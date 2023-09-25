@@ -55,6 +55,9 @@
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HeadersFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.DelegatingHandlersExtendedFactories">
             <inheritdoc />
         </member>
@@ -129,6 +132,12 @@
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithTimeout(System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.AddDelegatingHandler``1(``0)">
             <inheritdoc />
         </member>
@@ -138,7 +147,7 @@
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -437,6 +446,9 @@
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HeadersFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.TimeoutFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities">
             <inheritdoc />
         </member>
@@ -505,7 +517,7 @@
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpClientHandler(System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
@@ -527,6 +539,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithTimeout(System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(``0)">
@@ -681,6 +699,9 @@
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HeadersFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.DelegatingHandlersExtendedFactories">
             <inheritdoc />
         </member>
@@ -719,7 +740,7 @@
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHttpClientHandler(System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
@@ -741,6 +762,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithTimeout(System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.AddDelegatingHandler``1(``0)">
@@ -1183,6 +1210,11 @@
             Headers factory
             </summary>
         </member>
+        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory">
+            <summary>
+            Timeout factory
+            </summary>
+        </member>
         <member name="T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase">
             <summary>
             Options available at both common and proper level for extended registrations
@@ -1242,11 +1274,12 @@
             <param name="httpClientHandlerFactory">An <see cref="T:System.Net.Http.HttpClientHandler"/> instance factory</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder})">
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
             <summary>
             Adjust some HttpClient settings
             </summary>
             <param name="httpClientBuilder">The HttpClient builder</param>
+            <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.AddDelegatingHandler``1(System.Func{System.IServiceProvider,``0})">
@@ -1303,6 +1336,13 @@
             Add some headers to the request
             </summary>
             <param name="headersFactory">Headers to add to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+            <summary>
+            Set a timeout to the request
+            </summary>
+            <param name="timeoutFactory">The request timeout factory</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.ServiceCollectionExtensions">

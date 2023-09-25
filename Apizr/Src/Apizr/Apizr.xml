@@ -505,6 +505,58 @@
         <member name="M:Apizr.Caching.VoidCacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="T:Apizr.Cancelling.Attributes.TimeoutAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Cancelling.Attributes.TimeoutAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Cancelling.Attributes.TimeoutAttributeBase">
+            <summary>
+            Tells Apizr to set a timeout to the request
+            </summary>
+        </member>
+        <member name="P:Apizr.Cancelling.Attributes.TimeoutAttributeBase.Timeout">
+            <summary>
+            This request timeout
+            </summary>
+        </member>
+        <member name="M:Apizr.Cancelling.Attributes.TimeoutAttributeBase.#ctor(System.String)">
+            <summary>
+            Request times out after a specific duration
+            </summary>
+            <param name="timeoutRepresentation">TimeSpan representation to parse</param>
+        </member>
+        <member name="T:Apizr.Cancelling.Attributes.TimeoutCreateAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Cancelling.Attributes.TimeoutCreateAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Cancelling.Attributes.TimeoutDeleteAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Cancelling.Attributes.TimeoutDeleteAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Cancelling.Attributes.TimeoutReadAllAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Cancelling.Attributes.TimeoutReadAllAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Cancelling.Attributes.TimeoutReadAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Cancelling.Attributes.TimeoutReadAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Cancelling.Attributes.TimeoutUpdateAttribute">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Cancelling.Attributes.TimeoutUpdateAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.ApizrDuplicateStrategy">
             <summary>
             Duplicate strategy about options registration
@@ -558,6 +610,9 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HeadersFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory">
@@ -706,6 +761,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithTimeout(System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithTimeout(System.Func{System.TimeSpan})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -977,7 +1038,7 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.HeadersFactory">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.ContextFactory">
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Manager.ApizrManagerOptions`1">
@@ -1031,6 +1092,9 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Timeout">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger">
@@ -1197,6 +1261,12 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithTimeout(System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithTimeout(System.Func{System.TimeSpan})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)">
             <inheritdoc />
         </member>
@@ -1266,7 +1336,7 @@
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptions">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptions"/>
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
             The common options constructor
             </summary>
@@ -1279,6 +1349,7 @@
             <param name="handlersParameters">Some handlers parameters</param>
             <param name="httpTracerMode">The http tracer mode</param>
             <param name="trafficVerbosity">The traffic verbosity</param>
+            <param name="timeout">The request timeout</param>
             <param name="logLevels">The log levels</param>
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.BaseUriFactory">
@@ -1315,6 +1386,9 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.TimeoutFactory">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBase">
@@ -1442,6 +1516,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithTimeout(System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithTimeout(System.Func{System.TimeSpan})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -1915,7 +1995,7 @@
         <member name="T:Apizr.Configuring.Request.ApizrRequestOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Request.IApizrRequestOptionsBase" />
         </member>
-        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Microsoft.Extensions.Logging.LogLevel[])">
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Request.ApizrRequestOptionsBase.Context">
@@ -1931,6 +2011,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout(System.TimeSpan)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithContext(Polly.Context,Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -2048,6 +2131,9 @@
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase">
             <summary>
             Options available at both common and proper level for both static and extended registrations
@@ -2113,6 +2199,11 @@
             Headers to add to the request
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout">
+            <summary>
+            Request timeout
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase">
             <summary>
             Builder options available at all (common, proper and request) levels and for all (static and extended) registration types
@@ -2161,6 +2252,13 @@
             Add some headers to the request
             </summary>
             <param name="headers">Headers to add to the request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)">
+            <summary>
+            Set a timeout to the request
+            </summary>
+            <param name="timeout">The request timeout</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase">
@@ -2309,6 +2407,11 @@
         <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory">
             <summary>
             Headers factory
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory">
+            <summary>
+            Request timeout factory
             </summary>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase">
@@ -2472,6 +2575,13 @@
             Add some headers to the request
             </summary>
             <param name="headersFactory">Headers factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithTimeout(System.Func{System.TimeSpan})">
+            <summary>
+            Set a timeout to the request
+            </summary>
+            <param name="timeoutFactory">The request timeout factory</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilderBase">

@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 using Apizr.Configuring.Manager;
 using Apizr.Extending;
 
-namespace Apizr
+namespace Apizr.Requesting
 {
-    public class ApizrHttpClient : HttpClient
+    internal sealed class ApizrHttpMessageHandler : DelegatingHandler
     {
         private readonly IApizrManagerOptionsBase _apizrOptions;
 
-        public ApizrHttpClient(HttpMessageHandler handler, bool disposeHandler, IApizrManagerOptionsBase apizrOptions)
-            : base(handler, disposeHandler)
+        public ApizrHttpMessageHandler(HttpMessageHandler innerHandler, IApizrManagerOptionsBase apizrOptions) :base(innerHandler)
         {
             _apizrOptions = apizrOptions;
         }
 
-        public override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        /// <inheritdoc />
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             using (var cts = request.ProcessApizrOptions(cancellationToken, _apizrOptions, out var optionsCancellationToken))
             {

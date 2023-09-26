@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using Apizr.Configuring.Manager;
+using Apizr.Requesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Options;

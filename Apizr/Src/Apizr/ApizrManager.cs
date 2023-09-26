@@ -31,6 +31,7 @@ using Refit;
 
 namespace Apizr
 {
+    /// <inheritdoc />
     public abstract class ApizrManager : IApizrManager
     {
         internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(
@@ -368,6 +369,21 @@ namespace Apizr
 
                     result = await policy.ExecuteAsync(options => executeApiMethod.Compile().Invoke(options, webApi),
                         requestOptionsBuilder);
+
+                    if (_cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                        cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
+                    {
+                        requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Updating result cache");
+
+                        if (Equals(result, default(TApiData)))
+                            await ClearCacheAsync(cacheKey, methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                        else
+                            await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
+                                requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -402,16 +418,6 @@ namespace Apizr
 
                         requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                     }
-                }
-
-                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
-                {
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Caching result");
-
-                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
-                        requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }
 
@@ -514,6 +520,21 @@ namespace Apizr
 
                     result = await policy.ExecuteAsync(options => executeApiMethod.Compile().Invoke(options, webApi),
                         requestOptionsBuilder);
+
+                    if (_cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                        cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
+                    {
+                        requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Updating result cache");
+
+                        if (Equals(result, default(TApiData)))
+                            await ClearCacheAsync(cacheKey, methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                        else
+                            await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
+                                requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -548,16 +569,6 @@ namespace Apizr
 
                         requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                     }
-                }
-
-                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
-                {
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Caching result");
-
-                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
-                        requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }
 
@@ -629,7 +640,6 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
-                Exception ex = null;
                 try
                 {
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
@@ -665,13 +675,28 @@ namespace Apizr
 
                     result = await policy.ExecuteAsync(
                         options => executeApiMethod.Compile().Invoke(options, webApi, apiData), requestOptionsBuilder);
+
+                    if (_cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                        cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
+                    {
+                        requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Updating result cache");
+
+                        if (Equals(result, default(TApiData)))
+                            await ClearCacheAsync(cacheKey, methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                        else
+                            await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
+                                requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    }
                 }
                 catch (Exception e)
                 {
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
                         $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
 
-                    ex = new ApizrException<TApiData>(e, result);
+                    var ex = new ApizrException<TApiData>(e, result);
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
@@ -699,16 +724,6 @@ namespace Apizr
 
                         requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                     }
-                }
-
-                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
-                {
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Caching result");
-
-                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
-                        requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }
 
@@ -783,7 +798,6 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
-                Exception ex = null;
                 try
                 {
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
@@ -817,16 +831,62 @@ namespace Apizr
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(
+                    var apiResult = await policy.ExecuteAsync(
                         options => executeApiMethod.Compile().Invoke(options, webApi, apiRequestData),
                         requestOptionsBuilder);
+
+                    >>>>>>>>> /*WIP ApizrResponse*/ <<<<<<<< // Do not compile
+                    if (apiResult is IApiResponse {IsSuccessStatusCode: false} apiResponse)
+                    {
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
+                            $"{methodDetails.MethodInfo.Name}: Response status code does not indicate success.");
+
+                        if (Equals(result, default(TApiResultData)))
+                        {
+                            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
+                                $"{methodDetails.MethodInfo.Name}: No cached data to get from.");
+                        }
+                        else
+                        {
+                            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
+                                $"{methodDetails.MethodInfo.Name}: Getting data from cache.");
+                        }
+
+                        if (apiResponse.Error != null)
+                        {
+                            if (requestOptionsBuilder.ApizrOptions.OnException != null)
+                            {
+                                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                                    $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TModelResultData>)} with InnerException");
+
+                                var ex = new ApizrException<TModelResultData>(apiResponse.Error, Map<TApiResultData, TModelResultData>(result));
+                                requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
+                            }
+                        }
+                    }
+                    else if (_cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
+                        cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
+                    {
+                        requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Updating result cache");
+
+                        if (Equals(apiResult, default(TApiResultData)))
+                            await ClearCacheAsync(cacheKey, methodDetails.MethodInfo.Name, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                        else
+                            await _cacheHandler.SetAsync(cacheKey, apiResult, cacheAttribute.LifeSpan,
+                                requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    }
+
+                    result = apiResult;
                 }
                 catch (Exception e)
                 {
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
                         $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
 
-                    ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
+                    var ex = new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(result));
                     if (requestOptionsBuilder.ApizrOptions.OnException == null)
                     {
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
@@ -854,16 +914,6 @@ namespace Apizr
 
                         requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                     }
-                }
-
-                if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
-                {
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Caching result");
-
-                    await _cacheHandler.SetAsync(cacheKey, result, cacheAttribute.LifeSpan,
-                        requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }
 
@@ -929,15 +979,7 @@ namespace Apizr
                     _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
                         $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey}");
 
-                    var success = await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
-                    if (success)
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
-                            $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} succeed");
-                    else
-                        _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(),
-                            $"{methodCallExpression.Method.Name}: Clearing cache for key {cacheKey} failed");
-
-                    return success;
+                    return await ClearCacheAsync(cacheKey, methodCallExpression.Method.Name, cancellationToken);
                 }
 
                 _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
@@ -952,6 +994,19 @@ namespace Apizr
 
                 return false;
             }
+        }
+
+        private async Task<bool> ClearCacheAsync(string cacheKey, string operationKey, CancellationToken cancellationToken)
+        {
+            var success = await _cacheHandler.RemoveAsync(cacheKey, cancellationToken);
+            if (success)
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.Low(),
+                    $"{operationKey}: Clearing cache for key {cacheKey} succeed");
+            else
+                _apizrOptions.Logger.Log(_apizrOptions.LogLevels.High(),
+                    $"{operationKey}: Clearing cache for key {cacheKey} failed");
+
+            return success;
         }
 
         #endregion

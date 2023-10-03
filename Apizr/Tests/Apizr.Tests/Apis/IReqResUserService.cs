@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr;
@@ -33,6 +34,9 @@ namespace Apizr.Tests.Apis
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+
+        [Get("/users")]
+        Task<ApiResult<User>> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode, [RequestOptions] IApizrRequestOptions options);
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Property(nameof(Task.Delay))] TimeSpan delay, [RequestOptions] IApizrRequestOptions options);
@@ -95,5 +99,8 @@ namespace Apizr.Tests.Apis
 
         [Get("/users")]//, Timeout("00:00:06")]
         Task<ApiResult<User>> GetDelayedUsersAsync([Query] int delay, CancellationToken cancellationToken);
+
+        [Get("/users")]//, Timeout("00:00:06")]
+        Task<HttpResponseMessage> GetDelayedUsersAsync([Query] int delay);
     }
 }

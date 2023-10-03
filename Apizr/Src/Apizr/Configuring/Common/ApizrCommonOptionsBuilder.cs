@@ -349,13 +349,25 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithTimeout(TimeSpan timeout)
-            => WithTimeout(() => timeout);
+        public IApizrCommonOptionsBuilder WithOperationTimeout(TimeSpan timeout)
+            => WithOperationTimeout(() => timeout);
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithTimeout(Func<TimeSpan> timeoutFactory)
+        public IApizrCommonOptionsBuilder WithOperationTimeout(Func<TimeSpan> timeoutFactory)
         {
-            Options.TimeoutFactory = timeoutFactory;
+            Options.OperationTimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithRequestTimeout(TimeSpan timeout)
+            => WithRequestTimeout(() => timeout);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithRequestTimeout(Func<TimeSpan> timeoutFactory)
+        {
+            Options.RequestTimeoutFactory = timeoutFactory;
 
             return this;
         }

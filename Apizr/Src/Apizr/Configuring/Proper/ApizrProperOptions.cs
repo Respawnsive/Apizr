@@ -25,7 +25,8 @@ namespace Apizr.Configuring.Proper
         /// <param name="handlersParameters">Some handlers parameters</param>
         /// <param name="httpTracerMode">The http tracer mode</param>
         /// <param name="trafficVerbosity">The traffic verbosity</param>
-        /// <param name="timeout">The request timeout</param>
+        /// <param name="operationTimeout">The operation timeout</param>
+        /// <param name="requestTimeout">The request timeout</param>
         /// <param name="logLevels">The log levels</param>
         public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions,
             Type webApiType,
@@ -36,7 +37,8 @@ namespace Apizr.Configuring.Proper
             IDictionary<string, object> handlersParameters,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
-            TimeSpan? timeout,
+            TimeSpan? operationTimeout,
+            TimeSpan? requestTimeout,
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
             webApiPolicyRegistryKeys)
         {
@@ -54,7 +56,8 @@ namespace Apizr.Configuring.Proper
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = sharedOptions.ContextFactory;
             HeadersFactory = sharedOptions.HeadersFactory;
-            TimeoutFactory = timeout.HasValue ? () => timeout!.Value : sharedOptions.TimeoutFactory;
+            OperationTimeoutFactory = operationTimeout.HasValue ? () => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
+            RequestTimeoutFactory = requestTimeout.HasValue ? () => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -133,12 +136,20 @@ namespace Apizr.Configuring.Proper
                 : null;
         }
 
-        private Func<TimeSpan> _timeoutFactory;
+        private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
-        public Func<TimeSpan> TimeoutFactory
+        public Func<TimeSpan> OperationTimeoutFactory
         {
-            get => _timeoutFactory;
-            set => _timeoutFactory = value != null ? () => (TimeSpan) (Timeout = value.Invoke()) : null;
+            get => _operationTimeoutFactory;
+            set => _operationTimeoutFactory = value != null ? () => (TimeSpan) (OperationTimeout = value.Invoke()) : null;
+        }
+
+        private Func<TimeSpan> _requestTimeoutFactory;
+        /// <inheritdoc />
+        public Func<TimeSpan> RequestTimeoutFactory
+        {
+            get => _requestTimeoutFactory;
+            set => _requestTimeoutFactory = value != null ? () => (TimeSpan)(RequestTimeout = value.Invoke()) : null;
         }
     }
 }

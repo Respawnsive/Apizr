@@ -17,7 +17,8 @@ namespace Apizr.Policing
 
                     return action.Invoke(requestOptionsBuilder.ApizrOptions);
                 },
-                requestOptionsBuilder.ApizrOptions.Context, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                requestOptionsBuilder.ApizrOptions.Context, 
+                requestOptionsBuilder.ApizrOptions.CancellationToken);
 
         internal static Task<TResult> ExecuteAsync<TResult>(this IAsyncPolicy<TResult> policy,
             Func<IApizrRequestOptions, Task<TResult>> action, IApizrRequestOptionsBuilder requestOptionsBuilder) =>
@@ -28,6 +29,7 @@ namespace Apizr.Policing
 
                     return action.Invoke(requestOptionsBuilder.ApizrOptions);
                 },
-                requestOptionsBuilder.ApizrOptions.Context, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                requestOptionsBuilder.ApizrOptions.Context,
+                requestOptionsBuilder.ApizrOptions.CancellationToken);
     }
 }

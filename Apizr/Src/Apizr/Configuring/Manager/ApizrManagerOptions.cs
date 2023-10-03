@@ -44,7 +44,8 @@ namespace Apizr.Configuring.Manager
             DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = properOptions.ContextFactory;
             HeadersFactory = properOptions.HeadersFactory;
-            TimeoutFactory = properOptions.TimeoutFactory;
+            OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
+            RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -146,12 +147,20 @@ namespace Apizr.Configuring.Manager
                 : null;
         }
 
-        private Func<TimeSpan> _timeoutFactory;
+        private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
-        public Func<TimeSpan> TimeoutFactory
+        public Func<TimeSpan> OperationTimeoutFactory
         {
-            get => _timeoutFactory;
-            set => _timeoutFactory = value != null ? () => (TimeSpan)(Timeout = value.Invoke()) : null;
+            get => _operationTimeoutFactory;
+            set => _operationTimeoutFactory = value != null ? () => (TimeSpan)(OperationTimeout = value.Invoke()) : null;
+        }
+
+        private Func<TimeSpan> _requestTimeoutFactory;
+        /// <inheritdoc />
+        public Func<TimeSpan> RequestTimeoutFactory
+        {
+            get => _requestTimeoutFactory;
+            set => _requestTimeoutFactory = value != null ? () => (TimeSpan)(RequestTimeout = value.Invoke()) : null;
         }
     }
     
@@ -213,7 +222,10 @@ namespace Apizr.Configuring.Manager
         public IList<string> Headers => Options.Headers;
 
         /// <inheritdoc />
-        public TimeSpan? Timeout => Options.Timeout;
+        public TimeSpan? OperationTimeout => Options.OperationTimeout;
+
+        /// <inheritdoc />
+        public TimeSpan? RequestTimeout => Options.RequestTimeout;
 
         /// <inheritdoc />
         public ILogger Logger => Options.Logger;

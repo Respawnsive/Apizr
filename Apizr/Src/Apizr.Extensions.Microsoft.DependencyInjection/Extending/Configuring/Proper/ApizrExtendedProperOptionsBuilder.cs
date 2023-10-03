@@ -189,13 +189,25 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrExtendedProperOptionsBuilder WithTimeout(TimeSpan timeout)
-            => WithTimeout(_ => timeout);
+        public IApizrExtendedProperOptionsBuilder WithOperationTimeout(TimeSpan timeout)
+            => WithOperationTimeout(_ => timeout);
 
         /// <inheritdoc />
-        public IApizrExtendedProperOptionsBuilder WithTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory)
+        public IApizrExtendedProperOptionsBuilder WithOperationTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory)
         {
-            Options.TimeoutFactory = timeoutFactory;
+            Options.OperationTimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithRequestTimeout(TimeSpan timeout)
+            => WithRequestTimeout(_ => timeout);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithRequestTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory)
+        {
+            Options.RequestTimeoutFactory = timeoutFactory;
 
             return this;
         }

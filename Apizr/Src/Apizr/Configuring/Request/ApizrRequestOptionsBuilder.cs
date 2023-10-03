@@ -42,9 +42,17 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithTimeout(TimeSpan timeout)
+    public IApizrRequestOptionsBuilder WithOperationTimeout(TimeSpan timeout)
     {
-        Options.Timeout = timeout;
+        Options.OperationTimeout = timeout;
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithRequestTimeout(TimeSpan timeout)
+    {
+        Options.RequestTimeout = timeout;
 
         return this;
     }

@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Cancelling.Attributes;
+using Apizr.Cancelling.Attributes.Operation;
+using Apizr.Cancelling.Attributes.Request;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
@@ -42,13 +44,15 @@ namespace Apizr
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null,
             LogAttributeBase requestLogAttribute = null,
             IList<HandlerParameterAttribute> requestHandlerParameterAttributes = null,
+            TimeoutAttributeBase operationTimeoutAttribute = null,
             TimeoutAttributeBase requestTimeoutAttribute = null)
         {
             var requestOptions = new ApizrRequestOptions(baseOptions,
                 requestHandlerParameterAttributes?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
                 new Dictionary<string, object>(),
                 requestLogAttribute?.HttpTracerMode,
-                requestLogAttribute?.TrafficVerbosity, 
+                requestLogAttribute?.TrafficVerbosity,
+                operationTimeoutAttribute?.Timeout,
                 requestTimeoutAttribute?.Timeout, 
                 requestLogAttribute?.LogLevels);
             var builder = new ApizrRequestOptionsBuilder(requestOptions);
@@ -79,7 +83,8 @@ namespace Apizr
         private readonly ConcurrentDictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, IsPolicy> _policingMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>> _handlerParameterMethodsSet;
-        private readonly ConcurrentDictionary<MethodDetails, TimeoutAttributeBase> _timeoutMethodsSet;
+        private readonly ConcurrentDictionary<MethodDetails, TimeoutAttributeBase> _operationTimeoutMethodsSet;
+        private readonly ConcurrentDictionary<MethodDetails, TimeoutAttributeBase> _requestTimeoutMethodsSet;
 
         #endregion
 
@@ -108,7 +113,8 @@ namespace Apizr
             _loggingMethodsSet = new ConcurrentDictionary<MethodDetails, LogAttributeBase>();
             _policingMethodsSet = new ConcurrentDictionary<MethodDetails, IsPolicy>();
             _handlerParameterMethodsSet = new ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>>();
-            _timeoutMethodsSet = new ConcurrentDictionary<MethodDetails, TimeoutAttributeBase>();
+            _operationTimeoutMethodsSet = new ConcurrentDictionary<MethodDetails, TimeoutAttributeBase>();
+            _requestTimeoutMethodsSet = new ConcurrentDictionary<MethodDetails, TimeoutAttributeBase>();
         }
 
         #region Implementation
@@ -141,9 +147,10 @@ namespace Apizr
             var methodDetails = GetMethodDetails(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -214,9 +221,10 @@ namespace Apizr
             var methodDetails = GetMethodDetails(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -295,9 +303,10 @@ namespace Apizr
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -440,9 +449,10 @@ namespace Apizr
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -587,9 +597,10 @@ namespace Apizr
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -741,9 +752,10 @@ namespace Apizr
             var methodDetails = GetMethodDetails<TApiResultData>(originalExpression);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -1208,10 +1220,9 @@ namespace Apizr
 
                         if (registeredPolicy is IAsyncPolicy<TResult> registeredPolicyWithResult)
                         {
-                            if (policy is INoOpPolicy)
-                                policy = registeredPolicyWithResult;
-                            else
-                                policy.WrapAsync(registeredPolicyWithResult);
+                            policy = policy is INoOpPolicy
+                                ? registeredPolicyWithResult
+                                : policy.WrapAsync(registeredPolicyWithResult);
 
                             _apizrOptions.Logger.Log(logLevel,
                                 $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} will be applied");
@@ -1339,33 +1350,63 @@ namespace Apizr
 
         #region Cancelling
 
-        private TimeoutAttributeBase GetRequestTimeoutAttribute(MethodDetails methodDetails)
+        private TimeoutAttributeBase GetOperationTimeoutAttribute(MethodDetails methodDetails)
         {
-            if (_timeoutMethodsSet.TryGetValue(methodDetails, out var timeoutAttribute))
+            if (_operationTimeoutMethodsSet.TryGetValue(methodDetails, out var timeoutAttribute))
                 return timeoutAttribute;
 
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
             {
-                // Crud api logging
+                // Crud api operation timeout
                 var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
-                timeoutAttribute = methodDetails.MethodInfo.Name switch // Request logging
+                timeoutAttribute = methodDetails.MethodInfo.Name switch // Operation timeout
                 {
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<TimeoutReadAllAttribute>(true),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<TimeoutReadAttribute>(true),
-                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<TimeoutCreateAttribute>(true),
-                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<TimeoutUpdateAttribute>(true),
-                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<TimeoutDeleteAttribute>(true),
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllOperationTimeoutAttribute>(true),
+                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadOperationTimeoutAttribute>(true),
+                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateOperationTimeoutAttribute>(true),
+                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateOperationTimeoutAttribute>(true),
+                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteOperationTimeoutAttribute>(true),
                     _ => null
                 };
             }
             else
             {
-                // Classic api logging
-                timeoutAttribute = methodDetails.MethodInfo.GetCustomAttribute<TimeoutAttribute>(); // Request logging
+                // Classic api operation timeout
+                timeoutAttribute = methodDetails.MethodInfo.GetCustomAttribute<OperationTimeoutAttribute>(); // Operation timeout
             }
 
-            // Return log attribute
-            _timeoutMethodsSet.TryAdd(methodDetails, timeoutAttribute);
+            // Return operation timeout attribute
+            _operationTimeoutMethodsSet.TryAdd(methodDetails, timeoutAttribute);
+            return timeoutAttribute;
+        }
+
+        private TimeoutAttributeBase GetRequestTimeoutAttribute(MethodDetails methodDetails)
+        {
+            if (_requestTimeoutMethodsSet.TryGetValue(methodDetails, out var timeoutAttribute))
+                return timeoutAttribute;
+
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            {
+                // Crud api request timeout
+                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                timeoutAttribute = methodDetails.MethodInfo.Name switch // Request timeout
+                {
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllRequestTimeoutAttribute>(true),
+                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadRequestTimeoutAttribute>(true),
+                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateRequestTimeoutAttribute>(true),
+                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateRequestTimeoutAttribute>(true),
+                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteRequestTimeoutAttribute>(true),
+                    _ => null
+                };
+            }
+            else
+            {
+                // Classic api request timeout
+                timeoutAttribute = methodDetails.MethodInfo.GetCustomAttribute<RequestTimeoutAttribute>(); // Request logging
+            }
+
+            // Return request timeout attribute
+            _operationTimeoutMethodsSet.TryAdd(methodDetails, timeoutAttribute);
             return timeoutAttribute;
         }
 

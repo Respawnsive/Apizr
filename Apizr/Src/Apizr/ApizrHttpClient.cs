@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Manager;
 using Apizr.Extending;
+using Polly.Timeout;
 
 namespace Apizr
 {
@@ -25,10 +26,10 @@ namespace Apizr
                 {
                     return await base.SendAsync(request, cts?.Token ?? cancellationToken).ConfigureAwait(false);
                 }
-                catch (OperationCanceledException)
+                catch (OperationCanceledException ex)
                     when (!optionsCancellationToken.IsCancellationRequested) // Not a user cancellation
                 {
-                    throw new TimeoutException("Request timed out");
+                    throw new TimeoutRejectedException("Request timed out", ex);
                 }
             }
         }

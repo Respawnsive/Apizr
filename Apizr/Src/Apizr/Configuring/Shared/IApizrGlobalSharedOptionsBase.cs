@@ -47,8 +47,13 @@ namespace Apizr.Configuring.Shared
         IList<string> Headers { get; }
 
         /// <summary>
-        /// Request timeout
+        /// The operation timeout (overall request tries)
         /// </summary>
-        TimeSpan? Timeout { get; }
+        TimeSpan? OperationTimeout { get; }
+
+        /// <summary>
+        /// The request timeout (each request try)
+        /// </summary>
+        TimeSpan? RequestTimeout { get; }
     }
 }

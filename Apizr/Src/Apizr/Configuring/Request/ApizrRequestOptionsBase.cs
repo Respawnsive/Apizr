@@ -15,7 +15,8 @@ namespace Apizr.Configuring.Request
         protected ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
-            TimeSpan? timeout,
+            TimeSpan? operationTimeout,
+            TimeSpan? requestTimeout,
             params LogLevel[] logLevels) : base(sharedOptions)
         {
             Context = sharedOptions?.ContextFactory?.Invoke();
@@ -25,8 +26,10 @@ namespace Apizr.Configuring.Request
                 TrafficVerbosity = trafficVerbosity.Value;
             if(logLevels?.Any() == true)
                 LogLevels = logLevels;
-            if(timeout.HasValue)
-                Timeout = timeout.Value; // The request one, not the HttpClient one
+            if(operationTimeout.HasValue)
+                OperationTimeout = operationTimeout.Value;
+            if (requestTimeout.HasValue)
+                RequestTimeout = requestTimeout.Value;
 
             Headers = new List<string>(); // The request ones, not the HttpClient ones
         }

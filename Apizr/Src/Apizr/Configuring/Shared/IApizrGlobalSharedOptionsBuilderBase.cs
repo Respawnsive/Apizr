@@ -61,10 +61,17 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithHeaders(params string[] headers);
 
         /// <summary>
-        /// Set a timeout to the request
+        /// Set a timeout to the operation (overall request tries)
+        /// </summary>
+        /// <param name="timeout">The operation timeout</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithOperationTimeout(TimeSpan timeout);
+
+        /// <summary>
+        /// Set a timeout to the request (each request try)
         /// </summary>
         /// <param name="timeout">The request timeout</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithTimeout(TimeSpan timeout);
+        TApizrOptionsBuilder WithRequestTimeout(TimeSpan timeout);
     }
 }

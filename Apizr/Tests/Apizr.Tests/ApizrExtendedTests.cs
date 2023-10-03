@@ -960,14 +960,14 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
 
             services.AddApizrManagerFor<IReqResUserService>(
-                options => options.WithTimeout(TimeSpan.FromSeconds(4)));
+                options => options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(2)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TimeoutException>();
@@ -979,14 +979,14 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
 
             services.AddApizrManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(2)));
+                options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TimeoutException>();
@@ -998,7 +998,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
 
             services.AddApizrManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(4)));
+                options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -1008,7 +1008,7 @@ namespace Apizr.Tests
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(2))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(2))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
@@ -1021,7 +1021,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
 
             services.AddApizrManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(2)));
+                options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -1031,7 +1031,7 @@ namespace Apizr.Tests
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
@@ -1044,7 +1044,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
 
             services.AddApizrManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(4)));
+                options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var serviceProvider = services.BuildServiceProvider();
             var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
@@ -1054,7 +1054,7 @@ namespace Apizr.Tests
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(6))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(6))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();

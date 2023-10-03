@@ -27,39 +27,7 @@ namespace Apizr.Extending
                     logLevels = apizrOptions.LogLevels;
                 }
 
-                if (!options.HandlersParameters.TryGetValue(Constants.ApizrOptionsProcessedKey,
-                        out var optionsProcessedValue) || optionsProcessedValue is false)
-                {
-                    // Set options as processed yet
-                    options.HandlersParameters[Constants.ApizrOptionsProcessedKey] = true;
-
-                    // Set optionCancellationToken out param
-                    optionsCancellationToken = options.CancellationToken;
-
-                    // Merge cancellation tokens
-                    cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, optionsCancellationToken);
-
-                    // Set a timeout if provided
-                    if (options.Timeout.HasValue)
-                    {
-                        if (options.Timeout.Value > TimeSpan.Zero)
-                        {
-                            cts.CancelAfter(options.Timeout.Value);
-                            logger.Log(logLevels.Low(), "{0}: Timeout has been set with your provided {1} value.", context.OperationKey, options.Timeout);
-                        }
-                        else
-                        {
-                            logger.Log(logLevels.Low(),
-                                "{0}: You provided a timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
-                                context.OperationKey);
-                        }
-                    }
-                }
-                else
-                {
-                    optionsCancellationToken = cancellationToken;
-                }
-
+                // Handling headers
                 if (options.Headers?.Count > 0)
                 {
                     // Cloned and adjusted from Refit
@@ -85,6 +53,24 @@ namespace Apizr.Extending
                         request.SetHeader(headerKey, headerValue);
                         logger.Log(logLevels.Low(), "{0}: Header {1} has been set with your provided {2} value.", context.OperationKey, headerKey, headerValue);
                     }
+                }
+
+                // Handling cancellation
+                if (!options.HandlersParameters.TryGetValue(Constants.ApizrOptionsProcessedKey,
+                        out var optionsProcessedValue) || optionsProcessedValue is false)
+                {
+                    // Set options as processed yet
+                    options.HandlersParameters[Constants.ApizrOptionsProcessedKey] = true;
+
+                    // Set optionCancellationToken out param
+                    optionsCancellationToken = options.CancellationToken;
+
+                    // Merge cancellation tokens
+                    cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, optionsCancellationToken);
+                }
+                else
+                {
+                    optionsCancellationToken = cancellationToken;
                 }
             }
             else

@@ -21,8 +21,7 @@ namespace Apizr.Configuring.Shared
             BasePath = sharedOptions?.BasePath;
             ContextFactory = sharedOptions?.ContextFactory;
             PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
-            Timeout = sharedOptions?.Timeout; // The HttpClient one, not the request one
-            Headers = sharedOptions?.Headers ?? new List<string>(); // The HttpClient ones, not the request ones
+            Headers = sharedOptions?.Headers ?? new List<string>(); // The HttpClient ones
         }
 
         /// <inheritdoc />

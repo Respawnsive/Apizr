@@ -51,7 +51,8 @@ namespace Apizr.Extending.Configuring.Manager
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistrationActions = commonOptions.PostRegistrationActions.ToList();
             HeadersFactory = properOptions.HeadersFactory;
-            TimeoutFactory = properOptions.TimeoutFactory;
+            OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
+            RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
         }
 
         /// <inheritdoc />
@@ -65,8 +66,6 @@ namespace Apizr.Extending.Configuring.Manager
 
         /// <inheritdoc />
         public Type MappingHandlerType { get; set; }
-
-        /// <inheritdoc />
 
         private Func<IServiceProvider, Uri> _baseUriFactory;
         /// <inheritdoc />
@@ -166,12 +165,20 @@ namespace Apizr.Extending.Configuring.Manager
                 : null;
         }
 
-        private Func<IServiceProvider, TimeSpan> _timeoutFactory;
+        private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, TimeSpan> TimeoutFactory
+        public Func<IServiceProvider, TimeSpan> OperationTimeoutFactory
         {
-            get => _timeoutFactory;
-            set => _timeoutFactory = value != null ? serviceProvider => (TimeSpan)(Timeout = value.Invoke(serviceProvider)) : null;
+            get => _operationTimeoutFactory;
+            set => _operationTimeoutFactory = value != null ? serviceProvider => (TimeSpan)(OperationTimeout = value.Invoke(serviceProvider)) : null;
+        }
+
+        private Func<IServiceProvider, TimeSpan> _requestTimeoutFactory;
+        /// <inheritdoc />
+        public Func<IServiceProvider, TimeSpan> RequestTimeoutFactory
+        {
+            get => _requestTimeoutFactory;
+            set => _requestTimeoutFactory = value != null ? serviceProvider => (TimeSpan)(RequestTimeout = value.Invoke(serviceProvider)) : null;
         }
 
         /// <inheritdoc />

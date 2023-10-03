@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Apizr.Cancelling.Attributes
+namespace Apizr.Cancelling.Attributes.Operation
 {
     /// <inheritdoc />
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
-    public class TimeoutAttribute : TimeoutAttributeBase
+    public class OperationTimeoutAttribute : TimeoutAttributeBase
     {
         /// <inheritdoc />
-        public TimeoutAttribute(string timeoutRepresentation) : base(timeoutRepresentation)
+        public OperationTimeoutAttribute(string timeoutRepresentation) : base(timeoutRepresentation)
         {
         }
     }

@@ -24,7 +24,8 @@ namespace Apizr.Extending.Configuring.Proper
             IDictionary<string, object> handlersParameters,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
-            TimeSpan? timeout,
+            TimeSpan? operationTimeout,
+            TimeSpan? requestTimeout,
             params LogLevel[] logLevels) : base(sharedOptions, 
             webApiType, 
             assemblyPolicyRegistryKeys, 
@@ -43,7 +44,8 @@ namespace Apizr.Extending.Configuring.Proper
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             HeadersFactory = sharedOptions.HeadersFactory;
-            TimeoutFactory = timeout.HasValue ? _ => timeout!.Value : sharedOptions.TimeoutFactory;
+            OperationTimeoutFactory = operationTimeout.HasValue ? _ => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
+            RequestTimeoutFactory = requestTimeout.HasValue ? _ => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
         }
 
         /// <inheritdoc />
@@ -124,12 +126,20 @@ namespace Apizr.Extending.Configuring.Proper
                 : null;
         }
 
-        private Func<IServiceProvider, TimeSpan> _timeoutFactory;
+        private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, TimeSpan> TimeoutFactory
+        public Func<IServiceProvider, TimeSpan> OperationTimeoutFactory
         {
-            get => _timeoutFactory;
-            set => _timeoutFactory = value != null ? serviceProvider => (TimeSpan)(Timeout = value.Invoke(serviceProvider)) : null;
+            get => _operationTimeoutFactory;
+            set => _operationTimeoutFactory = value != null ? serviceProvider => (TimeSpan)(OperationTimeout = value.Invoke(serviceProvider)) : null;
+        }
+
+        private Func<IServiceProvider, TimeSpan> _requestTimeoutFactory;
+        /// <inheritdoc />
+        public Func<IServiceProvider, TimeSpan> RequestTimeoutFactory
+        {
+            get => _requestTimeoutFactory;
+            set => _requestTimeoutFactory = value != null ? serviceProvider => (TimeSpan)(RequestTimeout = value.Invoke(serviceProvider)) : null;
         }
 
         /// <inheritdoc />

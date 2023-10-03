@@ -178,10 +178,17 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithHeaders(Func<IList<string>> headersFactory);
 
         /// <summary>
-        /// Set a timeout to the request
+        /// Set a timeout to the operation (overall request tries)
+        /// </summary>
+        /// <param name="timeoutFactory">The operation timeout factory</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithOperationTimeout(Func<TimeSpan> timeoutFactory);
+
+        /// <summary>
+        /// Set a timeout to the request (each request try)
         /// </summary>
         /// <param name="timeoutFactory">The request timeout factory</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithTimeout(Func<TimeSpan> timeoutFactory);
+        TApizrOptionsBuilder WithRequestTimeout(Func<TimeSpan> timeoutFactory);
     }
 }

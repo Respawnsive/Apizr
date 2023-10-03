@@ -27,6 +27,7 @@ using MonkeyCache.FileStore;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Polly.Timeout;
 using Refit;
 using Xunit;
 
@@ -713,47 +714,111 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithTimeout_Should_Throw_A_Request_TimeoutException()
+        public async Task When_Calling_BA_WithOperationTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(2)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TimeoutException>();
+            ex.WithInnerException<TimeoutRejectedException>();
         }
 
         [Fact]
-        public async Task Calling_WithTimeout_Should_Throw_A_Client_TimeoutException()
+        public async Task When_Calling_AB_WithOperationTimeout_Then_Client_Should_Throw_A_TimeoutException()
         {
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                    options.WithTimeout(TimeSpan.FromSeconds(2)));
+                    options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TimeoutException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_BA_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(4)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(2)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_AB_WithRequestTimeout_Then_Client_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                    options.WithRequestTimeout(TimeSpan.FromSeconds(2)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(4)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_DCBA_WithOperationTimeout_And_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(8))
+                        .WithRequestTimeout(TimeSpan.FromSeconds(6)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))
+                        .WithRequestTimeout(TimeSpan.FromSeconds(2)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_ABCD_WithOperationTimeout_And_WithRequestTimeout_Then_Client_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                    options.WithOperationTimeout(TimeSpan.FromSeconds(2))
+                        .WithRequestTimeout(TimeSpan.FromSeconds(4)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(6))
+                        .WithRequestTimeout(TimeSpan.FromSeconds(8)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
         }
 
         [Fact]
         public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Request_TimeoutException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(4)));
+                options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(6));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(2))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(2))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
@@ -764,14 +829,14 @@ namespace Apizr.Tests
         public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Client_TimeoutException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(2)));
+                options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(6));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
@@ -782,18 +847,173 @@ namespace Apizr.Tests
         public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(4)));
+                options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(2));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(6))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(6))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<OperationCanceledException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_BA_WithOperationTimeout_And_WithRequestTimeout_With_Transient_Policy()
+        {
+            var attempts = 0;
+            var sleepDurations = new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(2),
+                TimeSpan.FromSeconds(3)
+            };
+            var policyRegistry = new PolicyRegistry
+            {
+                {
+                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
+                        .Or<TimeoutRejectedException>()
+                        .WaitAndRetryAsync(
+                        sleepDurations,
+                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
+                }
+            };
+
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options
+                        .WithPolicyRegistry(policyRegistry)
+                        .WithRequestTimeout(TimeSpan.FromSeconds(3)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt));//,
+            //options => options.WithTimeout(TimeSpan.FromSeconds(3)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+
+            // attempts should be equal to 2 as request timed out before the 3rd retry
+            attempts.Should().Be(3);
+        }
+
+        [Fact]
+        public async Task When_Calling_BA_WithOperationTimeout_And_WithRequestTimeout_With_Transient_Policy2()
+        {
+            var attempts = 0;
+            var sleepDurations = new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(2),
+                TimeSpan.FromSeconds(3)
+            };
+            var policyRegistry = new PolicyRegistry
+            {
+                {
+                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
+                        .Or<TimeoutRejectedException>()
+                        .WaitAndRetryAsync(
+                            sleepDurations,
+                            (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
+                }
+            };
+
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options
+                        .WithPolicyRegistry(policyRegistry)
+                        .WithOperationTimeout(TimeSpan.FromSeconds(10)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(3)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+
+            // attempts should be equal to 2 as request timed out before the 3rd retry
+            attempts.Should().Be(2);
+        }
+
+        [Fact]
+        public async Task When_Calling_BA_WithOperationTimeout_And_WithRequestTimeout_With_Transient_Policy3()
+        {
+            var attempts = 0;
+            var sleepDurations = new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(2),
+                TimeSpan.FromSeconds(3)
+            };
+            var policyRegistry = new PolicyRegistry
+            {
+                {
+                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
+                        .Or<TimeoutRejectedException>()
+                        .WaitAndRetryAsync(
+                            sleepDurations,
+                            (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
+                }
+            };
+
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(5));
+
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options
+                        .WithPolicyRegistry(policyRegistry)
+                        .WithOperationTimeout(TimeSpan.FromSeconds(10)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(3))
+                        .WithCancellation(cts.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TaskCanceledException>();
+
+            // attempts should be equal to 2 as request timed out before the 3rd retry
+            attempts.Should().Be(1);
+        }
+
+        [Fact]
+        public async Task Request_Returning_Timeout_Should_Time_Out_Before_Polly_Could_Complete_All_Retries()
+        {
+            var attempts = 0;
+            var sleepDurations = new[]
+            {
+                TimeSpan.FromSeconds(1),
+                TimeSpan.FromSeconds(2),
+                TimeSpan.FromSeconds(3)
+            };
+            var policyRegistry = new PolicyRegistry
+            {
+                {
+                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(
+                        sleepDurations,
+                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
+                }
+            };
+
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options
+                        .WithPolicyRegistry(policyRegistry)
+                        .AddDelegatingHandler(new TestRequestHandler())
+                        .WithOperationTimeout(TimeSpan.FromSeconds(3)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(HttpStatusCode.RequestTimeout, opt));//,
+                    //options => options.WithTimeout(TimeSpan.FromSeconds(3)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+
+            // attempts should be equal to 2 as request timed out before the 3rd retry
+            attempts.Should().Be(2);
         }
     }
 }

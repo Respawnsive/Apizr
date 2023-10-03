@@ -1260,13 +1260,13 @@ namespace Apizr.Tests
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4))));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(2)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TimeoutException>();
@@ -1277,13 +1277,13 @@ namespace Apizr.Tests
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options =>
-                    options.WithTimeout(TimeSpan.FromSeconds(2))));
+                    options.WithOperationTimeout(TimeSpan.FromSeconds(2))));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TimeoutException>();
@@ -1294,7 +1294,7 @@ namespace Apizr.Tests
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options =>
-                    options.WithTimeout(TimeSpan.FromSeconds(4))));
+                    options.WithOperationTimeout(TimeSpan.FromSeconds(4))));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1303,7 +1303,7 @@ namespace Apizr.Tests
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(2))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(2))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
@@ -1315,7 +1315,7 @@ namespace Apizr.Tests
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options =>
-                    options.WithTimeout(TimeSpan.FromSeconds(2))));
+                    options.WithOperationTimeout(TimeSpan.FromSeconds(2))));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1324,7 +1324,7 @@ namespace Apizr.Tests
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
@@ -1336,7 +1336,7 @@ namespace Apizr.Tests
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options =>
-                    options.WithTimeout(TimeSpan.FromSeconds(4))));
+                    options.WithOperationTimeout(TimeSpan.FromSeconds(4))));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1345,7 +1345,7 @@ namespace Apizr.Tests
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(6))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(6))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();

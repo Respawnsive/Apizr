@@ -4,7 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
-using Apizr.Cancelling.Attributes;
+using Apizr.Cancelling.Attributes.Operation;
+using Apizr.Cancelling.Attributes.Request;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
@@ -24,6 +25,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Polly;
+using Polly.NoOp;
 using Polly.Registry;
 using Refit;
 using PolicyHttpMessageHandler = Apizr.Policing.PolicyHttpMessageHandler;
@@ -604,6 +606,8 @@ namespace Apizr
                     var options = (IApizrExtendedManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
                     var handlerBuilder = new ExtendedHttpHandlerBuilder(options.HttpClientHandler, options);
 
+                    IAsyncPolicy<HttpResponseMessage> policy = Policy.NoOpAsync<HttpResponseMessage>();
+                    var wrappedPolicyKeys = new List<string>();
                     if (options.PolicyRegistryKeys != null && options.PolicyRegistryKeys.Any())
                     {
                         var policyRegistry = serviceProvider.GetService<IReadOnlyPolicyRegistry<string>>();
@@ -619,39 +623,46 @@ namespace Apizr
                                 if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy) && 
                                     registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
                                 {
-                                    var policySelector = new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
-                                            request =>
-                                            {
-                                                var context = request.GetOrBuildApizrPolicyExecutionContext();
-                                                if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
-                                                {
-                                                    if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions requestOptions)
-                                                    {
-                                                        logLevels = requestOptions.LogLevels;
-                                                        verbosity = requestOptions.TrafficVerbosity;
-                                                        tracerMode = requestOptions.HttpTracerMode;
-                                                    }
-                                                    else
-                                                    {
-                                                        logLevels = options.LogLevels;
-                                                        verbosity = options.TrafficVerbosity;
-                                                        tracerMode = options.HttpTracerMode;
-                                                    }
-                                                    contextLogger = options.Logger;
+                                    policy = policy is INoOpPolicy
+                                        ? registeredPolicyForHttpResponseMessage
+                                        : policy.WrapAsync(registeredPolicyForHttpResponseMessage);
 
-                                                    context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
-                                                    HttpRequestMessageApizrExtensions.SetApizrPolicyExecutionContext(request, context);
-                                                }
-
-                                                contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");
-
-                                                return registeredPolicyForHttpResponseMessage;
-                                            });
-                                    handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
+                                    wrappedPolicyKeys.Add(policyRegistryKey);
                                 }
                             }
                         }
                     }
+
+                    var policySelector = new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
+                            request =>
+                            {
+                                var context = request.GetOrBuildApizrPolicyExecutionContext();
+                                if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
+                                {
+                                    if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions requestOptions)
+                                    {
+                                        logLevels = requestOptions.LogLevels;
+                                        verbosity = requestOptions.TrafficVerbosity;
+                                        tracerMode = requestOptions.HttpTracerMode;
+                                    }
+                                    else
+                                    {
+                                        logLevels = options.LogLevels;
+                                        verbosity = options.TrafficVerbosity;
+                                        tracerMode = options.HttpTracerMode;
+                                    }
+                                    contextLogger = options.Logger;
+
+                                    context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
+                                    HttpRequestMessageApizrExtensions.SetApizrPolicyExecutionContext(request, context);
+                                }
+
+                                foreach (var wrappedPolicyKey in wrappedPolicyKeys)
+                                    contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {wrappedPolicyKey} will be applied");
+
+                                return policy;
+                            });
+                    handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector, apizrOptions));
 
                     foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories.Values)
                         handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));
@@ -670,24 +681,6 @@ namespace Apizr
                         // HttpClient
                         if (httpClient.BaseAddress == null) 
                             httpClient.BaseAddress = options.BaseUri;
-
-                        // Global timeout
-                        if (options.Timeout.HasValue)
-                        {
-                            if (options.Timeout.Value > TimeSpan.Zero)
-                            {
-                                httpClient.Timeout = options.Timeout.Value;
-                                options.Logger?.Log(options.LogLevels?.Low() ?? LogLevel.Trace,
-                                    "{0}: HttpClient's Timeout has been set with your provided {1} value.",
-                                    options.WebApiType.GetFriendlyName(), httpClient.Timeout);
-                            }
-                            else
-                            {
-                                options.Logger?.Log(options.LogLevels?.Low() ?? LogLevel.Trace,
-                                    "{0}: You provided a timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value {1} will be applied.",
-                                    options.WebApiType.GetFriendlyName(), httpClient.Timeout);
-                            }
-                        }
 
                         // Global headers
                         if (options.Headers?.Count > 0)
@@ -767,7 +760,8 @@ namespace Apizr
                 apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
                 apizrOptions.HeadersFactory?.Invoke(serviceProvider);
-                apizrOptions.TimeoutFactory?.Invoke(serviceProvider);
+                apizrOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
+                apizrOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
                 apizrOptions.HeadersFactory?.Invoke(serviceProvider);
 
                 return Activator.CreateInstance(typeof(ApizrExtendedManagerOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
@@ -854,7 +848,8 @@ namespace Apizr
 
             IList<HandlerParameterAttribute> properParameterAttributes, commonParameterAttributes;
             LogAttribute properLogAttribute, commonLogAttribute;
-            TimeoutAttribute properTimeoutAttribute, commonTimeoutAttribute;
+            OperationTimeoutAttribute properOperationTimeoutAttribute, commonOperationTimeoutAttribute;
+            RequestTimeoutAttribute properRequestTimeoutAttribute, commonRequestTimeoutAttribute;
             PolicyAttribute webApiPolicyAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
@@ -864,8 +859,10 @@ namespace Apizr
                 commonParameterAttributes = modelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
                 properLogAttribute = modelTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = modelType.Assembly.GetCustomAttribute<LogAttribute>();
-                properTimeoutAttribute = modelTypeInfo.GetCustomAttribute<TimeoutAttribute>(true);
-                commonTimeoutAttribute = modelType.Assembly.GetCustomAttribute<TimeoutAttribute>();
+                properOperationTimeoutAttribute = modelTypeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
+                commonOperationTimeoutAttribute = modelType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
+                properRequestTimeoutAttribute = modelTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
+                commonRequestTimeoutAttribute = modelType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
                 webApiPolicyAttribute = modelTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
             }
             else
@@ -875,8 +872,10 @@ namespace Apizr
                 commonParameterAttributes = webApiType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
                 properLogAttribute = webApiTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
-                properTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<TimeoutAttribute>(true);
-                commonTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<TimeoutAttribute>();
+                properOperationTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
+                commonOperationTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
+                properRequestTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
+                commonRequestTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
                 webApiPolicyAttribute = webApiTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
             }
 
@@ -897,7 +896,8 @@ namespace Apizr
                 handlersParameters,
                 properLogAttribute?.HttpTracerMode ?? (commonOptions.HttpTracerMode != HttpTracerMode.Unspecified ? commonOptions.HttpTracerMode : commonLogAttribute?.HttpTracerMode),
                 properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity),
-                properTimeoutAttribute?.Timeout ?? commonTimeoutAttribute?.Timeout,
+                properOperationTimeoutAttribute?.Timeout ?? commonOperationTimeoutAttribute?.Timeout,
+                properRequestTimeoutAttribute?.Timeout ?? commonRequestTimeoutAttribute?.Timeout,
                 properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrExtendedProperOptionsBuilder;
 
             properOptionsBuilder?.Invoke(builder);

@@ -58,8 +58,13 @@ namespace Apizr.Extending.Configuring.Shared
         Func<IServiceProvider, IList<string>> HeadersFactory { get; }
 
         /// <summary>
-        /// Timeout factory
+        /// The operation timeout factory (overall request tries)
         /// </summary>
-        Func<IServiceProvider, TimeSpan> TimeoutFactory { get; }
+        Func<IServiceProvider, TimeSpan> OperationTimeoutFactory { get; }
+
+        /// <summary>
+        /// The request timeout factory (each request try)
+        /// </summary>
+        Func<IServiceProvider, TimeSpan> RequestTimeoutFactory { get; }
     }
 }

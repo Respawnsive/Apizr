@@ -384,13 +384,25 @@ namespace Apizr.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithTimeout(TimeSpan timeout)
-            => WithTimeout(() => timeout);
+        public IApizrManagerOptionsBuilder WithOperationTimeout(TimeSpan timeout)
+            => WithOperationTimeout(() => timeout);
 
         /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithTimeout(Func<TimeSpan> timeoutFactory)
+        public IApizrManagerOptionsBuilder WithOperationTimeout(Func<TimeSpan> timeoutFactory)
         {
-            Options.TimeoutFactory = timeoutFactory;
+            Options.OperationTimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithRequestTimeout(TimeSpan timeout)
+            => WithRequestTimeout(() => timeout);
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithRequestTimeout(Func<TimeSpan> timeoutFactory)
+        {
+            Options.RequestTimeoutFactory = timeoutFactory;
 
             return this;
         }

@@ -21,6 +21,8 @@ namespace Apizr.Configuring.Shared
             LetThrowOnExceptionWithEmptyCache = sharedOptions?.LetThrowOnExceptionWithEmptyCache ?? true;
             HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
                                  new Dictionary<string, object>();
+            OperationTimeout = sharedOptions?.OperationTimeout;
+            RequestTimeout = sharedOptions?.RequestTimeout;
         }
 
         /// <inheritdoc />
@@ -57,6 +59,9 @@ namespace Apizr.Configuring.Shared
         public IList<string> Headers { get; internal set; }
 
         /// <inheritdoc />
-        public TimeSpan? Timeout { get; internal set; }
+        public TimeSpan? OperationTimeout { get; internal set; }
+
+        /// <inheritdoc />
+        public TimeSpan? RequestTimeout { get; internal set; }
     }
 }

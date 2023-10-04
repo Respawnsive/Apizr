@@ -673,7 +673,7 @@ namespace Apizr.Tests
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
 
             var cts = new CancellationTokenSource();
-            cts.CancelAfter(TimeSpan.FromSeconds(2));
+            cts.CancelAfter(TimeSpan.FromSeconds(3));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
@@ -808,7 +808,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Request_TimeoutException()
+        public async Task Calling_BCA_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Request_TimeoutRejectedException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
                 options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
@@ -822,11 +822,11 @@ namespace Apizr.Tests
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TimeoutException>();
+            ex.WithInnerException<TimeoutRejectedException>();
         }
 
         [Fact]
-        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Client_TimeoutException()
+        public async Task Calling_ACB_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Client_TimeoutRejectedException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
                 options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
@@ -840,11 +840,11 @@ namespace Apizr.Tests
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TimeoutException>();
+            ex.WithInnerException<TimeoutRejectedException>();
         }
 
         [Fact]
-        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
+        public async Task Calling_BAC_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
                 options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
@@ -862,7 +862,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task When_Calling_BA_WithOperationTimeout_And_WithRequestTimeout_With_Transient_Policy()
+        public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_3_On_3_Times()
         {
             var attempts = 0;
             var sleepDurations = new[]
@@ -900,7 +900,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task When_Calling_BA_WithOperationTimeout_And_WithRequestTimeout_With_Transient_Policy2()
+        public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_2_On_3_Times()
         {
             var attempts = 0;
             var sleepDurations = new[]
@@ -938,7 +938,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task When_Calling_BA_WithOperationTimeout_And_WithRequestTimeout_With_Transient_Policy3()
+        public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Policy_Then_It_Should_Retry_1_On_3_Times()
         {
             var attempts = 0;
             var sleepDurations = new[]
@@ -975,7 +975,7 @@ namespace Apizr.Tests
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TaskCanceledException>();
 
-            // attempts should be equal to 2 as request timed out before the 3rd retry
+            // attempts should be equal to 1 as request timed out before other retries
             attempts.Should().Be(1);
         }
 

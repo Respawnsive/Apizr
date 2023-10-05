@@ -747,8 +747,8 @@ namespace Apizr.Tests
         public async Task When_Calling_BA_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
             var reqResManager =
-                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
-                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(4)));
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
+                    //options => options.WithRequestTimeout(TimeSpan.FromSeconds(4)));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
@@ -973,7 +973,7 @@ namespace Apizr.Tests
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TaskCanceledException>();
+            ex.WithInnerException<OperationCanceledException>();
 
             // attempts should be equal to 1 as request timed out before other retries
             attempts.Should().Be(1);

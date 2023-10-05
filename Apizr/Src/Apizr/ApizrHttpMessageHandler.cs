@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,6 +25,11 @@ namespace Apizr
                 try
                 {
                     return await base.SendAsync(request, cts?.Token ?? cancellationToken).ConfigureAwait(false);
+                }
+                catch (WebException ex)
+                    when (optionsCancellationToken.IsCancellationRequested) // Actually a user cancellation
+                {
+                    throw new OperationCanceledException(ex.Message, ex);
                 }
                 catch (OperationCanceledException ex)
                     when (!optionsCancellationToken.IsCancellationRequested) // Not a user cancellation

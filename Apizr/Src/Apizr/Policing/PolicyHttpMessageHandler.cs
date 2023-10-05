@@ -3,6 +3,7 @@
 // Copied from https://github.com/dotnet/extensions/tree/release/3.1/src/HttpClientFactory/Polly/src but without any DI ref and some adjustments
 
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using Apizr.Configuring.Manager;
 using Apizr.Extending;
 using Microsoft.Extensions.Logging;
 using Polly;
+using Polly.Timeout;
 
 namespace Apizr.Policing
 {
@@ -140,8 +142,9 @@ namespace Apizr.Policing
                 }
 
                 finalPolicy ??= policy;
+                var optionsCancellationToken = options?.CancellationToken ?? CancellationToken.None;
 
-                response = await finalPolicy.ExecuteAsync((c, ct) => SendCoreAsync(request, c, ct), context, cancellationToken).ConfigureAwait(false);
+                response = await finalPolicy.ExecuteAsync((c, ct) => SendCoreAsync(request, c, ct, optionsCancellationToken), context, cancellationToken).ConfigureAwait(false);
             }
             finally
             {
@@ -160,8 +163,9 @@ namespace Apizr.Policing
         /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
         /// <param name="context">The <see cref="Context"/>.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
+        /// <param name="optionsCancellationToken"></param>
         /// <returns>Returns a <see cref="Task{HttpResponseMessage}"/> that will yield a response when completed.</returns>
-        protected virtual Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
+        protected virtual async Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken, CancellationToken optionsCancellationToken)
         {
             if (request == null)
             {
@@ -173,7 +177,16 @@ namespace Apizr.Policing
                 throw new ArgumentNullException(nameof(context));
             }
 
-            return base.SendAsync(request, cancellationToken);
+            try
+            {
+                return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            }
+            catch (WebException ex)
+                when (cancellationToken.IsCancellationRequested &&
+                      !optionsCancellationToken.IsCancellationRequested) // Actually a timeout cancellation
+            {
+                throw new TimeoutRejectedException(ex.Message, ex);
+            }
         }
 
         private IAsyncPolicy<HttpResponseMessage> SelectPolicy(HttpRequestMessage request)

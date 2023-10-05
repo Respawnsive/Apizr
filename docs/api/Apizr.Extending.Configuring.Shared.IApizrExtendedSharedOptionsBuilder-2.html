@@ -125,7 +125,10 @@
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithHeaders(String[])</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithTimeout_System_TimeSpan_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithTimeout(TimeSpan)</a>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithOperationTimeout_System_TimeSpan_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithOperationTimeout(TimeSpan)</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithRequestTimeout_System_TimeSpan_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithRequestTimeout(TimeSpan)</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.Extending.Configuring.Shared.html">Apizr.Extending.Configuring.Shared</a></h6>
@@ -975,19 +978,68 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithTimeout_System_Func_System_IServiceProvider_System_TimeSpan__.md&amp;value=---%0Auid%3A%20Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder%602.WithTimeout(System.Func%7BSystem.IServiceProvider%2CSystem.TimeSpan%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithOperationTimeout_System_Func_System_IServiceProvider_System_TimeSpan__.md&amp;value=---%0Auid%3A%20Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder%602.WithOperationTimeout(System.Func%7BSystem.IServiceProvider%2CSystem.TimeSpan%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptionsBuilder.cs/#L139">View Source</a>
   </span>
-  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithTimeout_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithTimeout*"></a>
-  <h4 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithTimeout_System_Func_System_IServiceProvider_System_TimeSpan__" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">WithTimeout(Func&lt;IServiceProvider, TimeSpan&gt;)</h4>
-  <div class="markdown level1 summary"><p>Set a timeout to the request</p>
+  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithOperationTimeout_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithOperationTimeout*"></a>
+  <h4 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithOperationTimeout_System_Func_System_IServiceProvider_System_TimeSpan__" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithOperationTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">WithOperationTimeout(Func&lt;IServiceProvider, TimeSpan&gt;)</h4>
+  <div class="markdown level1 summary"><p>Set a timeout to the operation (overall request tries)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithTimeout(Func&lt;IServiceProvider, TimeSpan&gt; timeoutFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithOperationTimeout(Func&lt;IServiceProvider, TimeSpan&gt; timeoutFactory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.IServiceProvider</span>, <span class="xref">System.TimeSpan</span>&gt;</td>
+        <td><span class="parametername">timeoutFactory</span></td>
+        <td><p>The operation timeout factory</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TApizrExtendedSharedOptionsBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithRequestTimeout_System_Func_System_IServiceProvider_System_TimeSpan__.md&amp;value=---%0Auid%3A%20Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder%602.WithRequestTimeout(System.Func%7BSystem.IServiceProvider%2CSystem.TimeSpan%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptionsBuilder.cs/#L146">View Source</a>
+  </span>
+  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithRequestTimeout_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithRequestTimeout*"></a>
+  <h4 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithRequestTimeout_System_Func_System_IServiceProvider_System_TimeSpan__" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithRequestTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">WithRequestTimeout(Func&lt;IServiceProvider, TimeSpan&gt;)</h4>
+  <div class="markdown level1 summary"><p>Set a timeout to the request (each request try)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithRequestTimeout(Func&lt;IServiceProvider, TimeSpan&gt; timeoutFactory)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

@@ -1,40 +1,40 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Apizr.Cancelling.Attributes.TimeoutAttribute
-  commentId: T:Apizr.Cancelling.Attributes.TimeoutAttribute
-  id: TimeoutAttribute
-  parent: Apizr.Cancelling.Attributes
+- uid: Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute
+  commentId: T:Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute
+  id: UpdateOperationTimeoutAttribute
+  parent: Apizr.Cancelling.Attributes.Operation
   children:
-  - Apizr.Cancelling.Attributes.TimeoutAttribute.#ctor(System.String)
+  - Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute.#ctor(System.String)
   langs:
   - csharp
   - vb
-  name: TimeoutAttribute
-  nameWithType: TimeoutAttribute
-  fullName: Apizr.Cancelling.Attributes.TimeoutAttribute
+  name: UpdateOperationTimeoutAttribute
+  nameWithType: UpdateOperationTimeoutAttribute
+  fullName: Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute
   type: Class
   source:
     remote:
-      path: Apizr/Src/Apizr/Cancelling/Attributes/TimeoutAttribute.cs
+      path: Apizr/Src/Apizr/Cancelling/Attributes/Operation/UpdateOperationTimeoutAttribute.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: TimeoutAttribute
-    path: ../../Src/Apizr/Cancelling/Attributes/TimeoutAttribute.cs
+    id: UpdateOperationTimeoutAttribute
+    path: ../../Src/Apizr/Cancelling/Attributes/Operation/UpdateOperationTimeoutAttribute.cs
     startLine: 5
   assemblies:
   - Apizr
-  namespace: Apizr.Cancelling.Attributes
+  namespace: Apizr.Cancelling.Attributes.Operation
   summary: "\nTells Apizr to set a timeout to the request\n"
   example: []
   syntax:
     content: >-
-      [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface)]
+      [AttributeUsage(AttributeTargets.Class)]
 
-      public class TimeoutAttribute : TimeoutAttributeBase
+      public class UpdateOperationTimeoutAttribute : TimeoutAttributeBase
     content.vb: >-
-      <AttributeUsage(AttributeTargets.Assembly Or AttributeTargets.Class Or AttributeTargets.Method Or AttributeTargets.Interface)>
+      <AttributeUsage(AttributeTargets.Class)>
 
-      Public Class TimeoutAttribute
+      Public Class UpdateOperationTimeoutAttribute
           Inherits TimeoutAttributeBase
   inheritance:
   - System.Object
@@ -89,55 +89,55 @@ items:
     ctor: System.AttributeUsageAttribute.#ctor(System.AttributeTargets)
     arguments:
     - type: System.AttributeTargets
-      value: 1093
+      value: 4
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Apizr.Cancelling.Attributes.TimeoutAttribute.#ctor(System.String)
-  commentId: M:Apizr.Cancelling.Attributes.TimeoutAttribute.#ctor(System.String)
+- uid: Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute.#ctor(System.String)
+  commentId: M:Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute.#ctor(System.String)
   id: '#ctor(System.String)'
-  parent: Apizr.Cancelling.Attributes.TimeoutAttribute
+  parent: Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute
   langs:
   - csharp
   - vb
-  name: TimeoutAttribute(String)
-  nameWithType: TimeoutAttribute.TimeoutAttribute(String)
-  fullName: Apizr.Cancelling.Attributes.TimeoutAttribute.TimeoutAttribute(System.String)
+  name: UpdateOperationTimeoutAttribute(String)
+  nameWithType: UpdateOperationTimeoutAttribute.UpdateOperationTimeoutAttribute(String)
+  fullName: Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute.UpdateOperationTimeoutAttribute(System.String)
   type: Constructor
   source:
     remote:
-      path: Apizr/Src/Apizr/Cancelling/Attributes/TimeoutAttribute.cs
+      path: Apizr/Src/Apizr/Cancelling/Attributes/Operation/UpdateOperationTimeoutAttribute.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
-    path: ../../Src/Apizr/Cancelling/Attributes/TimeoutAttribute.cs
+    path: ../../Src/Apizr/Cancelling/Attributes/Operation/UpdateOperationTimeoutAttribute.cs
     startLine: 9
   assemblies:
   - Apizr
-  namespace: Apizr.Cancelling.Attributes
+  namespace: Apizr.Cancelling.Attributes.Operation
   summary: "\nRequest times out after a specific duration\n"
   example: []
   syntax:
-    content: public TimeoutAttribute(string timeoutRepresentation)
+    content: public UpdateOperationTimeoutAttribute(string timeoutRepresentation)
     parameters:
     - id: timeoutRepresentation
       type: System.String
       description: TimeSpan representation to parse
     content.vb: Public Sub New(timeoutRepresentation As String)
-  overload: Apizr.Cancelling.Attributes.TimeoutAttribute.#ctor*
+  overload: Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
 references:
-- uid: Apizr.Cancelling.Attributes
-  commentId: N:Apizr.Cancelling.Attributes
-  name: Apizr.Cancelling.Attributes
-  nameWithType: Apizr.Cancelling.Attributes
-  fullName: Apizr.Cancelling.Attributes
+- uid: Apizr.Cancelling.Attributes.Operation
+  commentId: N:Apizr.Cancelling.Attributes.Operation
+  name: Apizr.Cancelling.Attributes.Operation
+  nameWithType: Apizr.Cancelling.Attributes.Operation
+  fullName: Apizr.Cancelling.Attributes.Operation
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -2480,11 +2480,16 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Cancelling.Attributes.TimeoutAttribute.#ctor*
-  commentId: Overload:Apizr.Cancelling.Attributes.TimeoutAttribute.#ctor
-  name: TimeoutAttribute
-  nameWithType: TimeoutAttribute.TimeoutAttribute
-  fullName: Apizr.Cancelling.Attributes.TimeoutAttribute.TimeoutAttribute
+- uid: Apizr.Cancelling.Attributes
+  commentId: N:Apizr.Cancelling.Attributes
+  name: Apizr.Cancelling.Attributes
+  nameWithType: Apizr.Cancelling.Attributes
+  fullName: Apizr.Cancelling.Attributes
+- uid: Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute.#ctor*
+  commentId: Overload:Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute.#ctor
+  name: UpdateOperationTimeoutAttribute
+  nameWithType: UpdateOperationTimeoutAttribute.UpdateOperationTimeoutAttribute
+  fullName: Apizr.Cancelling.Attributes.Operation.UpdateOperationTimeoutAttribute.UpdateOperationTimeoutAttribute
 - uid: System.String
   commentId: T:System.String
   parent: System

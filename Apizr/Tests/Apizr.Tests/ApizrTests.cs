@@ -924,7 +924,7 @@ namespace Apizr.Tests
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
                         .WithPolicyRegistry(policyRegistry)
-                        .WithOperationTimeout(TimeSpan.FromSeconds(10)));
+                        .WithOperationTimeout(TimeSpan.FromSeconds(9)));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),

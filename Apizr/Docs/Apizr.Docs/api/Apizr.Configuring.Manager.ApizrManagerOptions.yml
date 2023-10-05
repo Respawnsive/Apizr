@@ -21,9 +21,10 @@ items:
   - Apizr.Configuring.Manager.ApizrManagerOptions.LoggerFactoryFactory
   - Apizr.Configuring.Manager.ApizrManagerOptions.LogLevelsFactory
   - Apizr.Configuring.Manager.ApizrManagerOptions.MappingHandlerFactory
+  - Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory
   - Apizr.Configuring.Manager.ApizrManagerOptions.PolicyRegistryFactory
   - Apizr.Configuring.Manager.ApizrManagerOptions.RefitSettingsFactory
-  - Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory
+  - Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory
   - Apizr.Configuring.Manager.ApizrManagerOptions.TrafficVerbosityFactory
   langs:
   - csharp
@@ -84,7 +85,8 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -155,7 +157,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 51
+    startLine: 52
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -194,7 +196,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 59
+    startLine: 60
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -233,7 +235,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 67
+    startLine: 68
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -272,7 +274,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 75
+    startLine: 76
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -311,7 +313,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 83
+    startLine: 84
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -350,7 +352,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 91
+    startLine: 92
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -389,7 +391,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactoryFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 98
+    startLine: 99
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -428,7 +430,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 101
+    startLine: 102
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -467,7 +469,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 104
+    startLine: 105
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -506,7 +508,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 107
+    startLine: 108
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -545,7 +547,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientConfigurationBuilder
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 110
+    startLine: 111
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -584,7 +586,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: PolicyRegistryFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 113
+    startLine: 114
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -623,7 +625,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettingsFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 117
+    startLine: 118
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -662,7 +664,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 124
+    startLine: 125
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -701,7 +703,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 127
+    startLine: 128
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -740,7 +742,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 130
+    startLine: 131
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -779,7 +781,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersFactories
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 133
+    startLine: 134
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -818,7 +820,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 137
+    startLine: 138
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -839,39 +841,78 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory
-  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory
-  id: TimeoutFactory
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory
+  id: OperationTimeoutFactory
   parent: Apizr.Configuring.Manager.ApizrManagerOptions
   langs:
   - csharp
   - vb
-  name: TimeoutFactory
-  nameWithType: ApizrManagerOptions.TimeoutFactory
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: ApizrManagerOptions.OperationTimeoutFactory
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: TimeoutFactory
+    id: OperationTimeoutFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 150
+    startLine: 151
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nRequest timeout factory\n"
+  summary: "\nThe operation timeout factory (overall request tries)\n"
   example: []
   syntax:
-    content: public Func<TimeSpan> TimeoutFactory { get; set; }
+    content: public Func<TimeSpan> OperationTimeoutFactory { get; set; }
     parameters: []
     return:
       type: System.Func{System.TimeSpan}
-    content.vb: Public Property TimeoutFactory As Func(Of TimeSpan)
-  overload: Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory*
+    content.vb: Public Property OperationTimeoutFactory As Func(Of TimeSpan)
+  overload: Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory*
   implements:
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory
+  id: RequestTimeoutFactory
+  parent: Apizr.Configuring.Manager.ApizrManagerOptions
+  langs:
+  - csharp
+  - vb
+  name: RequestTimeoutFactory
+  nameWithType: ApizrManagerOptions.RequestTimeoutFactory
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestTimeoutFactory
+    path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
+    startLine: 159
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Manager
+  summary: "\nThe request timeout factory (each request try)\n"
+  example: []
+  syntax:
+    content: public Func<TimeSpan> RequestTimeoutFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.TimeSpan}
+    content.vb: Public Property RequestTimeoutFactory As Func(Of TimeSpan)
+  overload: Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
   modifiers.csharp:
   - public
   - get
@@ -1065,12 +1106,18 @@ references:
   name: Headers
   nameWithType: ApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
-  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
-  name: Timeout
-  nameWithType: ApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  name: OperationTimeout
+  nameWithType: ApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: RequestTimeout
+  nameWithType: ApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -2692,17 +2739,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory*
-  commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory
-  name: TimeoutFactory
-  nameWithType: ApizrManagerOptions.TimeoutFactory
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptions.TimeoutFactory
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory*
+  commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: ApizrManagerOptions.OperationTimeoutFactory
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
-  name: TimeoutFactory
-  nameWithType: IApizrSharedRegistrationOptions.TimeoutFactory
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
 - uid: System.Func{System.TimeSpan}
   commentId: T:System.Func{System.TimeSpan}
   parent: System
@@ -2747,3 +2794,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory*
+  commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory
+  name: RequestTimeoutFactory
+  nameWithType: ApizrManagerOptions.RequestTimeoutFactory
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  name: RequestTimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory

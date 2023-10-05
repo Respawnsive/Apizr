@@ -145,7 +145,10 @@
       <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_Headers">ApizrGlobalSharedOptionsBase.Headers</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_Timeout">ApizrGlobalSharedOptionsBase.Timeout</a>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_OperationTimeout">ApizrGlobalSharedOptionsBase.OperationTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_RequestTimeout">ApizrGlobalSharedOptionsBase.RequestTimeout</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -510,7 +513,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptions_HttpTracerModeFactory.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L122">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L130">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptions_HttpTracerModeFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptions_HttpTracerModeFactory" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory">HttpTracerModeFactory</h4>
@@ -572,7 +575,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptions_LogLevelsFactory.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptions.LogLevelsFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L138">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L146">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptions_LogLevelsFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.LogLevelsFactory*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptions_LogLevelsFactory" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.LogLevelsFactory">LogLevelsFactory</h4>
@@ -625,6 +628,37 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Apizr.Mapping.IMappingHandler.html">IMappingHandler</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptions_OperationTimeoutFactory.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L114">View Source</a>
+  </span>
+  <a id="Apizr_Configuring_Common_ApizrCommonOptions_OperationTimeoutFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory*"></a>
+  <h4 id="Apizr_Configuring_Common_ApizrCommonOptions_OperationTimeoutFactory" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory">OperationTimeoutFactory</h4>
+  <div class="markdown level1 summary"><p>The operation timeout factory (overall request tries)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;TimeSpan&gt; OperationTimeoutFactory { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.TimeSpan</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -693,19 +727,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptions_TimeoutFactory.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptions_RequestTimeoutFactory.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L114">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L122">View Source</a>
   </span>
-  <a id="Apizr_Configuring_Common_ApizrCommonOptions_TimeoutFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory*"></a>
-  <h4 id="Apizr_Configuring_Common_ApizrCommonOptions_TimeoutFactory" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory">TimeoutFactory</h4>
-  <div class="markdown level1 summary"><p>Request timeout factory</p>
+  <a id="Apizr_Configuring_Common_ApizrCommonOptions_RequestTimeoutFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory*"></a>
+  <h4 id="Apizr_Configuring_Common_ApizrCommonOptions_RequestTimeoutFactory" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory">RequestTimeoutFactory</h4>
+  <div class="markdown level1 summary"><p>The request timeout factory (each request try)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Func&lt;TimeSpan&gt; TimeoutFactory { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Func&lt;TimeSpan&gt; RequestTimeoutFactory { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -727,7 +761,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptions_TrafficVerbosityFactory.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptions.TrafficVerbosityFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L130">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs/#L138">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptions_TrafficVerbosityFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.TrafficVerbosityFactory*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptions_TrafficVerbosityFactory" data-uid="Apizr.Configuring.Common.ApizrCommonOptions.TrafficVerbosityFactory">TrafficVerbosityFactory</h4>

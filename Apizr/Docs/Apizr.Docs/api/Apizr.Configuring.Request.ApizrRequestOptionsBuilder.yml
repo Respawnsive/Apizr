@@ -15,7 +15,8 @@ items:
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHandlerParameter(System.String,System.Object)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
-  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout(System.TimeSpan)
+  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout(System.TimeSpan)
+  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout(System.TimeSpan)
   langs:
   - csharp
   - vb
@@ -231,32 +232,73 @@ items:
   - Public
   fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String())
   name.vb: WithHeaders(String())
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout(System.TimeSpan)
-  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout(System.TimeSpan)
-  id: WithTimeout(System.TimeSpan)
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout(System.TimeSpan)
+  id: WithOperationTimeout(System.TimeSpan)
   parent: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithTimeout(TimeSpan)
-  nameWithType: ApizrRequestOptionsBuilder.WithTimeout(TimeSpan)
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout(System.TimeSpan)
+  name: WithOperationTimeout(TimeSpan)
+  nameWithType: ApizrRequestOptionsBuilder.WithOperationTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout(System.TimeSpan)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: WithTimeout
+    id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
     startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
-  summary: "\nSet a timeout to the request\n"
+  summary: "\nSet a timeout to the operation (overall request tries)\n"
   example: []
   syntax:
-    content: public IApizrRequestOptionsBuilder WithTimeout(TimeSpan timeout)
+    content: public IApizrRequestOptionsBuilder WithOperationTimeout(TimeSpan timeout)
+    parameters:
+    - id: timeout
+      type: System.TimeSpan
+      description: The operation timeout
+    return:
+      type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+      description: ''
+    content.vb: Public Function WithOperationTimeout(timeout As TimeSpan) As IApizrRequestOptionsBuilder
+  overload: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithOperationTimeout(System.TimeSpan)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout(System.TimeSpan)
+  id: WithRequestTimeout(System.TimeSpan)
+  parent: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithRequestTimeout(TimeSpan)
+  nameWithType: ApizrRequestOptionsBuilder.WithRequestTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout(System.TimeSpan)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithRequestTimeout
+    path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
+    startLine: 52
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: "\nSet a timeout to the request (each request try)\n"
+  example: []
+  syntax:
+    content: public IApizrRequestOptionsBuilder WithRequestTimeout(TimeSpan timeout)
     parameters:
     - id: timeout
       type: System.TimeSpan
@@ -264,10 +306,10 @@ items:
     return:
       type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
       description: ''
-    content.vb: Public Function WithTimeout(timeout As TimeSpan) As IApizrRequestOptionsBuilder
-  overload: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout*
+    content.vb: Public Function WithRequestTimeout(timeout As TimeSpan) As IApizrRequestOptionsBuilder
+  overload: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithTimeout(System.TimeSpan)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithRequestTimeout(System.TimeSpan)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -290,7 +332,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithContext
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 52
+    startLine: 60
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -334,7 +376,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCancellation
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 86
+    startLine: 94
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -375,7 +417,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheClearing
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 94
+    startLine: 102
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -416,7 +458,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 102
+    startLine: 110
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -466,7 +508,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 134
+    startLine: 142
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -518,7 +560,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 141
+    startLine: 149
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -2102,25 +2144,25 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout*
-  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout
-  name: WithTimeout
-  nameWithType: ApizrRequestOptionsBuilder.WithTimeout
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithTimeout
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithTimeout(System.TimeSpan)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithTimeout(System.TimeSpan)
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout
+  name: WithOperationTimeout
+  nameWithType: ApizrRequestOptionsBuilder.WithOperationTimeout
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithOperationTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithOperationTimeout(System.TimeSpan)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-  name: WithTimeout(TimeSpan)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithTimeout(TimeSpan)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithTimeout(System.TimeSpan)
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithTimeout(TimeSpan)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithTimeout(System.TimeSpan)
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+  name: WithOperationTimeout(TimeSpan)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOperationTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithOperationTimeout(System.TimeSpan)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithOperationTimeout(TimeSpan)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithOperationTimeout(System.TimeSpan)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-    name: WithTimeout
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithTimeout
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithTimeout
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+    name: WithOperationTimeout
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOperationTimeout
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithOperationTimeout
   - name: (
     nameWithType: (
     fullName: (
@@ -2133,10 +2175,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-    name: WithTimeout
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithTimeout
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithTimeout
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+    name: WithOperationTimeout
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithOperationTimeout
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithOperationTimeout
   - name: (
     nameWithType: (
     fullName: (
@@ -2155,19 +2197,19 @@ references:
   name: TimeSpan
   nameWithType: TimeSpan
   fullName: System.TimeSpan
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
   isExternal: true
-  name: WithTimeout(TimeSpan)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout(TimeSpan)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout(System.TimeSpan)
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout(TimeSpan)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout(System.TimeSpan)
+  name: WithOperationTimeout(TimeSpan)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithOperationTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithOperationTimeout(System.TimeSpan)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithOperationTimeout(TimeSpan)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithOperationTimeout(System.TimeSpan)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-    name: WithTimeout
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+    name: WithOperationTimeout
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithOperationTimeout
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithOperationTimeout
   - name: (
     nameWithType: (
     fullName: (
@@ -2180,10 +2222,96 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-    name: WithTimeout
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+    name: WithOperationTimeout
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithOperationTimeout
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithOperationTimeout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout
+  name: WithRequestTimeout
+  nameWithType: ApizrRequestOptionsBuilder.WithRequestTimeout
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithRequestTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithRequestTimeout(System.TimeSpan)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+  name: WithRequestTimeout(TimeSpan)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithRequestTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithRequestTimeout(System.TimeSpan)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithRequestTimeout(TimeSpan)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithRequestTimeout(System.TimeSpan)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+    name: WithRequestTimeout
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithRequestTimeout
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithRequestTimeout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+    name: WithRequestTimeout
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithRequestTimeout
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithRequestTimeout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+  isExternal: true
+  name: WithRequestTimeout(TimeSpan)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithRequestTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithRequestTimeout(System.TimeSpan)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithRequestTimeout(TimeSpan)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithRequestTimeout(System.TimeSpan)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+    name: WithRequestTimeout
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithRequestTimeout
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithRequestTimeout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+    name: WithRequestTimeout
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithRequestTimeout
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithRequestTimeout
   - name: (
     nameWithType: (
     fullName: (

@@ -20,9 +20,10 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptions.LoggerFactoryFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.LogLevelsFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.MappingHandlerFactory
+  - Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.PolicyRegistryFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.RefitSettingsFactory
-  - Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
+  - Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.TrafficVerbosityFactory
   langs:
   - csharp
@@ -76,7 +77,8 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -668,39 +670,78 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
-  commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
-  id: TimeoutFactory
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
+  commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
+  id: OperationTimeoutFactory
   parent: Apizr.Configuring.Common.ApizrCommonOptions
   langs:
   - csharp
   - vb
-  name: TimeoutFactory
-  nameWithType: ApizrCommonOptions.TimeoutFactory
-  fullName: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: ApizrCommonOptions.OperationTimeoutFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: TimeoutFactory
+    id: OperationTimeoutFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
     startLine: 113
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nRequest timeout factory\n"
+  summary: "\nThe operation timeout factory (overall request tries)\n"
   example: []
   syntax:
-    content: public Func<TimeSpan> TimeoutFactory { get; set; }
+    content: public Func<TimeSpan> OperationTimeoutFactory { get; set; }
     parameters: []
     return:
       type: System.Func{System.TimeSpan}
-    content.vb: Public Property TimeoutFactory As Func(Of TimeSpan)
-  overload: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory*
+    content.vb: Public Property OperationTimeoutFactory As Func(Of TimeSpan)
+  overload: Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory*
   implements:
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory
+  commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory
+  id: RequestTimeoutFactory
+  parent: Apizr.Configuring.Common.ApizrCommonOptions
+  langs:
+  - csharp
+  - vb
+  name: RequestTimeoutFactory
+  nameWithType: ApizrCommonOptions.RequestTimeoutFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestTimeoutFactory
+    path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+    startLine: 121
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  summary: "\nThe request timeout factory (each request try)\n"
+  example: []
+  syntax:
+    content: public Func<TimeSpan> RequestTimeoutFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.TimeSpan}
+    content.vb: Public Property RequestTimeoutFactory As Func(Of TimeSpan)
+  overload: Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
   modifiers.csharp:
   - public
   - get
@@ -725,7 +766,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 121
+    startLine: 129
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -764,7 +805,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 129
+    startLine: 137
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -803,7 +844,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 137
+    startLine: 145
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -969,12 +1010,18 @@ references:
   name: Headers
   nameWithType: ApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
-  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
-  name: Timeout
-  nameWithType: ApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  name: OperationTimeout
+  nameWithType: ApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  name: RequestTimeout
+  nameWithType: ApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -2332,17 +2379,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory*
-  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
-  name: TimeoutFactory
-  nameWithType: ApizrCommonOptions.TimeoutFactory
-  fullName: Apizr.Configuring.Common.ApizrCommonOptions.TimeoutFactory
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: ApizrCommonOptions.OperationTimeoutFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
-  name: TimeoutFactory
-  nameWithType: IApizrSharedRegistrationOptions.TimeoutFactory
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
 - uid: System.Func{System.TimeSpan}
   commentId: T:System.Func{System.TimeSpan}
   parent: System
@@ -2387,6 +2434,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory
+  name: RequestTimeoutFactory
+  nameWithType: ApizrCommonOptions.RequestTimeoutFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.RequestTimeoutFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  name: RequestTimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
 - uid: Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory*
   commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory
   name: HttpTracerModeFactory

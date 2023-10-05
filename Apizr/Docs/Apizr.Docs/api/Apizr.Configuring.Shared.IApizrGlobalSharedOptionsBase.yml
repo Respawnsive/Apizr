@@ -11,7 +11,8 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   langs:
   - csharp
@@ -287,37 +288,72 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  id: Timeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  id: OperationTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   langs:
   - csharp
   - vb
-  name: Timeout
-  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  name: OperationTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBase.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: Timeout
+    id: OperationTimeout
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBase.cs
     startLine: 51
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
-  summary: "\nRequest timeout\n"
+  summary: "\nThe operation timeout (overall request tries)\n"
   example: []
   syntax:
-    content: TimeSpan? Timeout { get; }
+    content: TimeSpan? OperationTimeout { get; }
     parameters: []
     return:
       type: System.Nullable{System.TimeSpan}
-    content.vb: ReadOnly Property Timeout As TimeSpan?
-  overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout*
+    content.vb: ReadOnly Property OperationTimeout As TimeSpan?
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  id: RequestTimeout
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: RequestTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestTimeout
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBase.cs
+    startLine: 56
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: "\nThe request timeout (each request try)\n"
+  example: []
+  syntax:
+    content: TimeSpan? RequestTimeout { get; }
+    parameters: []
+    return:
+      type: System.Nullable{System.TimeSpan}
+    content.vb: ReadOnly Property RequestTimeout As TimeSpan?
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -700,11 +736,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout*
-  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  name: Timeout
-  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  name: OperationTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
 - uid: System.Nullable{System.TimeSpan}
   commentId: T:System.Nullable{System.TimeSpan}
   parent: System
@@ -788,3 +824,8 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  name: RequestTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout

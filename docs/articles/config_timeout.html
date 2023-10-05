@@ -79,6 +79,20 @@
             <article class="content wrap" id="_content" data-uid="">
 <h2 id="configuring-timeout">Configuring Timeout</h2>
 
+<p>There&#39;s actually two kind of client timeout:</p>
+<ul>
+<li>Request timeout which is set to each request try</li>
+<li>Operation timeout which is set to overall request tries</li>
+</ul>
+<p>Both of it will throw a TimeoutRejectedException when time is out.</p>
+<ul>
+<li>If you configured a retry policy handling TimeoutRejectedException:<ul>
+<li>with a request timeout, the request will be sent again by Polly with your defined request timeout set to each individual try.</li>
+<li>with an operation timeout, Polly will stop sending retries if the operation timeout timed out.</li>
+</ul>
+</li>
+<li>Otherwise, if you didn&#39;t configure any retry policy handling TimeoutRejectedException, request timeout will behave like an operation timeout, so it doesn&#39;t matter which one you defined.</li>
+</ul>
 <p>You can configure a timeout at:</p>
 <ul>
 <li>Design time by attribute decoration</li>
@@ -98,27 +112,28 @@
 </li>
 </ul>
 <section id="tabpanel_x51Ik5XZbj_tabid-designing" role="tabpanel" data-tab="tabid-designing">
-<p>Apizr comes with a <code>Timeout</code> attribute which set a request timeout at any level (all Assembly apis, interface apis or specific api method).</p>
+<p>Apizr comes with a <code>RequestTimeout</code> and an <code>OperationTimeout</code> attribute which set a timeout at any level (all Assembly apis, interface apis or specific api method).</p>
 <p>Here is classic api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample
 {
-    [WebApi(&quot;https://reqres.in/api&quot;)]
+    [WebApi(&quot;https://reqres.in/api&quot;), OperationTimeout(&quot;00:03:00&quot;)]
     public interface IReqResService
     {
-        [Get(&quot;/users&quot;), Timeout(&quot;00:01:00&quot;)]
+        [Get(&quot;/users&quot;), RequestTimeout(&quot;00:01:00&quot;)]
         Task&lt;UserList&gt; GetUsersAsync();
 
-        [Get(&quot;/users/{userId}&quot;), Timeout(&quot;00:00:30&quot;)]
+        [Get(&quot;/users/{userId}&quot;), RequestTimeout(&quot;00:00:30&quot;)]
         Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
     }
 }
-</code></pre><p>You’ll find also Timeout attributes dedicated to CRUD apis like <code>TimeoutRead</code>, <code>TimeoutReadAll</code>, <code>TimeoutCreate</code>, <code>TimeoutUpdate</code> and <code>TimeoutDelete</code>, so you could define timeout settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>
+</code></pre><p>You’ll find the same timeout attributes dedicated to CRUD apis (the ones starting with <code>Read</code>, <code>ReadAll</code>, <code>Create</code>, <code>Update</code> and <code>Delete</code> prefix), so you could define timeout settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>
 <p>Here is CRUD api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample.Models
 {
     [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
-    [TimeoutReadAll(&quot;00:01:00&quot;)]
-    [TimeoutRead(&quot;00:00:30&quot;)]
+    [OperationTimeout(&quot;00:03:00&quot;)]
+    [ReadAllRequestTimeout(&quot;00:01:00&quot;)]
+    [ReadRequestTimeout(&quot;00:00:30&quot;)]
     public class User
     {
         [JsonProperty(&quot;id&quot;)]
@@ -139,37 +154,50 @@
 }
 </code></pre><p>Both (classic and CRUD) attributes define the same thing about timeout.</p>
 <p>The attribute value is actually a <code>TimeSpan</code> string representation which is parsed then.</p>
-<p>Note that setting a timeout at assembly or interface level actually set the timeout to the HttpClient itslef, where setting it at method level it will be managed by an auto cancelling token.</p>
 <p>You definitly can set a global timeout by decorating the assembly or interface, then manage specific scenarios at method level.
-Apizr will apply the closest timeout settings to the request it could find. 
-But in such scenario, your global timeout (HttpClient) should be longer than your request one (CancellationToken) obviously, otherwise the request one would be useless.</p>
-<p>Back to the example, we are saying:</p>
+Apizr will apply the closest timeout settings to the request it could find. </p>
+<p>Back to previous examples, we are saying that:</p>
 <ul>
-<li>When getting all users, let’s admit we could have many users registered, so let&#39;s set a 1 minute timeout.</li>
-<li>When getting a specific user, the request should be quick, so let&#39;s set a 30 secondes timeout.</li>
+<li>in details, any request try shouldn&#39;t take longer than:<ul>
+<li>1 min for GetUsers/ReadAll</li>
+<li>30 sec for GetUser/Read</li>
+</ul>
+</li>
+<li>in general, we don&#39;t want the user to wait too much, so let&#39;s retry if needed, but not longer than 3 min overall.</li>
 </ul>
 </section>
 <section id="tabpanel_x51Ik5XZbj_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
 <p>Configuring a timeout fluently at register time allows you to set it dynamically (e.g. based on settings).</p>
-<p>Note that setting a timeout at register time actually set the timeout to the HttpClient itslef, where setting it at request time it will be managed by an auto cancelling token.</p>
-<p>You can set a timeout thanks to this option:</p>
+<p>You can set a request timeout thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
-options =&gt; options.WithTimeout(YOUR_TIMESPAN)
+options =&gt; options.WithRequestTimeout(YOUR_TIMESPAN)
 
 // OR factory configuration
-options =&gt; options.WithTimeout(() =&gt; YOUR_TIMESPAN)
+options =&gt; options.WithRequestTimeout(() =&gt; YOUR_TIMESPAN)
 
 // OR extended factory configuration with the service provider instance
-options =&gt; options.WithTimeout(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YOUR_TIMESPAN)
+options =&gt; options.WithRequestTimeout(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YOUR_TIMESPAN)
+</code></pre><p>And/or you can set an operation timeout thanks to this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithOperationTimeout(YOUR_TIMESPAN)
+
+// OR factory configuration
+options =&gt; options.WithOperationTimeout(() =&gt; YOUR_TIMESPAN)
+
+// OR extended factory configuration with the service provider instance
+options =&gt; options.WithOperationTimeout(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YOUR_TIMESPAN)
 </code></pre><p>All timeout fluent options are available with or without using registry. 
 It means that you can share timeout configuration, setting it at registry level and/or set some specific one at api level.</p>
 </section>
 <section id="tabpanel_x51Ik5XZbj_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
 <p>Configuring a timeout fluently at request time allows you to set it at the very end, just before sending the request.</p>
 <p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
-<p>You can now set a timeout thanks to this option:</p>
+<p>You can set a request timeout thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
-options =&gt; options.WithTimeout(YOUR_TIMESPAN)
+options =&gt; options.WithRequestTimeout(YOUR_TIMESPAN)
+</code></pre><p>And/or you can set an operation timeout thanks to this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithOperationTimeout(YOUR_TIMESPAN)
 </code></pre></section>
 </div>
 </article>

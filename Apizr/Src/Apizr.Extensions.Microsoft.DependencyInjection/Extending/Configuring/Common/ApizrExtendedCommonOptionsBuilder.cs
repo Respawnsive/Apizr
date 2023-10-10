@@ -151,10 +151,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory)
         {
-            if (Options.HeadersFactory == null)
-                Options.HeadersFactory = headersFactory;
-            else
-                Options.HeadersFactory += headersFactory;
+            Options.HeadersFactories.Add(headersFactory);
 
             return this;
         }

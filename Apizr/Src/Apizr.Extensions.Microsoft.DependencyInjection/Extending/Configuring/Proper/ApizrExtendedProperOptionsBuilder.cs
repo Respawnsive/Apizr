@@ -180,10 +180,7 @@ namespace Apizr.Extending.Configuring.Proper
         /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory)
         {
-            if (Options.HeadersFactory == null)
-                Options.HeadersFactory = headersFactory;
-            else
-                Options.HeadersFactory += headersFactory;
+            Options.HeadersFactories.Add(headersFactory);
 
             return this;
         }

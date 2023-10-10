@@ -6,6 +6,7 @@ using Polly;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 
 namespace Apizr.Extending
@@ -39,19 +40,14 @@ namespace Apizr.Extending
 
                     foreach (var header in options.Headers)
                     {
-                        if (string.IsNullOrWhiteSpace(header)) continue;
+                        if (string.IsNullOrWhiteSpace(header)) 
+                            continue;
 
-                        // NB: Silverlight doesn't have an overload for String.Split()
-                        // with a count parameter, but header values can contain
-                        // ':' so we have to re-join all but the first part to get the
-                        // value.
-                        var parts = header.Split(':');
-                        var headerKey = parts[0].Trim();
-                        var headerValue = parts.Length > 1 ?
-                            string.Join(":", parts.Skip(1)).Trim() : null;
-
-                        request.SetHeader(headerKey, headerValue);
-                        logger.Log(logLevels.Low(), "{0}: Header {1} has been set with your provided {2} value.", context.OperationKey, headerKey, headerValue);
+                        var added = request.TrySetHeader(header, out var key, out var value);
+                        if(added)
+                            logger.Log(logLevels.Low(), "{0}: Header {1} has been set with your provided {2} value.", context.OperationKey, key, value);
+                        else
+                            logger.Log(logLevels.Low(), "{0}: Header {1} can't be set.", context.OperationKey, header);
                     }
                 }
 
@@ -79,6 +75,69 @@ namespace Apizr.Extending
             }
 
             return cts;
+        }
+
+        internal static bool TrySetHeader(this HttpClient httpClient, string header, out string key, out string value)
+        {
+            if (TryGetHeaderKeyValue(header, out key, out value))
+                return httpClient.DefaultRequestHeaders.TrySetHeader(key, value);
+
+            return false;
+        }
+
+        internal static bool TrySetHeader(this HttpRequestMessage request, string header, out string key, out string value)
+        {
+            if (TryGetHeaderKeyValue(header, out key, out value))
+            {
+                var added = request.Headers.TrySetHeader(key, value);
+
+                if (request.Content != null) 
+                    added = request.Content.Headers.TrySetHeader(key, value, added);
+
+                return added;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Cloned from Refit repository
+        /// </summary>
+        internal static bool TrySetHeader(this HttpHeaders headers, string key, string value, bool removeOnly = false)
+        {
+            // Clear any existing version of this header that might be set, because
+            // we want to allow removal/redefinition of headers.
+            // We also don't want to double up content headers which may have been
+            // set for us automatically.
+
+            // NB: We have to enumerate the header names to check existence because
+            // Contains throws if it's the wrong header type for the collection.
+            if (headers.Any(x => x.Key == key))
+                headers.Remove(key);
+
+            // We don't even bother trying to add the header as a content header
+            // if we just added it to the other collection, neither if its value is null
+            if (value == null || removeOnly) 
+                return true;
+
+            return headers.TryAddWithoutValidation(key, value);
+        }
+
+        internal static bool TryGetHeaderKeyValue(string header, out string key, out string value)
+        {
+            if (string.IsNullOrWhiteSpace(header))
+            {
+                key = value = null;
+            }
+            else
+            {
+                var parts = header.Split(':');
+                key = parts[0].Trim();
+                value = parts.Length > 1 ?
+                    string.Join(":", parts.Skip(1)).Trim() : null; 
+            }
+
+            return !string.IsNullOrWhiteSpace(key);
         }
     }
 }

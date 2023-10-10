@@ -43,7 +43,7 @@ namespace Apizr.Configuring.Manager
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
             DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ContextFactory = properOptions.ContextFactory;
-            HeadersFactory = properOptions.HeadersFactory;
+            HeadersFactories = new List<Func<IList<string>>> { properOptions.HeadersFactory };
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
         }
@@ -134,18 +134,10 @@ namespace Apizr.Configuring.Manager
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
+        internal IList<Func<IList<string>>> HeadersFactories { get; }
         private Func<IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory
-        {
-            get => _headersFactory;
-            internal set => _headersFactory = value != null ? () =>
-                {
-                    value.Invoke().ToList().ForEach(header => Headers.Add(header));
-                    return Headers;
-                }
-                : null;
-        }
+        public Func<IList<string>> HeadersFactory => _headersFactory ??= () => Headers = HeadersFactories.SelectMany(factory => factory.Invoke()).ToList();
 
         private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

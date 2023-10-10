@@ -5,7 +5,7 @@ using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://reqres.in/api"), Headers("testKey1: testValue1")]
+    [WebApi("https://reqres.in/api"), Headers("testKey1: testValue1", "testKey2: testValue2.1")]
     public interface IReqResSimpleService
     {
         [Get("/users")]

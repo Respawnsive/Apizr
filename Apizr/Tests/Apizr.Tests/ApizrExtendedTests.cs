@@ -834,20 +834,24 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
 
-            services.AddApizrTransferManagerFor<ITransferUndefinedApi>(options => options
-                .WithBaseAddress("https://httpbin.org/post")
-                .WithHeaders("testKey2: testValue2")
+            services.AddApizrManagerFor<IReqResSimpleService>(options => options
+                .WithBaseAddress("https://reqres.in/api")
+                .WithHeaders("testKey2: testValue2.2", "testKey3: testValue3.1")
                 .AddDelegatingHandler(watcher));
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Get instances from the container
-            var apizrCustomTransferManager = serviceProvider.GetService<IApizrTransferManager<ITransferUndefinedApi>>(); // Custom
-            
+            var apizrManager = serviceProvider.GetService<IApizrManager<IReqResSimpleService>>();
+
             // Shortcut
-            await apizrCustomTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithHeaders("testKey3: testValue3.2", "testKey4: testValue4"));
             watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKey("testKey2");
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
+            watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Set by common option then updated by request option
+            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4"); // Set by request option
         }
 
         [Fact]

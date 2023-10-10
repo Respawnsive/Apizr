@@ -1561,25 +1561,27 @@ namespace Apizr.Tests
             services.AddPolicyRegistry(_policyRegistry);
 
             services.AddApizr(registry => registry
-                .AddTransferManagerFor<ITransferUndefinedApi>(options => options
-                    .WithBaseAddress("https://httpbin.org/post")
-                    .WithHeaders(_ => new[] { "testKey2: testValue2.2" })
+                .AddManagerFor<IReqResSimpleService>(options => options
+                    .WithBaseAddress("https://reqres.in/api")
+                    .WithHeaders("testKey3: testValue3.2", "testKey4: testValue4.1")
                     .AddDelegatingHandler(watcher)),
                 options => options
-                    .WithHeaders("testKey2: testValue2.1", "testKey3: testValue3.1"));
+                    .WithHeaders("testKey2: testValue2.2", "testKey3: testValue3.1"));
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Get instances from the container
-            var apizrCustomTransferManager = serviceProvider.GetService<IApizrTransferManager<ITransferUndefinedApi>>(); // Custom
+            var apizrManager = serviceProvider.GetService<IApizrManager<IReqResSimpleService>>(); // Custom
 
             // Shortcut
-            await apizrCustomTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"), options => options.WithHeaders("testKey3: testValue3.2", "testKey4: testValue4"));
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithHeaders("testKey4: testValue4.2", "testKey5: testValue5"));
             watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKeys("testKey2", "testKey3", "testKey4");
-            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2");
-            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2");
-            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4");
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5");
+            watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Set by common option then updated by proper option
+            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4.2"); // Set by proper option then updated by request option
+            watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5"); // Set by request option
         }
 
         [Fact]

@@ -37,6 +37,7 @@ namespace Apizr.Extending.Configuring.Common
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
             PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
             PostRegistrationActions = new List<Action<Type, IServiceCollection>>();
+            HeadersFactories = new List<Func<IServiceProvider, IList<string>>>();
         }
 
         /// <inheritdoc />
@@ -119,19 +120,11 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
+        internal IList<Func<IServiceProvider, IList<string>>> HeadersFactories { get; }
         private Func<IServiceProvider, IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, IList<string>> HeadersFactory
-        {
-            get => _headersFactory;
-            internal set => _headersFactory = value != null ? serviceProvider =>
-                {
-                    value.Invoke(serviceProvider).ToList().ForEach(header => Headers.Add(header));
-                    return Headers;
-                }
-                : null;
-        }
-
+        public Func<IServiceProvider, IList<string>> HeadersFactory => _headersFactory ??= serviceProvider => Headers = HeadersFactories.SelectMany(factory => factory.Invoke(serviceProvider)).ToList();
+        
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
         public Func<IServiceProvider, TimeSpan> OperationTimeoutFactory

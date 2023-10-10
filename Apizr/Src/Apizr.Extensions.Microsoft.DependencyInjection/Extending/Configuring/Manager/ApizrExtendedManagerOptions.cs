@@ -50,7 +50,7 @@ namespace Apizr.Extending.Configuring.Manager
             ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistrationActions = commonOptions.PostRegistrationActions.ToList();
-            HeadersFactory = properOptions.HeadersFactory;
+            HeadersFactories = new List<Func<IServiceProvider, IList<string>>> { properOptions.HeadersFactory };
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
         }
@@ -152,18 +152,10 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
+        internal IList<Func<IServiceProvider, IList<string>>> HeadersFactories { get; }
         private Func<IServiceProvider, IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, IList<string>> HeadersFactory
-        {
-            get => _headersFactory;
-            internal set => _headersFactory = value != null ? serviceProvider =>
-                {
-                    value.Invoke(serviceProvider).ToList().ForEach(header => Headers.Add(header));
-                    return Headers;
-                }
-                : null;
-        }
+        public Func<IServiceProvider, IList<string>> HeadersFactory => _headersFactory ??= serviceProvider => Headers = HeadersFactories.SelectMany(factory => factory.Invoke(serviceProvider)).ToList();
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

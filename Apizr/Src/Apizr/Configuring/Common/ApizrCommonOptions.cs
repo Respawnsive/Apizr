@@ -35,6 +35,7 @@ namespace Apizr.Configuring.Common
             CacheHandlerFactory = () => new VoidCacheHandler();
             MappingHandlerFactory = () => new VoidMappingHandler();
             DelegatingHandlersFactories = new Dictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>();
+            HeadersFactories = new List<Func<IList<string>>>();
         }
 
         private Func<Uri> _baseUriFactory;
@@ -96,18 +97,10 @@ namespace Apizr.Configuring.Common
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
+        internal IList<Func<IList<string>>> HeadersFactories { get; }
         private Func<IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory
-        {
-            get => _headersFactory;
-            internal set => _headersFactory = value != null ? () =>
-                {
-                    value.Invoke().ToList().ForEach(header => Headers.Add(header));
-                    return Headers;
-                }
-                : null;
-        }
+        public Func<IList<string>> HeadersFactory => _headersFactory ??= () => Headers = HeadersFactories.SelectMany(factory => factory.Invoke()).ToList();
 
         private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

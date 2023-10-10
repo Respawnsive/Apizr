@@ -340,10 +340,7 @@ namespace Apizr.Configuring.Common
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithHeaders(Func<IList<string>> headersFactory)
         {
-            if(Options.HeadersFactory == null)
-                Options.HeadersFactory = headersFactory;
-            else
-                Options.HeadersFactory += headersFactory;
+            Options.HeadersFactories.Add(headersFactory);
 
             return this;
         }

@@ -375,10 +375,7 @@ namespace Apizr.Configuring.Manager
         /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithHeaders(Func<IList<string>> headersFactory)
         {
-            if (Options.HeadersFactory == null)
-                Options.HeadersFactory = headersFactory;
-            else
-                Options.HeadersFactory += headersFactory;
+            Options.HeadersFactories.Add(headersFactory);
 
             return this;
         }

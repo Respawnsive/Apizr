@@ -235,13 +235,11 @@ namespace Apizr
                     {
                         if (string.IsNullOrWhiteSpace(header)) continue;
 
-                        var parts = header.Split(':');
-                        var headerKey = parts[0].Trim();
-                        var headerValue = parts.Length > 1 ?
-                            string.Join(":", parts.Skip(1)).Trim() : null;
-
-                        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(headerKey, headerValue);
-                        apizrOptions.Logger?.Log(apizrOptions.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} has been set with your provided {2} value.", apizrOptions.WebApiType.GetFriendlyName(), headerKey, headerValue);
+                        var added = httpClient.TrySetHeader(header, out var key, out var value);
+                        if(added)
+                            apizrOptions.Logger?.Log(apizrOptions.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} has been set with your provided {2} value.", apizrOptions.WebApiType.GetFriendlyName(), key, value);
+                        else
+                            apizrOptions.Logger?.Log(apizrOptions.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} can't be set.", apizrOptions.WebApiType.GetFriendlyName(), header);
                     } 
                 }
 

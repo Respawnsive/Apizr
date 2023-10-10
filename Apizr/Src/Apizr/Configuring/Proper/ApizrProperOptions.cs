@@ -54,7 +54,6 @@ namespace Apizr.Configuring.Proper
             HttpClientConfigurationBuilder = sharedOptions.HttpClientConfigurationBuilder;
             HttpClientFactory = sharedOptions.HttpClientFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            ContextFactory = sharedOptions.ContextFactory;
             HeadersFactories = new List<Func<IList<string>>>{sharedOptions.HeadersFactory};
             OperationTimeoutFactory = operationTimeout.HasValue ? () => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? () => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;

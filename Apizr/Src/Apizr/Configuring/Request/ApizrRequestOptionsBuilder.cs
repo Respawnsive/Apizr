@@ -81,7 +81,10 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
                         : Options.Context.OperationKey;
 
                     Options.Context = new Context(operationKey,
-                        Options.Context.Concat(context.ToList()).ToDictionary(x => x.Key, x => x.Value));
+                        Options.Context.Concat(context.ToList())
+                            .Reverse()
+                            .GroupBy(kpv => kpv.Key)
+                            .ToDictionary(x => x.Key, x => x.First().Value));
                 }
                 break;
             default:

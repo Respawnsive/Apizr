@@ -42,7 +42,6 @@ namespace Apizr.Configuring.Manager
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
             DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            ContextFactory = properOptions.ContextFactory;
             HeadersFactories = new List<Func<IList<string>>> { properOptions.HeadersFactory };
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;

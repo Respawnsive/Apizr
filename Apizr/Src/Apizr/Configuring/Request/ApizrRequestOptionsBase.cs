@@ -19,7 +19,9 @@ namespace Apizr.Configuring.Request
             TimeSpan? requestTimeout,
             params LogLevel[] logLevels) : base(sharedOptions)
         {
-            Context = sharedOptions?.ContextFactory?.Invoke();
+            var context = sharedOptions?.ContextFactory?.Invoke();
+            if (context?.Count > 0)
+                Context = context;
             if (httpTracerMode != null)
                 HttpTracerMode = httpTracerMode.Value;
             if (trafficVerbosity != null)

@@ -232,23 +232,16 @@ namespace Apizr.Extending.Configuring.Proper
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.ContextFactory ??= contextFactory;
+                    if (Options.ContextFactories.Count == 0)
+                        Options.ContextFactories.Add(contextFactory);
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.ContextFactory = contextFactory;
+                    Options.ContextFactories.Clear();
+                    Options.ContextFactories.Add(contextFactory);
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.ContextFactory == null)
-                    {
-                        Options.ContextFactory = contextFactory;
-                    }
-                    else
-                    {
-                        Options.ContextFactory = () => new Context(null,
-                            Options.ContextFactory.Invoke().Concat(contextFactory.Invoke().ToList())
-                                .ToDictionary(x => x.Key, x => x.Value));
-                    }
+                    Options.ContextFactories.Add(contextFactory);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);

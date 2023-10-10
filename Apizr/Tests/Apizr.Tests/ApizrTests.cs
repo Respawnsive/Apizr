@@ -428,28 +428,27 @@ namespace Apizr.Tests
         public async Task Requesting_With_Context_At_Multiple_Levels_Should_Merge_It_All_At_The_End()
         {
             var watcher = new WatchingRequestHandler();
-            var testKey1 = "TestKey1";
-            var testValue1 = 1;
 
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithContext(() => new Context { { testKey1, testValue1 } })
+                options.WithContext(() => new Context { { "testKey1", "testValue1" }, { "testKey2", "testValue2.1" } })
                     .AddDelegatingHandler(watcher));
 
-            var testKey2 = "TestKey2";
-            var testValue2 = 2;
             // Defining Context 2
-            var context2 = new Context { { testKey2, testValue2 } };
+            var context2 = new Context { { "testKey2", "testValue2.2" }, { "testKey3", "testValue3" } };
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithContext(context2));
 
             watcher.Context.Should().NotBeNull();
-            watcher.Context.Keys.Should().Contain(testKey1);
-            watcher.Context.TryGetValue(testKey1, out var value1).Should().BeTrue();
-            value1.Should().Be(testValue1);
-            watcher.Context.Keys.Should().Contain(testKey2);
-            watcher.Context.TryGetValue(testKey2, out var value2).Should().BeTrue();
-            value2.Should().Be(testValue2);
+            watcher.Context.Keys.Should().Contain("testKey1");
+            watcher.Context.TryGetValue("testKey1", out var valueKey1).Should().BeTrue(); // Set by manager option
+            valueKey1.Should().Be("testValue1");
+            watcher.Context.Keys.Should().Contain("testKey2");
+            watcher.Context.TryGetValue("testKey2", out var valueKey2).Should().BeTrue(); // Set by manager option then updated by the request one
+            valueKey2.Should().Be("testValue2.2");
+            watcher.Context.Keys.Should().Contain("testKey3");
+            watcher.Context.TryGetValue("testKey3", out var valueKey3).Should().BeTrue(); // Set by request option
+            valueKey3.Should().Be("testValue3");
         }
 
         [Fact]

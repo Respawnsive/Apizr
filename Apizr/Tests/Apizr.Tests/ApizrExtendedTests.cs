@@ -507,6 +507,68 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Requesting_With_Context_into_Options_Should_Set_Context()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            services.AddApizrManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            // Get instances from the container
+            var apizrManager = serviceProvider.GetService<IApizrManager<IReqResSimpleService>>();
+
+            var testKey = "TestKey1";
+            var testValue = 1;
+            // Defining Context
+            var context = new Context { { testKey, testValue } };
+
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithContext(context));
+            watcher.Context.Should().NotBeNull();
+            watcher.Context.Keys.Should().Contain(testKey);
+            watcher.Context.TryGetValue(testKey, out var value).Should().BeTrue();
+            value.Should().Be(testValue);
+        }
+
+        [Fact]
+        public async Task Requesting_With_Context_At_Multiple_Levels_Should_Merge_It_All_At_The_End()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var services = new ServiceCollection();
+            services.AddPolicyRegistry(_policyRegistry);
+
+            services.AddApizrManagerFor<IReqResUserService>(options =>
+                options.WithContext(() => new Context { { "testKey1", "testValue1" }, { "testKey2", "testValue2.1" } })
+                    .AddDelegatingHandler(watcher));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            // Get instances from the container
+            var apizrManager = serviceProvider.GetService<IApizrManager<IReqResSimpleService>>();
+
+            // Defining Context 2
+            var context2 = new Context { { "testKey2", "testValue2.2" }, { "testKey3", "testValue3" } };
+
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithContext(context2));
+
+            watcher.Context.Should().NotBeNull();
+            watcher.Context.Keys.Should().Contain("testKey1");
+            watcher.Context.TryGetValue("testKey1", out var valueKey1).Should().BeTrue(); // Set by manager option
+            valueKey1.Should().Be("testValue1");
+            watcher.Context.Keys.Should().Contain("testKey2");
+            watcher.Context.TryGetValue("testKey2", out var valueKey2).Should().BeTrue(); // Set by manager option then updated by the request one
+            valueKey2.Should().Be("testValue2.2");
+            watcher.Context.Keys.Should().Contain("testKey3");
+            watcher.Context.TryGetValue("testKey3", out var valueKey3).Should().BeTrue(); // Set by request option
+            valueKey3.Should().Be("testValue3");
+        }
+
+        [Fact]
         public async Task Calling_WithMediation_Should_Handle_Requests()
         {
             var services = new ServiceCollection();

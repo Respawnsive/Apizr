@@ -30,8 +30,6 @@ namespace Apizr.Configuring.Request
                 OperationTimeout = operationTimeout.Value;
             if (requestTimeout.HasValue)
                 RequestTimeout = requestTimeout.Value;
-
-            Headers = new List<string>(); // The request ones, not the HttpClient ones
         }
 
         /// <inheritdoc />

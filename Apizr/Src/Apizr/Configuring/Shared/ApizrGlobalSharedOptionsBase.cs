@@ -8,7 +8,7 @@ using Polly;
 namespace Apizr.Configuring.Shared
 {
     /// <summary>
-    /// Options available at both common and proper level for both static and extended registrations
+    /// Options available at every level for both static and extended registrations
     /// </summary>
     public abstract class ApizrGlobalSharedOptionsBase : IApizrGlobalSharedOptionsBase
     {
@@ -23,6 +23,7 @@ namespace Apizr.Configuring.Shared
                                  new Dictionary<string, object>();
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
+            Headers = sharedOptions?.Headers ?? new List<string>();
         }
 
         /// <inheritdoc />

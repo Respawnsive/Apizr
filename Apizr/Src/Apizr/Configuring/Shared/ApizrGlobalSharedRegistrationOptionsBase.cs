@@ -21,7 +21,6 @@ namespace Apizr.Configuring.Shared
             BasePath = sharedOptions?.BasePath;
             ContextFactory = sharedOptions?.ContextFactory;
             PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
-            Headers = sharedOptions?.Headers ?? new List<string>(); // The HttpClient ones
         }
 
         /// <inheritdoc />

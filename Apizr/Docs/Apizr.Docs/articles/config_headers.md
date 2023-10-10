@@ -9,17 +9,20 @@ You can configure headers at:
 
 You can set headers at design time, decorating interfaces or methods with the `Headers` attribute provided by Refit.
 
-But for now, this attribute approach won't let you:
-- set global/shared headers (other than repeating yourself decorating each interfaces or inheriting from a decorated one)
-- set computed/calculated headers (other than intercepting it on the handler side and changing its value before sending or providing it as a request parameter)
+You definitly can set a global header by decorating an interface, then manage specific scenarios at method level.
+Apizr will apply the closest header value to the request it could find. 
+
+>[!TIP]
+>
+> Please refer to Refit official documentation about header attribute. Note that decorating assembly is not available with Headers attribute.
 
 ### [Registering](#tab/tabid-registering)
 
 Configuring the headers fluently at register time allows you to set it dynamically (e.g. based on settings).
 
-Note that setting headers at register time actually set the headers to the HttpClient itslef, where setting it at request time it will be added on sending.
+First, please add the request options parameter to your api methods: ```[RequestOptions] IApizrRequestOptions options```
 
-You can set headers thanks to this option:
+Now you can set headers thanks to this option:
 
 ```csharp
 // direct configuration
@@ -46,7 +49,5 @@ You can now set headers thanks to this option:
 // direct configuration
 options => options.AddHeaders("HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2")
 ```
-
-You can do the same thing with the Refit's Header parameter attribute, but you'll have to design your api with this special parameter.
 
 ***

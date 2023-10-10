@@ -682,23 +682,6 @@ namespace Apizr
                         if (httpClient.BaseAddress == null) 
                             httpClient.BaseAddress = options.BaseUri;
 
-                        // Global headers
-                        if (options.Headers?.Count > 0)
-                        {
-                            foreach (var header in options.Headers)
-                            {
-                                if (string.IsNullOrWhiteSpace(header)) continue;
-
-                                var parts = header.Split(':');
-                                var headerKey = parts[0].Trim();
-                                var headerValue = parts.Length > 1 ?
-                                    string.Join(":", parts.Skip(1)).Trim() : null;
-
-                                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(headerKey, headerValue);
-                                options.Logger?.Log(options.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} has been set with your provided {2} value.", options.WebApiType.GetFriendlyName(), headerKey, headerValue);
-                            }
-                        }
-
                         // Refit rest service
                         return typeof(LazyFactory<>).MakeGenericType(options.WebApiType)
                             .GetConstructor(new[] { typeof(Func<object>) })

@@ -227,21 +227,6 @@ namespace Apizr
             {
                 // HttpClient
                 var httpClient = new ApizrHttpClient(httpHandlerFactory.Invoke(), false, apizrOptions) {BaseAddress = apizrOptions.BaseUri};
-                
-                // Global headers
-                if (apizrOptions.Headers?.Count > 0)
-                {
-                    foreach (var header in apizrOptions.Headers)
-                    {
-                        if (string.IsNullOrWhiteSpace(header)) continue;
-
-                        var added = httpClient.TrySetHeader(header, out var key, out var value);
-                        if(added)
-                            apizrOptions.Logger?.Log(apizrOptions.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} has been set with your provided {2} value.", apizrOptions.WebApiType.GetFriendlyName(), key, value);
-                        else
-                            apizrOptions.Logger?.Log(apizrOptions.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} can't be set.", apizrOptions.WebApiType.GetFriendlyName(), header);
-                    } 
-                }
 
                 // Custom client config
                 apizrOptions.HttpClientConfigurationBuilder.Invoke(httpClient);

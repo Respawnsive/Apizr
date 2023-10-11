@@ -514,12 +514,13 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
 
-            services.AddApizrManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher));
+            services.AddApizrManagerFor<IReqResSimpleService>(options => options.AddDelegatingHandler(watcher));
 
             var serviceProvider = services.BuildServiceProvider();
 
             // Get instances from the container
             var apizrManager = serviceProvider.GetService<IApizrManager<IReqResSimpleService>>();
+            apizrManager.Should().NotBeNull();
 
             var testKey = "TestKey1";
             var testValue = 1;
@@ -541,7 +542,7 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddPolicyRegistry(_policyRegistry);
 
-            services.AddApizrManagerFor<IReqResUserService>(options =>
+            services.AddApizrManagerFor<IReqResSimpleService>(options =>
                 options.WithContext(() => new Context { { "testKey1", "testValue1" }, { "testKey2", "testValue2.1" } })
                     .AddDelegatingHandler(watcher));
 

@@ -93,14 +93,14 @@
 <p>Configuring a context at register time allows you to get a pre-defined one while requesting.</p>
 <p><code>WithContext</code> builder option is available with or without using registry.
 It means that you can share a context globally by setting it at registry level and/or set some specific one at api level.
-As it&#39;s not recomended to share the same context instance between requests, <code>WithContext</code> registration option comes with a factory style.</p>
+As it&#39;s not recomended to share the same context instance between requests, <code>WithContext</code> registration option comes with a factory registration only.</p>
 <p>Here is a quite simple scenario:</p>
 <pre><code class="lang-csharp">var reqResUserManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResUserService&gt;(options =&gt; options
-                    .WithContext(() =&gt; new Context { { testKey1, testValue1 } }));
+                    .WithContext(() =&gt; new Context { { &quot;testKey1&quot;, &quot;testValue1&quot; } }));
 </code></pre><p>And here is a pretty complexe scenario:</p>
-<pre><code class="lang-csharp">private Context FirstContextFactory() =&gt; new() { { testKey1, testValue1 } };
-private Context SecondContextFactory() =&gt; new() { { testKey2, testValue2 } };
-private Context ThirdContextFactory() =&gt; new() { { testKey3, testValue3 } };
+<pre><code class="lang-csharp">private Context FirstContextFactory() =&gt; new() { { &quot;testKey1&quot;, &quot;testValue1&quot; } };
+private Context SecondContextFactory() =&gt; new() { { &quot;testKey2&quot;, &quot;testValue2&quot; } };
+private Context ThirdContextFactory() =&gt; new() { { &quot;testKey3&quot;, &quot;testValue3&quot; } };
 
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
         .AddGroup(group =&gt; group
@@ -118,7 +118,8 @@ var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
 <li>Pass the first context while requesting with <code>IHttpBinService</code> api or <code>User</code> CRUD api</li>
 </ul>
 <p>Feel free to configure your context at the level of your choice, depending on your needs.
-You definitly can mix it all with request option context providing.</p>
+You definitly can mix it all with request option context providing. 
+Keep in mind that the closest key/value to the request will be the one used by Apizr.</p>
 </section>
 <section id="tabpanel_DCh2MqYhH7_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
 <p>Configuring a context at request time allows you to set it at the very end, just before sending the request.</p>

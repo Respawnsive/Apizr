@@ -8,19 +8,19 @@ Configuring a context at register time allows you to get a pre-defined one while
 
 `WithContext` builder option is available with or without using registry.
 It means that you can share a context globally by setting it at registry level and/or set some specific one at api level.
-As it's not recomended to share the same context instance between requests, `WithContext` registration option comes with a factory style.
+As it's not recomended to share the same context instance between requests, `WithContext` registration option comes with a factory registration only.
 
 Here is a quite simple scenario:
 ```csharp
 var reqResUserManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
-                    .WithContext(() => new Context { { testKey1, testValue1 } }));
+                    .WithContext(() => new Context { { "testKey1", "testValue1" } }));
 ```
 
 And here is a pretty complexe scenario:
 ```csharp
-private Context FirstContextFactory() => new() { { testKey1, testValue1 } };
-private Context SecondContextFactory() => new() { { testKey2, testValue2 } };
-private Context ThirdContextFactory() => new() { { testKey3, testValue3 } };
+private Context FirstContextFactory() => new() { { "testKey1", "testValue1" } };
+private Context SecondContextFactory() => new() { { "testKey2", "testValue2" } };
+private Context ThirdContextFactory() => new() { { "testKey3", "testValue3" } };
 
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
         .AddGroup(group => group
@@ -39,7 +39,8 @@ Here I'm telling Apizr to:
 - Pass the first context while requesting with ```IHttpBinService``` api or ```User``` CRUD api
 
 Feel free to configure your context at the level of your choice, depending on your needs.
-You definitly can mix it all with request option context providing.
+You definitly can mix it all with request option context providing. 
+Keep in mind that the closest key/value to the request will be the one used by Apizr.
 
 ### [Requesting](#tab/tabid-requesting)
 

@@ -642,17 +642,19 @@ namespace Apizr.Tests
             var watcher = new WatchingRequestHandler();
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =>
-                    registry.AddManagerFor<IReqResUserService>(
+                    registry.AddGroup(group => group.AddManagerFor<IReqResSimpleService>(
                         options => options
-                            .WithContext(() => new Context {{"testKey2", "testValue2.2"}, {"testKey3", "testValue3.1"}}) // proper
+                            .WithContext(() => new Context { { "testKey3", "testValue3.2" }, { "testKey4", "testValue4.1" } }) // proper
                             .AddDelegatingHandler(watcher)),
+                        options => options
+                            .WithContext(() => new Context { { "testKey2", "testValue2.2" }, { "testKey3", "testValue3.1" } })), // group
                 options => options
                     .WithContext(() => new Context {{"testKey1", "testValue1"}, {"testKey2", "testValue2.1"}})); // common
 
-            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResSimpleService>();
 
             // Defining Context 2
-            var context2 = new Context { { "testKey3", "testValue3.2" }, { "testKey4", "testValue4" } }; // request
+            var context2 = new Context { { "testKey4", "testValue4.2" }, { "testKey5", "testValue5" } }; // request
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithContext(context2));
@@ -662,14 +664,17 @@ namespace Apizr.Tests
             watcher.Context.TryGetValue("testKey1", out var valueKey1).Should().BeTrue(); // Set by common option
             valueKey1.Should().Be("testValue1");
             watcher.Context.Keys.Should().Contain("testKey2");
-            watcher.Context.TryGetValue("testKey2", out var valueKey2).Should().BeTrue(); // Set by common option then updated by the proper one
+            watcher.Context.TryGetValue("testKey2", out var valueKey2).Should().BeTrue(); // Set by common option then updated by the group one
             valueKey2.Should().Be("testValue2.2");
             watcher.Context.Keys.Should().Contain("testKey3");
-            watcher.Context.TryGetValue("testKey3", out var valueKey3).Should().BeTrue(); // Set by proper option then updated by the request one
+            watcher.Context.TryGetValue("testKey3", out var valueKey3).Should().BeTrue(); // Set by group option then updated by the proper one
             valueKey3.Should().Be("testValue3.2");
             watcher.Context.Keys.Should().Contain("testKey4");
-            watcher.Context.TryGetValue("testKey4", out var valueKey4).Should().BeTrue(); // Set by request option
-            valueKey4.Should().Be("testValue4");
+            watcher.Context.TryGetValue("testKey4", out var valueKey4).Should().BeTrue(); // Set by proper option then updated by the request one
+            valueKey4.Should().Be("testValue4.2");
+            watcher.Context.Keys.Should().Contain("testKey5");
+            watcher.Context.TryGetValue("testKey5", out var valueKey5).Should().BeTrue(); // Set by request option
+            valueKey5.Should().Be("testValue5");
         }
 
         [Fact]

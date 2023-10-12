@@ -3,9 +3,10 @@
 
 ### All
 
-- [Unified][Cancellation] Now **cancelling a request on Android trow an OperationCanceledException** instead of a WebException/SocketClosedException
+- [Unified][Cancellation] Now **cancelling a request on Android trows an OperationCanceledException** instead of a WebException/SocketClosedException
+- [Unified][Cancellation] Now **cancelling a request on iOS trows an OperationCanceledException** instead of a TimeoutException/TaskCanceledException
 - [New][Timeout] Now we can **set a request timeout (each request try) and/or an operation timeout (overall request tries)** thanks to both dedicated attributes or fluent options
-- [Unified][Timeout] Now a **request that times out on client side throw a TimeoutRejectedException** provided by Polly instead of a TimeoutException
+- [Unified][Timeout] Now a **request that times out on client side throws a TimeoutRejectedException** provided by Polly instead of a TimeoutException
 - [Fix][Headers] Now the **headers feature fully support composite configuration**
 - [Fix][Context] Now the **context feature fully support composite configuration**
 

@@ -26,8 +26,13 @@ namespace Apizr
                 {
                     return await base.SendAsync(request, cts?.Token ?? cancellationToken).ConfigureAwait(false);
                 }
+                catch (TimeoutException ex)
+                    when (ex.InnerException is OperationCanceledException cancelEx) // Actually a user cancellation (iOS)
+                {
+                    throw cancelEx;
+                }
                 catch (WebException ex)
-                    when (optionsCancellationToken.IsCancellationRequested) // Actually a user cancellation
+                    when (optionsCancellationToken.IsCancellationRequested) // Actually a user cancellation (Android)
                 {
                     throw new OperationCanceledException(ex.Message, ex);
                 }

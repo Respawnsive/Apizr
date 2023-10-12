@@ -701,7 +701,7 @@ namespace Apizr.Tests
             ex.WithInnerException<OperationCanceledException>();
         }
 
-        [Fact]
+        [Fact] // todo: iOS fix => TimeoutException
         public async Task Cancelling_A_Post_Request_Should_Throw_An_OperationCanceledException()
         {
             var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>();

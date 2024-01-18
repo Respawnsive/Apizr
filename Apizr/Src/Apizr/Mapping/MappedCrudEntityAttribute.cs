@@ -22,4 +22,66 @@ namespace Apizr.Mapping
         {
         }
     }
+
+    /// <summary>
+    /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for the referenced api entity
+    /// and mapped to this decorated model entity (works only with IServiceCollection extensions registration)
+    /// </summary>
+    /// <typeparam name="TApiEntity">The mapped api entity type</typeparam>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class MappedCrudEntityAttribute<TApiEntity> : MappedCrudEntityAttribute
+    {
+        /// <inheritdoc />
+        public MappedCrudEntityAttribute(string apiEntityBaseUri) : base(apiEntityBaseUri, typeof(TApiEntity))
+        {
+        }
+    }
+
+    /// <summary>
+    /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for the referenced api entity
+    /// and mapped to this decorated model entity (works only with IServiceCollection extensions registration)
+    /// </summary>
+    /// <typeparam name="TApiEntity">The mapped api entity type</typeparam>
+    /// <typeparam name="TApiEntityKey">The mapped api entity's crud key type (default: null = typeof(int))</typeparam>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class MappedCrudEntityAttribute<TApiEntity, TApiEntityKey> : MappedCrudEntityAttribute
+    {
+        /// <inheritdoc />
+        public MappedCrudEntityAttribute(string apiEntityBaseUri) : base(apiEntityBaseUri, typeof(TApiEntity), typeof(TApiEntityKey))
+        {
+        }
+    }
+
+    /// <summary>
+    /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for the referenced api entity
+    /// and mapped to this decorated model entity (works only with IServiceCollection extensions registration)
+    /// </summary>
+    /// <typeparam name="TApiEntity">The mapped api entity type</typeparam>
+    /// <typeparam name="TApiEntityKey">The mapped api entity's crud key type (default: null = typeof(int))</typeparam>
+    /// <typeparam name="TApiEntityReadAllResult">The mapped api entity "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class MappedCrudEntityAttribute<TApiEntity, TApiEntityKey, TApiEntityReadAllResult> : MappedCrudEntityAttribute
+    {
+        /// <inheritdoc />
+        public MappedCrudEntityAttribute(string apiEntityBaseUri) : base(apiEntityBaseUri, typeof(TApiEntity), typeof(TApiEntityKey), typeof(TApiEntityReadAllResult))
+        {
+        }
+    }
+
+    /// <summary>
+    /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for the referenced api entity
+    /// and mapped to this decorated model entity (works only with IServiceCollection extensions registration)
+    /// </summary>
+    /// <typeparam name="TApiEntity">The mapped api entity type</typeparam>
+    /// <typeparam name="TApiEntityKey">The mapped api entity's crud key type (default: null = typeof(int))</typeparam>
+    /// <typeparam name="TApiEntityReadAllResult">The mapped api entity "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+    /// <typeparam name="TApiEntityReadAllParams">The mapped api entity ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class MappedCrudEntityAttribute<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TApiEntityReadAllParams> : MappedCrudEntityAttribute
+    {
+        /// <inheritdoc />
+        public MappedCrudEntityAttribute(string apiEntityBaseUri) : base(apiEntityBaseUri, typeof(TApiEntity), typeof(TApiEntityKey), typeof(TApiEntityReadAllResult), typeof(TApiEntityReadAllParams))
+        {
+        }
+    }
 }

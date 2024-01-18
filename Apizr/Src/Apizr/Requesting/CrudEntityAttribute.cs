@@ -21,8 +21,8 @@ namespace Apizr.Requesting
         /// <param name="modelEntityType">Model entity type mapped with this api entity type (default: null = decorated api entity type)</param>
         public CrudEntityAttribute(string baseUri, Type keyType = null, Type readAllResultType = null, Type readAllParamsType = null, Type modelEntityType = null)
         {
-            if (keyType != null && !keyType.GetTypeInfo().IsPrimitive)
-                throw new ArgumentException($"{keyType.Name} is not primitive", nameof(keyType));
+            if (keyType != null && keyType.GetTypeInfo().IsClass)
+                throw new ArgumentException($"{keyType.Name} must not be a class", nameof(keyType));
 
             if (readAllResultType != null && (!typeof(IEnumerable<>).IsAssignableFromGenericType(readAllResultType) && !readAllResultType.IsClass || !readAllResultType.IsGenericType))
                 throw new ArgumentException($"{readAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be a generic class");
@@ -62,4 +62,38 @@ namespace Apizr.Requesting
         /// </summary>
         public Type MappedEntityType { get; set; }
     }
+
+    /// <summary>
+    /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
+    /// </summary>
+    /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CrudEntityAttribute<TKey>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey));
+
+    /// <summary>
+    /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
+    /// </summary>
+    /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
+    /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CrudEntityAttribute<TKey, TReadAllResult>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult));
+
+    /// <summary>
+    /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
+    /// </summary>
+    /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
+    /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+    /// <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams));
+
+    /// <summary>
+    /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
+    /// </summary>
+    /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
+    /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+    /// <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
+    /// <typeparam name="TModelEntity">Model entity type mapped with this api entity type (default: null = decorated api entity type)</typeparam>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams, TModelEntity>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(TModelEntity));
 }

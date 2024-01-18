@@ -7,6 +7,7 @@ using Fusillade;
 using MediatR;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Shiny;
 
 namespace Apizr.Sample.MAUI.ViewModels
 {

@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Refit;
@@ -10,31 +11,27 @@ namespace Apizr
 {
     internal static class SerializationExtensions
     {
-        internal static byte[] ToByteArray(this object obj)
+        internal static async Task<byte[]> ToByteArrayAsync(this object obj)
         {
             if (obj == null)
             {
                 return null;
             }
-            var binaryFormatter = new BinaryFormatter();
-            using (var memoryStream = new MemoryStream())
-            {
-                binaryFormatter.Serialize(memoryStream, obj);
-                return memoryStream.ToArray();
-            }
+
+            using var memoryStream = new MemoryStream();
+            await JsonSerializer.SerializeAsync(memoryStream, obj);
+            return memoryStream.ToArray();
         }
 
-        internal static T FromByteArray<T>(this byte[] byteArray)
+        internal static async Task<T> FromByteArrayAsync<T>(this byte[] byteArray)
         {
             if (byteArray == null)
             {
                 return default;
             }
-            var binaryFormatter = new BinaryFormatter();
-            using (var memoryStream = new MemoryStream(byteArray))
-            {
-                return (T)binaryFormatter.Deserialize(memoryStream);
-            }
+
+            using var memoryStream = new MemoryStream(byteArray);
+            return await JsonSerializer.DeserializeAsync<T>(memoryStream);
         }
 
         internal static async Task<string> ToJsonStringAsync(this object obj, IHttpContentSerializer contentSerializer)

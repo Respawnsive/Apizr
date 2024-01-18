@@ -1,23 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	  <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-	  <RootNamespace>Apizr</RootNamespace>
+    <TargetFrameworks>netstandard2.0;net7.0</TargetFrameworks>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <RootNamespace>Apizr</RootNamespace>
   </PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>Apizr.Integrations.FileTransfer.MediatR.xml</DocumentationFile>
-		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Handling\Apizr.Integrations.MediatR\Apizr.Integrations.MediatR.csproj" />
-	  <ProjectReference Include="..\Apizr.Extensions.Microsoft.FileTransfer\Apizr.Extensions.Microsoft.FileTransfer.csproj" />
-	</ItemGroup>
-
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Apizr.Integrations.FileTransfer.MediatR.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Handling\Apizr.Integrations.MediatR\Apizr.Integrations.MediatR.csproj" />
+    <ProjectReference Include="..\Apizr.Extensions.Microsoft.FileTransfer\Apizr.Extensions.Microsoft.FileTransfer.csproj" />
+  </ItemGroup>
 </Project>

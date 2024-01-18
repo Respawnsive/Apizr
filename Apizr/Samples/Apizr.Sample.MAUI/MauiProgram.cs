@@ -6,8 +6,8 @@ using CommunityToolkit.Maui;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
-using Prism.DryIoc;
 using System.Reflection;
+using Shiny;
 
 namespace Apizr.Sample.MAUI
 {

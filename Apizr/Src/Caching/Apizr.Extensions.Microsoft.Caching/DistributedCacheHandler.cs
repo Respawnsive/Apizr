@@ -29,7 +29,7 @@ namespace Apizr
 
             if (typeof(TCache) == typeof(byte[]))
             {
-                var data = value.ToByteArray();
+                var data = await value.ToByteArrayAsync();
                 await _distributedCache.SetAsync(key, data, options, cancellationToken);
             }
             else if (typeof(TCache) == typeof(string))
@@ -49,7 +49,7 @@ namespace Apizr
             if (typeof(TCache) == typeof(byte[]))
             {
                 var result = await _distributedCache.GetAsync(key, cancellationToken);
-                return result.FromByteArray<TData>();
+                return await result.FromByteArrayAsync<TData>();
             }
             else if (typeof(TCache) == typeof(string))
             {

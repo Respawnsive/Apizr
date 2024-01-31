@@ -1,15 +1,13 @@
 ﻿using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 using Polly;
-using System;
 
-namespace Apizr.Policing
+namespace Apizr.Resiliencing
 {
     /// <summary>
     /// Polly logging extensions
     /// </summary>
-    [Obsolete("Use a Strategy instead")]
-    public static class PollyContextExtensions
+    public static class ResilienceContextExtensions
     {
         /// <summary>
         /// Passing your <see cref="ILogger"/> mapping implementation to Polly context
@@ -20,12 +18,13 @@ namespace Apizr.Policing
         /// <param name="verbosity"></param>
         /// <param name="tracerMode"></param>
         /// <returns></returns>
-        public static Context WithLogger(this Context context, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity, HttpTracerMode tracerMode)
+        public static ResilienceContext WithLogger(this ResilienceContext context, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity, HttpTracerMode tracerMode)
         {
-            context[nameof(ILogger)] = logger;
-            context[nameof(LogLevel)] = logLevels;
-            context[nameof(HttpMessageParts)] = verbosity;
-            context[nameof(HttpTracerMode)] = tracerMode;
+            context.Properties.Set(new ResiliencePropertyKey<ILogger>(nameof(ILogger)), logger);
+            context.Properties.Set(new ResiliencePropertyKey<LogLevel[]>(nameof(LogLevel)), logLevels);
+            context.Properties.Set(new ResiliencePropertyKey<HttpMessageParts>(nameof(HttpMessageParts)), verbosity);
+            context.Properties.Set(new ResiliencePropertyKey<HttpTracerMode>(nameof(HttpTracerMode)), tracerMode);
+
             return context;
         }
 
@@ -38,25 +37,27 @@ namespace Apizr.Policing
         /// <param name="verbosity"></param>
         /// <param name="tracerMode"></param>
         /// <returns></returns>
-        public static bool TryGetLogger(this Context context, out ILogger logger, out LogLevel[] logLevels, out HttpMessageParts verbosity, out HttpTracerMode tracerMode)
+        public static bool TryGetLogger(this ResilienceContext context, out ILogger logger, out LogLevel[] logLevels, out HttpMessageParts verbosity, out HttpTracerMode tracerMode)
         {
-            if (context != null && 
-                context.TryGetValue(nameof(ILogger), out var loggerObject) && loggerObject is ILogger loggerValue &&
-                context.TryGetValue(nameof(LogLevel), out var logLevelsObject) && logLevelsObject is LogLevel[] logLevelsValue &&
-                context.TryGetValue(nameof(HttpMessageParts), out var verbosityObject) && verbosityObject is HttpMessageParts verbosityValue &&
-                context.TryGetValue(nameof(HttpTracerMode), out var tracerModeObject) && tracerModeObject is HttpTracerMode tracerModeValue)
+            if (context != null &&
+                context.Properties.TryGetValue(new ResiliencePropertyKey<ILogger>(nameof(ILogger)), out var loggerValue) &&
+                context.Properties.TryGetValue(new ResiliencePropertyKey<LogLevel[]>(nameof(LogLevel)), out var logLevelsValue) &&
+                context.Properties.TryGetValue(new ResiliencePropertyKey<HttpMessageParts>(nameof(HttpMessageParts)), out var verbosityValue) &&
+                context.Properties.TryGetValue(new ResiliencePropertyKey<HttpTracerMode>(nameof(HttpTracerMode)), out var tracerModeValue))
             {
                 logger = loggerValue;
                 logLevels = logLevelsValue;
                 verbosity = verbosityValue;
                 tracerMode = tracerModeValue;
+
                 return true;
             }
 
             logger = null;
-            logLevels = new[] {LogLevel.None};
+            logLevels = [LogLevel.None];
             verbosity = HttpMessageParts.None;
             tracerMode = HttpTracerMode.ExceptionsOnly;
+
             return false;
         }
     }

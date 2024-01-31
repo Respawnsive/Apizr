@@ -58,7 +58,7 @@ namespace Apizr.Sample.Forms
                         TimeSpan.FromSeconds(1),
                         TimeSpan.FromSeconds(5),
                         TimeSpan.FromSeconds(10)
-                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
+                    }, LoggedStrategies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
             services.AddPolicyRegistry(registry);

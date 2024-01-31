@@ -24,6 +24,7 @@ using Akavache;
 using AutoMapper;
 using MediatR;
 using System.Reflection;
+using Apizr.Resiliencing;
 
 [assembly:Policy("TransientHttpError")] // Adjust policies if needed
 [assembly:Log] // Adjust log levels if needed
@@ -41,7 +42,7 @@ namespace Apizr.Sample.Tools.NSwag
                     TimeSpan.FromSeconds(1),
                     TimeSpan.FromSeconds(5),
                     TimeSpan.FromSeconds(10)
-                }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
+                }, LoggedStrategies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
             }
         };
 

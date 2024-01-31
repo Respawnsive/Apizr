@@ -26,6 +26,7 @@ using Apizr.Optional.Requesting.Sending;
 using Apizr.Policing;
 using Apizr.Progressing;
 using Apizr.Requesting;
+using Apizr.Resiliencing;
 using Apizr.Sample.Console.Models;
 using Apizr.Sample.Console.Models.Uploads;
 using Apizr.Sample.Models;
@@ -123,7 +124,7 @@ namespace Apizr.Sample.Console
                         TimeSpan.FromSeconds(1),
                         TimeSpan.FromSeconds(5),
                         TimeSpan.FromSeconds(10)
-                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
+                    }, LoggedStrategies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
             if (configChoice == 0)

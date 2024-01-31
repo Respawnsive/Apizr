@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace Apizr.Policing
+namespace Apizr.Policing;
+
+/// <inheritdoc />
+[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
+[Obsolete("Use a Strategy instead")]
+public class PolicyAttribute : PolicyAttributeBase
 {
     /// <inheritdoc />
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
-    public class PolicyAttribute : PolicyAttributeBase
+    public PolicyAttribute(params string[] registryKeys) : base(registryKeys)
     {
-        /// <inheritdoc />
-        public PolicyAttribute(params string[] registryKeys) : base(registryKeys)
-        {
-        }
-
     }
+
 }

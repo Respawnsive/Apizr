@@ -188,6 +188,9 @@ namespace Apizr.Configuring.Manager
         public Func<Context> ContextFactory => Options.ContextFactory;
 
         /// <inheritdoc />
+        public Func<ResilienceContext> ResilienceContextFactory => Options.ResilienceContextFactory;
+
+        /// <inheritdoc />
         public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory
             => Options.PrimaryHandlerFactory;
 

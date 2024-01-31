@@ -4,13 +4,12 @@ using Apizr.Configuring;
 using Apizr.Configuring.Request;
 using Polly;
 
-namespace Apizr.Policing
+namespace Apizr.Resiliencing
 {
-    [Obsolete("Use a Strategy instead")]
-    internal static class PolicyExtensions
+    internal static class ResiliencePipelineExtensions
     {
-        internal static Task ExecuteAsync(this IAsyncPolicy policy,
-            Func<IApizrRequestOptions, Task> action, IApizrRequestOptionsBuilder requestOptionsBuilder) =>
+        internal static ValueTask ExecuteAsync(this ResiliencePipeline policy,
+            Func<IApizrRequestOptions, ValueTask> action, IApizrRequestOptionsBuilder requestOptionsBuilder) =>
             policy.ExecuteAsync((ctx, ct) =>
                 {
                     requestOptionsBuilder.WithContext(ctx, ApizrDuplicateStrategy.Replace)
@@ -18,11 +17,11 @@ namespace Apizr.Policing
 
                     return action.Invoke(requestOptionsBuilder.ApizrOptions);
                 },
-                requestOptionsBuilder.ApizrOptions.Context, 
+                requestOptionsBuilder.ApizrOptions.Context,
                 requestOptionsBuilder.ApizrOptions.CancellationToken);
 
-        internal static Task<TResult> ExecuteAsync<TResult>(this IAsyncPolicy<TResult> policy,
-            Func<IApizrRequestOptions, Task<TResult>> action, IApizrRequestOptionsBuilder requestOptionsBuilder) =>
+        internal static ValueTask<TResult> ExecuteAsync<TResult>(this ResiliencePipeline<TResult> policy,
+            Func<IApizrRequestOptions, ValueTask<TResult>> action, IApizrRequestOptionsBuilder requestOptionsBuilder) =>
             policy.ExecuteAsync((ctx, ct) =>
                 {
                     requestOptionsBuilder.WithContext(ctx, ApizrDuplicateStrategy.Replace)

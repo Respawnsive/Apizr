@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Apizr.Policing;
 using Apizr.Progressing;
+using Apizr.Resiliencing;
 using Apizr.Tests.Apis;
 using FluentAssertions;
 using MonkeyCache.FileStore;
@@ -33,7 +34,7 @@ namespace Apizr.Tests
                         TimeSpan.FromSeconds(1),
                         TimeSpan.FromSeconds(5),
                         TimeSpan.FromSeconds(10)
-                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
+                    }, LoggedStrategies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
 

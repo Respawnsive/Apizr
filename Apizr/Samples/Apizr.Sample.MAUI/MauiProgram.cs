@@ -7,6 +7,7 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
 using System.Reflection;
+using Apizr.Resiliencing;
 using Shiny;
 
 namespace Apizr.Sample.MAUI
@@ -43,7 +44,7 @@ namespace Apizr.Sample.MAUI
                         TimeSpan.FromSeconds(1),
                         TimeSpan.FromSeconds(5),
                         TimeSpan.FromSeconds(10)
-                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
+                    }, LoggedStrategies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
                 }
             };
             services.AddPolicyRegistry(registry);

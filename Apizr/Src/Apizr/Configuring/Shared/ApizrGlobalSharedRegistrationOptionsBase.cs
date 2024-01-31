@@ -47,6 +47,28 @@ namespace Apizr.Configuring.Shared
                     .ToDictionary(x => x.Key, x => x.First().Value))
             : null;
 
+        internal IList<Func<ResilienceContext>> ResilienceContextFactories { get; }
+        private Func<ResilienceContext> _resilienceContextFactory;
+
+        /// <inheritdoc />
+        public Func<ResilienceContext> ResilienceContextFactory => _resilienceContextFactory ??= ResilienceContextFactories.Count > 0
+            ? () =>
+            {
+                var context = ResilienceContextPool.Shared.Get();
+                var properties = ResilienceContextFactories.Select(factory => factory.Invoke().Properties);
+                foreach (var property in properties)
+                {
+                    context.Properties.Set(property.);
+                }
+                context.Properties.SetProperties(
+                    ResilienceContextFactories.Reverse()
+                        .Select(factory => factory.Invoke().Properties)
+                        .fore;
+
+                return context;
+            }
+            : null;
+
         /// <inheritdoc />
         public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; internal set; }
     }

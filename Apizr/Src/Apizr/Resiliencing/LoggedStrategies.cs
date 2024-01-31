@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Net.Http;
 using Apizr.Extending;
+using Apizr.Policing;
 using Microsoft.Extensions.Logging;
 using Polly;
 
-namespace Apizr.Policing
+namespace Apizr.Resiliencing
 {
     /// <summary>
     /// Policy logging helper
     /// </summary>
-    [Obsolete("Use a Strategy instead")]
-    public static class LoggedPolicies
+    public static class LoggedStrategies
     {
         /// <summary>
         /// Tells Apizr to log retries

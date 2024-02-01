@@ -3,6 +3,7 @@
 // Copied from https://github.com/dotnet/extensions/tree/release/3.1/src/HttpClientFactory/Polly/src but without any DI ref plus some adjustments
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Configuring.Request;
 using Apizr.Policing;
@@ -25,7 +26,7 @@ namespace Apizr.Resiliencing
         /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="ResilienceContext"/> will be provided
         /// to the policy for use inside the <see cref="ResilienceContext"/> and in other message handlers.
         /// </remarks>
-        public static ResilienceContext? GetOrBuildApizrResilienceContext(this HttpRequestMessage request)
+        public static ResilienceContext GetOrBuildApizrResilienceContext(this HttpRequestMessage request)
         {
 #if NET6_0_OR_GREATER
             ArgumentNullException.ThrowIfNull(request);
@@ -60,7 +61,7 @@ namespace Apizr.Resiliencing
         /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
         /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
         /// </remarks>
-        public static ResilienceContext? GetApizrResilienceContext(this HttpRequestMessage request)
+        public static ResilienceContext GetApizrResilienceContext(this HttpRequestMessage request)
         {
 #if NET6_0_OR_GREATER
             ArgumentNullException.ThrowIfNull(request);

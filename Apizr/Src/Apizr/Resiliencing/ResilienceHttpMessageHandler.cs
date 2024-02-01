@@ -1,11 +1,13 @@
 ﻿using Polly;
 using System;
-using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Apizr.Configuring.Manager;
+using Apizr.Extending;
+using Microsoft.Extensions.Logging;
+using Polly.Timeout;
 
 namespace Apizr.Resiliencing
 {
@@ -63,7 +65,6 @@ namespace Apizr.Resiliencing
                 throw new ArgumentNullException(nameof(request));
 #endif
 
-            var pipeline = _pipelineProvider(request);
             var created = false;
             if (request.GetApizrResilienceContext() is not { } context)
             {
@@ -74,14 +75,62 @@ namespace Apizr.Resiliencing
 
             context.Properties.Set(Constants.RequestMessagePropertyKey, request);
 
+            var pipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>().AddPipeline(_pipelineProvider(request));
+            var options = request.GetApizrRequestOptions();
+            if (options != null)
+            {
+                // Get a configured logger instance
+                if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
+                {
+                    logger = _apizrOptions.Logger;
+                    logLevels = _apizrOptions.LogLevels;
+                }
 
+                // Set a request timeout if provided
+                if (options.RequestTimeout.HasValue)
+                {
+                    // Set the request timeout
+                    if (options.RequestTimeout.Value > TimeSpan.Zero)
+                    {
+                        pipelineBuilder.AddTimeout(options.RequestTimeout.Value);
+                        logger.Log(logLevels.Low(), "{0}: Timeout has been set with your provided {1} request timeout value.", context.OperationKey, options.RequestTimeout);
+                    }
+                    else
+                    {
+                        logger.Log(logLevels.Low(),
+                            "{0}: You provided a request timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
+                            context.OperationKey);
+                    }
+                }
+
+                // Set an operation timeout if provided
+                if (options.OperationTimeout.HasValue)
+                {
+                    // Set the request timeout
+                    if (options.OperationTimeout.Value > TimeSpan.Zero)
+                    {
+                        pipelineBuilder.AddTimeout(options.OperationTimeout.Value);
+                        logger.Log(logLevels.Low(), "{0}: Timeout has been set with your provided {1} operation timeout value.", context.OperationKey, options.OperationTimeout);
+                    }
+                    else
+                    {
+                        logger.Log(logLevels.Low(),
+                            "{0}: You provided an operation timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
+                            context.OperationKey);
+                    }
+                }
+            }
+
+            var pipeline = pipelineBuilder.Build();
 
             try
             {
                 var outcome = await pipeline.ExecuteOutcomeAsync(
                     static async (context, state) =>
                     {
-                        var request = context.Properties.GetValue(Constants.RequestMessagePropertyKey, state.request);
+                        var request = context.Properties.GetValue(Constants.RequestMessagePropertyKey, state.request); 
+                        var options = request.GetApizrRequestOptions();
+                        var optionsCancellationToken = options?.CancellationToken ?? CancellationToken.None;
 
                         // Always re-assign the context to this request message before execution.
                         // This is because for primary actions the context is also cloned and we need to re-assign it
@@ -90,7 +139,7 @@ namespace Apizr.Resiliencing
 
                         try
                         {
-                            var response = await state.instance.SendCoreAsync(request, context.CancellationToken).ConfigureAwait(context.ContinueOnCapturedContext);
+                            var response = await state.instance.SendCoreAsync(request, context.CancellationToken, optionsCancellationToken).ConfigureAwait(context.ContinueOnCapturedContext);
                             return Outcome.FromResult(response);
                         }
 #pragma warning disable CA1031 // Do not catch general exception types
@@ -123,7 +172,25 @@ namespace Apizr.Resiliencing
             }
         }
 
-        private Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken)
-            => base.SendAsync(requestMessage, cancellationToken);
+        private async Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken, CancellationToken optionsCancellationToken)
+        {
+#if NET6_0_OR_GREATER
+            ArgumentNullException.ThrowIfNull(requestMessage);
+#else
+            if (requestMessage == null)
+                throw new ArgumentNullException(nameof(requestMessage));
+#endif
+
+            try
+            {
+                return await base.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
+            }
+            catch (WebException ex)
+                when (cancellationToken.IsCancellationRequested &&
+                      !optionsCancellationToken.IsCancellationRequested) // Actually a timeout cancellation
+            {
+                throw new TimeoutRejectedException(ex.Message, ex);
+            }
+        }
     }
 }

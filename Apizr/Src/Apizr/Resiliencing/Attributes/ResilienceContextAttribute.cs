@@ -1,6 +1,6 @@
 ﻿using Refit;
 
-namespace Apizr.Resiliencing
+namespace Apizr.Resiliencing.Attributes
 {
     /// <summary>
     /// The Polly's resilience context property attribute

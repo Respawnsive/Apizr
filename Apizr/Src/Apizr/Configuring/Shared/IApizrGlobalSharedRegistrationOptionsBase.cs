@@ -32,11 +32,6 @@ namespace Apizr.Configuring.Shared
         Func<Context> ContextFactory { get; }
 
         /// <summary>
-        /// The Resilience Context to pass through it all
-        /// </summary>
-        Func<ResilienceContext> ResilienceContextFactory { get; }
-
-        /// <summary>
         /// The primary Http message handler factory (set internally)
         /// </summary>
         Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; }

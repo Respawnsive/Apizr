@@ -160,6 +160,14 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
 
     /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+    {
+        ((IApizrInternalOptions)Options).ResilienceProperties[key.Key] = value;
+
+        return this;
+    }
+
+    /// <inheritdoc />
     IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOriginalExpression(Expression originalExpression)
     {
         ((IApizrRequestOptions) Options).OriginalExpression = originalExpression;

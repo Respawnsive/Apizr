@@ -27,6 +27,7 @@ namespace Apizr.Configuring.Common
             LogLevelsFactory = () => new []{Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel};
             LoggerFactoryFactory = () => new DebugLoggerFactory(Constants.LowLogLevel);
             PolicyRegistryFactory = () => new PolicyRegistry();
+            ResiliencePipelineRegistryFactory = () => new ResiliencePipelineRegistry<string>();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             HttpClientConfigurationBuilder = _ => { };
             HttpClientFactory = (handler, uri) => new HttpClient(handler, false) {BaseAddress = uri};
@@ -67,6 +68,9 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
+
+        /// <inheritdoc />
+        public Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; set; }
 
         /// <inheritdoc />
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }

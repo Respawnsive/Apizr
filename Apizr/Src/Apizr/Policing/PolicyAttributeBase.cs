@@ -1,5 +1,6 @@
 ﻿using System;
 using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 
 namespace Apizr.Policing;
 
@@ -8,7 +9,7 @@ namespace Apizr.Policing;
 /// You have to provide a policy registry to Apizr to use this feature
 /// </summary>
 [Obsolete("Use a Strategy instead")]
-public abstract class PolicyAttributeBase : StrategyAttributeBase
+public abstract class PolicyAttributeBase : ResiliencePipelineAttributeBase
 {
     /// <summary>
     /// Apply policies with keys

@@ -22,9 +22,6 @@ namespace Apizr.Configuring.Request
             var context = sharedOptions?.ContextFactory?.Invoke();
             if (context?.Count > 0)
                 Context = context;
-            var resilienceContext = sharedOptions?.ContextFactory?.Invoke();
-            if (context?.Count > 0)
-                Context = context;
             if (httpTracerMode != null)
                 HttpTracerMode = httpTracerMode.Value;
             if (trafficVerbosity != null)

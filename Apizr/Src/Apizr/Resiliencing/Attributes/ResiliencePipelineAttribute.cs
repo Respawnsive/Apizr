@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Apizr.Resiliencing
+namespace Apizr.Resiliencing.Attributes
 {
     /// <inheritdoc />
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
-    public class StrategyAttribute : StrategyAttributeBase
+    public class ResiliencePipelineAttribute : ResiliencePipelineAttributeBase
     {
         /// <inheritdoc />
-        public StrategyAttribute(params string[] registryKeys) : base(registryKeys)
+        public ResiliencePipelineAttribute(params string[] registryKeys) : base(registryKeys)
         {
         }
 

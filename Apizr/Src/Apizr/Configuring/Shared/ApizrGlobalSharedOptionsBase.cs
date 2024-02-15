@@ -10,7 +10,7 @@ namespace Apizr.Configuring.Shared
     /// <summary>
     /// Options available at every level for both static and extended registrations
     /// </summary>
-    public abstract class ApizrGlobalSharedOptionsBase : IApizrGlobalSharedOptionsBase
+    public abstract class ApizrGlobalSharedOptionsBase : IApizrGlobalSharedOptionsBase, IApizrInternalOptions
     {
         protected ApizrGlobalSharedOptionsBase(IApizrGlobalSharedOptionsBase sharedOptions = null)
         {
@@ -24,6 +24,10 @@ namespace Apizr.Configuring.Shared
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
             Headers = sharedOptions?.Headers ?? new List<string>();
+            _resilienceProperties = (sharedOptions as IApizrInternalOptions)?
+                .ResilienceProperties?
+                .ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? 
+                new Dictionary<string, object>();
         }
 
         /// <inheritdoc />
@@ -64,5 +68,9 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public TimeSpan? RequestTimeout { get; internal set; }
+
+        private readonly IDictionary<string, object> _resilienceProperties = new Dictionary<string, object>();
+        /// <inheritdoc />
+        IDictionary<string, object> IApizrInternalOptions.ResilienceProperties => _resilienceProperties;
     }
 }

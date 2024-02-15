@@ -190,8 +190,8 @@ namespace Apizr.Configuring.Manager
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,
             Func<TTokenService> tokenServiceFactory,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
-            => AddDelegatingHandler((logHger, options) =>
-                new AuthenticationHandler<TSettingsService, TTokenService>(logHger,
+            => AddDelegatingHandler((logger, options) =>
+                new AuthenticationHandler<TSettingsService, TTokenService>(logger,
                     options,
                     settingsServiceFactory, tokenProperty,
                     tokenServiceFactory, refreshTokenMethod));
@@ -333,6 +333,14 @@ namespace Apizr.Configuring.Manager
         public IApizrManagerOptionsBuilder WithHandlerParameter(string key, object value)
         {
             Options.HandlersParameters[key] = value;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+        {
+            ((IApizrInternalOptions) Options).ResilienceProperties[key.Key] = value;
 
             return this;
         }

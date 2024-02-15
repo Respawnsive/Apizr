@@ -300,6 +300,14 @@ namespace Apizr.Extending.Configuring.Common
         }
 
         /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+        {
+            ((IApizrInternalOptions) Options).ResilienceProperties[key.Key] = value;
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All,
             params LogLevel[] logLevels)

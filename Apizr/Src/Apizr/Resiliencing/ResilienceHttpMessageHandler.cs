@@ -139,7 +139,7 @@ namespace Apizr.Resiliencing
 
                         try
                         {
-                            var response = await state.instance.SendCoreAsync(request, context.CancellationToken, optionsCancellationToken).ConfigureAwait(context.ContinueOnCapturedContext);
+                            var response = await state.instance.SendCoreAsync(request, context.CancellationToken, optionsCancellationToken, context.ContinueOnCapturedContext).ConfigureAwait(context.ContinueOnCapturedContext);
                             return Outcome.FromResult(response);
                         }
 #pragma warning disable CA1031 // Do not catch general exception types
@@ -172,7 +172,7 @@ namespace Apizr.Resiliencing
             }
         }
 
-        private async Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken, CancellationToken optionsCancellationToken)
+        private async Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken, CancellationToken optionsCancellationToken, bool continueOnCapturedContext)
         {
 #if NET6_0_OR_GREATER
             ArgumentNullException.ThrowIfNull(requestMessage);
@@ -183,7 +183,7 @@ namespace Apizr.Resiliencing
 
             try
             {
-                return await base.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
+                return await base.SendAsync(requestMessage, cancellationToken).ConfigureAwait(continueOnCapturedContext);
             }
             catch (WebException ex)
                 when (cancellationToken.IsCancellationRequested &&

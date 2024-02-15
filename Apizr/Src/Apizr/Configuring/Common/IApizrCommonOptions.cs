@@ -25,6 +25,11 @@ namespace Apizr.Configuring.Common
         Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }
 
         /// <summary>
+        /// Resilience pipeline registry factory
+        /// </summary>
+        Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; }
+
+        /// <summary>
         /// Refit settings factory
         /// </summary>
         Func<RefitSettings> RefitSettingsFactory { get; }

@@ -298,6 +298,14 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+        {
+            ((IApizrInternalOptions) Options).ResilienceProperties[key.Key] = value;
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
             => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevels);

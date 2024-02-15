@@ -37,6 +37,7 @@ namespace Apizr.Configuring.Manager
             HttpClientConfigurationBuilder = properOptions.HttpClientConfigurationBuilder;
             HttpClientFactory = properOptions.HttpClientFactory;
             PolicyRegistryFactory = commonOptions.PolicyRegistryFactory;
+            ResiliencePipelineRegistryFactory = commonOptions.ResiliencePipelineRegistryFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
@@ -113,6 +114,9 @@ namespace Apizr.Configuring.Manager
         /// <inheritdoc />
         public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
 
+        /// <inheritdoc />
+        public Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; set; }
+
         private Func<RefitSettings> _refitSettingsFactory;
         /// <inheritdoc />
         public Func<RefitSettings> RefitSettingsFactory
@@ -188,7 +192,7 @@ namespace Apizr.Configuring.Manager
         public Func<Context> ContextFactory => Options.ContextFactory;
 
         /// <inheritdoc />
-        public Func<ResilienceContext> ResilienceContextFactory => Options.ResilienceContextFactory;
+        public Action<ResilienceProperties> ResiliencePropertiesFactory => Options.ResiliencePropertiesFactory;
 
         /// <inheritdoc />
         public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory

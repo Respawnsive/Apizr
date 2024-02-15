@@ -1,6 +1,7 @@
 ﻿using Apizr.Resiliencing;
 using Refit;
 using System;
+using Apizr.Resiliencing.Attributes;
 
 namespace Apizr.Policing
 {

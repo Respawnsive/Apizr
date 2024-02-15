@@ -44,6 +44,14 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithHandlerParameter(string key, object value);
 
         /// <summary>
+        /// Set some resilience properties to the resilience context
+        /// </summary>
+        /// <param name="key">The resilience property's key</param>
+        /// <param name="value">The resilience property's value</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value);
+
+        /// <summary>
         /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
         /// </summary>
         /// <param name="httpTracerMode"></param>

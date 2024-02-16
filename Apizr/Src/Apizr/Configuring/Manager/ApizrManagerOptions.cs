@@ -5,6 +5,7 @@ using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
+using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -36,7 +37,6 @@ namespace Apizr.Configuring.Manager
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = properOptions.HttpClientConfigurationBuilder;
             HttpClientFactory = properOptions.HttpClientFactory;
-            PolicyRegistryFactory = commonOptions.PolicyRegistryFactory;
             ResiliencePipelineRegistryFactory = commonOptions.ResiliencePipelineRegistryFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
@@ -110,9 +110,6 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public Action<HttpClient> HttpClientConfigurationBuilder { get; set; }
-
-        /// <inheritdoc />
-        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
 
         /// <inheritdoc />
         public Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; set; }
@@ -189,12 +186,6 @@ namespace Apizr.Configuring.Manager
         public string BasePath => Options.BasePath;
 
         /// <inheritdoc />
-        public Func<Context> ContextFactory => Options.ContextFactory;
-
-        /// <inheritdoc />
-        public Action<ResilienceProperties> ResiliencePropertiesFactory => Options.ResiliencePropertiesFactory;
-
-        /// <inheritdoc />
         public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory
             => Options.PrimaryHandlerFactory;
 
@@ -226,10 +217,13 @@ namespace Apizr.Configuring.Manager
         public TimeSpan? RequestTimeout => Options.RequestTimeout;
 
         /// <inheritdoc />
+        IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResilienceProperties => Options.ResilienceProperties;
+
+        /// <inheritdoc />
         public ILogger Logger => Options.Logger;
 
         /// <inheritdoc />
-        public string[] PolicyRegistryKeys => Options.PolicyRegistryKeys;
+        public string[] ResiliencePipelineRegistryKeys => Options.ResiliencePipelineRegistryKeys;
 
         /// <inheritdoc />
         public RefitSettings RefitSettings => Options.RefitSettings;

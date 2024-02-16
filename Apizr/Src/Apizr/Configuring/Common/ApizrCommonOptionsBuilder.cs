@@ -212,13 +212,14 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
-            => WithPolicyRegistry(() => policyRegistry);
+        public IApizrCommonOptionsBuilder WithResiliencePipelineRegistry(
+            ResiliencePipelineRegistry<string> resiliencePipelineRegistry)
+            => WithResiliencePipelineRegistry(() => resiliencePipelineRegistry);
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
+        public IApizrCommonOptionsBuilder WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<string>> resiliencePipelineRegistryFactory)
         {
-            Options.PolicyRegistryFactory = policyRegistryFactory;
+            Options.ResiliencePipelineRegistryFactory = resiliencePipelineRegistryFactory;
 
             return this;
         }
@@ -311,14 +312,6 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
-        {
-            ((IApizrInternalOptions) Options).ResilienceProperties[key.Key] = value;
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels)
             => WithLogging(() => httpTracerMode, () => trafficVerbosity, () => logLevels);
@@ -378,26 +371,13 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithContext(Func<Context> contextFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        public IApizrCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+            => WithResilienceProperty(key, () => value);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory)
         {
-            switch (strategy)
-            {
-                case ApizrDuplicateStrategy.Ignore:
-                    if(Options.ContextFactories.Count == 0)
-                        Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Replace:
-                    Options.ContextFactories.Clear();
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Add:
-                case ApizrDuplicateStrategy.Merge:
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
-            }
+            ((IApizrGlobalSharedOptionsBase)Options).ResilienceProperties[key.Key] = () => valueFactory();
 
             return this;
         }

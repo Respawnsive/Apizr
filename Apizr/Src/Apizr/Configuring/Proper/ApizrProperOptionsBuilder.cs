@@ -206,31 +206,6 @@ namespace Apizr.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithContext(Func<Context> contextFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
-        {
-            switch (strategy)
-            {
-                case ApizrDuplicateStrategy.Ignore:
-                    if (Options.ContextFactories.Count == 0)
-                        Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Replace:
-                    Options.ContextFactories.Clear();
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Add:
-                case ApizrDuplicateStrategy.Merge:
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
-            }
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrProperOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
@@ -273,14 +248,6 @@ namespace Apizr.Configuring.Proper
         public IApizrProperOptionsBuilder WithHandlerParameter(string key, object value)
         {
             Options.HandlersParameters[key] = value;
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
-        {
-            ((IApizrInternalOptions) Options).ResilienceProperties[key.Key] = value;
 
             return this;
         }
@@ -340,6 +307,18 @@ namespace Apizr.Configuring.Proper
         public IApizrProperOptionsBuilder WithRequestTimeout(Func<TimeSpan> timeoutFactory)
         {
             Options.RequestTimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+            => WithResilienceProperty(key, () => value);
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory)
+        {
+            ((IApizrGlobalSharedOptionsBase)Options).ResilienceProperties[key.Key] = () => valueFactory();
 
             return this;
         }

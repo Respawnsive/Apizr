@@ -384,7 +384,7 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config
-                    .WithPolicyRegistry(policyRegistry)
+                    .WithResiliencePipelineRegistry(policyRegistry)
                     .AddDelegatingHandler(new TestRequestHandler()));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
@@ -1466,7 +1466,7 @@ namespace Apizr.Tests
                     .AddManagerFor<IReqResUserService>(),
 
                 options => options
-                    .WithPolicyRegistry(policyRegistry)
+                    .WithResiliencePipelineRegistry(policyRegistry)
                     .WithRequestTimeout(TimeSpan.FromSeconds(3)));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
@@ -1507,7 +1507,7 @@ namespace Apizr.Tests
                     .AddManagerFor<IReqResUserService>(),
 
                 options => options
-                    .WithPolicyRegistry(policyRegistry)
+                    .WithResiliencePipelineRegistry(policyRegistry)
                     .WithOperationTimeout(TimeSpan.FromSeconds(10)));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
@@ -1551,7 +1551,7 @@ namespace Apizr.Tests
                     .AddManagerFor<IReqResUserService>(),
 
                 options => options
-                    .WithPolicyRegistry(policyRegistry)
+                    .WithResiliencePipelineRegistry(policyRegistry)
                     .WithOperationTimeout(TimeSpan.FromSeconds(10)));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
@@ -1591,7 +1591,7 @@ namespace Apizr.Tests
                     .AddManagerFor<IReqResUserService>(),
 
                 options => options
-                    .WithPolicyRegistry(policyRegistry)
+                    .WithResiliencePipelineRegistry(policyRegistry)
                     .AddDelegatingHandler(new TestRequestHandler())
                     .WithOperationTimeout(TimeSpan.FromSeconds(3)));
 

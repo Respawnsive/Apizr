@@ -68,7 +68,7 @@ namespace Apizr.Sample.Tools.NSwag
                         //logging.AddDebug();
                         //logging.SetMinimumLevel(LogLevel.Trace);
                     }))
-                    .WithPolicyRegistry(ApizrPolicyRegistry)
+                    .WithResiliencePipelineRegistry(ApizrPolicyRegistry)
                     .WithPriority()
                     .WithAkavacheCacheHandler()
                     .WithAutoMapperMappingHandler(mapperConfig)

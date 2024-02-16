@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
@@ -19,9 +18,6 @@ namespace Apizr.Configuring.Request
             TimeSpan? requestTimeout,
             params LogLevel[] logLevels) : base(sharedOptions)
         {
-            var context = sharedOptions?.ContextFactory?.Invoke();
-            if (context?.Count > 0)
-                Context = context;
             if (httpTracerMode != null)
                 HttpTracerMode = httpTracerMode.Value;
             if (trafficVerbosity != null)
@@ -33,9 +29,6 @@ namespace Apizr.Configuring.Request
             if (requestTimeout.HasValue)
                 RequestTimeout = requestTimeout.Value;
         }
-
-        /// <inheritdoc />
-        public Context Context { get; internal set; }
 
         /// <inheritdoc />
         public ResilienceContext ResilienceContext { get; internal set; }

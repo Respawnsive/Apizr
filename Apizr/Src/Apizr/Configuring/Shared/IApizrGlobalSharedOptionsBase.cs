@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System;
-using Polly;
 
 namespace Apizr.Configuring.Shared
 {
@@ -55,5 +54,7 @@ namespace Apizr.Configuring.Shared
         /// The request timeout (each request try)
         /// </summary>
         TimeSpan? RequestTimeout { get; }
+
+        internal IDictionary<string, Func<object>> ResilienceProperties { get; }
     }
 }

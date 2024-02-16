@@ -12,7 +12,7 @@ namespace Apizr.Resiliencing
             Func<IApizrRequestOptions, ValueTask> action, IApizrRequestOptionsBuilder requestOptionsBuilder) =>
             pipeline.ExecuteAsync(ctx =>
                 {
-                    requestOptionsBuilder.WithContext(ctx, ApizrDuplicateStrategy.Replace)
+                    requestOptionsBuilder.WithContext(ctx)
                         .WithCancellation(ctx.CancellationToken);
 
                     return action.Invoke(requestOptionsBuilder.ApizrOptions);
@@ -21,14 +21,13 @@ namespace Apizr.Resiliencing
 
         internal static ValueTask<TResult> ExecuteAsync<TResult>(this ResiliencePipeline<TResult> pipeline,
             Func<IApizrRequestOptions, ValueTask<TResult>> action, IApizrRequestOptionsBuilder requestOptionsBuilder) =>
-            pipeline.ExecuteAsync((ctx, ct) =>
+            pipeline.ExecuteAsync(ctx =>
                 {
-                    requestOptionsBuilder.WithContext(ctx, ApizrDuplicateStrategy.Replace)
-                        .WithCancellation(ct);
+                    requestOptionsBuilder.WithContext(ctx)
+                        .WithCancellation(ctx.CancellationToken);
 
                     return action.Invoke(requestOptionsBuilder.ApizrOptions);
                 },
-                requestOptionsBuilder.ApizrOptions.Context,
-                requestOptionsBuilder.ApizrOptions.CancellationToken);
+                requestOptionsBuilder.ApizrOptions.ResilienceContext);
     }
 }

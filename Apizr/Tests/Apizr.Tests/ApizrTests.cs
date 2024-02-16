@@ -214,7 +214,7 @@ namespace Apizr.Tests
             };
 
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
-                    .WithPolicyRegistry(policyRegistry)
+                    .WithResiliencePipelineRegistry(policyRegistry)
                     .AddDelegatingHandler(new TestRequestHandler()));
 
             // Defining a transient throwing request
@@ -903,7 +903,7 @@ namespace Apizr.Tests
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
-                        .WithPolicyRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(policyRegistry)
                         .WithRequestTimeout(TimeSpan.FromSeconds(3)));
 
             Func<Task> act = () =>
@@ -941,7 +941,7 @@ namespace Apizr.Tests
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
-                        .WithPolicyRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(policyRegistry)
                         .WithOperationTimeout(TimeSpan.FromSeconds(9)));
 
             Func<Task> act = () =>
@@ -982,7 +982,7 @@ namespace Apizr.Tests
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
-                        .WithPolicyRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(policyRegistry)
                         .WithOperationTimeout(TimeSpan.FromSeconds(10)));
 
             Func<Task> act = () =>
@@ -1019,7 +1019,7 @@ namespace Apizr.Tests
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
-                        .WithPolicyRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(policyRegistry)
                         .AddDelegatingHandler(new TestRequestHandler())
                         .WithOperationTimeout(TimeSpan.FromSeconds(3)));
 

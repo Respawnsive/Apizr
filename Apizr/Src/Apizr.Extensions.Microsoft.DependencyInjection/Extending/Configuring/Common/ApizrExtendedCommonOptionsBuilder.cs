@@ -302,7 +302,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
         {
-            ((IApizrInternalOptions) Options).ResilienceProperties[key.Key] = value;
+            ((IApizrGlobalSharedOptionsBase) Options).ResilienceProperties[key.Key] = value;
 
             return this;
         }

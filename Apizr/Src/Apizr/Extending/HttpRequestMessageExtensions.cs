@@ -1,13 +1,11 @@
 ﻿using Apizr.Configuring.Manager;
-using Apizr.Helping;
-using Apizr.Policing;
-using Microsoft.Extensions.Logging;
-using Polly;
 using System;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
+using Apizr.Resiliencing;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Extending
 {
@@ -21,7 +19,7 @@ namespace Apizr.Extending
             if (options != null)
             {
                 // Get a configured logger instance
-                var context = request.GetOrBuildApizrPolicyExecutionContext();
+                var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
                 if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
                 {
                     logger = apizrOptions.Logger;

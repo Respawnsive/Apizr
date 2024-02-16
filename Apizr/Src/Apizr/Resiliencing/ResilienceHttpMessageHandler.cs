@@ -16,7 +16,7 @@ namespace Apizr.Resiliencing
     /// </summary>
     public class ResilienceHttpMessageHandler : DelegatingHandler
     {
-        private readonly Func<HttpRequestMessage, ResiliencePipeline<HttpResponseMessage>> _pipelineProvider;
+        private readonly Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>> _pipelineProvider;
         private readonly IApizrManagerOptionsBase _apizrOptions;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Apizr.Resiliencing
         /// <param name="pipelineProvider">The pipeline provider that supplies pipelines in response to an http message.</param>
         /// <param name="apizrOptions">The Apizr options</param>
         /// <exception cref="ArgumentNullException">If <paramref name="pipelineProvider"/> is <see langword="null"/>.</exception>
-        public ResilienceHttpMessageHandler(Func<HttpRequestMessage, ResiliencePipeline<HttpResponseMessage>> pipelineProvider, IApizrManagerOptionsBase apizrOptions)
+        public ResilienceHttpMessageHandler(Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>> pipelineProvider, IApizrManagerOptionsBase apizrOptions)
         {
             _pipelineProvider = pipelineProvider ?? throw new ArgumentNullException(nameof(pipelineProvider));
             _apizrOptions = apizrOptions ?? throw new ArgumentNullException(nameof(apizrOptions));
@@ -45,7 +45,7 @@ namespace Apizr.Resiliencing
             if (pipeline == null)
                 throw new ArgumentNullException(nameof(pipeline));
 #endif
-            _pipelineProvider = _ => pipeline;
+            _pipelineProvider = (_, _) => pipeline;
             _apizrOptions = apizrOptions ?? throw new ArgumentNullException(nameof(apizrOptions));
         }
 
@@ -68,14 +68,14 @@ namespace Apizr.Resiliencing
             var created = false;
             if (request.GetApizrResilienceContext() is not { } context)
             {
-                context = ResilienceContextPool.Shared.Get(cancellationToken);
+                context = request.GetOrBuildApizrResilienceContext(cancellationToken);
                 created = true;
                 request.SetApizrResilienceContext(context);
             }
 
             context.Properties.Set(Constants.RequestMessagePropertyKey, request);
 
-            var pipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>().AddPipeline(_pipelineProvider(request));
+            var pipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>().AddPipeline(_pipelineProvider(request, cancellationToken));
             var options = request.GetApizrRequestOptions();
             if (options != null)
             {

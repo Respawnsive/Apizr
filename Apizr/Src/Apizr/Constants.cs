@@ -10,7 +10,6 @@ namespace Apizr
     internal static class Constants
     {
         internal const string InterfaceTypeKey = "Refit.InterfaceType";
-        internal const string PollyExecutionContextKey = "PollyExecutionContext"; 
         internal const string ResilienceContextKey = "Resilience.Http.ResilienceContext";
         internal const string RequestMessageKey = "Resilience.Http.RequestMessage";
         internal const string PriorityKey = "Priority";
@@ -26,8 +25,8 @@ namespace Apizr
         internal static readonly ResiliencePropertyKey<HttpRequestMessage> RequestMessagePropertyKey = new(RequestMessageKey);
 #if NET6_0_OR_GREATER
         internal static readonly HttpRequestOptionsKey<Type> InterfaceTypeOptionsKey = new(InterfaceTypeKey);
-        internal static readonly HttpRequestOptionsKey<ResilienceContext?> ResilienceContextOptionsKey = new(ResilienceContextKey);
-        internal static readonly HttpRequestOptionsKey<IApizrRequestOptions?> ApizrRequestOptionsOptionsKey = new(ApizrRequestOptionsKey);
+        internal static readonly HttpRequestOptionsKey<ResilienceContext> ResilienceContextOptionsKey = new(ResilienceContextKey);
+        internal static readonly HttpRequestOptionsKey<IApizrRequestOptions> ApizrRequestOptionsOptionsKey = new(ApizrRequestOptionsKey);
 #endif
     }
 }

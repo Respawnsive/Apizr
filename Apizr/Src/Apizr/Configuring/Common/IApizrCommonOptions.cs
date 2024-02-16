@@ -20,11 +20,6 @@ namespace Apizr.Configuring.Common
         Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
 
         /// <summary>
-        /// Policy registry factory
-        /// </summary>
-        Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }
-
-        /// <summary>
         /// Resilience pipeline registry factory
         /// </summary>
         Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; }

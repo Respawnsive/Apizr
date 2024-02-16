@@ -9,10 +9,8 @@ namespace Apizr.Configuring.Request
     public interface IApizrRequestOptionsBase : IApizrGlobalSharedOptionsBase
     {
         /// <summary>
-        /// The Polly Context to pass through it all
+        /// The Polly resilience context to pass through it all
         /// </summary>
-        Context Context { get; }
-
         ResilienceContext ResilienceContext { get; }
     }
 }

@@ -9,11 +9,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Apizr.Extending;
-using Apizr.Policing;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Logging
@@ -63,7 +62,7 @@ namespace Apizr.Logging
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             IApizrRequestOptions requestOptions = null;
-            var context = request.GetOrBuildApizrPolicyExecutionContext();
+            var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
             if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
                 if (request.TryGetOptions(out requestOptions))

@@ -8,7 +8,6 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
-using Polly;
 using Polly.Registry;
 using Refit;
 
@@ -26,7 +25,6 @@ namespace Apizr.Configuring.Common
             TrafficVerbosityFactory = () => HttpMessageParts.All;
             LogLevelsFactory = () => new []{Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel};
             LoggerFactoryFactory = () => new DebugLoggerFactory(Constants.LowLogLevel);
-            PolicyRegistryFactory = () => new PolicyRegistry();
             ResiliencePipelineRegistryFactory = () => new ResiliencePipelineRegistry<string>();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             HttpClientConfigurationBuilder = _ => { };
@@ -65,9 +63,6 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         public Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
-
-        /// <inheritdoc />
-        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
 
         /// <inheritdoc />
         public Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; set; }

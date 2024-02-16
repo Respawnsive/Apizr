@@ -4,6 +4,7 @@ using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
+using Polly;
 using Polly.Registry;
 using Refit;
 
@@ -18,18 +19,18 @@ namespace Apizr.Configuring.Common
         where TApizrCommonOptionsBuilder : IApizrCommonOptionsBuilderBase<TApizrCommonOptions, TApizrCommonOptionsBuilder>
     {
         /// <summary>
-        /// Provide a policy registry
+        /// Provide a resilience pipeline registry
         /// </summary>
-        /// <param name="policyRegistry">A policy registry instance</param>
+        /// <param name="resiliencePipelineRegistry">A resilience pipeline registry instance</param>
         /// <returns></returns>
-        TApizrCommonOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry);
+        TApizrCommonOptionsBuilder WithResiliencePipelineRegistry(ResiliencePipelineRegistry<string> resiliencePipelineRegistry);
 
         /// <summary>
-        /// Provide a policy registry
+        /// Provide a resilience pipeline registry
         /// </summary>
-        /// <param name="policyRegistryFactory">A policy registry instance factory</param>
+        /// <param name="resiliencePipelineRegistryFactory">A resilience pipeline registry instance factory</param>
         /// <returns></returns>
-        TApizrCommonOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory);
+        TApizrCommonOptionsBuilder WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<string>> resiliencePipelineRegistryFactory);
 
         /// <summary>
         /// Provide some Refit specific settings

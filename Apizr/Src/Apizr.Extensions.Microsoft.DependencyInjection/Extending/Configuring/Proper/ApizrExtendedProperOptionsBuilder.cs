@@ -300,7 +300,7 @@ namespace Apizr.Extending.Configuring.Proper
         /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
         {
-            ((IApizrInternalOptions) Options).ResilienceProperties[key.Key] = value;
+            ((IApizrGlobalSharedOptionsBase) Options).ResilienceProperties[key.Key] = value;
 
             return this;
         }

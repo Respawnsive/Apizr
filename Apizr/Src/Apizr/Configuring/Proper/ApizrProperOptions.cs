@@ -6,7 +6,6 @@ using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
-using Polly;
 
 namespace Apizr.Configuring.Proper
 {

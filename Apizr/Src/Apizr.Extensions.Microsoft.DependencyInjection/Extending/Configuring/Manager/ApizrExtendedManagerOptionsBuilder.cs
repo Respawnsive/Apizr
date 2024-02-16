@@ -303,7 +303,7 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
         {
-            ((IApizrInternalOptions) Options).ResilienceProperties[key.Key] = value;
+            ((IApizrGlobalSharedOptionsBase) Options).ResilienceProperties[key.Key] = value;
 
             return this;
         }

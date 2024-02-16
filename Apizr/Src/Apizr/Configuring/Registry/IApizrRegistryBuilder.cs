@@ -22,7 +22,7 @@ namespace Apizr.Configuring.Registry
         where TApizrCommonOptionsBuilder : IApizrCommonOptionsBuilderBase
     {
         #region Crud
-        
+
         /// <summary>
         /// Create a <typeparamref name="TApizrManager"/> instance for a managed crud api for <typeparamref name="T"/> object (class), 
         /// with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
@@ -39,7 +39,7 @@ namespace Apizr.Configuring.Registry
         /// <returns></returns>
         TApizrRegistryBuilder AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-                IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
+                IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<string>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
                 TApizrManager> apizrManagerFactory,
             Action<TApizrProperOptionsBuilder> properOptionsBuilder = null)
             where T : class
@@ -48,7 +48,7 @@ namespace Apizr.Configuring.Registry
         #endregion
 
         #region General
-        
+
         /// <summary>
         /// Create a <typeparamref name="TApizrManager"/> instance for a managed <typeparamref name="TWebApi"/>
         /// </summary>
@@ -59,7 +59,7 @@ namespace Apizr.Configuring.Registry
         /// <returns></returns>
         TApizrRegistryBuilder AddManagerFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
-                ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+                ILazyFactory<ResiliencePipelineRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<TApizrProperOptionsBuilder> properOptionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi>; 
 

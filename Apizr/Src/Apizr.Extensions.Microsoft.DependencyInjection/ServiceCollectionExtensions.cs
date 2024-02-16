@@ -608,7 +608,7 @@ namespace Apizr
 
                     IAsyncPolicy<HttpResponseMessage> policy = Policy.NoOpAsync<HttpResponseMessage>();
                     var wrappedPolicyKeys = new List<string>();
-                    if (options.PolicyRegistryKeys != null && options.PolicyRegistryKeys.Any())
+                    if (options.ResiliencePipelineRegistryKeys != null && options.ResiliencePipelineRegistryKeys.Any())
                     {
                         var policyRegistry = serviceProvider.GetService<IReadOnlyPolicyRegistry<string>>();
                         if(policyRegistry == null)
@@ -618,7 +618,7 @@ namespace Apizr
                         }
                         else
                         {
-                            foreach (var policyRegistryKey in options.PolicyRegistryKeys)
+                            foreach (var policyRegistryKey in options.ResiliencePipelineRegistryKeys)
                             {
                                 if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy) && 
                                     registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)

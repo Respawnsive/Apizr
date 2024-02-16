@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using Apizr.Extending;
-using Apizr.Policing;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -20,7 +19,7 @@ namespace Apizr.Resiliencing
         /// <param name="retryCount"></param>
         /// <param name="context"></param>
         public static void OnLoggedRetry(DelegateResult<HttpResponseMessage> result, TimeSpan timeSpan, int retryCount,
-            Context context)
+            ResilienceContext context)
             => OnLoggedRetry(result, timeSpan, retryCount, context, null);
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace Apizr.Resiliencing
         /// <param name="retryCount"></param>
         /// <param name="context"></param>
         /// <param name="onRetry"></param>
-        public static void OnLoggedRetry(DelegateResult<HttpResponseMessage> result, TimeSpan timeSpan, int retryCount, Context context, Action<DelegateResult<HttpResponseMessage>, TimeSpan, int, Context> onRetry)
+        public static void OnLoggedRetry(DelegateResult<HttpResponseMessage> result, TimeSpan timeSpan, int retryCount, ResilienceContext context, Action<DelegateResult<HttpResponseMessage>, TimeSpan, int, ResilienceContext> onRetry)
         {
             if (context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {

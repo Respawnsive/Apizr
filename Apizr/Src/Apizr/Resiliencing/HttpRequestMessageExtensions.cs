@@ -1,12 +1,11 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
-// Copied from https://github.com/dotnet/extensions/tree/release/3.1/src/HttpClientFactory/Polly/src but without any DI ref plus some adjustments
+// Copied from https://github.com/dotnet/extensions/blob/main/src/Libraries/Microsoft.Extensions.Http.Resilience/Resilience but without any DI ref plus some adjustments
 
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using Apizr.Configuring.Request;
-using Apizr.Policing;
 using Polly;
 
 namespace Apizr.Resiliencing
@@ -20,13 +19,14 @@ namespace Apizr.Resiliencing
         /// Gets the <see cref="ResilienceContext"/> associated with the provided <see cref="HttpRequestMessage"/>.
         /// </summary>
         /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="cancellationToken">A cancellation token</param>
         /// <returns>The <see cref="ResilienceContext"/> if set, otherwise <c>null</c>.</returns>
         /// <remarks>
-        /// The <see cref="PolicyHttpMessageHandler"/> will attach a context to the <see cref="HttpResponseMessage"/> prior
-        /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="ResilienceContext"/> will be provided
-        /// to the policy for use inside the <see cref="ResilienceContext"/> and in other message handlers.
+        /// The <see cref="ResilienceHttpMessageHandler"/> will attach a context to the <see cref="HttpResponseMessage"/> prior
+        /// to executing a <see cref="ResiliencePipeline"/>, if one does not already exist. The <see cref="ResilienceContext"/> will be provided
+        /// to the resilience pipeline for use inside the <see cref="ResilienceContext"/> and in other message handlers.
         /// </remarks>
-        public static ResilienceContext GetOrBuildApizrResilienceContext(this HttpRequestMessage request)
+        public static ResilienceContext GetOrBuildApizrResilienceContext(this HttpRequestMessage request, CancellationToken cancellationToken)
         {
 #if NET6_0_OR_GREATER
             ArgumentNullException.ThrowIfNull(request);
@@ -34,7 +34,7 @@ namespace Apizr.Resiliencing
             var context = request.GetApizrResilienceContext();
             if (context == null && 
                 request.Options.TryGetValue(Constants.InterfaceTypeOptionsKey, out var interfaceType))
-                context = ResilienceContextPool.Shared.Get(interfaceType.Name);
+                context = ResilienceContextPool.Shared.Get(interfaceType.Name, cancellationToken);
 #else
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -44,7 +44,7 @@ namespace Apizr.Resiliencing
                 request.Properties.TryGetValue(Constants.InterfaceTypeKey, out var interfaceTypeProperty) && 
                 interfaceTypeProperty is Type interfaceType)
             {
-                context = ResilienceContextPool.Shared.Get(interfaceType.Name);
+                context = ResilienceContextPool.Shared.Get(interfaceType.Name, cancellationToken);
             }
 #endif
 
@@ -57,9 +57,9 @@ namespace Apizr.Resiliencing
         /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
         /// <returns>The <see cref="Context"/> if set, otherwise <c>null</c>.</returns>
         /// <remarks>
-        /// The <see cref="PolicyHttpMessageHandler"/> will attach a context to the <see cref="HttpResponseMessage"/> prior
-        /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
-        /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
+        /// The <see cref="ResilienceHttpMessageHandler"/> will attach a context to the <see cref="HttpResponseMessage"/> prior
+        /// to executing a <see cref="ResiliencePipeline"/>, if one does not already exist. The <see cref="Context"/> will be provided
+        /// to the Resilience Pipeline for use inside the <see cref="ResiliencePipeline"/> and in other message handlers.
         /// </remarks>
         public static ResilienceContext GetApizrResilienceContext(this HttpRequestMessage request)
         {
@@ -125,14 +125,14 @@ namespace Apizr.Resiliencing
         }
 
         /// <summary>
-        /// Sets the <see cref="Context"/> associated with the provided <see cref="HttpRequestMessage"/>.
+        /// Sets the <see cref="ResilienceContext"/> associated with the provided <see cref="HttpRequestMessage"/>.
         /// </summary>
         /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
-        /// <param name="context">The <see cref="Context"/>, may be <c>null</c>.</param>
+        /// <param name="context">The <see cref="ResilienceContext"/>, may be <c>null</c>.</param>
         /// <remarks>
-        /// The <see cref="PolicyHttpMessageHandler"/> will attach a context to the <see cref="HttpResponseMessage"/> prior
-        /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
-        /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
+        /// The <see cref="ResilienceHttpMessageHandler"/> will attach a context to the <see cref="HttpResponseMessage"/> prior
+        /// to executing a <see cref="ResiliencePipeline"/>, if one does not already exist. The <see cref="ResilienceContext"/> will be provided
+        /// to the strategy for use inside the <see cref="ResiliencePipeline"/> and in other message handlers.
         /// </remarks>
         public static void SetApizrResilienceContext(this HttpRequestMessage request, ResilienceContext context)
         {

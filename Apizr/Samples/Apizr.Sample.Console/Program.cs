@@ -239,7 +239,7 @@ namespace Apizr.Sample.Console
 
                     config => config//.WithConnectivityHandler(() => false)
                         .WithPriority()
-                        .WithPolicyRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(policyRegistry)
                         .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                         .WithLoggerFactory(() => lazyLoggerFactory.Value));
 

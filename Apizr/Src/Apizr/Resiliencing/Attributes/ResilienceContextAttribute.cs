@@ -10,7 +10,7 @@ namespace Apizr.Resiliencing.Attributes
         /// <summary>
         /// Create a Polly context
         /// </summary>
-        public ResilienceContextAttribute() : base(Constants.PollyExecutionContextKey)
+        public ResilienceContextAttribute() : base(Constants.ResilienceContextKey)
         {
 
         }

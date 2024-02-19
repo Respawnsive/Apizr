@@ -28,7 +28,6 @@ using Apizr.Resiliencing;
 using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
 using Polly;
-using Polly.NoOp;
 using Polly.Registry;
 using Refit;
 

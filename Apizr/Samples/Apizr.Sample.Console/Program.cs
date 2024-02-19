@@ -49,6 +49,7 @@ using Newtonsoft.Json.Serialization;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
+using Polly.Retry;
 using Refit;
 using HttpMessageParts = Apizr.Logging.HttpMessageParts;
 
@@ -116,17 +117,31 @@ namespace Apizr.Sample.Console
 
             System.Console.WriteLine("");
             System.Console.WriteLine("Initializing...");
-            var policyRegistry = new PolicyRegistry
+
+            var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
             {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+                logging.AddConsole();
+                logging.AddDebug();
+                logging.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+            var policyRegistry = new ResiliencePipelineRegistry<string>();
+            policyRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+                .ConfigureTelemetry(lazyLoggerFactory.Value)
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
                     {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }, LoggedStrategies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
-                }
-            };
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = 5,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential
+                    }));
+
             if (configChoice == 0)
             {
                 var stopwatch = new Stopwatch();
@@ -143,13 +158,6 @@ namespace Apizr.Sample.Console
                     //_httpBinService = RestService.For<IHttpBinService>("https://httpbin.org");
                     //var result = await _httpBinService.UploadStreamPart(streamPart);
                     //var test = await result.Content.ReadAsStringAsync();
-
-                    var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
-                    {
-                        logging.AddConsole();
-                        logging.AddDebug();
-                        logging.SetMinimumLevel(LogLevel.Trace);
-                    }));
 
                     //_httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
@@ -212,13 +220,6 @@ namespace Apizr.Sample.Console
             else if (configChoice == 1)
             {
                 Barrel.ApplicationId = nameof(Program);
-
-                var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
-                {
-                    logging.AddConsole();
-                    logging.AddDebug();
-                    logging.SetMinimumLevel(LogLevel.Trace);
-                }));
 
                 //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(policyRegistry)
                 //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))

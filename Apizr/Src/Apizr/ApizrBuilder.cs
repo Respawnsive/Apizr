@@ -325,7 +325,7 @@ namespace Apizr
                 webApiResiliencePipelineAttribute = webApiTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
             }
 
-            var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
+            var assemblyResiliencePipelineAttribute = webApiType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
 
             var handlersParameters = new Dictionary<string, object>();
             foreach (var commonParameterAttribute in commonParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
@@ -336,7 +336,7 @@ namespace Apizr
                 handlersParameters[properParameterAttribute.Key!] = properParameterAttribute.Value;
 
             var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType,
-                assemblyPolicyAttribute?.RegistryKeys, webApiResiliencePipelineAttribute?.RegistryKeys,
+                assemblyResiliencePipelineAttribute?.RegistryKeys, webApiResiliencePipelineAttribute?.RegistryKeys,
                 baseAddress,
                 basePath,
                 handlersParameters,

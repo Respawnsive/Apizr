@@ -24,7 +24,7 @@ namespace Apizr.Configuring.Shared
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
             Headers = sharedOptions?.Headers ?? new List<string>();
-            _resilienceProperties = sharedOptions?.ResilienceProperties?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? 
+            _resiliencePropertiesFactories = sharedOptions?.ResiliencePropertiesFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? 
                                     new Dictionary<string, Func<object>>();
         }
 
@@ -67,8 +67,8 @@ namespace Apizr.Configuring.Shared
         /// <inheritdoc />
         public TimeSpan? RequestTimeout { get; internal set; }
         
-        private readonly IDictionary<string, Func<object>> _resilienceProperties;
+        private readonly IDictionary<string, Func<object>> _resiliencePropertiesFactories;
         /// <inheritdoc />
-        IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResilienceProperties => _resilienceProperties;
+        IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResiliencePropertiesFactories => _resiliencePropertiesFactories;
     }
 }

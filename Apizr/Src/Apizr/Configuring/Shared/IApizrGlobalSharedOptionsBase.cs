@@ -55,6 +55,6 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         TimeSpan? RequestTimeout { get; }
 
-        internal IDictionary<string, Func<object>> ResilienceProperties { get; }
+        internal IDictionary<string, Func<object>> ResiliencePropertiesFactories { get; }
     }
 }

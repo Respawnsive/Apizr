@@ -8,6 +8,7 @@ using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Registry;
+using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
@@ -38,6 +39,7 @@ namespace Apizr.Extending.Configuring.Common
             PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
             PostRegistrationActions = new List<Action<Type, IServiceCollection>>();
             HeadersFactories = new List<Func<IServiceProvider, IList<string>>>();
+            _resiliencePropertiesExtendedFactories = new Dictionary<string, Func<IServiceProvider, object>>();
         }
 
         /// <inheritdoc />
@@ -158,5 +160,9 @@ namespace Apizr.Extending.Configuring.Common
 
         /// <inheritdoc />
         public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
+
+        private readonly IDictionary<string, Func<IServiceProvider, object>> _resiliencePropertiesExtendedFactories;
+        /// <inheritdoc />
+        IDictionary<string, Func<IServiceProvider, object>> IApizrExtendedSharedOptions.ResiliencePropertiesExtendedFactories => _resiliencePropertiesExtendedFactories;
     }
 }

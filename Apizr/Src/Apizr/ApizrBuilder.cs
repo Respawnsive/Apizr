@@ -188,7 +188,7 @@ namespace Apizr
                         var context = request.GetOrBuildApizrResilienceContext(ct);
                         if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                         {
-                            if (request.TryGetOptions(out var requestOptions))
+                            if (request.TryGetApizrRequestOptions(out var requestOptions))
                             {
                                 logLevels = requestOptions.LogLevels;
                                 verbosity = requestOptions.TrafficVerbosity;

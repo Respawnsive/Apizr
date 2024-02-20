@@ -180,8 +180,8 @@ namespace Apizr
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
                 if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
-                    internalOptions.ResilienceProperties.Any())
-                    resilienceContext.Properties.SetProperties(internalOptions.ResilienceProperties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                    internalOptions.ResiliencePropertiesFactories.Any())
+                    resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
                 resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                     requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                     requestOptionsBuilder.ApizrOptions.HttpTracerMode);
@@ -272,8 +272,8 @@ namespace Apizr
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
                 if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
-                    internalOptions.ResilienceProperties.Any())
-                    resilienceContext.Properties.SetProperties(internalOptions.ResilienceProperties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                    internalOptions.ResiliencePropertiesFactories.Any())
+                    resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
                 resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                     requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                     requestOptionsBuilder.ApizrOptions.HttpTracerMode);
@@ -396,8 +396,8 @@ namespace Apizr
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                     if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
-                        internalOptions.ResilienceProperties.Any())
-                        resilienceContext.Properties.SetProperties(internalOptions.ResilienceProperties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
                     resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
@@ -553,8 +553,8 @@ namespace Apizr
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                     if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
-                        internalOptions.ResilienceProperties.Any())
-                        resilienceContext.Properties.SetProperties(internalOptions.ResilienceProperties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
                     resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
@@ -715,8 +715,8 @@ namespace Apizr
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                     if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
-                        internalOptions.ResilienceProperties.Any())
-                        resilienceContext.Properties.SetProperties(internalOptions.ResilienceProperties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
                     resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
@@ -880,8 +880,8 @@ namespace Apizr
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                     if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
-                        internalOptions.ResilienceProperties.Any())
-                        resilienceContext.Properties.SetProperties(internalOptions.ResilienceProperties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
                     resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);

@@ -25,6 +25,7 @@ namespace Apizr
         internal static readonly ResiliencePropertyKey<HttpRequestMessage> RequestMessagePropertyKey = new(RequestMessageKey);
 #if NET6_0_OR_GREATER
         internal static readonly HttpRequestOptionsKey<Type> InterfaceTypeOptionsKey = new(InterfaceTypeKey);
+        internal static readonly HttpRequestOptionsKey<int> PriorityOptionsKey = new(PriorityKey);
         internal static readonly HttpRequestOptionsKey<ResilienceContext> ResilienceContextOptionsKey = new(ResilienceContextKey);
         internal static readonly HttpRequestOptionsKey<IApizrRequestOptions> ApizrRequestOptionsOptionsKey = new(ApizrRequestOptionsKey);
 #endif

@@ -66,5 +66,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// The request timeout factory (each request try)
         /// </summary>
         Func<IServiceProvider, TimeSpan> RequestTimeoutFactory { get; }
+
+        internal IDictionary<string, Func<IServiceProvider, object>> ResiliencePropertiesExtendedFactories { get; }
     }
 }

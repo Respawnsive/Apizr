@@ -217,7 +217,7 @@ namespace Apizr.Configuring.Manager
         public TimeSpan? RequestTimeout => Options.RequestTimeout;
 
         /// <inheritdoc />
-        IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResilienceProperties => Options.ResilienceProperties;
+        IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResiliencePropertiesFactories => Options.ResiliencePropertiesFactories;
 
         /// <inheritdoc />
         public ILogger Logger => Options.Logger;

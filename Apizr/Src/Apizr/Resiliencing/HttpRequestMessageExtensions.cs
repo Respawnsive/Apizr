@@ -117,7 +117,7 @@ namespace Apizr.Resiliencing
         /// <param name="request">The <see cref="HttpRequestMessage"/>.</param>
         /// <param name="options">The <see cref="IApizrRequestOptions"/> if set, otherwise <c>null</c>.</param>
         /// <returns></returns>
-        public static bool TryGetOptions(this HttpRequestMessage request, out IApizrRequestOptions options)
+        public static bool TryGetApizrRequestOptions(this HttpRequestMessage request, out IApizrRequestOptions options)
         {
             options = request?.GetApizrRequestOptions();
 

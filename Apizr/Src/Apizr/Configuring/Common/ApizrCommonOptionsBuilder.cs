@@ -377,7 +377,7 @@ namespace Apizr.Configuring.Common
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory)
         {
-            ((IApizrGlobalSharedOptionsBase)Options).ResilienceProperties[key.Key] = () => valueFactory();
+            ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory();
 
             return this;
         }

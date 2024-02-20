@@ -637,7 +637,7 @@ namespace Apizr
                                 var context = request.GetOrBuildApizrResilienceContext(ct);
                                 if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                                 {
-                                    if (request.TryGetOptions(out var requestOptions))
+                                    if (request.TryGetApizrRequestOptions(out var requestOptions))
                                     {
                                         logLevels = requestOptions.LogLevels;
                                         verbosity = requestOptions.TrafficVerbosity;
@@ -740,10 +740,12 @@ namespace Apizr
                 apizrOptions.RefitSettingsFactory.Invoke(serviceProvider);
                 apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
-                apizrOptions.HeadersFactory?.Invoke(serviceProvider);
                 apizrOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
                 apizrOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
                 apizrOptions.HeadersFactory?.Invoke(serviceProvider);
+                foreach (var resiliencePropertiesExtendedFactory in apizrOptions.ResiliencePropertiesExtendedFactories)
+                    apizrOptions.ResiliencePropertiesFactories[resiliencePropertiesExtendedFactory.Key] = () =>
+                        resiliencePropertiesExtendedFactory.Value.Invoke(serviceProvider);
 
                 return Activator.CreateInstance(typeof(ApizrExtendedManagerOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
             });

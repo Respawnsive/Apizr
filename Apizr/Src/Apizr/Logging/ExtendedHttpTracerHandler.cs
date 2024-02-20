@@ -65,7 +65,7 @@ namespace Apizr.Logging
             var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
             if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
-                if (request.TryGetOptions(out requestOptions))
+                if (request.TryGetApizrRequestOptions(out requestOptions))
                 {
                     logLevels = requestOptions.LogLevels;
                     verbosity = requestOptions.TrafficVerbosity;
@@ -81,7 +81,7 @@ namespace Apizr.Logging
             }
 
             // Ignore some message parts if asked to
-            if ((requestOptions != null || request.TryGetOptions(out requestOptions)) &&
+            if ((requestOptions != null || request.TryGetApizrRequestOptions(out requestOptions)) &&
                 requestOptions.HandlersParameters.TryGetValue(Constants.ApizrIgnoreMessagePartsKey,
                     out var ignoreMessagePartsProperty) &&
                 ignoreMessagePartsProperty is HttpMessageParts ignoreMessageParts)

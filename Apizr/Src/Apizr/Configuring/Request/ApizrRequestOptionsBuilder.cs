@@ -125,7 +125,7 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     /// <inheritdoc />
     public IApizrRequestOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue valueFactory)
     {
-        ((IApizrGlobalSharedOptionsBase)Options).ResilienceProperties[key.Key] = () => valueFactory;
+        ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory;
 
         return this;
     }

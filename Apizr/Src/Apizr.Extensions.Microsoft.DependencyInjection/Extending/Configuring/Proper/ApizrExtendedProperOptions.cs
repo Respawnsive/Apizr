@@ -46,6 +46,8 @@ namespace Apizr.Extending.Configuring.Proper
             HeadersFactories = new List<Func<IServiceProvider, IList<string>>> { sharedOptions.HeadersFactory };
             OperationTimeoutFactory = operationTimeout.HasValue ? _ => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? _ => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
+            _resiliencePropertiesExtendedFactories = sharedOptions?.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
+                                             new Dictionary<string, Func<IServiceProvider, object>>();
         }
 
         /// <inheritdoc />
@@ -137,5 +139,9 @@ namespace Apizr.Extending.Configuring.Proper
 
         /// <inheritdoc />
         public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+
+        private readonly IDictionary<string, Func<IServiceProvider, object>> _resiliencePropertiesExtendedFactories;
+        /// <inheritdoc />
+        IDictionary<string, Func<IServiceProvider, object>> IApizrExtendedSharedOptions.ResiliencePropertiesExtendedFactories => _resiliencePropertiesExtendedFactories;
     }
 }

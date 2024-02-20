@@ -8,25 +8,21 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Logging;
-using Apizr.Policing;
 using Apizr.Progressing;
+using Apizr.Resiliencing;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
 using Apizr.Tests.Settings;
-using Apizr.Transferring.Requesting;
 using AutoMapper;
 using FluentAssertions;
 using Mapster;
-using MapsterMapper;
-using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
-using Polly.Extensions.Http;
 using Polly.Registry;
+using Polly.Retry;
 using Polly.Timeout;
 using Refit;
 using Xunit;
@@ -197,24 +193,31 @@ namespace Apizr.Tests
         [Fact]
         public async Task RequestTimeout_Should_Be_Handled_By_Polly()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(
-                        sleepDurations,
-                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
-                    .WithResiliencePipelineRegistry(policyRegistry)
+                    .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                     .AddDelegatingHandler(new TestRequestHandler()));
 
             // Defining a transient throwing request
@@ -224,7 +227,7 @@ namespace Apizr.Tests
             await act.Should().ThrowAsync<ApizrException>();
 
             // attempts should be equal to total retry count
-            attempts.Should().Be(sleepDurations.Length);
+            attempts.Should().Be(maxRetryAttempts);
         }
 
         [Fact]
@@ -406,48 +409,45 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Requesting_With_Context_into_Options_Should_Set_Context()
+        public async Task Requesting_With_A_ResilienceProperty_into_Options_Should_Set_It_Into_Context()
         {
             var watcher = new WatchingRequestHandler();
 
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher));
 
-            var testKey = "TestKey1";
+            ResiliencePropertyKey<int> testKey = new("TestKey1");
             var testValue = 1;
-            // Defining Context
-            var context = new Context {{ testKey, testValue } };
 
-            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithContext(context));
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithResilienceProperty(testKey, testValue));
             watcher.Context.Should().NotBeNull();
-            watcher.Context.Keys.Should().Contain(testKey);
-            watcher.Context.TryGetValue(testKey, out var value).Should().BeTrue();
+            watcher.Context.Properties.TryGetValue(testKey, out var value).Should().BeTrue();
             value.Should().Be(testValue);
         }
 
         [Fact]
-        public async Task Requesting_With_Context_At_Multiple_Levels_Should_Merge_It_All_At_The_End()
+        public async Task Requesting_With_ResilienceProperties_At_Multiple_Levels_Should_Merge_It_All_At_The_End()
         {
             var watcher = new WatchingRequestHandler();
 
+            ResiliencePropertyKey<string> testKey1 = new(nameof(testKey1));
+            ResiliencePropertyKey<string> testKey2 = new(nameof(testKey2));
+            ResiliencePropertyKey<string> testKey3 = new(nameof(testKey3));
+
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithContext(() => new Context { { "testKey1", "testValue1" }, { "testKey2", "testValue2.1" } })
+                options.WithResilienceProperty(testKey1 , () => "testValue1")
+                    .WithResilienceProperty(testKey2, () => "testValue2.1")
                     .AddDelegatingHandler(watcher));
 
-            // Defining Context 2
-            var context2 = new Context { { "testKey2", "testValue2.2" }, { "testKey3", "testValue3" } };
-
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithContext(context2));
+                options => options.WithResilienceProperty(testKey2, "testValue2.2")
+                    .WithResilienceProperty(testKey3, "testValue3"));
 
             watcher.Context.Should().NotBeNull();
-            watcher.Context.Keys.Should().Contain("testKey1");
-            watcher.Context.TryGetValue("testKey1", out var valueKey1).Should().BeTrue(); // Set by manager option
+            watcher.Context.Properties.TryGetValue(testKey1, out var valueKey1).Should().BeTrue(); // Set by manager option
             valueKey1.Should().Be("testValue1");
-            watcher.Context.Keys.Should().Contain("testKey2");
-            watcher.Context.TryGetValue("testKey2", out var valueKey2).Should().BeTrue(); // Set by manager option then updated by the request one
+            watcher.Context.Properties.TryGetValue(testKey2, out var valueKey2).Should().BeTrue(); // Set by manager option then updated by the request one
             valueKey2.Should().Be("testValue2.2");
-            watcher.Context.Keys.Should().Contain("testKey3");
-            watcher.Context.TryGetValue("testKey3", out var valueKey3).Should().BeTrue(); // Set by request option
+            watcher.Context.Properties.TryGetValue(testKey3, out var valueKey3).Should().BeTrue(); // Set by request option
             valueKey3.Should().Be("testValue3");
         }
 
@@ -882,28 +882,34 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_3_On_3_Times()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
-                        .Or<TimeoutRejectedException>()
-                        .WaitAndRetryAsync(
-                        sleepDurations,
-                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .Handle<TimeoutRejectedException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
-                        .WithResiliencePipelineRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithRequestTimeout(TimeSpan.FromSeconds(3)));
 
             Func<Task> act = () =>
@@ -920,28 +926,34 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_2_On_3_Times()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
-                        .Or<TimeoutRejectedException>()
-                        .WaitAndRetryAsync(
-                            sleepDurations,
-                            (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .Handle<TimeoutRejectedException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
-                        .WithResiliencePipelineRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithOperationTimeout(TimeSpan.FromSeconds(9)));
 
             Func<Task> act = () =>
@@ -958,23 +970,29 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Policy_Then_It_Should_Retry_1_On_3_Times()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
-                        .Or<TimeoutRejectedException>()
-                        .WaitAndRetryAsync(
-                            sleepDurations,
-                            (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .Handle<TimeoutRejectedException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(5));
@@ -982,7 +1000,7 @@ namespace Apizr.Tests
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
-                        .WithResiliencePipelineRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithOperationTimeout(TimeSpan.FromSeconds(10)));
 
             Func<Task> act = () =>
@@ -1000,26 +1018,33 @@ namespace Apizr.Tests
         [Fact]
         public async Task Request_Returning_Timeout_Should_Time_Out_Before_Polly_Could_Complete_All_Retries()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(
-                        sleepDurations,
-                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
                     options => options
-                        .WithResiliencePipelineRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .AddDelegatingHandler(new TestRequestHandler())
                         .WithOperationTimeout(TimeSpan.FromSeconds(3)));
 

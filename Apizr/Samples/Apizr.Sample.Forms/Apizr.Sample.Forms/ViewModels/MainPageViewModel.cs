@@ -170,15 +170,15 @@ namespace Apizr.Sample.Forms.ViewModels
             try
             {
                 // This is a manually defined web api call into IReqResService (classic actually)
-                var userDetails = await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(user.Id, (int)Priority.UserInitiated, ct), CancellationToken.None);
+                var userDetails = await _reqResManager.ExecuteAsync((opt, api) => api.GetUserAsync(user.Id, opt), options => options.WithPriority(Priority.UserInitiated));
                 fetchedUser = userDetails?.User;
 
                 // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-                //var userDetails = await _userDetailsCrudManager.ExecuteAsync((ct, api) => api.Read(user.Id, ct), CancellationToken.None);
+                //var userDetails = await _userDetailsCrudManager.ExecuteAsync(api => api.Read(user.Id));
                 //fetchedUser = userDetails?.User;
 
                 // The same as before but with auto mediation handling and without optional result this time
-                //var userDetails = await _mediator.Send(new ReadQuery<UserDetails>(user.Id), CancellationToken.None);
+                //var userDetails = await _mediator.Send(new ReadQuery<UserDetails>(user.Id));
                 //fetchedUser = userDetails?.User;
             }
             catch (ApizrException<UserDetails> e)
@@ -191,7 +191,7 @@ namespace Apizr.Sample.Forms.ViewModels
             }
 
             // The same as before but with auto mediation handling and with optional result
-            //var result = await _mediator.Send(new ReadOptionalQuery<UserDetails>(user.Id), CancellationToken.None);
+            //var result = await _mediator.Send(new ReadOptionalQuery<UserDetails>(user.Id));
             //result.Match(userDetails =>
             //{
             //    fetchedUser = userDetails?.User;

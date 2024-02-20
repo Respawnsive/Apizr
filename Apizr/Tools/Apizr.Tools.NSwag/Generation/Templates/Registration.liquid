@@ -41,7 +41,8 @@ using Microsoft.Extensions.DependencyInjection;
 {% endif -%}
 {% if WithRetry -%}
 using System;
-using Apizr.Policing;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Registry;
@@ -74,7 +75,7 @@ using System.Reflection;
 {% endif -%}
 
 {% if WithRetry -%}
-[assembly:Policy("TransientHttpError")] // Adjust policies if needed
+[assembly:ResiliencePipeline("TransientHttpError")] // Adjust policies if needed
 {% endif -%}
 {% if WithLogs -%}
 [assembly:Log] // Adjust log levels if needed
@@ -87,24 +88,34 @@ namespace {{ NameSpace }}
     public static class ApizrRegistration
     {
 {%      if WithRetry -%}
-        // Define your PolicyRegistry if not done yet somewhere else
-        public static PolicyRegistry ApizrPolicyRegistry = new PolicyRegistry
-        {
-            {
-                "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+        // Define your ResiliencePipeline if not done yet somewhere else
+        public static ResiliencePipelineBuilder<HttpResponseMessage> ApizrResiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
+            .ConfigureTelemetry(lazyLoggerFactory.Value)
+            .AddRetry(
+                new RetryStrategyOptions<HttpResponseMessage>
                 {
-                    TimeSpan.FromSeconds(1),
-                    TimeSpan.FromSeconds(5),
-                    TimeSpan.FromSeconds(10)
-                }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
-            }
-        };
+                    ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                        .Handle<HttpRequestException>()
+                        .HandleResult(response =>
+                            response.StatusCode is >= HttpStatusCode.InternalServerError
+                                or HttpStatusCode.RequestTimeout),
+                    Delay = TimeSpan.FromSeconds(1),
+                    MaxRetryAttempts = 5,
+                    UseJitter = true,
+                    BackoffType = DelayBackoffType.Exponential
+                });
 
 {%      endif -%}
 {%      if RegistrationType == 'Static' or RegistrationType == 'Both' -%}
         // Static
         public static {% if HasManyApis  -%}IApizrRegistry {% else -%}IApizrManager<{{ LastApi }}> {% endif -%} Build()
         {
+{%          if WithRetry -%}
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", 
+                (builder, _) => builder.AddPipeline(resiliencePipelineBuilder.Build()));
+                
+{%          endif -%}
 {%          if WithCacheProvider == 'MonkeyCache' -%}
             Barrel.ApplicationId = "{{Title}}";
 
@@ -151,7 +162,7 @@ namespace {{ NameSpace }}
                     }))
 {%                  endif -%}
 {%                  if WithRetry -%}
-                    .WithPolicyRegistry(ApizrPolicyRegistry)
+                    .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
 {%                  endif -%}
 {%                  if WithPriority -%}
                     .WithPriority()
@@ -184,7 +195,7 @@ namespace {{ NameSpace }}
                     }))
 {%                  endif -%}
 {%                  if WithRetry -%}
-                    .WithPolicyRegistry(ApizrPolicyRegistry)
+                    .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
 {%                  endif -%}
 {%                  if WithPriority -%}
                     .WithPriority()
@@ -219,7 +230,8 @@ namespace {{ NameSpace }}
 
 {%          endif -%}
 {%          if WithRetry -%}
-            services.AddPolicyRegistry(ApizrPolicyRegistry); // Remove this line if already registered somewhere else
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(resiliencePipelineBuilder.Build())); // Remove this line if already registered somewhere else
 
 {%          endif -%}
 {%          if WithCacheProvider == 'MonkeyCache' -%}

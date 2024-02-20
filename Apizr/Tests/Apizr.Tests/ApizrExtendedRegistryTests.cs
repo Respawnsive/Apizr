@@ -16,10 +16,8 @@ using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting.Sending;
 using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting.Sending;
-using Apizr.Policing;
 using Apizr.Progressing;
 using Apizr.Requesting;
-using Apizr.Resiliencing;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
@@ -29,14 +27,12 @@ using Apizr.Transferring.Requesting;
 using FluentAssertions;
 using Mapster;
 using MapsterMapper;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
-using Polly.Extensions.Http;
-using Polly.Registry;
+using Polly.Retry;
 using Polly.Timeout;
 using Refit;
 using Xunit;
@@ -48,24 +44,27 @@ namespace Apizr.Tests
     public class ApizrExtendedRegistryTests
     {
         private readonly ITestOutputHelper _outputHelper;
-        private readonly IPolicyRegistry<string> _policyRegistry;
+        private readonly ResiliencePipelineBuilder<HttpResponseMessage> _resiliencePipelineBuilder;
         private readonly RefitSettings _refitSettings;
         private readonly Assembly _assembly;
 
         public ApizrExtendedRegistryTests(ITestOutputHelper outputHelper)
         {
             _outputHelper = outputHelper;
-            _policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            _resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
                     {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }, LoggedStrategies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
-                }
-            };
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = 3,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential
+                    });
 
             var opts = new JsonSerializerOptions
             {
@@ -243,7 +242,8 @@ namespace Apizr.Tests
 
             // By proper option overriding attribute
             services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress(uri1)));
 
@@ -254,7 +254,8 @@ namespace Apizr.Tests
 
             // By attribute overriding common option
             services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                     .AddManagerFor<IReqResUserService>(),
                 config => config.WithBaseAddress(uri1));
@@ -266,7 +267,8 @@ namespace Apizr.Tests
 
             // By proper option overriding proper option and attribute
             services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress(uri2)),
                 config => config.WithBaseAddress(uri1));
@@ -317,7 +319,8 @@ namespace Apizr.Tests
 
             // By proper option overriding all common options and attribute
             services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress(uri4)) // changing base uri
@@ -350,7 +353,8 @@ namespace Apizr.Tests
             string token = null;
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                 .AddManagerFor<IHttpBinService>(options => options
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "token"))));
@@ -370,7 +374,8 @@ namespace Apizr.Tests
             var testSettings = new TestSettings("token");
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddSingleton(testSettings);
 
             services.AddApizr(registry => registry
@@ -406,7 +411,8 @@ namespace Apizr.Tests
             string token = null;
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(
                 registry => registry
                     .AddManagerFor<IHttpBinService>(),
@@ -428,7 +434,8 @@ namespace Apizr.Tests
             string token = null;
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(
                 registry => registry
                     .AddManagerFor<IHttpBinService>(options => options
@@ -449,7 +456,8 @@ namespace Apizr.Tests
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             services.AddApizr(
                 registry => registry
@@ -487,7 +495,8 @@ namespace Apizr.Tests
         public async Task Calling_WithInMemoryCacheHandler_Should_Cache_Result()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddMemoryCache();
 
             services.AddApizr(
@@ -536,23 +545,29 @@ namespace Apizr.Tests
         [Fact]
         public async Task RequestTimeout_Should_Be_Handled_By_Polly()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(sleepDurations, 
-                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
             services.AddMemoryCache();
 
             services.AddApizr(
@@ -571,7 +586,7 @@ namespace Apizr.Tests
             await act.Should().ThrowAsync<ApizrException>();
 
             // attempts should be equal to total retry count
-            attempts.Should().Be(sleepDurations.Length);
+            attempts.Should().Be(maxRetryAttempts);
         }
 
         [Fact]
@@ -580,7 +595,8 @@ namespace Apizr.Tests
             var isConnected = false;
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(
                 registry => registry
                     .AddManagerFor<IReqResUserService>(),
@@ -625,7 +641,8 @@ namespace Apizr.Tests
         public async Task Calling_WithAutoMapperMappingHandler_Should_Map_Data()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddAutoMapper(_assembly);
             services.AddApizr(
                 registry => registry
@@ -651,7 +668,8 @@ namespace Apizr.Tests
         public async Task Calling_WithMappingHandler_With_AutoMapper_Should_Map_Data()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddAutoMapper(_assembly);
             services.AddApizr(
                 registry => registry
@@ -677,7 +695,8 @@ namespace Apizr.Tests
         public async Task Calling_WithMapsterMappingHandler_Should_Map_Data()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             var mapsterConfig = new TypeAdapterConfig();
             mapsterConfig.NewConfig<User, MinUser>()
@@ -711,7 +730,8 @@ namespace Apizr.Tests
         public async Task Calling_WithMappingHandler_With_Mapster_Should_Map_Data()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             var mapsterConfig = new TypeAdapterConfig();
             mapsterConfig.NewConfig<User, MinUser>()
@@ -746,7 +766,8 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             services.AddApizr(
                 registry => registry
@@ -758,15 +779,12 @@ namespace Apizr.Tests
             var apizrManager = serviceProvider.GetService<IApizrManager<IReqResSimpleService>>();
             apizrManager.Should().NotBeNull();
 
-            var testKey = "TestKey1";
+            ResiliencePropertyKey<int> testKey = new("TestKey1");
             var testValue = 1;
-            // Defining Context
-            var context = new Context { { testKey, testValue } };
 
-            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithContext(context));
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithResilienceProperty(testKey, testValue));
             watcher.Context.Should().NotBeNull();
-            watcher.Context.Keys.Should().Contain(testKey);
-            watcher.Context.TryGetValue(testKey, out var value).Should().BeTrue();
+            watcher.Context.Properties.TryGetValue(testKey, out var value).Should().BeTrue();
             value.Should().Be(testValue);
         }
 
@@ -775,17 +793,27 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+
+            ResiliencePropertyKey<string> testKey1 = new(nameof(testKey1));
+            ResiliencePropertyKey<string> testKey2 = new(nameof(testKey2));
+            ResiliencePropertyKey<string> testKey3 = new(nameof(testKey3));
+            ResiliencePropertyKey<string> testKey4 = new(nameof(testKey4));
+            ResiliencePropertyKey<string> testKey5 = new(nameof(testKey5));
 
             services.AddApizr(registry =>
                     registry.AddGroup(group => group.AddManagerFor<IReqResSimpleService>(
-                            options => options
-                                .WithContext(() => new Context { { "testKey3", "testValue3.2" }, { "testKey4", "testValue4.1" } }) // proper
+                            // proper
+                            options => options.WithResilienceProperty(testKey3, _ => "testValue3.2")
+                                .WithResilienceProperty(testKey4, _ => "testValue4.1")
                                 .AddDelegatingHandler(watcher)),
-                        options => options
-                            .WithContext(() => new Context { { "testKey2", "testValue2.2" }, { "testKey3", "testValue3.1" } })), // group
-                options => options
-                    .WithContext(() => new Context { { "testKey1", "testValue1" }, { "testKey2", "testValue2.1" } })); // common
+                        // group
+                        options => options.WithResilienceProperty(testKey2, _ => "testValue2.2")
+                            .WithResilienceProperty(testKey3, _ => "testValue3.1")),
+                // common
+                options => options.WithResilienceProperty(testKey1, _ => "testValue1")
+                    .WithResilienceProperty(testKey2, _ => "testValue2.1"));
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -793,27 +821,21 @@ namespace Apizr.Tests
             var apizrManager = serviceProvider.GetService<IApizrManager<IReqResSimpleService>>();
             apizrManager.Should().NotBeNull();
 
-            // Defining Context 2
-            var context2 = new Context { { "testKey4", "testValue4.2" }, { "testKey5", "testValue5" } }; // request
-
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithContext(context2));
+                // request
+                options => options.WithResilienceProperty(testKey4, "testValue4.2")
+                    .WithResilienceProperty(testKey5, "testValue5"));
 
             watcher.Context.Should().NotBeNull();
-            watcher.Context.Keys.Should().Contain("testKey1");
-            watcher.Context.TryGetValue("testKey1", out var valueKey1).Should().BeTrue(); // Set by common option
+            watcher.Context.Properties.TryGetValue(testKey1, out var valueKey1).Should().BeTrue(); // Set by common option
             valueKey1.Should().Be("testValue1");
-            watcher.Context.Keys.Should().Contain("testKey2");
-            watcher.Context.TryGetValue("testKey2", out var valueKey2).Should().BeTrue(); // Set by common option then updated by the group one
+            watcher.Context.Properties.TryGetValue(testKey2, out var valueKey2).Should().BeTrue(); // Set by common option then updated by the group one
             valueKey2.Should().Be("testValue2.2");
-            watcher.Context.Keys.Should().Contain("testKey3");
-            watcher.Context.TryGetValue("testKey3", out var valueKey3).Should().BeTrue(); // Set by group option then updated by the proper one
+            watcher.Context.Properties.TryGetValue(testKey3, out var valueKey3).Should().BeTrue(); // Set by group option then updated by the proper one
             valueKey3.Should().Be("testValue3.2");
-            watcher.Context.Keys.Should().Contain("testKey4");
-            watcher.Context.TryGetValue("testKey4", out var valueKey4).Should().BeTrue(); // Set by proper option then updated by the request one
+            watcher.Context.Properties.TryGetValue(testKey4, out var valueKey4).Should().BeTrue(); // Set by proper option then updated by the request one
             valueKey4.Should().Be("testValue4.2");
-            watcher.Context.Keys.Should().Contain("testKey5");
-            watcher.Context.TryGetValue("testKey5", out var valueKey5).Should().BeTrue(); // Set by request option
+            watcher.Context.Properties.TryGetValue(testKey5, out var valueKey5).Should().BeTrue(); // Set by request option
             valueKey5.Should().Be("testValue5");
         }
 
@@ -821,7 +843,8 @@ namespace Apizr.Tests
         public async Task Calling_WithMediation_Should_Handle_Requests()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizr(
@@ -847,7 +870,8 @@ namespace Apizr.Tests
         public async Task Calling_WithOptionalMediation_Should_Handle_Requests_With_Optional_Result()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizr(
@@ -973,7 +997,8 @@ namespace Apizr.Tests
 
             // Test 2
             services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(config => config.WithBaseAddress(uri4))
@@ -995,7 +1020,8 @@ namespace Apizr.Tests
         public async Task Downloading_File_Should_Succeed()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             services.AddApizr(registry => registry
                 .AddTransferManager()
@@ -1113,7 +1139,8 @@ namespace Apizr.Tests
         public async Task Downloading_File_Grouped_Should_Succeed()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             services.AddApizr(registry => registry
                 .AddGroup(group => group
@@ -1238,7 +1265,8 @@ namespace Apizr.Tests
                 percentage = args.ProgressPercentage;
             };
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                 .AddTransferManager(options => options
                         .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
@@ -1265,7 +1293,8 @@ namespace Apizr.Tests
                 percentage = args.ProgressPercentage;
             };
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                 .AddTransferManager(options => options
                     .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
@@ -1286,8 +1315,9 @@ namespace Apizr.Tests
         public async Task Uploading_File_Should_Succeed()
         {
             var services = new ServiceCollection();
-            services.AddLogging(builder => builder.AddXUnit(_outputHelper))
-                .AddPolicyRegistry(_policyRegistry);
+            services.AddLogging(builder => builder.AddXUnit(_outputHelper));
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             services.AddApizr(registry => registry
                 .AddTransferManager()
@@ -1405,7 +1435,8 @@ namespace Apizr.Tests
         public async Task Uploading_File_Grouped_Should_Succeed()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             services.AddApizr(registry => registry
                     .AddGroup(group => group
@@ -1530,7 +1561,8 @@ namespace Apizr.Tests
                 percentage = args.ProgressPercentage;
             };
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                 .AddTransferManager(options => options
                     .WithBaseAddress("https://httpbin.org/post")
@@ -1558,7 +1590,8 @@ namespace Apizr.Tests
                 percentage = args.ProgressPercentage;
             };
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddApizr(registry => registry
                     .AddTransferManager(options => options
                         .WithBaseAddress("https://httpbin.org/post")
@@ -1580,7 +1613,8 @@ namespace Apizr.Tests
         public async Task Calling_WithFileTransferMediation_Should_Handle_Requests()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizr(registry => registry
@@ -1604,7 +1638,8 @@ namespace Apizr.Tests
         public async Task Calling_WithFileTransferOptionalMediation_Should_Handle_Requests_With_Optional_Result()
         {
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddApizr(
@@ -1635,7 +1670,8 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
 
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResSimpleService>(options => options
@@ -1666,7 +1702,8 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(_policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
             services.AddSettings();
 
             services.AddApizr(registry => registry
@@ -1954,26 +1991,30 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_3_On_3_Times()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
-                        .Or<TimeoutRejectedException>()
-                        .WaitAndRetryAsync(
-                        sleepDurations,
-                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .Handle<TimeoutRejectedException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>(
@@ -1997,26 +2038,30 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_2_On_3_Times()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
-                        .Or<TimeoutRejectedException>()
-                        .WaitAndRetryAsync(
-                            sleepDurations,
-                            (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .Handle<TimeoutRejectedException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>(
@@ -2040,29 +2085,32 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Policy_Then_It_Should_Retry_1_On_3_Times()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError()
-                        .Or<TimeoutRejectedException>()
-                        .WaitAndRetryAsync(
-                            sleepDurations,
-                            (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(5));
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>(
@@ -2087,24 +2135,29 @@ namespace Apizr.Tests
         [Fact]
         public async Task Request_Returning_Timeout_Should_Time_Out_Before_Polly_Could_Complete_All_Retries()
         {
+            var maxRetryAttempts = 3;
             var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(
-                        sleepDurations,
-                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
 
             var services = new ServiceCollection();
-            services.AddPolicyRegistry(policyRegistry);
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                builder => builder.AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = maxRetryAttempts,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential,
+                        OnRetry = args =>
+                        {
+                            attempts = args.AttemptNumber;
+                            return default;
+                        }
+                    }));
 
             services.AddApizr(registry => registry
                 .AddManagerFor<IReqResUserService>(

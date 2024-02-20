@@ -1,17 +1,16 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Request;
-using Apizr.Policing;
+using Apizr.Resiliencing;
 using Polly;
 
 namespace Apizr.Tests.Helpers
 {
     public class WatchingRequestHandler : DelegatingHandler
     {
-        public Context Context { get; set; }
+        public ResilienceContext Context { get; set; }
 
         public IApizrRequestOptions Options { get; set; }
 
@@ -21,7 +20,7 @@ namespace Apizr.Tests.Helpers
         /// <inheritdoc />
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            Context = request.GetApizrPolicyExecutionContext();
+            Context = request.GetApizrResilienceContext();
             Options = request.GetApizrRequestOptions();
             Headers = request.Headers;
 

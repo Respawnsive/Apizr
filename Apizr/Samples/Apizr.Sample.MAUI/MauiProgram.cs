@@ -1,14 +1,12 @@
-﻿using Apizr.Policing;
+﻿using System.Net;
 using Apizr.Sample.MAUI.Views;
 using Apizr.Sample.MAUI.ViewModels;
 using Apizr.Sample.Models;
 using CommunityToolkit.Maui;
-using Polly;
-using Polly.Extensions.Http;
-using Polly.Registry;
 using System.Reflection;
-using Apizr.Resiliencing;
 using Shiny;
+using Polly;
+using Polly.Retry;
 
 namespace Apizr.Sample.MAUI
 {
@@ -35,20 +33,23 @@ namespace Apizr.Sample.MAUI
             // Navigation
             services.RegisterForNavigation<MainPage, MainPageViewModel>();
 
-            // Apizr
-            var registry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            // Polly
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                pipelineBuilder => pipelineBuilder.AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
                     {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }, LoggedStrategies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
-                }
-            };
-            services.AddPolicyRegistry(registry);
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = 3,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential
+                    }));
 
+            // Apizr
             services.AddApizr(
                 apizrRegistry => apizrRegistry
                     .AddManagerFor<IReqResService>()

@@ -3,7 +3,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -130,12 +132,36 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
         return this;
     }
 
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+    {
+        var options = Options as IApizrGlobalSharedOptionsBase;
+        if (options.ContextOptionsBuilder == null)
+        {
+            options.ContextOptionsBuilder = contextOptionsBuilder;
+        }
+        else
+        {
+            options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+        }
+
+        return this;
+    }
+
     #region Internals
 
     /// <inheritdoc />
     IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOriginalExpression(Expression originalExpression)
     {
         ((IApizrRequestOptions)Options).OriginalExpression = originalExpression;
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithResilienceContextOptions(IApizrResilienceContextOptions options)
+    {
+        Options.ResilienceContextOptions = options;
 
         return this;
     }

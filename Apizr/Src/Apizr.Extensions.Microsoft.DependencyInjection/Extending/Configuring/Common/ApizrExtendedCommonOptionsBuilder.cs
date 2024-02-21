@@ -9,10 +9,12 @@ using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -425,6 +427,22 @@ namespace Apizr.Extending.Configuring.Common
                     $"Your mapping handler class must inherit from {nameof(IMappingHandler)} interface or derived");
 
             Options.MappingHandlerType = mappingHandlerType;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
 
             return this;
         }

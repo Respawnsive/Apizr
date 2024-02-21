@@ -8,8 +8,10 @@ using Apizr.Authenticating;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -306,6 +308,22 @@ namespace Apizr.Extending.Configuring.Proper
             Options.HttpTracerModeFactory = httpTracerModeFactory;
             Options.TrafficVerbosityFactory = trafficVerbosityFactory;
             Options.LogLevelsFactory = logLevelsFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
 
             return this;
         }

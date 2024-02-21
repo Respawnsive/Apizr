@@ -8,9 +8,11 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -406,8 +408,24 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
+
+            return this;
+        }
+
         #region Internal
-        
+
         void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
         
         void IApizrInternalRegistrationOptionsBuilder.SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)

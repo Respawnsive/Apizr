@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Threading;
+using Apizr.Configuring.Shared.Context;
 using Polly;
 
 namespace Apizr.Configuring.Request
@@ -27,6 +28,7 @@ namespace Apizr.Configuring.Request
         TApizrOptionsBuilder WithCacheClearing(bool clearCache);
 
         internal TApizrOptionsBuilder WithOriginalExpression(Expression originalExpression);
+        internal TApizrOptionsBuilder WithResilienceContextOptions(IApizrResilienceContextOptions options);
         internal TApizrOptionsBuilder WithContext(ResilienceContext context);
     }
     

@@ -19,6 +19,7 @@ using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Logging.Attributes;
@@ -55,8 +56,16 @@ namespace Apizr
                 operationTimeoutAttribute?.Timeout,
                 requestTimeoutAttribute?.Timeout, 
                 requestLogAttribute?.LogLevels);
-            var builder = new ApizrRequestOptionsBuilder(requestOptions);
+            var builder = new ApizrRequestOptionsBuilder(requestOptions) as IApizrRequestOptionsBuilder;
             optionsBuilder?.Invoke(builder);
+
+            if (builder.ApizrOptions.ContextOptionsBuilder != null)
+            {
+                var contextOptions = new ApizrResilienceContextOptions();
+                var contextOptionsBuilder = new ApizrResilienceContextOptionsBuilder(contextOptions) as IApizrResilienceContextOptionsBuilder;
+                builder.ApizrOptions.ContextOptionsBuilder.Invoke(contextOptionsBuilder);
+                builder.WithResilienceContextOptions(contextOptionsBuilder.ResilienceContextOptions);
+            }
 
             return builder;
         }
@@ -178,6 +187,7 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
                 if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
                     internalOptions.ResiliencePropertiesFactories.Any())
@@ -210,7 +220,8 @@ namespace Apizr
             }
             finally
             {
-                if(resilienceContext != null)
+                if(resilienceContext != null &&
+                   requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
                     ResilienceContextPool.Shared.Return(resilienceContext);
             }
         }
@@ -270,6 +281,7 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: {typeof(TModelData).Name} mapped to {typeof(TApiData).Name}");
 
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
                 if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
                     internalOptions.ResiliencePropertiesFactories.Any())
@@ -302,7 +314,8 @@ namespace Apizr
             }
             finally
             {
-                if (resilienceContext != null)
+                if (resilienceContext != null &&
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
                     ResilienceContextPool.Shared.Return(resilienceContext);
             }
         }
@@ -394,6 +407,7 @@ namespace Apizr
                             $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                     if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
                         internalOptions.ResiliencePropertiesFactories.Any())
@@ -405,7 +419,7 @@ namespace Apizr
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    await resiliencePipeline.ExecuteAsync(
+                    result = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi),
                         requestOptionsBuilder);
                 }
@@ -445,7 +459,8 @@ namespace Apizr
                 }
                 finally
                 {
-                    if (resilienceContext != null)
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
                         ResilienceContextPool.Shared.Return(resilienceContext);
                 }
 
@@ -551,6 +566,7 @@ namespace Apizr
                             $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                     if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
                         internalOptions.ResiliencePropertiesFactories.Any())
@@ -562,7 +578,7 @@ namespace Apizr
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    await resiliencePipeline.ExecuteAsync(
+                    result = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi),
                         requestOptionsBuilder);
                 }
@@ -602,7 +618,8 @@ namespace Apizr
                 }
                 finally
                 {
-                    if (resilienceContext != null)
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
                         ResilienceContextPool.Shared.Return(resilienceContext);
                 }
 
@@ -713,6 +730,7 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: {typeof(TModelData).Name} mapped to {typeof(TApiData).Name}");
 
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                     if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
                         internalOptions.ResiliencePropertiesFactories.Any())
@@ -724,7 +742,7 @@ namespace Apizr
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    await resiliencePipeline.ExecuteAsync(
+                    result = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData),
                         requestOptionsBuilder);
                 }
@@ -764,7 +782,8 @@ namespace Apizr
                 }
                 finally
                 {
-                    if (resilienceContext != null)
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
                         ResilienceContextPool.Shared.Return(resilienceContext);
                 }
 
@@ -878,6 +897,7 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: {typeof(TModelRequestData).Name} mapped to {typeof(TApiRequestData).Name}");
 
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                     if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
                         internalOptions.ResiliencePropertiesFactories.Any())
@@ -889,7 +909,7 @@ namespace Apizr
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    await resiliencePipeline.ExecuteAsync(
+                    result = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi, apiRequestData),
                         requestOptionsBuilder);
                 }
@@ -929,7 +949,8 @@ namespace Apizr
                 }
                 finally
                 {
-                    if (resilienceContext != null)
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
                         ResilienceContextPool.Shared.Return(resilienceContext);
                 }
 

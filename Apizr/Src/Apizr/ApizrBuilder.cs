@@ -420,7 +420,6 @@ namespace Apizr
             builder.ApizrOptions.HeadersFactory?.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
-            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }

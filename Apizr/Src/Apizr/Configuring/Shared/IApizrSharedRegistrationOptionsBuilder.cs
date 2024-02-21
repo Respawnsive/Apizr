@@ -5,7 +5,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 

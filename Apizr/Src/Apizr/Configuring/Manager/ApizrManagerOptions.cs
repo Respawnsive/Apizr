@@ -6,9 +6,11 @@ using Apizr.Caching;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -215,6 +217,13 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public TimeSpan? RequestTimeout => Options.RequestTimeout;
+
+        /// <inheritdoc />
+        Action<IApizrResilienceContextOptionsBuilder> IApizrGlobalSharedOptionsBase.ContextOptionsBuilder
+        {
+            get => Options.ContextOptionsBuilder;
+            set {}
+        }
 
         /// <inheritdoc />
         IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResiliencePropertiesFactories => Options.ResiliencePropertiesFactories;

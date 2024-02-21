@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
-using Polly;
 
 namespace Apizr.Configuring.Shared
 {
@@ -24,6 +24,7 @@ namespace Apizr.Configuring.Shared
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
             Headers = sharedOptions?.Headers ?? new List<string>();
+            _contextOptionsBuilder = sharedOptions?.ContextOptionsBuilder;
             _resiliencePropertiesFactories = sharedOptions?.ResiliencePropertiesFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? 
                                     new Dictionary<string, Func<object>>();
         }
@@ -66,7 +67,15 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public TimeSpan? RequestTimeout { get; internal set; }
-        
+
+        private Action<IApizrResilienceContextOptionsBuilder> _contextOptionsBuilder;
+        /// <inheritdoc />
+        Action<IApizrResilienceContextOptionsBuilder> IApizrGlobalSharedOptionsBase.ContextOptionsBuilder
+        {
+            get => _contextOptionsBuilder;
+            set => _contextOptionsBuilder = value;
+        }
+
         private readonly IDictionary<string, Func<object>> _resiliencePropertiesFactories;
         /// <inheritdoc />
         IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResiliencePropertiesFactories => _resiliencePropertiesFactories;

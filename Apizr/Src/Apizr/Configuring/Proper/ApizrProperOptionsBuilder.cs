@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -319,6 +321,22 @@ namespace Apizr.Configuring.Proper
         public IApizrProperOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory)
         {
             ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory();
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
 
             return this;
         }

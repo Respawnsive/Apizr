@@ -7,6 +7,7 @@ using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

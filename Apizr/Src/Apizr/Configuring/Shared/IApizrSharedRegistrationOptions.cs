@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Configuring.Manager;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Shared

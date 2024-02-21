@@ -7,6 +7,7 @@ using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Refit;

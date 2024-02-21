@@ -9,10 +9,12 @@ using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -318,12 +320,6 @@ namespace Apizr.Extending.Configuring.Manager
             => WithRefitSettings(_ => refitSettings);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithRefitSettings(
             Func<IServiceProvider, RefitSettings> refitSettingsFactory)
         {
@@ -331,6 +327,10 @@ namespace Apizr.Extending.Configuring.Manager
 
             return this;
         }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
+            => WithConnectivityHandler(_ => connectivityHandler);
 
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(Func<IServiceProvider, IConnectivityHandler> connectivityHandlerFactory)
@@ -427,6 +427,22 @@ namespace Apizr.Extending.Configuring.Manager
                     $"Your mapping handler class must inherit from {nameof(IMappingHandler)} interface or derived");
 
             Options.MappingHandlerType = mappingHandlerType;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
 
             return this;
         }

@@ -5,6 +5,7 @@ using System.Net.Http;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Proper

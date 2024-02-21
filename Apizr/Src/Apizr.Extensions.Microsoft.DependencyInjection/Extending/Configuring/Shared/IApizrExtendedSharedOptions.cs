@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

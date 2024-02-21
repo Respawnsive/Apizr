@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Polly;
 using System;
+using Apizr.Configuring.Shared.Context;
+using Apizr.Resiliencing;
 
 namespace Apizr.Configuring.Shared
 {
@@ -81,5 +83,12 @@ namespace Apizr.Configuring.Shared
         /// <param name="timeout">The request timeout</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithRequestTimeout(TimeSpan timeout);
+
+        /// <summary>
+        /// Set some options to the resilience context
+        /// </summary>
+        /// <param name="contextOptionsBuilder">The resilience context options builder</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder);
     }
 }

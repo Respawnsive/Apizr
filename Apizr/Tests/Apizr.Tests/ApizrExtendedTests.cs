@@ -346,7 +346,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));
@@ -1259,7 +1259,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));
@@ -1305,7 +1305,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));
@@ -1354,7 +1354,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));
@@ -1400,7 +1400,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));

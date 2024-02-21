@@ -31,15 +31,18 @@ using Polly.Retry;
 using Polly.Timeout;
 using Refit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Apizr.Tests
 {
     public class ApizrRegistryTests
     {
         private readonly RefitSettings _refitSettings;
+        private readonly ITestOutputHelper _outputHelper;
 
-        public ApizrRegistryTests()
+        public ApizrRegistryTests(ITestOutputHelper outputHelper)
         {
+            _outputHelper = outputHelper;
             var opts = new JsonSerializerOptions
             {
                 NumberHandling = JsonNumberHandling.AllowReadingFromString
@@ -365,7 +368,10 @@ namespace Apizr.Tests
             var maxRetryAttempts = 3;
             var attempts = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
-            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
                 .AddRetry(
                     new RetryStrategyOptions<HttpResponseMessage>
                     {
@@ -380,7 +386,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));
@@ -1451,7 +1457,10 @@ namespace Apizr.Tests
             var maxRetryAttempts = 3;
             var attempts = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
-            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
                 .AddRetry(
                     new RetryStrategyOptions<HttpResponseMessage>
                     {
@@ -1467,7 +1476,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));
@@ -1498,7 +1507,10 @@ namespace Apizr.Tests
             var maxRetryAttempts = 3;
             var attempts = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
-            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
                 .AddRetry(
                     new RetryStrategyOptions<HttpResponseMessage>
                     {
@@ -1514,7 +1526,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));
@@ -1545,7 +1557,10 @@ namespace Apizr.Tests
             var maxRetryAttempts = 3;
             var attempts = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
-            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
                 .AddRetry(
                     new RetryStrategyOptions<HttpResponseMessage>
                     {
@@ -1561,7 +1576,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));
@@ -1596,7 +1611,10 @@ namespace Apizr.Tests
             var maxRetryAttempts = 3;
             var attempts = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
-            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) => builder
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
                 .AddRetry(
                     new RetryStrategyOptions<HttpResponseMessage>
                     {
@@ -1611,7 +1629,7 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber;
+                            attempts = args.AttemptNumber+1;
                             return default;
                         }
                     }));

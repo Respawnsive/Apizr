@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Threading;
+using Apizr.Configuring.Shared.Context;
 
 namespace Apizr.Configuring.Request
 {
@@ -15,6 +16,11 @@ namespace Apizr.Configuring.Request
         /// Clear request cache before executing (default: false)
         /// </summary>
         bool ClearCache { get; }
+
+        /// <summary>
+        /// Options set to resilience context
+        /// </summary>
+        IApizrResilienceContextOptions ResilienceContextOptions { get; }
 
         internal Expression OriginalExpression { get; set; }
     }

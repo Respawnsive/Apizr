@@ -11,8 +11,12 @@ namespace Apizr.Tests.Helpers
 {
     public class TestRequestHandler : DelegatingHandler
     {
+        public int Attempts { get; set; }
+
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            Attempts++;
+
             if (request.Options.TryGetValue(new HttpRequestOptionsKey<HttpStatusCode>(nameof(HttpStatusCode)),
                     out var httpStatusCode) && httpStatusCode != HttpStatusCode.OK)
                 return await Task.FromResult(new HttpResponseMessage(httpStatusCode));

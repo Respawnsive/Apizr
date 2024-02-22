@@ -75,7 +75,7 @@ namespace Apizr.Resiliencing
 
             context.Properties.Set(Constants.RequestMessagePropertyKey, request);
 
-            var pipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>().AddPipeline(_pipelineProvider(request, cancellationToken));
+            var pipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>();
             var options = request.GetApizrRequestOptions();
             if (options != null)
             {
@@ -85,6 +85,26 @@ namespace Apizr.Resiliencing
                     logger = _apizrOptions.Logger;
                     logLevels = _apizrOptions.LogLevels;
                 }
+
+                // Set an operation timeout first if provided
+                if (options.OperationTimeout.HasValue)
+                {
+                    // Set the request timeout
+                    if (options.OperationTimeout.Value > TimeSpan.Zero)
+                    {
+                        pipelineBuilder.AddTimeout(options.OperationTimeout.Value);
+                        logger.Log(logLevels.Low(), "{0}: Timeout has been set with your provided {1} operation timeout value.", context.OperationKey, options.OperationTimeout);
+                    }
+                    else
+                    {
+                        logger.Log(logLevels.Low(),
+                            "{0}: You provided an operation timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
+                            context.OperationKey);
+                    }
+                }
+
+                // Add user defined resilience pipelines
+                pipelineBuilder.AddPipeline(_pipelineProvider(request, cancellationToken));
 
                 // Set a request timeout if provided
                 if (options.RequestTimeout.HasValue)
@@ -99,23 +119,6 @@ namespace Apizr.Resiliencing
                     {
                         logger.Log(logLevels.Low(),
                             "{0}: You provided a request timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
-                            context.OperationKey);
-                    }
-                }
-
-                // Set an operation timeout if provided
-                if (options.OperationTimeout.HasValue)
-                {
-                    // Set the request timeout
-                    if (options.OperationTimeout.Value > TimeSpan.Zero)
-                    {
-                        pipelineBuilder.AddTimeout(options.OperationTimeout.Value);
-                        logger.Log(logLevels.Low(), "{0}: Timeout has been set with your provided {1} operation timeout value.", context.OperationKey, options.OperationTimeout);
-                    }
-                    else
-                    {
-                        logger.Log(logLevels.Low(),
-                            "{0}: You provided an operation timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
                             context.OperationKey);
                     }
                 }

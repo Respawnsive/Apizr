@@ -16,6 +16,8 @@ namespace Apizr.Tests.Helpers
 
         public HttpRequestHeaders Headers { get; set; }
 
+        public int Attempts { get; set; }
+
 
         /// <inheritdoc />
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -23,6 +25,7 @@ namespace Apizr.Tests.Helpers
             Context = request.GetApizrResilienceContext();
             Options = request.GetApizrRequestOptions();
             Headers = request.Headers;
+            Attempts++;
 
             if (Options.CancellationToken != CancellationToken.None)
                 await Task.Delay(5000, cancellationToken);

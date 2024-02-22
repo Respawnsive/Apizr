@@ -1050,6 +1050,8 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_3_On_3_Times()
         {
+            var maxRetryCount = 3;
+            var retryCount = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1064,7 +1066,7 @@ namespace Apizr.Tests
                             .HandleResult(response =>
                                 response.StatusCode is >= HttpStatusCode.InternalServerError
                                     or HttpStatusCode.RequestTimeout),
-                        MaxRetryAttempts = 3,
+                        MaxRetryAttempts = maxRetryCount,
                         DelayGenerator = static args =>
                         {
                             var delay = args.AttemptNumber switch
@@ -1077,6 +1079,11 @@ namespace Apizr.Tests
                             // This example uses a synchronous delay generator,
                             // but the API also supports asynchronous implementations.
                             return new ValueTask<TimeSpan?>(delay);
+                        },
+                        OnRetry = args =>
+                        {
+                            retryCount = args.AttemptNumber + 1;
+                            return default;
                         }
                     }));
 
@@ -1099,6 +1106,7 @@ namespace Apizr.Tests
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TimeoutRejectedException>();
 
+            retryCount.Should().Be(2);
             watcher.Attempts.Should().Be(4);
         }
 

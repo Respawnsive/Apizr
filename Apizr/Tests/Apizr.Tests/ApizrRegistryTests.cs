@@ -23,6 +23,7 @@ using AutoMapper;
 using FluentAssertions;
 using Fusillade;
 using Mapster;
+using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Logging;
 using MonkeyCache.FileStore;
 using Polly;
@@ -252,7 +253,11 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
                     .AddManagerFor<IHttpBinService>(options =>
-                        options.WithAuthenticationHandler(_ => Task.FromResult(token = "token"))));
+                        options.WithAuthenticationHandler(_ => Task.FromResult(token = "token"))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 
@@ -270,7 +275,11 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
                     .AddManagerFor<IHttpBinService>(options =>
-                        options.WithAuthenticationHandler(testSettings, settings => settings.TestJsonString)));
+                        options.WithAuthenticationHandler(testSettings, settings => settings.TestJsonString)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 
@@ -299,7 +308,10 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IHttpBinService>(),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
 
             var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
@@ -318,7 +330,10 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IHttpBinService>(options => options
                         .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenA"))),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenB")));
 
             var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
@@ -334,7 +349,10 @@ namespace Apizr.Tests
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithAkavacheCacheHandler()
                     .AddDelegatingHandler(new TestRequestHandler()));
 
@@ -366,7 +384,7 @@ namespace Apizr.Tests
         public async Task RequestTimeout_Should_Be_Handled_By_Polly()
         {
             var maxRetryAttempts = 3;
-            var attempts = 0;
+            var retryCount = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -386,14 +404,17 @@ namespace Apizr.Tests
                         BackoffType = DelayBackoffType.Exponential,
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber+1;
+                            retryCount = args.AttemptNumber+1;
                             return default;
                         }
                     }));
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                     .AddDelegatingHandler(new TestRequestHandler()));
 
@@ -406,7 +427,7 @@ namespace Apizr.Tests
             await act.Should().ThrowAsync<ApizrException>();
 
             // attempts should be equal to total retry count
-            attempts.Should().Be(maxRetryAttempts);
+            retryCount.Should().Be(maxRetryAttempts);
         }
 
         [Fact]
@@ -416,7 +437,10 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithConnectivityHandler(() => isConnected));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
@@ -459,7 +483,10 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithRefitSettings(_refitSettings)
                     .WithAutoMapperMappingHandler(mapperConfig));
 
@@ -488,7 +515,10 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper())));
 
@@ -516,7 +546,10 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithRefitSettings(_refitSettings)
                     .WithMapsterMappingHandler(new MapsterMapper.Mapper()));
 
@@ -544,7 +577,10 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
-                config => config
+                config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler(new MapsterMappingHandler(new MapsterMapper.Mapper())));
 
@@ -631,7 +667,13 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
+                registry => registry.AddManagerFor<IReqResUserService>(options =>
+                    options.AddDelegatingHandler(watcher)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             ResiliencePropertyKey<int> testKey = new("TestKey1");
@@ -664,7 +706,11 @@ namespace Apizr.Tests
                         options => options.WithResilienceProperty(testKey2, () => "testValue2.2")
                             .WithResilienceProperty(testKey3, () => "testValue3.1")),
                 // common
-                options => options.WithResilienceProperty(testKey1, () => "testValue1")
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithResilienceProperty(testKey1, () => "testValue1")
                     .WithResilienceProperty(testKey2, () => "testValue2.1"));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResSimpleService>();
@@ -692,7 +738,13 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
+                registry => registry.AddManagerFor<IReqResUserService>(options =>
+                    options.AddDelegatingHandler(watcher)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies));
@@ -726,7 +778,11 @@ namespace Apizr.Tests
                         options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add))
                     .AddManagerFor<IHttpBinService>()
                     .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
-                options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
 
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
@@ -758,7 +814,13 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry.AddManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)));
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
+                registry => registry.AddManagerFor<IReqResUserService>(options =>
+                    options.AddDelegatingHandler(watcher)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             var cts = new CancellationTokenSource(3000);
@@ -788,7 +850,10 @@ namespace Apizr.Tests
                         .WithBaseAddress("https://reqres.in/api/users")
                         .AddDelegatingHandler(watcher2)
                         .WithPriority(Priority.Speculative)),
-                options => options
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithPriority());
             
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
@@ -817,12 +882,15 @@ namespace Apizr.Tests
         public async Task Downloading_File_Should_Succeed()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddTransferManager()
-                .AddTransferManagerFor<ITransferUndefinedApi>()
-                .AddDownloadManager()
-                .AddDownloadManagerFor<ITransferUndefinedApi>(),
-                options => options
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+                    .AddTransferManager()
+                    .AddTransferManagerFor<ITransferUndefinedApi>()
+                    .AddDownloadManager()
+                    .AddDownloadManagerFor<ITransferUndefinedApi>(),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             apizrRegistry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
@@ -880,13 +948,17 @@ namespace Apizr.Tests
         public async Task Downloading_File_Grouped_Should_Succeed()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddGroup(group => group
-                        .AddTransferManager()
-                        .AddTransferManagerFor<ITransferUndefinedApi>()
-                        .AddDownloadManager()
-                        .AddDownloadManagerFor<ITransferUndefinedApi>(),
-                    options => options.WithBasePath("/files")),
-                options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr"));
+                    .AddGroup(group => group
+                            .AddTransferManager()
+                            .AddTransferManagerFor<ITransferUndefinedApi>()
+                            .AddDownloadManager()
+                            .AddDownloadManagerFor<ITransferUndefinedApi>(),
+                        options => options.WithBasePath("/files")),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithBaseAddress("http://speedtest.ftp.otenet.gr"));
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             apizrRegistry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
@@ -950,9 +1022,13 @@ namespace Apizr.Tests
                 percentage = args.ProgressPercentage;
             };
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddTransferManager(options => options
-                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
-                    .WithProgress()));
+                    .AddTransferManager(options => options
+                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                        .WithProgress()),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             regTransferManager.Should().NotBeNull(); // Built-in
@@ -975,7 +1051,11 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddTransferManager(options => options
                     .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
-                    .WithProgress(progress)));
+                    .WithProgress(progress)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             regTransferManager.Should().NotBeNull(); // Built-in
@@ -990,12 +1070,15 @@ namespace Apizr.Tests
         public async Task Uploading_File_Should_Succeed()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddTransferManager()
-                .AddTransferManagerFor<ITransferUndefinedApi>()
-                .AddUploadManager()
-                .AddUploadManagerFor<ITransferUndefinedApi>(),
-                options => options
-                        .WithBaseAddress("https://httpbin.org/post"));
+                    .AddTransferManager()
+                    .AddTransferManagerFor<ITransferUndefinedApi>()
+                    .AddUploadManager()
+                    .AddUploadManagerFor<ITransferUndefinedApi>(),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithBaseAddress("https://httpbin.org/post"));
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             apizrRegistry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
@@ -1058,7 +1141,10 @@ namespace Apizr.Tests
                         .AddTransferManagerFor<ITransferUndefinedApi>()
                         .AddUploadManager()
                         .AddUploadManagerFor<ITransferUndefinedApi>()),
-                options => options
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithBaseAddress("https://httpbin.org/post"));
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
@@ -1125,7 +1211,11 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddTransferManager(options => options
                     .WithBaseAddress("https://httpbin.org/post")
-                    .WithProgress()));
+                    .WithProgress()),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             regTransferManager.Should().NotBeNull(); // Built-in
@@ -1149,7 +1239,11 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddTransferManager(options => options
                         .WithBaseAddress("https://httpbin.org/post")
-                        .WithProgress(progress)));
+                        .WithProgress(progress)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             regTransferManager.Should().NotBeNull(); // Built-in
@@ -1171,7 +1265,10 @@ namespace Apizr.Tests
                     .WithBaseAddress("https://reqres.in/api")
                     .WithHeaders("testKey3: testValue3.2", "testKey4: testValue4.1")
                     .AddDelegatingHandler(watcher)),
-                options => options
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithHeaders("testKey2: testValue2.2", "testKey3: testValue3.1"));
 
             // Shortcut
@@ -1194,10 +1291,14 @@ namespace Apizr.Tests
             var watcher = new WatchingRequestHandler();
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResSimpleService>(options => options
-                .WithHeaders("testKey2: testValue2")
-                .AddDelegatingHandler(watcher)),
-                options => options.WithHeaders("testKey3: testValue3"));
+                    .AddManagerFor<IReqResSimpleService>(options => options
+                        .WithHeaders("testKey2: testValue2")
+                        .AddDelegatingHandler(watcher)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithHeaders("testKey3: testValue3"));
 
             apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var reqResManager).Should().BeTrue(); // Custom
             
@@ -1215,7 +1316,11 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options =>
                 options.ConfigureHttpClient(client => client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue"))
-                    .AddDelegatingHandler(watcher)));
+                    .AddDelegatingHandler(watcher)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1228,7 +1333,11 @@ namespace Apizr.Tests
         public async Task Concurrent_Requests_Should_Not_Throw()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResSimpleService>());
+                    .AddManagerFor<IReqResSimpleService>(),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var reqResManager).Should().BeTrue();
 
@@ -1248,7 +1357,11 @@ namespace Apizr.Tests
         public async Task Cancelling_A_Get_Request_Should_Throw_An_OperationCanceledException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>());
+                    .AddManagerFor<IReqResUserService>(),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1267,7 +1380,11 @@ namespace Apizr.Tests
         public async Task Cancelling_A_Post_Request_Should_Throw_An_OperationCanceledException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IHttpBinService>());
+                    .AddManagerFor<IHttpBinService>(),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IHttpBinService>(out var manager).Should().BeTrue();
 
@@ -1286,8 +1403,12 @@ namespace Apizr.Tests
         public async Task When_Calling_BA_WithOperationTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(
-                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))));
+                    .AddManagerFor<IReqResUserService>(
+                        options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1303,8 +1424,12 @@ namespace Apizr.Tests
         public async Task When_Calling_AB_WithOperationTimeout_Then_Client_Should_Throw_A_TimeoutException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(options =>
-                    options.WithOperationTimeout(TimeSpan.FromSeconds(2))));
+                    .AddManagerFor<IReqResUserService>(options =>
+                        options.WithOperationTimeout(TimeSpan.FromSeconds(2))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1320,8 +1445,12 @@ namespace Apizr.Tests
         public async Task When_Calling_BA_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(
-                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(4))));
+                    .AddManagerFor<IReqResUserService>(
+                        options => options.WithRequestTimeout(TimeSpan.FromSeconds(4))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1337,8 +1466,12 @@ namespace Apizr.Tests
         public async Task When_Calling_AB_WithRequestTimeout_Then_Client_Should_Throw_A_TimeoutException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(options =>
-                    options.WithRequestTimeout(TimeSpan.FromSeconds(2))));
+                    .AddManagerFor<IReqResUserService>(options =>
+                        options.WithRequestTimeout(TimeSpan.FromSeconds(2))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1354,9 +1487,13 @@ namespace Apizr.Tests
         public async Task When_Calling_DCBA_WithOperationTimeout_And_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(
-                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(8))
-                        .WithRequestTimeout(TimeSpan.FromSeconds(6))));
+                    .AddManagerFor<IReqResUserService>(
+                        options => options.WithOperationTimeout(TimeSpan.FromSeconds(8))
+                            .WithRequestTimeout(TimeSpan.FromSeconds(6))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1373,9 +1510,13 @@ namespace Apizr.Tests
         public async Task When_Calling_ABCD_WithOperationTimeout_And_WithRequestTimeout_Then_Client_Should_Throw_A_TimeoutException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(options =>
-                    options.WithOperationTimeout(TimeSpan.FromSeconds(2))
-                        .WithRequestTimeout(TimeSpan.FromSeconds(4))));
+                    .AddManagerFor<IReqResUserService>(options =>
+                        options.WithOperationTimeout(TimeSpan.FromSeconds(2))
+                            .WithRequestTimeout(TimeSpan.FromSeconds(4))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1392,8 +1533,12 @@ namespace Apizr.Tests
         public async Task Calling_BCA_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Request_TimeoutRejectedException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(options =>
-                options.WithOperationTimeout(TimeSpan.FromSeconds(4))));
+                    .AddManagerFor<IReqResUserService>(options =>
+                        options.WithOperationTimeout(TimeSpan.FromSeconds(4))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1413,8 +1558,12 @@ namespace Apizr.Tests
         public async Task Calling_ACB_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Client_TimeoutRejectedException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(options =>
-                options.WithOperationTimeout(TimeSpan.FromSeconds(2))));
+                    .AddManagerFor<IReqResUserService>(options =>
+                        options.WithOperationTimeout(TimeSpan.FromSeconds(2))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1434,8 +1583,12 @@ namespace Apizr.Tests
         public async Task Calling_BAC_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(options =>
-                options.WithOperationTimeout(TimeSpan.FromSeconds(4))));
+                    .AddManagerFor<IReqResUserService>(options =>
+                        options.WithOperationTimeout(TimeSpan.FromSeconds(4))),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1454,8 +1607,8 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_3_On_3_Times()
         {
-            var maxRetryAttempts = 3;
-            var attempts = 0;
+            var maxRetryCount = 3;
+            var retryCount = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1470,23 +1623,39 @@ namespace Apizr.Tests
                             .HandleResult(response =>
                                 response.StatusCode is >= HttpStatusCode.InternalServerError
                                     or HttpStatusCode.RequestTimeout),
-                        Delay = TimeSpan.FromSeconds(1),
-                        MaxRetryAttempts = maxRetryAttempts,
-                        UseJitter = true,
-                        BackoffType = DelayBackoffType.Exponential,
+                        MaxRetryAttempts = maxRetryCount,
+                        DelayGenerator = static args =>
+                        {
+                            var delay = args.AttemptNumber switch
+                            {
+                                0 => TimeSpan.FromSeconds(1),
+                                1 => TimeSpan.FromSeconds(2),
+                                _ => TimeSpan.FromSeconds(3)
+                            };
+
+                            // This example uses a synchronous delay generator,
+                            // but the API also supports asynchronous implementations.
+                            return new ValueTask<TimeSpan?>(delay);
+                        },
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber+1;
+                            retryCount = args.AttemptNumber+1;
                             return default;
                         }
                     }));
 
+            var watcher = new WatchingRequestHandler();
+
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
 
-                options => options
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-                    .WithRequestTimeout(TimeSpan.FromSeconds(3)));
+                    .WithRequestTimeout(TimeSpan.FromSeconds(3))
+                    .AddDelegatingHandler(watcher));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1498,14 +1667,15 @@ namespace Apizr.Tests
             ex.WithInnerException<TimeoutRejectedException>();
 
             // attempts should be equal to 2 as request timed out before the 3rd retry
-            attempts.Should().Be(3);
+            retryCount.Should().Be(2);
+            watcher.Attempts.Should().Be(4);
         }
 
         [Fact]
         public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_2_On_3_Times()
         {
-            var maxRetryAttempts = 3;
-            var attempts = 0;
+            var maxRetryCount = 3;
+            var retryCount = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1520,23 +1690,39 @@ namespace Apizr.Tests
                             .HandleResult(response =>
                                 response.StatusCode is >= HttpStatusCode.InternalServerError
                                     or HttpStatusCode.RequestTimeout),
-                        Delay = TimeSpan.FromSeconds(1),
-                        MaxRetryAttempts = maxRetryAttempts,
-                        UseJitter = true,
-                        BackoffType = DelayBackoffType.Exponential,
+                        MaxRetryAttempts = maxRetryCount,
+                        DelayGenerator = static args =>
+                        {
+                            var delay = args.AttemptNumber switch
+                            {
+                                0 => TimeSpan.FromSeconds(1),
+                                1 => TimeSpan.FromSeconds(2),
+                                _ => TimeSpan.FromSeconds(3)
+                            };
+
+                            // This example uses a synchronous delay generator,
+                            // but the API also supports asynchronous implementations.
+                            return new ValueTask<TimeSpan?>(delay);
+                        },
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber+1;
+                            retryCount = args.AttemptNumber+1;
                             return default;
                         }
                     }));
 
+            var watcher = new WatchingRequestHandler();
+
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
 
-                options => options
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-                    .WithOperationTimeout(TimeSpan.FromSeconds(10)));
+                    .WithOperationTimeout(TimeSpan.FromSeconds(10))
+                    .AddDelegatingHandler(watcher));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1548,14 +1734,15 @@ namespace Apizr.Tests
             ex.WithInnerException<TimeoutRejectedException>();
 
             // attempts should be equal to 2 as request timed out before the 3rd retry
-            attempts.Should().Be(2);
+            retryCount.Should().Be(2);
+            watcher.Attempts.Should().Be(3);
         }
 
         [Fact]
         public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Policy_Then_It_Should_Retry_1_On_3_Times()
         {
-            var maxRetryAttempts = 3;
-            var attempts = 0;
+            var maxRetryCount = 3;
+            var retryCount = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1570,13 +1757,23 @@ namespace Apizr.Tests
                             .HandleResult(response =>
                                 response.StatusCode is >= HttpStatusCode.InternalServerError
                                     or HttpStatusCode.RequestTimeout),
-                        Delay = TimeSpan.FromSeconds(1),
-                        MaxRetryAttempts = maxRetryAttempts,
-                        UseJitter = true,
-                        BackoffType = DelayBackoffType.Exponential,
+                        MaxRetryAttempts = maxRetryCount,
+                        DelayGenerator = static args =>
+                        {
+                            var delay = args.AttemptNumber switch
+                            {
+                                0 => TimeSpan.FromSeconds(1),
+                                1 => TimeSpan.FromSeconds(2),
+                                _ => TimeSpan.FromSeconds(3)
+                            };
+
+                            // This example uses a synchronous delay generator,
+                            // but the API also supports asynchronous implementations.
+                            return new ValueTask<TimeSpan?>(delay);
+                        },
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber+1;
+                            retryCount = args.AttemptNumber + 1;
                             return default;
                         }
                     }));
@@ -1584,12 +1781,18 @@ namespace Apizr.Tests
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(5));
 
+            var watcher = new WatchingRequestHandler();
+
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
 
-                options => options
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-                    .WithOperationTimeout(TimeSpan.FromSeconds(10)));
+                    .WithOperationTimeout(TimeSpan.FromSeconds(10))
+                    .AddDelegatingHandler(watcher));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1602,14 +1805,15 @@ namespace Apizr.Tests
             ex.WithInnerException<TaskCanceledException>();
 
             // attempts should be equal to 1 as request timed out before other retries
-            attempts.Should().Be(1);
+            retryCount.Should().Be(1);
+            watcher.Attempts.Should().Be(2);
         }
 
         [Fact]
         public async Task Request_Returning_Timeout_Should_Time_Out_Before_Polly_Could_Complete_All_Retries()
         {
             var maxRetryAttempts = 3;
-            var attempts = 0;
+            var retryCount = 0;
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1623,23 +1827,38 @@ namespace Apizr.Tests
                             .HandleResult(response =>
                                 response.StatusCode is >= HttpStatusCode.InternalServerError
                                     or HttpStatusCode.RequestTimeout),
-                        Delay = TimeSpan.FromSeconds(1),
                         MaxRetryAttempts = maxRetryAttempts,
-                        UseJitter = true,
-                        BackoffType = DelayBackoffType.Exponential,
+                        DelayGenerator = static args =>
+                        {
+                            var delay = args.AttemptNumber switch
+                            {
+                                0 => TimeSpan.FromSeconds(1),
+                                1 => TimeSpan.FromSeconds(2),
+                                _ => TimeSpan.FromSeconds(3)
+                            };
+
+                            // This example uses a synchronous delay generator,
+                            // but the API also supports asynchronous implementations.
+                            return new ValueTask<TimeSpan?>(delay);
+                        },
                         OnRetry = args =>
                         {
-                            attempts = args.AttemptNumber+1;
+                            retryCount = args.AttemptNumber + 1;
                             return default;
                         }
                     }));
 
+            var testHandler = new TestRequestHandler();
+
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
 
-                options => options
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-                    .AddDelegatingHandler(new TestRequestHandler())
+                    .AddDelegatingHandler(testHandler)
                     .WithOperationTimeout(TimeSpan.FromSeconds(3)));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
@@ -1652,7 +1871,8 @@ namespace Apizr.Tests
             ex.WithInnerException<TimeoutRejectedException>();
 
             // attempts should be equal to 2 as request timed out before the 3rd retry
-            attempts.Should().Be(2);
+            retryCount.Should().Be(2);
+            testHandler.Attempts.Should().Be(2);
         }
     }
 }

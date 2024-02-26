@@ -673,7 +673,9 @@ namespace Apizr.Tests
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
-                    .WithLogging());
+                    .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false)));
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             ResiliencePropertyKey<int> testKey = new("TestKey1");
@@ -710,6 +712,8 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
                     .WithResilienceProperty(testKey1, () => "testValue1")
                     .WithResilienceProperty(testKey2, () => "testValue2.1"));
 
@@ -744,7 +748,9 @@ namespace Apizr.Tests
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
-                    .WithLogging());
+                    .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false)));
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies));
@@ -820,7 +826,9 @@ namespace Apizr.Tests
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
-                    .WithLogging());
+                    .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false)));
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
             var cts = new CancellationTokenSource(3000);
@@ -854,6 +862,8 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
                     .WithPriority());
             
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
@@ -1095,7 +1105,7 @@ namespace Apizr.Tests
             regCustomUploadTypedManager.Should().NotBeNull(); // Custom
 
             // Shortcut
-            var regShortcutResult = await apizrRegistry.UploadAsync<IUploadApi, HttpResponseMessage>(FileHelper.GetTestFileStreamPart("small"));
+            var regShortcutResult = await apizrRegistry.UploadAsync<IUploadApi>(FileHelper.GetTestFileStreamPart("small"));
             regShortcutResult.Should().NotBeNull();
             regShortcutResult.StatusCode.Should().Be(HttpStatusCode.OK);
 
@@ -1269,6 +1279,8 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
                     .WithHeaders("testKey2: testValue2.2", "testKey3: testValue3.1"));
 
             // Shortcut
@@ -1298,6 +1310,8 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
                     .WithHeaders("testKey3: testValue3"));
 
             apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var reqResManager).Should().BeTrue(); // Custom
@@ -1320,7 +1334,9 @@ namespace Apizr.Tests
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
-                    .WithLogging());
+                    .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false)));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1653,6 +1669,8 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                     .WithRequestTimeout(TimeSpan.FromSeconds(3))
                     .AddDelegatingHandler(watcher));
@@ -1720,6 +1738,8 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                     .WithOperationTimeout(TimeSpan.FromSeconds(10))
                     .AddDelegatingHandler(watcher));
@@ -1790,6 +1810,8 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                     .WithOperationTimeout(TimeSpan.FromSeconds(10))
                     .AddDelegatingHandler(watcher));

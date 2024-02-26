@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,12 +8,13 @@ using Apizr.Caching.Attributes;
 using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://httpbin.org", false), Log(HttpMessageParts.None), Headers("testKey1: testValue1")]
+    [WebApi("https://httpbin.org", false), Log(HttpMessageParts.None), Headers("testKey1: testValue1"), ResiliencePipeline("TransientHttpError")]
     public interface IHttpBinService
     {
         [Get("/bearer")]
@@ -27,5 +29,11 @@ namespace Apizr.Tests.Apis
         [Multipart]
         [Post("/post")]
         Task UploadAsync([AliasAs("file")] StreamPart streamPart, [RequestOptions] IApizrRequestOptions options);
+
+        [Get("/status/{statusCode}")]
+        Task<string> GetStatusAsync(int statusCode);
+
+        [Get("/status/{statusCode}")]
+        Task<string> GetStatusAsync(int statusCode, [RequestOptions] IApizrRequestOptions options);
     }
 }

@@ -44,7 +44,7 @@ using System;
 using Apizr.Resiliencing;
 using Apizr.Resiliencing.Attributes;
 using Polly;
-using Polly.Extensions.Http;
+using Polly.Retry;
 using Polly.Registry;
 {% endif -%}
 {% if WithLogs -%}
@@ -90,7 +90,13 @@ namespace {{ NameSpace }}
 {%      if WithRetry -%}
         // Define your ResiliencePipeline if not done yet somewhere else
         public static ResiliencePipelineBuilder<HttpResponseMessage> ApizrResiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
-            .ConfigureTelemetry(lazyLoggerFactory.Value)
+            .ConfigureTelemetry(LoggerFactory.Create(logging =>
+                    {
+                        // Add here whatever logger of your choice, like:
+                        //logging.AddConsole();
+                        //logging.AddDebug();
+                        //logging.SetMinimumLevel(LogLevel.Trace);
+                    })
             .AddRetry(
                 new RetryStrategyOptions<HttpResponseMessage>
                 {

@@ -1625,6 +1625,7 @@ namespace Apizr.Tests
         {
             var maxRetryCount = 3;
             var retryCount = 0;
+
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1693,6 +1694,7 @@ namespace Apizr.Tests
         {
             var maxRetryCount = 3;
             var retryCount = 0;
+
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1762,6 +1764,7 @@ namespace Apizr.Tests
         {
             var maxRetryCount = 3;
             var retryCount = 0;
+
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1833,8 +1836,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Request_Returning_Timeout_Should_Time_Out_Before_Polly_Could_Complete_All_Retries()
         {
-            var maxRetryAttempts = 3;
+            var maxRetryCount = 3;
             var retryCount = 0;
+
             var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
             resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
                 builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -1848,7 +1852,7 @@ namespace Apizr.Tests
                             .HandleResult(response =>
                                 response.StatusCode is >= HttpStatusCode.InternalServerError
                                     or HttpStatusCode.RequestTimeout),
-                        MaxRetryAttempts = maxRetryAttempts,
+                        MaxRetryAttempts = maxRetryCount,
                         DelayGenerator = static args =>
                         {
                             var delay = args.AttemptNumber switch

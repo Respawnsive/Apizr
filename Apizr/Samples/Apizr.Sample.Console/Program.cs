@@ -398,8 +398,9 @@ namespace Apizr.Sample.Console
 
                         // This is just to let you know what's registered from/for Apizr and ready to use
                         foreach (var service in services.Where(d =>
-                            (d.ServiceType != null) ||
-                            (d.ImplementationType != null)))
+                                     d.ServiceKey == null &&
+                            ((d.ServiceType != null) ||
+                            (d.ImplementationType != null))))
                         {
                             System.Console.WriteLine(
                                 $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");

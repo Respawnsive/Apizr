@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Extending.Configuring.Manager;
 using Apizr.Extending.Configuring.Proper;
@@ -279,6 +280,8 @@ public static class FileTransferExtendedOptionsBuilderExtensions
                     optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody));
 
                 internalBuilder.AddAliasingManagerFor<IApizrUploadManager<IUploadApi>, IApizrUploadManager>();
+
+                internalBuilder.AddAliasingManagerFor<IApizrUploadManager<IUploadApi, HttpResponseMessage>, IApizrUploadManager>();
             }
             else
                 internalBuilder
@@ -364,6 +367,8 @@ public static class FileTransferExtendedOptionsBuilderExtensions
                     optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
                 internalBuilder.AddAliasingManagerFor<IApizrDownloadManager<IDownloadApi>, IApizrDownloadManager>();
+
+                internalBuilder.AddAliasingManagerFor<IApizrDownloadManager<IDownloadApi, IDictionary<string, object>>, IApizrDownloadManager>();
             }
             else
                 internalBuilder
@@ -448,6 +453,10 @@ public static class FileTransferExtendedOptionsBuilderExtensions
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody | HttpMessageParts.ResponseBody));
 
             internalBuilder.AddAliasingManagerFor<IApizrTransferManager<ITransferApi>, IApizrTransferManager>();
+
+            internalBuilder.AddAliasingManagerFor<IApizrTransferManager<ITransferApi, IDictionary<string, object>>, IApizrTransferManager>();
+
+            internalBuilder.AddAliasingManagerFor<IApizrTransferManager<ITransferApi, IDictionary<string, object>, HttpResponseMessage>, IApizrTransferManager>();
         }
 
         return builder;
@@ -488,6 +497,10 @@ public static class FileTransferExtendedOptionsBuilderExtensions
                                                           HttpMessageParts.ResponseBody));
 
                 internalBuilder.AddAliasingManagerFor<IApizrTransferManager<ITransferApi>, IApizrTransferManager>();
+
+                internalBuilder.AddAliasingManagerFor<IApizrTransferManager<ITransferApi, IDictionary<string, object>>, IApizrTransferManager>();
+
+                internalBuilder.AddAliasingManagerFor<IApizrTransferManager<ITransferApi, IDictionary<string, object>, HttpResponseMessage>, IApizrTransferManager>();
             }
             else
             {

@@ -8,6 +8,7 @@ items:
   - Apizr.Configuring.Request.ApizrRequestOptions.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Configuring.Request.ApizrRequestOptions.CancellationToken
   - Apizr.Configuring.Request.ApizrRequestOptions.ClearCache
+  - Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions
   langs:
   - csharp
   - vb
@@ -18,11 +19,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrRequestOptions
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -43,7 +44,7 @@ items:
   - Apizr.Configuring.Request.IApizrRequestOptionsBase
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   inheritedMembers:
-  - Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
+  - Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
@@ -80,11 +81,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -128,11 +129,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: CancellationToken
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -167,11 +168,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCache
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
-    startLine: 31
+    startLine: 32
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -186,6 +187,45 @@ items:
   overload: Apizr.Configuring.Request.ApizrRequestOptions.ClearCache*
   implements:
   - Apizr.Configuring.Request.IApizrRequestOptions.ClearCache
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions
+  commentId: P:Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions
+  id: ResilienceContextOptions
+  parent: Apizr.Configuring.Request.ApizrRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ResilienceContextOptions
+  nameWithType: ApizrRequestOptions.ResilienceContextOptions
+  fullName: Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ResilienceContextOptions
+    path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptions.cs
+    startLine: 35
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: "\nOptions set to resilience context\n"
+  example: []
+  syntax:
+    content: public IApizrResilienceContextOptions ResilienceContextOptions { get; }
+    parameters: []
+    return:
+      type: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
+    content.vb: Public ReadOnly Property ResilienceContextOptions As IApizrResilienceContextOptions
+  overload: Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions*
+  implements:
+  - Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
   modifiers.csharp:
   - public
   - get
@@ -235,12 +275,12 @@ references:
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-  commentId: P:Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+  commentId: P:Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
   parent: Apizr.Configuring.Request.ApizrRequestOptionsBase
-  name: Context
-  nameWithType: ApizrRequestOptionsBase.Context
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
+  name: ResilienceContext
+  nameWithType: ApizrRequestOptionsBase.ResilienceContext
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -948,3 +988,25 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions
+  name: ResilienceContextOptions
+  nameWithType: ApizrRequestOptions.ResilienceContextOptions
+  fullName: Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions
+- uid: Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
+  commentId: P:Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
+  parent: Apizr.Configuring.Request.IApizrRequestOptions
+  name: ResilienceContextOptions
+  nameWithType: IApizrRequestOptions.ResilienceContextOptions
+  fullName: Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
+- uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
+  commentId: T:Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
+  parent: Apizr.Configuring.Shared.Context
+  name: IApizrResilienceContextOptions
+  nameWithType: IApizrResilienceContextOptions
+  fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
+- uid: Apizr.Configuring.Shared.Context
+  commentId: N:Apizr.Configuring.Shared.Context
+  name: Apizr.Configuring.Shared.Context
+  nameWithType: Apizr.Configuring.Shared.Context
+  fullName: Apizr.Configuring.Shared.Context

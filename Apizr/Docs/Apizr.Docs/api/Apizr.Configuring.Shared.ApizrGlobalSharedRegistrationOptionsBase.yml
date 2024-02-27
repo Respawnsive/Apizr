@@ -9,7 +9,6 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BasePath
   - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseUri
-  - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
   - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   langs:
   - csharp
@@ -21,11 +20,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrGlobalSharedRegistrationOptionsBase
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 13
+    startLine: 10
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -86,11 +85,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 16
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -119,11 +118,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUri
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 29
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -160,11 +159,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddress
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 32
+    startLine: 26
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -201,11 +200,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePath
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 35
+    startLine: 29
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -228,45 +227,6 @@ items:
   - Public
   - Get
   - Protected Set
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  id: ContextFactory
-  parent: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
-  langs:
-  - csharp
-  - vb
-  name: ContextFactory
-  nameWithType: ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  type: Property
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ContextFactory
-    path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 41
-  assemblies:
-  - Apizr
-  namespace: Apizr.Configuring.Shared
-  summary: "\nThe Polly Context to pass through it all\n"
-  example: []
-  syntax:
-    content: public Func<Context> ContextFactory { get; }
-    parameters: []
-    return:
-      type: System.Func{Polly.Context}
-    content.vb: Public ReadOnly Property ContextFactory As Func(Of Context)
-  overload: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory*
-  implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   id: PrimaryHandlerFactory
@@ -281,11 +241,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: PrimaryHandlerFactory
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-    startLine: 50
+    startLine: 32
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -728,100 +688,6 @@ references:
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory*
-  commentId: Overload:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  name: ContextFactory
-  nameWithType: ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
-  name: ContextFactory
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-- uid: System.Func{Polly.Context}
-  commentId: T:System.Func{Polly.Context}
-  parent: System
-  definition: System.Func`1
-  name: Func<Context>
-  nameWithType: Func<Context>
-  fullName: System.Func<Polly.Context>
-  nameWithType.vb: Func(Of Context)
-  fullName.vb: System.Func(Of Polly.Context)
-  name.vb: Func(Of Context)
-  spec.csharp:
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Func`1
-  commentId: T:System.Func`1
-  isExternal: true
-  name: Func<TResult>
-  nameWithType: Func<TResult>
-  fullName: System.Func<TResult>
-  nameWithType.vb: Func(Of TResult)
-  fullName.vb: System.Func(Of TResult)
-  name.vb: Func(Of TResult)
-  spec.csharp:
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory*
   commentId: Overload:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   name: PrimaryHandlerFactory

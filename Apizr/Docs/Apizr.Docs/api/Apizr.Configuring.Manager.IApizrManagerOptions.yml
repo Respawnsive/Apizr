@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/IApizrManagerOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrManagerOptions
     path: ../../Src/Apizr/Configuring/Manager/IApizrManagerOptions.cs
@@ -32,7 +32,7 @@ items:
           Inherits IApizrManagerOptionsBase, IApizrCommonOptions, IApizrProperOptions
   inheritedMembers:
   - Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory
-  - Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
+  - Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.CacheHandlerFactory
@@ -40,7 +40,7 @@ items:
   - Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
   - Apizr.Configuring.Proper.IApizrProperOptions.LoggerFactory
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseUriFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseAddressFactory
@@ -58,7 +58,6 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
@@ -87,12 +86,12 @@ references:
   name: LoggerFactoryFactory
   nameWithType: IApizrCommonOptions.LoggerFactoryFactory
   fullName: Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory
-- uid: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-  commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
+- uid: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
   parent: Apizr.Configuring.Common.IApizrCommonOptions
-  name: PolicyRegistryFactory
-  nameWithType: IApizrCommonOptions.PolicyRegistryFactory
-  fullName: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
+  name: ResiliencePipelineRegistryFactory
+  nameWithType: IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  fullName: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
   parent: Apizr.Configuring.Common.IApizrCommonOptions
@@ -135,12 +134,12 @@ references:
   name: WebApiType
   nameWithType: IApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
-  name: PolicyRegistryKeys
-  nameWithType: IApizrProperOptionsBase.PolicyRegistryKeys
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+  name: ResiliencePipelineRegistryKeys
+  nameWithType: IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
@@ -243,12 +242,6 @@ references:
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
-  name: ContextFactory
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase

@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Registry/IApizrRegistryBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrRegistryBuilder
     path: ../../Src/Apizr/Configuring/Registry/IApizrRegistryBuilder.cs
@@ -31,8 +31,8 @@ items:
       Public Interface IApizrRegistryBuilder
           Inherits IApizrRegistryBuilder(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder)
   inheritedMembers:
-  - Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},{TApizrManager}},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
-  - Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddManagerFor``2(System.Func{Apizr.ILazyFactory{{TWebApi}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{{TWebApi}},{TApizrManager}},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  - Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},{TApizrManager}},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  - Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddManagerFor``2(System.Func{Apizr.ILazyFactory{{TWebApi}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{{TWebApi}},{TApizrManager}},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
   - Apizr.Configuring.Registry.IApizrRegistryBuilderBase{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.ApizrRegistry
   - Apizr.Configuring.Registry.IApizrRegistryBuilderBase{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddGroup(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})
   - Apizr.Configuring.Registry.IApizrRegistryBuilderBase{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddCrudManagerFor``1(System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
@@ -66,18 +66,18 @@ references:
   name: Apizr.Configuring.Registry
   nameWithType: Apizr.Configuring.Registry
   fullName: Apizr.Configuring.Registry
-- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},{TApizrManager}},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
-  commentId: M:Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{{T},{TKey},{TReadAllResult},{TReadAllParams}}},{TApizrManager}},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
   parent: Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
-  definition: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
-  name: AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<IApizrProperOptionsBuilder>)
-  nameWithType: IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<IApizrProperOptionsBuilder>)
-  fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(System.Func<Apizr.ILazyFactory<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
-  nameWithType.vb: IApizrRegistryBuilder(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of IApizrProperOptionsBuilder))
-  fullName.vb: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
-  name.vb: AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of IApizrProperOptionsBuilder))
+  definition: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
+  name: AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<String>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<IApizrProperOptionsBuilder>)
+  nameWithType: IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<String>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(System.Func<Apizr.ILazyFactory<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.ResiliencePipelineRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  nameWithType.vb: IApizrRegistryBuilder(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of ResiliencePipelineRegistry(Of String)), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of IApizrProperOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.ResiliencePipelineRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of ResiliencePipelineRegistry(Of String)), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of IApizrProperOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
     name: AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>
     nameWithType: IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>
     fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>
@@ -164,10 +164,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -258,7 +258,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
     name: AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)
     nameWithType: IApizrRegistryBuilder(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)
     fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)
@@ -345,10 +345,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -438,18 +438,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddManagerFor``2(System.Func{Apizr.ILazyFactory{{TWebApi}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{{TWebApi}},{TApizrManager}},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
-  commentId: M:Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddManagerFor``2(System.Func{Apizr.ILazyFactory{{TWebApi}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{{TWebApi}},{TApizrManager}},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
+  commentId: M:Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Proper.IApizrProperOptionsBuilder})
   parent: Apizr.Configuring.Registry.IApizrRegistryBuilder{Apizr.Configuring.Registry.IApizrRegistry,Apizr.Configuring.Registry.IApizrRegistryBuilder,Apizr.Configuring.Proper.IApizrProperOptionsBuilder,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
-  definition: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
-  name: AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<TWebApi>, TApizrManager>, Action<IApizrProperOptionsBuilder>)
-  nameWithType: IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<TWebApi>, TApizrManager>, Action<IApizrProperOptionsBuilder>)
-  fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>(System.Func<Apizr.ILazyFactory<TWebApi>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>, TApizrManager>, System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
-  nameWithType.vb: IApizrRegistryBuilder(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of IApizrProperOptionsBuilder))
-  fullName.vb: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of TWebApi), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi), TApizrManager), System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
-  name.vb: AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of IApizrProperOptionsBuilder))
+  definition: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
+  name: AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<String>>, IApizrManagerOptions<TWebApi>, TApizrManager>, Action<IApizrProperOptionsBuilder>)
+  nameWithType: IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<String>>, IApizrManagerOptions<TWebApi>, TApizrManager>, Action<IApizrProperOptionsBuilder>)
+  fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>(System.Func<Apizr.ILazyFactory<TWebApi>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.ResiliencePipelineRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>, TApizrManager>, System.Action<Apizr.Configuring.Proper.IApizrProperOptionsBuilder>)
+  nameWithType.vb: IApizrRegistryBuilder(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of ResiliencePipelineRegistry(Of String)), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of IApizrProperOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of TWebApi), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.ResiliencePipelineRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi), TApizrManager), System.Action(Of Apizr.Configuring.Proper.IApizrProperOptionsBuilder))
+  name.vb: AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of ResiliencePipelineRegistry(Of String)), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of IApizrProperOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
     name: AddManagerFor<TWebApi, TApizrManager>
     nameWithType: IApizrRegistryBuilder<IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>
     fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>
@@ -508,10 +508,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -574,7 +574,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
     name: AddManagerFor(Of TWebApi, TApizrManager)
     nameWithType: IApizrRegistryBuilder(Of IApizrRegistry, IApizrRegistryBuilder, IApizrProperOptionsBuilder, IApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)
     fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of Apizr.Configuring.Registry.IApizrRegistry, Apizr.Configuring.Registry.IApizrRegistryBuilder, Apizr.Configuring.Proper.IApizrProperOptionsBuilder, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)
@@ -633,10 +633,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1921,17 +1921,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
-  commentId: M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
+  commentId: M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
   isExternal: true
-  name: AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<TApizrProperOptionsBuilder>)
-  nameWithType: IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<TApizrProperOptionsBuilder>)
-  fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(System.Func<Apizr.ILazyFactory<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, System.Action<TApizrProperOptionsBuilder>)
-  nameWithType.vb: IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of TApizrProperOptionsBuilder))
-  fullName.vb: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), System.Action(Of TApizrProperOptionsBuilder))
-  name.vb: AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of TApizrProperOptionsBuilder))
+  name: AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<String>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<TApizrProperOptionsBuilder>)
+  nameWithType: IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<String>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, Action<TApizrProperOptionsBuilder>)
+  fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(System.Func<Apizr.ILazyFactory<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.ResiliencePipelineRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, TApizrManager>, System.Action<TApizrProperOptionsBuilder>)
+  nameWithType.vb: IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of ResiliencePipelineRegistry(Of String)), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of TApizrProperOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.ResiliencePipelineRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), System.Action(Of TApizrProperOptionsBuilder))
+  name.vb: AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Func(Of ILazyFactory(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of ResiliencePipelineRegistry(Of String)), IApizrManagerOptions(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)), TApizrManager), Action(Of TApizrProperOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
     name: AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>
     nameWithType: IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>
     fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>
@@ -2018,10 +2018,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -2111,7 +2111,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{`2})
     name: AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)
     nameWithType: IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)
     fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)
@@ -2198,10 +2198,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -2372,17 +2372,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
-  commentId: M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
+- uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
+  commentId: M:Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
   isExternal: true
-  name: AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<TWebApi>, TApizrManager>, Action<TApizrProperOptionsBuilder>)
-  nameWithType: IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<String>>, IApizrManagerOptions<TWebApi>, TApizrManager>, Action<TApizrProperOptionsBuilder>)
-  fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>(System.Func<Apizr.ILazyFactory<TWebApi>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>, TApizrManager>, System.Action<TApizrProperOptionsBuilder>)
-  nameWithType.vb: IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of TApizrProperOptionsBuilder))
-  fullName.vb: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of TWebApi), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi), TApizrManager), System.Action(Of TApizrProperOptionsBuilder))
-  name.vb: AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of IReadOnlyPolicyRegistry(Of String)), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of TApizrProperOptionsBuilder))
+  name: AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<String>>, IApizrManagerOptions<TWebApi>, TApizrManager>, Action<TApizrProperOptionsBuilder>)
+  nameWithType: IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>(Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<String>>, IApizrManagerOptions<TWebApi>, TApizrManager>, Action<TApizrProperOptionsBuilder>)
+  fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>(System.Func<Apizr.ILazyFactory<TWebApi>, Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory<Polly.Registry.ResiliencePipelineRegistry<System.String>>, Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>, TApizrManager>, System.Action<TApizrProperOptionsBuilder>)
+  nameWithType.vb: IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of ResiliencePipelineRegistry(Of String)), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of TApizrProperOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)(System.Func(Of Apizr.ILazyFactory(Of TWebApi), Apizr.Connecting.IConnectivityHandler, Apizr.Caching.ICacheHandler, Apizr.Mapping.IMappingHandler, Apizr.ILazyFactory(Of Polly.Registry.ResiliencePipelineRegistry(Of System.String)), Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi), TApizrManager), System.Action(Of TApizrProperOptionsBuilder))
+  name.vb: AddManagerFor(Of TWebApi, TApizrManager)(Func(Of ILazyFactory(Of TWebApi), IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory(Of ResiliencePipelineRegistry(Of String)), IApizrManagerOptions(Of TWebApi), TApizrManager), Action(Of TApizrProperOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
     name: AddManagerFor<TWebApi, TApizrManager>
     nameWithType: IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>
     fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder<TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder>.AddManagerFor<TWebApi, TApizrManager>
@@ -2441,10 +2441,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -2506,7 +2506,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.IReadOnlyPolicyRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
+  - uid: Apizr.Configuring.Registry.IApizrRegistryBuilder`4.AddManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{`2})
     name: AddManagerFor(Of TWebApi, TApizrManager)
     nameWithType: IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)
     fullName: Apizr.Configuring.Registry.IApizrRegistryBuilder(Of TApizrRegistry, TApizrRegistryBuilder, TApizrProperOptionsBuilder, TApizrCommonOptionsBuilder).AddManagerFor(Of TWebApi, TApizrManager)
@@ -2565,10 +2565,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '

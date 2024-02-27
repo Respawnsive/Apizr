@@ -6,7 +6,7 @@ items:
   parent: Apizr.Configuring.Request
   children:
   - Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
-  - Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
+  - Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
   langs:
   - csharp
   - vb
@@ -17,11 +17,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrRequestOptionsBase
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-    startLine: 11
+    startLine: 10
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -80,11 +80,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-    startLine: 14
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -113,39 +113,39 @@ items:
   - Protected
   fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBase.ApizrRequestOptionsBase(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Nullable(Of Apizr.Logging.HttpTracerMode), System.Nullable(Of Apizr.Logging.HttpMessageParts), System.Nullable(Of System.TimeSpan), System.Nullable(Of System.TimeSpan), Microsoft.Extensions.Logging.LogLevel())
   name.vb: ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), Nullable(Of TimeSpan), LogLevel())
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-  commentId: P:Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-  id: Context
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+  commentId: P:Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+  id: ResilienceContext
   parent: Apizr.Configuring.Request.ApizrRequestOptionsBase
   langs:
   - csharp
   - vb
-  name: Context
-  nameWithType: ApizrRequestOptionsBase.Context
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
+  name: ResilienceContext
+  nameWithType: ApizrRequestOptionsBase.ResilienceContext
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
-    id: Context
+    id: ResilienceContext
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-    startLine: 37
+    startLine: 33
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
-  summary: "\nThe Polly Context to pass through it all\n"
+  summary: "\nThe Polly resilience context to pass through it all\n"
   example: []
   syntax:
-    content: public Context Context { get; }
+    content: public ResilienceContext ResilienceContext { get; }
     parameters: []
     return:
-      type: Polly.Context
-    content.vb: Public ReadOnly Property Context As Context
-  overload: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context*
+      type: Polly.ResilienceContext
+    content.vb: Public ReadOnly Property ResilienceContext As ResilienceContext
+  overload: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext*
   implements:
-  - Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
+  - Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   modifiers.csharp:
   - public
   - get
@@ -731,24 +731,24 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context*
-  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-  name: Context
-  nameWithType: ApizrRequestOptionsBase.Context
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
-  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+  name: ResilienceContext
+  nameWithType: ApizrRequestOptionsBase.ResilienceContext
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
+  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   parent: Apizr.Configuring.Request.IApizrRequestOptionsBase
-  name: Context
-  nameWithType: IApizrRequestOptionsBase.Context
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
-- uid: Polly.Context
-  commentId: T:Polly.Context
+  name: ResilienceContext
+  nameWithType: IApizrRequestOptionsBase.ResilienceContext
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
+- uid: Polly.ResilienceContext
+  commentId: T:Polly.ResilienceContext
   parent: Polly
   isExternal: true
-  name: Context
-  nameWithType: Context
-  fullName: Polly.Context
+  name: ResilienceContext
+  nameWithType: ResilienceContext
+  fullName: Polly.ResilienceContext
 - uid: Polly
   commentId: N:Polly
   isExternal: true

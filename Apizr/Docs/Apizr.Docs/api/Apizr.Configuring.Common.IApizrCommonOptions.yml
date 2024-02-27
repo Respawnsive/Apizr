@@ -9,8 +9,8 @@ items:
   - Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory
-  - Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
+  - Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
   langs:
   - csharp
   - vb
@@ -21,7 +21,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrCommonOptions
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
@@ -54,7 +54,6 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
@@ -85,7 +84,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactoryFactory
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
@@ -105,37 +104,37 @@ items:
   modifiers.csharp:
   - get
   - set
-- uid: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-  commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-  id: PolicyRegistryFactory
+- uid: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  id: ResiliencePipelineRegistryFactory
   parent: Apizr.Configuring.Common.IApizrCommonOptions
   langs:
   - csharp
   - vb
-  name: PolicyRegistryFactory
-  nameWithType: IApizrCommonOptions.PolicyRegistryFactory
-  fullName: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
+  name: ResiliencePipelineRegistryFactory
+  nameWithType: IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  fullName: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
-    id: PolicyRegistryFactory
+    id: ResiliencePipelineRegistryFactory
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
     startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nPolicy registry factory\n"
+  summary: "\nResilience pipeline registry factory\n"
   example: []
   syntax:
-    content: Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }
+    content: Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; }
     parameters: []
     return:
-      type: System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
-    content.vb: ReadOnly Property PolicyRegistryFactory As Func(Of IReadOnlyPolicyRegistry(Of String))
-  overload: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory*
+      type: System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}}
+    content.vb: ReadOnly Property ResiliencePipelineRegistryFactory As Func(Of ResiliencePipelineRegistry(Of String))
+  overload: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -154,7 +153,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettingsFactory
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
@@ -189,7 +188,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
@@ -224,7 +223,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
@@ -259,7 +258,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
@@ -388,12 +387,6 @@ references:
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
-  name: ContextFactory
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
@@ -577,21 +570,21 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory*
-  commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-  name: PolicyRegistryFactory
-  nameWithType: IApizrCommonOptions.PolicyRegistryFactory
-  fullName: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-- uid: System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
-  commentId: T:System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
+- uid: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory*
+  commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  name: ResiliencePipelineRegistryFactory
+  nameWithType: IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  fullName: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+- uid: System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}}
+  commentId: T:System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}}
   parent: System
   definition: System.Func`1
-  name: Func<IReadOnlyPolicyRegistry<String>>
-  nameWithType: Func<IReadOnlyPolicyRegistry<String>>
-  fullName: System.Func<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>
-  nameWithType.vb: Func(Of IReadOnlyPolicyRegistry(Of String))
-  fullName.vb: System.Func(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String))
-  name.vb: Func(Of IReadOnlyPolicyRegistry(Of String))
+  name: Func<ResiliencePipelineRegistry<String>>
+  nameWithType: Func<ResiliencePipelineRegistry<String>>
+  fullName: System.Func<Polly.Registry.ResiliencePipelineRegistry<System.String>>
+  nameWithType.vb: Func(Of ResiliencePipelineRegistry(Of String))
+  fullName.vb: System.Func(Of Polly.Registry.ResiliencePipelineRegistry(Of System.String))
+  name.vb: Func(Of ResiliencePipelineRegistry(Of String))
   spec.csharp:
   - uid: System.Func`1
     name: Func
@@ -601,10 +594,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -629,10 +622,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '

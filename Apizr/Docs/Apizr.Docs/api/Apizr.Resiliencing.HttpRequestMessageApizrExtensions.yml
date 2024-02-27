@@ -1,0 +1,684 @@
+### YamlMime:ManagedReference
+items:
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions
+  commentId: T:Apizr.Resiliencing.HttpRequestMessageApizrExtensions
+  id: HttpRequestMessageApizrExtensions
+  parent: Apizr.Resiliencing
+  children:
+  - Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrRequestOptions(System.Net.Http.HttpRequestMessage)
+  - Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext(System.Net.Http.HttpRequestMessage)
+  - Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  - Apizr.Resiliencing.HttpRequestMessageApizrExtensions.SetApizrResilienceContext(System.Net.Http.HttpRequestMessage,Polly.ResilienceContext)
+  - Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions(System.Net.Http.HttpRequestMessage,Apizr.Configuring.Request.IApizrRequestOptions@)
+  langs:
+  - csharp
+  - vb
+  name: HttpRequestMessageApizrExtensions
+  nameWithType: HttpRequestMessageApizrExtensions
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions
+  type: Class
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HttpRequestMessageApizrExtensions
+    path: ../../Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+    startLine: 15
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: "\nExtension methods for <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref> Polly integration.\n"
+  example: []
+  syntax:
+    content: public static class HttpRequestMessageApizrExtensions
+    content.vb: Public Module HttpRequestMessageApizrExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  commentId: M:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  id: GetOrBuildApizrResilienceContext(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  isExtensionMethod: true
+  parent: Apizr.Resiliencing.HttpRequestMessageApizrExtensions
+  langs:
+  - csharp
+  - vb
+  name: GetOrBuildApizrResilienceContext(HttpRequestMessage, CancellationToken)
+  nameWithType: HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext(HttpRequestMessage, CancellationToken)
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: GetOrBuildApizrResilienceContext
+    path: ../../Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+    startLine: 28
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: "\nGets the <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> associated with the provided <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThe <xref href=\"Apizr.Resiliencing.ResilienceHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref> will attach a context to the <xref href=\"System.Net.Http.HttpResponseMessage\" data-throw-if-not-resolved=\"false\"></xref> prior\nto executing a <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>, if one does not already exist. The <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> will be provided\nto the resilience pipeline for use inside the <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> and in other message handlers.\n"
+  example: []
+  syntax:
+    content: public static ResilienceContext GetOrBuildApizrResilienceContext(this HttpRequestMessage request, CancellationToken cancellationToken)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+      description: The <xref href="System.Net.Http.HttpRequestMessage" data-throw-if-not-resolved="false"></xref>.
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: A cancellation token
+    return:
+      type: Polly.ResilienceContext
+      description: The <xref href="Polly.ResilienceContext" data-throw-if-not-resolved="false"></xref> if set, otherwise <code>null</code>.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function GetOrBuildApizrResilienceContext(request As HttpRequestMessage, cancellationToken As CancellationToken) As ResilienceContext
+  overload: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext(System.Net.Http.HttpRequestMessage)
+  commentId: M:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext(System.Net.Http.HttpRequestMessage)
+  id: GetApizrResilienceContext(System.Net.Http.HttpRequestMessage)
+  isExtensionMethod: true
+  parent: Apizr.Resiliencing.HttpRequestMessageApizrExtensions
+  langs:
+  - csharp
+  - vb
+  name: GetApizrResilienceContext(HttpRequestMessage)
+  nameWithType: HttpRequestMessageApizrExtensions.GetApizrResilienceContext(HttpRequestMessage)
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext(System.Net.Http.HttpRequestMessage)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: GetApizrResilienceContext
+    path: ../../Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+    startLine: 63
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: "\nGets the <see cref=\"!:Context\"></see> associated with the provided <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThe <xref href=\"Apizr.Resiliencing.ResilienceHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref> will attach a context to the <xref href=\"System.Net.Http.HttpResponseMessage\" data-throw-if-not-resolved=\"false\"></xref> prior\nto executing a <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>, if one does not already exist. The <see cref=\"!:Context\"></see> will be provided\nto the Resilience Pipeline for use inside the <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref> and in other message handlers.\n"
+  example: []
+  syntax:
+    content: public static ResilienceContext GetApizrResilienceContext(this HttpRequestMessage request)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+      description: The <xref href="System.Net.Http.HttpRequestMessage" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: Polly.ResilienceContext
+      description: The <see cref="!:Context"></see> if set, otherwise <code>null</code>.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function GetApizrResilienceContext(request As HttpRequestMessage) As ResilienceContext
+  overload: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrRequestOptions(System.Net.Http.HttpRequestMessage)
+  commentId: M:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrRequestOptions(System.Net.Http.HttpRequestMessage)
+  id: GetApizrRequestOptions(System.Net.Http.HttpRequestMessage)
+  isExtensionMethod: true
+  parent: Apizr.Resiliencing.HttpRequestMessageApizrExtensions
+  langs:
+  - csharp
+  - vb
+  name: GetApizrRequestOptions(HttpRequestMessage)
+  nameWithType: HttpRequestMessageApizrExtensions.GetApizrRequestOptions(HttpRequestMessage)
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrRequestOptions(System.Net.Http.HttpRequestMessage)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: GetApizrRequestOptions
+    path: ../../Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+    startLine: 94
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: "\nGets the <xref href=\"Apizr.Configuring.Request.IApizrRequestOptions\" data-throw-if-not-resolved=\"false\"></xref> associated with the provided <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static IApizrRequestOptions GetApizrRequestOptions(this HttpRequestMessage request)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+      description: The <xref href="System.Net.Http.HttpRequestMessage" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      description: The <xref href="Apizr.Configuring.Request.IApizrRequestOptions" data-throw-if-not-resolved="false"></xref> if set, otherwise <code>null</code>.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function GetApizrRequestOptions(request As HttpRequestMessage) As IApizrRequestOptions
+  overload: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrRequestOptions*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions(System.Net.Http.HttpRequestMessage,Apizr.Configuring.Request.IApizrRequestOptions@)
+  commentId: M:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions(System.Net.Http.HttpRequestMessage,Apizr.Configuring.Request.IApizrRequestOptions@)
+  id: TryGetApizrRequestOptions(System.Net.Http.HttpRequestMessage,Apizr.Configuring.Request.IApizrRequestOptions@)
+  isExtensionMethod: true
+  parent: Apizr.Resiliencing.HttpRequestMessageApizrExtensions
+  langs:
+  - csharp
+  - vb
+  name: TryGetApizrRequestOptions(HttpRequestMessage, out IApizrRequestOptions)
+  nameWithType: HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions(HttpRequestMessage, out IApizrRequestOptions)
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions(System.Net.Http.HttpRequestMessage, out Apizr.Configuring.Request.IApizrRequestOptions)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: TryGetApizrRequestOptions
+    path: ../../Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+    startLine: 119
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: "\nTry to get the <xref href=\"Apizr.Configuring.Request.IApizrRequestOptions\" data-throw-if-not-resolved=\"false\"></xref> associated with the provided <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static bool TryGetApizrRequestOptions(this HttpRequestMessage request, out IApizrRequestOptions options)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+      description: The <xref href="System.Net.Http.HttpRequestMessage" data-throw-if-not-resolved="false"></xref>.
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      description: The <xref href="Apizr.Configuring.Request.IApizrRequestOptions" data-throw-if-not-resolved="false"></xref> if set, otherwise <code>null</code>.
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function TryGetApizrRequestOptions(request As HttpRequestMessage, ByRef options As IApizrRequestOptions) As Boolean
+  overload: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions*
+  nameWithType.vb: HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions(HttpRequestMessage, ByRef IApizrRequestOptions)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions(System.Net.Http.HttpRequestMessage, ByRef Apizr.Configuring.Request.IApizrRequestOptions)
+  name.vb: TryGetApizrRequestOptions(HttpRequestMessage, ByRef IApizrRequestOptions)
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.SetApizrResilienceContext(System.Net.Http.HttpRequestMessage,Polly.ResilienceContext)
+  commentId: M:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.SetApizrResilienceContext(System.Net.Http.HttpRequestMessage,Polly.ResilienceContext)
+  id: SetApizrResilienceContext(System.Net.Http.HttpRequestMessage,Polly.ResilienceContext)
+  isExtensionMethod: true
+  parent: Apizr.Resiliencing.HttpRequestMessageApizrExtensions
+  langs:
+  - csharp
+  - vb
+  name: SetApizrResilienceContext(HttpRequestMessage, ResilienceContext)
+  nameWithType: HttpRequestMessageApizrExtensions.SetApizrResilienceContext(HttpRequestMessage, ResilienceContext)
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.SetApizrResilienceContext(System.Net.Http.HttpRequestMessage, Polly.ResilienceContext)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SetApizrResilienceContext
+    path: ../../Src/Apizr/Resiliencing/HttpRequestMessageExtensions.cs
+    startLine: 136
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: "\nSets the <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> associated with the provided <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThe <xref href=\"Apizr.Resiliencing.ResilienceHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref> will attach a context to the <xref href=\"System.Net.Http.HttpResponseMessage\" data-throw-if-not-resolved=\"false\"></xref> prior\nto executing a <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>, if one does not already exist. The <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> will be provided\nto the strategy for use inside the <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref> and in other message handlers.\n"
+  example: []
+  syntax:
+    content: public static void SetApizrResilienceContext(this HttpRequestMessage request, ResilienceContext context)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+      description: The <xref href="System.Net.Http.HttpRequestMessage" data-throw-if-not-resolved="false"></xref>.
+    - id: context
+      type: Polly.ResilienceContext
+      description: The <xref href="Polly.ResilienceContext" data-throw-if-not-resolved="false"></xref>, may be <code>null</code>.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub SetApizrResilienceContext(request As HttpRequestMessage, context As ResilienceContext)
+  overload: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.SetApizrResilienceContext*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: System.Net.Http.HttpRequestMessage
+  commentId: T:System.Net.Http.HttpRequestMessage
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpRequestMessage
+  nameWithType: HttpRequestMessage
+  fullName: System.Net.Http.HttpRequestMessage
+- uid: Apizr.Resiliencing
+  commentId: N:Apizr.Resiliencing
+  name: Apizr.Resiliencing
+  nameWithType: Apizr.Resiliencing
+  fullName: Apizr.Resiliencing
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: true
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polly.ResilienceContext
+  commentId: T:Polly.ResilienceContext
+  parent: Polly
+  isExternal: true
+  name: ResilienceContext
+  nameWithType: ResilienceContext
+  fullName: Polly.ResilienceContext
+- uid: Apizr.Resiliencing.ResilienceHttpMessageHandler
+  commentId: T:Apizr.Resiliencing.ResilienceHttpMessageHandler
+  name: ResilienceHttpMessageHandler
+  nameWithType: ResilienceHttpMessageHandler
+  fullName: Apizr.Resiliencing.ResilienceHttpMessageHandler
+- uid: System.Net.Http.HttpResponseMessage
+  commentId: T:System.Net.Http.HttpResponseMessage
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpResponseMessage
+  nameWithType: HttpResponseMessage
+  fullName: System.Net.Http.HttpResponseMessage
+- uid: Polly.ResiliencePipeline
+  commentId: T:Polly.ResiliencePipeline
+  isExternal: true
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext*
+  commentId: Overload:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext
+  name: GetOrBuildApizrResilienceContext
+  nameWithType: HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetOrBuildApizrResilienceContext
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: Polly
+  commentId: N:Polly
+  isExternal: true
+  name: Polly
+  nameWithType: Polly
+  fullName: Polly
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext*
+  commentId: Overload:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext
+  name: GetApizrResilienceContext
+  nameWithType: HttpRequestMessageApizrExtensions.GetApizrResilienceContext
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext
+- uid: Apizr.Configuring.Request.IApizrRequestOptions
+  commentId: T:Apizr.Configuring.Request.IApizrRequestOptions
+  parent: Apizr.Configuring.Request
+  name: IApizrRequestOptions
+  nameWithType: IApizrRequestOptions
+  fullName: Apizr.Configuring.Request.IApizrRequestOptions
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrRequestOptions*
+  commentId: Overload:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrRequestOptions
+  name: GetApizrRequestOptions
+  nameWithType: HttpRequestMessageApizrExtensions.GetApizrRequestOptions
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrRequestOptions
+- uid: Apizr.Configuring.Request
+  commentId: N:Apizr.Configuring.Request
+  name: Apizr.Configuring.Request
+  nameWithType: Apizr.Configuring.Request
+  fullName: Apizr.Configuring.Request
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions*
+  commentId: Overload:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions
+  name: TryGetApizrRequestOptions
+  nameWithType: HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.TryGetApizrRequestOptions
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.SetApizrResilienceContext*
+  commentId: Overload:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.SetApizrResilienceContext
+  name: SetApizrResilienceContext
+  nameWithType: HttpRequestMessageApizrExtensions.SetApizrResilienceContext
+  fullName: Apizr.Resiliencing.HttpRequestMessageApizrExtensions.SetApizrResilienceContext

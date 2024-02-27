@@ -1048,7 +1048,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_3_On_3_Times()
+        public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Resilience_Strategy_Then_It_Should_Retry_3_On_3_Times()
         {
             var maxRetryCount = 3;
             var retryCount = 0;
@@ -1095,6 +1095,8 @@ namespace Apizr.Tests
                             builder.AddXUnit(_outputHelper)
                                 .SetMinimumLevel(LogLevel.Trace)))
                         .WithLogging()
+                        .WithResilienceContextOptions(opt =>
+                            opt.ReturnToPoolOnComplete(false))
                         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithRequestTimeout(TimeSpan.FromSeconds(3))
                         .AddDelegatingHandler(watcher));
@@ -1106,12 +1108,12 @@ namespace Apizr.Tests
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<TimeoutRejectedException>();
 
-            retryCount.Should().Be(2);
+            retryCount.Should().Be(3);
             watcher.Attempts.Should().Be(4);
         }
 
         [Fact]
-        public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_2_On_3_Times()
+        public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Resilience_Strategy_Then_It_Should_Retry_2_On_3_Times()
         {
             var maxRetryCount = 3;
             var retryCount = 0;
@@ -1158,6 +1160,8 @@ namespace Apizr.Tests
                             builder.AddXUnit(_outputHelper)
                                 .SetMinimumLevel(LogLevel.Trace)))
                         .WithLogging()
+                        .WithResilienceContextOptions(opt =>
+                            opt.ReturnToPoolOnComplete(false))
                         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithOperationTimeout(TimeSpan.FromSeconds(10))
                         .AddDelegatingHandler(watcher));
@@ -1175,7 +1179,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Policy_Then_It_Should_Retry_1_On_3_Times()
+        public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Resilience_Strategy_Then_It_Should_Retry_1_On_3_Times()
         {
             var maxRetryCount = 3;
             var retryCount = 0;
@@ -1225,6 +1229,8 @@ namespace Apizr.Tests
                             builder.AddXUnit(_outputHelper)
                                 .SetMinimumLevel(LogLevel.Trace)))
                         .WithLogging()
+                        .WithResilienceContextOptions(opt =>
+                            opt.ReturnToPoolOnComplete(false))
                         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithOperationTimeout(TimeSpan.FromSeconds(10))
                         .AddDelegatingHandler(watcher));
@@ -1289,6 +1295,8 @@ namespace Apizr.Tests
                             builder.AddXUnit(_outputHelper)
                                 .SetMinimumLevel(LogLevel.Trace)))
                         .WithLogging()
+                        .WithResilienceContextOptions(opt =>
+                            opt.ReturnToPoolOnComplete(false))
                         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .AddDelegatingHandler(testHandler)
                         .WithOperationTimeout(TimeSpan.FromSeconds(3)));

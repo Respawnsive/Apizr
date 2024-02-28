@@ -122,8 +122,8 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Resiliencing
-  summary: "\nGets the <see cref=\"!:Context\"></see> associated with the provided <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
-  remarks: "\nThe <xref href=\"Apizr.Resiliencing.ResilienceHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref> will attach a context to the <xref href=\"System.Net.Http.HttpResponseMessage\" data-throw-if-not-resolved=\"false\"></xref> prior\nto executing a <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>, if one does not already exist. The <see cref=\"!:Context\"></see> will be provided\nto the Resilience Pipeline for use inside the <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref> and in other message handlers.\n"
+  summary: "\nGets the <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> associated with the provided <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThe <xref href=\"Apizr.Resiliencing.ResilienceHttpMessageHandler\" data-throw-if-not-resolved=\"false\"></xref> will attach a context to the <xref href=\"System.Net.Http.HttpResponseMessage\" data-throw-if-not-resolved=\"false\"></xref> prior\nto executing a <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>, if one does not already exist. The <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> will be provided\nto the Resilience Pipeline for use inside the <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref> and in other message handlers.\n"
   example: []
   syntax:
     content: public static ResilienceContext GetApizrResilienceContext(this HttpRequestMessage request)
@@ -133,7 +133,7 @@ items:
       description: The <xref href="System.Net.Http.HttpRequestMessage" data-throw-if-not-resolved="false"></xref>.
     return:
       type: Polly.ResilienceContext
-      description: The <see cref="!:Context"></see> if set, otherwise <code>null</code>.
+      description: The <xref href="Polly.ResilienceContext" data-throw-if-not-resolved="false"></xref> if set, otherwise <code>null</code>.
     content.vb: >-
       <ExtensionAttribute>
 

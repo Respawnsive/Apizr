@@ -2,40 +2,168 @@
 
 Please find here some breaking changes while upgrading from previous versions
 
+### 6.0
+
+#### Apizr
+
+- [Polly] Now **supporting the brand new Polly v8+ Resilience Strategies/Pipelines** instead of former Polly v7- Policies
+
+    - You'll have to rewrite your policies as strategies/pipelines. 
+        Here is an example of a former policy and its new equivalent strategy/pipeline:
+ 
+        Don't write anymore:
+        ```csharp 
+        var policy = Policy
+            .Handle<SomeExceptionType>()
+            .Retry(3);
+        ``` 
+
+        Now write:
+        ```csharp 
+        var resiliencePipelineBuilder = new ResiliencePipelineBuilder()
+            .AddRetry(new RetryStrategyOptions
+            {
+                ShouldHandle = new PredicateBuilder().Handle<SomeExceptionType>(),
+                MaxRetryAttempts = 3,
+                Delay = TimeSpan.Zero,
+            });
+        ``` 
+
+    - You can't register your policies into a policy registry and provide it to Apizr anymore. 
+        You have to register your pipeline into a pipeline registry instead and provide it to Apizr:
+ 
+        ### [Static](#tab/tabid-static)
+
+        Don't write anymore:
+        ```csharp 
+        var registry = new PolicyRegistry
+        {
+            { "TransientHttpError", policy }
+        };  
+        ...
+        options => options.WithPolicyRegistry(registry)
+        ``` 
+
+        Now write:
+        ```csharp 
+        var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+        resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", 
+            (builder, _) => builder.AddPipeline(resiliencePipelineBuilder.Build()));  
+        ...
+        options => options.WithResiliencePipelineRegistry(resiliencePipelineRegistry)  
+        ``` 
+
+        ### [Extended](#tab/tabid-extended)
+
+        Don't write anymore:
+        ```csharp 
+        var registry = new PolicyRegistry
+        {
+            { "TransientHttpError", policy }
+        };  
+        ...
+        services.AddPolicyRegistry(registry);
+        ``` 
+
+        Now write:
+        ```csharp 
+        services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+            builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));  
+        ```
+
+        ***
+        
+    - You can't provide your own context instance anymore to carry some properties. 
+        But you can provide your properties directly instead:
+ 
+        Don't write anymore:
+        ```csharp 
+        var context = new Context {{ "TestKey1", 1 }};
+        ...
+        options => options.WithContext(context);
+        ``` 
+
+        Now write:
+        ```csharp 
+        ResiliencePropertyKey<string> testKey1 = new("TestKey1");
+        ...
+        options => options.WithResilienceProperty(testKey1, "testValue1")
+        ``` 
+
+    - You'll have to change your PolicyAttribute to ResiliencePipelineAttribute. 
+ 
+        Don't write anymore:
+        ```csharp 
+        [assembly:Policy("TransientHttpError")]
+        namespace Apizr.Sample
+        {
+            [WebApi("https://reqres.in/api")]
+            public interface IReqResService
+            {
+                [Get("/users")]
+                Task<UserList> GetUsersAsync();
+            }
+        }
+        ``` 
+
+        Now write:
+        ```csharp 
+        [assembly:ResiliencePipeline("TransientHttpError")]
+        namespace Apizr.Sample
+        {
+            [WebApi("https://reqres.in/api")]
+            public interface IReqResService
+            {
+                [Get("/users")]
+                Task<UserList> GetUsersAsync();
+            }
+        }
+        ``` 
+    
 ### 5.3
 
 #### Apizr
 
 - [HttpClient] Now we can **configure the HttpClient instead of providing one** (same as extended experience) with the brand new ConfigureHttpClient fluent option
  
-    Now write:
-    ```csharp 
-    options => options.ConfigureHttpClient(httpClient => httpClient.WhateverOption = whateverValue)
-    ``` 
-    
     Don't write anymore:
     ```csharp 
     options => options.WithHttpClient((httpMessageHandler, baseUri) => 
         new YourOwnHttpClient(httpMessageHandler, false){BaseAddress = baseUri, WhateverOption = whateverValue});
     ``` 
 
+    Now write:
+    ```csharp 
+    options => options.ConfigureHttpClient(httpClient => httpClient.WhateverOption = whateverValue)
+    ``` 
+    
 ### 5.0
 
 #### Apizr
 
 - Now **ApizrBuilder static class exposes a single public property named Current and returning its own instance to get acces to its methods**, so that it could be extended then by other packages
 
-    Now write:
-    ```csharp 
-    ApizrBuilder.Current.WhatEver();
-    ``` 
-    
     Don't write anymore:
     ```csharp 
     ApizrBuilder.WhatEver();
     ``` 
 
+    Now write:
+    ```csharp 
+    ApizrBuilder.Current.WhatEver();
+    ``` 
+    
 - **Some methods have been deprecated and moved as extension methods to a dedicated namespace**, pointing to the new core ones
+
+    Don't write anymore: 
+    ```csharp 
+    // Designing
+    [Get("/")]
+    Task<MyResult> WhatEver([Priority] int priority, [Context] Context context, CancellationToken cancellationToken);
+    
+    // Requesting
+    myManager.ExecuteAsync((ctx, ct, api) => api.WhatEver((int)Priority.Background, ct), context, token, true, OnEx)
+    ``` 
 
     Now write:
     ```csharp 
@@ -50,16 +178,6 @@ Please find here some breaking changes while upgrading from previous versions
             .WithContext(context)
             .WithPriority(Priority.Background)
             .WithExCatcher(OnEx));
-    ``` 
-
-    Don't write anymore: 
-    ```csharp 
-    // Designing
-    [Get("/")]
-    Task<MyResult> WhatEver([Priority] int priority, [Context] Context context, CancellationToken cancellationToken);
-    
-    // Requesting
-    myManager.ExecuteAsync((ctx, ct, api) => api.WhatEver((int)Priority.Background, ct), context, token, true, OnEx)
     ``` 
 
 ### 4.1

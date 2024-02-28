@@ -80,28 +80,133 @@
 <h2 id="breaking-changes">Breaking changes</h2>
 
 <p>Please find here some breaking changes while upgrading from previous versions</p>
-<h3 id="53">5.3</h3>
+<h3 id="60">6.0</h3>
 <h4 id="apizr">Apizr</h4>
 <ul>
+<li><p>[Polly] Now <strong>supporting the brand new Polly v8+ Resilience Strategies/Pipelines</strong> instead of former Polly v7- Policies</p>
+<ul>
+<li><p>You&#39;ll have to rewrite your policies as strategies/pipelines. 
+  Here is an example of a former policy and its new equivalent strategy/pipeline:</p>
+<p>  Don&#39;t write anymore:</p>
+<pre><code class="lang-csharp">var policy = Policy
+    .Handle&lt;SomeExceptionType&gt;()
+    .Retry(3);
+</code></pre><p>  Now write:</p>
+<pre><code class="lang-csharp">var resiliencePipelineBuilder = new ResiliencePipelineBuilder()
+    .AddRetry(new RetryStrategyOptions
+    {
+        ShouldHandle = new PredicateBuilder().Handle&lt;SomeExceptionType&gt;(),
+        MaxRetryAttempts = 3,
+        Delay = TimeSpan.Zero,
+    });
+</code></pre></li>
+<li><p>You can&#39;t register your policies into a policy registry and provide it to Apizr anymore. 
+  You have to register your pipeline into a pipeline registry instead and provide it to Apizr:</p>
+<div class="tabGroup" id="tabgroup_uH82Gp-9S2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_uH82Gp-9S2_tabid-static" role="tab" aria-controls="tabpanel_uH82Gp-9S2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_uH82Gp-9S2_tabid-extended" role="tab" aria-controls="tabpanel_uH82Gp-9S2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_uH82Gp-9S2_tabid-static" role="tabpanel" data-tab="tabid-static">
+<p>  Don&#39;t write anymore:</p>
+<pre><code class="lang-csharp">var registry = new PolicyRegistry
+{
+    { &quot;TransientHttpError&quot;, policy }
+};  
+...
+options =&gt; options.WithPolicyRegistry(registry)
+</code></pre><p>  Now write:</p>
+<pre><code class="lang-csharp">var resiliencePipelineRegistry = new ResiliencePipelineRegistry&lt;string&gt;();
+resiliencePipelineRegistry.TryAddBuilder&lt;HttpResponseMessage&gt;(&quot;TransientHttpError&quot;, 
+    (builder, _) =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));  
+...
+options =&gt; options.WithResiliencePipelineRegistry(resiliencePipelineRegistry)  
+</code></pre></section>
+<section id="tabpanel_uH82Gp-9S2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<p>  Don&#39;t write anymore:</p>
+<pre><code class="lang-csharp">var registry = new PolicyRegistry
+{
+    { &quot;TransientHttpError&quot;, policy }
+};  
+...
+services.AddPolicyRegistry(registry);
+</code></pre><p>  Now write:</p>
+<pre><code class="lang-csharp">services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
+    builder =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));  
+</code></pre></section>
+</div>
+</li>
+<li><p>You can&#39;t provide your own context instance anymore to carry some properties. 
+  But you can provide your properties directly instead:</p>
+<p>  Don&#39;t write anymore:</p>
+<pre><code class="lang-csharp">var context = new Context {{ &quot;TestKey1&quot;, 1 }};
+...
+options =&gt; options.WithContext(context);
+</code></pre><p>  Now write:</p>
+<pre><code class="lang-csharp">ResiliencePropertyKey&lt;string&gt; testKey1 = new(&quot;TestKey1&quot;);
+...
+options =&gt; options.WithResilienceProperty(testKey1, &quot;testValue1&quot;)
+</code></pre></li>
+<li><p>You&#39;ll have to change your PolicyAttribute to ResiliencePipelineAttribute. </p>
+<p>  Don&#39;t write anymore:</p>
+<pre><code class="lang-csharp">[assembly:Policy(&quot;TransientHttpError&quot;)]
+namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync();
+    }
+}
+</code></pre><p>  Now write:</p>
+<pre><code class="lang-csharp">[assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
+namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync();
+    }
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="53">5.3</h3>
+<h4 id="apizr-1">Apizr</h4>
+<ul>
 <li><p>[HttpClient] Now we can <strong>configure the HttpClient instead of providing one</strong> (same as extended experience) with the brand new ConfigureHttpClient fluent option</p>
-<p>  Now write:</p>
-<pre><code class="lang-csharp">options =&gt; options.ConfigureHttpClient(httpClient =&gt; httpClient.WhateverOption = whateverValue)
-</code></pre><p>  Don&#39;t write anymore:</p>
+<p>  Don&#39;t write anymore:</p>
 <pre><code class="lang-csharp">options =&gt; options.WithHttpClient((httpMessageHandler, baseUri) =&gt; 
     new YourOwnHttpClient(httpMessageHandler, false){BaseAddress = baseUri, WhateverOption = whateverValue});
+</code></pre><p>  Now write:</p>
+<pre><code class="lang-csharp">options =&gt; options.ConfigureHttpClient(httpClient =&gt; httpClient.WhateverOption = whateverValue)
 </code></pre></li>
 </ul>
 <h3 id="50">5.0</h3>
-<h4 id="apizr-1">Apizr</h4>
+<h4 id="apizr-2">Apizr</h4>
 <ul>
 <li><p>Now <strong>ApizrBuilder static class exposes a single public property named Current and returning its own instance to get acces to its methods</strong>, so that it could be extended then by other packages</p>
-<p>  Now write:</p>
-<pre><code class="lang-csharp">ApizrBuilder.Current.WhatEver();
-</code></pre><p>  Don&#39;t write anymore:</p>
+<p>  Don&#39;t write anymore:</p>
 <pre><code class="lang-csharp">ApizrBuilder.WhatEver();
+</code></pre><p>  Now write:</p>
+<pre><code class="lang-csharp">ApizrBuilder.Current.WhatEver();
 </code></pre></li>
 <li><p><strong>Some methods have been deprecated and moved as extension methods to a dedicated namespace</strong>, pointing to the new core ones</p>
-<p>  Now write:</p>
+<p>  Don&#39;t write anymore: </p>
+<pre><code class="lang-csharp">// Designing
+[Get(&quot;/&quot;)]
+Task&lt;MyResult&gt; WhatEver([Priority] int priority, [Context] Context context, CancellationToken cancellationToken);
+
+// Requesting
+myManager.ExecuteAsync((ctx, ct, api) =&gt; api.WhatEver((int)Priority.Background, ct), context, token, true, OnEx)
+</code></pre><p>  Now write:</p>
 <pre><code class="lang-csharp">// Designing
 [Get(&quot;/&quot;)]
 Task&lt;MyResult&gt; WhatEver([RequestOptions] IApizrRequestOptions options);
@@ -113,17 +218,10 @@ myResult = await myManager.ExecuteAsync((opt, api) =&gt; api.WhatEver(opt),
         .WithContext(context)
         .WithPriority(Priority.Background)
         .WithExCatcher(OnEx));
-</code></pre><p>  Don&#39;t write anymore: </p>
-<pre><code class="lang-csharp">// Designing
-[Get(&quot;/&quot;)]
-Task&lt;MyResult&gt; WhatEver([Priority] int priority, [Context] Context context, CancellationToken cancellationToken);
-
-// Requesting
-myManager.ExecuteAsync((ctx, ct, api) =&gt; api.WhatEver((int)Priority.Background, ct), context, token, true, OnEx)
 </code></pre></li>
 </ul>
 <h3 id="41">4.1</h3>
-<h4 id="apizr-2">Apizr</h4>
+<h4 id="apizr-3">Apizr</h4>
 <ul>
 <li><strong>Apizr static class renamed to ApizrBuilder to match its purpose</strong> and doesn&#39;t conflict with its namespace anymore</li>
 <li><strong>ApizrBuilder&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to build (e.g. CreateRegistry, AddManagerFor, CreateManagerFor)</li>
@@ -143,7 +241,7 @@ myManager.ExecuteAsync((ctx, ct, api) =&gt; api.WhatEver((int)Priority.Backgroun
 <li><strong>ApizrOptionalMediationRegistry&#39;s methods renamed to match their return type</strong> so that we know what we&#39;re about to get (e.g. GetOptionalMediatorFor, GetCrudOptionalMediatorFor, ContainsOptionalMediatorFor)</li>
 </ul>
 <h3 id="40">4.0</h3>
-<h4 id="apizr-3">Apizr</h4>
+<h4 id="apizr-4">Apizr</h4>
 <ul>
 <li>TraceAttribute has been <strong>renamed back to LogAttribute</strong></li>
 <li>Now we can set a <strong>LogLevel value for each Low, Medium and High severity</strong> by attribute or fluent configuration</li>
@@ -164,12 +262,12 @@ myManager.ExecuteAsync((ctx, ct, api) =&gt; api.WhatEver((int)Priority.Backgroun
 <p>This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You&#39;ll have to provide a connectivity handler if you want Apizr to check it.</p>
 </div>
 <h3 id="30">3.0</h3>
-<h4 id="apizr-4">Apizr</h4>
+<h4 id="apizr-5">Apizr</h4>
 <ul>
 <li><strong>Fusillade has been moved to an integration package</strong>. If you used to play with it, just install it from its brand new dedicated integration package and follow the new Readme instructions</li>
 </ul>
 <h3 id="20">2.0</h3>
-<h4 id="apizr-5">Apizr</h4>
+<h4 id="apizr-6">Apizr</h4>
 <ul>
 <li><strong>TraceAttribute renamed to LogItAttribute</strong> to suits its tracing and logging both features activation</li>
 <li><strong>CacheAttribute renamed to CacheItAttribute</strong> to keep things consistent</li>
@@ -185,7 +283,7 @@ myManager.ExecuteAsync((ctx, ct, api) =&gt; api.WhatEver((int)Priority.Backgroun
 <li><code>WithCrudOptionalMediation</code> renamed to <code>WithOptionalMediation</code></li>
 </ul>
 <h3 id="120">1.2.0</h3>
-<h4 id="apizr-6">Apizr</h4>
+<h4 id="apizr-7">Apizr</h4>
 <ul>
 <li>Apizr instantiation/registration methods names standardized to Apizr.For and Apizr.CrudFor</li>
 </ul>

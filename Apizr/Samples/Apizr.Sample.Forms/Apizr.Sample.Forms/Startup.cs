@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
-using Apizr.Extending;
-using Apizr.Policing;
 using Apizr.Sample.Forms.Infrastructure;
 using Apizr.Sample.Forms.Services.Settings;
 using Apizr.Sample.Forms.ViewModels;
@@ -12,12 +10,10 @@ using Apizr.Sample.Forms.Views;
 using Apizr.Sample.Models;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
-using Polly.Extensions.Http;
-using Polly.Registry;
+using Polly.Retry;
 using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -50,18 +46,20 @@ namespace Apizr.Sample.Forms
 
             services.UseXfMaterialDialogs();
 
-            var registry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+            services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                pipelineBuilder => pipelineBuilder.AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
                     {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
-                }
-            };
-            services.AddPolicyRegistry(registry);
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = 3,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential
+                    }));
 
             services.AddSingleton<IAppSettings, AppSettings>();
             services.AddTransient<IConnectivity, ConnectivityImplementation>();

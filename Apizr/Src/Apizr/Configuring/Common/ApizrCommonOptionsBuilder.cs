@@ -8,9 +8,11 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -212,13 +214,14 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
-            => WithPolicyRegistry(() => policyRegistry);
+        public IApizrCommonOptionsBuilder WithResiliencePipelineRegistry(
+            ResiliencePipelineRegistry<string> resiliencePipelineRegistry)
+            => WithResiliencePipelineRegistry(() => resiliencePipelineRegistry);
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
+        public IApizrCommonOptionsBuilder WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<string>> resiliencePipelineRegistryFactory)
         {
-            Options.PolicyRegistryFactory = policyRegistryFactory;
+            Options.ResiliencePipelineRegistryFactory = resiliencePipelineRegistryFactory;
 
             return this;
         }
@@ -370,26 +373,13 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithContext(Func<Context> contextFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        public IApizrCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+            => WithResilienceProperty(key, () => value);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory)
         {
-            switch (strategy)
-            {
-                case ApizrDuplicateStrategy.Ignore:
-                    if(Options.ContextFactories.Count == 0)
-                        Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Replace:
-                    Options.ContextFactories.Clear();
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Add:
-                case ApizrDuplicateStrategy.Merge:
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
-            }
+            ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory();
 
             return this;
         }
@@ -418,8 +408,24 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
+
+            return this;
+        }
+
         #region Internal
-        
+
         void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
         
         void IApizrInternalRegistrationOptionsBuilder.SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)

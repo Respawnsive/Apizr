@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Polly;
 using System;
+using Apizr.Configuring.Shared.Context;
+using Apizr.Resiliencing;
 
 namespace Apizr.Configuring.Shared
 {
@@ -44,6 +46,14 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithHandlerParameter(string key, object value);
 
         /// <summary>
+        /// Set some resilience properties to the resilience context
+        /// </summary>
+        /// <param name="key">The resilience property's key</param>
+        /// <param name="value">The resilience property's value</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value);
+
+        /// <summary>
         /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)
         /// </summary>
         /// <param name="httpTracerMode"></param>
@@ -73,5 +83,12 @@ namespace Apizr.Configuring.Shared
         /// <param name="timeout">The request timeout</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithRequestTimeout(TimeSpan timeout);
+
+        /// <summary>
+        /// Set some options to the resilience context
+        /// </summary>
+        /// <param name="contextOptionsBuilder">The resilience context options builder</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder);
     }
 }

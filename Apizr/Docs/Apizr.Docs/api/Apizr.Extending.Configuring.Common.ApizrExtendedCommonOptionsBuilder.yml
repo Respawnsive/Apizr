@@ -31,7 +31,6 @@ items:
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler(System.Type)
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler``1
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})
-  - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHandlerParameter(System.String,System.Object)
@@ -52,6 +51,9 @@ items:
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRefitSettings(System.Func{System.IServiceProvider,Refit.RefitSettings})
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRequestTimeout(System.Func{System.IServiceProvider,System.TimeSpan})
   - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRequestTimeout(System.TimeSpan)
+  - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  - Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
   langs:
   - csharp
   - vb
@@ -62,11 +64,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrExtendedCommonOptionsBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 24
+    startLine: 27
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -139,11 +141,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: Options
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 26
+    startLine: 29
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -172,11 +174,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 37
+    startLine: 40
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -213,11 +215,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 59
+    startLine: 62
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -257,11 +259,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 67
+    startLine: 70
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -298,11 +300,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 71
+    startLine: 74
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -342,11 +344,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 79
+    startLine: 82
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -383,11 +385,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 83
+    startLine: 86
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -427,11 +429,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 91
+    startLine: 94
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -468,11 +470,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 95
+    startLine: 98
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -512,11 +514,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 103
+    startLine: 106
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -556,11 +558,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 109
+    startLine: 112
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -605,11 +607,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 115
+    startLine: 118
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -657,11 +659,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 126
+    startLine: 129
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -704,11 +706,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 137
+    startLine: 140
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -754,11 +756,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 147
+    startLine: 150
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -798,11 +800,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 151
+    startLine: 154
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -842,11 +844,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 159
+    startLine: 162
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -883,11 +885,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 163
+    startLine: 166
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -927,11 +929,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 171
+    startLine: 174
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -968,11 +970,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 175
+    startLine: 178
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1012,11 +1014,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 183
+    startLine: 186
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1060,11 +1062,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 187
+    startLine: 190
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1108,11 +1110,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 192
+    startLine: 195
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1156,11 +1158,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConfigureHttpClientBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 200
+    startLine: 203
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1189,53 +1191,6 @@ items:
   - Public
   fullName.vb: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.ConfigureHttpClientBuilder(System.Action(Of Microsoft.Extensions.DependencyInjection.IHttpClientBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: ConfigureHttpClientBuilder(Action(Of IHttpClientBuilder), ApizrDuplicateStrategy)
-- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  commentId: M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  id: WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  parent: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder
-  langs:
-  - csharp
-  - vb
-  name: WithContext(Func<Context>, ApizrDuplicateStrategy)
-  nameWithType: ApizrExtendedCommonOptionsBuilder.WithContext(Func<Context>, ApizrDuplicateStrategy)
-  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext(System.Func<Polly.Context>, Apizr.Configuring.ApizrDuplicateStrategy)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: WithContext
-    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 230
-  assemblies:
-  - Apizr.Extensions.Microsoft.DependencyInjection
-  namespace: Apizr.Extending.Configuring.Common
-  summary: "\nSet the Polly Context\n"
-  example: []
-  syntax:
-    content: public IApizrExtendedCommonOptionsBuilder WithContext(Func<Context> contextFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
-    parameters:
-    - id: contextFactory
-      type: System.Func{Polly.Context}
-      description: The Polly Context to pass through it all
-    - id: strategy
-      type: Apizr.Configuring.ApizrDuplicateStrategy
-      description: 'The duplicate strategy if there&apos;s another one already (default: Merge)'
-    return:
-      type: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder
-      description: ''
-    content.vb: Public Function WithContext(contextFactory As Func(Of Context), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Merge) As IApizrExtendedCommonOptionsBuilder
-  overload: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext*
-  implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  nameWithType.vb: ApizrExtendedCommonOptionsBuilder.WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext(System.Func(Of Polly.Context), Apizr.Configuring.ApizrDuplicateStrategy)
-  name.vb: WithContext(Func(Of Context), ApizrDuplicateStrategy)
 - uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   id: WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
@@ -1250,11 +1205,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 255
+    startLine: 233
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1300,11 +1255,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 287
+    startLine: 265
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1352,11 +1307,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 294
+    startLine: 272
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1382,6 +1337,104 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  commentId: M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  id: WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  parent: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  nameWithType: ApizrExtendedCommonOptionsBuilder.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, TValue)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithResilienceProperty
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
+    startLine: 280
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Common
+  summary: "\nSet some resilience properties to the resilience context\n"
+  example: []
+  syntax:
+    content: public IApizrExtendedCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+    parameters:
+    - id: key
+      type: Polly.ResiliencePropertyKey{{TValue}}
+      description: The resilience property&apos;s key
+    - id: value
+      type: '{TValue}'
+      description: The resilience property&apos;s value
+    typeParameters:
+    - id: TValue
+    return:
+      type: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder
+      description: ''
+    content.vb: Public Function WithResilienceProperty(Of TValue)(key As ResiliencePropertyKey(Of TValue), value As TValue) As IApizrExtendedCommonOptionsBuilder
+  overload: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},{TValue})
+  nameWithType.vb: ApizrExtendedCommonOptionsBuilder.WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), TValue)
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+  commentId: M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+  id: WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+  parent: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<IServiceProvider, TValue>)
+  nameWithType: ApizrExtendedCommonOptionsBuilder.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<IServiceProvider, TValue>)
+  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, System.Func<System.IServiceProvider, TValue>)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithResilienceProperty
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
+    startLine: 284
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Common
+  summary: "\nSet some resilience properties to the resilience context\n"
+  example: []
+  syntax:
+    content: public IApizrExtendedCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<IServiceProvider, TValue> valueFactory)
+    parameters:
+    - id: key
+      type: Polly.ResiliencePropertyKey{{TValue}}
+      description: The resilience property&apos;s key
+    - id: valueFactory
+      type: System.Func{System.IServiceProvider,{TValue}}
+      description: The resilience property&apos;s value factory
+    typeParameters:
+    - id: TValue
+    return:
+      type: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder
+      description: ''
+    content.vb: Public Function WithResilienceProperty(Of TValue)(key As ResiliencePropertyKey(Of TValue), valueFactory As Func(Of IServiceProvider, TValue)) As IApizrExtendedCommonOptionsBuilder
+  overload: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},System.Func{System.IServiceProvider,{TValue}})
+  nameWithType.vb: ApizrExtendedCommonOptionsBuilder.WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of IServiceProvider, TValue))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), System.Func(Of System.IServiceProvider, TValue))
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of IServiceProvider, TValue))
 - uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   commentId: M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   id: WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
@@ -1396,11 +1449,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 302
+    startLine: 292
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1446,11 +1499,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 308
+    startLine: 298
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1490,11 +1543,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 315
+    startLine: 305
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1540,11 +1593,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRefitSettings
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 328
+    startLine: 318
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1581,11 +1634,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRefitSettings
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 332
+    startLine: 322
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1625,11 +1678,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 341
+    startLine: 331
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1666,11 +1719,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 345
+    startLine: 335
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1710,11 +1763,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 353
+    startLine: 343
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1756,11 +1809,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 361
+    startLine: 351
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1800,11 +1853,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 369
+    startLine: 359
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1845,11 +1898,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 374
+    startLine: 364
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1886,11 +1939,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 386
+    startLine: 376
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1927,11 +1980,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 390
+    startLine: 380
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -1971,11 +2024,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 398
+    startLine: 388
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -2016,11 +2069,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 403
+    startLine: 393
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -2057,11 +2110,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 415
+    startLine: 405
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -2098,11 +2151,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 419
+    startLine: 409
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -2142,11 +2195,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 427
+    startLine: 417
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -2187,11 +2240,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
-    startLine: 432
+    startLine: 422
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Common
@@ -2214,6 +2267,50 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  commentId: M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  id: WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  parent: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  nameWithType: ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(System.Action<Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder>)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
+      branch: feat/resilience
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithResilienceContextOptions
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs
+    startLine: 434
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Common
+  summary: "\nSet some options to the resilience context\n"
+  example: []
+  syntax:
+    content: public IApizrExtendedCommonOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+    parameters:
+    - id: contextOptionsBuilder
+      type: System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder}
+      description: The resilience context options builder
+    return:
+      type: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder
+      description: ''
+    content.vb: Public Function WithResilienceContextOptions(contextOptionsBuilder As Action(Of IApizrResilienceContextOptionsBuilder)) As IApizrExtendedCommonOptionsBuilder
+  overload: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  nameWithType.vb: ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder))
+  name.vb: WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
 references:
 - uid: Apizr.Extending.Configuring.Common
   commentId: N:Apizr.Extending.Configuring.Common
@@ -9562,249 +9659,6 @@ references:
   name: Apizr.Configuring
   nameWithType: Apizr.Configuring
   fullName: Apizr.Configuring
-- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext*
-  commentId: Overload:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext
-  name: WithContext
-  nameWithType: ApizrExtendedCommonOptionsBuilder.WithContext
-  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  name: WithContext(Func<Context>, ApizrDuplicateStrategy)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithContext(Func<Context>, ApizrDuplicateStrategy)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithContext(System.Func<Polly.Context>, Apizr.Configuring.ApizrDuplicateStrategy)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithContext(System.Func(Of Polly.Context), Apizr.Configuring.ApizrDuplicateStrategy)
-  name.vb: WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithContext
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithContext
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.ApizrDuplicateStrategy
-    name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithContext
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithContext
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.ApizrDuplicateStrategy
-    name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Func{Polly.Context}
-  commentId: T:System.Func{Polly.Context}
-  parent: System
-  definition: System.Func`1
-  name: Func<Context>
-  nameWithType: Func<Context>
-  fullName: System.Func<Polly.Context>
-  nameWithType.vb: Func(Of Context)
-  fullName.vb: System.Func(Of Polly.Context)
-  name.vb: Func(Of Context)
-  spec.csharp:
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  isExternal: true
-  name: WithContext(Func<Context>, ApizrDuplicateStrategy)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithContext(Func<Context>, ApizrDuplicateStrategy)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithContext(System.Func<Polly.Context>, Apizr.Configuring.ApizrDuplicateStrategy)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithContext(System.Func(Of Polly.Context), Apizr.Configuring.ApizrDuplicateStrategy)
-  name.vb: WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithContext
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithContext
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.ApizrDuplicateStrategy
-    name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithContext
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithContext
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.ApizrDuplicateStrategy
-    name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Func`1
-  commentId: T:System.Func`1
-  isExternal: true
-  name: Func<TResult>
-  nameWithType: Func<TResult>
-  fullName: System.Func<TResult>
-  nameWithType.vb: Func(Of TResult)
-  fullName.vb: System.Func(Of TResult)
-  name.vb: Func(Of TResult)
-  spec.csharp:
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching*
   commentId: Overload:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching
   name: WithExCatching
@@ -10436,6 +10290,524 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty*
+  commentId: Overload:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty
+  name: WithResilienceProperty
+  nameWithType: ApizrExtendedCommonOptionsBuilder.WithResilienceProperty
+  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},{TValue})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, TValue)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), TValue)
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty<TValue>
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithResilienceProperty<TValue>
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithResilienceProperty<TValue>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty(Of TValue)
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithResilienceProperty(Of TValue)
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithResilienceProperty(Of TValue)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polly.ResiliencePropertyKey{{TValue}}
+  commentId: T:Polly.ResiliencePropertyKey{``0}
+  parent: Polly
+  definition: Polly.ResiliencePropertyKey`1
+  name: ResiliencePropertyKey<TValue>
+  nameWithType: ResiliencePropertyKey<TValue>
+  fullName: Polly.ResiliencePropertyKey<TValue>
+  nameWithType.vb: ResiliencePropertyKey(Of TValue)
+  fullName.vb: Polly.ResiliencePropertyKey(Of TValue)
+  name.vb: ResiliencePropertyKey(Of TValue)
+  spec.csharp:
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: '{TValue}'
+  commentId: '!:TValue'
+  definition: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  isExternal: true
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, TValue)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), TValue)
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty<TValue>
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty(Of TValue)
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polly.ResiliencePropertyKey`1
+  commentId: T:Polly.ResiliencePropertyKey`1
+  isExternal: true
+  name: ResiliencePropertyKey<TValue>
+  nameWithType: ResiliencePropertyKey<TValue>
+  fullName: Polly.ResiliencePropertyKey<TValue>
+  nameWithType.vb: ResiliencePropertyKey(Of TValue)
+  fullName.vb: Polly.ResiliencePropertyKey(Of TValue)
+  name.vb: ResiliencePropertyKey(Of TValue)
+  spec.csharp:
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polly
+  commentId: N:Polly
+  isExternal: true
+  name: Polly
+  nameWithType: Polly
+  fullName: Polly
+- uid: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},System.Func{System.IServiceProvider,{TValue}})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<IServiceProvider, TValue>)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<IServiceProvider, TValue>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, System.Func<System.IServiceProvider, TValue>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of IServiceProvider, TValue))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), System.Func(Of System.IServiceProvider, TValue))
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of IServiceProvider, TValue))
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+    name: WithResilienceProperty<TValue>
+    nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithResilienceProperty<TValue>
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithResilienceProperty<TValue>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+    name: WithResilienceProperty(Of TValue)
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithResilienceProperty(Of TValue)
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithResilienceProperty(Of TValue)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func{System.IServiceProvider,{TValue}}
+  commentId: T:System.Func{System.IServiceProvider,``0}
+  parent: System
+  definition: System.Func`2
+  name: Func<IServiceProvider, TValue>
+  nameWithType: Func<IServiceProvider, TValue>
+  fullName: System.Func<System.IServiceProvider, TValue>
+  nameWithType.vb: Func(Of IServiceProvider, TValue)
+  fullName.vb: System.Func(Of System.IServiceProvider, TValue)
+  name.vb: Func(Of IServiceProvider, TValue)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+  isExternal: true
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<IServiceProvider, TValue>)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<IServiceProvider, TValue>)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, System.Func<System.IServiceProvider, TValue>)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of IServiceProvider, TValue))
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), System.Func(Of System.IServiceProvider, TValue))
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of IServiceProvider, TValue))
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+    name: WithResilienceProperty<TValue>
+    nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithResilienceProperty<TValue>
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithResilienceProperty<TValue>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})
+    name: WithResilienceProperty(Of TValue)
+    nameWithType: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithResilienceProperty(Of TValue)
+    fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithResilienceProperty(Of TValue)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    nameWithType: IServiceProvider
+    fullName: System.IServiceProvider
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
   - name: )
     nameWithType: )
     fullName: )
@@ -12653,6 +13025,45 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Func`1
+  commentId: T:System.Func`1
+  isExternal: true
+  name: Func<TResult>
+  nameWithType: Func<TResult>
+  fullName: System.Func<TResult>
+  nameWithType.vb: Func(Of TResult)
+  fullName.vb: System.Func(Of TResult)
+  name.vb: Func(Of TResult)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithConnectivityHandler``1
   commentId: M:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithConnectivityHandler``1
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
@@ -13696,6 +14107,176 @@ references:
     nameWithType: Type
     fullName: System.Type
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions*
+  commentId: Overload:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions
+  name: WithResilienceContextOptions
+  nameWithType: ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions
+  fullName: Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  name: WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithResilienceContextOptions(System.Action<Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder>)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithResilienceContextOptions(System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder))
+  name.vb: WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder>.WithResilienceContextOptions
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>.WithResilienceContextOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBuilder).WithResilienceContextOptions
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder).WithResilienceContextOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder}
+  commentId: T:System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder}
+  parent: System
+  definition: System.Action`1
+  name: Action<IApizrResilienceContextOptionsBuilder>
+  nameWithType: Action<IApizrResilienceContextOptionsBuilder>
+  fullName: System.Action<Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder>
+  nameWithType.vb: Action(Of IApizrResilienceContextOptionsBuilder)
+  fullName.vb: System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder)
+  name.vb: Action(Of IApizrResilienceContextOptionsBuilder)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  isExternal: true
+  name: WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions(System.Action<Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder>)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions(System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder))
+  name.vb: WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
   - name: )
     nameWithType: )
     fullName: )

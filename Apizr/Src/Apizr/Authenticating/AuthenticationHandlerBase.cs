@@ -4,10 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Extending;
-using Apizr.Policing;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Authenticating
@@ -36,7 +35,7 @@ namespace Apizr.Authenticating
             HttpRequestMessage clonedRequest = null;
             string token = null;
 
-            var context = request.GetOrBuildApizrPolicyExecutionContext();
+            var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
             if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
             {
                 logger = Logger;

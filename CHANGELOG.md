@@ -1,3 +1,16 @@
+6.0.0-preview.1
+---
+
+### All
+
+- [New][Target] Now **targeting both .NetStandard 2.0 and .NET 7.0**
+- [Breaking][Deprecated] **Previsoulsy deprecated extensions methods have been droped** as they were not suitable anyore
+
+### Apizr
+
+- [Breaking][Polly] Now **supporting the brand new Polly v8+ Resilience Strategies/Pipelines** instead of former Polly v7- Policies
+- [New][Attributes] Now we can **provide types to attributes thanks to generic arguments** instead of using typeof() as constructor parameters
+
 5.4.0
 ---
 

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Apizr.Logging;
-using Microsoft.Extensions.Logging;
-using Polly;
 
 namespace Apizr.Configuring.Shared
 {
@@ -64,13 +61,5 @@ namespace Apizr.Configuring.Shared
         /// <param name="delegatingHandler">A delegating handler</param>
         /// <returns></returns>
         TApizrOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler;
-
-        /// <summary>
-        /// Set the Polly Context
-        /// </summary>
-        /// <param name="contextFactory">The Polly Context to pass through it all</param>
-        /// <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithContext(Func<Context> contextFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
     }
 }

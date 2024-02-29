@@ -5,7 +5,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -190,5 +192,13 @@ namespace Apizr.Configuring.Shared
         /// <param name="timeoutFactory">The request timeout factory</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithRequestTimeout(Func<TimeSpan> timeoutFactory);
+
+        /// <summary>
+        /// Set some resilience properties to the resilience context
+        /// </summary>
+        /// <param name="key">The resilience property's key</param>
+        /// <param name="valueFactory">The resilience property's value factory</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory);
     }
 }

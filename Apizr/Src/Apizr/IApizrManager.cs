@@ -2,10 +2,8 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
-using Polly;
 
 namespace Apizr
 {

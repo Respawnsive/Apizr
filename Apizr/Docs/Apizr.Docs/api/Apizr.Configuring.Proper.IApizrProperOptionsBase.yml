@@ -6,7 +6,7 @@ items:
   parent: Apizr.Configuring.Proper
   children:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   langs:
   - csharp
@@ -18,7 +18,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrProperOptionsBase
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
@@ -37,7 +37,6 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
@@ -68,7 +67,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApiType
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
@@ -89,37 +88,37 @@ items:
   - get
   modifiers.vb:
   - ReadOnly
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-  id: PolicyRegistryKeys
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  id: ResiliencePipelineRegistryKeys
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
   langs:
   - csharp
   - vb
-  name: PolicyRegistryKeys
-  nameWithType: IApizrProperOptionsBase.PolicyRegistryKeys
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+  name: ResiliencePipelineRegistryKeys
+  nameWithType: IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
-    id: PolicyRegistryKeys
+    id: ResiliencePipelineRegistryKeys
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
     startLine: 19
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: "\nPolicy keys from the registry\n"
+  summary: "\nResilience pipeline keys from the registry\n"
   example: []
   syntax:
-    content: string[] PolicyRegistryKeys { get; }
+    content: string[] ResiliencePipelineRegistryKeys { get; }
     parameters: []
     return:
       type: System.String[]
-    content.vb: ReadOnly Property PolicyRegistryKeys As String()
-  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys*
+    content.vb: ReadOnly Property ResiliencePipelineRegistryKeys As String()
+  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys*
   modifiers.csharp:
   - get
   modifiers.vb:
@@ -138,7 +137,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: Logger
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
@@ -183,12 +182,6 @@ references:
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
-  name: ContextFactory
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
@@ -284,11 +277,11 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys*
-  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-  name: PolicyRegistryKeys
-  nameWithType: IApizrProperOptionsBase.PolicyRegistryKeys
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys*
+  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  name: ResiliencePipelineRegistryKeys
+  nameWithType: IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
 - uid: System.String[]
   isExternal: true
   name: String[]

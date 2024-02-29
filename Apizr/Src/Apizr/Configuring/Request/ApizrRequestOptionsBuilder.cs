@@ -3,7 +3,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -53,43 +55,6 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     public IApizrRequestOptionsBuilder WithRequestTimeout(TimeSpan timeout)
     {
         Options.RequestTimeout = timeout;
-
-        return this;
-    }
-
-    /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
-    {
-        switch (strategy)
-        {
-            case ApizrDuplicateStrategy.Ignore:
-                Options.Context ??= context;
-                break;
-            case ApizrDuplicateStrategy.Replace:
-                Options.Context = context;
-                break;
-            case ApizrDuplicateStrategy.Add:
-            case ApizrDuplicateStrategy.Merge:
-                if (Options.Context == null)
-                {
-                    Options.Context = context;
-                }
-                else
-                {
-                    var operationKey = !string.IsNullOrWhiteSpace(context.OperationKey)
-                        ? context.OperationKey
-                        : Options.Context.OperationKey;
-
-                    Options.Context = new Context(operationKey,
-                        Options.Context.Concat(context.ToList())
-                            .Reverse()
-                            .GroupBy(kpv => kpv.Key)
-                            .ToDictionary(x => x.Key, x => x.First().Value));
-                }
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
-        }
 
         return this;
     }
@@ -160,10 +125,54 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
 
     /// <inheritdoc />
-    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOriginalExpression(Expression originalExpression)
+    public IApizrRequestOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue valueFactory)
     {
-        ((IApizrRequestOptions) Options).OriginalExpression = originalExpression;
+        ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory;
 
         return this;
     }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+    {
+        var options = Options as IApizrGlobalSharedOptionsBase;
+        if (options.ContextOptionsBuilder == null)
+        {
+            options.ContextOptionsBuilder = contextOptionsBuilder;
+        }
+        else
+        {
+            options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+        }
+
+        return this;
+    }
+
+    #region Internals
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOriginalExpression(Expression originalExpression)
+    {
+        ((IApizrRequestOptions)Options).OriginalExpression = originalExpression;
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithResilienceContextOptions(IApizrResilienceContextOptions options)
+    {
+        Options.ResilienceContextOptions = options;
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithContext(ResilienceContext context)
+    {
+        Options.ResilienceContext = context;
+
+        return this;
+    } 
+
+    #endregion
 }

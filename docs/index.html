@@ -106,12 +106,15 @@
 <p>Also, we built this lib to make it work with any .Net Standard 2.0 compliant platform, so we could use it seamlessly from any kind of app, with or without DI goodness.</p>
 <h2 id="how">How</h2>
 <p>An api definition with some attributes:</p>
-<pre><code class="lang-csharp">[assembly:Policy(&quot;TransientHttpError&quot;)]
+<pre><code class="lang-csharp">// (Polly) Define a resilience pipeline key
+[assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
 namespace Apizr.Sample
 {
+    // (Apizr) Define your web api base url and ask for cache and logs
     [WebApi(&quot;https://reqres.in/&quot;), Cache, Log]
     public interface IReqResService
     {
+        // (Refit) Define your web api interface methods
         [Get(&quot;/api/users&quot;)]
         Task&lt;UserList&gt; GetUsersAsync();
 
@@ -122,31 +125,76 @@ namespace Apizr.Sample
         Task&lt;User&gt; CreateUser(User user);
     }
 }
-</code></pre><p>An instance of this managed api:</p>
-<pre><code class="lang-csharp">// Define some policies
-var registry = new PolicyRegistry
-{
-    {
-        &quot;TransientHttpError&quot;, 
-        HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(new[]
+</code></pre><p>Some resilience strategies:</p>
+<pre><code class="lang-csharp">// (Polly) Create a resilience pipeline with some strategies
+var resiliencePipelineBuilder = new ResiliencePipelineBuilder&lt;HttpResponseMessage&gt;()
+    // Configure telemetry to get some logs from Polly process
+    .ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =&gt;
+        loggingBuilder.Debug()))
+    // Add a retry strategy with some options
+    .AddRetry(
+        new RetryStrategyOptions&lt;HttpResponseMessage&gt;
         {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(5),
-            TimeSpan.FromSeconds(10)
-        })
-    }
-};
+            ShouldHandle = new PredicateBuilder&lt;HttpResponseMessage&gt;()
+                .Handle&lt;HttpRequestException&gt;()
+                .HandleResult(response =&gt;
+                    response.StatusCode is &gt;= HttpStatusCode.InternalServerError
+                        or HttpStatusCode.RequestTimeout),
+            Delay = TimeSpan.FromSeconds(1),
+            MaxRetryAttempts = 3,
+            UseJitter = true,
+            BackoffType = DelayBackoffType.Exponential
+        }));
+</code></pre><p>An instance of this managed api:</p>
+<div class="tabGroup" id="tabgroup_pIdGyucMRO">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_pIdGyucMRO_tabid-static" role="tab" aria-controls="tabpanel_pIdGyucMRO_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_pIdGyucMRO_tabid-extended" role="tab" aria-controls="tabpanel_pIdGyucMRO_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_pIdGyucMRO_tabid-static" role="tabpanel" data-tab="tabid-static">
+<p>Relies on static builder instantiation approach.</p>
+<pre><code class="lang-csharp">// (Polly) Add the resilience pipeline with its key to a registry
+var resiliencePipelineRegistry = new ResiliencePipelineRegistry&lt;string&gt;();
+resiliencePipelineRegistry.TryAddBuilder&lt;HttpResponseMessage&gt;(&quot;TransientHttpError&quot;, 
+    (builder, _) =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));
 
-// Get your manager instance
+// (Apizr) Get your manager instance
 var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResService&gt;(
     options =&gt; options
-        .WithPolicyRegistry(registry)
+        // With a logger
+        .WithLoggerFactory(LoggerFactory.Create(loggingBuilder =&gt;
+            loggingBuilder.Debug()))
+        // With the defined resilience pipeline registry
+        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+        // And with a cache handler
         .WithAkavacheCacheHandler());
-</code></pre><p>And then you&#39;re good to go:</p>
+</code></pre></section>
+<section id="tabpanel_pIdGyucMRO_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<p>Relies on <code>IServiceCollection</code> extension methods approach.</p>
+<pre><code class="lang-csharp">// (Logger) Configure logging the way you want, like
+services.AddLogging(loggingBuilder =&gt; loggingBuilder.AddDebug());
+
+// (Apizr) Add an Apizr manager for the defined api to your container
+services.AddApizrManagerFor&lt;IReqResService&gt;(options =&gt; 
+    // With a cache handler
+    options.WithAkavacheCacheHandler());
+
+// (Polly) Add the resilience pipeline with its key to your container
+services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
+    builder =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));
+...
+
+// (Apizr) Get your manager instance the way you want, like
+var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqResService&gt;&gt;();
+</code></pre></section>
+</div>
+<p>And then you&#39;re good to go:</p>
 <pre><code class="lang-csharp">var userList = await reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync());
-</code></pre><p>This request will be managed with the defined policies, data cached, http traces logged.</p>
+</code></pre><p>This request will be managed with the defined resilience strategies, data cached and all logged.</p>
 <p>Apizr has a lot more to offer, just <a href="articles/index.html">read the doc</a>!</p>
 <h2 id="where">Where</h2>
 <p><a href="changelog.html">Change Log</a></p>
@@ -365,7 +413,7 @@ var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResService&gt;(
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/master/Apizr/Docs/Apizr.Docs/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/feat/resilience/Apizr/Docs/Apizr.Docs/index.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

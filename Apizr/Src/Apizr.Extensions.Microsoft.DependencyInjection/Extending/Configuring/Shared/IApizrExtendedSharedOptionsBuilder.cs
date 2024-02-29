@@ -8,8 +8,10 @@ using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Polly;
 
 namespace Apizr.Extending.Configuring.Shared
 {
@@ -144,5 +146,13 @@ namespace Apizr.Extending.Configuring.Shared
         /// <param name="timeoutFactory">The request timeout factory</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithRequestTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory);
+
+        /// <summary>
+        /// Set some resilience properties to the resilience context
+        /// </summary>
+        /// <param name="key">The resilience property's key</param>
+        /// <param name="valueFactory">The resilience property's value factory</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<IServiceProvider, TValue> valueFactory);
     }
 }

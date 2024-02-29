@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Threading;
-using Apizr.Configuring.Shared;
-using Apizr.Logging;
-using Microsoft.Extensions.Logging;
+using Apizr.Configuring.Shared.Context;
 using Polly;
 
 namespace Apizr.Configuring.Request
@@ -16,14 +13,6 @@ namespace Apizr.Configuring.Request
         where TApizrOptions : IApizrRequestOptions
         where TApizrOptionsBuilder : IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>
     {
-        /// <summary>
-        /// Set the Polly Context
-        /// </summary>
-        /// <param name="context">The Polly Context to pass through it all</param>
-        /// <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
-
         /// <summary>
         /// Set the cancellation token
         /// </summary>
@@ -39,6 +28,8 @@ namespace Apizr.Configuring.Request
         TApizrOptionsBuilder WithCacheClearing(bool clearCache);
 
         internal TApizrOptionsBuilder WithOriginalExpression(Expression originalExpression);
+        internal TApizrOptionsBuilder WithResilienceContextOptions(IApizrResilienceContextOptions options);
+        internal TApizrOptionsBuilder WithContext(ResilienceContext context);
     }
     
     /// <inheritdoc />

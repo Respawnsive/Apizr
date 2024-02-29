@@ -5,6 +5,7 @@ using Apizr.Configuring.Common;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Mapping;
+using Polly;
 using Refit;
 
 namespace Apizr.Extending.Configuring.Common

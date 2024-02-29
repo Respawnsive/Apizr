@@ -2,7 +2,7 @@
 
 We could define our web api service just like:
 ```csharp
-[assembly:Policy("TransientHttpError")]
+[assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
     [WebApi("https://reqres.in/"), Cache, Log]
@@ -26,7 +26,7 @@ Every attributes here will inform Apizr on how to manage each web api request. N
 
 Actually, you should consider to add a special parameter called RequestOptions to each methods, allowing some option adjustments later at request time:
 ```csharp
-[assembly:Policy("TransientHttpError")]
+[assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
     [WebApi("https://reqres.in/"), Cache, Log]
@@ -56,31 +56,41 @@ It's not required to register anything in a container for DI purpose (you can us
 
 Here is an example of how to register a managed instance of an api interface:
 ```csharp
-// Some policies
-var registry = new PolicyRegistry
-{
-    {
-        "TransientHttpError", 
-        HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(new[]
+// (Polly) Create a resilience pipeline registry with some strategies
+var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+    // Configure telemetry to get some logs from Polly process
+    builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+        loggingBuilder.Debug()))
+    // Add a retry strategy with some options
+    .AddRetry(
+        new RetryStrategyOptions<HttpResponseMessage>
         {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(5),
-            TimeSpan.FromSeconds(10)
-        })
-    }
-};
+            ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                .Handle<HttpRequestException>()
+                .HandleResult(response =>
+                    response.StatusCode is >= HttpStatusCode.InternalServerError
+                        or HttpStatusCode.RequestTimeout),
+            Delay = TimeSpan.FromSeconds(1),
+            MaxRetryAttempts = 3,
+            UseJitter = true,
+            BackoffType = DelayBackoffType.Exponential
+        }));
 
 // Apizr registration
 myContainer.RegistrationMethodFactory(() => 
     ApizrBuilder.Current.CreateManagerFor<IReqResService>(options => options
-        .WithPolicyRegistry(registry)
+        // With a logger
+        .WithLoggerFactory(LoggerFactory.Create(loggingBuilder =>
+            loggingBuilder.Debug()))
+        // With the defined resilience pipeline registry
+        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+        // And with a cache handler
         .WithAkavacheCacheHandler())
 );
 ```
 
-We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+We provided a resilience pipeline registry, a cache handler and a logger factory here as we asked for it with cache, log and resilience pipeline attributes while designing the api interface.
 Also, you could use the manager directly instead of registering it.
 
 #### [Extended](#tab/tabid-extended)
@@ -89,29 +99,33 @@ Here is an example of how to register a managed api interface:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            "TransientHttpError", 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
+    // (Logger) Configure logging the way you want, like
+    services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
 
-    // Apizr registration
-    services.AddApizrManagerFor<IReqResService>(options => options.WithAkavacheCacheHandler());
+    // (Apizr) Add an Apizr manager for the defined api to your container
+    services.AddApizrManagerFor<IReqResService>(options => 
+        // With a cache handler
+        options.WithAkavacheCacheHandler());
+
+    // (Polly) Add the resilience pipeline with its key to your container
+    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+        builder => builder.AddRetry(
+            new RetryStrategyOptions<HttpResponseMessage>
+            {
+                ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                    .Handle<HttpRequestException>()
+                    .HandleResult(response =>
+                        response.StatusCode is >= HttpStatusCode.InternalServerError
+                            or HttpStatusCode.RequestTimeout),
+                Delay = TimeSpan.FromSeconds(1),
+                MaxRetryAttempts = 3,
+                UseJitter = true,
+                BackoffType = DelayBackoffType.Exponential
+            }));
 }
 ```
 
-We registered a policy registry and provided a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+We registered a resilience pipeline registry and a logger factory and provided a cache handler here as we asked for it with cache, log and resilience pipeline attributes while designing the api interface.
 
 ***
 
@@ -128,22 +142,6 @@ Here is an example of how to register a managed instance of multiple api interfa
 ##### [Static](#tab/tabid-static)
 
 ```csharp
-// Some policies
-var registry = new PolicyRegistry
-{
-    {
-        "TransientHttpError", 
-        HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(new[]
-        {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(5),
-            TimeSpan.FromSeconds(10)
-        })
-    }
-};
-
 // Apizr registry
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry => registry
@@ -156,7 +154,6 @@ var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                     LogLevel.Trace)),
     
     config => config
-        .WithPolicyRegistry(registry)
         .WithAkavacheCacheHandler()
         .WithLogging(
             HttpTracerMode.ExceptionsOnly, 
@@ -175,7 +172,6 @@ Here is what we're saying in this example:
 - Add a manager for IHttpBinService api interface into the registry
   - Set some specific logging settings dedicated to IHttpBinService's manager
 - Apply common configuration to all managers by:
-  - Providing a policy registry
   - Providing a cache handler
   - Providing some logging settings (won't apply to IHttpBinService's manager as we set some specific ones)
 
@@ -191,23 +187,6 @@ Or, you could use the managers directly from the registry instead of registering
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            "TransientHttpError", 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizr(
         registry => registry
@@ -220,7 +199,6 @@ public override void ConfigureServices(IServiceCollection services)
                         LogLevel.Trace)),
     
         config => config
-            .WithPolicyRegistry(registry)
             .WithAkavacheCacheHandler()
             .WithLogging(
                 HttpTracerMode.ExceptionsOnly, 
@@ -235,7 +213,6 @@ Here is what we're saying in this example:
 - Add a manager for IHttpBinService api interface into the registry, to register it into the container
   - Set some specific logging settings dedicated to IHttpBinService's manager
 - Apply common configuration to all managers by:
-  - Providing a policy registry
   - Providing a cache handler
   - Providing some logging settings (won't apply to IHttpBinService's manager as we set some specific ones)
 
@@ -264,22 +241,6 @@ It could be usefull when requesting mutliple apis (multiple base address) commin
 ##### [Static](#tab/tabid-static)
 
 ```csharp
-// Some policies
-var registry = new PolicyRegistry
-{
-    {
-        "TransientHttpError", 
-        HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(new[]
-        {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(5),
-            TimeSpan.FromSeconds(10)
-        })
-    }
-};
-
 // Apizr registry
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry => registry
@@ -295,7 +256,6 @@ var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
             config => config.WithBaseAddress("https://httpbin.org")),
     
     config => config
-        .WithPolicyRegistry(registry)
         .WithAkavacheCacheHandler()
         .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Error)
 );
@@ -311,7 +271,6 @@ Here is what we're saying in this example:
 - Add a manager for IReqResResourceService api interface into the registry with a common base address (https://reqres.in/api) and a specific base path (resources)
 - Add a manager for IHttpBinService api interface into the registry with a speific base address (https://httpbin.org)
 - Apply common configuration to all managers by:
-  - Providing a policy registry
   - Providing a cache handler
   - Providing some logging settings
 
@@ -328,23 +287,6 @@ Or, you could use the managers directly from the registry instead of registering
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            "TransientHttpError", 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizr(
         registry => registry
@@ -360,7 +302,6 @@ public override void ConfigureServices(IServiceCollection services)
                 config => config.WithBaseAddress("https://httpbin.org")),
     
         config => config
-            .WithPolicyRegistry(registry)
             .WithAkavacheCacheHandler()
             .WithLogging(
                 HttpTracerMode.ExceptionsOnly, 
@@ -375,7 +316,6 @@ Here is what we're saying in this example:
 - Add a manager for IReqResResourceService api interface into the registry with a common base address (https://reqres.in/api) and a specific base path (resources), to register it into the container
 - Add a manager for IHttpBinService api interface into the registry with a speific base address (https://httpbin.org), to register it into the container
 - Apply common configuration to all managers by:
-  - Providing a policy registry
   - Providing a cache handler
   - Providing some logging settings
 
@@ -411,23 +351,6 @@ Here is an example of how to auto register all scanned interfaces:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            "TransientHttpError", 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizrManagerFor(options => options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_INTERFACES);
 }
@@ -435,13 +358,13 @@ public override void ConfigureServices(IServiceCollection services)
 
 Apizr will scan assemblies to auto register managers for decorated api interfaces.
 
-We registered a policy registry and provided a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+We registered provided a cache handler here as we asked for it with cache attributes while designing the api interface.
 
 ***
 
 ## Using
 
-Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.
+Here is an example of how to send a web request from an app - e.g. using Apizr in a MAUI mobile app.
 
 Inject ```IApizrManager<IYourDefinedInterface>``` where you need it - e.g. into your ViewModel constructor
 ```csharp

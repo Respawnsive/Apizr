@@ -18,11 +18,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrExtendedManagerOptions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 192
+    startLine: 200
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -58,7 +58,6 @@ items:
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.BaseUri
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.BaseAddress
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.BasePath
-  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ContextFactory
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.PrimaryHandlerFactory
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.HttpTracerMode
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.TrafficVerbosity
@@ -70,7 +69,7 @@ items:
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.OperationTimeout
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.RequestTimeout
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.Logger
-  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.PolicyRegistryKeys
+  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ResiliencePipelineRegistryKeys
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.RefitSettings
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -102,11 +101,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 195
+    startLine: 203
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -137,11 +136,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 201
+    startLine: 209
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -177,11 +176,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersExtendedFactories
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 205
+    startLine: 213
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -398,15 +397,6 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.BasePath
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).BasePath
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).BasePath
-- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ContextFactory
-  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.ContextFactory
-  parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
-  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.ContextFactory
-  name: ContextFactory
-  nameWithType: ApizrManagerOptions<TWebApi>.ContextFactory
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ContextFactory
-  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ContextFactory
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ContextFactory
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.PrimaryHandlerFactory
   parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
@@ -506,15 +496,15 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.Logger
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Logger
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Logger
-- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.PolicyRegistryKeys
-  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.PolicyRegistryKeys
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ResiliencePipelineRegistryKeys
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.ResiliencePipelineRegistryKeys
   parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
-  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.PolicyRegistryKeys
-  name: PolicyRegistryKeys
-  nameWithType: ApizrManagerOptions<TWebApi>.PolicyRegistryKeys
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.PolicyRegistryKeys
-  nameWithType.vb: ApizrManagerOptions(Of TWebApi).PolicyRegistryKeys
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).PolicyRegistryKeys
+  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
+  name: ResiliencePipelineRegistryKeys
+  nameWithType: ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.RefitSettings
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.RefitSettings
   parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
@@ -951,13 +941,6 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.BasePath
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).BasePath
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).BasePath
-- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.ContextFactory
-  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ContextFactory
-  name: ContextFactory
-  nameWithType: ApizrManagerOptions<TWebApi>.ContextFactory
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ContextFactory
-  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ContextFactory
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ContextFactory
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.PrimaryHandlerFactory
   name: PrimaryHandlerFactory
@@ -1035,13 +1018,13 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.Logger
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Logger
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Logger
-- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.PolicyRegistryKeys
-  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.PolicyRegistryKeys
-  name: PolicyRegistryKeys
-  nameWithType: ApizrManagerOptions<TWebApi>.PolicyRegistryKeys
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.PolicyRegistryKeys
-  nameWithType.vb: ApizrManagerOptions(Of TWebApi).PolicyRegistryKeys
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).PolicyRegistryKeys
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
+  name: ResiliencePipelineRegistryKeys
+  nameWithType: ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings
   name: RefitSettings

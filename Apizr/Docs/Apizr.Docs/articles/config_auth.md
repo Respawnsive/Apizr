@@ -168,7 +168,7 @@ protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage 
     HttpRequestMessage clonedRequest = null;
     string token = null;
 
-    var context = request.GetOrBuildPolicyExecutionContext();
+    var context = request.GetOrBuildApizrResilienceContext();
     if (!context.TryGetLogger(out var logger, out var logLevel, out _, out _))
     {
         logger = _logger;

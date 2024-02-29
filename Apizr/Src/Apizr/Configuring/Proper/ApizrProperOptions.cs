@@ -5,8 +5,8 @@ using System.Net.Http;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
-using Polly;
 
 namespace Apizr.Configuring.Proper
 {
@@ -18,8 +18,8 @@ namespace Apizr.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="assemblyPolicyRegistryKeys">Global policies</param>
-        /// <param name="webApiPolicyRegistryKeys">Specific policies</param>
+        /// <param name="assemblyResiliencePipelineRegistryKeys">Global resilience pipelines</param>
+        /// <param name="webApiResiliencePipelineRegistryKeys">Specific resilience pipeline</param>
         /// <param name="baseAddress">The web api base address</param>
         /// <param name="basePath">The web api base path</param>
         /// <param name="handlersParameters">Some handlers parameters</param>
@@ -30,8 +30,8 @@ namespace Apizr.Configuring.Proper
         /// <param name="logLevels">The log levels</param>
         public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions,
             Type webApiType,
-            string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys, 
+            string[] assemblyResiliencePipelineRegistryKeys,
+            string[] webApiResiliencePipelineRegistryKeys, 
             string baseAddress,
             string basePath,
             IDictionary<string, object> handlersParameters,
@@ -39,8 +39,8 @@ namespace Apizr.Configuring.Proper
             HttpMessageParts? trafficVerbosity,
             TimeSpan? operationTimeout,
             TimeSpan? requestTimeout,
-            params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
-            webApiPolicyRegistryKeys)
+            params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyResiliencePipelineRegistryKeys,
+            webApiResiliencePipelineRegistryKeys)
         {
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
             BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? () => baseAddress : sharedOptions.BaseAddressFactory;

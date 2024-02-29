@@ -19,15 +19,16 @@ using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
-using Apizr.Policing;
 using Apizr.Requesting;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
 using Polly;
-using Polly.NoOp;
 using Polly.Registry;
 using Refit;
 
@@ -55,8 +56,16 @@ namespace Apizr
                 operationTimeoutAttribute?.Timeout,
                 requestTimeoutAttribute?.Timeout, 
                 requestLogAttribute?.LogLevels);
-            var builder = new ApizrRequestOptionsBuilder(requestOptions);
+            var builder = new ApizrRequestOptionsBuilder(requestOptions) as IApizrRequestOptionsBuilder;
             optionsBuilder?.Invoke(builder);
+
+            if (builder.ApizrOptions.ContextOptionsBuilder != null)
+            {
+                var contextOptions = new ApizrResilienceContextOptions();
+                var contextOptionsBuilder = new ApizrResilienceContextOptionsBuilder(contextOptions) as IApizrResilienceContextOptionsBuilder;
+                builder.ApizrOptions.ContextOptionsBuilder.Invoke(contextOptionsBuilder);
+                builder.WithResilienceContextOptions(contextOptionsBuilder.ResilienceContextOptions);
+            }
 
             return builder;
         }
@@ -73,7 +82,7 @@ namespace Apizr
         private readonly IConnectivityHandler _connectivityHandler;
         private readonly ICacheHandler _cacheHandler;
         private readonly IMappingHandler _mappingHandler;
-        private readonly ILazyFactory<IReadOnlyPolicyRegistry<string>> _lazyPolicyRegistry;
+        private readonly ILazyFactory<ResiliencePipelineRegistry<string>> _lazyResiliencePipelineRegistry;
         private readonly string _webApiFriendlyName;
         private readonly IApizrManagerOptions<TWebApi> _apizrOptions;
 
@@ -81,7 +90,7 @@ namespace Apizr
             _cachingMethodsSet;
 
         private readonly ConcurrentDictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
-        private readonly ConcurrentDictionary<MethodDetails, IsPolicy> _policingMethodsSet;
+        private readonly ConcurrentDictionary<MethodDetails, object> _resiliencePipelineMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>> _handlerParameterMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, TimeoutAttributeBase> _operationTimeoutMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, TimeoutAttributeBase> _requestTimeoutMethodsSet;
@@ -95,23 +104,26 @@ namespace Apizr
         /// <param name="connectivityHandler">The connectivity handler</param>
         /// <param name="cacheHandler">The cache handler</param>
         /// <param name="mappingHandler">The mapping handler</param>
-        /// <param name="lazyPolicyRegistry">The policy registry</param>
+        /// <param name="lazyResiliencePipelineRegistry">The resilience pipeline registry</param>
         /// <param name="apizrOptions">The web api dedicated options</param>
-        public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, IConnectivityHandler connectivityHandler,
-            ICacheHandler cacheHandler, IMappingHandler mappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<string>> lazyPolicyRegistry,
+        public ApizrManager(ILazyFactory<TWebApi> lazyWebApi, 
+            IConnectivityHandler connectivityHandler,
+            ICacheHandler cacheHandler, 
+            IMappingHandler mappingHandler, 
+            ILazyFactory<ResiliencePipelineRegistry<string>> lazyResiliencePipelineRegistry,
             IApizrManagerOptions<TWebApi> apizrOptions)
         {
             _lazyWebApi = lazyWebApi;
             _connectivityHandler = connectivityHandler;
             _cacheHandler = cacheHandler;
-            _lazyPolicyRegistry = lazyPolicyRegistry;
             _mappingHandler = mappingHandler;
+            _lazyResiliencePipelineRegistry = lazyResiliencePipelineRegistry;
             _webApiFriendlyName = typeof(TWebApi).GetFriendlyName();
             _apizrOptions = apizrOptions;
 
             _cachingMethodsSet = new ConcurrentDictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>();
             _loggingMethodsSet = new ConcurrentDictionary<MethodDetails, LogAttributeBase>();
-            _policingMethodsSet = new ConcurrentDictionary<MethodDetails, IsPolicy>();
+            _resiliencePipelineMethodsSet = new ConcurrentDictionary<MethodDetails, object>();
             _handlerParameterMethodsSet = new ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>>();
             _operationTimeoutMethodsSet = new ConcurrentDictionary<MethodDetails, TimeoutAttributeBase>();
             _requestTimeoutMethodsSet = new ConcurrentDictionary<MethodDetails, TimeoutAttributeBase>();
@@ -155,6 +167,7 @@ namespace Apizr
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
+            ResilienceContext resilienceContext = null;
             try
             {
                 if (!_connectivityHandler.IsConnected())
@@ -167,21 +180,28 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                var policy = GetMethodPolicy(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
-                if (!(policy is INoOpPolicy))
+                var resiliencePipeline =
+                    GetMethodResiliencePipeline(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                if (resiliencePipeline != ResiliencePipeline.Empty)
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
+                        $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
-                var pollyContext = new Context(methodDetails.MethodInfo.Name,
-                    requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
+                if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                    internalOptions.ResiliencePropertiesFactories.Any())
+                    resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                     requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                     requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
-                await policy.ExecuteAsync(
-                    (_, _) => executeApiMethod.Compile().Invoke(requestOptionsBuilder.ApizrOptions, webApi),
-                    requestOptionsBuilder.ApizrOptions.Context,
-                    requestOptionsBuilder.ApizrOptions.CancellationToken);
+                requestOptionsBuilder.WithContext(resilienceContext);
+
+                requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                await resiliencePipeline.ExecuteAsync(
+                    async _ => await executeApiMethod.Compile().Invoke(requestOptionsBuilder.ApizrOptions, webApi),
+                    requestOptionsBuilder);
             }
             catch (Exception e)
             {
@@ -197,6 +217,12 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
                 requestOptionsBuilder.ApizrOptions.OnException(ex);
+            }
+            finally
+            {
+                if(resilienceContext != null &&
+                   requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                    ResilienceContextPool.Shared.Return(resilienceContext);
             }
         }
 
@@ -229,6 +255,7 @@ namespace Apizr
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
+            ResilienceContext resilienceContext = null;
             try
             {
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
@@ -243,25 +270,31 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                var policy = GetMethodPolicy(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
-                if (!(policy is INoOpPolicy))
+                var resiliencePipeline =
+                    GetMethodResiliencePipeline(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                if (resiliencePipeline != ResiliencePipeline.Empty)
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
+                        $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
                 var apiData = Map<TModelData, TApiData>(modelData);
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: {typeof(TModelData).Name} mapped to {typeof(TApiData).Name}");
 
-                var pollyContext = new Context(methodDetails.MethodInfo.Name,
-                    requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
+                if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                    internalOptions.ResiliencePropertiesFactories.Any())
+                    resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                     requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                     requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
+                requestOptionsBuilder.WithContext(resilienceContext);
 
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                await policy.ExecuteAsync(options => executeApiMethod.Compile().Invoke(options, webApi, apiData),
+                await resiliencePipeline.ExecuteAsync(
+                    async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData),
                     requestOptionsBuilder);
             }
             catch (Exception e)
@@ -278,6 +311,12 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Exception is handled by a custom action");
                 requestOptionsBuilder.ApizrOptions.OnException(ex);
+            }
+            finally
+            {
+                if (resilienceContext != null &&
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                    ResilienceContextPool.Shared.Return(resilienceContext);
             }
         }
 
@@ -345,6 +384,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                ResilienceContext resilienceContext = null;
                 Exception ex = null;
                 try
                 {
@@ -360,22 +400,27 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TApiData>(methodDetails,
-                        requestOptionsBuilder.ApizrOptions.LogLevels.Low());
-                    if (!(policy is INoOpPolicy))
+                    var resiliencePipeline =
+                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
+                            $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
-                    var pollyContext = new Context(methodDetails.MethodInfo.Name,
-                        requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                    resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                    resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                    requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
+                    requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile().Invoke(options, webApi),
+                    result = await resiliencePipeline.ExecuteAsync(
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi),
                         requestOptionsBuilder);
                 }
                 catch (Exception e)
@@ -411,6 +456,12 @@ namespace Apizr
 
                         requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                     }
+                }
+                finally
+                {
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                        ResilienceContextPool.Shared.Return(resilienceContext);
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -492,6 +543,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                ResilienceContext resilienceContext = null;
                 Exception ex = null;
                 try
                 {
@@ -507,22 +559,27 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TApiData>(methodDetails,
-                        requestOptionsBuilder.ApizrOptions.LogLevels.Low());
-                    if (!(policy is INoOpPolicy))
+                    var resiliencePipeline =
+                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
+                            $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
-                    var pollyContext = new Context(methodDetails.MethodInfo.Name,
-                        requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                    resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                    resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                    requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
+                    requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(options => executeApiMethod.Compile().Invoke(options, webApi),
+                    result = await resiliencePipeline.ExecuteAsync(
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi),
                         requestOptionsBuilder);
                 }
                 catch (Exception e)
@@ -558,6 +615,12 @@ namespace Apizr
 
                         requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                     }
+                }
+                finally
+                {
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                        ResilienceContextPool.Shared.Return(resilienceContext);
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -640,6 +703,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                ResilienceContext resilienceContext = null;
                 Exception ex = null;
                 try
                 {
@@ -655,27 +719,32 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TApiData>(methodDetails,
-                        requestOptionsBuilder.ApizrOptions.LogLevels.Low());
-                    if (!(policy is INoOpPolicy))
+                    var resiliencePipeline =
+                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
+                            $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
                     var apiData = Map<TModelData, TApiData>(modelData);
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: {typeof(TModelData).Name} mapped to {typeof(TApiData).Name}");
 
-                    var pollyContext = new Context(methodDetails.MethodInfo.Name,
-                        requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                    resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                    resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                    requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
+                    requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(
-                        options => executeApiMethod.Compile().Invoke(options, webApi, apiData), requestOptionsBuilder);
+                    result = await resiliencePipeline.ExecuteAsync(
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData),
+                        requestOptionsBuilder);
                 }
                 catch (Exception e)
                 {
@@ -710,6 +779,12 @@ namespace Apizr
 
                         requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                     }
+                }
+                finally
+                {
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                        ResilienceContextPool.Shared.Return(resilienceContext);
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -795,6 +870,7 @@ namespace Apizr
 
             if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
             {
+                ResilienceContext resilienceContext = null;
                 Exception ex = null;
                 try
                 {
@@ -810,27 +886,31 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var policy = GetMethodPolicy<TApiResultData>(methodDetails,
-                        requestOptionsBuilder.ApizrOptions.LogLevels.Low());
-                    if (!(policy is INoOpPolicy))
+                    var resiliencePipeline =
+                        GetMethodResiliencePipeline<TApiResultData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    if (resiliencePipeline != ResiliencePipeline<TApiResultData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Executing request with some policies");
+                            $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
 
                     var apiRequestData = Map<TModelRequestData, TApiRequestData>(modelRequestData);
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: {typeof(TModelRequestData).Name} mapped to {typeof(TApiRequestData).Name}");
 
-                    var pollyContext = new Context(methodDetails.MethodInfo.Name,
-                        requestOptionsBuilder.ApizrOptions.Context ?? new Context());
-                    pollyContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                    resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                    resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
-                    requestOptionsBuilder.WithContext(pollyContext, ApizrDuplicateStrategy.Replace);
+                    requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
-                    result = await policy.ExecuteAsync(
-                        options => executeApiMethod.Compile().Invoke(options, webApi, apiRequestData),
+                    result = await resiliencePipeline.ExecuteAsync(
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiRequestData),
                         requestOptionsBuilder);
                 }
                 catch (Exception e)
@@ -866,6 +946,12 @@ namespace Apizr
 
                         requestOptionsBuilder.ApizrOptions.OnException(ex as ApizrException);
                     }
+                }
+                finally
+                {
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                        ResilienceContextPool.Shared.Return(resilienceContext);
                 }
 
                 if (ex == null && result != null && _cacheHandler != null && !string.IsNullOrWhiteSpace(cacheKey) &&
@@ -1195,98 +1281,89 @@ namespace Apizr
 
         #endregion
 
-        #region Policing
+        #region Resiliencing
 
-        private IAsyncPolicy<TResult> GetMethodPolicy<TResult>(MethodDetails methodDetails, LogLevel logLevel)
+        private ResiliencePipeline<TResult> GetMethodResiliencePipeline<TResult>(MethodDetails methodDetails, LogLevel logLevel)
         {
-            if (_policingMethodsSet.TryGetValue(methodDetails, out var foundPolicy) &&
-                foundPolicy is IAsyncPolicy<TResult> policy)
-                return policy;
+            if (_resiliencePipelineMethodsSet.TryGetValue(methodDetails, out var resiliencePipelineObject) &&
+                resiliencePipelineObject is ResiliencePipeline<TResult> resiliencePipeline)
+                return resiliencePipeline;
 
-            policy = Policy.NoOpAsync<TResult>();
+            resiliencePipeline = ResiliencePipeline<TResult>.Empty;
 
-            if (_lazyPolicyRegistry == null)
-                return policy;
+            if (_lazyResiliencePipelineRegistry == null)
+                return resiliencePipeline;
 
-            var policyAttribute = GetMethodPolicyAttribute(methodDetails);
-            if (policyAttribute != null)
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
+            if (resiliencePipelineAttribute != null)
             {
-                foreach (var registryKey in policyAttribute.RegistryKeys)
+                var resiliencePipelineBuilder = new ResiliencePipelineBuilder<TResult>();
+                foreach (var registryKey in resiliencePipelineAttribute.RegistryKeys)
                 {
-                    if (_lazyPolicyRegistry.Value.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
+                    if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline(registryKey, out var registeredResiliencePipeline))
                     {
                         _apizrOptions.Logger.Log(logLevel,
-                            $"{methodDetails.MethodInfo.Name}: Found a policy with key {registryKey}");
+                            $"{methodDetails.MethodInfo.Name}: Found a resilience pipeline with key {registryKey}");
 
-                        if (registeredPolicy is IAsyncPolicy<TResult> registeredPolicyWithResult)
-                        {
-                            policy = policy is INoOpPolicy
-                                ? registeredPolicyWithResult
-                                : policy.WrapAsync(registeredPolicyWithResult);
+                        resiliencePipelineBuilder.AddPipeline(registeredResiliencePipeline);
 
-                            _apizrOptions.Logger.Log(logLevel,
-                                $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} will be applied");
-                        }
-                        else
-                            _apizrOptions.Logger.Log(logLevel,
-                                $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy<TResult>)} type and will be ignored");
+                        _apizrOptions.Logger.Log(logLevel,
+                            $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {registryKey} will be applied");
                     }
                     else
                         _apizrOptions.Logger.Log(logLevel,
-                            $"{methodDetails.MethodInfo.Name}: No policy found for key {registryKey}");
+                            $"{methodDetails.MethodInfo.Name}: No resilience pipeline found for key {registryKey}");
                 }
+
+                resiliencePipeline = resiliencePipelineBuilder.Build();
             }
 
-            _policingMethodsSet.TryAdd(methodDetails, policy);
-            return policy;
+            _resiliencePipelineMethodsSet.TryAdd(methodDetails, resiliencePipeline);
+
+            return resiliencePipeline;
         }
 
-        private IAsyncPolicy GetMethodPolicy(MethodDetails methodDetails, LogLevel logLevel)
+        private ResiliencePipeline GetMethodResiliencePipeline(MethodDetails methodDetails, LogLevel logLevel)
         {
-            if (_policingMethodsSet.TryGetValue(methodDetails, out var foundPolicy) &&
-                foundPolicy is IAsyncPolicy policy)
-                return policy;
+            if (_resiliencePipelineMethodsSet.TryGetValue(methodDetails, out var resiliencePipelineObject) &&
+                resiliencePipelineObject is ResiliencePipeline resiliencePipeline)
+                return resiliencePipeline;
 
-            policy = Policy.NoOpAsync();
+            resiliencePipeline = ResiliencePipeline.Empty;
 
-            if (_lazyPolicyRegistry == null)
-                return policy;
+            if (_lazyResiliencePipelineRegistry == null)
+                return resiliencePipeline;
 
-            var policyAttribute = GetMethodPolicyAttribute(methodDetails);
-            if (policyAttribute != null)
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
+            if (resiliencePipelineAttribute != null)
             {
-                foreach (var registryKey in policyAttribute.RegistryKeys)
+                var resiliencePipelineBuilder = new ResiliencePipelineBuilder();
+                foreach (var registryKey in resiliencePipelineAttribute.RegistryKeys)
                 {
-                    if (_lazyPolicyRegistry.Value.TryGet<IsPolicy>(registryKey, out var registeredPolicy))
+                    if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline(registryKey, out var registeredResiliencePipeline))
                     {
                         _apizrOptions.Logger.Log(logLevel,
-                            $"{methodDetails.MethodInfo.Name}: Found a policy with key {registryKey}");
+                            $"{methodDetails.MethodInfo.Name}: Found a resilience pipeline with key {registryKey}");
 
-                        if (registeredPolicy is IAsyncPolicy registeredPolicyWithoutResult)
-                        {
-                            if (policy == null)
-                                policy = registeredPolicyWithoutResult;
-                            else
-                                policy.WrapAsync(registeredPolicyWithoutResult);
+                        resiliencePipelineBuilder.AddPipeline(registeredResiliencePipeline);
 
-                            _apizrOptions.Logger.Log(logLevel,
-                                $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} will be applied");
-                        }
-                        else
-                            _apizrOptions.Logger.Log(logLevel,
-                                $"{methodDetails.MethodInfo.Name}: Policy with key {registryKey} is not of {typeof(IAsyncPolicy)} type and will be ignored");
+                        _apizrOptions.Logger.Log(logLevel,
+                            $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {registryKey} will be applied");
                     }
                     else
                         _apizrOptions.Logger.Log(logLevel,
-                            $"{methodDetails.MethodInfo.Name}: No policy found for key {registryKey}");
+                            $"{methodDetails.MethodInfo.Name}: No resilience pipeline found for key {registryKey}");
                 }
+
+                resiliencePipeline = resiliencePipelineBuilder.Build();
             }
 
-            _policingMethodsSet.TryAdd(methodDetails, policy);
-            return policy;
+            _resiliencePipelineMethodsSet.TryAdd(methodDetails, resiliencePipeline);
+
+            return resiliencePipeline;
         }
 
-        private PolicyAttributeBase GetMethodPolicyAttribute(MethodDetails methodDetails)
+        private ResiliencePipelineAttributeBase GetMethodResiliencePipelineAttribute(MethodDetails methodDetails)
         {
             if (methodDetails == null)
                 return null;
@@ -1294,21 +1371,21 @@ namespace Apizr
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(_apizrOptions.WebApiType)) // Crud api method
             {
                 var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
-                PolicyAttributeBase policyAttribute = methodDetails.MethodInfo.Name switch // Specific method policies
+                ResiliencePipelineAttributeBase resiliencePipelineAttribute = methodDetails.MethodInfo.Name switch // Specific method policies
                 {
-                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreatePolicyAttribute>(),
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllPolicyAttribute>(),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadPolicyAttribute>(),
-                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdatePolicyAttribute>(),
-                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeletePolicyAttribute>(),
+                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateResiliencePipelineAttribute>(),
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllResiliencePipelineAttribute>(),
+                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadResiliencePipelineAttribute>(),
+                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateResiliencePipelineAttribute>(),
+                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteResiliencePipelineAttribute>(),
                     _ => null
                 };
 
-                return policyAttribute;
+                return resiliencePipelineAttribute;
             }
 
             // Standard api method
-            return methodDetails.MethodInfo.GetCustomAttribute<PolicyAttribute>();
+            return methodDetails.MethodInfo.GetCustomAttribute<ResiliencePipelineAttribute>();
         }
 
         #endregion

@@ -15,11 +15,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptionsBuilder.cs
-      branch: master
+      branch: feat/resilience
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrCommonOptionsBuilder
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptionsBuilder.cs
-    startLine: 77
+    startLine: 78
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -30,8 +30,8 @@ items:
       Public Interface IApizrCommonOptionsBuilder
           Inherits IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder)
   inheritedMembers:
-  - Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
-  - Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
+  - Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
+  - Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
   - Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithRefitSettings(System.Func{Refit.RefitSettings})
   - Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithConnectivityHandler(System.Func{Apizr.Connecting.IConnectivityHandler})
   - Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithCacheHandler(System.Func{Apizr.Caching.ICacheHandler})
@@ -63,20 +63,22 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithOperationTimeout(System.Func{System.TimeSpan})
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithRequestTimeout(System.Func{System.TimeSpan})
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},System.Func{{TValue}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithBaseAddress(System.String)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithBaseAddress(System.Uri)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithBasePath(System.String)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.AddDelegatingHandler``1({THandler})
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithExCatching``1(System.Action{Apizr.ApizrException{{TResult}}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithHandlerParameter(System.String,System.Object)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},{TValue})
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithHeaders(System.String[])
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithOperationTimeout(System.TimeSpan)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithRequestTimeout(System.TimeSpan)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
   extensionMethods:
   - Apizr.Configuring.Common.IApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
   - Apizr.Configuring.Common.IApizrCommonOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
@@ -104,28 +106,28 @@ references:
   name: Apizr.Configuring.Common
   nameWithType: Apizr.Configuring.Common
   fullName: Apizr.Configuring.Common
-- uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
-  commentId: M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
+- uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
+  commentId: M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
   parent: Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
-  definition: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
-  name: WithPolicyRegistry(IReadOnlyPolicyRegistry<String>)
-  nameWithType: IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithPolicyRegistry(IReadOnlyPolicyRegistry<String>)
-  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry<System.String>)
-  nameWithType.vb: IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithPolicyRegistry(IReadOnlyPolicyRegistry(Of String))
-  fullName.vb: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry(Of System.String))
-  name.vb: WithPolicyRegistry(IReadOnlyPolicyRegistry(Of String))
+  definition: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
+  name: WithResiliencePipelineRegistry(ResiliencePipelineRegistry<String>)
+  nameWithType: IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry(ResiliencePipelineRegistry<String>)
+  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry<System.String>)
+  nameWithType.vb: IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResiliencePipelineRegistry(ResiliencePipelineRegistry(Of String))
+  fullName.vb: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry(Of System.String))
+  name.vb: WithResiliencePipelineRegistry(ResiliencePipelineRegistry(Of String))
   spec.csharp:
-  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
-    name: WithPolicyRegistry
-    nameWithType: IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithPolicyRegistry
-    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithPolicyRegistry
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
+    name: WithResiliencePipelineRegistry
+    nameWithType: IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -142,17 +144,17 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
-    name: WithPolicyRegistry
-    nameWithType: IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithPolicyRegistry
-    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithPolicyRegistry
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
+    name: WithResiliencePipelineRegistry
+    nameWithType: IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResiliencePipelineRegistry
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResiliencePipelineRegistry
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -168,21 +170,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
-  commentId: M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
+- uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
+  commentId: M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
   parent: Apizr.Configuring.Common.IApizrCommonOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
-  definition: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
-  name: WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<String>>)
-  nameWithType: IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<String>>)
-  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithPolicyRegistry(System.Func<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>)
-  nameWithType.vb: IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithPolicyRegistry(Func(Of IReadOnlyPolicyRegistry(Of String)))
-  fullName.vb: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithPolicyRegistry(System.Func(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String)))
-  name.vb: WithPolicyRegistry(Func(Of IReadOnlyPolicyRegistry(Of String)))
+  definition: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
+  name: WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<String>>)
+  nameWithType: IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<String>>)
+  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry(System.Func<Polly.Registry.ResiliencePipelineRegistry<System.String>>)
+  nameWithType.vb: IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResiliencePipelineRegistry(Func(Of ResiliencePipelineRegistry(Of String)))
+  fullName.vb: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResiliencePipelineRegistry(System.Func(Of Polly.Registry.ResiliencePipelineRegistry(Of System.String)))
+  name.vb: WithResiliencePipelineRegistry(Func(Of ResiliencePipelineRegistry(Of String)))
   spec.csharp:
-  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
-    name: WithPolicyRegistry
-    nameWithType: IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithPolicyRegistry
-    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithPolicyRegistry
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
+    name: WithResiliencePipelineRegistry
+    nameWithType: IApizrCommonOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry
   - name: (
     nameWithType: (
     fullName: (
@@ -194,10 +196,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -217,10 +219,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
-    name: WithPolicyRegistry
-    nameWithType: IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithPolicyRegistry
-    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithPolicyRegistry
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
+    name: WithResiliencePipelineRegistry
+    nameWithType: IApizrCommonOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResiliencePipelineRegistry
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResiliencePipelineRegistry
   - name: (
     nameWithType: (
     fullName: (
@@ -232,10 +234,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -3137,6 +3139,100 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},System.Func{{TValue}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<TValue>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<TValue>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, System.Func<TValue>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of TValue))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), System.Func(Of TValue))
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of TValue))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})
+    name: WithResilienceProperty<TValue>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResilienceProperty<TValue>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResilienceProperty<TValue>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})
+    name: WithResilienceProperty(Of TValue)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResilienceProperty(Of TValue)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResilienceProperty(Of TValue)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithBaseAddress(System.String)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithBaseAddress(System.String)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
@@ -3441,84 +3537,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  name: WithContext(Func<Context>, ApizrDuplicateStrategy)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithContext(Func<Context>, ApizrDuplicateStrategy)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithContext(System.Func<Polly.Context>, Apizr.Configuring.ApizrDuplicateStrategy)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithContext(System.Func(Of Polly.Context), Apizr.Configuring.ApizrDuplicateStrategy)
-  name.vb: WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithContext
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithContext
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.ApizrDuplicateStrategy
-    name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithContext
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithContext
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.ApizrDuplicateStrategy
-    name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
@@ -3778,6 +3796,78 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},{TValue})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, TValue)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), TValue)
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty<TValue>
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResilienceProperty<TValue>
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResilienceProperty<TValue>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty(Of TValue)
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResilienceProperty(Of TValue)
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResilienceProperty(Of TValue)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
@@ -3981,6 +4071,68 @@ references:
     nameWithType: TimeSpan
     fullName: System.TimeSpan
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Common.IApizrCommonOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  name: WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResilienceContextOptions(System.Action<Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder>)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResilienceContextOptions(System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder))
+  name.vb: WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrCommonOptions, IApizrCommonOptionsBuilder>.WithResilienceContextOptions
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder>.WithResilienceContextOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of IApizrCommonOptions, IApizrCommonOptionsBuilder).WithResilienceContextOptions
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Common.IApizrCommonOptions, Apizr.Configuring.Common.IApizrCommonOptionsBuilder).WithResilienceContextOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
   - name: )
     nameWithType: )
     fullName: )
@@ -4610,27 +4762,27 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
-  commentId: M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
+- uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
+  commentId: M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
   isExternal: true
-  name: WithPolicyRegistry(IReadOnlyPolicyRegistry<String>)
-  nameWithType: IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithPolicyRegistry(IReadOnlyPolicyRegistry<String>)
-  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry<System.String>)
-  nameWithType.vb: IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithPolicyRegistry(IReadOnlyPolicyRegistry(Of String))
-  fullName.vb: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry(Of System.String))
-  name.vb: WithPolicyRegistry(IReadOnlyPolicyRegistry(Of String))
+  name: WithResiliencePipelineRegistry(ResiliencePipelineRegistry<String>)
+  nameWithType: IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry(ResiliencePipelineRegistry<String>)
+  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry<System.String>)
+  nameWithType.vb: IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithResiliencePipelineRegistry(ResiliencePipelineRegistry(Of String))
+  fullName.vb: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry(Of System.String))
+  name.vb: WithResiliencePipelineRegistry(ResiliencePipelineRegistry(Of String))
   spec.csharp:
-  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
-    name: WithPolicyRegistry
-    nameWithType: IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithPolicyRegistry
-    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithPolicyRegistry
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
+    name: WithResiliencePipelineRegistry
+    nameWithType: IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -4647,17 +4799,17 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(Polly.Registry.IReadOnlyPolicyRegistry{System.String})
-    name: WithPolicyRegistry
-    nameWithType: IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithPolicyRegistry
-    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithPolicyRegistry
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})
+    name: WithResiliencePipelineRegistry
+    nameWithType: IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithResiliencePipelineRegistry
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithResiliencePipelineRegistry
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -4727,20 +4879,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
-  commentId: M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
+- uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
+  commentId: M:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
   isExternal: true
-  name: WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<String>>)
-  nameWithType: IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<String>>)
-  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithPolicyRegistry(System.Func<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>)
-  nameWithType.vb: IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithPolicyRegistry(Func(Of IReadOnlyPolicyRegistry(Of String)))
-  fullName.vb: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithPolicyRegistry(System.Func(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String)))
-  name.vb: WithPolicyRegistry(Func(Of IReadOnlyPolicyRegistry(Of String)))
+  name: WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<String>>)
+  nameWithType: IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<String>>)
+  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry(System.Func<Polly.Registry.ResiliencePipelineRegistry<System.String>>)
+  nameWithType.vb: IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithResiliencePipelineRegistry(Func(Of ResiliencePipelineRegistry(Of String)))
+  fullName.vb: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithResiliencePipelineRegistry(System.Func(Of Polly.Registry.ResiliencePipelineRegistry(Of System.String)))
+  name.vb: WithResiliencePipelineRegistry(Func(Of ResiliencePipelineRegistry(Of String)))
   spec.csharp:
-  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
-    name: WithPolicyRegistry
-    nameWithType: IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithPolicyRegistry
-    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithPolicyRegistry
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
+    name: WithResiliencePipelineRegistry
+    nameWithType: IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder<TApizrCommonOptions, TApizrCommonOptionsBuilder>.WithResiliencePipelineRegistry
   - name: (
     nameWithType: (
     fullName: (
@@ -4752,10 +4904,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: <
     nameWithType: <
@@ -4775,10 +4927,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithPolicyRegistry(System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}})
-    name: WithPolicyRegistry
-    nameWithType: IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithPolicyRegistry
-    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithPolicyRegistry
+  - uid: Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})
+    name: WithResiliencePipelineRegistry
+    nameWithType: IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithResiliencePipelineRegistry
+    fullName: Apizr.Configuring.Common.IApizrCommonOptionsBuilder(Of TApizrCommonOptions, TApizrCommonOptionsBuilder).WithResiliencePipelineRegistry
   - name: (
     nameWithType: (
     fullName: (
@@ -4790,10 +4942,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
+    nameWithType: ResiliencePipelineRegistry
+    fullName: Polly.Registry.ResiliencePipelineRegistry
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -7769,6 +7921,99 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})
+  isExternal: true
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<TValue>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, Func<TValue>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, System.Func<TValue>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of TValue))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), System.Func(Of TValue))
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), Func(Of TValue))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})
+    name: WithResilienceProperty<TValue>
+    nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})
+    name: WithResilienceProperty(Of TValue)
+    nameWithType: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)
+    fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Func`1
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
   isExternal: true
@@ -8120,83 +8365,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-  isExternal: true
-  name: WithContext(Func<Context>, ApizrDuplicateStrategy)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithContext(Func<Context>, ApizrDuplicateStrategy)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithContext(System.Func<Polly.Context>, Apizr.Configuring.ApizrDuplicateStrategy)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithContext(System.Func(Of Polly.Context), Apizr.Configuring.ApizrDuplicateStrategy)
-  name.vb: WithContext(Func(Of Context), ApizrDuplicateStrategy)
-  spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithContext
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithContext
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.ApizrDuplicateStrategy
-    name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithContext
-    nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithContext
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`1
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Polly.Context
-    name: Context
-    nameWithType: Context
-    fullName: Polly.Context
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Apizr.Configuring.ApizrDuplicateStrategy
-    name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
@@ -8507,6 +8675,77 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  isExternal: true
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, TValue)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), TValue)
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty<TValue>
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty(Of TValue)
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    nameWithType: ResiliencePropertyKey
+    fullName: Polly.ResiliencePropertyKey
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   isExternal: true
@@ -8706,6 +8945,67 @@ references:
     nameWithType: TimeSpan
     fullName: System.TimeSpan
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  isExternal: true
+  name: WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions(System.Action<Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder>)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions(System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder))
+  name.vb: WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions
+    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    nameWithType: IApizrResilienceContextOptionsBuilder
+    fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
   - name: )
     nameWithType: )
     fullName: )

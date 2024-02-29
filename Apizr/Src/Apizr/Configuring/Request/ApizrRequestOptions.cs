@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -30,6 +31,9 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
 
     /// <inheritdoc />
     public bool ClearCache { get; internal set; }
+
+    /// <inheritdoc />
+    public IApizrResilienceContextOptions ResilienceContextOptions { get; internal set; }
 
     /// <inheritdoc />
     Expression IApizrRequestOptions.OriginalExpression { get; set; }

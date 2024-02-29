@@ -17,7 +17,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Requesting/Handling/ExecuteOptionalUnitRequestHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteOptionalUnitRequestHandler
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Requesting/Handling/ExecuteOptionalUnitRequestHandler.cs
@@ -25,7 +25,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
-  summary: "\nThe mediation execute optional unit request handler\n"
+  summary: The mediation execute optional unit request handler
   example: []
   syntax:
     content: 'public class ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData> : ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>, IRequestHandler<ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Option<Unit, ApizrException>>'
@@ -36,10 +36,7 @@ items:
       description: The model data type
     - id: TApiData
       description: The api data type
-    content.vb: >-
-      Public Class ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData)
-          Inherits ExecuteOptionalUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), IApizrRequestOptions, IApizrRequestOptionsBuilder)
-          Implements IRequestHandler(Of ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData),  Option(Of Unit, ApizrException) )
+    content.vb: Public Class ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData) Inherits ExecuteOptionalUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), IApizrRequestOptions, IApizrRequestOptionsBuilder) Implements IRequestHandler(Of ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), Option(Of Unit, ApizrException))
   inheritance:
   - System.Object
   - Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
@@ -58,12 +55,6 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   nameWithType.vb: ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData)
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
   fullName.vb: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData)
   name.vb: ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData)
 - uid: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.#ctor(Apizr.IApizrManager{`0})
@@ -80,7 +71,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Requesting/Handling/ExecuteOptionalUnitRequestHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Requesting/Handling/ExecuteOptionalUnitRequestHandler.cs
@@ -95,13 +86,9 @@ items:
       type: Apizr.IApizrManager{{TWebApi}}
     content.vb: Public Sub New(webApiManager As IApizrManager(Of TWebApi))
   overload: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.#ctor*
-  nameWithType.vb: ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestHandler(IApizrManager(Of TWebApi))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestHandler(Apizr.IApizrManager(Of TWebApi))
-  name.vb: ExecuteOptionalUnitRequestHandler(IApizrManager(Of TWebApi))
+  nameWithType.vb: ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).New(IApizrManager(Of TWebApi))
+  fullName.vb: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).New(Apizr.IApizrManager(Of TWebApi))
+  name.vb: New(IApizrManager(Of TWebApi))
 - uid: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},System.Threading.CancellationToken)
   commentId: M:Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},System.Threading.CancellationToken)
   id: Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},System.Threading.CancellationToken)
@@ -116,7 +103,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Requesting/Handling/ExecuteOptionalUnitRequestHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Handle
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Requesting/Handling/ExecuteOptionalUnitRequestHandler.cs
@@ -124,49 +111,81 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Requesting.Handling
-  summary: "\nHandling the execute unit request\n"
+  summary: Handling the execute unit request
   example: []
   syntax:
-    content: public override async Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData> request, CancellationToken cancellationToken)
+    content: public override Task<Option<Unit, ApizrException>> Handle(ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData> request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}}
+      description: The execute result request
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
       description: ''
-    content.vb: Public Overrides Function Handle(request As ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), cancellationToken As CancellationToken) As Task(Of  Option(Of Unit, ApizrException)
+    content.vb: Public Overrides Function Handle(request As ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), cancellationToken As CancellationToken) As Task(Of [Option](Of Unit, ApizrException))
   overridden: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},System.Threading.CancellationToken)
   overload: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.Handle*
   nameWithType.vb: ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).Handle(ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), CancellationToken)
-  modifiers.csharp:
-  - public
-  - override
-  - async
-  modifiers.vb:
-  - Public
-  - Overrides
   fullName.vb: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), System.Threading.CancellationToken)
   name.vb: Handle(ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), CancellationToken)
 references:
 - uid: Apizr.Optional.Requesting.Handling
   commentId: N:Apizr.Optional.Requesting.Handling
+  href: Apizr.html
   name: Apizr.Optional.Requesting.Handling
   nameWithType: Apizr.Optional.Requesting.Handling
   fullName: Apizr.Optional.Requesting.Handling
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Requesting
+    name: Requesting
+    href: Apizr.Optional.Requesting.html
+  - name: .
+  - uid: Apizr.Optional.Requesting.Handling
+    name: Handling
+    href: Apizr.Optional.Requesting.Handling.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Requesting
+    name: Requesting
+    href: Apizr.Optional.Requesting.html
+  - name: .
+  - uid: Apizr.Optional.Requesting.Handling
+    name: Handling
+    href: Apizr.Optional.Requesting.Handling.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Requesting.Handling.Base
   definition: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   name: RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -176,51 +195,38 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{`0,`1,`2,Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Requesting.Handling.Base
   definition: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7
+  href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html
   name: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -230,195 +236,118 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7
     name: ExecuteUnitRequestHandlerBase
-    nameWithType: ExecuteUnitRequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase
+    href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7
     name: ExecuteUnitRequestHandlerBase
-    nameWithType: ExecuteUnitRequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase{`0,`1,`2,Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Optional.Requesting.Handling.Base
   definition: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`6
+  href: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase-6.html
   name: ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -428,143 +357,86 @@ references:
   spec.csharp:
   - uid: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`6
     name: ExecuteOptionalUnitRequestHandlerBase
-    nameWithType: ExecuteOptionalUnitRequestHandlerBase
-    fullName: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase
+    href: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase-6.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`6
     name: ExecuteOptionalUnitRequestHandlerBase
-    nameWithType: ExecuteOptionalUnitRequestHandlerBase
-    fullName: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase-6.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequestHandler{Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   commentId: T:MediatR.IRequestHandler{Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   parent: MediatR
   definition: MediatR.IRequestHandler`2
+  href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   name: IRequestHandler<ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Option<Unit, ApizrException>>
   nameWithType: IRequestHandler<ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Option<Unit, ApizrException>>
   fullName: MediatR.IRequestHandler<Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Optional.Option<MediatR.Unit, Apizr.ApizrException>>
@@ -574,133 +446,80 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WebApiManager
   commentId: F:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{`0,`1,`2,Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WebApiManager
   parent: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   definition: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.WebApiManager
+  href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_7_WebApiManager
   name: WebApiManager
   nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>.WebApiManager
   fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WebApiManager
@@ -710,6 +529,7 @@ references:
   commentId: M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{`0,`1,`2,Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},System.Threading.CancellationToken)
   parent: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{{TWebApi},{TModelData},{TApiData},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{{TWebApi},{TModelData},{TApiData}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   definition: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.Handle(`4,System.Threading.CancellationToken)
+  href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_7_Handle__4_System_Threading_CancellationToken_
   name: Handle(ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, CancellationToken)
   nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>.Handle(ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, CancellationToken)
   fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, System.Threading.CancellationToken)
@@ -717,380 +537,284 @@ references:
   fullName.vb: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, Optional.Option(Of MediatR.Unit, Apizr.ApizrException), Apizr.Optional.Requesting.ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), System.Threading.CancellationToken)
   name.vb: Handle(ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), CancellationToken)
   spec.csharp:
-  - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.Handle(`4,System.Threading.CancellationToken)
+  - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{`0,`1,`2,Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},System.Threading.CancellationToken)
     name: Handle
-    nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Option<Unit, ApizrException>, ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, IApizrRequestOptions, IApizrRequestOptionsBuilder>.Handle
-    fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.Handle
+    href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_7_Handle__4_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.Handle(`4,System.Threading.CancellationToken)
+  - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase{`0,`1,`2,Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2},System.Threading.CancellationToken)
     name: Handle
-    nameWithType: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, Option(Of Unit, ApizrException), ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), IApizrRequestOptions, IApizrRequestOptionsBuilder).Handle
-    fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, Optional.Option(Of MediatR.Unit, Apizr.ApizrException), Apizr.Optional.Requesting.ExecuteOptionalUnitRequest(Of TWebApi, TModelData, TApiData), Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).Handle
+    href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_7_Handle__4_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
   commentId: T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   name: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -1100,50 +824,74 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.Handling.Base
   commentId: N:Apizr.Mediation.Requesting.Handling.Base
+  href: Apizr.html
   name: Apizr.Mediation.Requesting.Handling.Base
   nameWithType: Apizr.Mediation.Requesting.Handling.Base
   fullName: Apizr.Mediation.Requesting.Handling.Base
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling
+    name: Handling
+    href: Apizr.Mediation.Requesting.Handling.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling.Base
+    name: Base
+    href: Apizr.Mediation.Requesting.Handling.Base.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling
+    name: Handling
+    href: Apizr.Mediation.Requesting.Handling.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling.Base
+    name: Base
+    href: Apizr.Mediation.Requesting.Handling.Base.html
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7
   commentId: T:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7
+  href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html
   name: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -1153,105 +901,58 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7
     name: ExecuteUnitRequestHandlerBase
-    nameWithType: ExecuteUnitRequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase
+    href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TFormattedModelResultData
-    nameWithType: TFormattedModelResultData
-    fullName: TFormattedModelResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7
     name: ExecuteUnitRequestHandlerBase
-    nameWithType: ExecuteUnitRequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TFormattedModelResultData
-    nameWithType: TFormattedModelResultData
-    fullName: TFormattedModelResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`6
   commentId: T:Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`6
+  href: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase-6.html
   name: ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -1261,96 +962,95 @@ references:
   spec.csharp:
   - uid: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`6
     name: ExecuteOptionalUnitRequestHandlerBase
-    nameWithType: ExecuteOptionalUnitRequestHandlerBase
-    fullName: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase
+    href: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase-6.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase`6
     name: ExecuteOptionalUnitRequestHandlerBase
-    nameWithType: ExecuteOptionalUnitRequestHandlerBase
-    fullName: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Requesting.Handling.Base.ExecuteOptionalUnitRequestHandlerBase-6.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Requesting.Handling.Base
   commentId: N:Apizr.Optional.Requesting.Handling.Base
+  href: Apizr.html
   name: Apizr.Optional.Requesting.Handling.Base
   nameWithType: Apizr.Optional.Requesting.Handling.Base
   fullName: Apizr.Optional.Requesting.Handling.Base
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Requesting
+    name: Requesting
+    href: Apizr.Optional.Requesting.html
+  - name: .
+  - uid: Apizr.Optional.Requesting.Handling
+    name: Handling
+    href: Apizr.Optional.Requesting.Handling.html
+  - name: .
+  - uid: Apizr.Optional.Requesting.Handling.Base
+    name: Base
+    href: Apizr.Optional.Requesting.Handling.Base.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Requesting
+    name: Requesting
+    href: Apizr.Optional.Requesting.html
+  - name: .
+  - uid: Apizr.Optional.Requesting.Handling
+    name: Handling
+    href: Apizr.Optional.Requesting.Handling.html
+  - name: .
+  - uid: Apizr.Optional.Requesting.Handling.Base
+    name: Base
+    href: Apizr.Optional.Requesting.Handling.Base.html
 - uid: MediatR.IRequestHandler`2
   commentId: T:MediatR.IRequestHandler`2
   isExternal: true
@@ -1363,45 +1063,25 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR
   commentId: N:MediatR
   isExternal: true
@@ -1410,6 +1090,7 @@ references:
   fullName: MediatR
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.WebApiManager
   commentId: F:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.WebApiManager
+  href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_7_WebApiManager
   name: WebApiManager
   nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.WebApiManager
   fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.WebApiManager
@@ -1418,6 +1099,7 @@ references:
 - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.Handle(`4,System.Threading.CancellationToken)
   commentId: M:Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.Handle(`4,System.Threading.CancellationToken)
   isExternal: true
+  href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_7_Handle__4_System_Threading_CancellationToken_
   name: Handle(TRequest, CancellationToken)
   nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle(TRequest, CancellationToken)
   fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle(TRequest, System.Threading.CancellationToken)
@@ -1426,58 +1108,43 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.Handle(`4,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle
-    fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase<TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle
+    href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_7_Handle__4_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase`7.Handle(`4,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).Handle
-    fullName: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase(Of TWebApi, TModelData, TApiData, TFormattedModelResultData, TRequest, TApizrRequestOptions, TApizrRequestOptionsBuilder).Handle
+    href: Apizr.Mediation.Requesting.Handling.Base.ExecuteUnitRequestHandlerBase-7.html#Apizr_Mediation_Requesting_Handling_Base_ExecuteUnitRequestHandlerBase_7_Handle__4_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.#ctor*
   commentId: Overload:Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.#ctor
+  href: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler-3.html#Apizr_Optional_Requesting_Handling_ExecuteOptionalUnitRequestHandler_3__ctor_Apizr_IApizrManager__0__
   name: ExecuteOptionalUnitRequestHandler
   nameWithType: ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestHandler
   fullName: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData>.ExecuteOptionalUnitRequestHandler
-  nameWithType.vb: ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestHandler
-  fullName.vb: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).ExecuteOptionalUnitRequestHandler
+  nameWithType.vb: ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).New
+  fullName.vb: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler(Of TWebApi, TModelData, TApiData).New
+  name.vb: New
 - uid: Apizr.IApizrManager{{TWebApi}}
   commentId: T:Apizr.IApizrManager{``0}
   parent: Apizr
   definition: Apizr.IApizrManager`1
+  href: Apizr.IApizrManager-1.html
   name: IApizrManager<TWebApi>
   nameWithType: IApizrManager<TWebApi>
   fullName: Apizr.IApizrManager<TWebApi>
@@ -1487,33 +1154,22 @@ references:
   spec.csharp:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
+    href: Apizr.IApizrManager-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.IApizrManager-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.IApizrManager`1
   commentId: T:Apizr.IApizrManager`1
+  href: Apizr.IApizrManager-1.html
   name: IApizrManager<TWebApi>
   nameWithType: IApizrManager<TWebApi>
   fullName: Apizr.IApizrManager<TWebApi>
@@ -1523,38 +1179,28 @@ references:
   spec.csharp:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
+    href: Apizr.IApizrManager-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.IApizrManager-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr
   commentId: N:Apizr
+  href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
 - uid: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.Handle*
   commentId: Overload:Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler`3.Handle
+  href: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler-3.html#Apizr_Optional_Requesting_Handling_ExecuteOptionalUnitRequestHandler_3_Handle_Apizr_Optional_Requesting_ExecuteOptionalUnitRequest__0__1__2__System_Threading_CancellationToken_
   name: Handle
   nameWithType: ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData>.Handle
   fullName: Apizr.Optional.Requesting.Handling.ExecuteOptionalUnitRequestHandler<TWebApi, TModelData, TApiData>.Handle
@@ -1564,6 +1210,7 @@ references:
   commentId: T:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest{`0,`1,`2}
   parent: Apizr.Optional.Requesting
   definition: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
+  href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   name: ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>
   nameWithType: ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>
   fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>
@@ -1573,59 +1220,36 @@ references:
   spec.csharp:
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.CancellationToken
   commentId: T:System.Threading.CancellationToken
   parent: System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
@@ -1633,6 +1257,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<Unit, ApizrException>>
   nameWithType: Task<Option<Unit, ApizrException>>
   fullName: System.Threading.Tasks.Task<Optional.Option<MediatR.Unit, Apizr.ApizrException>>
@@ -1642,75 +1267,50 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
   commentId: T:Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
+  href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   name: ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>
   nameWithType: ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>
   fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest<TWebApi, TModelData, TApiData>
@@ -1720,69 +1320,92 @@ references:
   spec.csharp:
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest`3
     name: ExecuteOptionalUnitRequest
-    nameWithType: ExecuteOptionalUnitRequest
-    fullName: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Requesting.ExecuteOptionalUnitRequest-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Requesting
   commentId: N:Apizr.Optional.Requesting
+  href: Apizr.html
   name: Apizr.Optional.Requesting
   nameWithType: Apizr.Optional.Requesting
   fullName: Apizr.Optional.Requesting
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Requesting
+    name: Requesting
+    href: Apizr.Optional.Requesting.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Requesting
+    name: Requesting
+    href: Apizr.Optional.Requesting.html
 - uid: System.Threading
   commentId: N:System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -1792,36 +1415,55 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

@@ -13,8 +13,8 @@ items:
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.HttpTracerMode
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.LetThrowOnExceptionWithEmptyCache
-  - Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.LogLevels
+  - Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.OnException
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.Options
@@ -34,7 +34,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrManagerOptions
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -42,16 +42,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nOptions available for static registrations\n"
+  summary: Options available for static registrations
   example: []
   syntax:
     content: 'public class ApizrManagerOptions<TWebApi> : IApizrManagerOptions<TWebApi>, IApizrManagerOptionsBase, IApizrCommonOptionsBase, IApizrProperOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase'
     typeParameters:
     - id: TWebApi
       description: ''
-    content.vb: >-
-      Public Class ApizrManagerOptions(Of TWebApi)
-          Implements IApizrManagerOptions(Of TWebApi), IApizrManagerOptionsBase, IApizrCommonOptionsBase, IApizrProperOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase
+    content.vb: Public Class ApizrManagerOptions(Of TWebApi) Implements IApizrManagerOptions(Of TWebApi), IApizrManagerOptionsBase, IApizrCommonOptionsBase, IApizrProperOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase
   inheritance:
   - System.Object
   derivedClasses:
@@ -73,12 +71,6 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   nameWithType.vb: ApizrManagerOptions(Of TWebApi)
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi)
   name.vb: ApizrManagerOptions(Of TWebApi)
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.Options
@@ -95,7 +87,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Options
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -103,7 +95,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nThe options\n"
+  summary: The options
   example: []
   syntax:
     content: protected readonly IApizrManagerOptionsBase Options
@@ -111,12 +103,6 @@ items:
       type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     content.vb: Protected ReadOnly Options As IApizrManagerOptionsBase
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Options
-  modifiers.csharp:
-  - protected
-  - readonly
-  modifiers.vb:
-  - Protected
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Options
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   commentId: M:Apizr.Configuring.Manager.ApizrManagerOptions`1.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
@@ -132,7 +118,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -140,7 +126,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nThe options constructor\n"
+  summary: The options constructor
   example: []
   syntax:
     content: public ApizrManagerOptions(IApizrManagerOptionsBase apizrOptions)
@@ -150,12 +136,9 @@ items:
       description: The base options
     content.vb: Public Sub New(apizrOptions As IApizrManagerOptionsBase)
   overload: Apizr.Configuring.Manager.ApizrManagerOptions`1.#ctor*
-  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ApizrManagerOptions(IApizrManagerOptionsBase)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ApizrManagerOptions(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).New(IApizrManagerOptionsBase)
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).New(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  name.vb: New(IApizrManagerOptionsBase)
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.WebApiType
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.WebApiType
   id: WebApiType
@@ -170,7 +153,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApiType
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -178,7 +161,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nWeb api interface type\n"
+  summary: Web api interface type
   example: []
   syntax:
     content: public Type WebApiType { get; }
@@ -190,12 +173,6 @@ items:
   implements:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).WebApiType
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).WebApiType
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseUri
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseUri
@@ -211,7 +188,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUri
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -219,7 +196,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nBase address\n"
+  summary: Base address
   example: []
   syntax:
     content: public Uri BaseUri { get; }
@@ -231,12 +208,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).BaseUri
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).BaseUri
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseAddress
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseAddress
@@ -252,7 +223,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddress
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -260,7 +231,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nBase address\n"
+  summary: Base address
   example: []
   syntax:
     content: public string BaseAddress { get; }
@@ -272,12 +243,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).BaseAddress
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).BaseAddress
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.BasePath
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.BasePath
@@ -293,7 +258,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePath
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -301,7 +266,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nBase path\n"
+  summary: Base path
   example: []
   syntax:
     content: public string BasePath { get; }
@@ -313,12 +278,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).BasePath
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).BasePath
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.PrimaryHandlerFactory
@@ -334,7 +293,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: PrimaryHandlerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -342,7 +301,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nThe primary Http message handler factory (set internally)\n"
+  summary: The primary Http message handler factory (set internally)
   example: []
   syntax:
     content: public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; }
@@ -354,12 +313,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).PrimaryHandlerFactory
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).PrimaryHandlerFactory
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.HttpTracerMode
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.HttpTracerMode
@@ -375,7 +328,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerMode
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -383,7 +336,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nHttp traffic tracing mode\n"
+  summary: Http traffic tracing mode
   example: []
   syntax:
     content: public HttpTracerMode HttpTracerMode { get; }
@@ -395,12 +348,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).HttpTracerMode
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).HttpTracerMode
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.TrafficVerbosity
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.TrafficVerbosity
@@ -416,7 +363,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosity
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -424,7 +371,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nHttp traffic tracing verbosity\n"
+  summary: Http traffic tracing verbosity
   example: []
   syntax:
     content: public HttpMessageParts TrafficVerbosity { get; }
@@ -436,12 +383,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).TrafficVerbosity
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).TrafficVerbosity
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.LogLevels
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.LogLevels
@@ -457,7 +398,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevels
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -465,7 +406,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nLog levels while writing\n"
+  summary: Log levels while writing
   example: []
   syntax:
     content: public LogLevel[] LogLevels { get; }
@@ -477,12 +418,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).LogLevels
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).LogLevels
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.OnException
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.OnException
@@ -498,7 +433,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: OnException
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -506,7 +441,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nCatching potential exception if defined\n"
+  summary: Catching potential exception if defined
   example: []
   syntax:
     content: public Action<ApizrException> OnException { get; }
@@ -518,12 +453,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).OnException
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).OnException
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.LetThrowOnExceptionWithEmptyCache
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.LetThrowOnExceptionWithEmptyCache
@@ -539,7 +468,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: LetThrowOnExceptionWithEmptyCache
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -547,7 +476,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nLet throw potential exception if there&apos;s no cached data to return\n"
+  summary: Let throw potential exception if there's no cached data to return
   example: []
   syntax:
     content: public bool LetThrowOnExceptionWithEmptyCache { get; }
@@ -559,12 +488,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).LetThrowOnExceptionWithEmptyCache
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).LetThrowOnExceptionWithEmptyCache
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.HandlersParameters
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.HandlersParameters
@@ -580,7 +503,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: HandlersParameters
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -588,7 +511,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nParameters passed through delegating handlers\n"
+  summary: Parameters passed through delegating handlers
   example: []
   syntax:
     content: public IDictionary<string, object> HandlersParameters { get; }
@@ -600,12 +523,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).HandlersParameters
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).HandlersParameters
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers
@@ -621,7 +538,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Headers
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -629,7 +546,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nHeaders to add to the request\n"
+  summary: Headers to add to the request
   example: []
   syntax:
     content: public IList<string> Headers { get; }
@@ -641,12 +558,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Headers
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Headers
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout
@@ -662,7 +573,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeout
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -670,7 +581,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nThe operation timeout (overall request tries)\n"
+  summary: The operation timeout (overall request tries)
   example: []
   syntax:
     content: public TimeSpan? OperationTimeout { get; }
@@ -682,12 +593,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).OperationTimeout
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).OperationTimeout
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.RequestTimeout
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RequestTimeout
@@ -703,7 +608,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeout
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -711,7 +616,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nThe request timeout (each request try)\n"
+  summary: The request timeout (each request try)
   example: []
   syntax:
     content: public TimeSpan? RequestTimeout { get; }
@@ -723,12 +628,6 @@ items:
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).RequestTimeout
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).RequestTimeout
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger
@@ -744,7 +643,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Logger
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -752,7 +651,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nThe logger instance\n"
+  summary: The logger instance
   example: []
   syntax:
     content: public ILogger Logger { get; }
@@ -764,12 +663,6 @@ items:
   implements:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Logger
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Logger
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
@@ -785,7 +678,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResiliencePipelineRegistryKeys
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -793,7 +686,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nResilience pipeline keys from the registry\n"
+  summary: Resilience pipeline keys from the registry
   example: []
   syntax:
     content: public string[] ResiliencePipelineRegistryKeys { get; }
@@ -805,12 +698,6 @@ items:
   implements:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings
@@ -826,7 +713,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettings
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
@@ -834,7 +721,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
-  summary: "\nRefit settings\n"
+  summary: Refit settings
   example: []
   syntax:
     content: public RefitSettings RefitSettings { get; }
@@ -846,66 +733,54 @@ items:
   implements:
   - Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).RefitSettings
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).RefitSettings
 references:
-- uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
-  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptions`1
-  name: IApizrManagerOptions<TWebApi>
-  nameWithType: IApizrManagerOptions<TWebApi>
-  fullName: Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>
-  nameWithType.vb: IApizrManagerOptions(Of TWebApi)
-  fullName.vb: Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi)
-  name.vb: IApizrManagerOptions(Of TWebApi)
-  spec.csharp:
-  - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
-    name: IApizrManagerOptions
-    nameWithType: IApizrManagerOptions
-    fullName: Apizr.Configuring.Manager.IApizrManagerOptions
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
-    name: IApizrManagerOptions
-    nameWithType: IApizrManagerOptions
-    fullName: Apizr.Configuring.Manager.IApizrManagerOptions
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Manager
   commentId: N:Apizr.Configuring.Manager
+  href: Apizr.html
   name: Apizr.Configuring.Manager
   nameWithType: Apizr.Configuring.Manager
   fullName: Apizr.Configuring.Manager
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Manager
+    name: Manager
+    href: Apizr.Configuring.Manager.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Manager
+    name: Manager
+    href: Apizr.Configuring.Manager.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Configuring.Manager.IApizrManagerOptions{{TWebApi}}
   commentId: T:Apizr.Configuring.Manager.IApizrManagerOptions{`0}
   parent: Apizr.Configuring.Manager
   definition: Apizr.Configuring.Manager.IApizrManagerOptions`1
+  href: Apizr.Configuring.Manager.IApizrManagerOptions-1.html
   name: IApizrManagerOptions<TWebApi>
   nameWithType: IApizrManagerOptions<TWebApi>
   fullName: Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>
@@ -915,64 +790,58 @@ references:
   spec.csharp:
   - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
     name: IApizrManagerOptions
-    nameWithType: IApizrManagerOptions
-    fullName: Apizr.Configuring.Manager.IApizrManagerOptions
+    href: Apizr.Configuring.Manager.IApizrManagerOptions-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
     name: IApizrManagerOptions
-    nameWithType: IApizrManagerOptions
-    fullName: Apizr.Configuring.Manager.IApizrManagerOptions
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Configuring.Manager.IApizrManagerOptions-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
   commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
   parent: Apizr.Configuring.Manager
+  href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
   name: IApizrManagerOptionsBase
   nameWithType: IApizrManagerOptionsBase
   fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
 - uid: Apizr.Configuring.Common.IApizrCommonOptionsBase
   commentId: T:Apizr.Configuring.Common.IApizrCommonOptionsBase
   parent: Apizr.Configuring.Common
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html
   name: IApizrCommonOptionsBase
   nameWithType: IApizrCommonOptionsBase
   fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase
   commentId: T:Apizr.Configuring.Proper.IApizrProperOptionsBase
   parent: Apizr.Configuring.Proper
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html
   name: IApizrProperOptionsBase
   nameWithType: IApizrProperOptionsBase
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase.html
   name: IApizrSharedRegistrationOptionsBase
   nameWithType: IApizrSharedRegistrationOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html
   name: IApizrGlobalSharedRegistrationOptionsBase
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
@@ -980,311 +849,355 @@ references:
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
+- uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
+  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptions`1
+  href: Apizr.Configuring.Manager.IApizrManagerOptions-1.html
+  name: IApizrManagerOptions<TWebApi>
+  nameWithType: IApizrManagerOptions<TWebApi>
+  fullName: Apizr.Configuring.Manager.IApizrManagerOptions<TWebApi>
+  nameWithType.vb: IApizrManagerOptions(Of TWebApi)
+  fullName.vb: Apizr.Configuring.Manager.IApizrManagerOptions(Of TWebApi)
+  name.vb: IApizrManagerOptions(Of TWebApi)
+  spec.csharp:
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
+    name: IApizrManagerOptions
+    href: Apizr.Configuring.Manager.IApizrManagerOptions-1.html
+  - name: <
+  - name: TWebApi
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptions`1
+    name: IApizrManagerOptions
+    href: Apizr.Configuring.Manager.IApizrManagerOptions-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TWebApi
+  - name: )
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
+  href: Apizr.html
   name: Apizr.Configuring.Common
   nameWithType: Apizr.Configuring.Common
   fullName: Apizr.Configuring.Common
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Common
+    name: Common
+    href: Apizr.Configuring.Common.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Common
+    name: Common
+    href: Apizr.Configuring.Common.html
 - uid: Apizr.Configuring.Proper
   commentId: N:Apizr.Configuring.Proper
+  href: Apizr.html
   name: Apizr.Configuring.Proper
   nameWithType: Apizr.Configuring.Proper
   fullName: Apizr.Configuring.Proper
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Proper
+    name: Proper
+    href: Apizr.Configuring.Proper.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Proper
+    name: Proper
+    href: Apizr.Configuring.Proper.html
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.#ctor*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.#ctor
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1__ctor_Apizr_Configuring_Manager_IApizrManagerOptionsBase_
   name: ApizrManagerOptions
   nameWithType: ApizrManagerOptions<TWebApi>.ApizrManagerOptions
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ApizrManagerOptions
-  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ApizrManagerOptions
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ApizrManagerOptions
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).New
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).New
+  name.vb: New
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.WebApiType*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.WebApiType
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_WebApiType
   name: WebApiType
   nameWithType: ApizrManagerOptions<TWebApi>.WebApiType
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.WebApiType
@@ -1293,6 +1206,7 @@ references:
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_WebApiType
   name: WebApiType
   nameWithType: IApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
@@ -1300,11 +1214,13 @@ references:
   commentId: T:System.Type
   parent: System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
   name: Type
   nameWithType: Type
   fullName: System.Type
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseUri*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseUri
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_BaseUri
   name: BaseUri
   nameWithType: ApizrManagerOptions<TWebApi>.BaseUri
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.BaseUri
@@ -1313,6 +1229,7 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseUri
   name: BaseUri
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
@@ -1320,11 +1237,13 @@ references:
   commentId: T:System.Uri
   parent: System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uri
   name: Uri
   nameWithType: Uri
   fullName: System.Uri
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseAddress*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseAddress
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_BaseAddress
   name: BaseAddress
   nameWithType: ApizrManagerOptions<TWebApi>.BaseAddress
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.BaseAddress
@@ -1333,6 +1252,7 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseAddress
   name: BaseAddress
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
@@ -1340,11 +1260,16 @@ references:
   commentId: T:System.String
   parent: System
   isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.BasePath*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.BasePath
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_BasePath
   name: BasePath
   nameWithType: ApizrManagerOptions<TWebApi>.BasePath
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.BasePath
@@ -1353,11 +1278,13 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BasePath
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.PrimaryHandlerFactory*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.PrimaryHandlerFactory
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_PrimaryHandlerFactory
   name: PrimaryHandlerFactory
   nameWithType: ApizrManagerOptions<TWebApi>.PrimaryHandlerFactory
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.PrimaryHandlerFactory
@@ -1366,6 +1293,7 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_PrimaryHandlerFactory
   name: PrimaryHandlerFactory
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
@@ -1373,6 +1301,7 @@ references:
   commentId: T:System.Func{System.Net.Http.DelegatingHandler,Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
   parent: System
   definition: System.Func`4
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
   name: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
   nameWithType: Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
   fullName: System.Func<System.Net.Http.DelegatingHandler, Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
@@ -1382,86 +1311,65 @@ references:
   spec.csharp:
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Net.Http.DelegatingHandler
     name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler
+  - name: ','
+  - name: " "
   - uid: Microsoft.Extensions.Logging.ILogger
     name: ILogger
-    nameWithType: ILogger
-    fullName: Microsoft.Extensions.Logging.ILogger
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     name: IApizrManagerOptionsBase
-    nameWithType: IApizrManagerOptionsBase
-    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
   - uid: System.Net.Http.HttpMessageHandler
     name: HttpMessageHandler
-    nameWithType: HttpMessageHandler
-    fullName: System.Net.Http.HttpMessageHandler
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Net.Http.DelegatingHandler
     name: DelegatingHandler
-    nameWithType: DelegatingHandler
-    fullName: System.Net.Http.DelegatingHandler
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler
+  - name: ','
+  - name: " "
   - uid: Microsoft.Extensions.Logging.ILogger
     name: ILogger
-    nameWithType: ILogger
-    fullName: Microsoft.Extensions.Logging.ILogger
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     name: IApizrManagerOptionsBase
-    nameWithType: IApizrManagerOptionsBase
-    fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
   - uid: System.Net.Http.HttpMessageHandler
     name: HttpMessageHandler
-    nameWithType: HttpMessageHandler
-    fullName: System.Net.Http.HttpMessageHandler
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Func`4
   commentId: T:System.Func`4
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
   name: Func<T1, T2, T3, TResult>
   nameWithType: Func<T1, T2, T3, TResult>
   fullName: System.Func<T1, T2, T3, TResult>
@@ -1471,71 +1379,42 @@ references:
   spec.csharp:
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T1
-    nameWithType: T1
-    fullName: T1
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: T2
-    nameWithType: T2
-    fullName: T2
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: T3
-    nameWithType: T3
-    fullName: T3
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
   - name: T1
-    nameWithType: T1
-    fullName: T1
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: T2
-    nameWithType: T2
-    fullName: T2
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: T3
-    nameWithType: T3
-    fullName: T3
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.HttpTracerMode*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.HttpTracerMode
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_HttpTracerMode
   name: HttpTracerMode
   nameWithType: ApizrManagerOptions<TWebApi>.HttpTracerMode
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.HttpTracerMode
@@ -1544,22 +1423,42 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HttpTracerMode
   name: HttpTracerMode
   nameWithType: IApizrGlobalSharedOptionsBase.HttpTracerMode
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
 - uid: Apizr.Logging.HttpTracerMode
   commentId: T:Apizr.Logging.HttpTracerMode
   parent: Apizr.Logging
+  href: Apizr.Logging.HttpTracerMode.html
   name: HttpTracerMode
   nameWithType: HttpTracerMode
   fullName: Apizr.Logging.HttpTracerMode
 - uid: Apizr.Logging
   commentId: N:Apizr.Logging
+  href: Apizr.html
   name: Apizr.Logging
   nameWithType: Apizr.Logging
   fullName: Apizr.Logging
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Logging
+    name: Logging
+    href: Apizr.Logging.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Logging
+    name: Logging
+    href: Apizr.Logging.html
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.TrafficVerbosity*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.TrafficVerbosity
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_TrafficVerbosity
   name: TrafficVerbosity
   nameWithType: ApizrManagerOptions<TWebApi>.TrafficVerbosity
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.TrafficVerbosity
@@ -1568,17 +1467,20 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_TrafficVerbosity
   name: TrafficVerbosity
   nameWithType: IApizrGlobalSharedOptionsBase.TrafficVerbosity
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
 - uid: Apizr.Logging.HttpMessageParts
   commentId: T:Apizr.Logging.HttpMessageParts
   parent: Apizr.Logging
+  href: Apizr.Logging.HttpMessageParts.html
   name: HttpMessageParts
   nameWithType: HttpMessageParts
   fullName: Apizr.Logging.HttpMessageParts
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.LogLevels*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.LogLevels
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_LogLevels
   name: LogLevels
   nameWithType: ApizrManagerOptions<TWebApi>.LogLevels
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.LogLevels
@@ -1587,11 +1489,13 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LogLevels
   name: LogLevels
   nameWithType: IApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
 - uid: Microsoft.Extensions.Logging.LogLevel[]
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
   name: LogLevel[]
   nameWithType: LogLevel[]
   fullName: Microsoft.Extensions.Logging.LogLevel[]
@@ -1601,23 +1505,20 @@ references:
   spec.csharp:
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: '['
+  - name: ']'
   spec.vb:
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: (
+  - name: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.OnException*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.OnException
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_OnException
   name: OnException
   nameWithType: ApizrManagerOptions<TWebApi>.OnException
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.OnException
@@ -1626,6 +1527,7 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OnException
   name: OnException
   nameWithType: IApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
@@ -1633,6 +1535,7 @@ references:
   commentId: T:System.Action{Apizr.ApizrException}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<ApizrException>
   nameWithType: Action<ApizrException>
   fullName: System.Action<Apizr.ApizrException>
@@ -1642,38 +1545,29 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -1683,35 +1577,24 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.LetThrowOnExceptionWithEmptyCache*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.LetThrowOnExceptionWithEmptyCache
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_LetThrowOnExceptionWithEmptyCache
   name: LetThrowOnExceptionWithEmptyCache
   nameWithType: ApizrManagerOptions<TWebApi>.LetThrowOnExceptionWithEmptyCache
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.LetThrowOnExceptionWithEmptyCache
@@ -1720,6 +1603,7 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LetThrowOnExceptionWithEmptyCache
   name: LetThrowOnExceptionWithEmptyCache
   nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
@@ -1727,11 +1611,16 @@ references:
   commentId: T:System.Boolean
   parent: System
   isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.HandlersParameters*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.HandlersParameters
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_HandlersParameters
   name: HandlersParameters
   nameWithType: ApizrManagerOptions<TWebApi>.HandlersParameters
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.HandlersParameters
@@ -1740,6 +1629,7 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HandlersParameters
   name: HandlersParameters
   nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
@@ -1747,65 +1637,53 @@ references:
   commentId: T:System.Collections.Generic.IDictionary{System.String,System.Object}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IDictionary`2
-  name: IDictionary<String, Object>
-  nameWithType: IDictionary<String, Object>
-  fullName: System.Collections.Generic.IDictionary<System.String, System.Object>
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<string, object>
+  nameWithType: IDictionary<string, object>
+  fullName: System.Collections.Generic.IDictionary<string, object>
   nameWithType.vb: IDictionary(Of String, Object)
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, System.Object)
+  fullName.vb: System.Collections.Generic.IDictionary(Of String, Object)
   name.vb: IDictionary(Of String, Object)
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Collections.Generic.IDictionary`2
   commentId: T:System.Collections.Generic.IDictionary`2
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   name: IDictionary<TKey, TValue>
   nameWithType: IDictionary<TKey, TValue>
   fullName: System.Collections.Generic.IDictionary<TKey, TValue>
@@ -1815,53 +1693,67 @@ references:
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TValue
-    nameWithType: TValue
-    fullName: TValue
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TValue
-    nameWithType: TValue
-    fullName: TValue
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_Headers
   name: Headers
   nameWithType: ApizrManagerOptions<TWebApi>.Headers
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.Headers
@@ -1870,6 +1762,7 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_Headers
   name: Headers
   nameWithType: IApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
@@ -1877,49 +1770,41 @@ references:
   commentId: T:System.Collections.Generic.IList{System.String}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IList`1
-  name: IList<String>
-  nameWithType: IList<String>
-  fullName: System.Collections.Generic.IList<System.String>
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<string>
+  nameWithType: IList<string>
+  fullName: System.Collections.Generic.IList<string>
   nameWithType.vb: IList(Of String)
-  fullName.vb: System.Collections.Generic.IList(Of System.String)
+  fullName.vb: System.Collections.Generic.IList(Of String)
   name.vb: IList(Of String)
   spec.csharp:
   - uid: System.Collections.Generic.IList`1
     name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IList`1
     name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Collections.Generic.IList`1
   commentId: T:System.Collections.Generic.IList`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
   name: IList<T>
   nameWithType: IList<T>
   fullName: System.Collections.Generic.IList<T>
@@ -1929,35 +1814,24 @@ references:
   spec.csharp:
   - uid: System.Collections.Generic.IList`1
     name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IList`1
     name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_OperationTimeout
   name: OperationTimeout
   nameWithType: ApizrManagerOptions<TWebApi>.OperationTimeout
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.OperationTimeout
@@ -1966,6 +1840,7 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OperationTimeout
   name: OperationTimeout
   nameWithType: IApizrGlobalSharedOptionsBase.OperationTimeout
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
@@ -1973,49 +1848,26 @@ references:
   commentId: T:System.Nullable{System.TimeSpan}
   parent: System
   definition: System.Nullable`1
-  name: Nullable<TimeSpan>
-  nameWithType: Nullable<TimeSpan>
-  fullName: System.Nullable<System.TimeSpan>
-  nameWithType.vb: Nullable(Of TimeSpan)
-  fullName.vb: System.Nullable(Of System.TimeSpan)
-  name.vb: Nullable(Of TimeSpan)
+  href: https://learn.microsoft.com/dotnet/api/system.timespan
+  name: TimeSpan?
+  nameWithType: TimeSpan?
+  fullName: System.TimeSpan?
   spec.csharp:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
   spec.vb:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
 - uid: System.Nullable`1
   commentId: T:System.Nullable`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
   name: Nullable<T>
   nameWithType: Nullable<T>
   fullName: System.Nullable<T>
@@ -2025,35 +1877,24 @@ references:
   spec.csharp:
   - uid: System.Nullable`1
     name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Nullable`1
     name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.RequestTimeout*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.RequestTimeout
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_RequestTimeout
   name: RequestTimeout
   nameWithType: ApizrManagerOptions<TWebApi>.RequestTimeout
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.RequestTimeout
@@ -2062,11 +1903,13 @@ references:
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_RequestTimeout
   name: RequestTimeout
   nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_Logger
   name: Logger
   nameWithType: ApizrManagerOptions<TWebApi>.Logger
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.Logger
@@ -2075,6 +1918,7 @@ references:
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_Logger
   name: Logger
   nameWithType: IApizrProperOptionsBase.Logger
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
@@ -2082,17 +1926,50 @@ references:
   commentId: T:Microsoft.Extensions.Logging.ILogger
   parent: Microsoft.Extensions.Logging
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
   name: ILogger
   nameWithType: ILogger
   fullName: Microsoft.Extensions.Logging.ILogger
 - uid: Microsoft.Extensions.Logging
   commentId: N:Microsoft.Extensions.Logging
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_ResiliencePipelineRegistryKeys
   name: ResiliencePipelineRegistryKeys
   nameWithType: ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
@@ -2101,37 +1978,36 @@ references:
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_ResiliencePipelineRegistryKeys
   name: ResiliencePipelineRegistryKeys
   nameWithType: IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
 - uid: System.String[]
   isExternal: true
-  name: String[]
-  nameWithType: String[]
-  fullName: System.String[]
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
   nameWithType.vb: String()
-  fullName.vb: System.String()
+  fullName.vb: String()
   name.vb: String()
   spec.csharp:
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
   spec.vb:
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_RefitSettings
   name: RefitSettings
   nameWithType: ApizrManagerOptions<TWebApi>.RefitSettings
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.RefitSettings
@@ -2140,6 +2016,7 @@ references:
 - uid: Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
   parent: Apizr.Configuring.Common.IApizrCommonOptionsBase
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html#Apizr_Configuring_Common_IApizrCommonOptionsBase_RefitSettings
   name: RefitSettings
   nameWithType: IApizrCommonOptionsBase.RefitSettings
   fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings

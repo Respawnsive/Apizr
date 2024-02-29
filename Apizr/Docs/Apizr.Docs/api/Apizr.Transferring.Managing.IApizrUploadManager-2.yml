@@ -18,7 +18,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrUploadManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrUploadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrUploadManager.cs
@@ -26,7 +26,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nThe upload manager\n"
+  summary: The upload manager
   example: []
   syntax:
     content: 'public interface IApizrUploadManager<TUploadApi, TUploadApiResultData> : IApizrTransferManagerBase<TUploadApi>, IApizrManager where TUploadApi : IUploadApi<TUploadApiResultData>'
@@ -35,16 +35,8 @@ items:
       description: The upload api type to manage
     - id: TUploadApiResultData
       description: The upload api result type
-    content.vb: >-
-      Public Interface IApizrUploadManager(Of TUploadApi As IUploadApi(Of TUploadApiResultData), TUploadApiResultData)
-          Inherits IApizrTransferManagerBase(Of TUploadApi)
+    content.vb: Public Interface IApizrUploadManager(Of TUploadApi As IUploadApi(Of TUploadApiResultData), TUploadApiResultData) Inherits IApizrTransferManagerBase(Of TUploadApi), IApizrManager
   nameWithType.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
   name.vb: IApizrUploadManager(Of TUploadApi, TUploadApiResultData)
 - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -61,7 +53,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrUploadManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrUploadManager.cs
@@ -69,7 +61,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nUpload a file from its bytes data\n"
+  summary: Upload a file from its bytes data
   example: []
   syntax:
     content: Task<TUploadApiResultData> UploadAsync(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -102,7 +94,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrUploadManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrUploadManager.cs
@@ -110,7 +102,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nUpload a file from its stream data\n"
+  summary: Upload a file from its stream data
   example: []
   syntax:
     content: Task<TUploadApiResultData> UploadAsync(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -143,7 +135,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrUploadManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrUploadManager.cs
@@ -151,7 +143,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nUpload a file from its file info data\n"
+  summary: Upload a file from its file info data
   example: []
   syntax:
     content: Task<TUploadApiResultData> UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -173,11 +165,37 @@ items:
 references:
 - uid: Apizr.Transferring.Managing
   commentId: N:Apizr.Transferring.Managing
+  href: Apizr.html
   name: Apizr.Transferring.Managing
   nameWithType: Apizr.Transferring.Managing
   fullName: Apizr.Transferring.Managing
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Managing
+    name: Managing
+    href: Apizr.Transferring.Managing.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Managing
+    name: Managing
+    href: Apizr.Transferring.Managing.html
 - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync*
   commentId: Overload:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: UploadAsync
   nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
@@ -194,6 +212,7 @@ references:
   commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrRequestOptionsBuilder>
   nameWithType: Action<IApizrRequestOptionsBuilder>
   fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -203,39 +222,30 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{TUploadApiResultData}}
   commentId: T:System.Threading.Tasks.Task{``1}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TUploadApiResultData>
   nameWithType: Task<TUploadApiResultData>
   fullName: System.Threading.Tasks.Task<TUploadApiResultData>
@@ -245,33 +255,21 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Refit
   commentId: N:Refit
   isExternal: true
@@ -281,6 +279,7 @@ references:
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -290,42 +289,32 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -335,39 +324,58 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Refit.StreamPart
   commentId: T:Refit.StreamPart
   parent: Refit

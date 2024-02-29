@@ -7,20 +7,20 @@ items:
   children:
   - Apizr.IApizrManager`1.Api
   - Apizr.IApizrManager`1.ClearCacheAsync(System.Threading.CancellationToken)
-  - Apizr.IApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}})
   - Apizr.IApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken)
-  - Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.IApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}})
   - Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.IApizrManager`1.ExecuteAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``1}}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.IApizrManager`1.ExecuteAsync``2(System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}},``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.IApizrManager`1.ExecuteAsync``4(System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}},``3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.IApizrManager`1.Options
   langs:
   - csharp
@@ -32,7 +32,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrManager
     path: ../../Src/Apizr/IApizrManager.cs
@@ -40,23 +40,15 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nThe manager encapsulating <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
+  summary: The manager encapsulating <code class="typeparamref">TWebApi</code>'s task
   example: []
   syntax:
     content: 'public interface IApizrManager<TWebApi> : IApizrManager'
     typeParameters:
     - id: TWebApi
       description: The web api interface to manage
-    content.vb: >-
-      Public Interface IApizrManager(Of TWebApi)
-          Inherits IApizrManager
+    content.vb: Public Interface IApizrManager(Of TWebApi) Inherits IApizrManager
   nameWithType.vb: IApizrManager(Of TWebApi)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.IApizrManager(Of TWebApi)
   name.vb: IApizrManager(Of TWebApi)
 - uid: Apizr.IApizrManager`1.Api
@@ -73,7 +65,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Api
     path: ../../Src/Apizr/IApizrManager.cs
@@ -81,7 +73,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nOriginal Refit Api without any Apizr management. You should use ExecuteAsync instead to get all the Apizr goodness :)\n"
+  summary: Original Refit Api without any Apizr management. You should use ExecuteAsync instead to get all the Apizr goodness :)
   example: []
   syntax:
     content: TWebApi Api { get; }
@@ -91,10 +83,6 @@ items:
     content.vb: ReadOnly Property Api As TWebApi
   overload: Apizr.IApizrManager`1.Api*
   nameWithType.vb: IApizrManager(Of TWebApi).Api
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
   fullName.vb: Apizr.IApizrManager(Of TWebApi).Api
 - uid: Apizr.IApizrManager`1.Options
   commentId: P:Apizr.IApizrManager`1.Options
@@ -110,7 +98,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Options
     path: ../../Src/Apizr/IApizrManager.cs
@@ -118,7 +106,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nBasic Apizr options\n"
+  summary: Basic Apizr options
   example: []
   syntax:
     content: IApizrManagerOptionsBase Options { get; }
@@ -128,10 +116,6 @@ items:
     content.vb: ReadOnly Property Options As IApizrManagerOptionsBase
   overload: Apizr.IApizrManager`1.Options*
   nameWithType.vb: IApizrManager(Of TWebApi).Options
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
   fullName.vb: Apizr.IApizrManager(Of TWebApi).Options
 - uid: Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.IApizrManager`1.ExecuteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -147,7 +131,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -155,14 +139,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task
   example: []
   syntax:
     content: Task ExecuteAsync(Expression<Func<TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to execute
+      description: The <code class="typeparamref">TWebApi</code>'s task to execute
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
       description: Options provided to the request
@@ -188,7 +172,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -196,14 +180,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task
   example: []
   syntax:
     content: Task ExecuteAsync(Expression<Func<IApizrRequestOptions, TWebApi, Task>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to execute
+      description: The <code class="typeparamref">TWebApi</code>'s task to execute
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
       description: Options provided to the request
@@ -229,7 +213,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -237,14 +221,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task
   example: []
   syntax:
     content: Task ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
+      description: The <code class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
       description: The model data to map
@@ -278,7 +262,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -286,14 +270,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task
   example: []
   syntax:
     content: Task ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},{TApiData},System.Threading.Tasks.Task}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
+      description: The <code class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
       description: The model data to map
@@ -327,7 +311,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -335,20 +319,20 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task
   example: []
   syntax:
     content: Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to execute
+      description: The <code class="typeparamref">TWebApi</code>'s task to execute
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
       description: Options provided to the request
     typeParameters:
     - id: TApiData
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task result
+      description: The <code class="typeparamref">TWebApi</code>'s task result
     return:
       type: System.Threading.Tasks.Task{{TApiData}}
       description: ''
@@ -371,7 +355,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -379,20 +363,20 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task
   example: []
   syntax:
     content: Task<TApiData> ExecuteAsync<TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to execute
+      description: The <code class="typeparamref">TWebApi</code>'s task to execute
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
       description: Options provided to the request
     typeParameters:
     - id: TApiData
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task result
+      description: The <code class="typeparamref">TWebApi</code>'s task result
     return:
       type: System.Threading.Tasks.Task{{TApiData}}
       description: ''
@@ -415,7 +399,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -423,14 +407,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task returning a mapped result
   example: []
   syntax:
     content: Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
+      description: The <code class="typeparamref">TWebApi</code> call to execute
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
       description: Options provided to the request
@@ -461,7 +445,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -469,14 +453,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task returning a mapped result
   example: []
   syntax:
     content: Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
+      description: The <code class="typeparamref">TWebApi</code> call to execute
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
       description: Options provided to the request
@@ -507,7 +491,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -515,14 +499,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task returning a mapped result
   example: []
   syntax:
     content: Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
+      description: The <code class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
       description: The model data to map
@@ -556,7 +540,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -564,14 +548,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task returning a mapped result
   example: []
   syntax:
     content: Task<TModelData> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
+      description: The <code class="typeparamref">TWebApi</code> call to execute
     - id: modelData
       type: '{TModelData}'
       description: The model data to map
@@ -605,7 +589,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -613,14 +597,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task returning a mapped result
   example: []
   syntax:
     content: Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
+      description: The <code class="typeparamref">TWebApi</code> call to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
       description: The model request data to map
@@ -658,7 +642,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExecuteAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -666,14 +650,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nExecute a managed <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TWebApi</code>&apos;s task returning a mapped result\n"
+  summary: Execute a managed <code class="typeparamref">TWebApi</code>'s task returning a mapped result
   example: []
   syntax:
     content: Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod, TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code> call to execute
+      description: The <code class="typeparamref">TWebApi</code> call to execute
     - id: modelRequestData
       type: '{TModelRequestData}'
       description: The model request data to map
@@ -711,7 +695,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCacheAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -719,10 +703,10 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nClear all cache\n"
+  summary: Clear all cache
   example: []
   syntax:
-    content: Task<bool> ClearCacheAsync(CancellationToken cancellationToken = default(CancellationToken))
+    content: Task<bool> ClearCacheAsync(CancellationToken cancellationToken = default)
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
@@ -748,7 +732,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCacheAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -756,17 +740,17 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nClear the cache of a specific request\n"
+  summary: Clear the cache of a specific request
   example: []
   syntax:
     content: Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TResult}}}}
-      description: The specific <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to clear cache for
+      description: The specific <code class="typeparamref">TWebApi</code>'s task to clear cache for
     typeParameters:
     - id: TResult
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task result
+      description: The <code class="typeparamref">TWebApi</code>'s task result
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
       description: ''
@@ -789,7 +773,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/IApizrManager.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCacheAsync
     path: ../../Src/Apizr/IApizrManager.cs
@@ -797,20 +781,20 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
-  summary: "\nClear the cache of a specific request\n"
+  summary: Clear the cache of a specific request
   example: []
   syntax:
-    content: Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default(CancellationToken))
+    content: Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default)
     parameters:
     - id: executeApiMethod
       type: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TResult}}}}
-      description: The specific <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task to clear cache for
+      description: The specific <code class="typeparamref">TWebApi</code>'s task to clear cache for
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: A cancellation token
     typeParameters:
     - id: TResult
-      description: The <code data-dev-comment-type="typeparamref" class="typeparamref">TWebApi</code>&apos;s task result
+      description: The <code class="typeparamref">TWebApi</code>'s task result
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
       description: ''
@@ -822,11 +806,13 @@ items:
 references:
 - uid: Apizr
   commentId: N:Apizr
+  href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
 - uid: Apizr.IApizrManager`1.Api*
   commentId: Overload:Apizr.IApizrManager`1.Api
+  href: Apizr.IApizrManager-1.html#Apizr_IApizrManager_1_Api
   name: Api
   nameWithType: IApizrManager<TWebApi>.Api
   fullName: Apizr.IApizrManager<TWebApi>.Api
@@ -844,6 +830,7 @@ references:
   fullName: TWebApi
 - uid: Apizr.IApizrManager`1.Options*
   commentId: Overload:Apizr.IApizrManager`1.Options
+  href: Apizr.IApizrManager-1.html#Apizr_IApizrManager_1_Options
   name: Options
   nameWithType: IApizrManager<TWebApi>.Options
   fullName: Apizr.IApizrManager<TWebApi>.Options
@@ -852,16 +839,43 @@ references:
 - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
   commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
   parent: Apizr.Configuring.Manager
+  href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
   name: IApizrManagerOptionsBase
   nameWithType: IApizrManagerOptionsBase
   fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
 - uid: Apizr.Configuring.Manager
   commentId: N:Apizr.Configuring.Manager
+  href: Apizr.html
   name: Apizr.Configuring.Manager
   nameWithType: Apizr.Configuring.Manager
   fullName: Apizr.Configuring.Manager
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Manager
+    name: Manager
+    href: Apizr.Configuring.Manager.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Manager
+    name: Manager
+    href: Apizr.Configuring.Manager.html
 - uid: Apizr.IApizrManager`1.ExecuteAsync*
   commentId: Overload:Apizr.IApizrManager`1.ExecuteAsync
+  href: Apizr.IApizrManager-1.html#Apizr_IApizrManager_1_ExecuteAsync_System_Linq_Expressions_Expression_System_Func__0_System_Threading_Tasks_Task___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: ExecuteAsync
   nameWithType: IApizrManager<TWebApi>.ExecuteAsync
   fullName: Apizr.IApizrManager<TWebApi>.ExecuteAsync
@@ -871,6 +885,7 @@ references:
   commentId: T:System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<TWebApi, Task>>
   nameWithType: Expression<Func<TWebApi, Task>>
   fullName: System.Linq.Expressions.Expression<System.Func<TWebApi, System.Threading.Tasks.Task>>
@@ -880,75 +895,52 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrRequestOptionsBuilder>
   nameWithType: Action<IApizrRequestOptionsBuilder>
   fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -958,45 +950,37 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
 - uid: System.Linq.Expressions.Expression`1
   commentId: T:System.Linq.Expressions.Expression`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<TDelegate>
   nameWithType: Expression<TDelegate>
   fullName: System.Linq.Expressions.Expression<TDelegate>
@@ -1006,42 +990,62 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDelegate
-    nameWithType: TDelegate
-    fullName: TDelegate
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDelegate
-    nameWithType: TDelegate
-    fullName: TDelegate
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions
   commentId: N:System.Linq.Expressions
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Linq.Expressions
   nameWithType: System.Linq.Expressions
   fullName: System.Linq.Expressions
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Linq
+    name: Linq
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq
+  - name: .
+  - uid: System.Linq.Expressions
+    name: Expressions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Linq
+    name: Linq
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq
+  - name: .
+  - uid: System.Linq.Expressions
+    name: Expressions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -1051,49 +1055,70 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<IApizrRequestOptions, TWebApi, Task>>
   nameWithType: Expression<Func<IApizrRequestOptions, TWebApi, Task>>
   fullName: System.Linq.Expressions.Expression<System.Func<Apizr.Configuring.Request.IApizrRequestOptions, TWebApi, System.Threading.Tasks.Task>>
@@ -1103,89 +1128,62 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<TWebApi, TApiData, Task>>
   nameWithType: Expression<Func<TWebApi, TApiData, Task>>
   fullName: System.Linq.Expressions.Expression<System.Func<TWebApi, TApiData, System.Threading.Tasks.Task>>
@@ -1195,83 +1193,53 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TModelData}'
   commentId: '!:TModelData'
   definition: TModelData
@@ -1286,6 +1254,7 @@ references:
   commentId: T:System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>>
   nameWithType: Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task>>
   fullName: System.Linq.Expressions.Expression<System.Func<Apizr.Configuring.Request.IApizrRequestOptions, TWebApi, TApiData, System.Threading.Tasks.Task>>
@@ -1295,101 +1264,68 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<TWebApi, Task<TApiData>>>
   nameWithType: Expression<Func<TWebApi, Task<TApiData>>>
   fullName: System.Linq.Expressions.Expression<System.Func<TWebApi, System.Threading.Tasks.Task<TApiData>>>
@@ -1399,93 +1335,60 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{TApiData}}
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TApiData>
   nameWithType: Task<TApiData>
   fullName: System.Threading.Tasks.Task<TApiData>
@@ -1495,36 +1398,25 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -1534,37 +1426,26 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},System.Threading.Tasks.Task{{TApiData}}}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,System.Threading.Tasks.Task{``0}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>>
   nameWithType: Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>>
   fullName: System.Linq.Expressions.Expression<System.Func<Apizr.Configuring.Request.IApizrRequestOptions, TWebApi, System.Threading.Tasks.Task<TApiData>>>
@@ -1574,107 +1455,70 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{TModelData}}
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TModelData>
   nameWithType: Task<TModelData>
   fullName: System.Threading.Tasks.Task<TModelData>
@@ -1684,37 +1528,26 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{`0,``1,System.Threading.Tasks.Task{``1}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<TWebApi, TApiData, Task<TApiData>>>
   nameWithType: Expression<Func<TWebApi, TApiData, Task<TApiData>>>
   fullName: System.Linq.Expressions.Expression<System.Func<TWebApi, TApiData, System.Threading.Tasks.Task<TApiData>>>
@@ -1724,105 +1557,66 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,{TWebApi},{TApiData},System.Threading.Tasks.Task{{TApiData}}}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``1,System.Threading.Tasks.Task{``1}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>>
   nameWithType: Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>>
   fullName: System.Linq.Expressions.Expression<System.Func<Apizr.Configuring.Request.IApizrRequestOptions, TWebApi, TApiData, System.Threading.Tasks.Task<TApiData>>>
@@ -1832,119 +1626,76 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiData
-    nameWithType: TApiData
-    fullName: TApiData
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{{TWebApi},{TApiRequestData},System.Threading.Tasks.Task{{TApiResultData}}}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{`0,``2,System.Threading.Tasks.Task{``1}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>>
   nameWithType: Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>>
   fullName: System.Linq.Expressions.Expression<System.Func<TWebApi, TApiRequestData, System.Threading.Tasks.Task<TApiResultData>>>
@@ -1954,101 +1705,61 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiRequestData
-    nameWithType: TApiRequestData
-    fullName: TApiRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiResultData
-    nameWithType: TApiResultData
-    fullName: TApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiRequestData
-    nameWithType: TApiRequestData
-    fullName: TApiRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiResultData
-    nameWithType: TApiResultData
-    fullName: TApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TModelRequestData}'
   commentId: '!:TModelRequestData'
   definition: TModelRequestData
@@ -2059,6 +1770,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TModelResultData>
   nameWithType: Task<TModelResultData>
   fullName: System.Threading.Tasks.Task<TModelResultData>
@@ -2068,33 +1780,21 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelResultData
-    nameWithType: TModelResultData
-    fullName: TModelResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelResultData
-    nameWithType: TModelResultData
-    fullName: TModelResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TModelRequestData
   name: TModelRequestData
   nameWithType: TModelRequestData
@@ -2103,6 +1803,7 @@ references:
   commentId: T:System.Linq.Expressions.Expression{System.Func{Apizr.Configuring.Request.IApizrRequestOptions,`0,``2,System.Threading.Tasks.Task{``1}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
   nameWithType: Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<TApiResultData>>>
   fullName: System.Linq.Expressions.Expression<System.Func<Apizr.Configuring.Request.IApizrRequestOptions, TWebApi, TApiRequestData, System.Threading.Tasks.Task<TApiResultData>>>
@@ -2112,117 +1813,74 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiRequestData
-    nameWithType: TApiRequestData
-    fullName: TApiRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiResultData
-    nameWithType: TApiResultData
-    fullName: TApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`4
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiRequestData
-    nameWithType: TApiRequestData
-    fullName: TApiRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiResultData
-    nameWithType: TApiResultData
-    fullName: TApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.IApizrManager`1.ClearCacheAsync*
   commentId: Overload:Apizr.IApizrManager`1.ClearCacheAsync
+  href: Apizr.IApizrManager-1.html#Apizr_IApizrManager_1_ClearCacheAsync_System_Threading_CancellationToken_
   name: ClearCacheAsync
   nameWithType: IApizrManager<TWebApi>.ClearCacheAsync
   fullName: Apizr.IApizrManager<TWebApi>.ClearCacheAsync
@@ -2232,6 +1890,7 @@ references:
   commentId: T:System.Threading.CancellationToken
   parent: System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
@@ -2239,56 +1898,69 @@ references:
   commentId: T:System.Threading.Tasks.Task{System.Boolean}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<Boolean>
-  nameWithType: Task<Boolean>
-  fullName: System.Threading.Tasks.Task<System.Boolean>
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<bool>
+  nameWithType: Task<bool>
+  fullName: System.Threading.Tasks.Task<bool>
   nameWithType.vb: Task(Of Boolean)
-  fullName.vb: System.Threading.Tasks.Task(Of System.Boolean)
+  fullName.vb: System.Threading.Tasks.Task(Of Boolean)
   name.vb: Task(Of Boolean)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
+    name: bool
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Boolean
     name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading
   commentId: N:System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
 - uid: System.Linq.Expressions.Expression{System.Func{{TWebApi},System.Threading.Tasks.Task{{TResult}}}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<TWebApi, Task<TResult>>>
   nameWithType: Expression<Func<TWebApi, Task<TResult>>>
   fullName: System.Linq.Expressions.Expression<System.Func<TWebApi, System.Threading.Tasks.Task<TResult>>>
@@ -2298,93 +1970,60 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,{TWebApi},System.Threading.Tasks.Task{{TResult}}}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<Func<CancellationToken, TWebApi, Task<TResult>>>
   nameWithType: Expression<Func<CancellationToken, TWebApi, Task<TResult>>>
   fullName: System.Linq.Expressions.Expression<System.Func<System.Threading.CancellationToken, TWebApi, System.Threading.Tasks.Task<TResult>>>
@@ -2394,102 +2033,64 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: ','
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )

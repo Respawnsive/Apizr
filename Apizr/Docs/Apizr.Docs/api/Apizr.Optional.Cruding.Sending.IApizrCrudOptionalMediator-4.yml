@@ -8,10 +8,10 @@ items:
   - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendCreateOptionalCommand(`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendCreateOptionalCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendDeleteOptionalCommand(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery``1(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadOptionalQuery(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadOptionalQuery``1(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendUpdateOptionalCommand(`1,`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -26,7 +26,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrCrudOptionalMediator
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -34,7 +34,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\n<xref href=\"Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator\" data-throw-if-not-resolved=\"false\"></xref> but dedicated to <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TApiEntity</code> cruding with optional result, getting all shorter\n"
+  summary: <xref href="Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator" data-throw-if-not-resolved="false"></xref> but dedicated to <code class="typeparamref">TApiEntity</code> cruding with optional result, getting all shorter
   example: []
   syntax:
     content: 'public interface IApizrCrudOptionalMediator<TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams> : IApizrCrudOptionalMediatorBase, IApizrCrudMediatorBase, IApizrOptionalMediatorBase, IApizrMediatorBase where TApiEntity : class'
@@ -43,16 +43,8 @@ items:
     - id: TApiEntityKey
     - id: TReadAllResult
     - id: TReadAllParams
-    content.vb: >-
-      Public Interface IApizrCrudOptionalMediator(Of TApiEntity As Class, In TApiEntityKey, TReadAllResult, In TReadAllParams)
-          Inherits IApizrCrudOptionalMediatorBase
+    content.vb: Public Interface IApizrCrudOptionalMediator(Of TApiEntity As Class, In TApiEntityKey, TReadAllResult, In TReadAllParams) Inherits IApizrCrudOptionalMediatorBase, IApizrCrudMediatorBase, IApizrOptionalMediatorBase, IApizrMediatorBase
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams)
   name.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams)
 - uid: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendCreateOptionalCommand(`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -69,7 +61,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendCreateOptionalCommand
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -77,7 +69,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Optional.Cruding.CreateOptionalCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  summary: Send a <xref href="Apizr.Optional.Cruding.CreateOptionalCommand%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning an optional result
   example: []
   syntax:
     content: Task<Option<TApiEntity, ApizrException>> SendCreateOptionalCommand(TApiEntity payload, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -91,7 +83,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException}}
       description: ''
-    content.vb: Function SendCreateOptionalCommand(payload As TApiEntity, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of TApiEntity, ApizrException)
+    content.vb: Function SendCreateOptionalCommand(payload As TApiEntity, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of TApiEntity, ApizrException))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendCreateOptionalCommand*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendCreateOptionalCommand(TApiEntity, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendCreateOptionalCommand(TApiEntity, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -110,7 +102,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendCreateOptionalCommand
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -118,7 +110,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.CreateCommand%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning a mapped optional result
   example: []
   syntax:
     content: Task<Option<TModelEntity, ApizrException>> SendCreateOptionalCommand<TModelEntity>(TModelEntity payload, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -135,7 +127,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException}}
       description: ''
-    content.vb: Function SendCreateOptionalCommand(Of TModelEntity)(payload As TModelEntity, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of TModelEntity, ApizrException)
+    content.vb: Function SendCreateOptionalCommand(Of TModelEntity)(payload As TModelEntity, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of TModelEntity, ApizrException))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendCreateOptionalCommand*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendCreateOptionalCommand(Of TModelEntity)(TModelEntity, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendCreateOptionalCommand(Of TModelEntity)(TModelEntity, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -154,7 +146,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllOptionalQuery
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -162,7 +154,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning an optional result
   example: []
   syntax:
     content: Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -173,7 +165,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
       description: ''
-    content.vb: Function SendReadAllOptionalQuery(optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
+    content.vb: Function SendReadAllOptionalQuery(optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of TReadAllResult, ApizrException(Of TReadAllResult)))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadAllOptionalQuery(Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadAllOptionalQuery(System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -192,7 +184,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllOptionalQuery
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -200,7 +192,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning mapped optional result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning mapped optional result
   example: []
   syntax:
     content: Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> SendReadAllOptionalQuery<TModelEntityReadAllResult>(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -214,7 +206,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}}}
       description: ''
-    content.vb: Function SendReadAllOptionalQuery(Of TModelEntityReadAllResult)(optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult))
+    content.vb: Function SendReadAllOptionalQuery(Of TModelEntityReadAllResult)(optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadAllOptionalQuery(Of TModelEntityReadAllResult)(Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadAllOptionalQuery(Of TModelEntityReadAllResult)(System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -233,7 +225,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllOptionalQuery
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -241,7 +233,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning an optional result
   example: []
   syntax:
     content: Task<Option<TReadAllResult, ApizrException<TReadAllResult>>> SendReadAllOptionalQuery(TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -255,7 +247,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TReadAllResult},Apizr.ApizrException{{TReadAllResult}}}}
       description: ''
-    content.vb: Function SendReadAllOptionalQuery(readAllParams As TReadAllParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of TReadAllResult, ApizrException(Of TReadAllResult))
+    content.vb: Function SendReadAllOptionalQuery(readAllParams As TReadAllParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of TReadAllResult, ApizrException(Of TReadAllResult)))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadAllOptionalQuery(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadAllOptionalQuery(TReadAllParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -274,7 +266,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllOptionalQuery
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -282,7 +274,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning a mapped optional result
   example: []
   syntax:
     content: Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> SendReadAllOptionalQuery<TModelEntityReadAllResult>(TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -299,7 +291,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}}}
       description: ''
-    content.vb: Function SendReadAllOptionalQuery(Of TModelEntityReadAllResult)(readAllParams As TReadAllParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult))
+    content.vb: Function SendReadAllOptionalQuery(Of TModelEntityReadAllResult)(readAllParams As TReadAllParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadAllOptionalQuery(Of TModelEntityReadAllResult)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadAllOptionalQuery(Of TModelEntityReadAllResult)(TReadAllParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -318,7 +310,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadOptionalQuery
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -326,7 +318,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadQuery%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning an optional result
   example: []
   syntax:
     content: Task<Option<TApiEntity, ApizrException<TApiEntity>>> SendReadOptionalQuery(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -340,7 +332,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException{{TApiEntity}}}}
       description: ''
-    content.vb: Function SendReadOptionalQuery(key As TApiEntityKey, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of TApiEntity, ApizrException(Of TApiEntity))
+    content.vb: Function SendReadOptionalQuery(key As TApiEntityKey, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of TApiEntity, ApizrException(Of TApiEntity)))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadOptionalQuery*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadOptionalQuery(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadOptionalQuery(TApiEntityKey, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -359,7 +351,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadOptionalQuery
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -367,7 +359,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning a mapped optional result\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadQuery%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning a mapped optional result
   example: []
   syntax:
     content: Task<Option<TModelEntity, ApizrException<TModelEntity>>> SendReadOptionalQuery<TModelEntity>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -384,7 +376,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntity},Apizr.ApizrException{{TModelEntity}}}}
       description: ''
-    content.vb: Function SendReadOptionalQuery(Of TModelEntity)(key As TApiEntityKey, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of TModelEntity, ApizrException(Of TModelEntity))
+    content.vb: Function SendReadOptionalQuery(Of TModelEntity)(key As TApiEntityKey, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of TModelEntity, ApizrException(Of TModelEntity)))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadOptionalQuery*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadOptionalQuery(Of TModelEntity)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendReadOptionalQuery(Of TModelEntity)(TApiEntityKey, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -403,7 +395,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUpdateOptionalCommand
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -411,7 +403,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.UpdateCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning an optional result
   example: []
   syntax:
     content: Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand(TApiEntityKey key, TApiEntity payload, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -428,7 +420,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
       description: ''
-    content.vb: Function SendUpdateOptionalCommand(key As TApiEntityKey, payload As TApiEntity, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of Unit, ApizrException)
+    content.vb: Function SendUpdateOptionalCommand(key As TApiEntityKey, payload As TApiEntity, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of Unit, ApizrException))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendUpdateOptionalCommand*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendUpdateOptionalCommand(TApiEntityKey, TApiEntity, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendUpdateOptionalCommand(TApiEntityKey, TApiEntity, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -447,7 +439,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUpdateOptionalCommand
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -455,7 +447,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.UpdateCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning an optional result
   example: []
   syntax:
     content: Task<Option<Unit, ApizrException>> SendUpdateOptionalCommand<TModelEntity>(TApiEntityKey key, TModelEntity payload, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -475,7 +467,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
       description: ''
-    content.vb: Function SendUpdateOptionalCommand(Of TModelEntity)(key As TApiEntityKey, payload As TModelEntity, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of Unit, ApizrException)
+    content.vb: Function SendUpdateOptionalCommand(Of TModelEntity)(key As TApiEntityKey, payload As TModelEntity, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of Unit, ApizrException))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendUpdateOptionalCommand*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendUpdateOptionalCommand(Of TModelEntity)(TApiEntityKey, TModelEntity, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendUpdateOptionalCommand(Of TModelEntity)(TApiEntityKey, TModelEntity, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -494,7 +486,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDeleteOptionalCommand
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Sending/IApizrCrudOptionalMediator.cs
@@ -502,7 +494,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR and returning an optional result\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.DeleteCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR and returning an optional result
   example: []
   syntax:
     content: Task<Option<Unit, ApizrException>> SendDeleteOptionalCommand(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -516,7 +508,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
       description: ''
-    content.vb: Function SendDeleteOptionalCommand(key As TApiEntityKey, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of  Option(Of Unit, ApizrException)
+    content.vb: Function SendDeleteOptionalCommand(key As TApiEntityKey, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of [Option](Of Unit, ApizrException))
   overload: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendDeleteOptionalCommand*
   nameWithType.vb: IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendDeleteOptionalCommand(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams).SendDeleteOptionalCommand(TApiEntityKey, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -525,16 +517,51 @@ references:
 - uid: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator
   commentId: T:Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator
   parent: Apizr.Optional.Cruding.Sending
+  href: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator.html
   name: IApizrCrudOptionalMediator
   nameWithType: IApizrCrudOptionalMediator
   fullName: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator
 - uid: Apizr.Optional.Cruding.Sending
   commentId: N:Apizr.Optional.Cruding.Sending
+  href: Apizr.html
   name: Apizr.Optional.Cruding.Sending
   nameWithType: Apizr.Optional.Cruding.Sending
   fullName: Apizr.Optional.Cruding.Sending
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Cruding
+    name: Cruding
+    href: Apizr.Optional.Cruding.html
+  - name: .
+  - uid: Apizr.Optional.Cruding.Sending
+    name: Sending
+    href: Apizr.Optional.Cruding.Sending.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Cruding
+    name: Cruding
+    href: Apizr.Optional.Cruding.html
+  - name: .
+  - uid: Apizr.Optional.Cruding.Sending
+    name: Sending
+    href: Apizr.Optional.Cruding.Sending.html
 - uid: Apizr.Optional.Cruding.CreateOptionalCommand`1
   commentId: T:Apizr.Optional.Cruding.CreateOptionalCommand`1
+  href: Apizr.Optional.Cruding.CreateOptionalCommand-1.html
   name: CreateOptionalCommand<TModelData>
   nameWithType: CreateOptionalCommand<TModelData>
   fullName: Apizr.Optional.Cruding.CreateOptionalCommand<TModelData>
@@ -544,33 +571,22 @@ references:
   spec.csharp:
   - uid: Apizr.Optional.Cruding.CreateOptionalCommand`1
     name: CreateOptionalCommand
-    nameWithType: CreateOptionalCommand
-    fullName: Apizr.Optional.Cruding.CreateOptionalCommand
+    href: Apizr.Optional.Cruding.CreateOptionalCommand-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Optional.Cruding.CreateOptionalCommand`1
     name: CreateOptionalCommand
-    nameWithType: CreateOptionalCommand
-    fullName: Apizr.Optional.Cruding.CreateOptionalCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Cruding.CreateOptionalCommand-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendCreateOptionalCommand*
   commentId: Overload:Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendCreateOptionalCommand
+  href: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator-4.html#Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator_4_SendCreateOptionalCommand__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendCreateOptionalCommand
   nameWithType: IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendCreateOptionalCommand
   fullName: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendCreateOptionalCommand
@@ -586,6 +602,7 @@ references:
   commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrRequestOptionsBuilder>
   nameWithType: Action<IApizrRequestOptionsBuilder>
   fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -595,39 +612,30 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{Optional.Option{{TApiEntity},Apizr.ApizrException}}
   commentId: T:System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<TApiEntity, ApizrException>>
   nameWithType: Task<Option<TApiEntity, ApizrException>>
   fullName: System.Threading.Tasks.Task<Optional.Option<TApiEntity, Apizr.ApizrException>>
@@ -637,69 +645,43 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TApiEntity
   name: TApiEntity
   nameWithType: TApiEntity
@@ -707,6 +689,7 @@ references:
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -716,42 +699,32 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -761,41 +734,61 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Apizr.Mediation.Cruding.CreateCommand`1
   commentId: T:Apizr.Mediation.Cruding.CreateCommand`1
+  href: Apizr.Mediation.Cruding.CreateCommand-1.html
   name: CreateCommand<TModelData>
   nameWithType: CreateCommand<TModelData>
   fullName: Apizr.Mediation.Cruding.CreateCommand<TModelData>
@@ -805,31 +798,19 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.CreateCommand`1
     name: CreateCommand
-    nameWithType: CreateCommand
-    fullName: Apizr.Mediation.Cruding.CreateCommand
+    href: Apizr.Mediation.Cruding.CreateCommand-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.CreateCommand`1
     name: CreateCommand
-    nameWithType: CreateCommand
-    fullName: Apizr.Mediation.Cruding.CreateCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.CreateCommand-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TModelEntity}'
   commentId: '!:TModelEntity'
   definition: TModelEntity
@@ -840,6 +821,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{Optional.Option{`0,Apizr.ApizrException}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<TModelEntity, ApizrException>>
   nameWithType: Task<Option<TModelEntity, ApizrException>>
   fullName: System.Threading.Tasks.Task<Optional.Option<TModelEntity, Apizr.ApizrException>>
@@ -849,75 +831,50 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TModelEntity
   name: TModelEntity
   nameWithType: TModelEntity
   fullName: TModelEntity
 - uid: Apizr.Mediation.Cruding.ReadAllQuery`1
   commentId: T:Apizr.Mediation.Cruding.ReadAllQuery`1
+  href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
   name: ReadAllQuery<TReadAllResult>
   nameWithType: ReadAllQuery<TReadAllResult>
   fullName: Apizr.Mediation.Cruding.ReadAllQuery<TReadAllResult>
@@ -927,33 +884,22 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.ReadAllQuery`1
     name: ReadAllQuery
-    nameWithType: ReadAllQuery
-    fullName: Apizr.Mediation.Cruding.ReadAllQuery
+    href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.ReadAllQuery`1
     name: ReadAllQuery
-    nameWithType: ReadAllQuery
-    fullName: Apizr.Mediation.Cruding.ReadAllQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery*
   commentId: Overload:Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadAllOptionalQuery
+  href: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator-4.html#Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator_4_SendReadAllOptionalQuery_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllOptionalQuery
   nameWithType: IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendReadAllOptionalQuery
   fullName: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendReadAllOptionalQuery
@@ -963,6 +909,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
   nameWithType: Task<Option<TReadAllResult, ApizrException<TReadAllResult>>>
   fullName: System.Threading.Tasks.Task<Optional.Option<TReadAllResult, Apizr.ApizrException<TReadAllResult>>>
@@ -972,91 +919,56 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}}}
   commentId: T:System.Threading.Tasks.Task{Optional.Option{`2,Apizr.ApizrException{`2}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
   nameWithType: Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
   fullName: System.Threading.Tasks.Task<Optional.Option<TModelEntityReadAllResult, Apizr.ApizrException<TModelEntityReadAllResult>>>
@@ -1066,87 +978,51 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TReadAllParams}'
   commentId: '!:TReadAllParams'
   definition: TReadAllParams
@@ -1159,6 +1035,7 @@ references:
   fullName: TReadAllParams
 - uid: Apizr.Mediation.Cruding.ReadQuery`2
   commentId: T:Apizr.Mediation.Cruding.ReadQuery`2
+  href: Apizr.Mediation.Cruding.ReadQuery-2.html
   name: ReadQuery<TResultData, TKey>
   nameWithType: ReadQuery<TResultData, TKey>
   fullName: Apizr.Mediation.Cruding.ReadQuery<TResultData, TKey>
@@ -1168,45 +1045,28 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.ReadQuery`2
     name: ReadQuery
-    nameWithType: ReadQuery
-    fullName: Apizr.Mediation.Cruding.ReadQuery
+    href: Apizr.Mediation.Cruding.ReadQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.ReadQuery`2
     name: ReadQuery
-    nameWithType: ReadQuery
-    fullName: Apizr.Mediation.Cruding.ReadQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.ReadQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadOptionalQuery*
   commentId: Overload:Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendReadOptionalQuery
+  href: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator-4.html#Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator_4_SendReadOptionalQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadOptionalQuery
   nameWithType: IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendReadOptionalQuery
   fullName: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendReadOptionalQuery
@@ -1222,6 +1082,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{Optional.Option{``0,Apizr.ApizrException{``0}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<TApiEntity, ApizrException<TApiEntity>>>
   nameWithType: Task<Option<TApiEntity, ApizrException<TApiEntity>>>
   fullName: System.Threading.Tasks.Task<Optional.Option<TApiEntity, Apizr.ApizrException<TApiEntity>>>
@@ -1231,87 +1092,51 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TApiEntityKey
   name: TApiEntityKey
   nameWithType: TApiEntityKey
@@ -1320,6 +1145,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{Optional.Option{`0,Apizr.ApizrException{`0}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<TModelEntity, ApizrException<TModelEntity>>>
   nameWithType: Task<Option<TModelEntity, ApizrException<TModelEntity>>>
   fullName: System.Threading.Tasks.Task<Optional.Option<TModelEntity, Apizr.ApizrException<TModelEntity>>>
@@ -1329,89 +1155,54 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.UpdateCommand`2
   commentId: T:Apizr.Mediation.Cruding.UpdateCommand`2
+  href: Apizr.Mediation.Cruding.UpdateCommand-2.html
   name: UpdateCommand<TKey, TRequestData>
   nameWithType: UpdateCommand<TKey, TRequestData>
   fullName: Apizr.Mediation.Cruding.UpdateCommand<TKey, TRequestData>
@@ -1421,45 +1212,28 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.UpdateCommand`2
     name: UpdateCommand
-    nameWithType: UpdateCommand
-    fullName: Apizr.Mediation.Cruding.UpdateCommand
+    href: Apizr.Mediation.Cruding.UpdateCommand-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.UpdateCommand`2
     name: UpdateCommand
-    nameWithType: UpdateCommand
-    fullName: Apizr.Mediation.Cruding.UpdateCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.UpdateCommand-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendUpdateOptionalCommand*
   commentId: Overload:Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendUpdateOptionalCommand
+  href: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator-4.html#Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator_4_SendUpdateOptionalCommand__1__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUpdateOptionalCommand
   nameWithType: IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendUpdateOptionalCommand
   fullName: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendUpdateOptionalCommand
@@ -1469,6 +1243,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<Unit, ApizrException>>
   nameWithType: Task<Option<Unit, ApizrException>>
   fullName: System.Threading.Tasks.Task<Optional.Option<MediatR.Unit, Apizr.ApizrException>>
@@ -1478,75 +1253,50 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.DeleteCommand`2
   commentId: T:Apizr.Mediation.Cruding.DeleteCommand`2
+  href: Apizr.Mediation.Cruding.DeleteCommand-2.html
   name: DeleteCommand<T, TKey>
   nameWithType: DeleteCommand<T, TKey>
   fullName: Apizr.Mediation.Cruding.DeleteCommand<T, TKey>
@@ -1556,45 +1306,28 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.DeleteCommand`2
     name: DeleteCommand
-    nameWithType: DeleteCommand
-    fullName: Apizr.Mediation.Cruding.DeleteCommand
+    href: Apizr.Mediation.Cruding.DeleteCommand-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.DeleteCommand`2
     name: DeleteCommand
-    nameWithType: DeleteCommand
-    fullName: Apizr.Mediation.Cruding.DeleteCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.DeleteCommand-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendDeleteOptionalCommand*
   commentId: Overload:Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator`4.SendDeleteOptionalCommand
+  href: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator-4.html#Apizr_Optional_Cruding_Sending_IApizrCrudOptionalMediator_4_SendDeleteOptionalCommand__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendDeleteOptionalCommand
   nameWithType: IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendDeleteOptionalCommand
   fullName: Apizr.Optional.Cruding.Sending.IApizrCrudOptionalMediator<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>.SendDeleteOptionalCommand

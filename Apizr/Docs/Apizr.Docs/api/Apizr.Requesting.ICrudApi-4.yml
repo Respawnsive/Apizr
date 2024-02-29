@@ -12,9 +12,9 @@ items:
   - Apizr.Requesting.ICrudApi`4.Read(`1)
   - Apizr.Requesting.ICrudApi`4.Read(`1,Apizr.Configuring.Request.IApizrRequestOptions)
   - Apizr.Requesting.ICrudApi`4.ReadAll
+  - Apizr.Requesting.ICrudApi`4.ReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
   - Apizr.Requesting.ICrudApi`4.ReadAll(`3)
   - Apizr.Requesting.ICrudApi`4.ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
   - Apizr.Requesting.ICrudApi`4.Update(`1,`0)
   - Apizr.Requesting.ICrudApi`4.Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
   langs:
@@ -27,7 +27,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ICrudApi
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -35,29 +35,21 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nThe crud api interface\n"
+  summary: The crud api interface
   example: []
   syntax:
-    content: >-
-      public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams>
-          where T : class
+    content: 'public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class'
     typeParameters:
     - id: T
       description: The entity type
     - id: TKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     - id: TReadAllResult
-      description: The &quot;ReadAll&quot; query result type
+      description: The "ReadAll" query result type
     - id: TReadAllParams
       description: ReadAll query parameters type
     content.vb: Public Interface ICrudApi(Of T As Class, In TKey, TReadAllResult, In TReadAllParams)
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)
   name.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)
 - uid: Apizr.Requesting.ICrudApi`4.Create(`0)
@@ -74,7 +66,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Create
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -82,13 +74,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload\n"
+  summary: Send a Create request with a <code class="typeparamref">T</code> payload
   example: []
   syntax:
     content: >-
       [Post("")]
 
-      Task<T> Create([Body] T payload)
+      Task<T> Create(T payload)
     parameters:
     - id: payload
       type: '{T}'
@@ -127,7 +119,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Create
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -135,13 +127,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload, passing a Polly context and a cancellation token through the request\n"
+  summary: Send a Create request with a <code class="typeparamref">T</code> payload, passing a Polly context and a cancellation token through the request
   example: []
   syntax:
     content: >-
       [Post("")]
 
-      Task<T> Create([Body] T payload, [RequestOptions] IApizrRequestOptions options)
+      Task<T> Create(T payload, IApizrRequestOptions options)
     parameters:
     - id: payload
       type: '{T}'
@@ -187,7 +179,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -195,7 +187,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request\n"
+  summary: Send a ReadAll request
   example: []
   syntax:
     content: >-
@@ -208,7 +200,7 @@ items:
     content.vb: >-
       <Get("")>
 
-      Function ReadAll As Task(Of TReadAllResult)
+      Function ReadAll() As Task(Of TReadAllResult)
   overload: Apizr.Requesting.ICrudApi`4.ReadAll*
   attributes:
   - type: Refit.GetAttribute
@@ -232,7 +224,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -240,13 +232,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request\n"
+  summary: Send a ReadAll request
   example: []
   syntax:
     content: >-
       [Get("")]
 
-      Task<TReadAllResult> ReadAll([RequestOptions] IApizrRequestOptions options)
+      Task<TReadAllResult> ReadAll(IApizrRequestOptions options)
     parameters:
     - id: options
       type: Apizr.Configuring.Request.IApizrRequestOptions
@@ -285,7 +277,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -293,13 +285,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key\n"
+  summary: Send a ReadAll request with some query params used as cache key
   example: []
   syntax:
     content: >-
       [Get("")]
 
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams)
+      Task<TReadAllResult> ReadAll(TReadAllParams readAllParams)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
@@ -338,7 +330,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -346,13 +338,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key\n"
+  summary: Send a ReadAll request with some query params used as cache key
   example: []
   syntax:
     content: >-
       [Get("")]
 
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options)
+      Task<TReadAllResult> ReadAll(TReadAllParams readAllParams, IApizrRequestOptions options)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
@@ -398,7 +390,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Read
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -406,13 +398,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param\n"
+  summary: Send a Read request with a key param
   example: []
   syntax:
     content: >-
       [Get("/{key}")]
 
-      Task<T> Read([CacheKey] TKey key)
+      Task<T> Read(TKey key)
     parameters:
     - id: key
       type: '{TKey}'
@@ -451,7 +443,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Read
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -459,13 +451,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param\n"
+  summary: Send a Read request with a key param
   example: []
   syntax:
     content: >-
       [Get("/{key}")]
 
-      Task<T> Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options)
+      Task<T> Read(TKey key, IApizrRequestOptions options)
     parameters:
     - id: key
       type: '{TKey}'
@@ -511,7 +503,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Update
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -519,13 +511,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend an Update request with a key and a payload\n"
+  summary: Send an Update request with a key and a payload
   example: []
   syntax:
     content: >-
       [Put("/{key}")]
 
-      Task Update(TKey key, [Body] T payload)
+      Task Update(TKey key, T payload)
     parameters:
     - id: key
       type: '{TKey}'
@@ -567,7 +559,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Update
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -575,13 +567,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend an Update request with a key and a payload\n"
+  summary: Send an Update request with a key and a payload
   example: []
   syntax:
     content: >-
       [Put("/{key}")]
 
-      Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options)
+      Task Update(TKey key, T payload, IApizrRequestOptions options)
     parameters:
     - id: key
       type: '{TKey}'
@@ -630,7 +622,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Delete
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -638,7 +630,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Delete request with a key param\n"
+  summary: Send a Delete request with a key param
   example: []
   syntax:
     content: >-
@@ -679,7 +671,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Delete
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
@@ -687,13 +679,13 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Delete request with a key param\n"
+  summary: Send a Delete request with a key param
   example: []
   syntax:
     content: >-
       [Delete("/{key}")]
 
-      Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options)
+      Task Delete(TKey key, IApizrRequestOptions options)
     parameters:
     - id: key
       type: '{TKey}'
@@ -724,11 +716,29 @@ items:
 references:
 - uid: Apizr.Requesting
   commentId: N:Apizr.Requesting
+  href: Apizr.html
   name: Apizr.Requesting
   nameWithType: Apizr.Requesting
   fullName: Apizr.Requesting
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Requesting
+    name: Requesting
+    href: Apizr.Requesting.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Requesting
+    name: Requesting
+    href: Apizr.Requesting.html
 - uid: Apizr.Requesting.ICrudApi`4.Create*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Create
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_Create__0_
   name: Create
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Create
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Create
@@ -744,6 +754,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<T>
   nameWithType: Task<T>
   fullName: System.Threading.Tasks.Task<T>
@@ -753,33 +764,21 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: T
   name: T
   nameWithType: T
@@ -787,6 +786,7 @@ references:
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -796,52 +796,98 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Apizr.Configuring.Request.IApizrRequestOptions
   commentId: T:Apizr.Configuring.Request.IApizrRequestOptions
   parent: Apizr.Configuring.Request
+  href: Apizr.Configuring.Request.IApizrRequestOptions.html
   name: IApizrRequestOptions
   nameWithType: IApizrRequestOptions
   fullName: Apizr.Configuring.Request.IApizrRequestOptions
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
+  href: Apizr.html
   name: Apizr.Configuring.Request
   nameWithType: Apizr.Configuring.Request
   fullName: Apizr.Configuring.Request
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
 - uid: Apizr.Requesting.ICrudApi`4.ReadAll*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.ReadAll
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_ReadAll
   name: ReadAll
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll
@@ -851,6 +897,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{``2}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TReadAllResult>
   nameWithType: Task<TReadAllResult>
   fullName: System.Threading.Tasks.Task<TReadAllResult>
@@ -860,33 +907,21 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TReadAllParams}'
   commentId: '!:TReadAllParams'
   definition: TReadAllParams
@@ -899,6 +934,7 @@ references:
   fullName: TReadAllParams
 - uid: Apizr.Requesting.ICrudApi`4.Read*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Read
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_Read__1_
   name: Read
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read
@@ -916,6 +952,7 @@ references:
   fullName: TKey
 - uid: Apizr.Requesting.ICrudApi`4.Update*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Update
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_Update__1__0_
   name: Update
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Update
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Update
@@ -925,11 +962,13 @@ references:
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
 - uid: Apizr.Requesting.ICrudApi`4.Delete*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Delete
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_Delete__1_
   name: Delete
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Delete
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Delete

@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring Exception handling | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring Exception handling | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../resources/favicon.ico">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    
+      <link rel="shortcut icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
     
     <meta property="docfx:rel" content="../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../index.html">
                 <img id="logo" class="svg" src="../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,8 +77,8 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-exception-handling">Configuring Exception handling</h2>
 
+<h2 id="configuring-exception-handling">Configuring Exception handling</h2>
 <h3 id="using-trycatch">Using <code>Try/Catch</code></h3>
 <p>Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.</p>
 <p>Inject <code>IApizrManager&lt;IYourDefinedInterface&gt;</code> where you need it - e.g. into your ViewModel constructor</p>
@@ -98,23 +98,26 @@ catch (ApizrException&lt;UserList&gt; e)
 
 if(users != null)
     Users = new ObservableCollection&lt;User&gt;(users);
-</code></pre><p>We catch any ApizrException as it will contain the original inner exception, but also the previously cached result if some.
-If you provided an IConnectivityHandler implementation and there&#39;s no network connectivity before sending request, Apizr will throw an IO inner exception without sending the request.</p>
+</code></pre>
+<p>We catch any ApizrException as it will contain the original inner exception, but also the previously cached result if some.
+If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw an IO inner exception without sending the request.</p>
 <h3 id="using-actionexception">Using <code>Action&lt;Exception&gt;</code></h3>
 <p>Instead of trycatching all the things, you may want to provide an exception handling action, thanks to <code>WithExCatching</code> builder option, available at both register and request time.</p>
 <p>You can set it thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithExCatching(OnException)
-</code></pre><div class="tabGroup" id="tabgroup_cl43sdywzU">
+</code></pre>
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_cl43sdywzU_tabid-registering" role="tab" aria-controls="tabpanel_cl43sdywzU_tabid-registering" data-tab="tabid-registering" tabindex="0" aria-selected="true">Registering</a>
+<a href="#tabpanel_1_tabid-registering" role="tab" aria-controls="tabpanel_1_tabid-registering" data-tab="tabid-registering" tabindex="0" aria-selected="true">Registering</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_cl43sdywzU_tabid-requesting" role="tab" aria-controls="tabpanel_cl43sdywzU_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
+<a href="#tabpanel_1_tabid-requesting" role="tab" aria-controls="tabpanel_1_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
 </li>
 </ul>
-<section id="tabpanel_cl43sdywzU_tabid-registering" role="tabpanel" data-tab="tabid-registering">
+<section id="tabpanel_1_tabid-registering" role="tabpanel" data-tab="tabid-registering">
+
 <p>Configuring an exception handler at register time allows you to get some Global Exception Handling concepts right in place.</p>
 <p><code>WithExCatching</code> builder option is available with or without using registry.
 It means that you can share your exception handler globally by setting it at registry level and/or set some specific one at api level.</p>
@@ -128,7 +131,8 @@ private void OnException(ApizrException ex)
     // called back in case of exception thrown 
     // while requesting with IReqResUserService managed api
 }
-</code></pre><p>And here is a pretty complexe scenario:</p>
+</code></pre>
+<p>And here is a pretty complexe scenario:</p>
 <pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
         .AddGroup(group =&gt; group
                 .AddManagerFor&lt;IReqResUserService&gt;(options =&gt; options
@@ -157,7 +161,8 @@ private void OnReqResUserException(ApizrException ex)
     // called back in case of exception thrown 
     // while requesting with a specific managed api
 }
-</code></pre><p>Here I&#39;m telling Apizr to:</p>
+</code></pre>
+<p>Here I'm telling Apizr to:</p>
 <ul>
 <li>Call back all exception handlers in case of any exception thrown while requesting with <code>IReqResUserService</code> api</li>
 <li>Call back <code>OnReqResException</code> and <code>OnException</code> handlers in case of any exception thrown while requesting with <code>IReqResResourceService</code> api</li>
@@ -166,7 +171,8 @@ private void OnReqResUserException(ApizrException ex)
 <p>Feel free to configure your exception handlers at the level of your choice, depending on your needs.
 You definitly can mix it all with request option exception handling.</p>
 </section>
-<section id="tabpanel_cl43sdywzU_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
+
 <p>Configuring an exception handler at request time allows you to set it at the very end, just before sending the request, like trycatching does.</p>
 <pre><code class="lang-csharp">var reqResManager = apizrRegistry.GetManagerFor&lt;IReqResUserService&gt;();
 
@@ -179,7 +185,8 @@ private void OnGetUsersException(ApizrException&lt;ApiResult&lt;User&gt;&gt; ex)
     // called back in case of exception thrown 
     // while requesting with a specific managed api
 }
-</code></pre><p>Here I&#39;m telling Apizr in case of exception while resting to:</p>
+</code></pre>
+<p>Here I'm telling Apizr in case of exception while resting to:</p>
 <ul>
 <li>Call back any other registered exception handlers if any, thanks to <code>Add</code> duplicate strategy</li>
 <li>Call back <code>OnGetUsersException</code> (e.g. to display a dedicated message or something)</li>
@@ -188,16 +195,18 @@ private void OnGetUsersException(ApizrException&lt;ApiResult&lt;User&gt;&gt; ex)
 <p>You definitly can mix it with registration option exception handling.</p>
 </section>
 </div>
+
 <p>You may notice that:</p>
 <ul>
-<li><code>strategy</code> parameter let you adjust the behavior in case of mixing (default: <code>Replace</code>):<ul>
-<li><code>Ignore</code>: if there&#39;s another handler yet configured, ignore this one</li>
+<li><code>strategy</code> parameter let you adjust the behavior in case of mixing (default: <code>Replace</code>):
+<ul>
+<li><code>Ignore</code>: if there's another handler yet configured, ignore this one</li>
 <li><code>Add</code>: add/queue this handler, no matter of yet configured ones</li>
 <li><code>Replace</code>: replace all yet configured handlers by this one</li>
 <li><code>Merge</code>: add/queue this handler, no matter of yet configured ones</li>
 </ul>
 </li>
-<li><code>letThrowOnExceptionWithEmptyCache</code> parameter tells Apizr to throw the actual exception if there&#39;s no cached data to return</li>
+<li><code>letThrowOnExceptionWithEmptyCache</code> parameter tells Apizr to throw the actual exception if there's no cached data to return</li>
 </ul>
 <h3 id="using-optionalasync">Using <code>Optional.Async</code></h3>
 <p>Here is how we could handle exceptions using Optional.Async:</p>
@@ -215,20 +224,22 @@ optionalPagedResult.Match(userList =&gt;
     if (e.CachedResult?.Data != null &amp;&amp; e.CachedResult.Data.Any())
         Users = new ObservableCollection&lt;User&gt;(e.CachedResult.Data);
 });
-</code></pre><p>Optional is pretty cool when trying to handle nullables and exceptions, but what if we still want to write it shorter to get our request done and managed with as less code as possible.
+</code></pre>
+<p>Optional is pretty cool when trying to handle nullables and exceptions, but what if we still want to write it shorter to get our request done and managed with as less code as possible.
 Even if we use the typed optional mediator or typed crud optional mediator to get things shorter, we still have to deal with the result matching boilerplate.
 Fortunately, Apizr provides some dedicated extensions to help getting things as short as we can with exceptions handled.</p>
 <h4 id="with-onresultasync">With <code>OnResultAsync</code></h4>
 <p><code>OnResultAsync</code> ask you to provide one of these parameters:</p>
 <ul>
 <li><code>Action&lt;TResult&gt; onResult</code>: this action will be invoked just before throwing any exception that might have occurred during request execution
-  <code>csharp
-  await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync())
-      .OnResultAsync(userList =&gt; 
-      { 
-          users = userList?.Data; 
-      });</code></li>
-<li><p><code>Func&lt;TResult, ApizrException&lt;TResult&gt;, bool&gt; onResult</code>: this function will be invoked with the returned result and potential occurred exception</p>
+<pre><code class="lang-csharp">await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync())
+    .OnResultAsync(userList =&gt; 
+    { 
+        users = userList?.Data; 
+    });
+</code></pre>
+</li>
+<li><code>Func&lt;TResult, ApizrException&lt;TResult&gt;, bool&gt; onResult</code>: this function will be invoked with the returned result and potential occurred exception
 <pre><code class="lang-csharp">await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync())
     .OnResultAsync((userList, exception) =&gt; 
     { 
@@ -239,8 +250,9 @@ Fortunately, Apizr provides some dedicated extensions to help getting things as 
 
         return true;
     });
-</code></pre></li>
-<li><p><code>Func&lt;TResult, ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt; onResult</code>: this function will be invoked async with the returned result and potential occurred exception</p>
+</code></pre>
+</li>
+<li><code>Func&lt;TResult, ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt; onResult</code>: this function will be invoked async with the returned result and potential occurred exception
 <pre><code class="lang-csharp">var success = await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync())
     .OnResultAsync((userList, exception) =&gt; 
     { 
@@ -248,7 +260,8 @@ Fortunately, Apizr provides some dedicated extensions to help getting things as 
 
         return exception != null;
     });
-</code></pre></li>
+</code></pre>
+</li>
 </ul>
 <p>All give you a result returned from fetch if succeed, or cache if failed (if configured). The main goal here is to set any binded property with the returned result (fetched or cached), no matter of exceptions. Then the Action will let the exception throw, where the Func will let you decide to throw manually or return a success boolean flag.
 Of course, remember to catch throwing exceptions.</p>
@@ -261,19 +274,24 @@ Of course, remember to catch throwing exceptions.</p>
 <p>This one returns result from fetch or cache (if configured), no matter of potential exception handled on the other side by an action callback</p>
 <pre><code class="lang-csharp">var userList = await _reqResOptionalMediator.SendFor(api =&gt; api.GetUsersAsync())
     .CatchAsync(AsyncErrorHandler.HandleException, true);
-</code></pre><p>Here we ask the api to get users and if it fails:</p>
+</code></pre>
+<p>Here we ask the api to get users and if it fails:</p>
 <ul>
-<li>There’s some cached data?<ul>
+<li>There’s some cached data?
+<ul>
 <li><a href="https://github.com/Fody/AsyncErrorHandler">AsyncErrorHandler</a> will handle the exception like to inform the user that call just failed</li>
 <li>Apizr will return the previous result from cache</li>
 </ul>
 </li>
-<li>There’s no cached data yet!<ul>
-<li>letThrowOnExceptionWithEmptyCache is True? (which is the case here)<ul>
+<li>There’s no cached data yet!
+<ul>
+<li>letThrowOnExceptionWithEmptyCache is True? (which is the case here)
+<ul>
 <li>Apizr will throw the inner exception that will be catched further by AsyncErrorHander (this is its normal behavior)</li>
 </ul>
 </li>
-<li>letThrowOnExceptionWithEmptyCache is False! (default)<ul>
+<li>letThrowOnExceptionWithEmptyCache is False! (default)
+<ul>
 <li>Apizr will return the empty cache data (null) which has to be handled then</li>
 </ul>
 </li>
@@ -281,27 +299,28 @@ Of course, remember to catch throwing exceptions.</p>
 </li>
 </ul>
 <p>One line of code to get all the thing done safely and shorter than ever!</p>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/feat/resilience/Apizr/Docs/Apizr.Docs/articles/config_exceptions.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_exceptions.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -309,14 +328,14 @@ Of course, remember to catch throwing exceptions.</p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

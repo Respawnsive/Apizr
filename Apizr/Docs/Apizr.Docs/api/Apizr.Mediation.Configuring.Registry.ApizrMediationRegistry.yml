@@ -16,7 +16,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/ApizrMediationRegistry.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrMediationRegistry
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/ApizrMediationRegistry.cs
@@ -24,14 +24,11 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Configuring.Registry
-  summary: "\nRegistry options available for extended registrations with mediation\n"
+  summary: Registry options available for extended registrations with mediation
   example: []
   syntax:
     content: 'public class ApizrMediationRegistry : ApizrMediationRegistryBase, IApizrMediationConcurrentRegistry, IApizrMediationRegistry, IApizrMediationEnumerableRegistry, IEnumerable<KeyValuePair<Type, Func<IApizrMediatorBase>>>, IEnumerable, IApizrExtendedConcurrentRegistryBase'
-    content.vb: >-
-      Public Class ApizrMediationRegistry
-          Inherits ApizrMediationRegistryBase
-          Implements IApizrMediationConcurrentRegistry, IApizrMediationRegistry, IApizrMediationEnumerableRegistry, IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrMediatorBase))), IEnumerable, IApizrExtendedConcurrentRegistryBase
+    content.vb: Public Class ApizrMediationRegistry Inherits ApizrMediationRegistryBase Implements IApizrMediationConcurrentRegistry, IApizrMediationRegistry, IApizrMediationEnumerableRegistry, IEnumerable(Of KeyValuePair(Of Type, Func(Of IApizrMediatorBase))), IEnumerable, IApizrExtendedConcurrentRegistryBase
   inheritance:
   - System.Object
   - Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
@@ -45,7 +42,6 @@ items:
   inheritedMembers:
   - Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ConcurrentRegistry
   - Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator
-  - Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator
   - Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``1
   - Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``2
   - Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``3
@@ -69,12 +65,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.AddOrUpdateManager(System.Type)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.AddOrUpdateManager(System.Type)
   id: AddOrUpdateManager(System.Type)
@@ -89,7 +79,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/ApizrMediationRegistry.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddOrUpdateManager
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/ApizrMediationRegistry.cs
@@ -107,44 +97,81 @@ items:
   overload: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.AddOrUpdateManager*
   implements:
   - Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 references:
 - uid: Apizr.Mediation.Configuring.Registry
   commentId: N:Apizr.Mediation.Configuring.Registry
+  href: Apizr.html
   name: Apizr.Mediation.Configuring.Registry
   nameWithType: Apizr.Mediation.Configuring.Registry
   fullName: Apizr.Mediation.Configuring.Registry
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Configuring
+    name: Configuring
+    href: Apizr.Mediation.Configuring.html
+  - name: .
+  - uid: Apizr.Mediation.Configuring.Registry
+    name: Registry
+    href: Apizr.Mediation.Configuring.Registry.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Configuring
+    name: Configuring
+    href: Apizr.Mediation.Configuring.html
+  - name: .
+  - uid: Apizr.Mediation.Configuring.Registry
+    name: Registry
+    href: Apizr.Mediation.Configuring.Registry.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
   commentId: T:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
   parent: Apizr.Mediation.Configuring.Registry
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html
   name: ApizrMediationRegistryBase
   nameWithType: ApizrMediationRegistryBase
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
 - uid: Apizr.Mediation.Configuring.Registry.IApizrMediationConcurrentRegistry
   commentId: T:Apizr.Mediation.Configuring.Registry.IApizrMediationConcurrentRegistry
   parent: Apizr.Mediation.Configuring.Registry
+  href: Apizr.Mediation.Configuring.Registry.IApizrMediationConcurrentRegistry.html
   name: IApizrMediationConcurrentRegistry
   nameWithType: IApizrMediationConcurrentRegistry
   fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationConcurrentRegistry
 - uid: Apizr.Mediation.Configuring.Registry.IApizrMediationRegistry
   commentId: T:Apizr.Mediation.Configuring.Registry.IApizrMediationRegistry
   parent: Apizr.Mediation.Configuring.Registry
+  href: Apizr.Mediation.Configuring.Registry.IApizrMediationRegistry.html
   name: IApizrMediationRegistry
   nameWithType: IApizrMediationRegistry
   fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationRegistry
 - uid: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   commentId: T:Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
   parent: Apizr.Mediation.Configuring.Registry
+  href: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.html
   name: IApizrMediationEnumerableRegistry
   nameWithType: IApizrMediationEnumerableRegistry
   fullName: Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry
@@ -152,6 +179,7 @@ references:
   commentId: T:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Type,System.Func{Apizr.Mediation.Requesting.Sending.IApizrMediatorBase}}}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   name: IEnumerable<KeyValuePair<Type, Func<IApizrMediatorBase>>>
   nameWithType: IEnumerable<KeyValuePair<Type, Func<IApizrMediatorBase>>>
   fullName: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Type, System.Func<Apizr.Mediation.Requesting.Sending.IApizrMediatorBase>>>
@@ -161,175 +189,110 @@ references:
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Collections.Generic.KeyValuePair`2
     name: KeyValuePair
-    nameWithType: KeyValuePair
-    fullName: System.Collections.Generic.KeyValuePair
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase
     name: IApizrMediatorBase
-    nameWithType: IApizrMediatorBase
-    fullName: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase
+    href: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Collections.Generic.KeyValuePair`2
     name: KeyValuePair
-    nameWithType: KeyValuePair
-    fullName: System.Collections.Generic.KeyValuePair
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase
     name: IApizrMediatorBase
-    nameWithType: IApizrMediatorBase
-    fullName: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase
+    href: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Collections.IEnumerable
   commentId: T:System.Collections.IEnumerable
   parent: System.Collections
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
   name: IEnumerable
   nameWithType: IEnumerable
   fullName: System.Collections.IEnumerable
 - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase
   commentId: T:Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase
   parent: Apizr.Extending.Configuring.Registry
+  href: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.html
   name: IApizrExtendedConcurrentRegistryBase
   nameWithType: IApizrExtendedConcurrentRegistryBase
   fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ConcurrentRegistry
   commentId: F:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ConcurrentRegistry
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ConcurrentRegistry
   name: ConcurrentRegistry
   nameWithType: ApizrMediationRegistryBase.ConcurrentRegistry
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ConcurrentRegistry
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetEnumerator
   name: GetEnumerator()
   nameWithType: ApizrMediationRegistryBase.GetEnumerator()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator
     name: GetEnumerator
-    nameWithType: ApizrMediationRegistryBase.GetEnumerator
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetEnumerator
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator
     name: GetEnumerator
-    nameWithType: ApizrMediationRegistryBase.GetEnumerator
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetEnumerator
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetEnumerator
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator
-  commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator
-  parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
-  name: IEnumerable.GetEnumerator()
-  nameWithType: ApizrMediationRegistryBase.IEnumerable.GetEnumerator()
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System.Collections.IEnumerable.GetEnumerator()
-  nameWithType.vb: ApizrMediationRegistryBase.System.Collections.IEnumerable.GetEnumerator()
-  name.vb: System.Collections.IEnumerable.GetEnumerator()
-  spec.csharp:
-  - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator
-    name: IEnumerable.GetEnumerator
-    nameWithType: ApizrMediationRegistryBase.IEnumerable.GetEnumerator
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System.Collections.IEnumerable.GetEnumerator
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System#Collections#IEnumerable#GetEnumerator
-    name: System.Collections.IEnumerable.GetEnumerator
-    nameWithType: ApizrMediationRegistryBase.System.Collections.IEnumerable.GetEnumerator
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.System.Collections.IEnumerable.GetEnumerator
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``1
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``1
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__1
   name: GetCrudMediatorFor<T>()
   nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor<T>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor<T>()
@@ -338,29 +301,28 @@ references:
   name.vb: GetCrudMediatorFor(Of T)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``1
-    name: GetCrudMediatorFor<T>
-    nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor<T>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor<T>
+    name: GetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__1
+  - name: <
+  - name: T
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``1
-    name: GetCrudMediatorFor(Of T)
-    nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor(Of T)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor(Of T)
+    name: GetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__1
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``2
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``2
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__2
   name: GetCrudMediatorFor<T, TKey>()
   nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey>()
@@ -369,29 +331,34 @@ references:
   name.vb: GetCrudMediatorFor(Of T, TKey)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``2
-    name: GetCrudMediatorFor<T, TKey>
-    nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey>
+    name: GetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``2
-    name: GetCrudMediatorFor(Of T, TKey)
-    nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor(Of T, TKey)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor(Of T, TKey)
+    name: GetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__2
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``3
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``3
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__3
   name: GetCrudMediatorFor<T, TKey, TReadAllResult>()
   nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey, TReadAllResult>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey, TReadAllResult>()
@@ -400,29 +367,40 @@ references:
   name.vb: GetCrudMediatorFor(Of T, TKey, TReadAllResult)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``3
-    name: GetCrudMediatorFor<T, TKey, TReadAllResult>
-    nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey, TReadAllResult>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey, TReadAllResult>
+    name: GetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__3
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``3
-    name: GetCrudMediatorFor(Of T, TKey, TReadAllResult)
-    nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor(Of T, TKey, TReadAllResult)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor(Of T, TKey, TReadAllResult)
+    name: GetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__3
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``4
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``4
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__4
   name: GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
   nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
@@ -431,29 +409,46 @@ references:
   name.vb: GetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``4
-    name: GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
-    nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
+    name: GetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__4
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllParams
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor``4
-    name: GetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    nameWithType: ApizrMediationRegistryBase.GetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
+    name: GetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetCrudMediatorFor__4
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllParams
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor``1
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor``1
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetMediatorFor__1
   name: GetMediatorFor<TWebApi>()
   nameWithType: ApizrMediationRegistryBase.GetMediatorFor<TWebApi>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor<TWebApi>()
@@ -462,643 +457,508 @@ references:
   name.vb: GetMediatorFor(Of TWebApi)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor``1
-    name: GetMediatorFor<TWebApi>
-    nameWithType: ApizrMediationRegistryBase.GetMediatorFor<TWebApi>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor<TWebApi>
+    name: GetMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetMediatorFor__1
+  - name: <
+  - name: TWebApi
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor``1
-    name: GetMediatorFor(Of TWebApi)
-    nameWithType: ApizrMediationRegistryBase.GetMediatorFor(Of TWebApi)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.GetMediatorFor(Of TWebApi)
+    name: GetMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_GetMediatorFor__1
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},System.Int32,System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
   definition: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  name: TryGetCrudMediatorFor<T>(IApizrCrudMediator<T, Int32, IEnumerable<T>, IDictionary<String, Object>>)
-  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>(IApizrCrudMediator<T, Int32, IEnumerable<T>, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, System.Int32, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>)
-  nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)(IApizrCrudMediator(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, System.Int32, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object)))
-  name.vb: TryGetCrudMediatorFor(Of T)(IApizrCrudMediator(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object)))
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
+  name: TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>>)
+  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, int, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<string, object>>)
+  nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)(IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, Integer, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of String, Object)))
+  name.vb: TryGetCrudMediatorFor(Of T)(IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object)))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor<T>
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
+  - name: <
+  - name: T
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
+    name: int
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor(Of T)
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
+    name: Integer
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},System.Collections.Generic.IEnumerable{{T}},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
   definition: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  name: TryGetCrudMediatorFor<T, TKey>(IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<String, Object>>)
-  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>(IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>)
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
+  name: TryGetCrudMediatorFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>>)
+  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<string, object>>)
   nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)(IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of String, Object)))
   name.vb: TryGetCrudMediatorFor(Of T, TKey)(IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor<T, TKey>
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor(Of T, TKey)
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},{TReadAllResult},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
   definition: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult>(IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<String, Object>>)
-  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, System.Collections.Generic.IDictionary<System.String, System.Object>>)
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____
+  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>>)
+  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, System.Collections.Generic.IDictionary<string, object>>)
   nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, System.Collections.Generic.IDictionary(Of System.String, System.Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, System.Collections.Generic.IDictionary(Of String, Object)))
   name.vb: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor<T, TKey, TReadAllResult>
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{{T},{TKey},{TReadAllResult},{TReadAllParams}}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
   definition: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
-  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___
+  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
   nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
   fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
   name.vb: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-    name: TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllParams
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-    name: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllParams
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{{TWebApi}}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
   definition: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
-  name: TryGetMediatorFor<TWebApi>(IApizrMediator<TWebApi>)
-  nameWithType: ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>(IApizrMediator<TWebApi>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>(Apizr.Mediation.Requesting.Sending.IApizrMediator<TWebApi>)
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___
+  name: TryGetMediatorFor<TWebApi>(out IApizrMediator<TWebApi>)
+  nameWithType: ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>(out IApizrMediator<TWebApi>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>(out Apizr.Mediation.Requesting.Sending.IApizrMediator<TWebApi>)
   nameWithType.vb: ApizrMediationRegistryBase.TryGetMediatorFor(Of TWebApi)(IApizrMediator(Of TWebApi))
   fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor(Of TWebApi)(Apizr.Mediation.Requesting.Sending.IApizrMediator(Of TWebApi))
   name.vb: TryGetMediatorFor(Of TWebApi)(IApizrMediator(Of TWebApi))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
-    name: TryGetMediatorFor<TWebApi>
-    nameWithType: ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>
+    name: TryGetMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___
+  - name: <
+  - name: TWebApi
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Requesting.Sending.IApizrMediator`1
     name: IApizrMediator
-    nameWithType: IApizrMediator
-    fullName: Apizr.Mediation.Requesting.Sending.IApizrMediator
+    href: Apizr.Mediation.Requesting.Sending.IApizrMediator-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
-    name: TryGetMediatorFor(Of TWebApi)
-    nameWithType: ApizrMediationRegistryBase.TryGetMediatorFor(Of TWebApi)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor(Of TWebApi)
+    name: TryGetMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TWebApi
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Requesting.Sending.IApizrMediator`1
     name: IApizrMediator
-    nameWithType: IApizrMediator
-    fullName: Apizr.Mediation.Requesting.Sending.IApizrMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Sending.IApizrMediator-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.Count
   commentId: P:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.Count
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_Count
   name: Count
   nameWithType: ApizrMediationRegistryBase.Count
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.Count
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``1
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``1
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__1
   name: ContainsCrudMediatorFor<T>()
   nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor<T>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor<T>()
@@ -1107,29 +967,28 @@ references:
   name.vb: ContainsCrudMediatorFor(Of T)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``1
-    name: ContainsCrudMediatorFor<T>
-    nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor<T>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor<T>
+    name: ContainsCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__1
+  - name: <
+  - name: T
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``1
-    name: ContainsCrudMediatorFor(Of T)
-    nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor(Of T)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor(Of T)
+    name: ContainsCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__1
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``2
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``2
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__2
   name: ContainsCrudMediatorFor<T, TKey>()
   nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey>()
@@ -1138,29 +997,34 @@ references:
   name.vb: ContainsCrudMediatorFor(Of T, TKey)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``2
-    name: ContainsCrudMediatorFor<T, TKey>
-    nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey>
+    name: ContainsCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``2
-    name: ContainsCrudMediatorFor(Of T, TKey)
-    nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor(Of T, TKey)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor(Of T, TKey)
+    name: ContainsCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__2
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``3
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``3
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__3
   name: ContainsCrudMediatorFor<T, TKey, TReadAllResult>()
   nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey, TReadAllResult>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey, TReadAllResult>()
@@ -1169,29 +1033,40 @@ references:
   name.vb: ContainsCrudMediatorFor(Of T, TKey, TReadAllResult)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``3
-    name: ContainsCrudMediatorFor<T, TKey, TReadAllResult>
-    nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey, TReadAllResult>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey, TReadAllResult>
+    name: ContainsCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__3
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``3
-    name: ContainsCrudMediatorFor(Of T, TKey, TReadAllResult)
-    nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor(Of T, TKey, TReadAllResult)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor(Of T, TKey, TReadAllResult)
+    name: ContainsCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__3
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``4
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``4
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__4
   name: ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
   nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>()
@@ -1200,29 +1075,46 @@ references:
   name.vb: ContainsCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``4
-    name: ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
-    nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
+    name: ContainsCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__4
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllParams
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor``4
-    name: ContainsCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    nameWithType: ApizrMediationRegistryBase.ContainsCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
+    name: ContainsCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsCrudMediatorFor__4
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllParams
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor``1
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor``1
   parent: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsMediatorFor__1
   name: ContainsMediatorFor<TWebApi>()
   nameWithType: ApizrMediationRegistryBase.ContainsMediatorFor<TWebApi>()
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor<TWebApi>()
@@ -1231,314 +1123,254 @@ references:
   name.vb: ContainsMediatorFor(Of TWebApi)()
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor``1
-    name: ContainsMediatorFor<TWebApi>
-    nameWithType: ApizrMediationRegistryBase.ContainsMediatorFor<TWebApi>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor<TWebApi>
+    name: ContainsMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsMediatorFor__1
+  - name: <
+  - name: TWebApi
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor``1
-    name: ContainsMediatorFor(Of TWebApi)
-    nameWithType: ApizrMediationRegistryBase.ContainsMediatorFor(Of TWebApi)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.ContainsMediatorFor(Of TWebApi)
+    name: ContainsMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_ContainsMediatorFor__1
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Collections.Generic.IEnumerable`1
   commentId: T:System.Collections.Generic.IEnumerable`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   name: IEnumerable<T>
   nameWithType: IEnumerable<T>
   fullName: System.Collections.Generic.IEnumerable<T>
@@ -1548,653 +1380,592 @@ references:
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: System.Collections
   commentId: N:System.Collections
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Collections
   nameWithType: System.Collections
   fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
 - uid: Apizr.Extending.Configuring.Registry
   commentId: N:Apizr.Extending.Configuring.Registry
+  href: Apizr.html
   name: Apizr.Extending.Configuring.Registry
   nameWithType: Apizr.Extending.Configuring.Registry
   fullName: Apizr.Extending.Configuring.Registry
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Registry
+    name: Registry
+    href: Apizr.Extending.Configuring.Registry.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Registry
+    name: Registry
+    href: Apizr.Extending.Configuring.Registry.html
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   isExternal: true
-  name: TryGetCrudMediatorFor<T>(IApizrCrudMediator<T, Int32, IEnumerable<T>, IDictionary<String, Object>>)
-  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>(IApizrCrudMediator<T, Int32, IEnumerable<T>, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, System.Int32, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>)
-  nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)(IApizrCrudMediator(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, System.Int32, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object)))
-  name.vb: TryGetCrudMediatorFor(Of T)(IApizrCrudMediator(Of T, Int32, IEnumerable(Of T), IDictionary(Of String, Object)))
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
+  name: TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>>)
+  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>(out IApizrCrudMediator<T, int, IEnumerable<T>, IDictionary<string, object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, int, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<string, object>>)
+  nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)(IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, Integer, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of String, Object)))
+  name.vb: TryGetCrudMediatorFor(Of T)(IApizrCrudMediator(Of T, Integer, IEnumerable(Of T), IDictionary(Of String, Object)))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor<T>
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T>
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
+  - name: <
+  - name: T
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
+    name: int
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor(Of T)
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T)
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
+    name: Integer
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   isExternal: true
-  name: TryGetCrudMediatorFor<T, TKey>(IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<String, Object>>)
-  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>(IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<System.String, System.Object>>)
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
+  name: TryGetCrudMediatorFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>>)
+  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>(out IApizrCrudMediator<T, TKey, IEnumerable<T>, IDictionary<string, object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IDictionary<string, object>>)
   nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)(IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of System.String, System.Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IDictionary(Of String, Object)))
   name.vb: TryGetCrudMediatorFor(Of T, TKey)(IApizrCrudMediator(Of T, TKey, IEnumerable(Of T), IDictionary(Of String, Object)))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor<T, TKey>
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey>
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor(Of T, TKey)
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey)
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
   isExternal: true
-  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult>(IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<String, Object>>)
-  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<String, Object>>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, System.Collections.Generic.IDictionary<System.String, System.Object>>)
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____
+  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>>)
+  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out IApizrCrudMediator<T, TKey, TReadAllResult, IDictionary<string, object>>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, System.Collections.Generic.IDictionary<string, object>>)
   nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
-  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, System.Collections.Generic.IDictionary(Of System.String, System.Object)))
+  fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, System.Collections.Generic.IDictionary(Of String, Object)))
   name.vb: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)(IApizrCrudMediator(Of T, TKey, TReadAllResult, IDictionary(Of String, Object)))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor<T, TKey, TReadAllResult>
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult>
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)
-    name: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult)
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
-  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___
+  name: TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>(out Apizr.Mediation.Cruding.Sending.IApizrCrudMediator<T, TKey, TReadAllResult, TReadAllParams>)
   nameWithType.vb: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
   fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
   name.vb: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)(IApizrCrudMediator(Of T, TKey, TReadAllResult, TReadAllParams))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-    name: TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor<T, TKey, TReadAllResult, TReadAllParams>
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllParams
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)
-    name: TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    nameWithType: ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetCrudMediatorFor(Of T, TKey, TReadAllResult, TReadAllParams)
+    name: TryGetCrudMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllParams
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4
     name: IApizrCrudMediator
-    nameWithType: IApizrCrudMediator
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
   commentId: M:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
-  name: TryGetMediatorFor<TWebApi>(IApizrMediator<TWebApi>)
-  nameWithType: ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>(IApizrMediator<TWebApi>)
-  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>(Apizr.Mediation.Requesting.Sending.IApizrMediator<TWebApi>)
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___
+  name: TryGetMediatorFor<TWebApi>(out IApizrMediator<TWebApi>)
+  nameWithType: ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>(out IApizrMediator<TWebApi>)
+  fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>(out Apizr.Mediation.Requesting.Sending.IApizrMediator<TWebApi>)
   nameWithType.vb: ApizrMediationRegistryBase.TryGetMediatorFor(Of TWebApi)(IApizrMediator(Of TWebApi))
   fullName.vb: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor(Of TWebApi)(Apizr.Mediation.Requesting.Sending.IApizrMediator(Of TWebApi))
   name.vb: TryGetMediatorFor(Of TWebApi)(IApizrMediator(Of TWebApi))
   spec.csharp:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
-    name: TryGetMediatorFor<TWebApi>
-    nameWithType: ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor<TWebApi>
+    name: TryGetMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___
+  - name: <
+  - name: TWebApi
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: out
+  - name: " "
   - uid: Apizr.Mediation.Requesting.Sending.IApizrMediator`1
     name: IApizrMediator
-    nameWithType: IApizrMediator
-    fullName: Apizr.Mediation.Requesting.Sending.IApizrMediator
+    href: Apizr.Mediation.Requesting.Sending.IApizrMediator-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)
-    name: TryGetMediatorFor(Of TWebApi)
-    nameWithType: ApizrMediationRegistryBase.TryGetMediatorFor(Of TWebApi)
-    fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.TryGetMediatorFor(Of TWebApi)
+    name: TryGetMediatorFor
+    href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistryBase.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistryBase_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TWebApi
+  - name: )
+  - name: (
   - uid: Apizr.Mediation.Requesting.Sending.IApizrMediator`1
     name: IApizrMediator
-    nameWithType: IApizrMediator
-    fullName: Apizr.Mediation.Requesting.Sending.IApizrMediator
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Sending.IApizrMediator-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.AddOrUpdateManager*
   commentId: Overload:Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.AddOrUpdateManager
+  href: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.html#Apizr_Mediation_Configuring_Registry_ApizrMediationRegistry_AddOrUpdateManager_System_Type_
   name: AddOrUpdateManager
   nameWithType: ApizrMediationRegistry.AddOrUpdateManager
   fullName: Apizr.Mediation.Configuring.Registry.ApizrMediationRegistry.AddOrUpdateManager
@@ -2202,45 +1973,35 @@ references:
   commentId: M:Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
   parent: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase
   isExternal: true
+  href: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.html#Apizr_Extending_Configuring_Registry_IApizrExtendedConcurrentRegistryBase_AddOrUpdateManager_System_Type_
   name: AddOrUpdateManager(Type)
   nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(Type)
   fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
   spec.csharp:
   - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
     name: AddOrUpdateManager
-    nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager
-    fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager
+    href: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.html#Apizr_Extending_Configuring_Registry_IApizrExtendedConcurrentRegistryBase_AddOrUpdateManager_System_Type_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager(System.Type)
     name: AddOrUpdateManager
-    nameWithType: IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager
-    fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.AddOrUpdateManager
+    href: Apizr.Extending.Configuring.Registry.IApizrExtendedConcurrentRegistryBase.html#Apizr_Extending_Configuring_Registry_IApizrExtendedConcurrentRegistryBase_AddOrUpdateManager_System_Type_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Type
   commentId: T:System.Type
   parent: System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
   name: Type
   nameWithType: Type
   fullName: System.Type

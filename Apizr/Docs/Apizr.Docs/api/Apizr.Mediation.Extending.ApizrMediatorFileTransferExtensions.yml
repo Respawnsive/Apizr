@@ -9,10 +9,10 @@ items:
   - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -35,7 +35,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrMediatorFileTransferExtensions
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -56,13 +56,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  modifiers.csharp:
-  - public
-  - static
-  - class
-  modifiers.vb:
-  - Public
-  - Module
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   id: SendDownloadQueryFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -78,7 +71,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDownloadQueryFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -86,12 +79,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a download query to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TDownloadApi</code> with a custom query parameters type\n"
+  summary: Send a download query to Apizr using MediatR for <code class="typeparamref">TDownloadApi</code> with a custom query parameters type
   example: []
   syntax:
-    content: >-
-      public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi, TDownloadParams>(this IApizrMediator apizrMediator, FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TDownloadApi : IDownloadApi<TDownloadParams>
+    content: 'public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi, TDownloadParams>(this IApizrMediator apizrMediator, FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<TDownloadParams>'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -113,18 +104,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendDownloadQueryFor(Of TDownloadApi As IDownloadApi(Of TDownloadParams), TDownloadParams)(apizrMediator As IApizrMediator, fileInfo As FileInfo, downloadParams As TDownloadParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function SendDownloadQueryFor(Of TDownloadApi As IDownloadApi(Of TDownloadParams), TDownloadParams)(apizrMediator As IApizrMediator, fileInfo As FileInfo, downloadParams As TDownloadParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi, TDownloadParams)(IApizrMediator, FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi, TDownloadParams)(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDownloadQueryFor(Of TDownloadApi, TDownloadParams)(IApizrMediator, FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -142,7 +124,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDownloadQueryFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -150,12 +132,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a download query to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TDownloadApi</code>\n"
+  summary: Send a download query to Apizr using MediatR for <code class="typeparamref">TDownloadApi</code>
   example: []
   syntax:
-    content: >-
-      public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi, TDownloadParams>(this IApizrMediator apizrMediator, FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TDownloadApi : IDownloadApi<TDownloadParams>
+    content: 'public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi, TDownloadParams>(this IApizrMediator apizrMediator, FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<TDownloadParams>'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -174,18 +154,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendDownloadQueryFor(Of TDownloadApi As IDownloadApi(Of TDownloadParams), TDownloadParams)(apizrMediator As IApizrMediator, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function SendDownloadQueryFor(Of TDownloadApi As IDownloadApi(Of TDownloadParams), TDownloadParams)(apizrMediator As IApizrMediator, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi, TDownloadParams)(IApizrMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi, TDownloadParams)(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDownloadQueryFor(Of TDownloadApi, TDownloadParams)(IApizrMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -196,14 +167,14 @@ items:
   langs:
   - csharp
   - vb
-  name: SendDownloadQueryFor<TDownloadApi>(IApizrMediator, FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: ApizrMediatorFileTransferExtensions.SendDownloadQueryFor<TDownloadApi>(IApizrMediator, FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor<TDownloadApi>(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  name: SendDownloadQueryFor<TDownloadApi>(IApizrMediator, FileInfo, IDictionary<string, object>, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrMediatorFileTransferExtensions.SendDownloadQueryFor<TDownloadApi>(IApizrMediator, FileInfo, IDictionary<string, object>, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor<TDownloadApi>(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary<string, object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDownloadQueryFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -211,12 +182,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a download query to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TDownloadApi</code> with a dictionary query parameters type\n"
+  summary: Send a download query to Apizr using MediatR for <code class="typeparamref">TDownloadApi</code> with a dictionary query parameters type
   example: []
   syntax:
-    content: >-
-      public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi>(this IApizrMediator apizrMediator, FileInfo fileInfo, IDictionary<string, object> downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TDownloadApi : IDownloadApi
+    content: 'public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi>(this IApizrMediator apizrMediator, FileInfo fileInfo, IDictionary<string, object> downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -236,19 +205,10 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendDownloadQueryFor(Of TDownloadApi As IDownloadApi)(apizrMediator As IApizrMediator, fileInfo As FileInfo, downloadParams As IDictionary(Of String, Object), optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function SendDownloadQueryFor(Of TDownloadApi As IDownloadApi)(apizrMediator As IApizrMediator, fileInfo As FileInfo, downloadParams As IDictionary(Of String, Object), optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi)(IApizrMediator, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi)(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi)(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary(Of String, Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDownloadQueryFor(Of TDownloadApi)(IApizrMediator, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -265,7 +225,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDownloadQueryFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -273,12 +233,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a download query to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TDownloadApi</code>\n"
+  summary: Send a download query to Apizr using MediatR for <code class="typeparamref">TDownloadApi</code>
   example: []
   syntax:
-    content: >-
-      public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi>(this IApizrMediator apizrMediator, FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TDownloadApi : IDownloadApi
+    content: 'public static Task<FileInfo> SendDownloadQueryFor<TDownloadApi>(this IApizrMediator apizrMediator, FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -295,18 +253,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendDownloadQueryFor(Of TDownloadApi As IDownloadApi)(apizrMediator As IApizrMediator, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function SendDownloadQueryFor(Of TDownloadApi As IDownloadApi)(apizrMediator As IApizrMediator, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi)(IApizrMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor(Of TDownloadApi)(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDownloadQueryFor(Of TDownloadApi)(IApizrMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -317,14 +266,14 @@ items:
   langs:
   - csharp
   - vb
-  name: SendDownloadQuery(IApizrMediator, FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: ApizrMediatorFileTransferExtensions.SendDownloadQuery(IApizrMediator, FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  name: SendDownloadQuery(IApizrMediator, FileInfo, IDictionary<string, object>, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: ApizrMediatorFileTransferExtensions.SendDownloadQuery(IApizrMediator, FileInfo, IDictionary<string, object>, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary<string, object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDownloadQuery
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -332,7 +281,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a download query to Apizr using MediatR for <xref href=\"Apizr.Transferring.Requesting.IDownloadApi\" data-throw-if-not-resolved=\"false\"></xref> with a dictionary query parameters type\n"
+  summary: Send a download query to Apizr using MediatR for <xref href="Apizr.Transferring.Requesting.IDownloadApi" data-throw-if-not-resolved="false"></xref> with a dictionary query parameters type
   example: []
   syntax:
     content: public static Task<FileInfo> SendDownloadQuery(this IApizrMediator apizrMediator, FileInfo fileInfo, IDictionary<string, object> downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -352,19 +301,10 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendDownloadQuery(apizrMediator As IApizrMediator, fileInfo As FileInfo, downloadParams As IDictionary(Of String, Object), optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function SendDownloadQuery(apizrMediator As IApizrMediator, fileInfo As FileInfo, downloadParams As IDictionary(Of String, Object), optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendDownloadQuery(IApizrMediator, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Collections.Generic.IDictionary(Of String, Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDownloadQuery(IApizrMediator, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -381,7 +321,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDownloadQuery
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -389,7 +329,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a download query to Apizr using MediatR for <xref href=\"Apizr.Transferring.Requesting.IDownloadApi\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: Send a download query to Apizr using MediatR for <xref href="Apizr.Transferring.Requesting.IDownloadApi" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
     content: public static Task<FileInfo> SendDownloadQuery(this IApizrMediator apizrMediator, FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -406,18 +346,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendDownloadQuery(apizrMediator As IApizrMediator, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function SendDownloadQuery(apizrMediator As IApizrMediator, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendDownloadQuery(IApizrMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDownloadQuery(IApizrMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -435,7 +366,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDownloadWithQuery
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -443,7 +374,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a download query to Apizr using MediatR with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TDownloadParams</code>\n"
+  summary: Send a download query to Apizr using MediatR with <code class="typeparamref">TDownloadParams</code>
   example: []
   syntax:
     content: public static Task<FileInfo> SendDownloadWithQuery<TDownloadParams>(this IApizrMediator apizrMediator, FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -466,18 +397,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendDownloadWithQuery(Of TDownloadParams)(apizrMediator As IApizrMediator, fileInfo As FileInfo, downloadParams As TDownloadParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function SendDownloadWithQuery(Of TDownloadParams)(apizrMediator As IApizrMediator, fileInfo As FileInfo, downloadParams As TDownloadParams, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendDownloadWithQuery(Of TDownloadParams)(IApizrMediator, FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery(Of TDownloadParams)(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDownloadWithQuery(Of TDownloadParams)(IApizrMediator, FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -495,7 +417,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDownloadWithQuery
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -503,7 +425,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a download query to Apizr using MediatR with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TDownloadParams</code>\n"
+  summary: Send a download query to Apizr using MediatR with <code class="typeparamref">TDownloadParams</code>
   example: []
   syntax:
     content: public static Task<FileInfo> SendDownloadWithQuery<TDownloadParams>(this IApizrMediator apizrMediator, FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -523,18 +445,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendDownloadWithQuery(Of TDownloadParams)(apizrMediator As IApizrMediator, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function SendDownloadWithQuery(Of TDownloadParams)(apizrMediator As IApizrMediator, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendDownloadWithQuery(Of TDownloadParams)(IApizrMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery(Of TDownloadParams)(Apizr.Mediation.Requesting.Sending.IApizrMediator, System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDownloadWithQuery(Of TDownloadParams)(IApizrMediator, FileInfo, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -552,7 +465,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommandFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -560,12 +473,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApi</code> from file bytes data\n"
+  summary: Send a upload command to Apizr using MediatR for <code class="typeparamref">TUploadApi</code> from file bytes data
   example: []
   syntax:
-    content: >-
-      public static Task<TUploadApiResultData> SendUploadCommandFor<TUploadApi, TUploadApiResultData>(this IApizrMediator apizrMediator, ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TUploadApi : IUploadApi<TUploadApiResultData>
+    content: 'public static Task<TUploadApiResultData> SendUploadCommandFor<TUploadApi, TUploadApiResultData>(this IApizrMediator apizrMediator, ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<TUploadApiResultData>'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -584,18 +495,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{{TUploadApiResultData}}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi(Of TUploadApiResultData), TUploadApiResultData)(apizrMediator As IApizrMediator, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
+    content.vb: Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi(Of TUploadApiResultData), TUploadApiResultData)(apizrMediator As IApizrMediator, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(IApizrMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(IApizrMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -613,7 +515,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommandFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -621,12 +523,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApi</code> from file stream data\n"
+  summary: Send a upload command to Apizr using MediatR for <code class="typeparamref">TUploadApi</code> from file stream data
   example: []
   syntax:
-    content: >-
-      public static Task<TUploadApiResultData> SendUploadCommandFor<TUploadApi, TUploadApiResultData>(this IApizrMediator apizrMediator, StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TUploadApi : IUploadApi<TUploadApiResultData>
+    content: 'public static Task<TUploadApiResultData> SendUploadCommandFor<TUploadApi, TUploadApiResultData>(this IApizrMediator apizrMediator, StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<TUploadApiResultData>'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -645,18 +545,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{{TUploadApiResultData}}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi(Of TUploadApiResultData), TUploadApiResultData)(apizrMediator As IApizrMediator, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
+    content.vb: Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi(Of TUploadApiResultData), TUploadApiResultData)(apizrMediator As IApizrMediator, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(IApizrMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(IApizrMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor``2(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -674,7 +565,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommandFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -682,12 +573,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApi</code> from file info data\n"
+  summary: Send a upload command to Apizr using MediatR for <code class="typeparamref">TUploadApi</code> from file info data
   example: []
   syntax:
-    content: >-
-      public static Task<TUploadApiResultData> SendUploadCommandFor<TUploadApi, TUploadApiResultData>(this IApizrMediator apizrMediator, FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TUploadApi : IUploadApi<TUploadApiResultData>
+    content: 'public static Task<TUploadApiResultData> SendUploadCommandFor<TUploadApi, TUploadApiResultData>(this IApizrMediator apizrMediator, FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<TUploadApiResultData>'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -706,18 +595,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{{TUploadApiResultData}}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi(Of TUploadApiResultData), TUploadApiResultData)(apizrMediator As IApizrMediator, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
+    content.vb: Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi(Of TUploadApiResultData), TUploadApiResultData)(apizrMediator As IApizrMediator, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(IApizrMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommandFor(Of TUploadApi, TUploadApiResultData)(IApizrMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -735,7 +615,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommandFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -743,12 +623,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApi</code> from file bytes data\n"
+  summary: Send a upload command to Apizr using MediatR for <code class="typeparamref">TUploadApi</code> from file bytes data
   example: []
   syntax:
-    content: >-
-      public static Task SendUploadCommandFor<TUploadApi>(this IApizrMediator apizrMediator, ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TUploadApi : IUploadApi
+    content: 'public static Task SendUploadCommandFor<TUploadApi>(this IApizrMediator apizrMediator, ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -765,18 +643,9 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi)(apizrMediator As IApizrMediator, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
+    content.vb: Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi)(apizrMediator As IApizrMediator, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi)(IApizrMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommandFor(Of TUploadApi)(IApizrMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -794,7 +663,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommandFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -802,12 +671,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApi</code> from file stream data\n"
+  summary: Send a upload command to Apizr using MediatR for <code class="typeparamref">TUploadApi</code> from file stream data
   example: []
   syntax:
-    content: >-
-      public static Task SendUploadCommandFor<TUploadApi>(this IApizrMediator apizrMediator, StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TUploadApi : IUploadApi
+    content: 'public static Task SendUploadCommandFor<TUploadApi>(this IApizrMediator apizrMediator, StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -824,18 +691,9 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi)(apizrMediator As IApizrMediator, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
+    content.vb: Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi)(apizrMediator As IApizrMediator, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi)(IApizrMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommandFor(Of TUploadApi)(IApizrMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -853,7 +711,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommandFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -861,12 +719,10 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApi</code> from file info data\n"
+  summary: Send a upload command to Apizr using MediatR for <code class="typeparamref">TUploadApi</code> from file info data
   example: []
   syntax:
-    content: >-
-      public static Task SendUploadCommandFor<TUploadApi>(this IApizrMediator apizrMediator, FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-          where TUploadApi : IUploadApi
+    content: 'public static Task SendUploadCommandFor<TUploadApi>(this IApizrMediator apizrMediator, FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi'
     parameters:
     - id: apizrMediator
       type: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -883,18 +739,9 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi)(apizrMediator As IApizrMediator, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
+    content.vb: Public Shared Function SendUploadCommandFor(Of TUploadApi As IUploadApi)(apizrMediator As IApizrMediator, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi)(IApizrMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor(Of TUploadApi)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommandFor(Of TUploadApi)(IApizrMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -912,7 +759,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommand
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -920,7 +767,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <xref href=\"Apizr.Transferring.Requesting.IUploadApi\" data-throw-if-not-resolved=\"false\"></xref> from file bytes data\n"
+  summary: Send a upload command to Apizr using MediatR for <xref href="Apizr.Transferring.Requesting.IUploadApi" data-throw-if-not-resolved="false"></xref> from file bytes data
   example: []
   syntax:
     content: public static Task SendUploadCommand(this IApizrMediator apizrMediator, ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -937,18 +784,9 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommand(apizrMediator As IApizrMediator, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
+    content.vb: Public Shared Function SendUploadCommand(apizrMediator As IApizrMediator, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommand(IApizrMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommand(IApizrMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -966,7 +804,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommand
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -974,7 +812,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <xref href=\"Apizr.Transferring.Requesting.IUploadApi\" data-throw-if-not-resolved=\"false\"></xref> from file stream data\n"
+  summary: Send a upload command to Apizr using MediatR for <xref href="Apizr.Transferring.Requesting.IUploadApi" data-throw-if-not-resolved="false"></xref> from file stream data
   example: []
   syntax:
     content: public static Task SendUploadCommand(this IApizrMediator apizrMediator, StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -991,18 +829,9 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommand(apizrMediator As IApizrMediator, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
+    content.vb: Public Shared Function SendUploadCommand(apizrMediator As IApizrMediator, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommand(IApizrMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommand(IApizrMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -1020,7 +849,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadCommand
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -1028,7 +857,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR for <xref href=\"Apizr.Transferring.Requesting.IUploadApi\" data-throw-if-not-resolved=\"false\"></xref> from file info data\n"
+  summary: Send a upload command to Apizr using MediatR for <xref href="Apizr.Transferring.Requesting.IUploadApi" data-throw-if-not-resolved="false"></xref> from file info data
   example: []
   syntax:
     content: public static Task SendUploadCommand(this IApizrMediator apizrMediator, FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1045,18 +874,9 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadCommand(apizrMediator As IApizrMediator, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
+    content.vb: Public Shared Function SendUploadCommand(apizrMediator As IApizrMediator, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadCommand(IApizrMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadCommand(IApizrMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -1074,7 +894,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadWithCommand
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -1082,7 +902,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApiResultData</code> from file bytes data\n"
+  summary: Send a upload command to Apizr using MediatR with <code class="typeparamref">TUploadApiResultData</code> from file bytes data
   example: []
   syntax:
     content: public static Task<TUploadApiResultData> SendUploadWithCommand<TUploadApiResultData>(this IApizrMediator apizrMediator, ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1102,18 +922,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{{TUploadApiResultData}}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadWithCommand(Of TUploadApiResultData)(apizrMediator As IApizrMediator, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
+    content.vb: Public Shared Function SendUploadWithCommand(Of TUploadApiResultData)(apizrMediator As IApizrMediator, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadWithCommand(Of TUploadApiResultData)(IApizrMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand(Of TUploadApiResultData)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadWithCommand(Of TUploadApiResultData)(IApizrMediator, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -1131,7 +942,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadWithCommand
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -1139,7 +950,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApiResultData</code> from file stream data\n"
+  summary: Send a upload command to Apizr using MediatR with <code class="typeparamref">TUploadApiResultData</code> from file stream data
   example: []
   syntax:
     content: public static Task<TUploadApiResultData> SendUploadWithCommand<TUploadApiResultData>(this IApizrMediator apizrMediator, StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1159,18 +970,9 @@ items:
     return:
       type: System.Threading.Tasks.Task{{TUploadApiResultData}}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadWithCommand(Of TUploadApiResultData)(apizrMediator As IApizrMediator, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
+    content.vb: Public Shared Function SendUploadWithCommand(Of TUploadApiResultData)(apizrMediator As IApizrMediator, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadWithCommand(Of TUploadApiResultData)(IApizrMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand(Of TUploadApiResultData)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadWithCommand(Of TUploadApiResultData)(IApizrMediator, StreamPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand``1(Apizr.Mediation.Requesting.Sending.IApizrMediator,Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -1188,7 +990,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUploadWithCommand
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.MediatR/Mediation/Extending/ApizrMediatorFileTransferExtensions.cs
@@ -1196,7 +998,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Extending
-  summary: "\nSend a upload command to Apizr using MediatR with <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TUploadApiResultData</code> from file info data\n"
+  summary: Send a upload command to Apizr using MediatR with <code class="typeparamref">TUploadApiResultData</code> from file info data
   example: []
   syntax:
     content: public static Task<TUploadApiResultData> SendUploadWithCommand<TUploadApiResultData>(this IApizrMediator apizrMediator, FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1216,326 +1018,289 @@ items:
     return:
       type: System.Threading.Tasks.Task{{TUploadApiResultData}}
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function SendUploadWithCommand(Of TUploadApiResultData)(apizrMediator As IApizrMediator, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
+    content.vb: Public Shared Function SendUploadWithCommand(Of TUploadApiResultData)(apizrMediator As IApizrMediator, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of TUploadApiResultData)
   overload: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand*
   nameWithType.vb: ApizrMediatorFileTransferExtensions.SendUploadWithCommand(Of TUploadApiResultData)(IApizrMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand(Of TUploadApiResultData)(Apizr.Mediation.Requesting.Sending.IApizrMediator, Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUploadWithCommand(Of TUploadApiResultData)(IApizrMediator, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
 references:
 - uid: Apizr.Mediation.Extending
   commentId: N:Apizr.Mediation.Extending
+  href: Apizr.html
   name: Apizr.Mediation.Extending
   nameWithType: Apizr.Mediation.Extending
   fullName: Apizr.Mediation.Extending
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Extending
+    name: Extending
+    href: Apizr.Mediation.Extending.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Extending
+    name: Extending
+    href: Apizr.Mediation.Extending.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor*
   commentId: Overload:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor
+  href: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.html#Apizr_Mediation_Extending_ApizrMediatorFileTransferExtensions_SendDownloadQueryFor__2_Apizr_Mediation_Requesting_Sending_IApizrMediator_System_IO_FileInfo___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendDownloadQueryFor
   nameWithType: ApizrMediatorFileTransferExtensions.SendDownloadQueryFor
   fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQueryFor
 - uid: Apizr.Mediation.Requesting.Sending.IApizrMediator
   commentId: T:Apizr.Mediation.Requesting.Sending.IApizrMediator
   parent: Apizr.Mediation.Requesting.Sending
+  href: Apizr.Mediation.Requesting.Sending.IApizrMediator.html
   name: IApizrMediator
   nameWithType: IApizrMediator
   fullName: Apizr.Mediation.Requesting.Sending.IApizrMediator
@@ -1543,6 +1308,7 @@ references:
   commentId: T:System.IO.FileInfo
   parent: System.IO
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   name: FileInfo
   nameWithType: FileInfo
   fullName: System.IO.FileInfo
@@ -1556,6 +1322,7 @@ references:
   commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrRequestOptionsBuilder>
   nameWithType: Action<IApizrRequestOptionsBuilder>
   fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -1565,39 +1332,30 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{System.IO.FileInfo}
   commentId: T:System.Threading.Tasks.Task{System.IO.FileInfo}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<FileInfo>
   nameWithType: Task<FileInfo>
   fullName: System.Threading.Tasks.Task<System.IO.FileInfo>
@@ -1607,48 +1365,92 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.Sending
   commentId: N:Apizr.Mediation.Requesting.Sending
+  href: Apizr.html
   name: Apizr.Mediation.Requesting.Sending
   nameWithType: Apizr.Mediation.Requesting.Sending
   fullName: Apizr.Mediation.Requesting.Sending
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Sending
+    name: Sending
+    href: Apizr.Mediation.Requesting.Sending.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Sending
+    name: Sending
+    href: Apizr.Mediation.Requesting.Sending.html
 - uid: System.IO
   commentId: N:System.IO
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
 - uid: TDownloadParams
   name: TDownloadParams
   nameWithType: TDownloadParams
@@ -1656,6 +1458,7 @@ references:
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -1665,36 +1468,25 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -1704,102 +1496,109 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: System.Collections.Generic.IDictionary{System.String,System.Object}
   commentId: T:System.Collections.Generic.IDictionary{System.String,System.Object}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IDictionary`2
-  name: IDictionary<String, Object>
-  nameWithType: IDictionary<String, Object>
-  fullName: System.Collections.Generic.IDictionary<System.String, System.Object>
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<string, object>
+  nameWithType: IDictionary<string, object>
+  fullName: System.Collections.Generic.IDictionary<string, object>
   nameWithType.vb: IDictionary(Of String, Object)
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, System.Object)
+  fullName.vb: System.Collections.Generic.IDictionary(Of String, Object)
   name.vb: IDictionary(Of String, Object)
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Collections.Generic.IDictionary`2
   commentId: T:System.Collections.Generic.IDictionary`2
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   name: IDictionary<TKey, TValue>
   nameWithType: IDictionary<TKey, TValue>
   fullName: System.Collections.Generic.IDictionary<TKey, TValue>
@@ -1809,68 +1608,85 @@ references:
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TValue
-    nameWithType: TValue
-    fullName: TValue
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TValue
-    nameWithType: TValue
-    fullName: TValue
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: Apizr.Transferring.Requesting.IDownloadApi
   commentId: T:Apizr.Transferring.Requesting.IDownloadApi
+  href: Apizr.Transferring.Requesting.IDownloadApi.html
   name: IDownloadApi
   nameWithType: IDownloadApi
   fullName: Apizr.Transferring.Requesting.IDownloadApi
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery*
   commentId: Overload:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery
+  href: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.html#Apizr_Mediation_Extending_ApizrMediatorFileTransferExtensions_SendDownloadQuery_Apizr_Mediation_Requesting_Sending_IApizrMediator_System_IO_FileInfo_System_Collections_Generic_IDictionary_System_String_System_Object__System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendDownloadQuery
   nameWithType: ApizrMediatorFileTransferExtensions.SendDownloadQuery
   fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadQuery
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery*
   commentId: Overload:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery
+  href: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.html#Apizr_Mediation_Extending_ApizrMediatorFileTransferExtensions_SendDownloadWithQuery__1_Apizr_Mediation_Requesting_Sending_IApizrMediator_System_IO_FileInfo___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendDownloadWithQuery
   nameWithType: ApizrMediatorFileTransferExtensions.SendDownloadWithQuery
   fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendDownloadWithQuery
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor*
   commentId: Overload:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor
+  href: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.html#Apizr_Mediation_Extending_ApizrMediatorFileTransferExtensions_SendUploadCommandFor__2_Apizr_Mediation_Requesting_Sending_IApizrMediator_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUploadCommandFor
   nameWithType: ApizrMediatorFileTransferExtensions.SendUploadCommandFor
   fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommandFor
@@ -1885,6 +1701,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{``1}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TUploadApiResultData>
   nameWithType: Task<TUploadApiResultData>
   fullName: System.Threading.Tasks.Task<TUploadApiResultData>
@@ -1894,33 +1711,21 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Refit
   commentId: N:Refit
   isExternal: true
@@ -1945,21 +1750,25 @@ references:
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
 - uid: Apizr.Transferring.Requesting.IUploadApi
   commentId: T:Apizr.Transferring.Requesting.IUploadApi
+  href: Apizr.Transferring.Requesting.IUploadApi.html
   name: IUploadApi
   nameWithType: IUploadApi
   fullName: Apizr.Transferring.Requesting.IUploadApi
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand*
   commentId: Overload:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand
+  href: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.html#Apizr_Mediation_Extending_ApizrMediatorFileTransferExtensions_SendUploadCommand_Apizr_Mediation_Requesting_Sending_IApizrMediator_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUploadCommand
   nameWithType: ApizrMediatorFileTransferExtensions.SendUploadCommand
   fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadCommand
 - uid: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand*
   commentId: Overload:Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand
+  href: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.html#Apizr_Mediation_Extending_ApizrMediatorFileTransferExtensions_SendUploadWithCommand__1_Apizr_Mediation_Requesting_Sending_IApizrMediator_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUploadWithCommand
   nameWithType: ApizrMediatorFileTransferExtensions.SendUploadWithCommand
   fullName: Apizr.Mediation.Extending.ApizrMediatorFileTransferExtensions.SendUploadWithCommand

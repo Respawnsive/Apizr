@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring data mapping | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring data mapping | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../../../resources/favicon.ico">
-    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../../../styles/docfx.css">
-    <link rel="stylesheet" href="../../../styles/main.css">
-    <meta property="docfx:navrel" content="../../../toc.html">
-    <meta property="docfx:tocrel" content="../../toc.html">
+    
+      <link rel="shortcut icon" href="../../../resources/favicon.ico">
+      <link rel="stylesheet" href="../../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../../styles/docfx.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc.html">
+      <meta property="docfx:tocrel" content="../../toc.html">
     
     <meta property="docfx:rel" content="../../../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../../../index.html">
                 <img id="logo" class="svg" src="../../../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,12 +77,12 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-data-mapping">Configuring data mapping</h2>
 
+<h2 id="configuring-data-mapping">Configuring data mapping</h2>
 <p>You may need to map data between some API types and Model types, known as DTO design pattern.
 Apizr could handle it for you by providing an <code>IMappingHandler</code> interface implementation to it.
-Fortunately, there&#39;s an integration Nuget package called Apizr.Integration.AutoMapper to integrate... AutoMapper obviously.
-Of course, you can implement your own integration, but here we&#39;ll talk about the provided AutoMapper one.</p>
+Fortunately, there's an integration Nuget package called Apizr.Integration.AutoMapper to integrate... AutoMapper obviously.
+Of course, you can implement your own integration, but here we'll talk about the provided AutoMapper one.</p>
 <p>Please first install this integration package:</p>
 <table>
 <thead>
@@ -112,7 +112,10 @@ Of course, you can implement your own integration, but here we&#39;ll talk about
             .ForMember(dest =&gt; dest.FirstName, opt =&gt; opt.MapFrom(src =&gt; src.Name));
     }
 }
-</code></pre><div class="WARNING"><h5>Warning</h5><p><strong>Data Mapping with MediatR and/or Optional</strong></p>
+</code></pre>
+<div class="WARNING">
+<h5>Warning</h5>
+<p><strong>Data Mapping with MediatR and/or Optional</strong></p>
 <p>If you plan to use MediatR and/or Optional integrations, one more defining step need to be done.</p>
 </div>
 <p>Only for those of you planning to use data mapping with <strong>MediatR</strong> and/or <strong>Optional</strong>, Apizr provide a <code>MappedWith</code> attribute telling it to map api object with model object.
@@ -124,24 +127,27 @@ public class MinUser
     public int Id { get; set; }
     public string Name { get; set; }
 }
-</code></pre><h3 id="registering">Registering</h3>
-<div class="tabGroup" id="tabgroup_jQCjnzoGd+">
+</code></pre>
+<h3 id="registering">Registering</h3>
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_jQCjnzoGd+_tabid-static" role="tab" aria-controls="tabpanel_jQCjnzoGd+_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_jQCjnzoGd+_tabid-extended" role="tab" aria-controls="tabpanel_jQCjnzoGd+_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_jQCjnzoGd+_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <p>First create a <code>MapperConfiguration</code> with your profiles:</p>
 <pre><code class="lang-csharp">var mapperConfig = new MapperConfiguration(config =&gt;
 {
     config.AddProfile&lt;UserMinUserProfile&gt;();
     config.AddProfile&lt;WhateverProfile&gt;();
 });
-</code></pre><p>Then you&#39;ll be able to register with this option:</p>
+</code></pre>
+<p>Then you'll be able to register with this option:</p>
 <pre><code class="lang-csharp">// direct short configuration
 options =&gt; options.WithAutoMapperMappingHandler(mapperConfig)
 
@@ -150,11 +156,14 @@ options =&gt; options.WithMappingHandler(new AutoMapperMappingHandler(mapperConf
 
 // OR factory configuration
 options =&gt; options.WithMappingHandler(() =&gt; new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
-</code></pre></section>
-<section id="tabpanel_jQCjnzoGd+_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+</code></pre>
+</section>
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <p>First register AutoMapper as you used to do:</p>
 <pre><code class="lang-csharp">services.AddAutoMapper(ASSEMBLIES_CONTAINING_PROFILES);
-</code></pre><p>Then you&#39;ll be able to register with this option:</p>
+</code></pre>
+<p>Then you'll be able to register with this option:</p>
 <pre><code class="lang-csharp">// direct short configuration
 options =&gt; options.WithAutoMapperMappingHandler()
 
@@ -172,38 +181,41 @@ options =&gt; options.WithMappingHandler&lt;AutoMapperMappingHandler&gt;()
 
 // OR parameter type configuration
 options =&gt; options.WithMappingHandler(typeof(AutoMapperMappingHandler))
-</code></pre></section>
+</code></pre>
+</section>
 </div>
 <h3 id="using">Using</h3>
 <p>You can tell Apizr to map data just by providing types when executing a request.</p>
 <p>Something like:</p>
 <pre><code class="lang-csharp">var result = await reqResManager.ExecuteAsync&lt;MinUser, User&gt;((api, user) =&gt; 
     api.CreateUser(user, CancellationToken.None), minUser);
-</code></pre><p>Here we give a MinUser typed object to Apizr, which will be mapped to User type just before sending it.
+</code></pre>
+<p>Here we give a MinUser typed object to Apizr, which will be mapped to User type just before sending it.
 Then Apizr will map the User typed result back to MinUser type just before returning it.</p>
-<p>There are much more overloads so you can map objects the way you need. 
+<p>There are much more overloads so you can map objects the way you need.
 The same while using <strong>MediatR</strong> and/or <strong>Optional</strong>.</p>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/feat/resilience/Apizr/Docs/Apizr.Docs/articles/legacy/v4/config_datamapping.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/legacy/v4/config_datamapping.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -211,14 +223,14 @@ The same while using <strong>MediatR</strong> and/or <strong>Optional</strong>.<
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../../../styles/docfx.js"></script>
     <script type="text/javascript" src="../../../styles/main.js"></script>
   </body>

@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrExtendedCommonOptionsBuilderBase.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrExtendedCommonOptionsBuilderBase
     path: ../../Src/Apizr/Configuring/Common/IApizrExtendedCommonOptionsBuilderBase.cs
@@ -23,831 +23,678 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nBuilder options available at common level for extended registration\n"
+  summary: Builder options available at common level for extended registration
   example: []
   syntax:
     content: 'public interface IApizrExtendedCommonOptionsBuilderBase : IApizrGlobalCommonOptionsBuilderBase, IApizrGlobalSharedRegistrationOptionsBuilderBase, IApizrGlobalSharedOptionsBuilderBase'
-    content.vb: >-
-      Public Interface IApizrExtendedCommonOptionsBuilderBase
-          Inherits IApizrGlobalCommonOptionsBuilderBase
+    content.vb: Public Interface IApizrExtendedCommonOptionsBuilderBase Inherits IApizrGlobalCommonOptionsBuilderBase, IApizrGlobalSharedRegistrationOptionsBuilderBase, IApizrGlobalSharedOptionsBuilderBase
   extensionMethods:
+  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1
+  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache})
+  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache},System.String)
+  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.String)
+  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
+  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
+  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
   - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
   - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
   - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
   - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
-  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1
-  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1
-  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache})
-  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.String)
-  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache},System.String)
-  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
-  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
   - Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
 references:
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
+  href: Apizr.html
   name: Apizr.Configuring.Common
   nameWithType: Apizr.Configuring.Common
   fullName: Apizr.Configuring.Common
-- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-  parent: Apizr.FusilladeOptionsBuilderExtensions
-  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-  name: WithPriorityManagement<IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement<IApizrExtendedCommonOptionsBuilderBase>()
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of IApizrExtendedCommonOptionsBuilderBase)()
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)()
-  name.vb: WithPriorityManagement(Of IApizrExtendedCommonOptionsBuilderBase)()
   spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
-    name: WithPriorityManagement<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Common
+    name: Common
+    href: Apizr.Configuring.Common.html
   spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
-    name: WithPriorityManagement(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
-  parent: Apizr.FusilladeOptionsBuilderExtensions
-  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
-  name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>()
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)()
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)()
-  name.vb: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)()
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
-    name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
-    name: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-  parent: Apizr.FusilladeOptionsBuilderExtensions
-  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-  name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>(Priority)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>(Priority)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Fusillade.Priority)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(Priority)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Fusillade.Priority)
-  name.vb: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(Priority)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
-    name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Fusillade.Priority
-    name: Priority
-    nameWithType: Priority
-    fullName: Fusillade.Priority
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
-    name: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Fusillade.Priority
-    name: Priority
-    nameWithType: Priority
-    fullName: Fusillade.Priority
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-  parent: Apizr.FusilladeOptionsBuilderExtensions
-  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-  name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>(Int32)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>(Int32)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(System.Int32)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(Int32)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(System.Int32)
-  name.vb: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(Int32)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
-    name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
-    name: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1
-  commentId: M:Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1(``0)
-  parent: Apizr.AutoMapperOptionsBuilderExtensions
-  definition: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1(``0)
-  name: WithAutoMapperMappingHandler<IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType: AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler<IApizrExtendedCommonOptionsBuilderBase>()
-  fullName: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType.vb: AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)()
-  fullName.vb: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)()
-  name.vb: WithAutoMapperMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)()
-  spec.csharp:
-  - uid: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1
-    name: WithAutoMapperMappingHandler<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1
-    name: WithAutoMapperMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Common
+    name: Common
+    href: Apizr.Configuring.Common.html
 - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1
   commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0)
   parent: Apizr.AkavacheOptionsBuilderExtensions
   definition: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0)
-  name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>()
-  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)()
-  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)()
-  name.vb: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)()
+  href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_
+  name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
+  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  name.vb: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
   spec.csharp:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1
-    name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1
-    name: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
 - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache})
   commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache})
   parent: Apizr.AkavacheOptionsBuilderExtensions
   definition: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache})
-  name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(Func<IBlobCache>)
-  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(Func<IBlobCache>)
-  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(System.Func<Akavache.IBlobCache>)
-  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(Func(Of IBlobCache))
-  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(System.Func(Of Akavache.IBlobCache))
-  name.vb: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(Func(Of IBlobCache))
+  href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__
+  name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, Func<IBlobCache>)
+  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, Func<IBlobCache>)
+  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, System.Func<Akavache.IBlobCache>)
+  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Func(Of IBlobCache))
+  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, System.Func(Of Akavache.IBlobCache))
+  name.vb: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Func(Of IBlobCache))
   spec.csharp:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache})
-    name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.Func{Akavache.IBlobCache})
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Akavache.IBlobCache
     name: IBlobCache
-    nameWithType: IBlobCache
-    fullName: Akavache.IBlobCache
     isExternal: true
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache})
-    name: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.Func{Akavache.IBlobCache})
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Akavache.IBlobCache
     name: IBlobCache
-    nameWithType: IBlobCache
-    fullName: Akavache.IBlobCache
     isExternal: true
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.String)
-  commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
-  parent: Apizr.AkavacheOptionsBuilderExtensions
-  definition: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
-  name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(String)
-  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(String)
-  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(System.String)
-  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(String)
-  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(System.String)
-  name.vb: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(String)
-  spec.csharp:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.String)
-    name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.String)
-    name: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache},System.String)
   commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache},System.String)
   parent: Apizr.AkavacheOptionsBuilderExtensions
   definition: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache},System.String)
-  name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(Func<IBlobCache>, String)
-  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(Func<IBlobCache>, String)
-  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(System.Func<Akavache.IBlobCache>, System.String)
-  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(Func(Of IBlobCache), String)
-  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(System.Func(Of Akavache.IBlobCache), System.String)
-  name.vb: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(Func(Of IBlobCache), String)
+  href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__System_String_
+  name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, Func<IBlobCache>, string)
+  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, Func<IBlobCache>, string)
+  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, System.Func<Akavache.IBlobCache>, string)
+  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Func(Of IBlobCache), String)
+  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, System.Func(Of Akavache.IBlobCache), String)
+  name.vb: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Func(Of IBlobCache), String)
   spec.csharp:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache},System.String)
-    name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.Func{Akavache.IBlobCache},System.String)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__System_String_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Akavache.IBlobCache
     name: IBlobCache
-    nameWithType: IBlobCache
-    fullName: Akavache.IBlobCache
     isExternal: true
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.Func{Akavache.IBlobCache},System.String)
-    name: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.Func{Akavache.IBlobCache},System.String)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__System_String_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Akavache.IBlobCache
     name: IBlobCache
-    nameWithType: IBlobCache
-    fullName: Akavache.IBlobCache
     isExternal: true
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(System.String)
+  commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
+  parent: Apizr.AkavacheOptionsBuilderExtensions
+  definition: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
+  href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_String_
+  name: WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, string)
+  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, string)
+  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, string)
+  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, String)
+  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, String)
+  name.vb: WithAkavacheCacheHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, String)
+  spec.csharp:
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.String)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_String_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.String)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_String_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
 - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
   parent: Apizr.FileTransferOptionsBuilderExtensions
   definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
-  name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>()
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)()
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)()
-  name.vb: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)()
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
+  name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  name.vb: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
   spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
-    name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
-    name: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  parent: Apizr.FileTransferOptionsBuilderExtensions
-  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>(Action<ApizrProgressEventArgs>)
-  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>(Action<ApizrProgressEventArgs>)
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(Action(Of ApizrProgressEventArgs))
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
-  name.vb: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(Action(Of ApizrProgressEventArgs))
-  spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-    name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
   - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-    name: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
   - name: )
-    nameWithType: )
-    fullName: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
 - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
   parent: Apizr.FileTransferOptionsBuilderExtensions
   definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
-  name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>(IApizrProgress)
-  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>(IApizrProgress)
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Progressing.IApizrProgress)
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrProgress)
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Progressing.IApizrProgress)
-  name.vb: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrProgress)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
+  name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, IApizrProgress)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, IApizrProgress)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, Apizr.Progressing.IApizrProgress)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, IApizrProgress)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, Apizr.Progressing.IApizrProgress)
+  name.vb: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, IApizrProgress)
   spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
-    name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,Apizr.Progressing.IApizrProgress)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Progressing.IApizrProgress
     name: IApizrProgress
-    nameWithType: IApizrProgress
-    fullName: Apizr.Progressing.IApizrProgress
+    href: Apizr.Progressing.IApizrProgress.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
-    name: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,Apizr.Progressing.IApizrProgress)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Progressing.IApizrProgress
     name: IApizrProgress
-    nameWithType: IApizrProgress
-    fullName: Apizr.Progressing.IApizrProgress
+    href: Apizr.Progressing.IApizrProgress.html
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  name: WithProgress<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, Action<ApizrProgressEventArgs>)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, Action<ApizrProgressEventArgs>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Action(Of ApizrProgressEventArgs))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
+  name.vb: WithProgress(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Action(Of ApizrProgressEventArgs))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
+  name: WithPriorityManagement<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  name.vb: WithPriorityManagement(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithPriorityManagement
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithPriorityManagement
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_
+  name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  name.vb: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, Fusillade.Priority)
+  name.vb: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Priority)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,Fusillade.Priority)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
+  - uid: Fusillade.Priority
+    name: Priority
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,Fusillade.Priority)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
+  - uid: Fusillade.Priority
+    name: Priority
+    isExternal: true
+  - name: )
+- uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  name: WithPriority<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, int)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase, int)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, int)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Integer)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase, Integer)
+  name.vb: WithPriority(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase, Integer)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.Int32)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase,System.Int32)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
 - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1
   commentId: M:Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1(``0)
   parent: Apizr.MapsterOptionsBuilderExtensions
   definition: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1(``0)
-  name: WithMapsterMappingHandler<IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<IApizrExtendedCommonOptionsBuilderBase>()
-  fullName: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>()
-  nameWithType.vb: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)()
-  fullName.vb: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)()
-  name.vb: WithMapsterMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)()
+  href: Apizr.MapsterOptionsBuilderExtensions.html#Apizr_MapsterOptionsBuilderExtensions_WithMapsterMappingHandler__1___0_
+  name: WithMapsterMappingHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<IApizrExtendedCommonOptionsBuilderBase>(IApizrExtendedCommonOptionsBuilderBase)
+  fullName: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  nameWithType.vb: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
+  fullName.vb: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  name.vb: WithMapsterMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)(IApizrExtendedCommonOptionsBuilderBase)
   spec.csharp:
-  - uid: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1
-    name: WithMapsterMappingHandler<IApizrExtendedCommonOptionsBuilderBase>
-    nameWithType: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<IApizrExtendedCommonOptionsBuilderBase>
-    fullName: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase>
+  - uid: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithMapsterMappingHandler
+    href: Apizr.MapsterOptionsBuilderExtensions.html#Apizr_MapsterOptionsBuilderExtensions_WithMapsterMappingHandler__1___0_
+  - name: <
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1
-    name: WithMapsterMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    nameWithType: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler(Of IApizrExtendedCommonOptionsBuilderBase)
-    fullName: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler(Of Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+  - uid: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1(Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase)
+    name: WithMapsterMappingHandler
+    href: Apizr.MapsterOptionsBuilderExtensions.html#Apizr_MapsterOptionsBuilderExtensions_WithMapsterMappingHandler__1___0_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-  name: WithPriorityManagement<T>(T)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement<T>(T)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement<T>(T)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
-  name.vb: WithPriorityManagement(Of T)(T)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-    name: WithPriorityManagement<T>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement<T>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement<T>
   - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
+  - uid: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase
+    name: IApizrExtendedCommonOptionsBuilderBase
+    href: Apizr.Configuring.Common.IApizrExtendedCommonOptionsBuilderBase.html
   - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-    name: WithPriorityManagement(Of T)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.FusilladeOptionsBuilderExtensions
-  commentId: T:Apizr.FusilladeOptionsBuilderExtensions
-  parent: Apizr
-  name: FusilladeOptionsBuilderExtensions
-  nameWithType: FusilladeOptionsBuilderExtensions
-  fullName: Apizr.FusilladeOptionsBuilderExtensions
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
-  name: WithPriority<T>(T)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
-  name.vb: WithPriority(Of T)(T)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
-    name: WithPriority<T>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
-    name: WithPriority(Of T)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-  isExternal: true
-  name: WithPriority<T>(T, Priority)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
-  name.vb: WithPriority(Of T)(T, Priority)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-    name: WithPriority<T>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Fusillade.Priority
-    name: Priority
-    nameWithType: Priority
-    fullName: Fusillade.Priority
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-    name: WithPriority(Of T)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Fusillade.Priority
-    name: Priority
-    nameWithType: Priority
-    fullName: Fusillade.Priority
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-  isExternal: true
-  name: WithPriority<T>(T, Int32)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Int32)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, System.Int32)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Int32)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, System.Int32)
-  name.vb: WithPriority(Of T)(T, Int32)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-    name: WithPriority<T>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-    name: WithPriority(Of T)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1(``0)
-  commentId: M:Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1(``0)
-  name: WithAutoMapperMappingHandler<TBuilder>(TBuilder)
-  nameWithType: AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler<TBuilder>(TBuilder)
-  fullName: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler<TBuilder>(TBuilder)
-  nameWithType.vb: AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler(Of TBuilder)(TBuilder)
-  fullName.vb: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler(Of TBuilder)(TBuilder)
-  name.vb: WithAutoMapperMappingHandler(Of TBuilder)(TBuilder)
-  spec.csharp:
-  - uid: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1(``0)
-    name: WithAutoMapperMappingHandler<TBuilder>
-    nameWithType: AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler<TBuilder>
-    fullName: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler``1(``0)
-    name: WithAutoMapperMappingHandler(Of TBuilder)
-    nameWithType: AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler(Of TBuilder)
-    fullName: Apizr.AutoMapperOptionsBuilderExtensions.WithAutoMapperMappingHandler(Of TBuilder)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.AutoMapperOptionsBuilderExtensions
-  commentId: T:Apizr.AutoMapperOptionsBuilderExtensions
-  parent: Apizr
-  name: AutoMapperOptionsBuilderExtensions
-  nameWithType: AutoMapperOptionsBuilderExtensions
-  fullName: Apizr.AutoMapperOptionsBuilderExtensions
 - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0)
   commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0)
+  href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_
   name: WithAkavacheCacheHandler<TBuilder>(TBuilder)
   nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder)
   fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder)
@@ -856,41 +703,37 @@ references:
   name.vb: WithAkavacheCacheHandler(Of TBuilder)(TBuilder)
   spec.csharp:
   - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0)
-    name: WithAkavacheCacheHandler<TBuilder>
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_
+  - name: <
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
+  - name: '>'
+  - name: (
+  - name: TBuilder
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0)
-    name: WithAkavacheCacheHandler(Of TBuilder)
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: TBuilder
+  - name: )
 - uid: Apizr.AkavacheOptionsBuilderExtensions
   commentId: T:Apizr.AkavacheOptionsBuilderExtensions
   parent: Apizr
+  href: Apizr.AkavacheOptionsBuilderExtensions.html
   name: AkavacheOptionsBuilderExtensions
   nameWithType: AkavacheOptionsBuilderExtensions
   fullName: Apizr.AkavacheOptionsBuilderExtensions
 - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache})
   commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache})
   isExternal: true
+  href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__
   name: WithAkavacheCacheHandler<TBuilder>(TBuilder, Func<IBlobCache>)
   nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, Func<IBlobCache>)
   fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, System.Func<Akavache.IBlobCache>)
@@ -899,216 +742,165 @@ references:
   name.vb: WithAkavacheCacheHandler(Of TBuilder)(TBuilder, Func(Of IBlobCache))
   spec.csharp:
   - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache})
-    name: WithAkavacheCacheHandler<TBuilder>
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__
+  - name: <
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Akavache.IBlobCache
     name: IBlobCache
-    nameWithType: IBlobCache
-    fullName: Akavache.IBlobCache
     isExternal: true
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache})
-    name: WithAkavacheCacheHandler(Of TBuilder)
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Akavache.IBlobCache
     name: IBlobCache
-    nameWithType: IBlobCache
-    fullName: Akavache.IBlobCache
     isExternal: true
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
-  commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
-  isExternal: true
-  name: WithAkavacheCacheHandler<TBuilder>(TBuilder, String)
-  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, String)
-  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, System.String)
-  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)(TBuilder, String)
-  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)(TBuilder, System.String)
-  name.vb: WithAkavacheCacheHandler(Of TBuilder)(TBuilder, String)
-  spec.csharp:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
-    name: WithAkavacheCacheHandler<TBuilder>
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
-    name: WithAkavacheCacheHandler(Of TBuilder)
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache},System.String)
   commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache},System.String)
   isExternal: true
-  name: WithAkavacheCacheHandler<TBuilder>(TBuilder, Func<IBlobCache>, String)
-  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, Func<IBlobCache>, String)
-  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, System.Func<Akavache.IBlobCache>, System.String)
+  href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__System_String_
+  name: WithAkavacheCacheHandler<TBuilder>(TBuilder, Func<IBlobCache>, string)
+  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, Func<IBlobCache>, string)
+  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, System.Func<Akavache.IBlobCache>, string)
   nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)(TBuilder, Func(Of IBlobCache), String)
-  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)(TBuilder, System.Func(Of Akavache.IBlobCache), System.String)
+  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)(TBuilder, System.Func(Of Akavache.IBlobCache), String)
   name.vb: WithAkavacheCacheHandler(Of TBuilder)(TBuilder, Func(Of IBlobCache), String)
   spec.csharp:
   - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache},System.String)
-    name: WithAkavacheCacheHandler<TBuilder>
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__System_String_
+  - name: <
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Akavache.IBlobCache
     name: IBlobCache
-    nameWithType: IBlobCache
-    fullName: Akavache.IBlobCache
     isExternal: true
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.Func{Akavache.IBlobCache},System.String)
-    name: WithAkavacheCacheHandler(Of TBuilder)
-    nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)
-    fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_Func_Akavache_IBlobCache__System_String_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Akavache.IBlobCache
     name: IBlobCache
-    nameWithType: IBlobCache
-    fullName: Akavache.IBlobCache
     isExternal: true
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
+  commentId: M:Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
+  isExternal: true
+  href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_String_
+  name: WithAkavacheCacheHandler<TBuilder>(TBuilder, string)
+  nameWithType: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, string)
+  fullName: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler<TBuilder>(TBuilder, string)
+  nameWithType.vb: AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)(TBuilder, String)
+  fullName.vb: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler(Of TBuilder)(TBuilder, String)
+  name.vb: WithAkavacheCacheHandler(Of TBuilder)(TBuilder, String)
+  spec.csharp:
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_String_
+  - name: <
+  - name: TBuilder
+  - name: '>'
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Apizr.AkavacheOptionsBuilderExtensions.WithAkavacheCacheHandler``1(``0,System.String)
+    name: WithAkavacheCacheHandler
+    href: Apizr.AkavacheOptionsBuilderExtensions.html#Apizr_AkavacheOptionsBuilderExtensions_WithAkavacheCacheHandler__1___0_System_String_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TBuilder
+  - name: )
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
 - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
   name: WithProgress<TBuilder>(TBuilder)
   nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder)
   fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder)
@@ -1117,113 +909,36 @@ references:
   name.vb: WithProgress(Of TBuilder)(TBuilder)
   spec.csharp:
   - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
-    name: WithProgress<TBuilder>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
+  - name: <
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
+  - name: '>'
+  - name: (
+  - name: TBuilder
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
-    name: WithProgress(Of TBuilder)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: TBuilder
+  - name: )
 - uid: Apizr.FileTransferOptionsBuilderExtensions
   commentId: T:Apizr.FileTransferOptionsBuilderExtensions
   parent: Apizr
+  href: Apizr.FileTransferOptionsBuilderExtensions.html
   name: FileTransferOptionsBuilderExtensions
   nameWithType: FileTransferOptionsBuilderExtensions
   fullName: Apizr.FileTransferOptionsBuilderExtensions
-- uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  isExternal: true
-  name: WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
-  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
-  name.vb: WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
-  spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-    name: WithProgress<TBuilder>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-    name: WithProgress(Of TBuilder)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
   name: WithProgress<TBuilder>(TBuilder, IApizrProgress)
   nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, IApizrProgress)
   fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, Apizr.Progressing.IApizrProgress)
@@ -1232,48 +947,250 @@ references:
   name.vb: WithProgress(Of TBuilder)(TBuilder, IApizrProgress)
   spec.csharp:
   - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
-    name: WithProgress<TBuilder>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
+  - name: <
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
   - uid: Apizr.Progressing.IApizrProgress
     name: IApizrProgress
-    nameWithType: IApizrProgress
-    fullName: Apizr.Progressing.IApizrProgress
+    href: Apizr.Progressing.IApizrProgress.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
-    name: WithProgress(Of TBuilder)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
   - uid: Apizr.Progressing.IApizrProgress
     name: IApizrProgress
-    nameWithType: IApizrProgress
-    fullName: Apizr.Progressing.IApizrProgress
+    href: Apizr.Progressing.IApizrProgress.html
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  isExternal: true
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  name: WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
+  name.vb: WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  - name: <
+  - name: TBuilder
+  - name: '>'
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TBuilder
+  - name: )
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
+  - name: )
+  - name: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
+  name: WithPriorityManagement<T>(T)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement<T>(T)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement<T>(T)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
+  name.vb: WithPriorityManagement(Of T)(T)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
+    name: WithPriorityManagement
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
+    name: WithPriorityManagement
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions
+  commentId: T:Apizr.FusilladeOptionsBuilderExtensions
+  parent: Apizr
+  href: Apizr.FusilladeOptionsBuilderExtensions.html
+  name: FusilladeOptionsBuilderExtensions
+  nameWithType: FusilladeOptionsBuilderExtensions
+  fullName: Apizr.FusilladeOptionsBuilderExtensions
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_
+  name: WithPriority<T>(T)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T)
+  name.vb: WithPriority(Of T)(T)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  isExternal: true
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  name: WithPriority<T>(T, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
+  name.vb: WithPriority(Of T)(T, Priority)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Fusillade.Priority
+    name: Priority
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Fusillade.Priority
+    name: Priority
+    isExternal: true
+  - name: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  isExternal: true
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  name: WithPriority<T>(T, int)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, int)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, int)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Integer)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Integer)
+  name.vb: WithPriority(Of T)(T, Integer)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
 - uid: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1(``0)
   commentId: M:Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1(``0)
+  href: Apizr.MapsterOptionsBuilderExtensions.html#Apizr_MapsterOptionsBuilderExtensions_WithMapsterMappingHandler__1___0_
   name: WithMapsterMappingHandler<TBuilder>(TBuilder)
   nameWithType: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<TBuilder>(TBuilder)
   fullName: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<TBuilder>(TBuilder)
@@ -1282,40 +1199,36 @@ references:
   name.vb: WithMapsterMappingHandler(Of TBuilder)(TBuilder)
   spec.csharp:
   - uid: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1(``0)
-    name: WithMapsterMappingHandler<TBuilder>
-    nameWithType: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<TBuilder>
-    fullName: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: WithMapsterMappingHandler
+    href: Apizr.MapsterOptionsBuilderExtensions.html#Apizr_MapsterOptionsBuilderExtensions_WithMapsterMappingHandler__1___0_
+  - name: <
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
+  - name: '>'
+  - name: (
+  - name: TBuilder
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler``1(``0)
-    name: WithMapsterMappingHandler(Of TBuilder)
-    nameWithType: MapsterOptionsBuilderExtensions.WithMapsterMappingHandler(Of TBuilder)
-    fullName: Apizr.MapsterOptionsBuilderExtensions.WithMapsterMappingHandler(Of TBuilder)
+    name: WithMapsterMappingHandler
+    href: Apizr.MapsterOptionsBuilderExtensions.html#Apizr_MapsterOptionsBuilderExtensions_WithMapsterMappingHandler__1___0_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: TBuilder
+  - name: )
 - uid: Apizr.MapsterOptionsBuilderExtensions
   commentId: T:Apizr.MapsterOptionsBuilderExtensions
   parent: Apizr
+  href: Apizr.MapsterOptionsBuilderExtensions.html
   name: MapsterOptionsBuilderExtensions
   nameWithType: MapsterOptionsBuilderExtensions
   fullName: Apizr.MapsterOptionsBuilderExtensions
 - uid: Apizr
   commentId: N:Apizr
+  href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr

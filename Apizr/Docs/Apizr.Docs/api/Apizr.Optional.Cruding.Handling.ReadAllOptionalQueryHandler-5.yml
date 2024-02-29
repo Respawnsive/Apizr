@@ -17,7 +17,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Handling/ReadAllOptionalQueryHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAllOptionalQueryHandler
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Handling/ReadAllOptionalQueryHandler.cs
@@ -25,7 +25,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Handling
-  summary: "\nThe ReadAll optional query handler\n"
+  summary: The ReadAll optional query handler
   example: []
   syntax:
     content: 'public class ReadAllOptionalQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams> : ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder>, IMediationQueryHandler<ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>, IRequestHandler<ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> where TApiEntity : class'
@@ -40,7 +40,7 @@ items:
       description: The received api result type
     - id: TReadAllParams
       description: The query parameters type
-    content.vb: "Public Class ReadAllOptionalQueryHandler(Of TApiEntity As Class, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams)\n    Inherits ReadAllQueryHandlerBase(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult),  Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)) ,  IApizrRequestOptions, IApizrRequestOptionsBuilder) \n    Implements IMediationQueryHandler(Of ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult),  Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)) ), IRequestHandler(Of ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult),  Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)) )"
+    content.vb: Public Class ReadAllOptionalQueryHandler(Of TApiEntity As Class, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams) Inherits ReadAllQueryHandlerBase(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)), IApizrRequestOptions, IApizrRequestOptionsBuilder) Implements IMediationQueryHandler(Of ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult))), IRequestHandler(Of ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)))
   inheritance:
   - System.Object
   - Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
@@ -60,12 +60,6 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   nameWithType.vb: ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams)
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
   fullName.vb: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams)
   name.vb: ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams)
 - uid: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.#ctor(Apizr.IApizrManager{Apizr.Requesting.ICrudApi{`0,`1,`3,`4}})
@@ -82,7 +76,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Handling/ReadAllOptionalQueryHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Handling/ReadAllOptionalQueryHandler.cs
@@ -97,13 +91,9 @@ items:
       type: Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{TApiEntity},{TApiEntityKey},{TApiEntityReadAllResult},{TReadAllParams}}}
     content.vb: Public Sub New(crudApiManager As IApizrManager(Of ICrudApi(Of TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams)))
   overload: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.#ctor*
-  nameWithType.vb: ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).ReadAllOptionalQueryHandler(IApizrManager(Of ICrudApi(Of TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams)))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).ReadAllOptionalQueryHandler(Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams)))
-  name.vb: ReadAllOptionalQueryHandler(IApizrManager(Of ICrudApi(Of TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams)))
+  nameWithType.vb: ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).New(IApizrManager(Of ICrudApi(Of TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams)))
+  fullName.vb: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).New(Apizr.IApizrManager(Of Apizr.Requesting.ICrudApi(Of TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams)))
+  name.vb: New(IApizrManager(Of ICrudApi(Of TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams)))
 - uid: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},System.Threading.CancellationToken)
   commentId: M:Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},System.Threading.CancellationToken)
   id: Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},System.Threading.CancellationToken)
@@ -118,7 +108,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Handling/ReadAllOptionalQueryHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Handle
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Cruding/Handling/ReadAllOptionalQueryHandler.cs
@@ -126,45 +116,81 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding.Handling
+  summary: Handling the ReadAll query
+  example: []
   syntax:
-    content: public override async Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> Handle(ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult> request, CancellationToken cancellationToken)
+    content: public override Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>> Handle(ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult> request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}}
+      description: The ReadAll query
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: A cancellation token
     return:
       type: System.Threading.Tasks.Task{Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}}}
-    content.vb: Public Overrides Function Handle(request As ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), cancellationToken As CancellationToken) As Task(Of  Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult))
+      description: ''
+    content.vb: Public Overrides Function Handle(request As ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), cancellationToken As CancellationToken) As Task(Of [Option](Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)))
   overridden: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{{TApiEntity},{TApiEntityKey},{TModelEntityReadAllResult},{TApiEntityReadAllResult},{TReadAllParams},Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}},Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}},System.Threading.CancellationToken)
   overload: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.Handle*
   nameWithType.vb: ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).Handle(ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), CancellationToken)
-  modifiers.csharp:
-  - public
-  - override
-  - async
-  modifiers.vb:
-  - Public
-  - Overrides
   fullName.vb: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), System.Threading.CancellationToken)
   name.vb: Handle(ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), CancellationToken)
 references:
 - uid: Apizr.Optional.Cruding.Handling
   commentId: N:Apizr.Optional.Cruding.Handling
+  href: Apizr.html
   name: Apizr.Optional.Cruding.Handling
   nameWithType: Apizr.Optional.Cruding.Handling
   fullName: Apizr.Optional.Cruding.Handling
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Cruding
+    name: Cruding
+    href: Apizr.Optional.Cruding.html
+  - name: .
+  - uid: Apizr.Optional.Cruding.Handling
+    name: Handling
+    href: Apizr.Optional.Cruding.Handling.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Cruding
+    name: Cruding
+    href: Apizr.Optional.Cruding.html
+  - name: .
+  - uid: Apizr.Optional.Cruding.Handling
+    name: Handling
+    href: Apizr.Optional.Cruding.Handling.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Requesting.Handling.Base
   definition: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   name: RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -174,51 +200,38 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase{{TApiEntity},{TApiEntityKey},{TApiEntityReadAllResult},{TReadAllParams},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase{`0,`1,`3,`4,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Cruding.Handling.Base
   definition: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6
+  href: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html
   name: CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -228,99 +241,62 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6
     name: CrudRequestHandlerBase
-    nameWithType: CrudRequestHandlerBase
-    fullName: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase
+    href: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityReadAllResult
-    nameWithType: TApiEntityReadAllResult
-    fullName: TApiEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6
     name: CrudRequestHandlerBase
-    nameWithType: CrudRequestHandlerBase
-    fullName: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityReadAllResult
-    nameWithType: TApiEntityReadAllResult
-    fullName: TApiEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{{TApiEntity},{TApiEntityKey},{TModelEntityReadAllResult},{TApiEntityReadAllResult},{TReadAllParams},Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}},Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{`0,`1,`2,`3,`4,Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},Optional.Option{`2,Apizr.ApizrException{`2}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Cruding.Handling.Base
   definition: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9
+  href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html
   name: ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, Apizr.Optional.Cruding.ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Optional.Option<TModelEntityReadAllResult, Apizr.ApizrException<TModelEntityReadAllResult>>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -330,221 +306,128 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9
     name: ReadAllQueryHandlerBase
-    nameWithType: ReadAllQueryHandlerBase
-    fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase
+    href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityReadAllResult
-    nameWithType: TApiEntityReadAllResult
-    fullName: TApiEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9
     name: ReadAllQueryHandlerBase
-    nameWithType: ReadAllQueryHandlerBase
-    fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityReadAllResult
-    nameWithType: TApiEntityReadAllResult
-    fullName: TApiEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Querying.IMediationQueryHandler{Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}},Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}}}
   commentId: T:Apizr.Mediation.Querying.IMediationQueryHandler{Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},Optional.Option{`2,Apizr.ApizrException{`2}}}
   parent: Apizr.Mediation.Querying
   definition: Apizr.Mediation.Querying.IMediationQueryHandler`2
+  href: Apizr.Mediation.Querying.IMediationQueryHandler-2.html
   name: IMediationQueryHandler<ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
   nameWithType: IMediationQueryHandler<ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
   fullName: Apizr.Mediation.Querying.IMediationQueryHandler<Apizr.Optional.Cruding.ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Optional.Option<TModelEntityReadAllResult, Apizr.ApizrException<TModelEntityReadAllResult>>>
@@ -554,133 +437,78 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Querying.IMediationQueryHandler`2
     name: IMediationQueryHandler
-    nameWithType: IMediationQueryHandler
-    fullName: Apizr.Mediation.Querying.IMediationQueryHandler
+    href: Apizr.Mediation.Querying.IMediationQueryHandler-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Querying.IMediationQueryHandler`2
     name: IMediationQueryHandler
-    nameWithType: IMediationQueryHandler
-    fullName: Apizr.Mediation.Querying.IMediationQueryHandler
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Querying.IMediationQueryHandler-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequestHandler{Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}},Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}}}
   commentId: T:MediatR.IRequestHandler{Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},Optional.Option{`2,Apizr.ApizrException{`2}}}
   parent: MediatR
   definition: MediatR.IRequestHandler`2
+  href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   name: IRequestHandler<ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
   nameWithType: IRequestHandler<ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
   fullName: MediatR.IRequestHandler<Apizr.Optional.Cruding.ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Optional.Option<TModelEntityReadAllResult, Apizr.ApizrException<TModelEntityReadAllResult>>>
@@ -690,135 +518,78 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{{TApiEntity},{TApiEntityKey},{TModelEntityReadAllResult},{TApiEntityReadAllResult},{TReadAllParams},Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}},Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}},System.Threading.CancellationToken)
   commentId: M:Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{`0,`1,`2,`3,`4,Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},Optional.Option{`2,Apizr.ApizrException{`2}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},System.Threading.CancellationToken)
   parent: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{{TApiEntity},{TApiEntityKey},{TModelEntityReadAllResult},{TApiEntityReadAllResult},{TReadAllParams},Apizr.Optional.Cruding.ReadAllOptionalQuery{{TReadAllParams},{TModelEntityReadAllResult}},Optional.Option{{TModelEntityReadAllResult},Apizr.ApizrException{{TModelEntityReadAllResult}}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   definition: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9.Handle(`5,System.Threading.CancellationToken)
+  href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html#Apizr_Mediation_Cruding_Handling_Base_ReadAllQueryHandlerBase_9_Handle__5_System_Threading_CancellationToken_
   name: Handle(ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, CancellationToken)
   nameWithType: ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder>.Handle(ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, CancellationToken)
   fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, Apizr.Optional.Cruding.ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Optional.Option<TModelEntityReadAllResult, Apizr.ApizrException<TModelEntityReadAllResult>>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, System.Threading.CancellationToken)
@@ -826,85 +597,54 @@ references:
   fullName.vb: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, Apizr.Optional.Cruding.ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), Optional.Option(Of TModelEntityReadAllResult, Apizr.ApizrException(Of TModelEntityReadAllResult)), Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), System.Threading.CancellationToken)
   name.vb: Handle(ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), CancellationToken)
   spec.csharp:
-  - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9.Handle(`5,System.Threading.CancellationToken)
+  - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{`0,`1,`2,`3,`4,Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},Optional.Option{`2,Apizr.ApizrException{`2}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},System.Threading.CancellationToken)
     name: Handle
-    nameWithType: ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>, IApizrRequestOptions, IApizrRequestOptionsBuilder>.Handle
-    fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, Apizr.Optional.Cruding.ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>, Optional.Option<TModelEntityReadAllResult, Apizr.ApizrException<TModelEntityReadAllResult>>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.Handle
+    href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html#Apizr_Mediation_Cruding_Handling_Base_ReadAllQueryHandlerBase_9_Handle__5_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9.Handle(`5,System.Threading.CancellationToken)
+  - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase{`0,`1,`2,`3,`4,Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},Optional.Option{`2,Apizr.ApizrException{`2}},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Handle(Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2},System.Threading.CancellationToken)
     name: Handle
-    nameWithType: ReadAllQueryHandlerBase(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), Option(Of TModelEntityReadAllResult, ApizrException(Of TModelEntityReadAllResult)), IApizrRequestOptions, IApizrRequestOptionsBuilder).Handle
-    fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, Apizr.Optional.Cruding.ReadAllOptionalQuery(Of TReadAllParams, TModelEntityReadAllResult), Optional.Option(Of TModelEntityReadAllResult, Apizr.ApizrException(Of TModelEntityReadAllResult)), Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).Handle
+    href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html#Apizr_Mediation_Cruding_Handling_Base_ReadAllQueryHandlerBase_9_Handle__5_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase{{TApiEntity},{TApiEntityKey},{TApiEntityReadAllResult},{TReadAllParams},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.CrudApiManager
   commentId: F:Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase{`0,`1,`3,`4,Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.CrudApiManager
   parent: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase{{TApiEntity},{TApiEntityKey},{TApiEntityReadAllResult},{TReadAllParams},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   definition: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6.CrudApiManager
+  href: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html#Apizr_Mediation_Cruding_Handling_Base_CrudRequestHandlerBase_6_CrudApiManager
   name: CrudApiManager
   nameWithType: CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams, IApizrRequestOptions, IApizrRequestOptionsBuilder>.CrudApiManager
   fullName: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.CrudApiManager
@@ -914,289 +654,231 @@ references:
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
   commentId: T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   name: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -1206,50 +888,74 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.Handling.Base
   commentId: N:Apizr.Mediation.Requesting.Handling.Base
+  href: Apizr.html
   name: Apizr.Mediation.Requesting.Handling.Base
   nameWithType: Apizr.Mediation.Requesting.Handling.Base
   fullName: Apizr.Mediation.Requesting.Handling.Base
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling
+    name: Handling
+    href: Apizr.Mediation.Requesting.Handling.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling.Base
+    name: Base
+    href: Apizr.Mediation.Requesting.Handling.Base.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling
+    name: Handling
+    href: Apizr.Mediation.Requesting.Handling.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling.Base
+    name: Base
+    href: Apizr.Mediation.Requesting.Handling.Base.html
 - uid: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6
   commentId: T:Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6
+  href: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html
   name: CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -1259,98 +965,98 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6
     name: CrudRequestHandlerBase
-    nameWithType: CrudRequestHandlerBase
-    fullName: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase
+    href: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6
     name: CrudRequestHandlerBase
-    nameWithType: CrudRequestHandlerBase
-    fullName: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Handling.Base
   commentId: N:Apizr.Mediation.Cruding.Handling.Base
+  href: Apizr.html
   name: Apizr.Mediation.Cruding.Handling.Base
   nameWithType: Apizr.Mediation.Cruding.Handling.Base
   fullName: Apizr.Mediation.Cruding.Handling.Base
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding
+    name: Cruding
+    href: Apizr.Mediation.Cruding.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Handling
+    name: Handling
+    href: Apizr.Mediation.Cruding.Handling.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Handling.Base
+    name: Base
+    href: Apizr.Mediation.Cruding.Handling.Base.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding
+    name: Cruding
+    href: Apizr.Mediation.Cruding.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Handling
+    name: Handling
+    href: Apizr.Mediation.Cruding.Handling.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Handling.Base
+    name: Base
+    href: Apizr.Mediation.Cruding.Handling.Base.html
 - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9
   commentId: T:Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9
+  href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html
   name: ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -1360,129 +1066,70 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9
     name: ReadAllQueryHandlerBase
-    nameWithType: ReadAllQueryHandlerBase
-    fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase
+    href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityReadAllResult
-    nameWithType: TApiEntityReadAllResult
-    fullName: TApiEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TQuery
-    nameWithType: TQuery
-    fullName: TQuery
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TQueryResult
-    nameWithType: TQueryResult
-    fullName: TQueryResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9
     name: ReadAllQueryHandlerBase
-    nameWithType: ReadAllQueryHandlerBase
-    fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityReadAllResult
-    nameWithType: TApiEntityReadAllResult
-    fullName: TApiEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TQuery
-    nameWithType: TQuery
-    fullName: TQuery
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TQueryResult
-    nameWithType: TQueryResult
-    fullName: TQueryResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Querying.IMediationQueryHandler`2
   commentId: T:Apizr.Mediation.Querying.IMediationQueryHandler`2
+  href: Apizr.Mediation.Querying.IMediationQueryHandler-2.html
   name: IMediationQueryHandler<TQuery, TResponse>
   nameWithType: IMediationQueryHandler<TQuery, TResponse>
   fullName: Apizr.Mediation.Querying.IMediationQueryHandler<TQuery, TResponse>
@@ -1492,48 +1139,55 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Querying.IMediationQueryHandler`2
     name: IMediationQueryHandler
-    nameWithType: IMediationQueryHandler
-    fullName: Apizr.Mediation.Querying.IMediationQueryHandler
+    href: Apizr.Mediation.Querying.IMediationQueryHandler-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TQuery
-    nameWithType: TQuery
-    fullName: TQuery
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Querying.IMediationQueryHandler`2
     name: IMediationQueryHandler
-    nameWithType: IMediationQueryHandler
-    fullName: Apizr.Mediation.Querying.IMediationQueryHandler
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Querying.IMediationQueryHandler-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TQuery
-    nameWithType: TQuery
-    fullName: TQuery
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Querying
   commentId: N:Apizr.Mediation.Querying
+  href: Apizr.html
   name: Apizr.Mediation.Querying
   nameWithType: Apizr.Mediation.Querying
   fullName: Apizr.Mediation.Querying
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Querying
+    name: Querying
+    href: Apizr.Mediation.Querying.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Querying
+    name: Querying
+    href: Apizr.Mediation.Querying.html
 - uid: MediatR.IRequestHandler`2
   commentId: T:MediatR.IRequestHandler`2
   isExternal: true
@@ -1546,45 +1200,25 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR
   commentId: N:MediatR
   isExternal: true
@@ -1594,6 +1228,7 @@ references:
 - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9.Handle(`5,System.Threading.CancellationToken)
   commentId: M:Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9.Handle(`5,System.Threading.CancellationToken)
   isExternal: true
+  href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html#Apizr_Mediation_Cruding_Handling_Base_ReadAllQueryHandlerBase_9_Handle__5_System_Threading_CancellationToken_
   name: Handle(TQuery, CancellationToken)
   nameWithType: ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle(TQuery, CancellationToken)
   fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle(TQuery, System.Threading.CancellationToken)
@@ -1602,49 +1237,32 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9.Handle(`5,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle
-    fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Handle
+    href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html#Apizr_Mediation_Cruding_Handling_Base_ReadAllQueryHandlerBase_9_Handle__5_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TQuery
-    nameWithType: TQuery
-    fullName: TQuery
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase`9.Handle(`5,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: ReadAllQueryHandlerBase(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder).Handle
-    fullName: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams, TQuery, TQueryResult, TApizrRequestOptions, TApizrRequestOptionsBuilder).Handle
+    href: Apizr.Mediation.Cruding.Handling.Base.ReadAllQueryHandlerBase-9.html#Apizr_Mediation_Cruding_Handling_Base_ReadAllQueryHandlerBase_9_Handle__5_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TQuery
-    nameWithType: TQuery
-    fullName: TQuery
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6.CrudApiManager
   commentId: F:Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase`6.CrudApiManager
+  href: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase-6.html#Apizr_Mediation_Cruding_Handling_Base_CrudRequestHandlerBase_6_CrudApiManager
   name: CrudApiManager
   nameWithType: CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>.CrudApiManager
   fullName: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder>.CrudApiManager
@@ -1652,15 +1270,18 @@ references:
   fullName.vb: Apizr.Mediation.Cruding.Handling.Base.CrudRequestHandlerBase(Of TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams, TApizrRequestOptions, TApizrRequestOptionsBuilder).CrudApiManager
 - uid: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.#ctor*
   commentId: Overload:Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.#ctor
+  href: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler-5.html#Apizr_Optional_Cruding_Handling_ReadAllOptionalQueryHandler_5__ctor_Apizr_IApizrManager_Apizr_Requesting_ICrudApi__0__1__3__4___
   name: ReadAllOptionalQueryHandler
   nameWithType: ReadAllOptionalQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams>.ReadAllOptionalQueryHandler
   fullName: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams>.ReadAllOptionalQueryHandler
-  nameWithType.vb: ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).ReadAllOptionalQueryHandler
-  fullName.vb: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).ReadAllOptionalQueryHandler
+  nameWithType.vb: ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).New
+  fullName.vb: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler(Of TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams).New
+  name.vb: New
 - uid: Apizr.IApizrManager{Apizr.Requesting.ICrudApi{{TApiEntity},{TApiEntityKey},{TApiEntityReadAllResult},{TReadAllParams}}}
   commentId: T:Apizr.IApizrManager{Apizr.Requesting.ICrudApi{`0,`1,`3,`4}}
   parent: Apizr
   definition: Apizr.IApizrManager`1
+  href: Apizr.IApizrManager-1.html
   name: IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>>
   nameWithType: IApizrManager<ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>>
   fullName: Apizr.IApizrManager<Apizr.Requesting.ICrudApi<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TReadAllParams>>
@@ -1670,89 +1291,52 @@ references:
   spec.csharp:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
+    href: Apizr.IApizrManager-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Requesting.ICrudApi`4
     name: ICrudApi
-    nameWithType: ICrudApi
-    fullName: Apizr.Requesting.ICrudApi
+    href: Apizr.Requesting.ICrudApi-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityReadAllResult
-    nameWithType: TApiEntityReadAllResult
-    fullName: TApiEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.IApizrManager-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Requesting.ICrudApi`4
     name: ICrudApi
-    nameWithType: ICrudApi
-    fullName: Apizr.Requesting.ICrudApi
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Requesting.ICrudApi-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApiEntityReadAllResult
-    nameWithType: TApiEntityReadAllResult
-    fullName: TApiEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.IApizrManager`1
   commentId: T:Apizr.IApizrManager`1
+  href: Apizr.IApizrManager-1.html
   name: IApizrManager<TWebApi>
   nameWithType: IApizrManager<TWebApi>
   fullName: Apizr.IApizrManager<TWebApi>
@@ -1762,38 +1346,28 @@ references:
   spec.csharp:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
+    href: Apizr.IApizrManager-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.IApizrManager-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr
   commentId: N:Apizr
+  href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
 - uid: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.Handle*
   commentId: Overload:Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler`5.Handle
+  href: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler-5.html#Apizr_Optional_Cruding_Handling_ReadAllOptionalQueryHandler_5_Handle_Apizr_Optional_Cruding_ReadAllOptionalQuery__4__2__System_Threading_CancellationToken_
   name: Handle
   nameWithType: ReadAllOptionalQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams>.Handle
   fullName: Apizr.Optional.Cruding.Handling.ReadAllOptionalQueryHandler<TApiEntity, TApiEntityKey, TModelEntityReadAllResult, TApiEntityReadAllResult, TReadAllParams>.Handle
@@ -1803,6 +1377,7 @@ references:
   commentId: T:Apizr.Optional.Cruding.ReadAllOptionalQuery{`4,`2}
   parent: Apizr.Optional.Cruding
   definition: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
+  href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   name: ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>
   nameWithType: ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>
   fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery<TReadAllParams, TModelEntityReadAllResult>
@@ -1812,47 +1387,30 @@ references:
   spec.csharp:
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.CancellationToken
   commentId: T:System.Threading.CancellationToken
   parent: System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
@@ -1860,6 +1418,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{Optional.Option{`2,Apizr.ApizrException{`2}}}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
   nameWithType: Task<Option<TModelEntityReadAllResult, ApizrException<TModelEntityReadAllResult>>>
   fullName: System.Threading.Tasks.Task<Optional.Option<TModelEntityReadAllResult, Apizr.ApizrException<TModelEntityReadAllResult>>>
@@ -1869,89 +1428,54 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntityReadAllResult
-    nameWithType: TModelEntityReadAllResult
-    fullName: TModelEntityReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
   commentId: T:Apizr.Optional.Cruding.ReadAllOptionalQuery`2
+  href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   name: ReadAllOptionalQuery<TReadAllParams, TReadAllResult>
   nameWithType: ReadAllOptionalQuery<TReadAllParams, TReadAllResult>
   fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery<TReadAllParams, TReadAllResult>
@@ -1961,57 +1485,86 @@ references:
   spec.csharp:
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Optional.Cruding.ReadAllOptionalQuery`2
     name: ReadAllOptionalQuery
-    nameWithType: ReadAllOptionalQuery
-    fullName: Apizr.Optional.Cruding.ReadAllOptionalQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Optional.Cruding.ReadAllOptionalQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Optional.Cruding
   commentId: N:Apizr.Optional.Cruding
+  href: Apizr.html
   name: Apizr.Optional.Cruding
   nameWithType: Apizr.Optional.Cruding
   fullName: Apizr.Optional.Cruding
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Cruding
+    name: Cruding
+    href: Apizr.Optional.Cruding.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Cruding
+    name: Cruding
+    href: Apizr.Optional.Cruding.html
 - uid: System.Threading
   commentId: N:System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -2021,36 +1574,55 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

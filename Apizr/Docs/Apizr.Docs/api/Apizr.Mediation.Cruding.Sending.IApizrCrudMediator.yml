@@ -9,8 +9,8 @@ items:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -26,7 +26,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrCrudMediator
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -34,19 +34,11 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nApizr mediator dedicated to cruding\n"
+  summary: Apizr mediator dedicated to cruding
   example: []
   syntax:
     content: 'public interface IApizrCrudMediator : IApizrCrudMediatorBase, IApizrMediatorBase'
-    content.vb: >-
-      Public Interface IApizrCrudMediator
-          Inherits IApizrCrudMediatorBase
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
+    content.vb: Public Interface IApizrCrudMediator Inherits IApizrCrudMediatorBase, IApizrMediatorBase
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   id: SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -61,7 +53,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendCreateCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -69,7 +61,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.CreateCommand%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: Task<TApiEntity> SendCreateCommand<TApiEntity>(TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -105,7 +97,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendCreateCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -113,7 +105,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.CreateCommand%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR returning a mapped result
   example: []
   syntax:
     content: Task<TModelEntity> SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -151,7 +143,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -159,7 +151,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -169,7 +161,7 @@ items:
       description: Options provided to the request
     typeParameters:
     - id: TReadAllResult
-      description: The &quot;ReadAll&quot; query result type
+      description: The "ReadAll" query result type
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
       description: ''
@@ -192,7 +184,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -200,7 +192,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning mapped result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR returning mapped result
   example: []
   syntax:
     content: Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -235,7 +227,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -243,7 +235,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -281,7 +273,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -289,7 +281,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR returning a mapped result
   example: []
   syntax:
     content: Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -329,7 +321,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -337,7 +329,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadQuery%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -352,7 +344,7 @@ items:
     - id: TApiEntity
       description: The api entity type
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
       description: ''
@@ -375,7 +367,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -383,7 +375,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadQuery%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR returning a mapped result
   example: []
   syntax:
     content: Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -400,7 +392,7 @@ items:
     - id: TApiEntity
       description: The api entity type to map to
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
       description: ''
@@ -423,7 +415,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUpdateCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -431,7 +423,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.UpdateCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: Task SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -449,7 +441,7 @@ items:
     - id: TApiEntity
       description: The api entity type
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task
       description: ''
@@ -472,7 +464,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUpdateCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -480,7 +472,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.UpdateCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: Task SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -500,7 +492,7 @@ items:
     - id: TApiEntity
       description: The api entity type to map to
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task
       description: ''
@@ -523,7 +515,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDeleteCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs
@@ -531,7 +523,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.DeleteCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: Task SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -546,7 +538,7 @@ items:
     - id: TApiEntity
       description: The api entity type
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task
       description: ''
@@ -558,11 +550,45 @@ items:
 references:
 - uid: Apizr.Mediation.Cruding.Sending
   commentId: N:Apizr.Mediation.Cruding.Sending
+  href: Apizr.html
   name: Apizr.Mediation.Cruding.Sending
   nameWithType: Apizr.Mediation.Cruding.Sending
   fullName: Apizr.Mediation.Cruding.Sending
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding
+    name: Cruding
+    href: Apizr.Mediation.Cruding.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Sending
+    name: Sending
+    href: Apizr.Mediation.Cruding.Sending.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding
+    name: Cruding
+    href: Apizr.Mediation.Cruding.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Sending
+    name: Sending
+    href: Apizr.Mediation.Cruding.Sending.html
 - uid: Apizr.Mediation.Cruding.CreateCommand`1
   commentId: T:Apizr.Mediation.Cruding.CreateCommand`1
+  href: Apizr.Mediation.Cruding.CreateCommand-1.html
   name: CreateCommand<TModelData>
   nameWithType: CreateCommand<TModelData>
   fullName: Apizr.Mediation.Cruding.CreateCommand<TModelData>
@@ -572,33 +598,22 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.CreateCommand`1
     name: CreateCommand
-    nameWithType: CreateCommand
-    fullName: Apizr.Mediation.Cruding.CreateCommand
+    href: Apizr.Mediation.Cruding.CreateCommand-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.CreateCommand`1
     name: CreateCommand
-    nameWithType: CreateCommand
-    fullName: Apizr.Mediation.Cruding.CreateCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.CreateCommand-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelData
-    nameWithType: TModelData
-    fullName: TModelData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendCreateCommand
   nameWithType: IApizrCrudMediator.SendCreateCommand
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand
@@ -612,6 +627,7 @@ references:
   commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrRequestOptionsBuilder>
   nameWithType: Action<IApizrRequestOptionsBuilder>
   fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -621,39 +637,30 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{TApiEntity}}
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TApiEntity>
   nameWithType: Task<TApiEntity>
   fullName: System.Threading.Tasks.Task<TApiEntity>
@@ -663,33 +670,21 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TApiEntity
   name: TApiEntity
   nameWithType: TApiEntity
@@ -697,6 +692,7 @@ references:
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -706,42 +702,32 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -751,39 +737,58 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: '{TModelEntity}'
   commentId: '!:TModelEntity'
   definition: TModelEntity
@@ -794,6 +799,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TModelEntity>
   nameWithType: Task<TModelEntity>
   fullName: System.Threading.Tasks.Task<TModelEntity>
@@ -803,39 +809,28 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TModelEntity
   name: TModelEntity
   nameWithType: TModelEntity
   fullName: TModelEntity
 - uid: Apizr.Mediation.Cruding.ReadAllQuery`1
   commentId: T:Apizr.Mediation.Cruding.ReadAllQuery`1
+  href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
   name: ReadAllQuery<TReadAllResult>
   nameWithType: ReadAllQuery<TReadAllResult>
   fullName: Apizr.Mediation.Cruding.ReadAllQuery<TReadAllResult>
@@ -845,33 +840,22 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.ReadAllQuery`1
     name: ReadAllQuery
-    nameWithType: ReadAllQuery
-    fullName: Apizr.Mediation.Cruding.ReadAllQuery
+    href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.ReadAllQuery`1
     name: ReadAllQuery
-    nameWithType: ReadAllQuery
-    fullName: Apizr.Mediation.Cruding.ReadAllQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllQuery
   nameWithType: IApizrCrudMediator.SendReadAllQuery
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery
@@ -879,6 +863,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{``2}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TReadAllResult>
   nameWithType: Task<TReadAllResult>
   fullName: System.Threading.Tasks.Task<TReadAllResult>
@@ -888,37 +873,26 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{TModelReadAllResult}}
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TModelReadAllResult>
   nameWithType: Task<TModelReadAllResult>
   fullName: System.Threading.Tasks.Task<TModelReadAllResult>
@@ -928,33 +902,21 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelReadAllResult
-    nameWithType: TModelReadAllResult
-    fullName: TModelReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelReadAllResult
-    nameWithType: TModelReadAllResult
-    fullName: TModelReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TReadAllParams}'
   commentId: '!:TReadAllParams'
   definition: TReadAllParams
@@ -967,6 +929,7 @@ references:
   fullName: TReadAllParams
 - uid: Apizr.Mediation.Cruding.ReadQuery`2
   commentId: T:Apizr.Mediation.Cruding.ReadQuery`2
+  href: Apizr.Mediation.Cruding.ReadQuery-2.html
   name: ReadQuery<TResultData, TKey>
   nameWithType: ReadQuery<TResultData, TKey>
   fullName: Apizr.Mediation.Cruding.ReadQuery<TResultData, TKey>
@@ -976,45 +939,28 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.ReadQuery`2
     name: ReadQuery
-    nameWithType: ReadQuery
-    fullName: Apizr.Mediation.Cruding.ReadQuery
+    href: Apizr.Mediation.Cruding.ReadQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.ReadQuery`2
     name: ReadQuery
-    nameWithType: ReadQuery
-    fullName: Apizr.Mediation.Cruding.ReadQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.ReadQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadQuery
   nameWithType: IApizrCrudMediator.SendReadQuery
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery
@@ -1030,6 +976,7 @@ references:
   fullName: TApiEntityKey
 - uid: Apizr.Mediation.Cruding.UpdateCommand`2
   commentId: T:Apizr.Mediation.Cruding.UpdateCommand`2
+  href: Apizr.Mediation.Cruding.UpdateCommand-2.html
   name: UpdateCommand<TKey, TRequestData>
   nameWithType: UpdateCommand<TKey, TRequestData>
   fullName: Apizr.Mediation.Cruding.UpdateCommand<TKey, TRequestData>
@@ -1039,45 +986,28 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.UpdateCommand`2
     name: UpdateCommand
-    nameWithType: UpdateCommand
-    fullName: Apizr.Mediation.Cruding.UpdateCommand
+    href: Apizr.Mediation.Cruding.UpdateCommand-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.UpdateCommand`2
     name: UpdateCommand
-    nameWithType: UpdateCommand
-    fullName: Apizr.Mediation.Cruding.UpdateCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.UpdateCommand-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__2___1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUpdateCommand
   nameWithType: IApizrCrudMediator.SendUpdateCommand
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand
@@ -1085,11 +1015,13 @@ references:
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
 - uid: Apizr.Mediation.Cruding.DeleteCommand`2
   commentId: T:Apizr.Mediation.Cruding.DeleteCommand`2
+  href: Apizr.Mediation.Cruding.DeleteCommand-2.html
   name: DeleteCommand<T, TKey>
   nameWithType: DeleteCommand<T, TKey>
   fullName: Apizr.Mediation.Cruding.DeleteCommand<T, TKey>
@@ -1099,45 +1031,28 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.DeleteCommand`2
     name: DeleteCommand
-    nameWithType: DeleteCommand
-    fullName: Apizr.Mediation.Cruding.DeleteCommand
+    href: Apizr.Mediation.Cruding.DeleteCommand-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.DeleteCommand`2
     name: DeleteCommand
-    nameWithType: DeleteCommand
-    fullName: Apizr.Mediation.Cruding.DeleteCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.DeleteCommand-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendDeleteCommand__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendDeleteCommand
   nameWithType: IApizrCrudMediator.SendDeleteCommand
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand

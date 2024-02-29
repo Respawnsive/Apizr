@@ -20,7 +20,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Mapping/IMappingHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IMappingHandler
     path: ../../Src/Apizr/Mapping/IMappingHandler.cs
@@ -28,17 +28,11 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nThe mapping handler definition\n"
+  summary: The mapping handler definition
   example: []
   syntax:
     content: public interface IMappingHandler
     content.vb: Public Interface IMappingHandler
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
 - uid: Apizr.Mapping.IMappingHandler.Map``1(System.Object)
   commentId: M:Apizr.Mapping.IMappingHandler.Map``1(System.Object)
   id: Map``1(System.Object)
@@ -46,14 +40,14 @@ items:
   langs:
   - csharp
   - vb
-  name: Map<TDestination>(Object)
-  nameWithType: IMappingHandler.Map<TDestination>(Object)
-  fullName: Apizr.Mapping.IMappingHandler.Map<TDestination>(System.Object)
+  name: Map<TDestination>(object)
+  nameWithType: IMappingHandler.Map<TDestination>(object)
+  fullName: Apizr.Mapping.IMappingHandler.Map<TDestination>(object)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Mapping/IMappingHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Map
     path: ../../Src/Apizr/Mapping/IMappingHandler.cs
@@ -61,7 +55,10 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to a new destination object.\nThe source type is inferred from the source object.\n"
+  summary: >-
+    Execute a mapping from the source object to a new destination object.
+
+    The source type is inferred from the source object.
   example: []
   syntax:
     content: TDestination Map<TDestination>(object source)
@@ -78,7 +75,7 @@ items:
     content.vb: Function Map(Of TDestination)(source As Object) As TDestination
   overload: Apizr.Mapping.IMappingHandler.Map*
   nameWithType.vb: IMappingHandler.Map(Of TDestination)(Object)
-  fullName.vb: Apizr.Mapping.IMappingHandler.Map(Of TDestination)(System.Object)
+  fullName.vb: Apizr.Mapping.IMappingHandler.Map(Of TDestination)(Object)
   name.vb: Map(Of TDestination)(Object)
 - uid: Apizr.Mapping.IMappingHandler.Map``2(``0)
   commentId: M:Apizr.Mapping.IMappingHandler.Map``2(``0)
@@ -94,7 +91,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Mapping/IMappingHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Map
     path: ../../Src/Apizr/Mapping/IMappingHandler.cs
@@ -102,7 +99,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to a new destination object.\n"
+  summary: Execute a mapping from the source object to a new destination object.
   example: []
   syntax:
     content: TDestination Map<TSource, TDestination>(TSource source)
@@ -137,7 +134,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Mapping/IMappingHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Map
     path: ../../Src/Apizr/Mapping/IMappingHandler.cs
@@ -145,7 +142,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to the existing destination object.\n"
+  summary: Execute a mapping from the source object to the existing destination object.
   example: []
   syntax:
     content: TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
@@ -163,7 +160,7 @@ items:
       description: Destination type
     return:
       type: '{TDestination}'
-      description: The mapped destination object, same instance as the <code data-dev-comment-type="paramref" class="paramref">destination</code> object
+      description: The mapped destination object, same instance as the <code class="paramref">destination</code> object
     content.vb: Function Map(Of TSource, TDestination)(source As TSource, destination As TDestination) As TDestination
   overload: Apizr.Mapping.IMappingHandler.Map*
   nameWithType.vb: IMappingHandler.Map(Of TSource, TDestination)(TSource, TDestination)
@@ -176,14 +173,14 @@ items:
   langs:
   - csharp
   - vb
-  name: Map(Object, Type, Type)
-  nameWithType: IMappingHandler.Map(Object, Type, Type)
-  fullName: Apizr.Mapping.IMappingHandler.Map(System.Object, System.Type, System.Type)
+  name: Map(object, Type, Type)
+  nameWithType: IMappingHandler.Map(object, Type, Type)
+  fullName: Apizr.Mapping.IMappingHandler.Map(object, System.Type, System.Type)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Mapping/IMappingHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Map
     path: ../../Src/Apizr/Mapping/IMappingHandler.cs
@@ -191,7 +188,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to a new destination object with explicit <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> objects\n"
+  summary: Execute a mapping from the source object to a new destination object with explicit <xref href="System.Type" data-throw-if-not-resolved="false"></xref> objects
   example: []
   syntax:
     content: object Map(object source, Type sourceType, Type destinationType)
@@ -210,6 +207,9 @@ items:
       description: Mapped destination object
     content.vb: Function Map(source As Object, sourceType As Type, destinationType As Type) As Object
   overload: Apizr.Mapping.IMappingHandler.Map*
+  nameWithType.vb: IMappingHandler.Map(Object, Type, Type)
+  fullName.vb: Apizr.Mapping.IMappingHandler.Map(Object, System.Type, System.Type)
+  name.vb: Map(Object, Type, Type)
 - uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
   commentId: M:Apizr.Mapping.IMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
   id: Map(System.Object,System.Object,System.Type,System.Type)
@@ -217,14 +217,14 @@ items:
   langs:
   - csharp
   - vb
-  name: Map(Object, Object, Type, Type)
-  nameWithType: IMappingHandler.Map(Object, Object, Type, Type)
-  fullName: Apizr.Mapping.IMappingHandler.Map(System.Object, System.Object, System.Type, System.Type)
+  name: Map(object, object, Type, Type)
+  nameWithType: IMappingHandler.Map(object, object, Type, Type)
+  fullName: Apizr.Mapping.IMappingHandler.Map(object, object, System.Type, System.Type)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Mapping/IMappingHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Map
     path: ../../Src/Apizr/Mapping/IMappingHandler.cs
@@ -232,7 +232,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to existing destination object with explicit <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> objects\n"
+  summary: Execute a mapping from the source object to existing destination object with explicit <xref href="System.Type" data-throw-if-not-resolved="false"></xref> objects
   example: []
   syntax:
     content: object Map(object source, object destination, Type sourceType, Type destinationType)
@@ -251,17 +251,38 @@ items:
       description: Destination type to use
     return:
       type: System.Object
-      description: Mapped destination object, same instance as the <code data-dev-comment-type="paramref" class="paramref">destination</code> object
+      description: Mapped destination object, same instance as the <code class="paramref">destination</code> object
     content.vb: Function Map(source As Object, destination As Object, sourceType As Type, destinationType As Type) As Object
   overload: Apizr.Mapping.IMappingHandler.Map*
+  nameWithType.vb: IMappingHandler.Map(Object, Object, Type, Type)
+  fullName.vb: Apizr.Mapping.IMappingHandler.Map(Object, Object, System.Type, System.Type)
+  name.vb: Map(Object, Object, Type, Type)
 references:
 - uid: Apizr.Mapping
   commentId: N:Apizr.Mapping
+  href: Apizr.html
   name: Apizr.Mapping
   nameWithType: Apizr.Mapping
   fullName: Apizr.Mapping
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mapping
+    name: Mapping
+    href: Apizr.Mapping.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mapping
+    name: Mapping
+    href: Apizr.Mapping.html
 - uid: Apizr.Mapping.IMappingHandler.Map*
   commentId: Overload:Apizr.Mapping.IMappingHandler.Map
+  href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__1_System_Object_
   name: Map
   nameWithType: IMappingHandler.Map
   fullName: Apizr.Mapping.IMappingHandler.Map
@@ -269,9 +290,13 @@ references:
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: '{TDestination}'
   commentId: '!:TDestination'
   definition: TDestination
@@ -281,6 +306,7 @@ references:
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
@@ -302,6 +328,7 @@ references:
   commentId: T:System.Type
   parent: System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
   name: Type
   nameWithType: Type
   fullName: System.Type

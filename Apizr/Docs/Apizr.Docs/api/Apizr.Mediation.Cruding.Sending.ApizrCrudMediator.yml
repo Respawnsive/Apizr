@@ -10,8 +10,8 @@ items:
   - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -27,7 +27,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrCrudMediator
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -35,14 +35,11 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nApizr mediator dedicated to cruding\n"
+  summary: Apizr mediator dedicated to cruding
   example: []
   syntax:
     content: 'public class ApizrCrudMediator : ApizrMediatorBase, IApizrCrudMediator, IApizrCrudMediatorBase, IApizrMediatorBase'
-    content.vb: >-
-      Public Class ApizrCrudMediator
-          Inherits ApizrMediatorBase
-          Implements IApizrCrudMediator, IApizrCrudMediatorBase, IApizrMediatorBase
+    content.vb: Public Class ApizrCrudMediator Inherits ApizrMediatorBase Implements IApizrCrudMediator, IApizrCrudMediatorBase, IApizrMediatorBase
   inheritance:
   - System.Object
   - Apizr.Mediation.Requesting.Sending.ApizrMediatorBase
@@ -59,12 +56,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.#ctor(MediatR.IMediator)
   commentId: M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.#ctor(MediatR.IMediator)
   id: '#ctor(MediatR.IMediator)'
@@ -79,7 +70,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -94,10 +85,9 @@ items:
       type: MediatR.IMediator
     content.vb: Public Sub New(mediator As IMediator)
   overload: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.#ctor*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
+  nameWithType.vb: ApizrCrudMediator.New(IMediator)
+  fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.New(MediatR.IMediator)
+  name.vb: New(IMediator)
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   id: SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -112,7 +102,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendCreateCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -120,7 +110,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.CreateCommand%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: public Task<TApiEntity> SendCreateCommand<TApiEntity>(TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -142,10 +132,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1({TApiEntity},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendCreateCommand(Of TApiEntity)(TApiEntity, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand(Of TApiEntity)(TApiEntity, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendCreateCommand(Of TApiEntity)(TApiEntity, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -162,7 +148,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendCreateCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -170,7 +156,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.CreateCommand%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.CreateCommand%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR returning a mapped result
   example: []
   syntax:
     content: public Task<TModelEntity> SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -194,10 +180,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2({TModelEntity},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendCreateCommand(Of TModelEntity, TApiEntity)(TModelEntity, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand(Of TModelEntity, TApiEntity)(TModelEntity, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendCreateCommand(Of TModelEntity, TApiEntity)(TModelEntity, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -214,7 +196,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -222,7 +204,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery<TReadAllResult>(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -232,7 +214,7 @@ items:
       description: Options provided to the request
     typeParameters:
     - id: TReadAllResult
-      description: The &quot;ReadAll&quot; query result type
+      description: The "ReadAll" query result type
     return:
       type: System.Threading.Tasks.Task{{TReadAllResult}}
       description: ''
@@ -241,10 +223,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendReadAllQuery(Of TReadAllResult)(Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery(Of TReadAllResult)(System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendReadAllQuery(Of TReadAllResult)(Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -261,7 +239,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -269,7 +247,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning mapped result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR returning mapped result
   example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult>(Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -289,10 +267,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TReadAllResult)(Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TReadAllResult)(System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendReadAllQuery(Of TModelReadAllResult, TReadAllResult)(Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -309,7 +283,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -317,7 +291,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: public Task<TReadAllResult> SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -341,10 +315,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2({TReadAllParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendReadAllQuery(Of TReadAllResult, TReadAllParams)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery(Of TReadAllResult, TReadAllParams)(TReadAllParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendReadAllQuery(Of TReadAllResult, TReadAllParams)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -361,7 +331,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadAllQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -369,7 +339,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.ReadAllQuery%601\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.ReadAllQuery%601" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR returning a mapped result
   example: []
   syntax:
     content: public Task<TModelReadAllResult> SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams readAllParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -394,10 +364,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3({TReadAllParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TReadAllResult, TReadAllParams)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TReadAllResult, TReadAllParams)(TReadAllParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendReadAllQuery(Of TModelReadAllResult, TReadAllResult, TReadAllParams)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -414,7 +380,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -422,7 +388,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadQuery%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: public Task<TApiEntity> SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -437,7 +403,7 @@ items:
     - id: TApiEntity
       description: The api entity type
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task{{TApiEntity}}
       description: ''
@@ -446,10 +412,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2({TApiEntityKey},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendReadQuery(Of TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery(Of TApiEntity, TApiEntityKey)(TApiEntityKey, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendReadQuery(Of TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -466,7 +428,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendReadQuery
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -474,7 +436,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.ReadQuery%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR returning a mapped result\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.ReadQuery%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR returning a mapped result
   example: []
   syntax:
     content: public Task<TModelEntity> SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -491,7 +453,7 @@ items:
     - id: TApiEntity
       description: The api entity type to map to
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task{{TModelEntity}}
       description: ''
@@ -500,10 +462,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3({TApiEntityKey},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -520,7 +478,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUpdateCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -528,7 +486,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.UpdateCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: public Task SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -546,7 +504,7 @@ items:
     - id: TApiEntity
       description: The api entity type
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task
       description: ''
@@ -555,10 +513,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2({TApiEntityKey},{TApiEntity},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendUpdateCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, TApiEntity, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, TApiEntity, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUpdateCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, TApiEntity, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -575,7 +529,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendUpdateCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -583,7 +537,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a mapped <xref href=\"Apizr.Mediation.Cruding.UpdateCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a mapped <xref href="Apizr.Mediation.Cruding.UpdateCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: public Task SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey key, TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -603,7 +557,7 @@ items:
     - id: TApiEntity
       description: The api entity type to map to
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task
       description: ''
@@ -612,10 +566,6 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3({TApiEntityKey},{TModelEntity},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, TModelEntity, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, TModelEntity, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, TModelEntity, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -632,7 +582,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendDeleteCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/ApizrCrudMediator.cs
@@ -640,7 +590,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Cruding.Sending
-  summary: "\nSend a <xref href=\"Apizr.Mediation.Cruding.DeleteCommand%602\" data-throw-if-not-resolved=\"false\"></xref> to Apizr using MediatR\n"
+  summary: Send a <xref href="Apizr.Mediation.Cruding.DeleteCommand%602" data-throw-if-not-resolved="false"></xref> to Apizr using MediatR
   example: []
   syntax:
     content: public Task SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -655,7 +605,7 @@ items:
     - id: TApiEntity
       description: The api entity type
     - id: TApiEntityKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     return:
       type: System.Threading.Tasks.Task
       description: ''
@@ -664,46 +614,83 @@ items:
   implements:
   - Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2({TApiEntityKey},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrCrudMediator.SendDeleteCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: SendDeleteCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
 references:
 - uid: Apizr.Mediation.Cruding.Sending
   commentId: N:Apizr.Mediation.Cruding.Sending
+  href: Apizr.html
   name: Apizr.Mediation.Cruding.Sending
   nameWithType: Apizr.Mediation.Cruding.Sending
   fullName: Apizr.Mediation.Cruding.Sending
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding
+    name: Cruding
+    href: Apizr.Mediation.Cruding.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Sending
+    name: Sending
+    href: Apizr.Mediation.Cruding.Sending.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding
+    name: Cruding
+    href: Apizr.Mediation.Cruding.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Sending
+    name: Sending
+    href: Apizr.Mediation.Cruding.Sending.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase
   commentId: T:Apizr.Mediation.Requesting.Sending.ApizrMediatorBase
   parent: Apizr.Mediation.Requesting.Sending
+  href: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.html
   name: ApizrMediatorBase
   nameWithType: ApizrMediatorBase
   fullName: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   commentId: T:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   parent: Apizr.Mediation.Cruding.Sending
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html
   name: IApizrCrudMediator
   nameWithType: IApizrCrudMediator
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediatorBase
   commentId: T:Apizr.Mediation.Cruding.Sending.IApizrCrudMediatorBase
   parent: Apizr.Mediation.Cruding.Sending
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediatorBase.html
   name: IApizrCrudMediatorBase
   nameWithType: IApizrCrudMediatorBase
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediatorBase
 - uid: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase
   commentId: T:Apizr.Mediation.Requesting.Sending.IApizrMediatorBase
   parent: Apizr.Mediation.Requesting.Sending
+  href: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase.html
   name: IApizrMediatorBase
   nameWithType: IApizrMediatorBase
   fullName: Apizr.Mediation.Requesting.Sending.IApizrMediatorBase
@@ -711,6 +698,7 @@ references:
   commentId: M:Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.CreateRequestOptionsBuilder(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase
   isExternal: true
+  href: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.html#Apizr_Mediation_Requesting_Sending_ApizrMediatorBase_CreateRequestOptionsBuilder_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: CreateRequestOptionsBuilder(Action<IApizrRequestOptionsBuilder>)
   nameWithType: ApizrMediatorBase.CreateRequestOptionsBuilder(Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.CreateRequestOptionsBuilder(System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -720,350 +708,308 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.CreateRequestOptionsBuilder(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: CreateRequestOptionsBuilder
-    nameWithType: ApizrMediatorBase.CreateRequestOptionsBuilder
-    fullName: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.CreateRequestOptionsBuilder
+    href: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.html#Apizr_Mediation_Requesting_Sending_ApizrMediatorBase_CreateRequestOptionsBuilder_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.CreateRequestOptionsBuilder(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: CreateRequestOptionsBuilder
-    nameWithType: ApizrMediatorBase.CreateRequestOptionsBuilder
-    fullName: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.CreateRequestOptionsBuilder
+    href: Apizr.Mediation.Requesting.Sending.ApizrMediatorBase.html#Apizr_Mediation_Requesting_Sending_ApizrMediatorBase_CreateRequestOptionsBuilder_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Mediation.Requesting.Sending
   commentId: N:Apizr.Mediation.Requesting.Sending
+  href: Apizr.html
   name: Apizr.Mediation.Requesting.Sending
   nameWithType: Apizr.Mediation.Requesting.Sending
   fullName: Apizr.Mediation.Requesting.Sending
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Sending
+    name: Sending
+    href: Apizr.Mediation.Requesting.Sending.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Sending
+    name: Sending
+    href: Apizr.Mediation.Requesting.Sending.html
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.#ctor*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.#ctor
+  href: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_ApizrCrudMediator__ctor_MediatR_IMediator_
   name: ApizrCrudMediator
   nameWithType: ApizrCrudMediator.ApizrCrudMediator
   fullName: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.ApizrCrudMediator
+  nameWithType.vb: ApizrCrudMediator.New
+  fullName.vb: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.New
+  name.vb: New
 - uid: MediatR.IMediator
   commentId: T:MediatR.IMediator
   parent: MediatR
@@ -1077,8 +1023,34 @@ references:
   name: MediatR
   nameWithType: MediatR
   fullName: MediatR
+- uid: Apizr.Mediation.Cruding.CreateCommand`1
+  commentId: T:Apizr.Mediation.Cruding.CreateCommand`1
+  href: Apizr.Mediation.Cruding.CreateCommand-1.html
+  name: CreateCommand<TModelData>
+  nameWithType: CreateCommand<TModelData>
+  fullName: Apizr.Mediation.Cruding.CreateCommand<TModelData>
+  nameWithType.vb: CreateCommand(Of TModelData)
+  fullName.vb: Apizr.Mediation.Cruding.CreateCommand(Of TModelData)
+  name.vb: CreateCommand(Of TModelData)
+  spec.csharp:
+  - uid: Apizr.Mediation.Cruding.CreateCommand`1
+    name: CreateCommand
+    href: Apizr.Mediation.Cruding.CreateCommand-1.html
+  - name: <
+  - name: TModelData
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Cruding.CreateCommand`1
+    name: CreateCommand
+    href: Apizr.Mediation.Cruding.CreateCommand-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TModelData
+  - name: )
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand
+  href: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_ApizrCrudMediator_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendCreateCommand
   nameWithType: ApizrCrudMediator.SendCreateCommand
   fullName: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendCreateCommand
@@ -1086,6 +1058,7 @@ references:
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendCreateCommand<TApiEntity>(TApiEntity, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendCreateCommand<TApiEntity>(TApiEntity, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand<TApiEntity>(TApiEntity, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1094,68 +1067,50 @@ references:
   name.vb: SendCreateCommand(Of TApiEntity)(TApiEntity, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendCreateCommand<TApiEntity>
-    nameWithType: IApizrCrudMediator.SendCreateCommand<TApiEntity>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand<TApiEntity>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendCreateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendCreateCommand(Of TApiEntity)
-    nameWithType: IApizrCrudMediator.SendCreateCommand(Of TApiEntity)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand(Of TApiEntity)
+    name: SendCreateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TApiEntity}'
   commentId: '!:TApiEntity'
   definition: TApiEntity
@@ -1166,6 +1121,7 @@ references:
   commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrRequestOptionsBuilder>
   nameWithType: Action<IApizrRequestOptionsBuilder>
   fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -1175,39 +1131,30 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{TApiEntity}}
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TApiEntity>
   nameWithType: Task<TApiEntity>
   fullName: System.Threading.Tasks.Task<TApiEntity>
@@ -1217,36 +1164,25 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendCreateCommand<TApiEntity>(TApiEntity, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendCreateCommand<TApiEntity>(TApiEntity, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand<TApiEntity>(TApiEntity, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1255,68 +1191,50 @@ references:
   name.vb: SendCreateCommand(Of TApiEntity)(TApiEntity, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendCreateCommand<TApiEntity>
-    nameWithType: IApizrCrudMediator.SendCreateCommand<TApiEntity>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand<TApiEntity>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendCreateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendCreateCommand(Of TApiEntity)
-    nameWithType: IApizrCrudMediator.SendCreateCommand(Of TApiEntity)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand(Of TApiEntity)
+    name: SendCreateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TApiEntity
   name: TApiEntity
   nameWithType: TApiEntity
@@ -1324,6 +1242,7 @@ references:
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -1333,36 +1252,25 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -1372,43 +1280,63 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2({TModelEntity},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1417,68 +1345,56 @@ references:
   name.vb: SendCreateCommand(Of TModelEntity, TApiEntity)(TModelEntity, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendCreateCommand<TModelEntity, TApiEntity>
-    nameWithType: IApizrCrudMediator.SendCreateCommand<TModelEntity, TApiEntity>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand<TModelEntity, TApiEntity>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendCreateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: '>'
+  - name: (
+  - name: TModelEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendCreateCommand(Of TModelEntity, TApiEntity)
-    nameWithType: IApizrCrudMediator.SendCreateCommand(Of TModelEntity, TApiEntity)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand(Of TModelEntity, TApiEntity)
+    name: SendCreateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: )
+  - name: (
+  - name: TModelEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TModelEntity}'
   commentId: '!:TModelEntity'
   definition: TModelEntity
@@ -1489,6 +1405,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TModelEntity>
   nameWithType: Task<TModelEntity>
   fullName: System.Threading.Tasks.Task<TModelEntity>
@@ -1498,36 +1415,25 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand<TModelEntity, TApiEntity>(TModelEntity, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1536,74 +1442,88 @@ references:
   name.vb: SendCreateCommand(Of TModelEntity, TApiEntity)(TModelEntity, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendCreateCommand<TModelEntity, TApiEntity>
-    nameWithType: IApizrCrudMediator.SendCreateCommand<TModelEntity, TApiEntity>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand<TModelEntity, TApiEntity>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendCreateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: '>'
+  - name: (
+  - name: TModelEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand``2(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendCreateCommand(Of TModelEntity, TApiEntity)
-    nameWithType: IApizrCrudMediator.SendCreateCommand(Of TModelEntity, TApiEntity)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendCreateCommand(Of TModelEntity, TApiEntity)
+    name: SendCreateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendCreateCommand__2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: )
+  - name: (
+  - name: TModelEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TModelEntity
   name: TModelEntity
   nameWithType: TModelEntity
   fullName: TModelEntity
+- uid: Apizr.Mediation.Cruding.ReadAllQuery`1
+  commentId: T:Apizr.Mediation.Cruding.ReadAllQuery`1
+  href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
+  name: ReadAllQuery<TReadAllResult>
+  nameWithType: ReadAllQuery<TReadAllResult>
+  fullName: Apizr.Mediation.Cruding.ReadAllQuery<TReadAllResult>
+  nameWithType.vb: ReadAllQuery(Of TReadAllResult)
+  fullName.vb: Apizr.Mediation.Cruding.ReadAllQuery(Of TReadAllResult)
+  name.vb: ReadAllQuery(Of TReadAllResult)
+  spec.csharp:
+  - uid: Apizr.Mediation.Cruding.ReadAllQuery`1
+    name: ReadAllQuery
+    href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
+  - name: <
+  - name: TReadAllResult
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Cruding.ReadAllQuery`1
+    name: ReadAllQuery
+    href: Apizr.Mediation.Cruding.ReadAllQuery-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TReadAllResult
+  - name: )
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery
+  href: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_ApizrCrudMediator_SendReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllQuery
   nameWithType: ApizrCrudMediator.SendReadAllQuery
   fullName: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadAllQuery
@@ -1611,6 +1531,7 @@ references:
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllQuery<TReadAllResult>(Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadAllQuery<TReadAllResult>(Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TReadAllResult>(System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1619,60 +1540,49 @@ references:
   name.vb: SendReadAllQuery(Of TReadAllResult)(Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery<TReadAllResult>
-    nameWithType: IApizrCrudMediator.SendReadAllQuery<TReadAllResult>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TReadAllResult>
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TReadAllResult
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery(Of TReadAllResult)
-    nameWithType: IApizrCrudMediator.SendReadAllQuery(Of TReadAllResult)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery(Of TReadAllResult)
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TReadAllResult
+  - name: )
+  - name: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{TReadAllResult}}
   commentId: T:System.Threading.Tasks.Task{``2}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TReadAllResult>
   nameWithType: Task<TReadAllResult>
   fullName: System.Threading.Tasks.Task<TReadAllResult>
@@ -1682,37 +1592,26 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllQuery<TModelReadAllResult, TReadAllResult>(Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult>(Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult>(System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1721,60 +1620,55 @@ references:
   name.vb: SendReadAllQuery(Of TModelReadAllResult, TReadAllResult)(Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery<TModelReadAllResult, TReadAllResult>
-    nameWithType: IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult>
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TModelReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery(Of TModelReadAllResult, TReadAllResult)
-    nameWithType: IApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TReadAllResult)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TReadAllResult)
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TModelReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: )
+  - name: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{TModelReadAllResult}}
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TModelReadAllResult>
   nameWithType: Task<TModelReadAllResult>
   fullName: System.Threading.Tasks.Task<TModelReadAllResult>
@@ -1784,37 +1678,26 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TModelReadAllResult
-    nameWithType: TModelReadAllResult
-    fullName: TModelReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TModelReadAllResult
-    nameWithType: TModelReadAllResult
-    fullName: TModelReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2({TReadAllParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1823,68 +1706,56 @@ references:
   name.vb: SendReadAllQuery(Of TReadAllResult, TReadAllParams)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery<TReadAllResult, TReadAllParams>
-    nameWithType: IApizrCrudMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TReadAllParams
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery(Of TReadAllResult, TReadAllParams)
-    nameWithType: IApizrCrudMediator.SendReadAllQuery(Of TReadAllResult, TReadAllParams)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery(Of TReadAllResult, TReadAllParams)
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TReadAllParams
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TReadAllParams}'
   commentId: '!:TReadAllParams'
   definition: TReadAllParams
@@ -1894,6 +1765,7 @@ references:
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>(TReadAllParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1902,68 +1774,56 @@ references:
   name.vb: SendReadAllQuery(Of TReadAllResult, TReadAllParams)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery<TReadAllResult, TReadAllParams>
-    nameWithType: IApizrCrudMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TReadAllResult, TReadAllParams>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TReadAllParams
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery(Of TReadAllResult, TReadAllParams)
-    nameWithType: IApizrCrudMediator.SendReadAllQuery(Of TReadAllResult, TReadAllParams)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery(Of TReadAllResult, TReadAllParams)
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TReadAllParams
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TReadAllParams
   name: TReadAllParams
   nameWithType: TReadAllParams
@@ -1972,6 +1832,7 @@ references:
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>(TReadAllParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1980,71 +1841,66 @@ references:
   name.vb: SendReadAllQuery(Of TModelReadAllResult, TReadAllResult, TReadAllParams)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>
-    nameWithType: IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TReadAllResult, TReadAllParams>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TModelReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TReadAllParams
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery(Of TModelReadAllResult, TReadAllResult, TReadAllParams)
-    nameWithType: IApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TReadAllResult, TReadAllParams)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TReadAllResult, TReadAllParams)
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TModelReadAllResult
+  - name: ','
+  - name: " "
+  - name: TReadAllResult
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TReadAllParams
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>(TReadAllParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2053,70 +1909,96 @@ references:
   name.vb: SendReadAllQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)(TReadAllParams, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>
-    nameWithType: IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TModelReadAllResult
+  - name: ','
+  - name: " "
+  - name: TApiReadAllResult
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TReadAllParams
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadAllQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)
-    nameWithType: IApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadAllQuery(Of TModelReadAllResult, TApiReadAllResult, TReadAllParams)
+    name: SendReadAllQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadAllQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TModelReadAllResult
+  - name: ','
+  - name: " "
+  - name: TApiReadAllResult
+  - name: ','
+  - name: " "
   - name: TReadAllParams
-    nameWithType: TReadAllParams
-    fullName: TReadAllParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TReadAllParams
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Mediation.Cruding.ReadQuery`2
+  commentId: T:Apizr.Mediation.Cruding.ReadQuery`2
+  href: Apizr.Mediation.Cruding.ReadQuery-2.html
+  name: ReadQuery<TResultData, TKey>
+  nameWithType: ReadQuery<TResultData, TKey>
+  fullName: Apizr.Mediation.Cruding.ReadQuery<TResultData, TKey>
+  nameWithType.vb: ReadQuery(Of TResultData, TKey)
+  fullName.vb: Apizr.Mediation.Cruding.ReadQuery(Of TResultData, TKey)
+  name.vb: ReadQuery(Of TResultData, TKey)
+  spec.csharp:
+  - uid: Apizr.Mediation.Cruding.ReadQuery`2
+    name: ReadQuery
+    href: Apizr.Mediation.Cruding.ReadQuery-2.html
+  - name: <
+  - name: TResultData
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Cruding.ReadQuery`2
+    name: ReadQuery
+    href: Apizr.Mediation.Cruding.ReadQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResultData
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: )
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery
+  href: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_ApizrCrudMediator_SendReadQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadQuery
   nameWithType: ApizrCrudMediator.SendReadQuery
   fullName: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendReadQuery
@@ -2124,6 +2006,7 @@ references:
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2132,68 +2015,56 @@ references:
   name.vb: SendReadQuery(Of TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadQuery<TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendReadQuery<TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery<TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendReadQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadQuery(Of TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendReadQuery(Of TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery(Of TApiEntity, TApiEntityKey)
+    name: SendReadQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TApiEntityKey}'
   commentId: '!:TApiEntityKey'
   definition: TApiEntityKey
@@ -2203,6 +2074,7 @@ references:
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery<TApiEntity, TApiEntityKey>(TApiEntityKey, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2211,68 +2083,56 @@ references:
   name.vb: SendReadQuery(Of TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadQuery<TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendReadQuery<TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery<TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendReadQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadQuery(Of TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendReadQuery(Of TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery(Of TApiEntity, TApiEntityKey)
+    name: SendReadQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TApiEntityKey
   name: TApiEntityKey
   nameWithType: TApiEntityKey
@@ -2281,6 +2141,7 @@ references:
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2289,71 +2150,66 @@ references:
   name.vb: SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendReadQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TModelEntity
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)
+    name: SendReadQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TModelEntity
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2362,70 +2218,96 @@ references:
   name.vb: SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendReadQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TModelEntity
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery``3(``2,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendReadQuery(Of TModelEntity, TApiEntity, TApiEntityKey)
+    name: SendReadQuery
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendReadQuery__3___2_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TModelEntity
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Mediation.Cruding.UpdateCommand`2
+  commentId: T:Apizr.Mediation.Cruding.UpdateCommand`2
+  href: Apizr.Mediation.Cruding.UpdateCommand-2.html
+  name: UpdateCommand<TKey, TRequestData>
+  nameWithType: UpdateCommand<TKey, TRequestData>
+  fullName: Apizr.Mediation.Cruding.UpdateCommand<TKey, TRequestData>
+  nameWithType.vb: UpdateCommand(Of TKey, TRequestData)
+  fullName.vb: Apizr.Mediation.Cruding.UpdateCommand(Of TKey, TRequestData)
+  name.vb: UpdateCommand(Of TKey, TRequestData)
+  spec.csharp:
+  - uid: Apizr.Mediation.Cruding.UpdateCommand`2
+    name: UpdateCommand
+    href: Apizr.Mediation.Cruding.UpdateCommand-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TRequestData
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Cruding.UpdateCommand`2
+    name: UpdateCommand
+    href: Apizr.Mediation.Cruding.UpdateCommand-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TRequestData
+  - name: )
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand
+  href: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_ApizrCrudMediator_SendUpdateCommand__2___1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUpdateCommand
   nameWithType: ApizrCrudMediator.SendUpdateCommand
   fullName: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendUpdateCommand
@@ -2433,6 +2315,7 @@ references:
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__2___1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, TApiEntity, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, TApiEntity, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, TApiEntity, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2441,90 +2324,74 @@ references:
   name.vb: SendUpdateCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, TApiEntity, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendUpdateCommand<TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendUpdateCommand<TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand<TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    name: SendUpdateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__2___1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntityKey
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendUpdateCommand(Of TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendUpdateCommand(Of TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand(Of TApiEntity, TApiEntityKey)
+    name: SendUpdateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__2___1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
-  - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntityKey
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__2___1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, TApiEntity, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, TApiEntity, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, TApiEntity, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2533,84 +2400,67 @@ references:
   name.vb: SendUpdateCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, TApiEntity, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendUpdateCommand<TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendUpdateCommand<TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand<TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    name: SendUpdateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__2___1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntityKey
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``2(``1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendUpdateCommand(Of TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendUpdateCommand(Of TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand(Of TApiEntity, TApiEntityKey)
+    name: SendUpdateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__2___1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
-  - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: Of
+  - name: " "
   - name: TApiEntity
-    nameWithType: TApiEntity
-    fullName: TApiEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntityKey
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3({TApiEntityKey},{TModelEntity},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__3___2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, TModelEntity, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, TModelEntity, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, TModelEntity, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2619,83 +2469,72 @@ references:
   name.vb: SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, TModelEntity, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    name: SendUpdateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__3___2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
+  - name: TApiEntityKey
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
+  - name: TModelEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)
+    name: SendUpdateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__3___2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
-  - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
+  - name: TApiEntityKey
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
+  - name: TModelEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__3___2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, TModelEntity, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, TModelEntity, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>(TApiEntityKey, TModelEntity, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2704,82 +2543,102 @@ references:
   name.vb: SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)(TApiEntityKey, TModelEntity, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    name: SendUpdateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__3___2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
+  - name: TApiEntityKey
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
+  - name: TModelEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand``3(``2,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendUpdateCommand(Of TModelEntity, TApiEntity, TApiEntityKey)
+    name: SendUpdateCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendUpdateCommand__3___2___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
-  - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: Of
+  - name: " "
   - name: TModelEntity
-    nameWithType: TModelEntity
-    fullName: TModelEntity
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
+  - name: TApiEntityKey
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
+  - name: TModelEntity
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Mediation.Cruding.DeleteCommand`2
+  commentId: T:Apizr.Mediation.Cruding.DeleteCommand`2
+  href: Apizr.Mediation.Cruding.DeleteCommand-2.html
+  name: DeleteCommand<T, TKey>
+  nameWithType: DeleteCommand<T, TKey>
+  fullName: Apizr.Mediation.Cruding.DeleteCommand<T, TKey>
+  nameWithType.vb: DeleteCommand(Of T, TKey)
+  fullName.vb: Apizr.Mediation.Cruding.DeleteCommand(Of T, TKey)
+  name.vb: DeleteCommand(Of T, TKey)
+  spec.csharp:
+  - uid: Apizr.Mediation.Cruding.DeleteCommand`2
+    name: DeleteCommand
+    href: Apizr.Mediation.Cruding.DeleteCommand-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.Mediation.Cruding.DeleteCommand`2
+    name: DeleteCommand
+    href: Apizr.Mediation.Cruding.DeleteCommand-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TKey
+  - name: )
 - uid: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand*
   commentId: Overload:Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand
+  href: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_ApizrCrudMediator_SendDeleteCommand__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendDeleteCommand
   nameWithType: ApizrCrudMediator.SendDeleteCommand
   fullName: Apizr.Mediation.Cruding.Sending.ApizrCrudMediator.SendDeleteCommand
@@ -2787,6 +2646,7 @@ references:
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator
   definition: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendDeleteCommand__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2795,71 +2655,60 @@ references:
   name.vb: SendDeleteCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendDeleteCommand<TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendDeleteCommand<TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand<TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendDeleteCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendDeleteCommand__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendDeleteCommand(Of TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendDeleteCommand(Of TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand(Of TApiEntity, TApiEntityKey)
+    name: SendDeleteCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendDeleteCommand__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendDeleteCommand__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrCrudMediator.SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand<TApiEntity, TApiEntityKey>(TApiEntityKey, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2868,65 +2717,53 @@ references:
   name.vb: SendDeleteCommand(Of TApiEntity, TApiEntityKey)(TApiEntityKey, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendDeleteCommand<TApiEntity, TApiEntityKey>
-    nameWithType: IApizrCrudMediator.SendDeleteCommand<TApiEntity, TApiEntityKey>
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand<TApiEntity, TApiEntityKey>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: SendDeleteCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendDeleteCommand__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  - name: <
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand``2(``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-    name: SendDeleteCommand(Of TApiEntity, TApiEntityKey)
-    nameWithType: IApizrCrudMediator.SendDeleteCommand(Of TApiEntity, TApiEntityKey)
-    fullName: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.SendDeleteCommand(Of TApiEntity, TApiEntityKey)
+    name: SendDeleteCommand
+    href: Apizr.Mediation.Cruding.Sending.IApizrCrudMediator.html#Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_SendDeleteCommand__2___1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TApiEntity
+  - name: ','
+  - name: " "
   - name: TApiEntityKey
-    nameWithType: TApiEntityKey
-    fullName: TApiEntityKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TApiEntityKey
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )

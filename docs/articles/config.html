@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../resources/favicon.ico">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    
+      <link rel="shortcut icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
     
     <meta property="docfx:rel" content="../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../index.html">
                 <img id="logo" class="svg" src="../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,9 +77,9 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring">Configuring</h2>
 
-<p>Many options could be set by attribute decoration and much more by fluent contextualized configuration, depending on what you&#39;re asking and where.</p>
+<h2 id="configuring">Configuring</h2>
+<p>Many options could be set by attribute decoration and much more by fluent contextualized configuration, depending on what you're asking and where.</p>
 <p>You can configure the way your api request will be managed by Apizr at 3 different stages:</p>
 <ul>
 <li>Design time, by attribute decoration, when you first create your api interface</li>
@@ -87,8 +87,8 @@
 <li>Request time, by fluent options, when you finally send the request to the api</li>
 </ul>
 <p>At Design time, everything is set by attribute like we used to with Refit, decorating at different levels like assembly, interface or method.</p>
-<p>At Register time, you&#39;ll get the possibility to share some options or not with several api interfaces registrations or not.</p>
-<p>At Request time, you&#39;ll get your last chance to adjust configuration before the request to be sent.</p>
+<p>At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not.</p>
+<p>At Request time, you'll get your last chance to adjust configuration before the request to be sent.</p>
 <p>As you can mix stages and levels while configuring, here is the configuration pipeline:</p>
 <ul>
 <li><strong>1 (Design):</strong> The <strong>assembly attribute configuration</strong> level set a configuration to <strong>all api interfaces</strong> contained into the assembly.</li>
@@ -98,7 +98,7 @@
 <li><strong>5 (Design):</strong> The <strong>method attribute configuration</strong> level takes over all the previous ones and set a configuration to <strong>a specific api interface method</strong>.</li>
 <li><strong>6 (Request):</strong> The <strong>fluent request configuration</strong> option takes over all the previous ones and set a configuration to <strong>the called api interface method</strong>.</li>
 </ul>
-<p>Let&#39;s take a quite complexe and dummy but exhaustive timeout configuration example to illustrate that pipeline.</p>
+<p>Let's take a quite complexe and dummy but exhaustive timeout configuration example to illustrate that pipeline.</p>
 <p>First, the design:</p>
 <pre><code class="lang-csharp">[assembly:OperationTimeout(&quot;00:02:00&quot;)]
 namespace Apizr.Sample
@@ -112,7 +112,8 @@ namespace Apizr.Sample
         Task&lt;UserList&gt; GetUsersAsync([RequestOptions] IApizrRequestOptions options);
     }
 }
-</code></pre><p>Then, the registration, the extended way:</p>
+</code></pre>
+<p>Then, the registration, the extended way:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
@@ -121,16 +122,18 @@ namespace Apizr.Sample
             .AddManagerFor&lt;IReqResService&gt;(properOptions =&gt; 
                 properOptions.WithOperationTimeout(new TimeSpan(0,1,15)))
             .AddManagerFor&lt;IHttpBinService&gt;()),
-
+    
         commonOptions =&gt; commonOptions
             .WithOperationTimeout(new TimeSpan(0,1,45))
     );
 }
-</code></pre><p>Finally, the request:</p>
+</code></pre>
+<p>Finally, the request:</p>
 <pre><code class="lang-csharp">// reqResManager here is a resolved instance of IApizrManager&lt;IReqResService&gt;&gt;
 var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(opt), options =&gt; 
-    options.WithRequestTimeout(new TimeSpan(0,0,45)));
-</code></pre><p>Now, guess when the request will time out?</p>
+	options.WithRequestTimeout(new TimeSpan(0,0,45)));
+</code></pre>
+<p>Now, guess when the request will time out?</p>
 <p>Here is how Apizr will take its decision about that:</p>
 <ul>
 <li>It first detects we set a global operation timeout of 00:02:00 (assembly attribute decoration)</li>
@@ -142,7 +145,7 @@ var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(
 </ul>
 <p>And the winner is allways the closest one to the request call, so here 00:00:45.</p>
 <p>If we had defined some Polly strategies handling request timeouts, it would have waited further for another try, but timed out definitly at 00:01:15 right before the retry, due to our operation timeout.</p>
-<p>Now you get the picture about the configuration pipeline, let&#39;s take a more meanful example.</p>
+<p>Now you get the picture about the configuration pipeline, let's take a more meanful example.</p>
 <p>Here is what configuring with a registry, the extended way, could look like:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
@@ -175,7 +178,7 @@ var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(
             .AddCrudManagerFor&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt;(
                 options =&gt; options
                     .WithBaseAddress(&quot;https://reqres.in/api/users&quot;))),
-
+    
         config =&gt; config
             .WithAkavacheCacheHandler()
             .WithLogging(
@@ -184,45 +187,50 @@ var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(
                 LogLevel.Error)
     );
 }
-</code></pre><p>And here is what we&#39;re saying in this example:</p>
+</code></pre>
+<p>And here is what we're saying in this example:</p>
 <ul>
 <li>Add a manager for IReqResService api interface into the registry, to register it into the container</li>
-<li>Add a manager for IHttpBinService api interface into the registry, to register it into the container<ul>
-<li>Apply proper logging options dedicated to IHttpBinService&#39;s manager</li>
+<li>Add a manager for IHttpBinService api interface into the registry, to register it into the container
+<ul>
+<li>Apply proper logging options dedicated to IHttpBinService's manager</li>
 </ul>
 </li>
-<li>Add a manager for User entity with CRUD api interface and custom types into the registry, to register it into the container<ul>
-<li>Apply proper address option dedicated to User&#39;s manager</li>
+<li>Add a manager for User entity with CRUD api interface and custom types into the registry, to register it into the container
+<ul>
+<li>Apply proper address option dedicated to User's manager</li>
 </ul>
 </li>
-<li>Apply common options to all managers by:<ul>
+<li>Apply common options to all managers by:
+<ul>
 <li>Providing a cache handler</li>
-<li>Providing some logging settings (won&#39;t apply to IHttpBinService&#39;s manager as we set some specific ones)</li>
+<li>Providing some logging settings (won't apply to IHttpBinService's manager as we set some specific ones)</li>
 </ul>
 </li>
 </ul>
-<p>Are you still following? Don&#39;t worry! Every single option is detailed through this documentation, so let&#39;s browse it!</p>
+<p>Are you still following? Don't worry! Every single option is detailed through this documentation, so let's browse it!</p>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/feat/resilience/Apizr/Docs/Apizr.Docs/articles/config.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -230,14 +238,14 @@ var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

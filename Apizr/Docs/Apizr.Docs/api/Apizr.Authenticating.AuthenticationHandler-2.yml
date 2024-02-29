@@ -19,7 +19,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: AuthenticationHandler
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
@@ -27,7 +27,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe authentication handler implementation refreshing and saving token\n"
+  summary: The authentication handler implementation refreshing and saving token
   example: []
   syntax:
     content: 'public class AuthenticationHandler<TSettingsService, TTokenService> : AuthenticationHandlerBase, IDisposable, IAuthenticationHandler'
@@ -36,10 +36,7 @@ items:
       description: The settings service type
     - id: TTokenService
       description: The refresh token service type
-    content.vb: >-
-      Public Class AuthenticationHandler(Of TSettingsService, TTokenService)
-          Inherits AuthenticationHandlerBase
-          Implements IDisposable, IAuthenticationHandler
+    content.vb: Public Class AuthenticationHandler(Of TSettingsService, TTokenService) Inherits AuthenticationHandlerBase Implements IDisposable, IAuthenticationHandler
   inheritance:
   - System.Object
   - System.Net.Http.HttpMessageHandler
@@ -64,12 +61,6 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   nameWithType.vb: AuthenticationHandler(Of TSettingsService, TTokenService)
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
   fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService)
   name.vb: AuthenticationHandler(Of TSettingsService, TTokenService)
 - uid: Apizr.Authenticating.AuthenticationHandler`2.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{`0},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Func{`1},System.Linq.Expressions.Expression{System.Func{`1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})
@@ -79,14 +70,14 @@ items:
   langs:
   - csharp
   - vb
-  name: AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<TSettingsService>, Expression<Func<TSettingsService, String>>, Func<TTokenService>, Expression<Func<TTokenService, HttpRequestMessage, Task<String>>>)
-  nameWithType: AuthenticationHandler<TSettingsService, TTokenService>.AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<TSettingsService>, Expression<Func<TSettingsService, String>>, Func<TTokenService>, Expression<Func<TTokenService, HttpRequestMessage, Task<String>>>)
-  fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService, TTokenService>.AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>, System.Func<TTokenService>, System.Linq.Expressions.Expression<System.Func<TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<System.String>>>)
+  name: AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<TSettingsService>, Expression<Func<TSettingsService, string>>, Func<TTokenService>, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>>)
+  nameWithType: AuthenticationHandler<TSettingsService, TTokenService>.AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<TSettingsService>, Expression<Func<TSettingsService, string>>, Func<TTokenService>, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>>)
+  fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService, TTokenService>.AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>, System.Func<TTokenService>, System.Linq.Expressions.Expression<System.Func<TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<string>>>)
   type: Constructor
   source:
     remote:
       path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
@@ -94,7 +85,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe authentication handler constructor\n"
+  summary: The authentication handler constructor
   example: []
   syntax:
     content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> settingsTokenProperty, Func<TTokenService> tokenServiceFactory, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
@@ -110,7 +101,7 @@ items:
       description: The settings service factory
     - id: settingsTokenProperty
       type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
-      description: The settings service&apos;s token property expression
+      description: The settings service's token property expression
     - id: tokenServiceFactory
       type: System.Func{{TTokenService}}
       description: The refresh token service factory
@@ -122,13 +113,10 @@ items:
   exceptions:
   - type: System.ArgumentNullException
     commentId: T:System.ArgumentNullException
-  nameWithType.vb: AuthenticationHandler(Of TSettingsService, TTokenService).AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of TTokenService), Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String))))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService).AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String)), System.Func(Of TTokenService), System.Linq.Expressions.Expression(Of System.Func(Of TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String))))
-  name.vb: AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of TTokenService), Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String))))
+    description: ''
+  nameWithType.vb: AuthenticationHandler(Of TSettingsService, TTokenService).New(ILogger, IApizrManagerOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of TTokenService), Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String))))
+  fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService).New(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String)), System.Func(Of TTokenService), System.Linq.Expressions.Expression(Of System.Func(Of TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String))))
+  name.vb: New(ILogger, IApizrManagerOptionsBase, Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of TTokenService), Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String))))
 - uid: Apizr.Authenticating.AuthenticationHandler`2.GetToken
   commentId: M:Apizr.Authenticating.AuthenticationHandler`2.GetToken
   id: GetToken
@@ -143,7 +131,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetToken
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
@@ -151,23 +139,17 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe method called to get token from settings\n"
+  summary: The method called to get token from settings
   example: []
   syntax:
     content: public override string GetToken()
     return:
       type: System.String
       description: ''
-    content.vb: Public Overrides Function GetToken As String
+    content.vb: Public Overrides Function GetToken() As String
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
   overload: Apizr.Authenticating.AuthenticationHandler`2.GetToken*
   nameWithType.vb: AuthenticationHandler(Of TSettingsService, TTokenService).GetToken()
-  modifiers.csharp:
-  - public
-  - override
-  modifiers.vb:
-  - Public
-  - Overrides
   fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService).GetToken()
 - uid: Apizr.Authenticating.AuthenticationHandler`2.SetToken(System.String)
   commentId: M:Apizr.Authenticating.AuthenticationHandler`2.SetToken(System.String)
@@ -176,14 +158,14 @@ items:
   langs:
   - csharp
   - vb
-  name: SetToken(String)
-  nameWithType: AuthenticationHandler<TSettingsService, TTokenService>.SetToken(String)
-  fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService, TTokenService>.SetToken(System.String)
+  name: SetToken(string)
+  nameWithType: AuthenticationHandler<TSettingsService, TTokenService>.SetToken(string)
+  fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService, TTokenService>.SetToken(string)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: SetToken
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
@@ -191,7 +173,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe method called to save token into settings\n"
+  summary: The method called to save token into settings
   example: []
   syntax:
     content: public override void SetToken(string token)
@@ -203,13 +185,8 @@ items:
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
   overload: Apizr.Authenticating.AuthenticationHandler`2.SetToken*
   nameWithType.vb: AuthenticationHandler(Of TSettingsService, TTokenService).SetToken(String)
-  modifiers.csharp:
-  - public
-  - override
-  modifiers.vb:
-  - Public
-  - Overrides
-  fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService).SetToken(System.String)
+  fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService).SetToken(String)
+  name.vb: SetToken(String)
 - uid: Apizr.Authenticating.AuthenticationHandler`2.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   commentId: M:Apizr.Authenticating.AuthenticationHandler`2.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   id: RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
@@ -224,7 +201,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefreshTokenAsync
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
@@ -232,7 +209,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe method called to refresh token when rejected or empty\n"
+  summary: The method called to refresh token when rejected or empty
   example: []
   syntax:
     content: public override Task<string> RefreshTokenAsync(HttpRequestMessage request)
@@ -247,30 +224,46 @@ items:
   overridden: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   overload: Apizr.Authenticating.AuthenticationHandler`2.RefreshTokenAsync*
   nameWithType.vb: AuthenticationHandler(Of TSettingsService, TTokenService).RefreshTokenAsync(HttpRequestMessage)
-  modifiers.csharp:
-  - public
-  - override
-  modifiers.vb:
-  - Public
-  - Overrides
   fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService).RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
 references:
 - uid: Apizr.Authenticating
   commentId: N:Apizr.Authenticating
+  href: Apizr.html
   name: Apizr.Authenticating
   nameWithType: Apizr.Authenticating
   fullName: Apizr.Authenticating
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Authenticating
+    name: Authenticating
+    href: Apizr.Authenticating.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Authenticating
+    name: Authenticating
+    href: Apizr.Authenticating.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: System.Net.Http.HttpMessageHandler
   commentId: T:System.Net.Http.HttpMessageHandler
   parent: System.Net.Http
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
   name: HttpMessageHandler
   nameWithType: HttpMessageHandler
   fullName: System.Net.Http.HttpMessageHandler
@@ -278,12 +271,14 @@ references:
   commentId: T:System.Net.Http.DelegatingHandler
   parent: System.Net.Http
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler
   name: DelegatingHandler
   nameWithType: DelegatingHandler
   fullName: System.Net.Http.DelegatingHandler
 - uid: Apizr.Authenticating.AuthenticationHandlerBase
   commentId: T:Apizr.Authenticating.AuthenticationHandlerBase
   parent: Apizr.Authenticating
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html
   name: AuthenticationHandlerBase
   nameWithType: AuthenticationHandlerBase
   fullName: Apizr.Authenticating.AuthenticationHandlerBase
@@ -291,24 +286,28 @@ references:
   commentId: T:System.IDisposable
   parent: System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
   name: IDisposable
   nameWithType: IDisposable
   fullName: System.IDisposable
 - uid: Apizr.Authenticating.IAuthenticationHandler
   commentId: T:Apizr.Authenticating.IAuthenticationHandler
   parent: Apizr.Authenticating
+  href: Apizr.Authenticating.IAuthenticationHandler.html
   name: IAuthenticationHandler
   nameWithType: IAuthenticationHandler
   fullName: Apizr.Authenticating.IAuthenticationHandler
 - uid: Apizr.Authenticating.AuthenticationHandlerBase.Logger
   commentId: F:Apizr.Authenticating.AuthenticationHandlerBase.Logger
   parent: Apizr.Authenticating.AuthenticationHandlerBase
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_Logger
   name: Logger
   nameWithType: AuthenticationHandlerBase.Logger
   fullName: Apizr.Authenticating.AuthenticationHandlerBase.Logger
 - uid: Apizr.Authenticating.AuthenticationHandlerBase.ApizrOptions
   commentId: F:Apizr.Authenticating.AuthenticationHandlerBase.ApizrOptions
   parent: Apizr.Authenticating.AuthenticationHandlerBase
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_ApizrOptions
   name: ApizrOptions
   nameWithType: AuthenticationHandlerBase.ApizrOptions
   fullName: Apizr.Authenticating.AuthenticationHandlerBase.ApizrOptions
@@ -316,141 +315,108 @@ references:
   commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   parent: Apizr.Authenticating.AuthenticationHandlerBase
   isExternal: true
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_
   name: SendAsync(HttpRequestMessage, CancellationToken)
   nameWithType: AuthenticationHandlerBase.SendAsync(HttpRequestMessage, CancellationToken)
   fullName: Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
     name: SendAsync
-    nameWithType: AuthenticationHandlerBase.SendAsync
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.SendAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
-    nameWithType: HttpRequestMessage
-    fullName: System.Net.Http.HttpRequestMessage
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
     name: SendAsync
-    nameWithType: AuthenticationHandlerBase.SendAsync
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.SendAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
-    nameWithType: HttpRequestMessage
-    fullName: System.Net.Http.HttpRequestMessage
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)
   commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)
   parent: Apizr.Authenticating.AuthenticationHandlerBase
   isExternal: true
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_CloneHttpRequestMessageAsync_System_Net_Http_HttpRequestMessage_
   name: CloneHttpRequestMessageAsync(HttpRequestMessage)
   nameWithType: AuthenticationHandlerBase.CloneHttpRequestMessageAsync(HttpRequestMessage)
   fullName: Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)
   spec.csharp:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)
     name: CloneHttpRequestMessageAsync
-    nameWithType: AuthenticationHandlerBase.CloneHttpRequestMessageAsync
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_CloneHttpRequestMessageAsync_System_Net_Http_HttpRequestMessage_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
-    nameWithType: HttpRequestMessage
-    fullName: System.Net.Http.HttpRequestMessage
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)
     name: CloneHttpRequestMessageAsync
-    nameWithType: AuthenticationHandlerBase.CloneHttpRequestMessageAsync
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_CloneHttpRequestMessageAsync_System_Net_Http_HttpRequestMessage_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
-    nameWithType: HttpRequestMessage
-    fullName: System.Net.Http.HttpRequestMessage
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
   commentId: M:System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
   parent: System.Net.Http.DelegatingHandler
   isExternal: true
-  name: Dispose(Boolean)
-  nameWithType: DelegatingHandler.Dispose(Boolean)
-  fullName: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.dispose
+  name: Dispose(bool)
+  nameWithType: DelegatingHandler.Dispose(bool)
+  fullName: System.Net.Http.DelegatingHandler.Dispose(bool)
+  nameWithType.vb: DelegatingHandler.Dispose(Boolean)
+  fullName.vb: System.Net.Http.DelegatingHandler.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
   spec.csharp:
   - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
     name: Dispose
-    nameWithType: DelegatingHandler.Dispose
-    fullName: System.Net.Http.DelegatingHandler.Dispose
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.dispose
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
+    name: bool
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
     name: Dispose
-    nameWithType: DelegatingHandler.Dispose
-    fullName: System.Net.Http.DelegatingHandler.Dispose
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.dispose
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Boolean
     name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Net.Http.DelegatingHandler.InnerHandler
   commentId: P:System.Net.Http.DelegatingHandler.InnerHandler
   parent: System.Net.Http.DelegatingHandler
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.innerhandler
   name: InnerHandler
   nameWithType: DelegatingHandler.InnerHandler
   fullName: System.Net.Http.DelegatingHandler.InnerHandler
@@ -458,344 +424,315 @@ references:
   commentId: M:System.Net.Http.HttpMessageHandler.Dispose
   parent: System.Net.Http.HttpMessageHandler
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler.dispose#system-net-http-httpmessagehandler-dispose
   name: Dispose()
   nameWithType: HttpMessageHandler.Dispose()
   fullName: System.Net.Http.HttpMessageHandler.Dispose()
   spec.csharp:
   - uid: System.Net.Http.HttpMessageHandler.Dispose
     name: Dispose
-    nameWithType: HttpMessageHandler.Dispose
-    fullName: System.Net.Http.HttpMessageHandler.Dispose
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler.dispose#system-net-http-httpmessagehandler-dispose
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Net.Http.HttpMessageHandler.Dispose
     name: Dispose
-    nameWithType: HttpMessageHandler.Dispose
-    fullName: System.Net.Http.HttpMessageHandler.Dispose
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler.dispose#system-net-http-httpmessagehandler-dispose
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Net.Http
   commentId: N:System.Net.Http
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
 - uid: System.ArgumentNullException
   commentId: T:System.ArgumentNullException
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
 - uid: Apizr.Authenticating.AuthenticationHandler`2.#ctor*
   commentId: Overload:Apizr.Authenticating.AuthenticationHandler`2.#ctor
+  href: Apizr.Authenticating.AuthenticationHandler-2.html#Apizr_Authenticating_AuthenticationHandler_2__ctor_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase_System_Func__0__System_Linq_Expressions_Expression_System_Func__0_System_String___System_Func__1__System_Linq_Expressions_Expression_System_Func__1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____
   name: AuthenticationHandler
   nameWithType: AuthenticationHandler<TSettingsService, TTokenService>.AuthenticationHandler
   fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService, TTokenService>.AuthenticationHandler
-  nameWithType.vb: AuthenticationHandler(Of TSettingsService, TTokenService).AuthenticationHandler
-  fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService).AuthenticationHandler
+  nameWithType.vb: AuthenticationHandler(Of TSettingsService, TTokenService).New
+  fullName.vb: Apizr.Authenticating.AuthenticationHandler(Of TSettingsService, TTokenService).New
+  name.vb: New
 - uid: Microsoft.Extensions.Logging.ILogger
   commentId: T:Microsoft.Extensions.Logging.ILogger
   parent: Microsoft.Extensions.Logging
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
   name: ILogger
   nameWithType: ILogger
   fullName: Microsoft.Extensions.Logging.ILogger
 - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
   commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
   parent: Apizr.Configuring.Manager
+  href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
   name: IApizrManagerOptionsBase
   nameWithType: IApizrManagerOptionsBase
   fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
@@ -803,6 +740,7 @@ references:
   commentId: T:System.Func{`0}
   parent: System
   definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<TSettingsService>
   nameWithType: Func<TSettingsService>
   fullName: System.Func<TSettingsService>
@@ -812,115 +750,81 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TSettingsService
-    nameWithType: TSettingsService
-    fullName: TSettingsService
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TSettingsService
-    nameWithType: TSettingsService
-    fullName: TSettingsService
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{`0,System.String}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
-  name: Expression<Func<TSettingsService, String>>
-  nameWithType: Expression<Func<TSettingsService, String>>
-  fullName: System.Linq.Expressions.Expression<System.Func<TSettingsService, System.String>>
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  name: Expression<Func<TSettingsService, string>>
+  nameWithType: Expression<Func<TSettingsService, string>>
+  fullName: System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>
   nameWithType.vb: Expression(Of Func(Of TSettingsService, String))
-  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, System.String))
+  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String))
   name.vb: Expression(Of Func(Of TSettingsService, String))
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TSettingsService
-    nameWithType: TSettingsService
-    fullName: TSettingsService
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - name: TSettingsService
-    nameWithType: TSettingsService
-    fullName: TSettingsService
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Func{{TTokenService}}
   commentId: T:System.Func{`1}
   parent: System
   definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<TTokenService>
   nameWithType: Func<TTokenService>
   fullName: System.Func<TTokenService>
@@ -930,163 +834,173 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TTokenService
-    nameWithType: TTokenService
-    fullName: TTokenService
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TTokenService
-    nameWithType: TTokenService
-    fullName: TTokenService
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression{System.Func{{TTokenService},System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}}
   commentId: T:System.Linq.Expressions.Expression{System.Func{`1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}}
   parent: System.Linq.Expressions
   definition: System.Linq.Expressions.Expression`1
-  name: Expression<Func<TTokenService, HttpRequestMessage, Task<String>>>
-  nameWithType: Expression<Func<TTokenService, HttpRequestMessage, Task<String>>>
-  fullName: System.Linq.Expressions.Expression<System.Func<TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<System.String>>>
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  name: Expression<Func<TTokenService, HttpRequestMessage, Task<string>>>
+  nameWithType: Expression<Func<TTokenService, HttpRequestMessage, Task<string>>>
+  fullName: System.Linq.Expressions.Expression<System.Func<TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<string>>>
   nameWithType.vb: Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String)))
-  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of System.String)))
+  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of TTokenService, System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String)))
   name.vb: Expression(Of Func(Of TTokenService, HttpRequestMessage, Task(Of String)))
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TTokenService
-    nameWithType: TTokenService
-    fullName: TTokenService
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
-    nameWithType: HttpRequestMessage
-    fullName: System.Net.Http.HttpRequestMessage
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Func`3
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
   - name: TTokenService
-    nameWithType: TTokenService
-    fullName: TTokenService
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
-    nameWithType: HttpRequestMessage
-    fullName: System.Net.Http.HttpRequestMessage
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Logging
   commentId: N:Microsoft.Extensions.Logging
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
 - uid: Apizr.Configuring.Manager
   commentId: N:Apizr.Configuring.Manager
+  href: Apizr.html
   name: Apizr.Configuring.Manager
   nameWithType: Apizr.Configuring.Manager
   fullName: Apizr.Configuring.Manager
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Manager
+    name: Manager
+    href: Apizr.Configuring.Manager.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Manager
+    name: Manager
+    href: Apizr.Configuring.Manager.html
 - uid: System.Func`1
   commentId: T:System.Func`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<TResult>
   nameWithType: Func<TResult>
   fullName: System.Func<TResult>
@@ -1096,36 +1010,25 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions.Expression`1
   commentId: T:System.Linq.Expressions.Expression`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   name: Expression<TDelegate>
   nameWithType: Expression<TDelegate>
   fullName: System.Linq.Expressions.Expression<TDelegate>
@@ -1135,69 +1038,80 @@ references:
   spec.csharp:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDelegate
-    nameWithType: TDelegate
-    fullName: TDelegate
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Linq.Expressions.Expression`1
     name: Expression
-    nameWithType: Expression
-    fullName: System.Linq.Expressions.Expression
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDelegate
-    nameWithType: TDelegate
-    fullName: TDelegate
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Linq.Expressions
   commentId: N:System.Linq.Expressions
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Linq.Expressions
   nameWithType: System.Linq.Expressions
   fullName: System.Linq.Expressions
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Linq
+    name: Linq
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq
+  - name: .
+  - uid: System.Linq.Expressions
+    name: Expressions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Linq
+    name: Linq
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq
+  - name: .
+  - uid: System.Linq.Expressions
+    name: Expressions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions
 - uid: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
   commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.GetToken
   parent: Apizr.Authenticating.AuthenticationHandlerBase
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetToken
   name: GetToken()
   nameWithType: AuthenticationHandlerBase.GetToken()
   fullName: Apizr.Authenticating.AuthenticationHandlerBase.GetToken()
   spec.csharp:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
     name: GetToken
-    nameWithType: AuthenticationHandlerBase.GetToken
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetToken
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
     name: GetToken
-    nameWithType: AuthenticationHandlerBase.GetToken
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetToken
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Authenticating.AuthenticationHandler`2.GetToken*
   commentId: Overload:Apizr.Authenticating.AuthenticationHandler`2.GetToken
+  href: Apizr.Authenticating.AuthenticationHandler-2.html#Apizr_Authenticating_AuthenticationHandler_2_GetToken
   name: GetToken
   nameWithType: AuthenticationHandler<TSettingsService, TTokenService>.GetToken
   fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService, TTokenService>.GetToken
@@ -1207,50 +1121,47 @@ references:
   commentId: T:System.String
   parent: System
   isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
 - uid: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
   commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
   parent: Apizr.Authenticating.AuthenticationHandlerBase
   isExternal: true
-  name: SetToken(String)
-  nameWithType: AuthenticationHandlerBase.SetToken(String)
-  fullName: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetToken_System_String_
+  name: SetToken(string)
+  nameWithType: AuthenticationHandlerBase.SetToken(string)
+  fullName: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(string)
+  nameWithType.vb: AuthenticationHandlerBase.SetToken(String)
+  fullName.vb: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(String)
+  name.vb: SetToken(String)
   spec.csharp:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
     name: SetToken
-    nameWithType: AuthenticationHandlerBase.SetToken
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.SetToken
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetToken_System_String_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
     name: SetToken
-    nameWithType: AuthenticationHandlerBase.SetToken
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.SetToken
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetToken_System_String_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Authenticating.AuthenticationHandler`2.SetToken*
   commentId: Overload:Apizr.Authenticating.AuthenticationHandler`2.SetToken
+  href: Apizr.Authenticating.AuthenticationHandler-2.html#Apizr_Authenticating_AuthenticationHandler_2_SetToken_System_String_
   name: SetToken
   nameWithType: AuthenticationHandler<TSettingsService, TTokenService>.SetToken
   fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService, TTokenService>.SetToken
@@ -1260,43 +1171,33 @@ references:
   commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   parent: Apizr.Authenticating.AuthenticationHandlerBase
   isExternal: true
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
   name: RefreshTokenAsync(HttpRequestMessage)
   nameWithType: AuthenticationHandlerBase.RefreshTokenAsync(HttpRequestMessage)
   fullName: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   spec.csharp:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
     name: RefreshTokenAsync
-    nameWithType: AuthenticationHandlerBase.RefreshTokenAsync
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
-    nameWithType: HttpRequestMessage
-    fullName: System.Net.Http.HttpRequestMessage
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
     name: RefreshTokenAsync
-    nameWithType: AuthenticationHandlerBase.RefreshTokenAsync
-    fullName: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
-    nameWithType: HttpRequestMessage
-    fullName: System.Net.Http.HttpRequestMessage
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Authenticating.AuthenticationHandler`2.RefreshTokenAsync*
   commentId: Overload:Apizr.Authenticating.AuthenticationHandler`2.RefreshTokenAsync
+  href: Apizr.Authenticating.AuthenticationHandler-2.html#Apizr_Authenticating_AuthenticationHandler_2_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
   name: RefreshTokenAsync
   nameWithType: AuthenticationHandler<TSettingsService, TTokenService>.RefreshTokenAsync
   fullName: Apizr.Authenticating.AuthenticationHandler<TSettingsService, TTokenService>.RefreshTokenAsync
@@ -1306,6 +1207,7 @@ references:
   commentId: T:System.Net.Http.HttpRequestMessage
   parent: System.Net.Http
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
   name: HttpRequestMessage
   nameWithType: HttpRequestMessage
   fullName: System.Net.Http.HttpRequestMessage
@@ -1313,49 +1215,41 @@ references:
   commentId: T:System.Threading.Tasks.Task{System.String}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<String>
-  nameWithType: Task<String>
-  fullName: System.Threading.Tasks.Task<System.String>
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<string>
+  nameWithType: Task<string>
+  fullName: System.Threading.Tasks.Task<string>
   nameWithType.vb: Task(Of String)
-  fullName.vb: System.Threading.Tasks.Task(Of System.String)
+  fullName.vb: System.Threading.Tasks.Task(Of String)
   name.vb: Task(Of String)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -1365,36 +1259,55 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

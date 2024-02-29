@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Path to DocFx drop folder -->
+    <!-- <DocFxDropFolder>\\server-name\share-name</DocFxDropFolder> -->
+    <!-- Location of built DocFx content -->
+    <DocFxSiteBuildFolder>$(MSBuildProjectDirectory)\_Site</DocFxSiteBuildFolder>
+    <!-- DocFx content ZIP file to create  -->
+    <!-- <DocFxZipFileName>$(MSBuildProjectDirectory)\DocFxSite_$(MSBuildProjectName).zip</DocFxZipFileName> -->
+    <!-- Username and password to use when copying ZIP file -->
+    <!-- <CopyAsUser>xxxxxxxxxx</CopyAsUser> -->
+    <!-- <CopyAsUserPassword>xxxxxxxxxx</CopyAsUserPassword> -->
+  </PropertyGroup>
+
+  <!-- Run DocFx to generate site content -->
+  <Target Name="RunDocFx" AfterTargets="Build" Condition="'$(Configuration)'=='Release'">
+    <!-- Install DocFx locally (using version from dotnet-tools.json) -->
+    <Exec Command="dotnet tool restore" ContinueOnError="false" />
+
+    <!-- Run DocFx to generate content -->
+    <Exec Command="dotnet tool run docfx" ContinueOnError="false" />
+  </Target>
+
+  <!-- Copy the zipped DocFx site to the drop folder -->
+  <!--<Target Name="UploadDocFxSiteToServer" AfterTargets="RunDocFx" Condition="'$(Configuration)'=='Release'">
+    --><!-- Create ZIP file --><!--
+    <ZipDirectory SourceDirectory="$(DocFxSiteBuildFolder)" DestinationFile="$(DocFxZipFileName)" Overwrite="true" />
+
+    --><!-- Get handle to ZIP file --><!--
+    <ItemGroup>
+      <DocFxZipFile Include="$(DocFxZipFileName)"/>
+    </ItemGroup>
+
+    --><!-- Copy ZIP file to drop folder --><!--
+    <Exec Command="net use $(DocFxDropFolder) /delete" ContinueOnError="true" />
+    <Exec Command="net use $(DocFxDropFolder) /user:$(CopyAsUser) $(CopyAsUserPassword)" ContinueOnError="false"/>
+    <Copy SourceFiles="@(DocFxZipFile)" DestinationFolder="$(DocFxDropFolder)" ContinueOnError="true" />
+    <Exec Command="net use $(DocFxDropFolder) /delete" ContinueOnError="true" />
+  </Target>-->
+</Project>

@@ -6,9 +6,9 @@ items:
   parent: Apizr.Transferring.Requesting
   children:
   - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String)
+  - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
   - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0)
   - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
   langs:
   - csharp
   - vb
@@ -19,7 +19,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IDownloadApi
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
@@ -31,16 +31,8 @@ items:
     content: 'public interface IDownloadApi<in TDownloadParams> : ITransferApiBase'
     typeParameters:
     - id: TDownloadParams
-    content.vb: >-
-      Public Interface IDownloadApi(Of In TDownloadParams)
-          Inherits ITransferApiBase
+    content.vb: Public Interface IDownloadApi(Of In TDownloadParams) Inherits ITransferApiBase
   nameWithType.vb: IDownloadApi(Of TDownloadParams)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams)
   name.vb: IDownloadApi(Of TDownloadParams)
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String)
@@ -50,14 +42,14 @@ items:
   langs:
   - csharp
   - vb
-  name: DownloadAsync(String)
-  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(String)
-  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(System.String)
+  name: DownloadAsync(string)
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(string)
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(string)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
@@ -105,7 +97,8 @@ items:
     - type: Apizr.Caching.CacheMode
       value: 0
   nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String)
-  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String)
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(String)
+  name.vb: DownloadAsync(String)
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
   id: DownloadAsync(System.String,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -113,14 +106,14 @@ items:
   langs:
   - csharp
   - vb
-  name: DownloadAsync(String, IApizrRequestOptions)
-  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(String, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  name: DownloadAsync(string, IApizrRequestOptions)
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(string, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(string, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
@@ -136,7 +129,7 @@ items:
 
       [Cache(CacheMode.None)]
 
-      Task<HttpResponseMessage> DownloadAsync(string filePathOrName, [RequestOptions] IApizrRequestOptions options)
+      Task<HttpResponseMessage> DownloadAsync(string filePathOrName, IApizrRequestOptions options)
     parameters:
     - id: filePathOrName
       type: System.String
@@ -174,7 +167,8 @@ items:
     - type: Apizr.Caching.CacheMode
       value: 0
   nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, IApizrRequestOptions)
-  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(String, Apizr.Configuring.Request.IApizrRequestOptions)
+  name.vb: DownloadAsync(String, IApizrRequestOptions)
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0)
   commentId: M:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0)
   id: DownloadAsync(System.String,`0)
@@ -182,14 +176,14 @@ items:
   langs:
   - csharp
   - vb
-  name: DownloadAsync(String, TDownloadParams)
-  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(String, TDownloadParams)
-  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(System.String, TDownloadParams)
+  name: DownloadAsync(string, TDownloadParams)
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(string, TDownloadParams)
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(string, TDownloadParams)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
@@ -239,7 +233,8 @@ items:
     - type: Apizr.Caching.CacheMode
       value: 0
   nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, TDownloadParams)
-  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, TDownloadParams)
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(String, TDownloadParams)
+  name.vb: DownloadAsync(String, TDownloadParams)
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
   id: DownloadAsync(System.String,`0,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -247,14 +242,14 @@ items:
   langs:
   - csharp
   - vb
-  name: DownloadAsync(String, TDownloadParams, IApizrRequestOptions)
-  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(String, TDownloadParams, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(System.String, TDownloadParams, Apizr.Configuring.Request.IApizrRequestOptions)
+  name: DownloadAsync(string, TDownloadParams, IApizrRequestOptions)
+  nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync(string, TDownloadParams, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync(string, TDownloadParams, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
-      branch: feat/resilience
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IDownloadApi.cs
@@ -270,7 +265,7 @@ items:
 
       [Cache(CacheMode.None)]
 
-      Task<HttpResponseMessage> DownloadAsync(string filePathOrName, TDownloadParams downloadParams, [RequestOptions] IApizrRequestOptions options)
+      Task<HttpResponseMessage> DownloadAsync(string filePathOrName, TDownloadParams downloadParams, IApizrRequestOptions options)
     parameters:
     - id: filePathOrName
       type: System.String
@@ -310,15 +305,42 @@ items:
     - type: Apizr.Caching.CacheMode
       value: 0
   nameWithType.vb: IDownloadApi(Of TDownloadParams).DownloadAsync(String, TDownloadParams, IApizrRequestOptions)
-  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(System.String, TDownloadParams, Apizr.Configuring.Request.IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams).DownloadAsync(String, TDownloadParams, Apizr.Configuring.Request.IApizrRequestOptions)
+  name.vb: DownloadAsync(String, TDownloadParams, IApizrRequestOptions)
 references:
 - uid: Apizr.Transferring.Requesting
   commentId: N:Apizr.Transferring.Requesting
+  href: Apizr.html
   name: Apizr.Transferring.Requesting
   nameWithType: Apizr.Transferring.Requesting
   fullName: Apizr.Transferring.Requesting
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Requesting
+    name: Requesting
+    href: Apizr.Transferring.Requesting.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Requesting
+    name: Requesting
+    href: Apizr.Transferring.Requesting.html
 - uid: Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync*
   commentId: Overload:Apizr.Transferring.Requesting.IDownloadApi`1.DownloadAsync
+  href: Apizr.Transferring.Requesting.IDownloadApi-1.html#Apizr_Transferring_Requesting_IDownloadApi_1_DownloadAsync_System_String_
   name: DownloadAsync
   nameWithType: IDownloadApi<TDownloadParams>.DownloadAsync
   fullName: Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>.DownloadAsync
@@ -328,13 +350,18 @@ references:
   commentId: T:System.String
   parent: System
   isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
 - uid: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
   commentId: T:System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<HttpResponseMessage>
   nameWithType: Task<HttpResponseMessage>
   fullName: System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>
@@ -344,46 +371,38 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Net.Http.HttpResponseMessage
     name: HttpResponseMessage
-    nameWithType: HttpResponseMessage
-    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Net.Http.HttpResponseMessage
     name: HttpResponseMessage
-    nameWithType: HttpResponseMessage
-    fullName: System.Net.Http.HttpResponseMessage
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -393,50 +412,95 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Apizr.Configuring.Request.IApizrRequestOptions
   commentId: T:Apizr.Configuring.Request.IApizrRequestOptions
   parent: Apizr.Configuring.Request
+  href: Apizr.Configuring.Request.IApizrRequestOptions.html
   name: IApizrRequestOptions
   nameWithType: IApizrRequestOptions
   fullName: Apizr.Configuring.Request.IApizrRequestOptions
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
+  href: Apizr.html
   name: Apizr.Configuring.Request
   nameWithType: Apizr.Configuring.Request
   fullName: Apizr.Configuring.Request
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
 - uid: '{TDownloadParams}'
   commentId: '!:TDownloadParams'
   definition: TDownloadParams

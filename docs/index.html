@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Apizr | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Apizr | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Apizr | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Apizr | Apizr ">
     
-    <link rel="shortcut icon" href="resources/favicon.ico">
-    <link rel="stylesheet" href="styles/docfx.vendor.css">
-    <link rel="stylesheet" href="styles/docfx.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <meta property="docfx:navrel" content="toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    
+      <link rel="shortcut icon" href="resources/favicon.ico">
+      <link rel="stylesheet" href="styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="styles/docfx.css">
+      <link rel="stylesheet" href="styles/main.css">
+      <meta property="docfx:navrel" content="toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
     
     <meta property="docfx:rel" content="">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="index.html">
                 <img id="logo" class="svg" src="resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -125,7 +125,8 @@ namespace Apizr.Sample
         Task&lt;User&gt; CreateUser(User user);
     }
 }
-</code></pre><p>Some resilience strategies:</p>
+</code></pre>
+<p>Some resilience strategies:</p>
 <pre><code class="lang-csharp">// (Polly) Create a resilience pipeline with some strategies
 var resiliencePipelineBuilder = new ResiliencePipelineBuilder&lt;HttpResponseMessage&gt;()
     // Configure telemetry to get some logs from Polly process
@@ -145,17 +146,19 @@ var resiliencePipelineBuilder = new ResiliencePipelineBuilder&lt;HttpResponseMes
             UseJitter = true,
             BackoffType = DelayBackoffType.Exponential
         }));
-</code></pre><p>An instance of this managed api:</p>
-<div class="tabGroup" id="tabgroup_pIdGyucMRO">
+</code></pre>
+<p>An instance of this managed api:</p>
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_pIdGyucMRO_tabid-static" role="tab" aria-controls="tabpanel_pIdGyucMRO_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_pIdGyucMRO_tabid-extended" role="tab" aria-controls="tabpanel_pIdGyucMRO_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_pIdGyucMRO_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <p>Relies on static builder instantiation approach.</p>
 <pre><code class="lang-csharp">// (Polly) Add the resilience pipeline with its key to a registry
 var resiliencePipelineRegistry = new ResiliencePipelineRegistry&lt;string&gt;();
@@ -172,8 +175,10 @@ var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResService&gt;(
         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
         // And with a cache handler
         .WithAkavacheCacheHandler());
-</code></pre></section>
-<section id="tabpanel_pIdGyucMRO_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+</code></pre>
+</section>
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <p>Relies on <code>IServiceCollection</code> extension methods approach.</p>
 <pre><code class="lang-csharp">// (Logger) Configure logging the way you want, like
 services.AddLogging(loggingBuilder =&gt; loggingBuilder.AddDebug());
@@ -190,11 +195,14 @@ services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;Transien
 
 // (Apizr) Get your manager instance the way you want, like
 var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqResService&gt;&gt;();
-</code></pre></section>
+</code></pre>
+</section>
 </div>
-<p>And then you&#39;re good to go:</p>
+
+<p>And then you're good to go:</p>
 <pre><code class="lang-csharp">var userList = await reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync());
-</code></pre><p>This request will be managed with the defined resilience strategies, data cached and all logged.</p>
+</code></pre>
+<p>This request will be managed with the defined resilience strategies, data cached and all logged.</p>
 <p>Apizr has a lot more to offer, just <a href="articles/index.html">read the doc</a>!</p>
 <h2 id="where">Where</h2>
 <p><a href="changelog.html">Change Log</a></p>
@@ -391,7 +399,8 @@ var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqR
 </table>
 <p>It also comes with some handling interfaces to let you provide your own services for:</p>
 <ul>
-<li><strong>Caching</strong> with ICacheHandler, which comes with its default VoidCacheHandler (no cache), but also with:<ul>
+<li><strong>Caching</strong> with ICacheHandler, which comes with its default VoidCacheHandler (no cache), but also with:
+<ul>
 <li>InMemoryCacheHandler &amp; DistributedCacheHandler: <a href="https://www.nuget.org/packages/Microsoft.Extensions.Caching.Abstractions">MS Extensions Caching</a> methods mapping interface (Integration package referenced above), meaning you can provide any compatible caching engine</li>
 <li>AkavacheCacheHandler: <a href="https://github.com/reactiveui/Akavache">Akavache</a> methods mapping interface (Integration package referenced above)</li>
 <li>MonkeyCacheHandler: <a href="https://github.com/jamesmontemagno/monkey-cache">MonkeyCache</a> methods mapping interface (Integration package referenced above)</li>
@@ -399,33 +408,35 @@ var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqR
 </li>
 <li><strong>Logging</strong> As Apizr relies on official <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions">MS ILogger interface</a>, you may want to provide any compatible logging engine (built-in DebugLogger activated by default)</li>
 <li><strong>Connectivity</strong> with IConnectivityHandler, which comes with its default VoidConnectivityHandler (no connectivity check)</li>
-<li><strong>Mapping</strong> with IMappingHandler, which comes with its default VoidMappingHandler (no mapping conversion), but also with:<ul>
+<li><strong>Mapping</strong> with IMappingHandler, which comes with its default VoidMappingHandler (no mapping conversion), but also with:
+<ul>
 <li>AutoMapperMappingHandler: <a href="https://github.com/AutoMapper/AutoMapper">AutoMapper</a> mapping methods mapping interface (Integration package referenced above)</li>
 <li>MapsterMappingHandler: <a href="https://github.com/MapsterMapper/Mapster">Mapster</a> mapping methods mapping interface (Integration package referenced above)</li>
 </ul>
 </li>
 </ul>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/feat/resilience/Apizr/Docs/Apizr.Docs/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/index.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -433,14 +444,14 @@ var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqR
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="styles/docfx.js"></script>
     <script type="text/javascript" src="styles/main.js"></script>
   </body>

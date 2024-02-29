@@ -233,23 +233,6 @@ var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T
 <section id="tabpanel_u8ofuDaOMe-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            &quot;TransientHttpError&quot;, 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry
@@ -353,23 +336,6 @@ You can add mutliple group at the same level and go deeper with group into group
 <section id="tabpanel_u8ofuDaOMe-2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            &quot;TransientHttpError&quot;, 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry

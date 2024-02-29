@@ -113,7 +113,7 @@ items:
   summary: "\nThe common options constructor\n"
   example: []
   syntax:
-    content: public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions, Type webApiType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? operationTimeout, TimeSpan? requestTimeout, params LogLevel[] logLevels)
+    content: public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions, Type webApiType, string[] assemblyResiliencePipelineRegistryKeys, string[] webApiResiliencePipelineRegistryKeys, string baseAddress, string basePath, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? operationTimeout, TimeSpan? requestTimeout, params LogLevel[] logLevels)
     parameters:
     - id: sharedOptions
       type: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
@@ -121,12 +121,12 @@ items:
     - id: webApiType
       type: System.Type
       description: The web api type
-    - id: assemblyPolicyRegistryKeys
+    - id: assemblyResiliencePipelineRegistryKeys
       type: System.String[]
-      description: Global policies
-    - id: webApiPolicyRegistryKeys
+      description: Global resilience pipelines
+    - id: webApiResiliencePipelineRegistryKeys
       type: System.String[]
-      description: Specific policies
+      description: Specific resilience pipeline
     - id: baseAddress
       type: System.String
       description: The web api base address
@@ -151,7 +151,7 @@ items:
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
       description: The log levels
-    content.vb: Public Sub New(sharedOptions As IApizrSharedRegistrationOptions, webApiType As Type, assemblyPolicyRegistryKeys As String(), webApiPolicyRegistryKeys As String(), baseAddress As String, basePath As String, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, operationTimeout As TimeSpan?, requestTimeout As TimeSpan?, ParamArray logLevels As LogLevel())
+    content.vb: Public Sub New(sharedOptions As IApizrSharedRegistrationOptions, webApiType As Type, assemblyResiliencePipelineRegistryKeys As String(), webApiResiliencePipelineRegistryKeys As String(), baseAddress As String, basePath As String, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, operationTimeout As TimeSpan?, requestTimeout As TimeSpan?, ParamArray logLevels As LogLevel())
   overload: Apizr.Configuring.Proper.ApizrProperOptions.#ctor*
   nameWithType.vb: ApizrProperOptions.ApizrProperOptions(IApizrSharedRegistrationOptions, Type, String(), String(), String, String, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), Nullable(Of TimeSpan), LogLevel())
   modifiers.csharp:

@@ -116,7 +116,6 @@ var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResService>(
 Relies on `IServiceCollection` extension methods approach.
 
 ```csharp
-
 // (Logger) Configure logging the way you want, like
 services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
 

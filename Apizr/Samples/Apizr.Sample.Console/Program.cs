@@ -178,7 +178,6 @@ namespace Apizr.Sample.Console
                     //    })
                     //    .ConfigureServices(services =>
                     //    {
-                    //        services.AddPolicyRegistry(policyRegistry);
                     //        services.AddApizr(registry => registry
                     //            .AddManagerFor<IReqResService>()
                     //            .AddManagerFor<IHttpBinService>()//);
@@ -218,7 +217,7 @@ namespace Apizr.Sample.Console
             {
                 Barrel.ApplicationId = nameof(Program);
 
-                //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(policyRegistry)
+                //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                 //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                 //    .WithPriorityManagement()
                 //    .WithLoggerFactory(() => lazyLoggerFactory.Value)

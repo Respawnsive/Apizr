@@ -100,64 +100,67 @@
 </ul>
 <p>Let&#39;s take a quite complexe and dummy but exhaustive timeout configuration example to illustrate that pipeline.</p>
 <p>First, the design:</p>
-<pre><code class="lang-csharp">[assembly:Timeout(&quot;00:02:00&quot;)]
+<pre><code class="lang-csharp">[assembly:OperationTimeout(&quot;00:02:00&quot;)]
 namespace Apizr.Sample
 {
     [WebApi(&quot;https://reqres.in/api&quot;)]
-    [Timeout(&quot;00:01:30&quot;)]
+    [OperationTimeout(&quot;00:01:30&quot;)]
     public interface IReqResService
     {
         [Get(&quot;/users&quot;)]
-        [Timeout(&quot;00:01:00&quot;)]
+        [RequestTimeout(&quot;00:01:00&quot;)]
         Task&lt;UserList&gt; GetUsersAsync([RequestOptions] IApizrRequestOptions options);
     }
 }
-</code></pre><p>Then, the registration:</p>
+</code></pre><p>Then, the registration, the extended way:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry
             .AddManagerFor&lt;IReqResService&gt;(properOptions =&gt; 
-                properOptions.WithTimeout(new TimeSpan(0,1,15)))
+                properOptions.WithOperationTimeout(new TimeSpan(0,1,15)))
             .AddManagerFor&lt;IHttpBinService&gt;()),
 
         commonOptions =&gt; commonOptions
-            .WithTimeout(new TimeSpan(0,1,45))
+            .WithOperationTimeout(new TimeSpan(0,1,45))
     );
 }
 </code></pre><p>Finally, the request:</p>
 <pre><code class="lang-csharp">// reqResManager here is a resolved instance of IApizrManager&lt;IReqResService&gt;&gt;
 var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(opt), options =&gt; 
-    options.WithTimeout(new TimeSpan(0,0,45)));
+    options.WithRequestTimeout(new TimeSpan(0,0,45)));
 </code></pre><p>Now, guess when the request will time out?</p>
 <p>Here is how Apizr will take its decision about that:</p>
 <ul>
-<li>It first detects we set a global timeout of 00:02:00 (assembly attribute decoration)</li>
-<li>Then it detects we registered another global timeout of 00:01:45 (fluent common options)</li>
-<li>Then it detects we set an api timeout of 00:01:30 (interface attribute decoration)</li>
-<li>Then it detects we registered another api timeout of 00:01:15 (fluent proper options)</li>
+<li>It first detects we set a global operation timeout of 00:02:00 (assembly attribute decoration)</li>
+<li>Then it detects we registered another global operation timeout of 00:01:45 (fluent common options)</li>
+<li>Then it detects we set an api operation timeout of 00:01:30 (interface attribute decoration)</li>
+<li>Then it detects we registered another api operation timeout of 00:01:15 (fluent proper options)</li>
 <li>Then it detects we set a request timeout of 00:01:00 (method attribute decoration)</li>
 <li>Then it detects we registered another request timeout of 00:00:45 (fluent request options)</li>
 </ul>
 <p>And the winner is allways the closest one to the request call, so here 00:00:45.</p>
+<p>If we had defined some Polly strategies handling request timeouts, it would have waited further for another try, but timed out definitly at 00:01:15 right before the retry, due to our operation timeout.</p>
 <p>Now you get the picture about the configuration pipeline, let&#39;s take a more meanful example.</p>
 <p>Here is what configuring with a registry, the extended way, could look like:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            &quot;TransientHttpError&quot;, HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+    // Some Polly strategies to handle transient http errors
+    services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
+        builder =&gt; builder.AddRetry(
+            new RetryStrategyOptions&lt;HttpResponseMessage&gt;
             {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
+                ShouldHandle = new PredicateBuilder&lt;HttpResponseMessage&gt;()
+                    .Handle&lt;HttpRequestException&gt;()
+                    .HandleResult(response =&gt;
+                        response.StatusCode is &gt;= HttpStatusCode.InternalServerError
+                            or HttpStatusCode.RequestTimeout),
+                Delay = TimeSpan.FromSeconds(1),
+                MaxRetryAttempts = 3,
+                UseJitter = true,
+                BackoffType = DelayBackoffType.Exponential
+            }));
 
     // Apizr registration
     services.AddApizr(
@@ -174,7 +177,6 @@ var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(
                     .WithBaseAddress(&quot;https://reqres.in/api/users&quot;))),
 
         config =&gt; config
-            .WithPolicyRegistry(registry)
             .WithAkavacheCacheHandler()
             .WithLogging(
                 HttpTracerMode.ExceptionsOnly, 
@@ -194,7 +196,6 @@ var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(
 </ul>
 </li>
 <li>Apply common options to all managers by:<ul>
-<li>Providing a policy registry</li>
 <li>Providing a cache handler</li>
 <li>Providing some logging settings (won&#39;t apply to IHttpBinService&#39;s manager as we set some specific ones)</li>
 </ul>

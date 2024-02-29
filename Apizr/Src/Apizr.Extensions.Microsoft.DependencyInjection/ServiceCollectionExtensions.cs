@@ -655,8 +655,8 @@ namespace Apizr
                                     request.SetApizrResilienceContext(context);
                                 }
 
-                                foreach (var wrappedPolicyKey in wrappedResiliencePipelineKeys)
-                                    contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Resilience pipeline with key {wrappedPolicyKey} will be applied");
+                                foreach (var wrappedResiliencePipelineKey in wrappedResiliencePipelineKeys)
+                                    contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Resilience pipeline with key {wrappedResiliencePipelineKey} will be applied");
 
                                 return resiliencePipeline;
                             });

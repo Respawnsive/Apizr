@@ -1411,8 +1411,8 @@
             </summary>
             <param name="sharedOptions">The shared options</param>
             <param name="webApiType">The web api type</param>
-            <param name="assemblyPolicyRegistryKeys">Global policies</param>
-            <param name="webApiPolicyRegistryKeys">Specific policies</param>
+            <param name="assemblyResiliencePipelineRegistryKeys">Global resilience pipelines</param>
+            <param name="webApiResiliencePipelineRegistryKeys">Specific resilience pipeline</param>
             <param name="baseAddress">The web api base address</param>
             <param name="basePath">The web api base path</param>
             <param name="handlersParameters">Some handlers parameters</param>
@@ -4454,13 +4454,13 @@
         </member>
         <member name="M:Apizr.Resiliencing.HttpRequestMessageApizrExtensions.GetApizrResilienceContext(System.Net.Http.HttpRequestMessage)">
             <summary>
-            Gets the <see cref="!:Context"/> associated with the provided <see cref="T:System.Net.Http.HttpRequestMessage"/>.
+            Gets the <see cref="T:Polly.ResilienceContext"/> associated with the provided <see cref="T:System.Net.Http.HttpRequestMessage"/>.
             </summary>
             <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/>.</param>
-            <returns>The <see cref="!:Context"/> if set, otherwise <c>null</c>.</returns>
+            <returns>The <see cref="T:Polly.ResilienceContext"/> if set, otherwise <c>null</c>.</returns>
             <remarks>
             The <see cref="T:Apizr.Resiliencing.ResilienceHttpMessageHandler"/> will attach a context to the <see cref="T:System.Net.Http.HttpResponseMessage"/> prior
-            to executing a <see cref="T:Polly.ResiliencePipeline"/>, if one does not already exist. The <see cref="!:Context"/> will be provided
+            to executing a <see cref="T:Polly.ResiliencePipeline"/>, if one does not already exist. The <see cref="T:Polly.ResilienceContext"/> will be provided
             to the Resilience Pipeline for use inside the <see cref="T:Polly.ResiliencePipeline"/> and in other message handlers.
             </remarks>
         </member>

@@ -1587,7 +1587,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_3_On_3_Times()
+        public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Strategy_Then_It_Should_Retry_3_On_3_Times()
         {
             var watcher = new WatchingRequestHandler();
 
@@ -1658,7 +1658,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Policy_Then_It_Should_Retry_2_On_3_Times()
+        public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Strategy_Then_It_Should_Retry_2_On_3_Times()
         {
             var watcher = new WatchingRequestHandler();
 
@@ -1729,7 +1729,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Policy_Then_It_Should_Retry_1_On_3_Times()
+        public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Strategy_Then_It_Should_Retry_1_On_3_Times()
         {
             var watcher = new WatchingRequestHandler();
 

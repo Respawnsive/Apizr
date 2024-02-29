@@ -18,8 +18,8 @@ namespace Apizr.Extending.Configuring.Proper
     {
         public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions,
             Type webApiType, Type apizrManagerType,
-            string[] assemblyPolicyRegistryKeys, 
-            string[] webApiPolicyRegistryKeys,
+            string[] assemblyResiliencePipelineRegistryKeys, 
+            string[] webApiResiliencePipelineRegistryKeys,
             string baseAddress,
             string basePath,
             IDictionary<string, object> handlersParameters,
@@ -29,8 +29,8 @@ namespace Apizr.Extending.Configuring.Proper
             TimeSpan? requestTimeout,
             params LogLevel[] logLevels) : base(sharedOptions, 
             webApiType, 
-            assemblyPolicyRegistryKeys, 
-            webApiPolicyRegistryKeys)
+            assemblyResiliencePipelineRegistryKeys, 
+            webApiResiliencePipelineRegistryKeys)
         {
             ApizrManagerType = apizrManagerType;
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;

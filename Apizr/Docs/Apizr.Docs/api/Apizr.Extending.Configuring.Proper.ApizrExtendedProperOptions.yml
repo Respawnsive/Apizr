@@ -113,7 +113,7 @@ items:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
   syntax:
-    content: public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions, Type webApiType, Type apizrManagerType, string[] assemblyPolicyRegistryKeys, string[] webApiPolicyRegistryKeys, string baseAddress, string basePath, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? operationTimeout, TimeSpan? requestTimeout, params LogLevel[] logLevels)
+    content: public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions, Type webApiType, Type apizrManagerType, string[] assemblyResiliencePipelineRegistryKeys, string[] webApiResiliencePipelineRegistryKeys, string baseAddress, string basePath, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? operationTimeout, TimeSpan? requestTimeout, params LogLevel[] logLevels)
     parameters:
     - id: sharedOptions
       type: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
@@ -121,9 +121,9 @@ items:
       type: System.Type
     - id: apizrManagerType
       type: System.Type
-    - id: assemblyPolicyRegistryKeys
+    - id: assemblyResiliencePipelineRegistryKeys
       type: System.String[]
-    - id: webApiPolicyRegistryKeys
+    - id: webApiResiliencePipelineRegistryKeys
       type: System.String[]
     - id: baseAddress
       type: System.String
@@ -141,7 +141,7 @@ items:
       type: System.Nullable{System.TimeSpan}
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
-    content.vb: Public Sub New(sharedOptions As IApizrExtendedSharedOptions, webApiType As Type, apizrManagerType As Type, assemblyPolicyRegistryKeys As String(), webApiPolicyRegistryKeys As String(), baseAddress As String, basePath As String, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, operationTimeout As TimeSpan?, requestTimeout As TimeSpan?, ParamArray logLevels As LogLevel())
+    content.vb: Public Sub New(sharedOptions As IApizrExtendedSharedOptions, webApiType As Type, apizrManagerType As Type, assemblyResiliencePipelineRegistryKeys As String(), webApiResiliencePipelineRegistryKeys As String(), baseAddress As String, basePath As String, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, operationTimeout As TimeSpan?, requestTimeout As TimeSpan?, ParamArray logLevels As LogLevel())
   overload: Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor*
   nameWithType.vb: ApizrExtendedProperOptions.ApizrExtendedProperOptions(IApizrExtendedSharedOptions, Type, Type, String(), String(), String, String, IDictionary(Of String, Object), Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), Nullable(Of TimeSpan), LogLevel())
   modifiers.csharp:

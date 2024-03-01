@@ -3,7 +3,7 @@
 
 ### All
 
-- [New][Target] Now **targeting both .NetStandard 2.0 and .NET 7.0**
+- [New][Target] Now **targeting multiple frameworks based on Refit targets**: `netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0`
 - [Breaking][Deprecated] **Previsoulsy deprecated extensions methods have been droped** as they were not suitable anyore
 
 ### Apizr

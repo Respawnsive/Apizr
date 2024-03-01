@@ -32,7 +32,6 @@ using Apizr.Sample.Models;
 using Apizr.Transferring.Requesting;
 using AutoMapper;
 using Fusillade;
-using HttpTracer;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

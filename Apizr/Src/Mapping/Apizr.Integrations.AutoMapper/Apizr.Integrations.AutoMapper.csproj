@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net6.0;net7.0;net8.0</TargetFrameworks>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <RootNamespace>Apizr</RootNamespace>
   </PropertyGroup>
@@ -12,7 +12,10 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
+	  <PackageReference Include="AutoMapper">
+		  <Version Condition="'$(TargetFramework)' == 'netstandard2.1'">12.0.1</Version>
+          <Version Condition="'$(TargetFramework)' != 'netstandard2.1'">13.0.1</Version>
+	  </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Apizr\Apizr.csproj" />

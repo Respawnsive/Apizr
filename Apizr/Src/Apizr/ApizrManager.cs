@@ -1112,34 +1112,37 @@ namespace Apizr
                 cacheAttribute = null;
                 cacheKey = null;
 
-                if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails
-                        .ApiInterfaceType)) // Crud api caching
+                if (typeof(TResult) != typeof(IApiResponse)) // Real data content
                 {
-                    var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
-                    var methodName = methodDetails.MethodInfo.Name;
-                    switch (methodName) // Specific method caching
+                    if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails
+                                    .ApiInterfaceType)) // Crud api caching
                     {
-                        case "ReadAll":
-                            cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheReadAllAttribute>(true);
-                            break;
-                        case "Read":
-                            cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheReadAttribute>(true);
-                            break;
+                        var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                        var methodName = methodDetails.MethodInfo.Name;
+                        switch (methodName) // Specific method caching
+                        {
+                            case "ReadAll":
+                                cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheReadAllAttribute>(true);
+                                break;
+                            case "Read":
+                                cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheReadAttribute>(true);
+                                break;
+                        }
+
+                        if (cacheAttribute == null) // Global model caching
+                            cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheAttribute>(true);
+                    }
+                    else // Classic api caching
+                    {
+                        cacheAttribute =
+                            methodToCacheData.MethodInfo.GetCustomAttribute<CacheAttribute>() ?? // Specific method caching
+                            methodDetails.ApiInterfaceType.GetTypeInfo()
+                                .GetCustomAttribute<CacheAttribute>(); // Global api interface caching
                     }
 
-                    if (cacheAttribute == null) // Global model caching
-                        cacheAttribute = modelType.GetTypeInfo().GetCustomAttribute<CacheAttribute>(true);
+                    if (cacheAttribute == null) // Global assembly caching
+                        cacheAttribute = methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<CacheAttribute>(); 
                 }
-                else // Classic api caching
-                {
-                    cacheAttribute =
-                        methodToCacheData.MethodInfo.GetCustomAttribute<CacheAttribute>() ?? // Specific method caching
-                        methodDetails.ApiInterfaceType.GetTypeInfo()
-                            .GetCustomAttribute<CacheAttribute>(); // Global api interface caching
-                }
-
-                if (cacheAttribute == null) // Global assembly caching
-                    cacheAttribute = methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<CacheAttribute>();
 
                 // Are we asked to cache this method?
                 if (cacheAttribute == null || cacheAttribute.Mode == CacheMode.None)

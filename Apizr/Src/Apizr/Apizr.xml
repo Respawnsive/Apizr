@@ -110,6 +110,64 @@
         <member name="M:Apizr.ApizrManager`1.ClearCacheAsync``1(System.Linq.Expressions.Expression{System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task{``0}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="T:Apizr.ApizrResponse">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse.Headers">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse.ContentHeaders">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse.IsSuccessStatusCode">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse.StatusCode">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse.ReasonPhrase">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse.RequestMessage">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse.Error">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.ApizrResponse.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.ApizrResponse`1">
+            <inheritdoc cref="T:Apizr.IApizrResponse`1" />
+        </member>
+        <member name="M:Apizr.ApizrResponse`1.#ctor(Refit.IApiResponse{`0},`0)">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.ApizrResponse`1.Content">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.ApizrResponseExtensions">
+            <summary>
+            ApizrResponse extensions methods
+            </summary>
+        </member>
+        <member name="M:Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)">
+            <summary>
+            Ensures the request was successful by throwing an exception in case of failure
+            </summary>
+            <returns>The current <see cref="T:Apizr.IApizrResponse"/></returns>
+            <exception cref="T:Apizr.ApizrException"></exception>
+        </member>
+        <member name="M:Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{``0},``0)">
+            <summary>
+            Ensures the request was successful by throwing an exception in case of failure
+            </summary>
+            <returns>The current <see cref="T:Apizr.IApizrResponse`1"/> with optional cached <typeparamref name="T"/> data</returns>
+            <exception cref="T:Apizr.ApizrException"></exception>
+        </member>
         <member name="T:Apizr.Authenticating.AuthenticationHandler">
             <summary>
             The authentication handler implementation refreshing token
@@ -3500,6 +3558,17 @@
             <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
             <param name="cancellationToken">A cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.IApizrResponse">
+            <summary>
+            Base interface used to represent an API response managed by Apizr.
+            </summary>
+        </member>
+        <member name="T:Apizr.IApizrResponse`1">
+            <summary>
+            Interface used to represent an API response managed by Apizr.
+            </summary>
+            <typeparam name="T">Deserialized request content as <typeparamref name="T"/></typeparam>
         </member>
         <member name="T:Apizr.ILazyFactory`1">
             <summary>

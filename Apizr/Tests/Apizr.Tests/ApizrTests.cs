@@ -26,6 +26,7 @@ using Polly.Registry;
 using Polly.Retry;
 using Polly.Timeout;
 using Refit;
+using RichardSzalay.MockHttp;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -208,6 +209,44 @@ namespace Apizr.Tests
             // This one should fail but with cached result
             var ex2 = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
             ex2.And.CachedResult.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_Should_Cache_ApizrResponse()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .AddDelegatingHandler(new TestRequestHandler()));
+
+            // Clearing cache
+            await reqResManager.ClearCacheAsync();
+
+            var result = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync(HttpStatusCode.BadRequest));
+
+            result.Should().NotBeNull();
+            result.IsSuccessStatusCode.Should().BeFalse();
+            result.Content.Should().BeNull();
+
+            // This one should succeed
+            result = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync());
+
+            // and cache result in-memory
+            result.Should().NotBeNull();
+            result.IsSuccessStatusCode.Should().BeTrue();
+            result.Content.Should().NotBeNull();
+            result.Content!.Data.Should().NotBeNullOrEmpty();
+
+            // This one should fail but with cached result
+            result = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync(HttpStatusCode.BadRequest));
+
+            result.Should().NotBeNull();
+            result.IsSuccessStatusCode.Should().BeFalse();
+            result.Content.Should().NotBeNull();
+            result.Content!.Data.Should().NotBeNullOrEmpty();
         }
 
         [Fact]

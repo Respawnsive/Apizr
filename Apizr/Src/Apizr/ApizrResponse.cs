@@ -63,20 +63,17 @@ namespace Apizr
     /// <inheritdoc cref="IApizrResponse{TResult}" />
     public class ApizrResponse<TResult> : ApizrResponse, IApizrResponse<TResult>
     {
-        public ApizrResponse(TResult cachedResult) : base()
+        public ApizrResponse(TResult result, ApizrResponseDataSource dataSource) : base()
         {
-            Result = cachedResult;
-            DataSource = ApizrResponseDataSource.Cache;
+            Result = result;
+            DataSource = dataSource;
         }
 
         /// <inheritdoc />
-        public ApizrResponse(IApiResponse<TResult> apiResponse) : base(apiResponse)
+        public ApizrResponse(IApiResponse apiResponse, TResult result, ApizrResponseDataSource dataSource) : base(apiResponse)
         {
-            if (apiResponse.Content != null)
-            {
-                Result = apiResponse.Content;
-                DataSource = ApizrResponseDataSource.Request;
-            }
+            Result = result;
+            DataSource = dataSource;
         }
 
         public ApizrResponse(ApizrException<TResult> apizrException) : base(apizrException)
@@ -86,18 +83,10 @@ namespace Apizr
         }
 
         /// <inheritdoc />
-        public ApizrResponse(IApiResponse<TResult> apiResponse, ApizrException<TResult> apizrException) : base(apiResponse, apizrException)
+        public ApizrResponse(IApiResponse apiResponse, ApizrException<TResult> apizrException) : base(apiResponse, apizrException)
         {
-            if (apiResponse.Content != null)
-            {
-                Result = apiResponse.Content;
-                DataSource = ApizrResponseDataSource.Request;
-            }
-            else if (apizrException.CachedResult != null)
-            {
-                Result = apizrException.CachedResult;
-                DataSource = ApizrResponseDataSource.Cache;
-            }
+            Result = apizrException.CachedResult;
+            DataSource = ApizrResponseDataSource.Cache;
         }
 
         /// <inheritdoc />

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Request;
+using Refit;
 
 namespace Apizr
 {
@@ -103,8 +104,52 @@ namespace Apizr
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
+        Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
+            Expression<Func<TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
+            Expression<Func<TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
         Task<TApiData> ExecuteAsync<TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null);
 
         /// <summary>

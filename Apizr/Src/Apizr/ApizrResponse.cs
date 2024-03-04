@@ -1,45 +1,42 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Refit;
+﻿using Refit;
 
 namespace Apizr
 {
     /// <inheritdoc />
     public class ApizrResponse : IApizrResponse
     {
-        private readonly IApiResponse _apiResponse;
+        protected ApizrResponse()
+        {
+            
+        }
 
         public ApizrResponse(IApiResponse apiResponse)
         {
-            _apiResponse = apiResponse;
+            ApiResponse = apiResponse;
+            if(apiResponse.Error != null)
+                Exception = new ApizrException(apiResponse.Error);
+        }
+
+        public ApizrResponse(ApizrException apiException)
+        {
+            Exception = apiException;
+        }
+
+        public ApizrResponse(IApiResponse apiResponse, ApizrException apizrException)
+        {
+            ApiResponse = apiResponse;
+            Exception = apizrException;
         }
 
         /// <inheritdoc />
-        public HttpResponseHeaders Headers => _apiResponse.Headers;
+        public bool IsSuccess => Exception == null;
 
         /// <inheritdoc />
-        public HttpContentHeaders ContentHeaders => _apiResponse.ContentHeaders;
+        public IApiResponse ApiResponse { get; }
 
         /// <inheritdoc />
-        public bool IsSuccessStatusCode => _apiResponse.IsSuccessStatusCode;
+        public ApizrException Exception { get; }
 
-        /// <inheritdoc />
-        public HttpStatusCode StatusCode => _apiResponse.StatusCode;
-
-        /// <inheritdoc />
-        public string ReasonPhrase => _apiResponse.ReasonPhrase;
-
-        /// <inheritdoc />
-        public HttpRequestMessage RequestMessage => _apiResponse.RequestMessage;
-
-        /// <inheritdoc />
-        public Version Version => _apiResponse.Version;
-
-        /// <inheritdoc />
-        public ApiException Error => _apiResponse.Error;
-        
         #region Dispose
 
         private bool _disposed;
@@ -57,23 +54,57 @@ namespace Apizr
 
             _disposed = true;
 
-            _apiResponse.Dispose();
+            ApiResponse.Dispose();
         }
 
         #endregion
     }
 
-    /// <inheritdoc cref="IApizrResponse{T}" />
-    public class ApizrResponse<T> : ApizrResponse, IApizrResponse<T>
+    /// <inheritdoc cref="IApizrResponse{TResult}" />
+    public class ApizrResponse<TResult> : ApizrResponse, IApizrResponse<TResult>
     {
-        /// <inheritdoc />
-        public ApizrResponse(IApiResponse<T> apiResponse, T cachedContent = default) : base(apiResponse)
+        public ApizrResponse(TResult cachedResult) : base()
         {
-            Content = apiResponse.Content ?? cachedContent;
+            Result = cachedResult;
+            DataSource = ApizrResponseDataSource.Cache;
         }
 
         /// <inheritdoc />
-        public T Content { get; }
+        public ApizrResponse(IApiResponse<TResult> apiResponse) : base(apiResponse)
+        {
+            if (apiResponse.Content != null)
+            {
+                Result = apiResponse.Content;
+                DataSource = ApizrResponseDataSource.Request;
+            }
+        }
+
+        public ApizrResponse(ApizrException<TResult> apizrException) : base(apizrException)
+        {
+            Result = apizrException.CachedResult;
+            DataSource = ApizrResponseDataSource.Cache;
+        }
+
+        /// <inheritdoc />
+        public ApizrResponse(IApiResponse<TResult> apiResponse, ApizrException<TResult> apizrException) : base(apiResponse, apizrException)
+        {
+            if (apiResponse.Content != null)
+            {
+                Result = apiResponse.Content;
+                DataSource = ApizrResponseDataSource.Request;
+            }
+            else if (apizrException.CachedResult != null)
+            {
+                Result = apizrException.CachedResult;
+                DataSource = ApizrResponseDataSource.Cache;
+            }
+        }
+
+        /// <inheritdoc />
+        public TResult Result { get; }
+
+        /// <inheritdoc />
+        public ApizrResponseDataSource DataSource { get; }
     }
 
     /// <summary>
@@ -88,9 +119,9 @@ namespace Apizr
         /// <exception cref="ApizrException"></exception>
         public static IApizrResponse EnsureSuccessStatusCode(this IApizrResponse apizrResponse)
         {
-            if (!apizrResponse.IsSuccessStatusCode)
+            if (!apizrResponse.IsSuccess)
             {
-                var exception = new ApizrException(apizrResponse.Error);
+                var exception = apizrResponse.Exception ?? new ApizrException("Unknown exception occured");
 
                 apizrResponse.Dispose();
 
@@ -105,12 +136,11 @@ namespace Apizr
         /// </summary>
         /// <returns>The current <see cref="IApizrResponse{T}"/> with optional cached <typeparamref name="T"/> data</returns>
         /// <exception cref="ApizrException"></exception>
-        public static IApizrResponse<T> EnsureSuccessStatusCode<T>(this IApizrResponse<T> apizrResponse,
-            T cachedContent = default)
+        public static IApizrResponse<T> EnsureSuccessStatusCode<T>(this IApizrResponse<T> apizrResponse)
         {
-            if (!apizrResponse.IsSuccessStatusCode)
+            if (!apizrResponse.IsSuccess)
             {
-                var exception = new ApizrException(apizrResponse.Error, cachedContent);
+                var exception = apizrResponse.Exception ?? new ApizrException<T>("Unknown exception occured", apizrResponse.Result);
 
                 apizrResponse.Dispose();
 

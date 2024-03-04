@@ -676,6 +676,23 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
+        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (_, api) => executeApiMethod.Compile().Invoke(api)
+                    .ContinueWith(task => (IApiResponse<TApiData>) task.Result),
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (_, api) => executeApiMethod.Compile().Invoke(api),
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
         public virtual async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -827,8 +844,40 @@ namespace Apizr
         }
 
         /// <inheritdoc />
+        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (opt, api) => executeApiMethod.Compile().Invoke(opt, api)
+                    .ContinueWith(task => (IApiResponse<TApiData>) task.Result),
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task<ApiResponse<TApiData>>>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData)
+                    .ContinueWith(task => (IApiResponse<TApiData>) task.Result), modelData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod, TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
                 (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelData,
@@ -991,11 +1040,47 @@ namespace Apizr
         }
 
         /// <inheritdoc />
+        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (opt, api, apiData) => executeApiMethod.Compile().Invoke(opt, api, apiData)
+                    .ContinueWith(task => (IApiResponse<TApiData>) task.Result), modelData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public virtual Task<TModelResultData> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<TApiResultData>>> executeApiMethod,
             TModelRequestData modelRequestData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+                (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelRequestData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
+            TModelRequestData>(
+            Expression<Func<TWebApi, TApiRequestData, Task<ApiResponse<TApiResultData>>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+                (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData)
+                    .ContinueWith(task => (IApiResponse<TApiResultData>) task.Result), modelRequestData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
+            TModelRequestData>(
+            Expression<Func<TWebApi, TApiRequestData, Task<IApiResponse<TApiResultData>>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelRequestData,
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
@@ -1157,6 +1242,21 @@ namespace Apizr
             return Map<TApiResultData, TModelResultData>(result);
         }
 
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<ApiResponse<TApiResultData>>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+                (opt, api, apiData) => executeApiMethod.Compile().Invoke(opt, api, apiData)
+                    .ContinueWith(task => (IApiResponse<TApiResultData>)task.Result), modelRequestData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<IApiResponse<TApiResultData>>>> executeApiMethod,
+            TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #endregion
@@ -1188,6 +1288,16 @@ namespace Apizr
 
         /// <inheritdoc />
         public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
+            => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(api), CancellationToken.None);
+
+        /// <inheritdoc />
+        public Task<bool> ClearCacheAsync<TResult>(
+            Expression<Func<TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod)
+            => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(api)
+                .ContinueWith(task => (IApiResponse<TResult>) task.Result, ct), CancellationToken.None);
+
+        /// <inheritdoc />
+        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod)
             => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(api), CancellationToken.None);
 
         /// <inheritdoc />
@@ -1236,6 +1346,17 @@ namespace Apizr
 
                 return false;
             }
+        }
+
+        /// <inheritdoc />
+        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod, CancellationToken cancellationToken = default)
+            => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(ct, api)
+                .ContinueWith(task => (IApiResponse<TResult>)task.Result, ct), cancellationToken);
+
+        /// <inheritdoc />
+        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

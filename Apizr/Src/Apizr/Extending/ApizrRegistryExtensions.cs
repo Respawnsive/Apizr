@@ -81,16 +81,367 @@ namespace Apizr.Extending
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task
         /// </summary>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> ExecuteAsync<TWebApi>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, Task<IApiResponse>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
         /// <typeparam name="TWebApi">The web api to manage</typeparam>
         /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(this IApizrEnumerableRegistry registry,
+        public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(
+            this IApizrEnumerableRegistry registry,
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => registry.GetManagerFor<TWebApi>().ExecuteAsync<TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TApiData>> ExecuteAsync<TWebApi, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TApiData>> ExecuteAsync<TWebApi, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> ExecuteAsync<TWebApi>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TApiData>> ExecuteAsync<TWebApi, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TApiData>> ExecuteAsync<TWebApi, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TModelData, TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelData>> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TModelData, TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelData>> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TModelData, TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TModelData, TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelData>> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TModelData, TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelData>> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TModelData, TApiData>(executeApiMethod, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, TApiData, Task<IApiResponse>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelData>> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, TApiData, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelData>> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<IApiResponse>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelData>> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<ApiResponse<TApiData>>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+
+        /// <summary>
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TModelData">The model data type</typeparam>
+        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelData">The model data to map</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelData>> ExecuteAsync<TWebApi, TModelData, TApiData>(
+            this IApizrEnumerableRegistry registry,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod,
+            TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -116,53 +467,50 @@ namespace Apizr.Extending
                     modelRequestData, optionsBuilder);
 
         /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
         /// </summary>
         /// <typeparam name="TWebApi">The web api to manage</typeparam>
-        /// <typeparam name="TModelData">The model data type</typeparam>
-        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <typeparam name="TModelResultData">The mapped model result type</typeparam>
+        /// <typeparam name="TApiResultData">The api result type</typeparam>
+        /// <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+        /// <typeparam name="TModelRequestData">The model request data type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-        /// <param name="modelData">The model data to map</param>
+        /// <param name="modelRequestData">The model request data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(
+        public static Task<IApizrResponse<TModelResultData>> ExecuteAsync<TWebApi, TModelResultData, TApiResultData,
+            TApiRequestData, TModelRequestData>(
             this IApizrEnumerableRegistry registry,
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            Expression<Func<TWebApi, TApiRequestData, Task<ApiResponse<TApiResultData>>>> executeApiMethod,
+            TModelRequestData modelRequestData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => registry.GetManagerFor<TWebApi>()
-                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+                .ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
+                    modelRequestData, optionsBuilder);
 
         /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
         /// </summary>
         /// <typeparam name="TWebApi">The web api to manage</typeparam>
-        /// <typeparam name="TModelData">The model data type</typeparam>
-        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <typeparam name="TModelResultData">The mapped model result type</typeparam>
+        /// <typeparam name="TApiResultData">The api result type</typeparam>
+        /// <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+        /// <typeparam name="TModelRequestData">The model request data type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelRequestData">The model request data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(
+        public static Task<IApizrResponse<TModelResultData>> ExecuteAsync<TWebApi, TModelResultData, TApiResultData,
+            TApiRequestData, TModelRequestData>(
             this IApizrEnumerableRegistry registry,
-            Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
+            Expression<Func<TWebApi, TApiRequestData, Task<IApiResponse<TApiResultData>>>> executeApiMethod,
+            TModelRequestData modelRequestData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TModelData, TApiData>(executeApiMethod, optionsBuilder);
-
-        /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task
-        /// </summary>
-        /// <typeparam name="TWebApi">The web api to manage</typeparam>
-        /// <typeparam name="TApiData">The <typeparamref name="TWebApi"/>'s task result</typeparam>
-        /// <param name="registry">The registry</param>
-        /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/>'s task to execute</param>
-        /// <param name="optionsBuilder">Options provided to the request</param>
-        /// <returns></returns>
-        public static Task<TApiData> ExecuteAsync<TWebApi, TApiData>(
-            this IApizrEnumerableRegistry registry,
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
-            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TApiData>(executeApiMethod, optionsBuilder);
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
+                    modelRequestData, optionsBuilder);
 
         /// <summary>
         /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
@@ -188,39 +536,52 @@ namespace Apizr.Extending
                     modelRequestData, optionsBuilder);
 
         /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
         /// </summary>
         /// <typeparam name="TWebApi">The web api to manage</typeparam>
-        /// <typeparam name="TModelData">The model data type</typeparam>
-        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <typeparam name="TModelResultData">The mapped model result type</typeparam>
+        /// <typeparam name="TApiResultData">The api result type</typeparam>
+        /// <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+        /// <typeparam name="TModelRequestData">The model request data type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
-        /// <param name="modelData">The model data to map</param>
+        /// <param name="modelRequestData">The model request data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(
+        public static Task<IApizrResponse<TModelResultData>> ExecuteAsync<TWebApi, TModelResultData, TApiResultData,
+            TApiRequestData, TModelRequestData>(
             this IApizrEnumerableRegistry registry,
-            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<TApiData>>> executeApiMethod,
-            TModelData modelData,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<ApiResponse<TApiResultData>>>>
+                executeApiMethod,
+            TModelRequestData modelRequestData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => registry.GetManagerFor<TWebApi>()
-                .ExecuteAsync<TModelData, TApiData>(executeApiMethod, modelData, optionsBuilder);
+                .ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
+                    modelRequestData, optionsBuilder);
 
         /// <summary>
-        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped result
+        /// Execute a managed <typeparamref name="TWebApi"/>'s task returning a mapped response result
         /// </summary>
         /// <typeparam name="TWebApi">The web api to manage</typeparam>
-        /// <typeparam name="TModelData">The model data type</typeparam>
-        /// <typeparam name="TApiData">The api data type</typeparam>
+        /// <typeparam name="TModelResultData">The mapped model result type</typeparam>
+        /// <typeparam name="TApiResultData">The api result type</typeparam>
+        /// <typeparam name="TApiRequestData">The mapped api request data type</typeparam>
+        /// <typeparam name="TModelRequestData">The model request data type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="executeApiMethod">The <typeparamref name="TWebApi"/> call to execute</param>
+        /// <param name="modelRequestData">The model request data to map</param>
         /// <param name="optionsBuilder">Options provided to the request</param>
         /// <returns></returns>
-        public static Task<TModelData> ExecuteAsync<TWebApi, TModelData, TApiData>(
+        public static Task<IApizrResponse<TModelResultData>> ExecuteAsync<TWebApi, TModelResultData, TApiResultData,
+            TApiRequestData, TModelRequestData>(
             this IApizrEnumerableRegistry registry,
-            Expression<Func<IApizrRequestOptions, TWebApi, Task<TApiData>>> executeApiMethod,
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<IApiResponse<TApiResultData>>>>
+                executeApiMethod,
+            TModelRequestData modelRequestData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
-            => registry.GetManagerFor<TWebApi>().ExecuteAsync<TModelData, TApiData>(executeApiMethod, optionsBuilder);
+            => registry.GetManagerFor<TWebApi>()
+                .ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(executeApiMethod,
+                    modelRequestData, optionsBuilder);
 
         #endregion
 
@@ -243,6 +604,19 @@ namespace Apizr.Extending
             => registry.GetCrudManagerFor<TApiEntity>()
                 .ExecuteAsync((options, api) => api.Create(entity, options), optionsBuilder);
 
+        /// <summary>
+        /// Send a Create request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="entity">The entity to create</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TApiEntity>> SafeCreateAsync<TApiEntity>(
+            this IApizrEnumerableRegistry registry,
+            TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync((options, api) => api.SafeCreate(entity, options), optionsBuilder);
 
         /// <summary>
         /// Send a mapped Create request, returning a mapped result
@@ -257,6 +631,22 @@ namespace Apizr.Extending
             TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity>()
                 .ExecuteAsync<TModelEntity, TApiEntity>((options, api, apiEntity) => api.Create(apiEntity, options),
+                    entity, optionsBuilder);
+
+        /// <summary>
+        /// Send a mapped Create request, returning a mapped result
+        /// </summary>
+        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="entity">The entity to create</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelEntity>> SafeCreateAsync<TModelEntity, TApiEntity>(
+            this IApizrEnumerableRegistry registry,
+            TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync<TModelEntity, TApiEntity>((options, api, apiEntity) => api.SafeCreate(apiEntity, options),
                     entity, optionsBuilder);
 
         #endregion
@@ -279,6 +669,21 @@ namespace Apizr.Extending
                 .ExecuteAsync((options, api) => api.ReadAll(options), optionsBuilder);
 
         /// <summary>
+        /// Send a ReadAll request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <typeparam name="TReadAllResult">The "ReadAll" query result type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TReadAllResult>> SafeReadAllAsync<TApiEntity, TApiEntityKey, TReadAllResult>(
+            this IApizrEnumerableRegistry registry, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey, TReadAllResult>()
+                .ExecuteAsync((options, api) => api.SafeReadAll(options), optionsBuilder);
+
+        /// <summary>
         /// Send a ReadAll request, returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
@@ -294,6 +699,25 @@ namespace Apizr.Extending
             where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey, TApiReadAllResult>()
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>((options, api) => api.ReadAll(options),
+                    optionsBuilder);
+
+        /// <summary>
+        /// Send a ReadAll request, returning mapped result
+        /// </summary>
+        /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelReadAllResult>> SafeReadAllAsync<TModelReadAllResult, TApiEntity,
+            TApiEntityKey,
+            TApiReadAllResult>(this IApizrEnumerableRegistry registry,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey, TApiReadAllResult>()
+                .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>((options, api) => api.SafeReadAll(options),
                     optionsBuilder);
 
         /// <summary>
@@ -315,6 +739,25 @@ namespace Apizr.Extending
                 .ExecuteAsync((options, api) => api.ReadAll(readAllParams, options), optionsBuilder);
 
         /// <summary>
+        /// Send a ReadAll request with some parameters
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <typeparam name="TReadAllResult">The api result type</typeparam>
+        /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="readAllParams">The read all filters</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TReadAllResult>> SafeReadAllAsync<TApiEntity, TApiEntityKey, TReadAllResult,
+            TReadAllParams>(
+            this IApizrEnumerableRegistry registry, TReadAllParams readAllParams,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>()
+                .ExecuteAsync((options, api) => api.SafeReadAll(readAllParams, options), optionsBuilder);
+
+        /// <summary>
         /// Send a ReadAll request with some parameters, returning mapped result
         /// </summary>
         /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
@@ -333,6 +776,28 @@ namespace Apizr.Extending
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey, TApiReadAllResult, TReadAllParams>()
                 .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
                     (options, api) => api.ReadAll(readAllParams, options),
+                    optionsBuilder);
+
+        /// <summary>
+        /// Send a ReadAll request with some parameters, returning mapped result
+        /// </summary>
+        /// <typeparam name="TModelReadAllResult">The model result type to map to</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <typeparam name="TApiReadAllResult">The api result type to map from</typeparam>
+        /// <typeparam name="TReadAllParams">The ReadAll parameters type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="readAllParams">The read all filters</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelReadAllResult>> SafeReadAllAsync<TModelReadAllResult, TApiEntity,
+            TApiEntityKey,
+            TApiReadAllResult, TReadAllParams>(this IApizrEnumerableRegistry registry, TReadAllParams readAllParams,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey, TApiReadAllResult, TReadAllParams>()
+                .ExecuteAsync<TModelReadAllResult, TApiReadAllResult>(
+                    (options, api) => api.SafeReadAll(readAllParams, options),
                     optionsBuilder);
 
         #endregion
@@ -357,6 +822,20 @@ namespace Apizr.Extending
         /// Send a Read request
         /// </summary>
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TApiEntity>> SafeReadAsync<TApiEntity>(this IApizrEnumerableRegistry registry,
+            int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync((options, api) => api.SafeRead(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send a Read request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="key">The entity key</param>
@@ -367,6 +846,22 @@ namespace Apizr.Extending
             where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
                 .ExecuteAsync((options, api) => api.Read(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send a Read request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TApiEntity>> SafeReadAsync<TApiEntity, TApiEntityKey>(
+            this IApizrEnumerableRegistry registry,
+            TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
+                .ExecuteAsync((options, api) => api.SafeRead(key, options), optionsBuilder);
 
         /// <summary>
         /// Send a Read request, returning mapped result
@@ -389,6 +884,22 @@ namespace Apizr.Extending
         /// </summary>
         /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
         /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelEntity>> SafeReadAsync<TModelEntity, TApiEntity>(
+            this IApizrEnumerableRegistry registry, int key,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync<TModelEntity, TApiEntity>((options, api) => api.SafeRead(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send a Read request, returning mapped result
+        /// </summary>
+        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="key">The entity key</param>
@@ -400,6 +911,23 @@ namespace Apizr.Extending
             where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
                 .ExecuteAsync<TModelEntity, TApiEntity>((options, api) => api.Read(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send a Read request, returning mapped result
+        /// </summary>
+        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse<TModelEntity>> SafeReadAsync<TModelEntity, TApiEntity, TApiEntityKey>(
+            this IApizrEnumerableRegistry registry, TApiEntityKey key,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
+                .ExecuteAsync<TModelEntity, TApiEntity>((options, api) => api.SafeRead(key, options), optionsBuilder);
 
         #endregion
 
@@ -425,6 +953,22 @@ namespace Apizr.Extending
         /// Send an Update request
         /// </summary>
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> SafeUpdateAsync<TApiEntity>(this IApizrEnumerableRegistry registry,
+            int key,
+            TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync((options, api) => api.SafeUpdate(key, entity, options), optionsBuilder);
+
+        /// <summary>
+        /// Send an Update request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="key">The entity key</param>
@@ -437,6 +981,24 @@ namespace Apizr.Extending
             where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
                 .ExecuteAsync((options, api) => api.Update(key, entity, options), optionsBuilder);
+
+        /// <summary>
+        /// Send an Update request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> SafeUpdateAsync<TApiEntity, TApiEntityKey>(
+            this IApizrEnumerableRegistry registry,
+            TApiEntityKey key,
+            TApiEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
+                .ExecuteAsync((options, api) => api.SafeUpdate(key, entity, options), optionsBuilder);
 
         /// <summary>
         /// Send a mapped Update request, returning mapped result
@@ -461,6 +1023,25 @@ namespace Apizr.Extending
         /// </summary>
         /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
         /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> SafeUpdateAsync<TModelEntity, TApiEntity>(
+            this IApizrEnumerableRegistry registry,
+            int key,
+            TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync<TModelEntity, TApiEntity>(
+                    (options, api, apiEntity) => api.SafeUpdate(key, apiEntity, options), entity, optionsBuilder);
+
+        /// <summary>
+        /// Send a mapped Update request, returning mapped result
+        /// </summary>
+        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="key">The entity key</param>
@@ -474,6 +1055,26 @@ namespace Apizr.Extending
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
                 .ExecuteAsync<TModelEntity, TApiEntity>(
                     (options, api, apiEntity) => api.Update(key, apiEntity, options), entity, optionsBuilder);
+
+        /// <summary>
+        /// Send a mapped Update request, returning mapped result
+        /// </summary>
+        /// <typeparam name="TModelEntity">The model entity type to map from</typeparam>
+        /// <typeparam name="TApiEntity">The api entity type to map to</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="entity">The entity to update</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> SafeUpdateAsync<TModelEntity, TApiEntity, TApiEntityKey>(
+            this IApizrEnumerableRegistry registry,
+            TApiEntityKey key,
+            TModelEntity entity, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
+                .ExecuteAsync<TModelEntity, TApiEntity>(
+                    (options, api, apiEntity) => api.SafeUpdate(key, apiEntity, options), entity, optionsBuilder);
 
         #endregion
 
@@ -497,6 +1098,20 @@ namespace Apizr.Extending
         /// Send an Delete request
         /// </summary>
         /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> SafeDeleteAsync<TApiEntity>(this IApizrEnumerableRegistry registry,
+            int key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity>()
+                .ExecuteAsync((options, api) => api.SafeDelete(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send an Delete request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
         /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="key">The entity key</param>
@@ -507,6 +1122,22 @@ namespace Apizr.Extending
             where TApiEntity : class
             => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
                 .ExecuteAsync((options, api) => api.Delete(key, options), optionsBuilder);
+
+        /// <summary>
+        /// Send an Delete request
+        /// </summary>
+        /// <typeparam name="TApiEntity">The api entity type</typeparam>
+        /// <typeparam name="TApiEntityKey">The entity's crud key type</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="key">The entity key</param>
+        /// <param name="optionsBuilder">Options provided to the request</param>
+        /// <returns></returns>
+        public static Task<IApizrResponse> SafeDeleteAsync<TApiEntity, TApiEntityKey>(
+            this IApizrEnumerableRegistry registry,
+            TApiEntityKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            where TApiEntity : class
+            => registry.GetCrudManagerFor<TApiEntity, TApiEntityKey>()
+                .ExecuteAsync((options, api) => api.SafeDelete(key, options), optionsBuilder);
 
         #endregion
 
@@ -536,6 +1167,34 @@ namespace Apizr.Extending
         /// <returns></returns>
         public static Task<bool> ClearCacheAsync<TWebApi, TResult>(this IApizrEnumerableRegistry registry,
             Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
+            CancellationToken cancellationToken = default)
+            => registry.GetManagerFor<TWebApi>().ClearCacheAsync<TResult>(executeApiMethod, cancellationToken);
+
+        /// <summary>
+        /// Clear the cache of a specific request
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
+        public static Task<bool> ClearCacheAsync<TWebApi, TResult>(this IApizrEnumerableRegistry registry, 
+            Expression<Func<TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod,
+            CancellationToken cancellationToken = default)
+            => registry.GetManagerFor<TWebApi>().ClearCacheAsync<TResult>(executeApiMethod, cancellationToken);
+
+        /// <summary>
+        /// Clear the cache of a specific request
+        /// </summary>
+        /// <typeparam name="TWebApi">The web api to manage</typeparam>
+        /// <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
+        /// <param name="registry">The registry</param>
+        /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
+        /// <param name="cancellationToken">A cancellation token</param>
+        /// <returns></returns>
+        public static Task<bool> ClearCacheAsync<TWebApi, TResult>(this IApizrEnumerableRegistry registry,
+            Expression<Func<TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod,
             CancellationToken cancellationToken = default)
             => registry.GetManagerFor<TWebApi>().ClearCacheAsync<TResult>(executeApiMethod, cancellationToken);
 

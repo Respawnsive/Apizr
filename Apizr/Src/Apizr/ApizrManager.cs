@@ -184,7 +184,7 @@ namespace Apizr
                     GetMethodResiliencePipeline(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                 if (resiliencePipeline != ResiliencePipeline.Empty)
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
+                        $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
 
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                     requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
@@ -198,6 +198,9 @@ namespace Apizr
                 requestOptionsBuilder.WithContext(resilienceContext);
 
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                 await resiliencePipeline.ExecuteAsync(
                     async _ => await executeApiMethod.Compile().Invoke(requestOptionsBuilder.ApizrOptions, webApi),
@@ -274,7 +277,7 @@ namespace Apizr
                     GetMethodResiliencePipeline(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                 if (resiliencePipeline != ResiliencePipeline.Empty)
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
+                        $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
 
                 var apiData = Map<TModelData, TApiData>(modelData);
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -292,6 +295,9 @@ namespace Apizr
                 requestOptionsBuilder.WithContext(resilienceContext);
 
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                 await resiliencePipeline.ExecuteAsync(
                     async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData),
@@ -419,7 +425,7 @@ namespace Apizr
                         GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                     if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
+                            $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
 
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
@@ -433,6 +439,9 @@ namespace Apizr
                     requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     result = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi),
@@ -765,7 +774,7 @@ namespace Apizr
                         GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                     if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
+                            $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
 
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
@@ -779,6 +788,9 @@ namespace Apizr
                     requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     result = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi),
@@ -852,7 +864,8 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public async Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod, 
+        public async Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod, 
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             var webApi = _lazyWebApi.Value;
@@ -1020,7 +1033,8 @@ namespace Apizr
 
         /// <inheritdoc />
         public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, TModelData modelData,
+            Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, 
+            TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
                 (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelData,
@@ -1028,7 +1042,8 @@ namespace Apizr
 
         /// <inheritdoc />
         public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<ApiResponse<TApiData>>>> executeApiMethod, TModelData modelData,
+            Expression<Func<TWebApi, TApiData, Task<ApiResponse<TApiData>>>> executeApiMethod, 
+            TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
                 (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData)
@@ -1037,7 +1052,8 @@ namespace Apizr
 
         /// <inheritdoc />
         public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
-            Expression<Func<TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod, TModelData modelData,
+            Expression<Func<TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod, 
+            TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
                 (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelData,
@@ -1118,7 +1134,7 @@ namespace Apizr
                         GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                     if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
+                            $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
 
                     var apiData = Map<TModelData, TApiData>(modelData);
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -1136,6 +1152,9 @@ namespace Apizr
                     requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     result = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData),
@@ -1210,7 +1229,9 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public async Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod, TModelData modelData,
+        public async Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod, 
+            TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
             var webApi = _lazyWebApi.Value;
@@ -1311,6 +1332,9 @@ namespace Apizr
                     requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     var apiResponse = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData),
@@ -1483,7 +1507,7 @@ namespace Apizr
                         GetMethodResiliencePipeline<TApiResultData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
                     if (resiliencePipeline != ResiliencePipeline<TApiResultData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Executing request with some resilience strategies");
+                            $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
 
                     var apiRequestData = Map<TModelRequestData, TApiRequestData>(modelRequestData);
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -1501,6 +1525,9 @@ namespace Apizr
                     requestOptionsBuilder.WithContext(resilienceContext);
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     result = await resiliencePipeline.ExecuteAsync(
                         async options => await executeApiMethod.Compile().Invoke(options, webApi, apiRequestData),
@@ -1565,7 +1592,8 @@ namespace Apizr
         }
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<ApiResponse<TApiResultData>>>> executeApiMethod,
+        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<ApiResponse<TApiResultData>>>> executeApiMethod,
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
                 (opt, api, apiData) => executeApiMethod.Compile().Invoke(opt, api, apiData)
@@ -1573,10 +1601,175 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<IApiResponse<TApiResultData>>>> executeApiMethod,
+        public async Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<IApiResponse<TApiResultData>>>> executeApiMethod,
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
-            throw new NotImplementedException();
+            var webApi = _lazyWebApi.Value;
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails<TApiResultData>(originalExpression);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
+            var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
+
+            TApiResultData cachedResult = default;
+            TApiResultData apiResult = default;
+            IApizrResponse<TModelResultData> response = default;
+
+            if (IsMethodCacheable<TApiResultData>(methodDetails, originalExpression, out var cacheAttribute,
+                    out var cacheKey))
+            {
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Called method is cacheable");
+
+                if (_cacheHandler is VoidCacheHandler)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
+                        $"{methodDetails.MethodInfo.Name}: You ask for cache but doesn't provide any cache handler. {nameof(VoidCacheHandler)} will fake it.");
+
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Used cache key is {cacheKey}");
+
+                cachedResult = await _cacheHandler.GetAsync<TApiResultData>(cacheKey,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
+                if (!Equals(cachedResult, default))
+                {
+                    if (requestOptionsBuilder.ApizrOptions.ClearCache)
+                    {
+                        await _cacheHandler.RemoveAsync(cacheKey, requestOptionsBuilder.ApizrOptions.CancellationToken);
+                        cachedResult = default;
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Cached data cleared for this cache key");
+                    }
+                    else
+                    {
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Some cached data found for this cache key");
+                    }
+                }
+            }
+
+            if (!Equals(cachedResult, default) && cacheAttribute?.Mode == CacheMode.GetOrFetch)
+            {
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Using cached data for the response");
+
+                response = new ApizrResponse<TModelResultData>(Map<TApiResultData, TModelResultData>(cachedResult), ApizrResponseDataSource.Cache);
+            }
+            else
+            {
+                ResilienceContext resilienceContext = null;
+                try
+                {
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    if (!_connectivityHandler.IsConnected())
+                    {
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
+                            $"{methodDetails.MethodInfo.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                        throw new IOException("Connectivity check failed");
+                    }
+
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
+
+                    var resiliencePipeline =
+                        GetMethodResiliencePipeline<IApiResponse<TApiResultData>>(methodDetails,
+                            requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    if (resiliencePipeline != ResiliencePipeline<IApiResponse<TApiResultData>>.Empty)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
+
+                    var apiRequestData = Map<TModelRequestData, TApiRequestData>(modelRequestData);
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: {typeof(TModelRequestData).Name} mapped to {typeof(TApiRequestData).Name}");
+
+                    resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+                    if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                        internalOptions.ResiliencePropertiesFactories.Any())
+                        resilienceContext.Properties.SetProperties(
+                            internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key,
+                                kvp => kvp.Value()), out _);
+                    resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                        requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                        requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                    requestOptionsBuilder.WithContext(resilienceContext);
+
+                    requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Executing the request");
+
+                    var apiResponse = await resiliencePipeline.ExecuteAsync(
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiRequestData),
+                        requestOptionsBuilder);
+
+                    if (apiResponse.IsSuccessStatusCode && apiResponse.Error == null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Request succeed! Using request data for the response");
+                    else if (!Equals(cachedResult, default(TApiResultData)))
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Request failed! Using cached data for the response");
+                    else
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Request failed! No cached data to use for the response");
+
+                    apiResult = apiResponse.Content;
+
+                    response = apiResponse.Error == null ?
+                        new ApizrResponse<TModelResultData>(apiResponse, Map<TApiResultData, TModelResultData>(apiResult), ApizrResponseDataSource.Request) :
+                        new ApizrResponse<TModelResultData>(apiResponse, new ApizrException<TModelResultData>(apiResponse.Error, Map<TApiResultData, TModelResultData>(cachedResult)));
+                }
+                catch (Exception e)
+                {
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
+                        $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
+
+                    response = new ApizrResponse<TModelResultData>(new ApizrException<TModelResultData>(e, Map<TApiResultData, TModelResultData>(cachedResult)));
+                }
+                finally
+                {
+                    if (resilienceContext != null &&
+                        requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                        ResilienceContextPool.Shared.Return(resilienceContext);
+                }
+
+                if (response.Exception != null && requestOptionsBuilder.ApizrOptions.OnException != null)
+                {
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        Equals(cachedResult, default(TApiResultData))
+                            ? $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TModelResultData>)} with InnerException but no cached result"
+                            : $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException<TModelResultData>)} with InnerException and cached result");
+
+                    requestOptionsBuilder.ApizrOptions.OnException(response.Exception);
+                }
+
+                if (response.Exception == null &&
+                    _cacheHandler != null &&
+                    !string.IsNullOrWhiteSpace(cacheKey) &&
+                    cacheAttribute != null && 
+                    cacheAttribute.Mode != CacheMode.None &&
+                    !Equals(apiResult, default(TApiResultData)))
+                {
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Caching result");
+
+                    await _cacheHandler.SetAsync(cacheKey, apiResult, cacheAttribute.LifeSpan,
+                        requestOptionsBuilder.ApizrOptions.CancellationToken);
+                }
+            }
+
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Returning mapped result from {typeof(TApiResultData).Name} to {typeof(TModelResultData).Name}");
+
+            return response;
         }
 
         #endregion

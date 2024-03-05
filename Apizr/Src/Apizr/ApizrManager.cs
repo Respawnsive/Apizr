@@ -331,6 +331,12 @@ namespace Apizr
         #region Task<T>
 
         /// <inheritdoc />
+        public virtual Task<IApizrResponse> ExecuteAsync(Expression<Func<TWebApi, Task<IApiResponse>>> executeApiMethod, 
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync((_, api) => executeApiMethod.Compile().Invoke(api),
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
         public virtual Task<TApiData> ExecuteAsync<TApiData>(
             Expression<Func<TWebApi, Task<TApiData>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -338,7 +344,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
+        public virtual Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
             Expression<Func<TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync((_, api) => executeApiMethod.Compile().Invoke(api)
@@ -346,11 +352,111 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
+        public virtual Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
             Expression<Func<TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync((_, api) => executeApiMethod.Compile().Invoke(api),
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public virtual async Task<IApizrResponse> ExecuteAsync(
+            Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse>>> executeApiMethod, 
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            var webApi = _lazyWebApi.Value;
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails<IApiResponse>(originalExpression);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
+            var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
+
+            IApizrResponse response = default;
+            ResilienceContext resilienceContext = null;
+
+            try
+            {
+                requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                if (!_connectivityHandler.IsConnected())
+                {
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
+                        $"{methodDetails.MethodInfo.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    throw new IOException("Connectivity check failed");
+                }
+
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
+
+                var resiliencePipeline =
+                    GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                if (resiliencePipeline != ResiliencePipeline<IApiResponse>.Empty)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
+
+                resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
+                if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                    internalOptions.ResiliencePropertiesFactories.Any())
+                    resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                    requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                    requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                requestOptionsBuilder.WithContext(resilienceContext);
+
+                requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Executing the request");
+
+                var apiResponse = await resiliencePipeline.ExecuteAsync(
+                    async options => await executeApiMethod.Compile().Invoke(options, webApi),
+                    requestOptionsBuilder);
+
+                if (apiResponse.IsSuccessStatusCode && apiResponse.Error == null)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Request succeed!");
+                else
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Request failed!");
+
+                response = apiResponse.Error == null ?
+                    new ApizrResponse(apiResponse) :
+                    new ApizrResponse(apiResponse, new ApizrException(apiResponse.Error));
+            }
+            catch (Exception e)
+            {
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
+                    $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
+
+                response = new ApizrResponse(new ApizrException(e));
+            }
+            finally
+            {
+                if (resilienceContext != null &&
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                    ResilienceContextPool.Shared.Return(resilienceContext);
+            }
+
+            if (response.Exception != null && requestOptionsBuilder.ApizrOptions.OnException != null)
+            {
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException)}");
+
+                requestOptionsBuilder.ApizrOptions.OnException(response.Exception);
+            }
+
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Returning result");
+
+            return response;
+        }
 
         /// <inheritdoc />
         public virtual async Task<TApiData> ExecuteAsync<TApiData>(
@@ -506,7 +612,7 @@ namespace Apizr
         }
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
+        public virtual Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync(
@@ -515,7 +621,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public async Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
+        public virtual async Task<IApizrResponse<TApiData>> ExecuteAsync<TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
@@ -687,7 +793,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
@@ -696,7 +802,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
@@ -858,7 +964,7 @@ namespace Apizr
         }
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<ApiResponse<TApiData>>>> executeApiMethod,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
@@ -867,7 +973,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public async Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+        public virtual async Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, Task<IApiResponse<TApiData>>>> executeApiMethod, 
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {
@@ -1035,6 +1141,14 @@ namespace Apizr
         }
 
         /// <inheritdoc />
+        public virtual Task<IApizrResponse> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<TWebApi, TApiData, Task<IApiResponse>>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+            => ExecuteAsync<TModelData, TApiData>(
+                (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelData,
+                optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
         public virtual Task<TModelData> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<TApiData>>> executeApiMethod, 
             TModelData modelData,
@@ -1044,7 +1158,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<ApiResponse<TApiData>>>> executeApiMethod, 
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1054,13 +1168,117 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod, 
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelData, TApiData>(
                 (_, api, apiData) => executeApiMethod.Compile().Invoke(api, apiData), modelData,
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
+
+        /// <inheritdoc />
+        public virtual async Task<IApizrResponse> ExecuteAsync<TModelData, TApiData>(
+            Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<IApiResponse>>> executeApiMethod, TModelData modelData,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
+        {
+            var webApi = _lazyWebApi.Value;
+            var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
+            var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
+            var methodDetails = GetMethodDetails<IApiResponse>(originalExpression);
+            var requestLogAttribute = GetRequestLogAttribute(methodDetails);
+            var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
+            var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
+            var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Calling method");
+
+            IApizrResponse response = default;
+            ResilienceContext resilienceContext = null;
+
+            try
+            {
+                requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                if (!_connectivityHandler.IsConnected())
+                {
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Medium(),
+                        $"{methodDetails.MethodInfo.Name}: Connectivity check failed, throw {nameof(IOException)}");
+                    throw new IOException("Connectivity check failed");
+                }
+
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
+
+                var resiliencePipeline =
+                    GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                if (resiliencePipeline != ResiliencePipeline<IApiResponse>.Empty)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
+
+                var apiData = Map<TModelData, TApiData>(modelData);
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: {typeof(TModelData).Name} mapped to {typeof(TApiData).Name}");
+
+                resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
+                    requestOptionsBuilder.ApizrOptions.CancellationToken);
+                if (requestOptionsBuilder.ApizrOptions is IApizrGlobalSharedOptionsBase internalOptions &&
+                    internalOptions.ResiliencePropertiesFactories.Any())
+                    resilienceContext.Properties.SetProperties(internalOptions.ResiliencePropertiesFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value()), out _);
+                resilienceContext.WithLogger(_apizrOptions.Logger, requestOptionsBuilder.ApizrOptions.LogLevels,
+                    requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
+                    requestOptionsBuilder.ApizrOptions.HttpTracerMode);
+                requestOptionsBuilder.WithContext(resilienceContext);
+
+                requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
+
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Executing the request");
+
+                var apiResponse = await resiliencePipeline.ExecuteAsync(
+                    async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData),
+                    requestOptionsBuilder);
+
+                if (apiResponse.IsSuccessStatusCode && apiResponse.Error == null)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Request succeed!");
+                else
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Request failed!");
+
+                response = apiResponse.Error == null ?
+                    new ApizrResponse(apiResponse) :
+                    new ApizrResponse(apiResponse, new ApizrException(apiResponse.Error));
+            }
+            catch (Exception e)
+            {
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.High(),
+                    $"{methodDetails.MethodInfo.Name}: Request threw an exception with message {e.Message}");
+
+                response = new ApizrResponse(new ApizrException(e));
+            }
+            finally
+            {
+                if (resilienceContext != null &&
+                    requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ReturnToPoolOnComplete != false)
+                    ResilienceContextPool.Shared.Return(resilienceContext);
+            }
+
+            if (response.Exception != null && requestOptionsBuilder.ApizrOptions.OnException != null)
+            {
+                _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Handling an {nameof(ApizrException)}");
+
+                requestOptionsBuilder.ApizrOptions.OnException(response.Exception);
+            }
+
+            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                $"{methodDetails.MethodInfo.Name}: Returning mapped result from {typeof(TApiData).Name} to {typeof(TModelData).Name}");
+
+            return response;
+        }
 
         /// <inheritdoc />
         public virtual async Task<TModelData> ExecuteAsync<TModelData, TApiData>(
@@ -1222,7 +1440,7 @@ namespace Apizr
         }
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+        public virtual Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<ApiResponse<TApiData>>>> executeApiMethod,
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1232,7 +1450,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public async Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
+        public virtual async Task<IApizrResponse<TModelData>> ExecuteAsync<TModelData, TApiData>(
             Expression<Func<IApizrRequestOptions, TWebApi, TApiData, Task<IApiResponse<TApiData>>>> executeApiMethod, 
             TModelData modelData,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1416,7 +1634,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
+        public virtual Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<ApiResponse<TApiResultData>>>> executeApiMethod,
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1426,7 +1644,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
+        public virtual Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData,
             TModelRequestData>(
             Expression<Func<TWebApi, TApiRequestData, Task<IApiResponse<TApiResultData>>>> executeApiMethod,
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -1595,7 +1813,7 @@ namespace Apizr
         }
 
         /// <inheritdoc />
-        public Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+        public virtual Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<ApiResponse<TApiResultData>>>> executeApiMethod,
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
             => ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
@@ -1604,7 +1822,7 @@ namespace Apizr
                 optionsBuilder.WithOriginalExpression(executeApiMethod));
 
         /// <inheritdoc />
-        public async Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
+        public virtual async Task<IApizrResponse<TModelResultData>> ExecuteAsync<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>(
             Expression<Func<IApizrRequestOptions, TWebApi, TApiRequestData, Task<IApiResponse<TApiResultData>>>> executeApiMethod,
             TModelRequestData modelRequestData, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
         {

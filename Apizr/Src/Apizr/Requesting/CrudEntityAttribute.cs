@@ -19,7 +19,8 @@ namespace Apizr.Requesting
         /// <param name="readAllResultType">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</param>
         /// <param name="readAllParamsType">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</param>
         /// <param name="modelEntityType">Model entity type mapped with this api entity type (default: null = decorated api entity type)</param>
-        public CrudEntityAttribute(string baseUri, Type keyType = null, Type readAllResultType = null, Type readAllParamsType = null, Type modelEntityType = null)
+        /// <param name="useApiResponse">Tells Apizr to handle Refit's ApiResponse and return an ApizrResponse (default: false)</param>
+        public CrudEntityAttribute(string baseUri, Type keyType = null, Type readAllResultType = null, Type readAllParamsType = null, Type modelEntityType = null, bool useApiResponse = false)
         {
             if (keyType != null && keyType.GetTypeInfo().IsClass)
                 throw new ArgumentException($"{keyType.Name} must not be a class", nameof(keyType));
@@ -35,6 +36,7 @@ namespace Apizr.Requesting
             ReadAllResultType = readAllResultType ?? typeof(IEnumerable<>);
             ReadAllParamsType = readAllParamsType ?? typeof(IDictionary<string, object>);
             MappedEntityType = modelEntityType;
+            UseApiResponse = useApiResponse;
         }
 
         /// <summary>
@@ -61,22 +63,31 @@ namespace Apizr.Requesting
         /// Model entity type mapped with this Api entity type
         /// </summary>
         public Type MappedEntityType { get; set; }
+
+        /// <summary>
+        /// Tells Apizr to handle Refit's ApiResponse and return an ApizrResponse
+        /// </summary>
+        public bool UseApiResponse { get; set; }
     }
 
     /// <summary>
     /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
     /// </summary>
     /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
+    /// <param name="baseUri">This specific api entity's base crud uri</param>
+    /// <param name="useApiResponse">Tells Apizr to handle Refit's ApiResponse and return an ApizrResponse (default: false)</param>
     [AttributeUsage(AttributeTargets.Class)]
-    public class CrudEntityAttribute<TKey>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey));
+    public class CrudEntityAttribute<TKey>(string baseUri, bool useApiResponse = false) : CrudEntityAttribute(baseUri, typeof(TKey), useApiResponse: useApiResponse);
 
     /// <summary>
     /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
     /// </summary>
     /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
     /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+    /// <param name="baseUri">This specific api entity's base crud uri</param>
+    /// <param name="useApiResponse">Tells Apizr to handle Refit's ApiResponse and return an ApizrResponse (default: false)</param>
     [AttributeUsage(AttributeTargets.Class)]
-    public class CrudEntityAttribute<TKey, TReadAllResult>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult));
+    public class CrudEntityAttribute<TKey, TReadAllResult>(string baseUri, bool useApiResponse = false) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), useApiResponse: useApiResponse);
 
     /// <summary>
     /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
@@ -84,8 +95,10 @@ namespace Apizr.Requesting
     /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
     /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
     /// <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
+    /// <param name="baseUri">This specific api entity's base crud uri</param>
+    /// <param name="useApiResponse">Tells Apizr to handle Refit's ApiResponse and return an ApizrResponse (default: false)</param>
     [AttributeUsage(AttributeTargets.Class)]
-    public class CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams));
+    public class CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams>(string baseUri, bool useApiResponse = false) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), useApiResponse: useApiResponse);
 
     /// <summary>
     /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
@@ -94,6 +107,8 @@ namespace Apizr.Requesting
     /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
     /// <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
     /// <typeparam name="TModelEntity">Model entity type mapped with this api entity type (default: null = decorated api entity type)</typeparam>
+    /// <param name="baseUri">This specific api entity's base crud uri</param>
+    /// <param name="useApiResponse">Tells Apizr to handle Refit's ApiResponse and return an ApizrResponse (default: false)</param>
     [AttributeUsage(AttributeTargets.Class)]
-    public class CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams, TModelEntity>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(TModelEntity));
+    public class CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams, TModelEntity>(string baseUri, bool useApiResponse = false) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(TModelEntity), useApiResponse);
 }

@@ -422,24 +422,10 @@ namespace Apizr
         /// </summary>
         /// <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
         /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
+        /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod);
-
-        /// <summary>
-        /// Clear the cache of a specific request
-        /// </summary>
-        /// <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
-        /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
-        /// <returns></returns>
-        Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod);
-
-        /// <summary>
-        /// Clear the cache of a specific request
-        /// </summary>
-        /// <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
-        /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
-        /// <returns></returns>
-        Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod);
+        Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Clear the cache of a specific request
@@ -448,7 +434,8 @@ namespace Apizr
         /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod, CancellationToken cancellationToken = default);
+        Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Clear the cache of a specific request
@@ -457,16 +444,8 @@ namespace Apizr
         /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
-        Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod, CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Clear the cache of a specific request
-        /// </summary>
-        /// <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
-        /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
-        /// <param name="cancellationToken">A cancellation token</param>
-        /// <returns></returns>
-        Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod, CancellationToken cancellationToken = default);
+        Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod,
+            CancellationToken cancellationToken = default);
 
         #endregion
     }

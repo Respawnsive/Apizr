@@ -532,22 +532,10 @@ namespace Apizr.Extending
         /// <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
         /// <param name="registry">The registry</param>
         /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
-        /// <returns></returns>
-        public static Task<bool> ClearCacheAsync<TWebApi, TResult>(this IApizrEnumerableRegistry registry,
-            Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
-            => registry.GetManagerFor<TWebApi>().ClearCacheAsync<TResult>(executeApiMethod);
-
-        /// <summary>
-        /// Clear the cache of a specific request
-        /// </summary>
-        /// <typeparam name="TWebApi">The web api to manage</typeparam>
-        /// <typeparam name="TResult">The <typeparamref name="TWebApi"/>'s task result</typeparam>
-        /// <param name="registry">The registry</param>
-        /// <param name="executeApiMethod">The specific <typeparamref name="TWebApi"/>'s task to clear cache for</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns></returns>
         public static Task<bool> ClearCacheAsync<TWebApi, TResult>(this IApizrEnumerableRegistry registry,
-            Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
+            Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
             CancellationToken cancellationToken = default)
             => registry.GetManagerFor<TWebApi>().ClearCacheAsync<TResult>(executeApiMethod, cancellationToken);
 

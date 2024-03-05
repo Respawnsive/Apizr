@@ -657,9 +657,12 @@ namespace Apizr
                     requestOptionsBuilder.ApizrOptions.OnException(response.Exception);
                 }
 
-                if (response.Exception == null && response.Result != null && _cacheHandler != null &&
+                if (response.Exception == null && 
+                    response.Result != null && 
+                    _cacheHandler != null &&
                     !string.IsNullOrWhiteSpace(cacheKey) &&
-                    cacheAttribute != null && cacheAttribute.Mode != CacheMode.None)
+                    cacheAttribute != null && 
+                    cacheAttribute.Mode != CacheMode.None)
                 {
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Caching result");
@@ -1802,22 +1805,24 @@ namespace Apizr
         }
 
         /// <inheritdoc />
-        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod)
-            => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(api), CancellationToken.None);
+        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<TResult>>> executeApiMethod,
+            CancellationToken cancellationToken = default)
+            => ClearMethodCacheAsync<TResult>(executeApiMethod, CancellationToken.None);
 
         /// <inheritdoc />
         public Task<bool> ClearCacheAsync<TResult>(
-            Expression<Func<TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod)
-            => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(api)
-                .ContinueWith(task => (IApiResponse<TResult>) task.Result, ct), CancellationToken.None);
+            Expression<Func<TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod,
+            CancellationToken cancellationToken = default)
+            => ClearMethodCacheAsync<TResult>(executeApiMethod, CancellationToken.None);
 
         /// <inheritdoc />
-        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod)
-            => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(api), CancellationToken.None);
+        public Task<bool> ClearCacheAsync<TResult>(
+            Expression<Func<TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod,
+            CancellationToken cancellationToken = default)
+            => ClearMethodCacheAsync<TResult>(executeApiMethod, CancellationToken.None);
 
-        /// <inheritdoc />
-        public async Task<bool> ClearCacheAsync<TResult>(
-            Expression<Func<CancellationToken, TWebApi, Task<TResult>>> executeApiMethod,
+        private async Task<bool> ClearMethodCacheAsync<TResult>(
+            Expression executeApiMethod,
             CancellationToken cancellationToken = default)
         {
             var methodCallExpression = GetMethodCallExpression<TResult>(executeApiMethod);
@@ -1861,17 +1866,6 @@ namespace Apizr
 
                 return false;
             }
-        }
-
-        /// <inheritdoc />
-        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<ApiResponse<TResult>>>> executeApiMethod, CancellationToken cancellationToken = default)
-            => ClearCacheAsync((ct, api) => executeApiMethod.Compile().Invoke(ct, api)
-                .ContinueWith(task => (IApiResponse<TResult>)task.Result, ct), cancellationToken);
-
-        /// <inheritdoc />
-        public Task<bool> ClearCacheAsync<TResult>(Expression<Func<CancellationToken, TWebApi, Task<IApiResponse<TResult>>>> executeApiMethod, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

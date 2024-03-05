@@ -86,7 +86,7 @@ namespace Apizr
         public ApizrResponse(IApiResponse apiResponse, ApizrException<TResult> apizrException) : base(apiResponse, apizrException)
         {
             Result = apizrException.CachedResult;
-            DataSource = ApizrResponseDataSource.Cache;
+            DataSource = Equals(apizrException.CachedResult, default) ? ApizrResponseDataSource.None : ApizrResponseDataSource.Cache;
         }
 
         /// <inheritdoc />

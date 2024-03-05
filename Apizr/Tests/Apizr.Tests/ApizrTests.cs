@@ -222,8 +222,10 @@ namespace Apizr.Tests
                     .WithAkavacheCacheHandler()
                     .AddDelegatingHandler(new TestRequestHandler()));
 
-            // Clearing cache
-            await reqResManager.ClearCacheAsync();
+            // Clearing all cache
+            var cleared = await reqResManager.ClearCacheAsync();
+
+            cleared.Should().BeTrue();
 
             // This one should fail with no cached result
             var response = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync(HttpStatusCode.BadRequest));
@@ -257,6 +259,21 @@ namespace Apizr.Tests
             response.Result.Should().NotBeNull();
             response.Result!.Data.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            // Clearing specific cache
+            cleared = await reqResManager.ClearCacheAsync(api => api.GetUsersResponseAsync());
+
+            cleared.Should().BeTrue();
+
+            // This one should fail with no cached result
+            response = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().BeNull();
+            response.DataSource.Should().Be(ApizrResponseDataSource.None);
         }
 
         [Fact]

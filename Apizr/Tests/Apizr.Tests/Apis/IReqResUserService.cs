@@ -28,10 +28,10 @@ namespace Apizr.Tests.Apis
     public interface IReqResUserService
     {
         [Get("/users")]
-        Task<IApiResponse<ApiResult<User>>> GetUsersResponseAsync();
+        Task<IApiResponse<ApiResult<User>>> SafeGetUsersAsync();
 
         [Get("/users")]
-        Task<ApiResponse<ApiResult<User>>> GetUsersResponseAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+        Task<ApiResponse<ApiResult<User>>> SafeGetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync();

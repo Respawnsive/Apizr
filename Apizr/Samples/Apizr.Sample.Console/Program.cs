@@ -405,7 +405,7 @@ namespace Apizr.Sample.Console
                         }
                     }).Build();
 
-                
+                //typeof(IRequestHandler<ExecuteSafeResultRequest<IReqResService, UserList>, IApizrResponse<UserList>>)
                 var scope = host.Services.CreateScope();
 
                 _reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();

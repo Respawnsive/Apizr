@@ -95,6 +95,22 @@ namespace Apizr
 
                             // Registration
                             services.TryAddTransient(shortReadQueryHandlerServiceType, shortReadQueryHandlerImplementationType);
+
+                            // -- Safe --
+                            // ServiceType
+                            var shortSafeReadQueryType = typeof(SafeReadQuery<>).MakeGenericType(modelEntityType);
+                            var shortSafeReadQueryResponseType = typeof(IApizrResponse<>).MakeGenericType(modelEntityType);
+                            var shortSafeReadQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortSafeReadQueryType, shortSafeReadQueryResponseType);
+
+                            // ImplementationType
+                            var shortSafeReadQueryHandlerImplementationType = typeof(SafeReadQueryHandler<,,,>).MakeGenericType(
+                                modelEntityType,
+                                apiEntityType,
+                                apiEntityReadAllResultType,
+                                apiEntityReadAllParamsType);
+
+                            // Registration
+                            services.TryAddTransient(shortSafeReadQueryHandlerServiceType, shortSafeReadQueryHandlerImplementationType);
                         }
 
                         #endregion
@@ -116,6 +132,23 @@ namespace Apizr
                         // Registration
                         services.TryAddTransient(readQueryHandlerServiceType, readQueryHandlerImplementationType);
 
+                        // -- Safe --
+                        // ServiceType
+                        var safeReadQueryType = typeof(SafeReadQuery<,>).MakeGenericType(modelEntityType, apiEntityKeyType);
+                        var safeReadQueryResponseType = typeof(IApizrResponse<>).MakeGenericType(modelEntityType);
+                        var safeReadQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeReadQueryType, safeReadQueryResponseType);
+
+                        // ImplementationType
+                        var safeReadQueryHandlerImplementationType = typeof(SafeReadQueryHandler<,,,,>).MakeGenericType(
+                            modelEntityType,
+                            apiEntityType,
+                            apiEntityKeyType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+
+                        // Registration
+                        services.TryAddTransient(safeReadQueryHandlerServiceType, safeReadQueryHandlerImplementationType);
+
                         #endregion
 
                         #region ShortReadAll
@@ -136,6 +169,22 @@ namespace Apizr
 
                             // Registration
                             services.TryAddTransient(shortReadAllQueryHandlerServiceType, shortReadAllQueryHandlerImplementationType);
+
+                            // -- Safe --
+                            // ServiceType
+                            var shortSafeReadAllQueryType = typeof(SafeReadAllQuery<>).MakeGenericType(modelEntityReadAllResultType);
+                            var shortSafeReadAllQueryResponseType = typeof(IApizrResponse<>).MakeGenericType(modelEntityReadAllResultType);
+                            var shortSafeReadAllQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortSafeReadAllQueryType, shortSafeReadAllQueryResponseType);
+
+                            // ImplementationType
+                            var shortSafeReadAllQueryHandlerImplementationType = typeof(SafeReadAllQueryHandler<,,,>).MakeGenericType(
+                                apiEntityType,
+                                apiEntityKeyType,
+                                modelEntityReadAllResultType,
+                                apiEntityReadAllResultType);
+
+                            // Registration
+                            services.TryAddTransient(shortSafeReadAllQueryHandlerServiceType, shortSafeReadAllQueryHandlerImplementationType);
                         }
 
                         #endregion
@@ -157,6 +206,23 @@ namespace Apizr
                         // Registration
                         services.TryAddTransient(readAllQueryHandlerServiceType, readAllQueryHandlerImplementationType);
 
+                        // -- Safe --
+                        // ServiceType
+                        var safeReadAllQueryType = typeof(SafeReadAllQuery<,>).MakeGenericType(apiEntityReadAllParamsType, modelEntityReadAllResultType);
+                        var safeReadAllQueryResponseType = typeof(IApizrResponse<>).MakeGenericType(modelEntityReadAllResultType);
+                        var safeReadAllQueryHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeReadAllQueryType, safeReadAllQueryResponseType);
+
+                        // ImplementationType
+                        var safeReadAllQueryHandlerImplementationType = typeof(SafeReadAllQueryHandler<,,,,>).MakeGenericType(
+                            apiEntityType,
+                            apiEntityKeyType,
+                            modelEntityReadAllResultType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+
+                        // Registration
+                        services.TryAddTransient(safeReadAllQueryHandlerServiceType, safeReadAllQueryHandlerImplementationType);
+
                         #endregion
 
                         #region Create
@@ -175,6 +241,23 @@ namespace Apizr
 
                         // Registration
                         services.TryAddTransient(createCommandHandlerServiceType, createCommandHandlerImplementationType);
+
+                        // -- Safe --
+                        // ServiceType
+                        var safeCreateCommandType = typeof(SafeCreateCommand<>).MakeGenericType(modelEntityType);
+                        var safeCreateCommandResponseType = typeof(IApizrResponse<>).MakeGenericType(modelEntityType);
+                        var safeCreateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeCreateCommandType, safeCreateCommandResponseType);
+
+                        // ImplementationType
+                        var safeCreateCommandHandlerImplementationType = typeof(SafeCreateCommandHandler<,,,,>).MakeGenericType(
+                            modelEntityType,
+                            apiEntityType,
+                            apiEntityKeyType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+
+                        // Registration
+                        services.TryAddTransient(safeCreateCommandHandlerServiceType, safeCreateCommandHandlerImplementationType);
 
                         #endregion
 
@@ -197,6 +280,22 @@ namespace Apizr
 
                             // Registration
                             services.TryAddTransient(shortUpdateCommandHandlerServiceType, shortUpdateCommandHandlerImplementationType);
+
+                            // -- Safe --
+                            // ServiceType
+                            var shortSafeUpdateCommandType = typeof(SafeUpdateCommand<>).MakeGenericType(modelEntityType);
+                            var shortSafeUpdateCommandResponseType = typeof(IApizrResponse);
+                            var shortSafeUpdateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortSafeUpdateCommandType, shortSafeUpdateCommandResponseType);
+
+                            // ImplementationType
+                            var shortSafeUpdateCommandHandlerImplementationType = typeof(SafeUpdateCommandHandler<,,,>).MakeGenericType(
+                                modelEntityType,
+                                apiEntityType,
+                                apiEntityReadAllResultType,
+                                apiEntityReadAllParamsType);
+
+                            // Registration
+                            services.TryAddTransient(shortSafeUpdateCommandHandlerServiceType, shortSafeUpdateCommandHandlerImplementationType);
                         }
 
                         #endregion
@@ -219,6 +318,23 @@ namespace Apizr
                         // Registration
                         services.TryAddTransient(updateCommandHandlerServiceType, updateCommandHandlerImplementationType);
 
+                        // -- Safe --
+                        // ServiceType
+                        var safeUpdateCommandType = typeof(SafeUpdateCommand<,>).MakeGenericType(apiEntityKeyType, modelEntityType);
+                        var safeUpdateCommandResponseType = typeof(IApizrResponse);
+                        var safeUpdateCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeUpdateCommandType, safeUpdateCommandResponseType);
+
+                        // ImplementationType
+                        var safeUpdateCommandHandlerImplementationType = typeof(SafeUpdateCommandHandler<,,,,>).MakeGenericType(
+                            modelEntityType,
+                            apiEntityType,
+                            apiEntityKeyType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+
+                        // Registration
+                        services.TryAddTransient(safeUpdateCommandHandlerServiceType, safeUpdateCommandHandlerImplementationType);
+
                         #endregion
 
                         #region ShortDelete
@@ -240,6 +356,22 @@ namespace Apizr
 
                             // Registration
                             services.TryAddTransient(shortDeleteCommandHandlerServiceType, shortDeleteCommandHandlerImplementationType);
+
+                            // -- Safe --
+                            // ServiceType
+                            var shortSafeDeleteCommandType = typeof(SafeDeleteCommand<>).MakeGenericType(modelEntityType);
+                            var shortSafeDeleteCommandResponseType = typeof(IApizrResponse);
+                            var shortSafeDeleteCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortSafeDeleteCommandType, shortSafeDeleteCommandResponseType);
+
+                            // ImplementationType
+                            var shortSafeDeleteCommandHandlerImplementationType = typeof(SafeDeleteCommandHandler<,,,>).MakeGenericType(
+                                modelEntityType,
+                                apiEntityType,
+                                apiEntityReadAllResultType,
+                                apiEntityReadAllParamsType);
+
+                            // Registration
+                            services.TryAddTransient(shortSafeDeleteCommandHandlerServiceType, shortSafeDeleteCommandHandlerImplementationType);
                         }
 
                         #endregion
@@ -261,6 +393,23 @@ namespace Apizr
 
                         // Registration
                         services.TryAddTransient(deleteCommandHandlerServiceType, deleteCommandHandlerImplementationType);
+
+                        // -- Safe --
+                        // ServiceType
+                        var safeDeleteCommandType = typeof(SafeDeleteCommand<,>).MakeGenericType(modelEntityType, apiEntityKeyType);
+                        var safeDeleteCommandResponseType = typeof(IApizrResponse);
+                        var safeDeleteCommandHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeDeleteCommandType, safeDeleteCommandResponseType);
+
+                        // ImplementationType
+                        var safeDeleteCommandHandlerImplementationType = typeof(SafeDeleteCommandHandler<,,,,>).MakeGenericType(
+                            modelEntityType,
+                            apiEntityType,
+                            apiEntityKeyType,
+                            apiEntityReadAllResultType,
+                            apiEntityReadAllParamsType);
+
+                        // Registration
+                        services.TryAddTransient(safeDeleteCommandHandlerServiceType, safeDeleteCommandHandlerImplementationType);
 
                         #endregion
 
@@ -312,9 +461,10 @@ namespace Apizr
 
                         #region Result
 
-                        if (returnType.IsGenericType &&
-                                            (methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(Task<>)
-                                             || methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(IObservable<>)))
+                        if (returnType.IsGenericType && 
+                            returnType != typeof(Task<IApiResponse>) &&
+                            (returnType.GetGenericTypeDefinition() == typeof(Task<>)
+                             || returnType.GetGenericTypeDefinition() == typeof(IObservable<>)))
                         {
                             #region Unmapped
 
@@ -326,10 +476,10 @@ namespace Apizr
                             {
                                 apiResponseType = apiResponseType.GetGenericArguments()[0];
                             }
-                            else if (apiResponseType == typeof(IApiResponse))
-                            {
-                                apiResponseType = typeof(HttpContent);
-                            }
+                            //else if (apiResponseType == typeof(IApiResponse))
+                            //{
+                            //    apiResponseType = typeof(HttpContent);
+                            //}
 
                             // ServiceType
                             var executeRequestType = typeof(ExecuteResultRequest<,>).MakeGenericType(webApiType, apiResponseType);
@@ -340,6 +490,18 @@ namespace Apizr
 
                             // Registration
                             services.TryAddTransient(executeRequestHandlerServiceType, executeRequestHandlerImplementationType);
+
+                            // -- Safe --
+                            // ServiceType
+                            var safeExecuteRequestType = typeof(ExecuteSafeResultRequest<,>).MakeGenericType(webApiType, apiResponseType); 
+                            var safeExecuteResponseType = typeof(IApizrResponse<>).MakeGenericType(apiResponseType);
+                            var safeExecuteRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteRequestType, safeExecuteResponseType);
+
+                            // ImplementationType
+                            var safeExecuteRequestHandlerImplementationType = typeof(ExecuteSafeResultRequestHandler<,>).MakeGenericType(webApiType, apiResponseType);
+
+                            // Registration
+                            services.TryAddTransient(safeExecuteRequestHandlerServiceType, safeExecuteRequestHandlerImplementationType);
 
                             #endregion
 
@@ -369,6 +531,18 @@ namespace Apizr
 
                                     // Registration
                                     services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+
+                                    // -- Safe --
+                                    // ServiceType
+                                    var safeExecuteMappedRequestType = typeof(ExecuteSafeResultRequest<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
+                                    var safeExecuteMappedResponseType = typeof(IApizrResponse<>).MakeGenericType(modelResponseType);
+                                    var safeExecuteMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedRequestType, safeExecuteMappedResponseType);
+
+                                    // ImplementationType
+                                    var safeExecuteMappedRequestHandlerImplementationType = typeof(ExecuteSafeResultRequestHandler<,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType);
+
+                                    // Registration
+                                    services.TryAddTransient(safeExecuteMappedRequestHandlerServiceType, safeExecuteMappedRequestHandlerImplementationType);
                                 }
                                 else // ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
                                 {
@@ -385,6 +559,18 @@ namespace Apizr
 
                                     // Registration
                                     services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+
+                                    // -- Safe --
+                                    // ServiceType
+                                    var safeExecuteMappedRequestType = typeof(ExecuteSafeResultRequest<,,,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+                                    var safeExecuteMappedResponseType = typeof(IApizrResponse<>).MakeGenericType(modelResponseType);
+                                    var safeExecuteMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedRequestType, safeExecuteMappedResponseType);
+
+                                    // ImplementationType
+                                    var safeExecuteMappedRequestHandlerImplementationType = typeof(ExecuteSafeResultRequestHandler<,,,,>).MakeGenericType(webApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+
+                                    // Registration
+                                    services.TryAddTransient(safeExecuteMappedRequestHandlerServiceType, safeExecuteMappedRequestHandlerImplementationType);
                                 }
                             }
 
@@ -394,6 +580,51 @@ namespace Apizr
                         #endregion
 
                         #region Unit
+
+                        else if (returnType == typeof(Task<IApiResponse>))
+                        {
+                            // -- Safe --
+
+                            #region Unmapped
+
+                            // ServiceType
+                            var safeExecuteRequestType = typeof(ExecuteSafeUnitRequest<>).MakeGenericType(webApiType);
+                            var safeExecuteRequestResponseType = typeof(IApizrResponse);
+                            var safeExecuteRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteRequestType, safeExecuteRequestResponseType);
+
+                            // ImplementationType
+                            var safeExecuteRequestHandlerImplementationType = typeof(ExecuteSafeUnitRequestHandler<>).MakeGenericType(webApiType);
+
+                            // Registration
+                            services.TryAddTransient(safeExecuteRequestHandlerServiceType, safeExecuteRequestHandlerImplementationType);
+
+                            #endregion
+
+                            #region Mapped
+
+                            // Mapped object
+                            var mappedParameterInfo = methodInfo.GetParameters().FirstOrDefault(p =>
+                                p.ParameterType is { IsClass: true, IsAbstract: false } &&
+                                p.ParameterType.GetCustomAttribute<MappedWithAttribute>() != null);
+                            if (mappedParameterInfo != null)
+                            {
+                                var modelEntityType = mappedParameterInfo.ParameterType.GetCustomAttribute<MappedWithAttribute>().MappedWithType;
+                                var apiEntityType = mappedParameterInfo.ParameterType;
+
+                                // ServiceType
+                                var safeExecuteMappedRequestType = typeof(ExecuteSafeUnitRequest<,,>).MakeGenericType(webApiType, modelEntityType, apiEntityType);
+                                var safeExecuteMappedRequestResponseType = typeof(IApizrResponse);
+                                var safeExecuteMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedRequestType, safeExecuteMappedRequestResponseType);
+
+                                // ImplementationType
+                                var safeExecuteMappedRequestHandlerImplementationType = typeof(ExecuteSafeUnitRequestHandler<,,>).MakeGenericType(webApiType, modelEntityType, apiEntityType);
+
+                                // Registration
+                                services.TryAddTransient(safeExecuteMappedRequestHandlerServiceType, safeExecuteMappedRequestHandlerImplementationType);
+                            }
+
+                            #endregion
+                        }
 
                         else if (returnType == typeof(Task))
                         {

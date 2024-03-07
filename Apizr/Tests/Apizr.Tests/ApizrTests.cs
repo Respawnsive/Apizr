@@ -228,7 +228,7 @@ namespace Apizr.Tests
             cleared.Should().BeTrue();
 
             // This one should fail with no cached result
-            var response = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync(HttpStatusCode.BadRequest));
+            var response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
 
             response.Should().NotBeNull();
             response.IsSuccess.Should().BeFalse();
@@ -238,7 +238,7 @@ namespace Apizr.Tests
             response.DataSource.Should().Be(ApizrResponseDataSource.None);
 
             // This one should succeed with request result
-            response = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync());
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync());
 
             // and cache result in-memory
             response.Should().NotBeNull();
@@ -250,7 +250,7 @@ namespace Apizr.Tests
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
 
             // This one should fail but with cached result
-            response = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync(HttpStatusCode.BadRequest));
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
 
             response.Should().NotBeNull();
             response.IsSuccess.Should().BeFalse();
@@ -261,12 +261,12 @@ namespace Apizr.Tests
             response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
 
             // Clearing specific cache
-            cleared = await reqResManager.ClearCacheAsync(api => api.GetUsersResponseAsync());
+            cleared = await reqResManager.ClearCacheAsync(api => api.SafeGetUsersAsync());
 
             cleared.Should().BeTrue();
 
             // This one should fail with no cached result
-            response = await reqResManager.ExecuteAsync(api => api.GetUsersResponseAsync(HttpStatusCode.BadRequest));
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
 
             response.Should().NotBeNull();
             response.IsSuccess.Should().BeFalse();

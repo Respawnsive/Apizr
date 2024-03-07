@@ -735,6 +735,14 @@ namespace Apizr.Tests
             result.Should().NotBeNull();
             result.Data.Should().NotBeNull();
             result.Data.Count.Should().BeGreaterOrEqualTo(1);
+
+            var response = await reqResMediator.SendFor(api => api.SafeGetUsersAsync());
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.Exception.Should().BeNull();
+            response.Result.Should().NotBeNull();
+            response.Result.Data.Should().NotBeNull();
+            response.Result.Data.Count.Should().BeGreaterOrEqualTo(1);
         }
 
         [Fact]

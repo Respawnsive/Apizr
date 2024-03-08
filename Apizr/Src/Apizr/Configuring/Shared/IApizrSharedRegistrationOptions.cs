@@ -49,11 +49,6 @@ namespace Apizr.Configuring.Shared
         Func<HttpClientHandler> HttpClientHandlerFactory { get; }
 
         /// <summary>
-        /// HttpClient factory
-        /// </summary>
-        Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; }
-
-        /// <summary>
         /// HttpClient configuration builder
         /// </summary>
         Action<HttpClient> HttpClientConfigurationBuilder { get; }

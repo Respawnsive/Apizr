@@ -134,14 +134,6 @@ namespace Apizr.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
-        {
-            Options.HttpClientFactory = httpClientFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
             Func<ILogger, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
             where TAuthenticationHandler : AuthenticationHandlerBase

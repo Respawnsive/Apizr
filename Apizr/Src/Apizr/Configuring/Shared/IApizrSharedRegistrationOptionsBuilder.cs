@@ -65,13 +65,6 @@ namespace Apizr.Configuring.Shared
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
 
         /// <summary>
-        /// Provide a custom HttpClient
-        /// </summary>
-        /// <param name="httpClientFactory">An <see cref="HttpClient"/> instance factory</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory);
-
-        /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation factory
         /// </summary>
         /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>

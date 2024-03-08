@@ -52,7 +52,6 @@ namespace Apizr.Configuring.Proper
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = sharedOptions.HttpClientConfigurationBuilder;
-            HttpClientFactory = sharedOptions.HttpClientFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             HeadersFactories = new List<Func<IList<string>>>{sharedOptions.HeadersFactory};
             OperationTimeoutFactory = operationTimeout.HasValue ? () => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
@@ -112,9 +111,6 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
-
-        /// <inheritdoc />
-        public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
 
         /// <inheritdoc />
         public Action<HttpClient> HttpClientConfigurationBuilder { get; set;  }

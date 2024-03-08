@@ -7,7 +7,6 @@ using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
-using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Refit;
@@ -29,7 +28,6 @@ namespace Apizr.Configuring.Common
             ResiliencePipelineRegistryFactory = () => new ResiliencePipelineRegistry<string>();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             HttpClientConfigurationBuilder = _ => { };
-            HttpClientFactory = (handler, uri) => new HttpClient(handler, false) {BaseAddress = uri};
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new DefaultConnectivityHandler(() => true);
             CacheHandlerFactory = () => new VoidCacheHandler();
@@ -70,9 +68,6 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
-
-        /// <inheritdoc />
-        public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
 
         /// <inheritdoc />
         public Action<HttpClient> HttpClientConfigurationBuilder { get; set; }

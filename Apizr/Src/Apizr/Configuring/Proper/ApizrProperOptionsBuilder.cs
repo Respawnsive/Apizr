@@ -130,14 +130,6 @@ namespace Apizr.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
-        {
-            Options.HttpClientFactory = httpClientFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrProperOptionsBuilder WithAuthenticationHandler(
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
             => AddDelegatingHandler((logger, options) =>

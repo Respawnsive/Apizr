@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
+    
+    
+      <link rel="shortcut icon" href="../../../resources/favicon.ico">
+      <link rel="stylesheet" href="../../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../../styles/docfx.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc.html">
+      <meta property="docfx:tocrel" content="../../toc.html">
+    
+    <meta property="docfx:rel" content="../../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="configuring-data-mapping">Configuring data mapping</h2>
+<p>You may need to map data between some API types and Model types, known as DTO design pattern.
+Apizr could handle it for you by providing an <code>IMappingHandler</code> interface implementation to it.
+Fortunately, there are some integration Nuget packages to do so.
+Of course, you can implement your own integration, but here we'll talk about the provided ones.</p>
+<p>Please first install this integration package of your choice:</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Current</th>
+<th>Upcoming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apizr.Integrations.AutoMapper</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.AutoMapper.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.AutoMapper/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.AutoMapper.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Apizr.Integrations.Mapster</td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Mapster/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.Mapster.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/Apizr.Integrations.Mapster/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.Mapster.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+</tbody>
+</table>
+<p>Where:</p>
+<ul>
+<li><strong>Apizr.Integrations.AutoMapper</strong> package brings an <code>IMappingHandler</code> implementation for <a href="https://github.com/AutoMapper/AutoMapper">AutoMapper</a></li>
+<li><strong>Apizr.Integrations.Mapster</strong> package brings an <code>IMappingHandler</code> implementation for <a href="https://github.com/MapsterMapper/Mapster">Mapster</a></li>
+</ul>
+<h3 id="defining">Defining</h3>
+<h4 id="automapper">AutoMapper</h4>
+<p>As usually with AutoMapper, define your mapping profiles, like for example:</p>
+<pre><code class="lang-csharp">public class UserMinUserProfile : Profile
+{
+    public UserMinUserProfile()
+    {
+        CreateMap&lt;User, MinUser&gt;()
+            .ForMember(dest =&gt; dest.Name, opt =&gt; opt.MapFrom(src =&gt; src.FirstName));
+        CreateMap&lt;MinUser, User&gt;()
+            .ForMember(dest =&gt; dest.FirstName, opt =&gt; opt.MapFrom(src =&gt; src.Name));
+    }
+}
+</code></pre>
+<h4 id="mapster">Mapster</h4>
+<p>No need to write your own DTO classes. Mapster provides Mapster.Tool to help you generating models. And if you would like to have explicit mapping, Mapster also generates mapper class for you.</p>
+<pre><code class="lang-csharp">[AdaptTo(&quot;[name]Dto&quot;), GenerateMapper]
+public class Student {
+    ...
+}
+</code></pre>
+<p>Then Mapster will generate:</p>
+<pre><code class="lang-csharp">public class StudentDto {
+    ...
+}
+public static class StudentMapper {
+    public static StudentDto AdaptToDto(this Student poco) { ... }
+    public static StudentDto AdaptTo(this Student poco, StudentDto dto) { ... }
+    public static Expression&lt;Func&lt;Student, StudentDto&gt;&gt; ProjectToDto =&gt; ...
+}
+</code></pre>
+<p>But you can also write your own mapping configuration, like for example:</p>
+<pre><code class="lang-csharp">TypeAdapterConfig&lt;TSource, TDestination&gt;
+    .NewConfig()
+    .Ignore(dest =&gt; dest.Age)
+    .Map(dest =&gt; dest.FullName,
+        src =&gt; string.Format(&quot;{0} {1}&quot;, src.FirstName, src.LastName));
+</code></pre>
+<h4 id="advanced">Advanced</h4>
+<div class="WARNING">
+<h5>Warning</h5>
+<p><strong>Data Mapping with MediatR and/or Optional</strong></p>
+<p>If you plan to use MediatR and/or Optional integrations, one more defining step has to be done.</p>
+</div>
+<p>Only for those of you planning to use data mapping with <strong>MediatR</strong> and/or <strong>Optional</strong>, Apizr provide a <code>MappedWith</code> attribute telling it to map api object with model object.
+You’ll find another <code>MappedCrudEntity</code> attribute dedicated to CRUD apis, coming with auto-registration capabilities, in case of access restricted to only local client model.
+We could get a model class mapped to an api one like:</p>
+<pre><code class="lang-csharp">[MappedWith(typeof(User))]
+public class MinUser
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+</code></pre>
+<h3 id="registering">Registering</h3>
+<h4 id="automapper-1">AutoMapper</h4>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+
+<p>First create a <code>MapperConfiguration</code> with your profiles:</p>
+<pre><code class="lang-csharp">var mapperConfig = new MapperConfiguration(config =&gt;
+{
+    config.AddProfile&lt;UserMinUserProfile&gt;();
+    config.AddProfile&lt;WhateverProfile&gt;();
+});
+</code></pre>
+<p>Then you'll be able to register with this option:</p>
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithAutoMapperMappingHandler(mapperConfig)
+
+// OR direct configuration
+options =&gt; options.WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
+
+// OR factory configuration
+options =&gt; options.WithMappingHandler(() =&gt; new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
+</code></pre>
+</section>
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
+<p>First register AutoMapper as you used to do:</p>
+<pre><code class="lang-csharp">services.AddAutoMapper(ASSEMBLIES_CONTAINING_PROFILES);
+</code></pre>
+<p>Then you'll be able to register with this option:</p>
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithAutoMapperMappingHandler()
+
+// OR direct configuration
+options =&gt; options.WithMappingHandler(new AutoMapperMappingHandler(YOUR_MAPPER_CONFIG))
+
+// OR factory configuration
+options =&gt; options.WithMappingHandler(() =&gt; new AutoMapperMappingHandler(YOUR_MAPPER_CONFIG))
+
+// OR factory configuration with the service provider instance
+options =&gt; options.WithMappingHandler(serviceProvider =&gt; new AutoMapperMappingHandler(YOUR_MAPPER_CONFIG))
+
+// OR closed type configuration
+options =&gt; options.WithMappingHandler&lt;AutoMapperMappingHandler&gt;()
+
+// OR parameter type configuration
+options =&gt; options.WithMappingHandler(typeof(AutoMapperMappingHandler))
+</code></pre>
+</section>
+</div>
+<h4 id="mapster-1">Mapster</h4>
+<div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+</li>
+</ul>
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
+
+<p>Register with one of the following options:</p>
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithMapsterMappingHandler(new Mapper())
+
+// OR direct configuration
+options =&gt; options.WithMappingHandler(new MapsterMappingHandler(new Mapper()))
+
+// OR factory configuration
+options =&gt; options.WithMappingHandler(() =&gt; new MapsterMappingHandler(new Mapper()))
+</code></pre>
+</section>
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
+<p>First register Mapster as you used to do:</p>
+<pre><code class="lang-csharp">var config = new TypeAdapterConfig();
+// Or
+// var config = TypeAdapterConfig.GlobalSettings;
+services.AddSingleton(config);
+services.AddScoped&lt;IMapper, ServiceMapper&gt;();
+</code></pre>
+<p>Then you'll be able to register with this option:</p>
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithMapsterMappingHandler()
+
+// OR closed type configuration
+options =&gt; options.WithMappingHandler&lt;MapsterMappingHandler&gt;()
+
+// OR parameter type configuration
+options =&gt; options.WithMappingHandler(typeof(MapsterMappingHandler))
+</code></pre>
+</section>
+</div>
+<h3 id="using">Using</h3>
+<p>You can tell Apizr to map data just by providing types when executing a request.</p>
+<p>Something like:</p>
+<pre><code class="lang-csharp">var result = await reqResManager.ExecuteAsync&lt;MinUser, User&gt;((api, user) =&gt; 
+    api.CreateUser(user, CancellationToken.None), minUser);
+</code></pre>
+<p>Here we give a MinUser typed object to Apizr, which will be mapped to User type just before sending it.
+Then Apizr will map the User typed result back to MinUser type just before returning it.</p>
+<p>There are much more overloads so you can map objects the way you need.
+The same while using <strong>MediatR</strong> and/or <strong>Optional</strong>.</p>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/legacy/v5/config_datamapping.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Supported by Respawnsive
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

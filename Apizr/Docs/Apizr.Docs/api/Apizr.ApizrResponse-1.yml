@@ -1,0 +1,918 @@
+### YamlMime:ManagedReference
+items:
+- uid: Apizr.ApizrResponse`1
+  commentId: T:Apizr.ApizrResponse`1
+  id: ApizrResponse`1
+  parent: Apizr
+  children:
+  - Apizr.ApizrResponse`1.#ctor(Apizr.ApizrException{`0})
+  - Apizr.ApizrResponse`1.#ctor(Refit.IApiResponse,Apizr.ApizrException{`0})
+  - Apizr.ApizrResponse`1.#ctor(Refit.IApiResponse,`0,Apizr.ApizrResponseDataSource)
+  - Apizr.ApizrResponse`1.#ctor(`0,Apizr.ApizrResponseDataSource)
+  - Apizr.ApizrResponse`1.DataSource
+  - Apizr.ApizrResponse`1.Result
+  langs:
+  - csharp
+  - vb
+  name: ApizrResponse<TResult>
+  nameWithType: ApizrResponse<TResult>
+  fullName: Apizr.ApizrResponse<TResult>
+  type: Class
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrResponse.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ApizrResponse
+    path: ../../Src/Apizr/ApizrResponse.cs
+    startLine: 63
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  summary: Interface used to represent an API response managed by Apizr.
+  example: []
+  syntax:
+    content: 'public class ApizrResponse<TResult> : ApizrResponse, IApizrResponse<TResult>, IApizrResponse, IDisposable'
+    typeParameters:
+    - id: TResult
+      description: Deserialized request content as TResult
+    content.vb: Public Class ApizrResponse(Of TResult) Inherits ApizrResponse Implements IApizrResponse(Of TResult), IApizrResponse, IDisposable
+  inheritance:
+  - System.Object
+  - Apizr.ApizrResponse
+  implements:
+  - Apizr.IApizrResponse{{TResult}}
+  - Apizr.IApizrResponse
+  - System.IDisposable
+  inheritedMembers:
+  - Apizr.ApizrResponse.IsSuccess
+  - Apizr.ApizrResponse.ApiResponse
+  - Apizr.ApizrResponse.Exception
+  - Apizr.ApizrResponse.Dispose
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Apizr.IApizrResponse.Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode
+  - Apizr.IApizrResponse{`0}.Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1
+  nameWithType.vb: ApizrResponse(Of TResult)
+  fullName.vb: Apizr.ApizrResponse(Of TResult)
+  name.vb: ApizrResponse(Of TResult)
+- uid: Apizr.ApizrResponse`1.#ctor(`0,Apizr.ApizrResponseDataSource)
+  commentId: M:Apizr.ApizrResponse`1.#ctor(`0,Apizr.ApizrResponseDataSource)
+  id: '#ctor(`0,Apizr.ApizrResponseDataSource)'
+  parent: Apizr.ApizrResponse`1
+  langs:
+  - csharp
+  - vb
+  name: ApizrResponse(TResult, ApizrResponseDataSource)
+  nameWithType: ApizrResponse<TResult>.ApizrResponse(TResult, ApizrResponseDataSource)
+  fullName: Apizr.ApizrResponse<TResult>.ApizrResponse(TResult, Apizr.ApizrResponseDataSource)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrResponse.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/ApizrResponse.cs
+    startLine: 65
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  syntax:
+    content: public ApizrResponse(TResult result, ApizrResponseDataSource dataSource)
+    parameters:
+    - id: result
+      type: '{TResult}'
+    - id: dataSource
+      type: Apizr.ApizrResponseDataSource
+    content.vb: Public Sub New(result As TResult, dataSource As ApizrResponseDataSource)
+  overload: Apizr.ApizrResponse`1.#ctor*
+  nameWithType.vb: ApizrResponse(Of TResult).New(TResult, ApizrResponseDataSource)
+  fullName.vb: Apizr.ApizrResponse(Of TResult).New(TResult, Apizr.ApizrResponseDataSource)
+  name.vb: New(TResult, ApizrResponseDataSource)
+- uid: Apizr.ApizrResponse`1.#ctor(Refit.IApiResponse,`0,Apizr.ApizrResponseDataSource)
+  commentId: M:Apizr.ApizrResponse`1.#ctor(Refit.IApiResponse,`0,Apizr.ApizrResponseDataSource)
+  id: '#ctor(Refit.IApiResponse,`0,Apizr.ApizrResponseDataSource)'
+  parent: Apizr.ApizrResponse`1
+  langs:
+  - csharp
+  - vb
+  name: ApizrResponse(IApiResponse, TResult, ApizrResponseDataSource)
+  nameWithType: ApizrResponse<TResult>.ApizrResponse(IApiResponse, TResult, ApizrResponseDataSource)
+  fullName: Apizr.ApizrResponse<TResult>.ApizrResponse(Refit.IApiResponse, TResult, Apizr.ApizrResponseDataSource)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrResponse.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/ApizrResponse.cs
+    startLine: 72
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  example: []
+  syntax:
+    content: public ApizrResponse(IApiResponse apiResponse, TResult result, ApizrResponseDataSource dataSource)
+    parameters:
+    - id: apiResponse
+      type: Refit.IApiResponse
+    - id: result
+      type: '{TResult}'
+    - id: dataSource
+      type: Apizr.ApizrResponseDataSource
+    content.vb: Public Sub New(apiResponse As IApiResponse, result As TResult, dataSource As ApizrResponseDataSource)
+  overload: Apizr.ApizrResponse`1.#ctor*
+  nameWithType.vb: ApizrResponse(Of TResult).New(IApiResponse, TResult, ApizrResponseDataSource)
+  fullName.vb: Apizr.ApizrResponse(Of TResult).New(Refit.IApiResponse, TResult, Apizr.ApizrResponseDataSource)
+  name.vb: New(IApiResponse, TResult, ApizrResponseDataSource)
+- uid: Apizr.ApizrResponse`1.#ctor(Apizr.ApizrException{`0})
+  commentId: M:Apizr.ApizrResponse`1.#ctor(Apizr.ApizrException{`0})
+  id: '#ctor(Apizr.ApizrException{`0})'
+  parent: Apizr.ApizrResponse`1
+  langs:
+  - csharp
+  - vb
+  name: ApizrResponse(ApizrException<TResult>)
+  nameWithType: ApizrResponse<TResult>.ApizrResponse(ApizrException<TResult>)
+  fullName: Apizr.ApizrResponse<TResult>.ApizrResponse(Apizr.ApizrException<TResult>)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrResponse.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/ApizrResponse.cs
+    startLine: 78
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  syntax:
+    content: public ApizrResponse(ApizrException<TResult> apizrException)
+    parameters:
+    - id: apizrException
+      type: Apizr.ApizrException{{TResult}}
+    content.vb: Public Sub New(apizrException As ApizrException(Of TResult))
+  overload: Apizr.ApizrResponse`1.#ctor*
+  nameWithType.vb: ApizrResponse(Of TResult).New(ApizrException(Of TResult))
+  fullName.vb: Apizr.ApizrResponse(Of TResult).New(Apizr.ApizrException(Of TResult))
+  name.vb: New(ApizrException(Of TResult))
+- uid: Apizr.ApizrResponse`1.#ctor(Refit.IApiResponse,Apizr.ApizrException{`0})
+  commentId: M:Apizr.ApizrResponse`1.#ctor(Refit.IApiResponse,Apizr.ApizrException{`0})
+  id: '#ctor(Refit.IApiResponse,Apizr.ApizrException{`0})'
+  parent: Apizr.ApizrResponse`1
+  langs:
+  - csharp
+  - vb
+  name: ApizrResponse(IApiResponse, ApizrException<TResult>)
+  nameWithType: ApizrResponse<TResult>.ApizrResponse(IApiResponse, ApizrException<TResult>)
+  fullName: Apizr.ApizrResponse<TResult>.ApizrResponse(Refit.IApiResponse, Apizr.ApizrException<TResult>)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrResponse.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/ApizrResponse.cs
+    startLine: 85
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  example: []
+  syntax:
+    content: public ApizrResponse(IApiResponse apiResponse, ApizrException<TResult> apizrException)
+    parameters:
+    - id: apiResponse
+      type: Refit.IApiResponse
+    - id: apizrException
+      type: Apizr.ApizrException{{TResult}}
+    content.vb: Public Sub New(apiResponse As IApiResponse, apizrException As ApizrException(Of TResult))
+  overload: Apizr.ApizrResponse`1.#ctor*
+  nameWithType.vb: ApizrResponse(Of TResult).New(IApiResponse, ApizrException(Of TResult))
+  fullName.vb: Apizr.ApizrResponse(Of TResult).New(Refit.IApiResponse, Apizr.ApizrException(Of TResult))
+  name.vb: New(IApiResponse, ApizrException(Of TResult))
+- uid: Apizr.ApizrResponse`1.Result
+  commentId: P:Apizr.ApizrResponse`1.Result
+  id: Result
+  parent: Apizr.ApizrResponse`1
+  langs:
+  - csharp
+  - vb
+  name: Result
+  nameWithType: ApizrResponse<TResult>.Result
+  fullName: Apizr.ApizrResponse<TResult>.Result
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrResponse.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: Result
+    path: ../../Src/Apizr/ApizrResponse.cs
+    startLine: 92
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  summary: Deserialized request or cache content as TResult.
+  example: []
+  syntax:
+    content: public TResult Result { get; }
+    parameters: []
+    return:
+      type: '{TResult}'
+    content.vb: Public ReadOnly Property Result As TResult
+  overload: Apizr.ApizrResponse`1.Result*
+  implements:
+  - Apizr.IApizrResponse{{TResult}}.Result
+  nameWithType.vb: ApizrResponse(Of TResult).Result
+  fullName.vb: Apizr.ApizrResponse(Of TResult).Result
+- uid: Apizr.ApizrResponse`1.DataSource
+  commentId: P:Apizr.ApizrResponse`1.DataSource
+  id: DataSource
+  parent: Apizr.ApizrResponse`1
+  langs:
+  - csharp
+  - vb
+  name: DataSource
+  nameWithType: ApizrResponse<TResult>.DataSource
+  fullName: Apizr.ApizrResponse<TResult>.DataSource
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrResponse.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: DataSource
+    path: ../../Src/Apizr/ApizrResponse.cs
+    startLine: 95
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  summary: The source of the result data (might be from the request or the cache).
+  example: []
+  syntax:
+    content: public ApizrResponseDataSource DataSource { get; }
+    parameters: []
+    return:
+      type: Apizr.ApizrResponseDataSource
+    content.vb: Public ReadOnly Property DataSource As ApizrResponseDataSource
+  overload: Apizr.ApizrResponse`1.DataSource*
+  implements:
+  - Apizr.IApizrResponse{{TResult}}.DataSource
+  nameWithType.vb: ApizrResponse(Of TResult).DataSource
+  fullName.vb: Apizr.ApizrResponse(Of TResult).DataSource
+references:
+- uid: Apizr
+  commentId: N:Apizr
+  href: Apizr.html
+  name: Apizr
+  nameWithType: Apizr
+  fullName: Apizr
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Apizr.ApizrResponse
+  commentId: T:Apizr.ApizrResponse
+  parent: Apizr
+  href: Apizr.ApizrResponse.html
+  name: ApizrResponse
+  nameWithType: ApizrResponse
+  fullName: Apizr.ApizrResponse
+- uid: Apizr.IApizrResponse{{TResult}}
+  commentId: T:Apizr.IApizrResponse{`0}
+  parent: Apizr
+  definition: Apizr.IApizrResponse`1
+  href: Apizr.IApizrResponse-1.html
+  name: IApizrResponse<TResult>
+  nameWithType: IApizrResponse<TResult>
+  fullName: Apizr.IApizrResponse<TResult>
+  nameWithType.vb: IApizrResponse(Of TResult)
+  fullName.vb: Apizr.IApizrResponse(Of TResult)
+  name.vb: IApizrResponse(Of TResult)
+  spec.csharp:
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse
+    href: Apizr.IApizrResponse-1.html
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse
+    href: Apizr.IApizrResponse-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Apizr.IApizrResponse
+  commentId: T:Apizr.IApizrResponse
+  parent: Apizr
+  href: Apizr.IApizrResponse.html
+  name: IApizrResponse
+  nameWithType: IApizrResponse
+  fullName: Apizr.IApizrResponse
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Apizr.ApizrResponse.IsSuccess
+  commentId: P:Apizr.ApizrResponse.IsSuccess
+  parent: Apizr.ApizrResponse
+  href: Apizr.ApizrResponse.html#Apizr_ApizrResponse_IsSuccess
+  name: IsSuccess
+  nameWithType: ApizrResponse.IsSuccess
+  fullName: Apizr.ApizrResponse.IsSuccess
+- uid: Apizr.ApizrResponse.ApiResponse
+  commentId: P:Apizr.ApizrResponse.ApiResponse
+  parent: Apizr.ApizrResponse
+  href: Apizr.ApizrResponse.html#Apizr_ApizrResponse_ApiResponse
+  name: ApiResponse
+  nameWithType: ApizrResponse.ApiResponse
+  fullName: Apizr.ApizrResponse.ApiResponse
+- uid: Apizr.ApizrResponse.Exception
+  commentId: P:Apizr.ApizrResponse.Exception
+  parent: Apizr.ApizrResponse
+  href: Apizr.ApizrResponse.html#Apizr_ApizrResponse_Exception
+  name: Exception
+  nameWithType: ApizrResponse.Exception
+  fullName: Apizr.ApizrResponse.Exception
+- uid: Apizr.ApizrResponse.Dispose
+  commentId: M:Apizr.ApizrResponse.Dispose
+  parent: Apizr.ApizrResponse
+  href: Apizr.ApizrResponse.html#Apizr_ApizrResponse_Dispose
+  name: Dispose()
+  nameWithType: ApizrResponse.Dispose()
+  fullName: Apizr.ApizrResponse.Dispose()
+  spec.csharp:
+  - uid: Apizr.ApizrResponse.Dispose
+    name: Dispose
+    href: Apizr.ApizrResponse.html#Apizr_ApizrResponse_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Apizr.ApizrResponse.Dispose
+    name: Dispose
+    href: Apizr.ApizrResponse.html#Apizr_ApizrResponse_Dispose
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Apizr.IApizrResponse.Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode
+  commentId: M:Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+  parent: Apizr.ApizrResponseExtensions
+  definition: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+  href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode_Apizr_IApizrResponse_
+  name: EnsureSuccessStatusCode(IApizrResponse)
+  nameWithType: ApizrResponseExtensions.EnsureSuccessStatusCode(IApizrResponse)
+  fullName: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+  spec.csharp:
+  - uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+    name: EnsureSuccessStatusCode
+    href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode_Apizr_IApizrResponse_
+  - name: (
+  - uid: Apizr.IApizrResponse
+    name: IApizrResponse
+    href: Apizr.IApizrResponse.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+    name: EnsureSuccessStatusCode
+    href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode_Apizr_IApizrResponse_
+  - name: (
+  - uid: Apizr.IApizrResponse
+    name: IApizrResponse
+    href: Apizr.IApizrResponse.html
+  - name: )
+- uid: Apizr.IApizrResponse{`0}.Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1
+  commentId: M:Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{``0})
+  parent: Apizr.ApizrResponseExtensions
+  definition: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{``0})
+  href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode__1_Apizr_IApizrResponse___0__
+  name: EnsureSuccessStatusCode<TResult>(IApizrResponse<TResult>)
+  nameWithType: ApizrResponseExtensions.EnsureSuccessStatusCode<TResult>(IApizrResponse<TResult>)
+  fullName: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode<TResult>(Apizr.IApizrResponse<TResult>)
+  nameWithType.vb: ApizrResponseExtensions.EnsureSuccessStatusCode(Of TResult)(IApizrResponse(Of TResult))
+  fullName.vb: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Of TResult)(Apizr.IApizrResponse(Of TResult))
+  name.vb: EnsureSuccessStatusCode(Of TResult)(IApizrResponse(Of TResult))
+  spec.csharp:
+  - uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{`0})
+    name: EnsureSuccessStatusCode
+    href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode__1_Apizr_IApizrResponse___0__
+  - name: <
+  - name: TResult
+  - name: '>'
+  - name: (
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse
+    href: Apizr.IApizrResponse-1.html
+  - name: <
+  - name: TResult
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{`0})
+    name: EnsureSuccessStatusCode
+    href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode__1_Apizr_IApizrResponse___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+  - name: (
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse
+    href: Apizr.IApizrResponse-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Apizr.IApizrResponse`1
+  commentId: T:Apizr.IApizrResponse`1
+  href: Apizr.IApizrResponse-1.html
+  name: IApizrResponse<TResult>
+  nameWithType: IApizrResponse<TResult>
+  fullName: Apizr.IApizrResponse<TResult>
+  nameWithType.vb: IApizrResponse(Of TResult)
+  fullName.vb: Apizr.IApizrResponse(Of TResult)
+  name.vb: IApizrResponse(Of TResult)
+  spec.csharp:
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse
+    href: Apizr.IApizrResponse-1.html
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse
+    href: Apizr.IApizrResponse-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+  commentId: M:Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+  href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode_Apizr_IApizrResponse_
+  name: EnsureSuccessStatusCode(IApizrResponse)
+  nameWithType: ApizrResponseExtensions.EnsureSuccessStatusCode(IApizrResponse)
+  fullName: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+  spec.csharp:
+  - uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+    name: EnsureSuccessStatusCode
+    href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode_Apizr_IApizrResponse_
+  - name: (
+  - uid: Apizr.IApizrResponse
+    name: IApizrResponse
+    href: Apizr.IApizrResponse.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Apizr.IApizrResponse)
+    name: EnsureSuccessStatusCode
+    href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode_Apizr_IApizrResponse_
+  - name: (
+  - uid: Apizr.IApizrResponse
+    name: IApizrResponse
+    href: Apizr.IApizrResponse.html
+  - name: )
+- uid: Apizr.ApizrResponseExtensions
+  commentId: T:Apizr.ApizrResponseExtensions
+  parent: Apizr
+  href: Apizr.ApizrResponseExtensions.html
+  name: ApizrResponseExtensions
+  nameWithType: ApizrResponseExtensions
+  fullName: Apizr.ApizrResponseExtensions
+- uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{``0})
+  commentId: M:Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{``0})
+  href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode__1_Apizr_IApizrResponse___0__
+  name: EnsureSuccessStatusCode<T>(IApizrResponse<T>)
+  nameWithType: ApizrResponseExtensions.EnsureSuccessStatusCode<T>(IApizrResponse<T>)
+  fullName: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode<T>(Apizr.IApizrResponse<T>)
+  nameWithType.vb: ApizrResponseExtensions.EnsureSuccessStatusCode(Of T)(IApizrResponse(Of T))
+  fullName.vb: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode(Of T)(Apizr.IApizrResponse(Of T))
+  name.vb: EnsureSuccessStatusCode(Of T)(IApizrResponse(Of T))
+  spec.csharp:
+  - uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{``0})
+    name: EnsureSuccessStatusCode
+    href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode__1_Apizr_IApizrResponse___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse
+    href: Apizr.IApizrResponse-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.ApizrResponseExtensions.EnsureSuccessStatusCode``1(Apizr.IApizrResponse{``0})
+    name: EnsureSuccessStatusCode
+    href: Apizr.ApizrResponseExtensions.html#Apizr_ApizrResponseExtensions_EnsureSuccessStatusCode__1_Apizr_IApizrResponse___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse
+    href: Apizr.IApizrResponse-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: Apizr.ApizrResponse`1.#ctor*
+  commentId: Overload:Apizr.ApizrResponse`1.#ctor
+  href: Apizr.ApizrResponse-1.html#Apizr_ApizrResponse_1__ctor__0_Apizr_ApizrResponseDataSource_
+  name: ApizrResponse
+  nameWithType: ApizrResponse<TResult>.ApizrResponse
+  fullName: Apizr.ApizrResponse<TResult>.ApizrResponse
+  nameWithType.vb: ApizrResponse(Of TResult).New
+  fullName.vb: Apizr.ApizrResponse(Of TResult).New
+  name.vb: New
+- uid: '{TResult}'
+  commentId: '!:TResult'
+  definition: TResult
+  name: TResult
+  nameWithType: TResult
+  fullName: TResult
+- uid: Apizr.ApizrResponseDataSource
+  commentId: T:Apizr.ApizrResponseDataSource
+  parent: Apizr
+  href: Apizr.ApizrResponseDataSource.html
+  name: ApizrResponseDataSource
+  nameWithType: ApizrResponseDataSource
+  fullName: Apizr.ApizrResponseDataSource
+- uid: TResult
+  name: TResult
+  nameWithType: TResult
+  fullName: TResult
+- uid: Refit.IApiResponse
+  commentId: T:Refit.IApiResponse
+  parent: Refit
+  isExternal: true
+  name: IApiResponse
+  nameWithType: IApiResponse
+  fullName: Refit.IApiResponse
+- uid: Refit
+  commentId: N:Refit
+  isExternal: true
+  name: Refit
+  nameWithType: Refit
+  fullName: Refit
+- uid: Apizr.ApizrException{{TResult}}
+  commentId: T:Apizr.ApizrException{`0}
+  parent: Apizr
+  definition: Apizr.ApizrException`1
+  href: Apizr.ApizrException-1.html
+  name: ApizrException<TResult>
+  nameWithType: ApizrException<TResult>
+  fullName: Apizr.ApizrException<TResult>
+  nameWithType.vb: ApizrException(Of TResult)
+  fullName.vb: Apizr.ApizrException(Of TResult)
+  name.vb: ApizrException(Of TResult)
+  spec.csharp:
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    href: Apizr.ApizrException-1.html
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Apizr.ApizrException`1
+  commentId: T:Apizr.ApizrException`1
+  href: Apizr.ApizrException-1.html
+  name: ApizrException<TResult>
+  nameWithType: ApizrException<TResult>
+  fullName: Apizr.ApizrException<TResult>
+  nameWithType.vb: ApizrException(Of TResult)
+  fullName.vb: Apizr.ApizrException(Of TResult)
+  name.vb: ApizrException(Of TResult)
+  spec.csharp:
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    href: Apizr.ApizrException-1.html
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Apizr.ApizrResponse`1.Result*
+  commentId: Overload:Apizr.ApizrResponse`1.Result
+  href: Apizr.ApizrResponse-1.html#Apizr_ApizrResponse_1_Result
+  name: Result
+  nameWithType: ApizrResponse<TResult>.Result
+  fullName: Apizr.ApizrResponse<TResult>.Result
+  nameWithType.vb: ApizrResponse(Of TResult).Result
+  fullName.vb: Apizr.ApizrResponse(Of TResult).Result
+- uid: Apizr.IApizrResponse{{TResult}}.Result
+  commentId: P:Apizr.IApizrResponse{`0}.Result
+  parent: Apizr.IApizrResponse{{TResult}}
+  definition: Apizr.IApizrResponse`1.Result
+  href: Apizr.IApizrResponse-1.html#Apizr_IApizrResponse_1_Result
+  name: Result
+  nameWithType: IApizrResponse<TResult>.Result
+  fullName: Apizr.IApizrResponse<TResult>.Result
+  nameWithType.vb: IApizrResponse(Of TResult).Result
+  fullName.vb: Apizr.IApizrResponse(Of TResult).Result
+- uid: Apizr.IApizrResponse`1.Result
+  commentId: P:Apizr.IApizrResponse`1.Result
+  href: Apizr.IApizrResponse-1.html#Apizr_IApizrResponse_1_Result
+  name: Result
+  nameWithType: IApizrResponse<TResult>.Result
+  fullName: Apizr.IApizrResponse<TResult>.Result
+  nameWithType.vb: IApizrResponse(Of TResult).Result
+  fullName.vb: Apizr.IApizrResponse(Of TResult).Result
+- uid: Apizr.ApizrResponse`1.DataSource*
+  commentId: Overload:Apizr.ApizrResponse`1.DataSource
+  href: Apizr.ApizrResponse-1.html#Apizr_ApizrResponse_1_DataSource
+  name: DataSource
+  nameWithType: ApizrResponse<TResult>.DataSource
+  fullName: Apizr.ApizrResponse<TResult>.DataSource
+  nameWithType.vb: ApizrResponse(Of TResult).DataSource
+  fullName.vb: Apizr.ApizrResponse(Of TResult).DataSource
+- uid: Apizr.IApizrResponse{{TResult}}.DataSource
+  commentId: P:Apizr.IApizrResponse{`0}.DataSource
+  parent: Apizr.IApizrResponse{{TResult}}
+  definition: Apizr.IApizrResponse`1.DataSource
+  href: Apizr.IApizrResponse-1.html#Apizr_IApizrResponse_1_DataSource
+  name: DataSource
+  nameWithType: IApizrResponse<TResult>.DataSource
+  fullName: Apizr.IApizrResponse<TResult>.DataSource
+  nameWithType.vb: IApizrResponse(Of TResult).DataSource
+  fullName.vb: Apizr.IApizrResponse(Of TResult).DataSource
+- uid: Apizr.IApizrResponse`1.DataSource
+  commentId: P:Apizr.IApizrResponse`1.DataSource
+  href: Apizr.IApizrResponse-1.html#Apizr_IApizrResponse_1_DataSource
+  name: DataSource
+  nameWithType: IApizrResponse<TResult>.DataSource
+  fullName: Apizr.IApizrResponse<TResult>.DataSource
+  nameWithType.vb: IApizrResponse(Of TResult).DataSource
+  fullName.vb: Apizr.IApizrResponse(Of TResult).DataSource

@@ -247,6 +247,8 @@ options => options.WithCacheHandler(serviceProvider => new MonkeyCacheHandler(Ba
 
 #### Reading
 
+##### From thrown `ApizrException<T>`
+
 Using Apizr caching feature is just about catching exceptions like for example:
 ```csharp
 IList<User>? users = null;
@@ -267,6 +269,44 @@ finally
 ```
 
 Here we catch an `ApizrException<UserList>` meaning that in case of exception, it will bring a typed object to you loaded from cache.
+
+##### From returned `IApizrResponse<T>`
+
+If your api methods return an `IApiResponse<T>` provided by Refit, you can handle the `IApizrResponse<T>` returned by Apizr to get your data from the cache, the safe way without throwing any exception.
+
+```csharp
+// Here we wrap the response into an IApiResponse<T> provided by Refit
+[WebApi("https://reqres.in/api")]
+public interface IReqResService
+{
+    [Get("/users")]
+    Task<IApiResponse<UserList>> GetUsersAsync();
+}
+
+...
+
+// Then we can handle the IApizrResponse<T> response comming from Apizr
+var response = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+// Log potential errors and maybe inform the user about it
+if(!response.IsSuccess)
+{
+   _logger.LogError(response.Exception);
+    Alert.Show("Error", response.Exception.Message);
+}
+
+// Use the data, no matter the source
+if(response.Result?.Data?.Any() == true)
+{
+    Users = new ObservableCollection<User>(response.Result.Data);
+
+    // Inform the user that data comes from cache if so
+    if(response.DataSource == ApizrResponseDataSource.Cache)
+        Toast.Show("Data comes from cache");
+}
+```
+
+Read the exception handling documentation to get more details about it.
 
 #### Clearing
 

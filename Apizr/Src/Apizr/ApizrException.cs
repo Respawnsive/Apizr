@@ -7,17 +7,15 @@ namespace Apizr
     /// </summary>
     public class ApizrException : Exception
     {
-        public ApizrException(Exception innerException) : this(innerException, default)
+        public ApizrException(string message) : base(message)
         {
             
         }
 
-        public ApizrException(Exception innerException, object cachedResult) : base(innerException.Message, innerException)
+        public ApizrException(Exception innerException) : base(innerException.Message, innerException)
         {
-            CachedResult = cachedResult;
+            
         }
-
-        public object CachedResult { get; }
     }
 
     /// <summary>
@@ -25,16 +23,26 @@ namespace Apizr
     /// </summary>
     public class ApizrException<TResult> : ApizrException
     {
+        public ApizrException(string message) : base(message)
+        {
+
+        }
+
+        public ApizrException(string message, TResult cachedResult) : base(message)
+        {
+            CachedResult = cachedResult;
+        }
+
         public ApizrException(Exception innerException) : this(innerException, default)
         {
 
         }
 
-        public ApizrException(Exception innerException, TResult cachedResult) : base(innerException, cachedResult)
+        public ApizrException(Exception innerException, TResult cachedResult) : base(innerException)
         {
             CachedResult = cachedResult;
         }
 
-        public new TResult CachedResult { get; }
+        public TResult CachedResult { get; }
     }
 }

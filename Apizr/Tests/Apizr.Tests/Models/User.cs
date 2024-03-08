@@ -8,7 +8,8 @@ using Fusillade;
 
 namespace Apizr.Tests.Models
 {
-    [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>)),
+    [//CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>)),
+    CrudEntity<int, PagedResult<User>>("https://reqres.in/api/users"),
      CacheReadAll(CacheMode.GetAndFetch),
      CacheRead(CacheMode.GetOrFetch),
      Log(HttpMessageParts.All),

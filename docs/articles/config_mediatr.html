@@ -110,6 +110,11 @@ Simple and unified because instead of injecting/resolving each api interface you
 </code></pre>
 <p>Where <code>YOUR_REQUESTHANDLER_ASSEMBLIES</code> should be the assemblies containing your custom request handlers, if you get some (Apizr MediatR request handlers will be auto registered).</p>
 <h3 id="using">Using</h3>
+<div class="NOTE">
+<h5>Note</h5>
+<p><strong>Sending the safe way</strong></p>
+<p>We are sometime talking about Safe request meaning that Refit will handle exceptions and return an <code>IApiResponse</code> to Apizr and then Apizr will return it as an <code>IApizrResponse</code> without throwing. Please read the exception handling doc to get more info.</p>
+</div>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
@@ -134,14 +139,19 @@ Everything you need to do then, is sending your request by calling:</p>
 <li>With no result:
 <ul>
 <li><code>ExecuteUnitRequest&lt;TWebApi&gt;</code>: execute any method from <code>TWebApi</code></li>
+<li><code>ExecuteSafeUnitRequest&lt;TWebApi&gt;</code>: execute any method from <code>TWebApi</code>, the safe way with <code>IApizrResponse</code> handling</li>
 <li><code>ExecuteUnitRequest&lt;TWebApi, TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> mapped with <code>TApiData</code></li>
+<li><code>ExecuteSafeUnitRequest&lt;TWebApi, TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> mapped with <code>TApiData</code>, the safe way with <code>IApizrResponse</code> handling</li>
 </ul>
 </li>
 <li>With result:
 <ul>
 <li><code>ExecuteResultRequest&lt;TWebApi, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with a <code>TApiData</code> request/result data</li>
+<li><code>ExecuteSafeResultRequest&lt;TWebApi, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with a <code>TApiData</code> request/result data, the safe way with <code>IApizrResponse&lt;TApiData&gt;</code> handling</li>
 <li><code>ExecuteResultRequest&lt;TWebApi, TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> request/result data mapped with <code>TApiData</code></li>
+<li><code>ExecuteSafeResultRequest&lt;TWebApi, TModelData, TApiData&gt;</code>: execute any method from <code>TWebApi</code> with <code>TModelData</code> request/result data mapped with <code>TApiData</code>, the safe way with <code>IApizrResponse&lt;TModelData&gt;</code> handling</li>
 <li><code>ExecuteResultRequest&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;</code>: execute any method from <code>TWebApi</code>, sending <code>TApiRequestData</code> mapped from <code>TModelRequestData</code>, then returning <code>TModelResultData</code> mapped from <code>TApiResultData</code></li>
+<li><code>ExecuteSafeResultRequest&lt;TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData&gt;</code>: execute any method from <code>TWebApi</code>, sending <code>TApiRequestData</code> mapped from <code>TModelRequestData</code>, then returning <code>TModelResultData</code> mapped from <code>TApiResultData</code>, the safe way with <code>IApizrResponse&lt;TModelResultData&gt;</code> handling</li>
 </ul>
 </li>
 </ul>
@@ -150,30 +160,39 @@ Everything you need to do then, is sending your request by calling:</p>
 <li>Read:
 <ul>
 <li><code>ReadQuery&lt;TResultData&gt;</code>: get the <code>TResultData</code> entity matching an int key</li>
+<li><code>SafeReadQuery&lt;TResultData&gt;</code>: get the <code>TResultData</code> entity matching an int key, the safe way with <code>IApizrResponse&lt;TApiData&gt;</code> handling</li>
 <li><code>ReadQuery&lt;TResultData, TKey&gt;</code>: get the <code>TResultData</code> entity matching a <code>TKey</code></li>
+<li><code>SafeReadQuery&lt;TResultData, TKey&gt;</code>: get the <code>TResultData</code> entity matching a <code>TKey</code> , the safe way with <code>IApizrResponse&lt;TApiData&gt;</code> handling</li>
 </ul>
 </li>
 <li>ReadAll:
 <ul>
 <li><code>ReadAllQuery&lt;TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>IDictionary&lt;string, object&gt;</code> optional query parameters</li>
+<li><code>SafeReadAllQuery&lt;TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>IDictionary&lt;string, object&gt;</code> optional query parameters, the safe way with <code>IApizrResponse&lt;TReadAllResult&gt;</code> handling</li>
 <li><code>ReadAllQuery&lt;TReadAllParams, TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+<li><code>SafeReadAllQuery&lt;TReadAllParams, TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters, the safe way with <code>IApizrResponse&lt;TReadAllResult&gt;</code> handling</li>
 </ul>
 </li>
 <li>Create:
 <ul>
 <li><code>CreateCommand&lt;TModelData&gt;</code>: create a <code>TModelData</code> entity</li>
+<li><code>SafeCreateCommand&lt;TModelData&gt;</code>: create a <code>TModelData</code> entity, the safe way with <code>IApizrResponse&lt;TModelData&gt;</code> handling</li>
 </ul>
 </li>
 <li>Update:
 <ul>
 <li><code>UpdateCommand&lt;TRequestData&gt;</code>: update the <code>TRequestData</code> entity matching an int key</li>
+<li><code>SafeUpdateCommand&lt;TRequestData&gt;</code>: update the <code>TRequestData</code> entity matching an int key, the safe way with <code>IApizrResponse</code> handling</li>
 <li><code>UpdateCommand&lt;TKey, TRequestData&gt;</code>: update the <code>TRequestData</code> entity matching a <code>TKey</code></li>
+<li><code>SafeUpdateCommand&lt;TKey, TRequestData&gt;</code>: update the <code>TRequestData</code> entity matching a <code>TKey</code>, the safe way with <code>IApizrResponse</code> handling</li>
 </ul>
 </li>
 <li>Delete:
 <ul>
 <li><code>DeleteCommand&lt;T&gt;</code>: delete the <code>T</code> entity matching an int key</li>
+<li><code>SafeDeleteCommand&lt;T&gt;</code>: delete the <code>T</code> entity matching an int key, the safe way with <code>IApizrResponse</code> handling</li>
 <li><code>DeleteCommand&lt;T, TKey&gt;</code>: delete the <code>T</code> entity matching a <code>TKey</code></li>
+<li><code>SafeDeleteCommand&lt;T, TKey&gt;</code>: delete the <code>T</code> entity matching a <code>TKey</code>, the safe way with <code>IApizrResponse</code> handling</li>
 </ul>
 </li>
 </ul>
@@ -204,37 +223,53 @@ var result = await _apizrCrudMediator.SendReadAllQuery&lt;TReadAllResult&gt;();
 </ul>
 </li>
 </ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p><strong>Sending the safe way</strong></p>
+<p>Note that if your api returns an <code>IApiResponse&lt;T&gt;</code>, Apizr mediator will send a safe request so you can handle an <code>IApizrResponse&lt;T&gt;</code> back from it.</p>
+</div>
 <p>CRUD mediator methods:</p>
 <ul>
 <li>Read:
 <ul>
 <li><code>SendReadQuery&lt;TApiEntity, TApiEntityKey&gt;</code>: get the <code>TApiEntity</code> matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeReadQuery&lt;TApiEntity, TApiEntityKey&gt;</code>: get the <code>TApiEntity</code> matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse&lt;TApiEntity&gt;</code> handling</li>
 <li><code>SendReadQuery&lt;TModelEntity, TApiEntity, TApiEntityKey&gt;</code>: get the <code>TModelEntity</code> mapped from <code>TApiEntity</code> and matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeReadQuery&lt;TModelEntity, TApiEntity, TApiEntityKey&gt;</code>: get the <code>TModelEntity</code> mapped from <code>TApiEntity</code> and matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse&lt;TModelEntity&gt;</code> handling</li>
 </ul>
 </li>
 <li>ReadAll:
 <ul>
 <li><code>SendReadAllQuery&lt;TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>IDictionary&lt;string, object&gt;</code> optional query parameters</li>
+<li><code>SendSafeReadAllQuery&lt;TReadAllResult&gt;</code>: get <code>TReadAllResult</code> with <code>IDictionary&lt;string, object&gt;</code> optional query parameters, the safe way with <code>IApizrResponse&lt;TReadAllResult&gt;</code> handling</li>
 <li><code>SendReadAllQuery&lt;TModelReadAllResult, TApiReadAllResult&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code></li>
+<li><code>SendSafeReadAllQuery&lt;TModelReadAllResult, TApiReadAllResult&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code>, the safe way with <code>IApizrResponse&lt;TModelReadAllResult&gt;</code> handling</li>
 <li><code>SendReadAllQuery&lt;TReadAllResult, TReadAllParams&gt;</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+<li><code>SendSafeReadAllQuery&lt;TReadAllResult, TReadAllParams&gt;</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters, the safe way with <code>IApizrResponse&lt;TReadAllResult&gt;</code> handling</li>
 <li><code>SendReadAllQuery&lt;TModelReadAllResult, TApiReadAllResult, TReadAllParams&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+<li><code>SendSafeReadAllQuery&lt;TModelReadAllResult, TApiReadAllResult, TReadAllParams&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code> with <code>TReadAllParams</code> optional query parameters, the safe way with <code>IApizrResponse&lt;TModelReadAllResult&gt;</code> handling</li>
 </ul>
 </li>
 <li>Create:
 <ul>
 <li><code>SendCreateCommand&lt;TApiEntity&gt;</code>: create a <code>TApiEntity</code></li>
+<li><code>SendSafeCreateCommand&lt;TApiEntity&gt;</code>: create a <code>TApiEntity</code>, the safe way with <code>IApizrResponse&lt;TApiEntity&gt;</code> handling</li>
 <li><code>SendCreateCommand&lt;TModelEntity, TApiEntity&gt;</code>: create a <code>TApiEntity</code> mapped from <code>TModelEntity</code></li>
+<li><code>SendSafeCreateCommand&lt;TModelEntity, TApiEntity&gt;</code>: create a <code>TApiEntity</code> mapped from <code>TModelEntity</code>, the safe way with <code>IApizrResponse&lt;TModelEntity&gt;</code> handling</li>
 </ul>
 </li>
 <li>Update:
 <ul>
 <li><code>SendUpdateCommand&lt;TApiEntity, TApiEntityKey&gt;</code>: update the <code>TApiEntity</code> entity matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeUpdateCommand&lt;TApiEntity, TApiEntityKey&gt;</code>: update the <code>TApiEntity</code> entity matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse</code> handling</li>
 <li><code>SendUpdateCommand&lt;TModelEntity, TApiEntity, TApiEntityKey&gt;</code>: update the <code>TApiEntity</code> mapped from <code>TModelEntity</code> and matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeUpdateCommand&lt;TModelEntity, TApiEntity, TApiEntityKey&gt;</code>: update the <code>TApiEntity</code> mapped from <code>TModelEntity</code> and matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse</code> handling</li>
 </ul>
 </li>
 <li>Delete:
 <ul>
 <li><code>SendDeleteCommand&lt;TApiEntity, TApiEntityKey&gt;</code>: delete the <code>TApiEntity</code> matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeDeleteCommand&lt;TApiEntity, TApiEntityKey&gt;</code>: delete the <code>TApiEntity</code> matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse</code> handling</li>
 </ul>
 </li>
 </ul>
@@ -270,35 +305,49 @@ var result = await _apizrCrudMediator.SendReadAllQuery();
 </ul>
 </li>
 </ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p><strong>Sending the safe way</strong></p>
+<p>Note that if your api returns an <code>IApiResponse&lt;T&gt;</code>, Apizr mediator will send a safe request so you can handle an <code>IApizrResponse&lt;T&gt;</code> back from it.</p>
+</div>
 <p>CRUD typed mediator methods:</p>
 <ul>
 <li>Read:
 <ul>
 <li><code>SendReadQuery</code>: get the <code>TApiEntity</code> matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeReadQuery</code>: get the <code>TApiEntity</code> matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse&lt;TApiEntity&gt;</code> handling</li>
 <li><code>SendReadQuery&lt;TModelEntity&gt;</code>: get the <code>TModelEntity</code> mapped from <code>TApiEntity</code> and matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeReadQuery&lt;TModelEntity&gt;</code>: get the <code>TModelEntity</code> mapped from <code>TApiEntity</code> and matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse&lt;TModelEntity&gt;</code> handling</li>
 </ul>
 </li>
 <li>ReadAll:
 <ul>
 <li><code>SendReadAllQuery</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+<li><code>SendSafeReadAllQuery</code>: get <code>TReadAllResult</code> with <code>TReadAllParams</code> optional query parameters, the safe way with <code>IApizrResponse&lt;TReadAllResult&gt;</code> handling</li>
 <li><code>SendReadAllQuery&lt;TModelReadAllResult&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code> with <code>TReadAllParams</code> optional query parameters</li>
+<li><code>SendSafeReadAllQuery&lt;TModelReadAllResult&gt;</code>: get <code>TModelReadAllResult</code> mapped from <code>TApiReadAllResult</code> with <code>TReadAllParams</code> optional query parameters, the safe way with <code>IApizrResponse&lt;TModelReadAllResult&gt;</code> handling</li>
 </ul>
 </li>
 <li>Create:
 <ul>
 <li><code>SendCreateCommand</code>: create a <code>TApiEntity</code></li>
+<li><code>SendSafeCreateCommand</code>: create a <code>TApiEntity</code>, the safe way with <code>IApizrResponse&lt;TApiEntity&gt;</code> handling</li>
 <li><code>SendCreateCommand&lt;TModelEntity&gt;</code>: create a <code>TApiEntity</code> mapped from <code>TModelEntity</code></li>
+<li><code>SendSafeCreateCommand&lt;TModelEntity&gt;</code>: create a <code>TApiEntity</code> mapped from <code>TModelEntity</code>, the safe way with <code>IApizrResponse&lt;TModelEntity&gt;</code> handling</li>
 </ul>
 </li>
 <li>Update:
 <ul>
 <li><code>SendUpdateCommand</code>: update the <code>TApiEntity</code> entity matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeUpdateCommand</code>: update the <code>TApiEntity</code> entity matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse</code> handling</li>
 <li><code>SendUpdateCommand&lt;TModelEntity&gt;</code>: update the <code>TApiEntity</code> mapped from <code>TModelEntity</code> and matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeUpdateCommand&lt;TModelEntity&gt;</code>: update the <code>TApiEntity</code> mapped from <code>TModelEntity</code> and matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse</code> handling</li>
 </ul>
 </li>
 <li>Delete:
 <ul>
 <li><code>SendDeleteCommand</code>: delete the <code>TApiEntity</code> matching a <code>TApiEntityKey</code></li>
+<li><code>SendSafeDeleteCommand</code>: delete the <code>TApiEntity</code> matching a <code>TApiEntityKey</code>, the safe way with <code>IApizrResponse</code> handling</li>
 </ul>
 </li>
 </ul>
@@ -313,7 +362,7 @@ var result = await _apizrCrudMediator.SendReadAllQuery();
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_mediatr.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/feat/response/Apizr/Docs/Apizr.Docs/articles/config_mediatr.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

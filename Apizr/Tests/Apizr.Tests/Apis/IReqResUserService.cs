@@ -28,6 +28,12 @@ namespace Apizr.Tests.Apis
     public interface IReqResUserService
     {
         [Get("/users")]
+        Task<IApiResponse<ApiResult<User>>> SafeGetUsersAsync();
+
+        [Get("/users")]
+        Task<ApiResponse<ApiResult<User>>> SafeGetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+
+        [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync();
 
         [Get("/users")]
@@ -85,6 +91,12 @@ namespace Apizr.Tests.Apis
 
         [Get("/users/{userId}")]
         Task<UserDetails> GetUserAsync(int userId, IDictionary<string, object> parameters, [Priority] int priority, CancellationToken cancellationToken);
+
+        [Get("/users/{userId}")]
+        Task<ApiResponse<UserDetails>> GetUserResponseAsync(int userId);
+
+        [Get("/users/{userId}")]
+        Task<ApiResponse<UserDetails>> GetUserResponseAsync(int userId, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
         [Post("/users")]
         Task<User> CreateUser(User user, CancellationToken cancellationToken);

@@ -19,6 +19,14 @@ items:
     name: ApizrManager
   - uid: Apizr.ApizrManager`1
     name: ApizrManager<TWebApi>
+  - uid: Apizr.ApizrResponse
+    name: ApizrResponse
+  - uid: Apizr.ApizrResponseDataSource
+    name: ApizrResponseDataSource
+  - uid: Apizr.ApizrResponseExtensions
+    name: ApizrResponseExtensions
+  - uid: Apizr.ApizrResponse`1
+    name: ApizrResponse<TResult>
   - uid: Apizr.AutoMapperMappingHandler
     name: AutoMapperMappingHandler
   - uid: Apizr.AutoMapperOptionsBuilderExtensions
@@ -37,6 +45,10 @@ items:
     name: IApizrManager
   - uid: Apizr.IApizrManager`1
     name: IApizrManager<TWebApi>
+  - uid: Apizr.IApizrResponse
+    name: IApizrResponse
+  - uid: Apizr.IApizrResponse`1
+    name: IApizrResponse<TResult>
   - uid: Apizr.ILazyFactory`1
     name: ILazyFactory<TInstance>
   - uid: Apizr.InMemoryCacheHandler
@@ -545,6 +557,24 @@ items:
     name: ReadQuery<TResultData>
   - uid: Apizr.Mediation.Cruding.ReadQuery`2
     name: ReadQuery<TResultData, TKey>
+  - uid: Apizr.Mediation.Cruding.SafeCreateCommand`1
+    name: SafeCreateCommand<TModelData>
+  - uid: Apizr.Mediation.Cruding.SafeDeleteCommand`1
+    name: SafeDeleteCommand<T>
+  - uid: Apizr.Mediation.Cruding.SafeDeleteCommand`2
+    name: SafeDeleteCommand<T, TKey>
+  - uid: Apizr.Mediation.Cruding.SafeReadAllQuery`1
+    name: SafeReadAllQuery<TReadAllResult>
+  - uid: Apizr.Mediation.Cruding.SafeReadAllQuery`2
+    name: SafeReadAllQuery<TReadAllParams, TReadAllResult>
+  - uid: Apizr.Mediation.Cruding.SafeReadQuery`1
+    name: SafeReadQuery<TResultData>
+  - uid: Apizr.Mediation.Cruding.SafeReadQuery`2
+    name: SafeReadQuery<TResultData, TKey>
+  - uid: Apizr.Mediation.Cruding.SafeUpdateCommand`1
+    name: SafeUpdateCommand<TRequestData>
+  - uid: Apizr.Mediation.Cruding.SafeUpdateCommand`2
+    name: SafeUpdateCommand<TKey, TRequestData>
   - uid: Apizr.Mediation.Cruding.UpdateCommand`1
     name: UpdateCommand<TRequestData>
   - uid: Apizr.Mediation.Cruding.UpdateCommand`2
@@ -591,6 +621,24 @@ items:
     name: ReadQueryHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams>
   - uid: Apizr.Mediation.Cruding.Handling.ReadQueryHandler`5
     name: ReadQueryHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeCreateCommandHandler`5
+    name: SafeCreateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeDeleteCommandHandler`4
+    name: SafeDeleteCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeDeleteCommandHandler`5
+    name: SafeDeleteCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeReadAllQueryHandler`4
+    name: SafeReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeReadAllQueryHandler`5
+    name: SafeReadAllQueryHandler<TApiEntity, TApiEntityKey, TModelReadAllResult, TApiReadAllResult, TReadAllParams>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeReadQueryHandler`4
+    name: SafeReadQueryHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeReadQueryHandler`5
+    name: SafeReadQueryHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeUpdateCommandHandler`4
+    name: SafeUpdateCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams>
+  - uid: Apizr.Mediation.Cruding.Handling.SafeUpdateCommandHandler`5
+    name: SafeUpdateCommandHandler<TModelEntity, TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams>
   - uid: Apizr.Mediation.Cruding.Handling.UpdateCommandHandler`4
     name: UpdateCommandHandler<TModelEntity, TApiEntity, TReadAllResult, TReadAllParams>
   - uid: Apizr.Mediation.Cruding.Handling.UpdateCommandHandler`5
@@ -664,6 +712,16 @@ items:
     name: ExecuteResultRequest<TWebApi, TModelData, TApiData>
   - uid: Apizr.Mediation.Requesting.ExecuteResultRequest`5
     name: ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
+  - uid: Apizr.Mediation.Requesting.ExecuteSafeResultRequest`2
+    name: ExecuteSafeResultRequest<TWebApi, TApiData>
+  - uid: Apizr.Mediation.Requesting.ExecuteSafeResultRequest`3
+    name: ExecuteSafeResultRequest<TWebApi, TModelData, TApiData>
+  - uid: Apizr.Mediation.Requesting.ExecuteSafeResultRequest`5
+    name: ExecuteSafeResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
+  - uid: Apizr.Mediation.Requesting.ExecuteSafeUnitRequest`1
+    name: ExecuteSafeUnitRequest<TWebApi>
+  - uid: Apizr.Mediation.Requesting.ExecuteSafeUnitRequest`3
+    name: ExecuteSafeUnitRequest<TWebApi, TModelData, TApiData>
   - uid: Apizr.Mediation.Requesting.ExecuteUnitRequest`1
     name: ExecuteUnitRequest<TWebApi>
   - uid: Apizr.Mediation.Requesting.ExecuteUnitRequest`3
@@ -722,6 +780,16 @@ items:
     name: ExecuteResultRequestHandler<TWebApi, TModelData, TApiData>
   - uid: Apizr.Mediation.Requesting.Handling.ExecuteResultRequestHandler`5
     name: ExecuteResultRequestHandler<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
+  - uid: Apizr.Mediation.Requesting.Handling.ExecuteSafeResultRequestHandler`2
+    name: ExecuteSafeResultRequestHandler<TWebApi, TApiData>
+  - uid: Apizr.Mediation.Requesting.Handling.ExecuteSafeResultRequestHandler`3
+    name: ExecuteSafeResultRequestHandler<TWebApi, TModelData, TApiData>
+  - uid: Apizr.Mediation.Requesting.Handling.ExecuteSafeResultRequestHandler`5
+    name: ExecuteSafeResultRequestHandler<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
+  - uid: Apizr.Mediation.Requesting.Handling.ExecuteSafeUnitRequestHandler`1
+    name: ExecuteSafeUnitRequestHandler<TWebApi>
+  - uid: Apizr.Mediation.Requesting.Handling.ExecuteSafeUnitRequestHandler`3
+    name: ExecuteSafeUnitRequestHandler<TWebApi, TModelData, TApiData>
   - uid: Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`1
     name: ExecuteUnitRequestHandler<TWebApi>
   - uid: Apizr.Mediation.Requesting.Handling.ExecuteUnitRequestHandler`3

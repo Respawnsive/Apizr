@@ -67,6 +67,7 @@ namespace Apizr.Requesting
     /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)
     /// </summary>
     /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
+    /// <param name="baseUri">This specific api entity's base crud uri</param>
     [AttributeUsage(AttributeTargets.Class)]
     public class CrudEntityAttribute<TKey>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey));
 
@@ -75,6 +76,7 @@ namespace Apizr.Requesting
     /// </summary>
     /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
     /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+    /// <param name="baseUri">This specific api entity's base crud uri</param>
     [AttributeUsage(AttributeTargets.Class)]
     public class CrudEntityAttribute<TKey, TReadAllResult>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult));
 
@@ -84,6 +86,7 @@ namespace Apizr.Requesting
     /// <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
     /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
     /// <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
+    /// <param name="baseUri">This specific api entity's base crud uri</param>
     [AttributeUsage(AttributeTargets.Class)]
     public class CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams));
 
@@ -94,6 +97,7 @@ namespace Apizr.Requesting
     /// <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
     /// <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
     /// <typeparam name="TModelEntity">Model entity type mapped with this api entity type (default: null = decorated api entity type)</typeparam>
+    /// <param name="baseUri">This specific api entity's base crud uri</param>
     [AttributeUsage(AttributeTargets.Class)]
     public class CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams, TModelEntity>(string baseUri) : CrudEntityAttribute(baseUri, typeof(TKey), typeof(TReadAllResult), typeof(TReadAllParams), typeof(TModelEntity));
 }

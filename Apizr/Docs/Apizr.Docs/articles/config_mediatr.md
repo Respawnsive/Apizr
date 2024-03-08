@@ -29,6 +29,12 @@ Where `YOUR_REQUESTHANDLER_ASSEMBLIES` should be the assemblies containing your 
 
 ### Using
 
+>[!NOTE]
+>
+>**Sending the safe way**
+>
+>We are sometime talking about Safe request meaning that Refit will handle exceptions and return an `IApiResponse` to Apizr and then Apizr will return it as an `IApizrResponse` without throwing. Please read the exception handling doc to get more info.
+
 #### [`IMediator`](#tab/tabid-imediator)
 
 When registered, you don't have to inject/resolve anything else than `IMediator`, in order to play with your api services (both classic and crud). 
@@ -42,27 +48,41 @@ Where `YOUR_REQUEST_HERE` could be:
 Classic API:
  - With no result:
    - `ExecuteUnitRequest<TWebApi>`: execute any method from `TWebApi`
+   - `ExecuteSafeUnitRequest<TWebApi>`: execute any method from `TWebApi`, the safe way with `IApizrResponse` handling
    - `ExecuteUnitRequest<TWebApi, TModelData, TApiData>`: execute any method from `TWebApi` with `TModelData` mapped with `TApiData`
+   - `ExecuteSafeUnitRequest<TWebApi, TModelData, TApiData>`: execute any method from `TWebApi` with `TModelData` mapped with `TApiData`, the safe way with `IApizrResponse` handling
  - With result:
    - `ExecuteResultRequest<TWebApi, TApiData>`: execute any method from `TWebApi` with a `TApiData` request/result data
+   - `ExecuteSafeResultRequest<TWebApi, TApiData>`: execute any method from `TWebApi` with a `TApiData` request/result data, the safe way with `IApizrResponse<TApiData>` handling
    - `ExecuteResultRequest<TWebApi, TModelData, TApiData>`: execute any method from `TWebApi` with `TModelData` request/result data mapped with `TApiData`
+   - `ExecuteSafeResultRequest<TWebApi, TModelData, TApiData>`: execute any method from `TWebApi` with `TModelData` request/result data mapped with `TApiData`, the safe way with `IApizrResponse<TModelData>` handling
    - `ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>`: execute any method from `TWebApi`, sending `TApiRequestData` mapped from `TModelRequestData`, then returning `TModelResultData` mapped from `TApiResultData`
+   - `ExecuteSafeResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>`: execute any method from `TWebApi`, sending `TApiRequestData` mapped from `TModelRequestData`, then returning `TModelResultData` mapped from `TApiResultData`, the safe way with `IApizrResponse<TModelResultData>` handling
 
 CRUD API:
  - Read:
    - `ReadQuery<TResultData>`: get the `TResultData` entity matching an int key
+   - `SafeReadQuery<TResultData>`: get the `TResultData` entity matching an int key, the safe way with `IApizrResponse<TApiData>` handling
    - `ReadQuery<TResultData, TKey>`: get the `TResultData` entity matching a `TKey` 
+   - `SafeReadQuery<TResultData, TKey>`: get the `TResultData` entity matching a `TKey` , the safe way with `IApizrResponse<TApiData>` handling
  - ReadAll:
    - `ReadAllQuery<TReadAllResult>`: get `TReadAllResult` with `IDictionary<string, object>` optional query parameters
+   - `SafeReadAllQuery<TReadAllResult>`: get `TReadAllResult` with `IDictionary<string, object>` optional query parameters, the safe way with `IApizrResponse<TReadAllResult>` handling
    - `ReadAllQuery<TReadAllParams, TReadAllResult>`: get `TReadAllResult` with `TReadAllParams` optional query parameters
+   - `SafeReadAllQuery<TReadAllParams, TReadAllResult>`: get `TReadAllResult` with `TReadAllParams` optional query parameters, the safe way with `IApizrResponse<TReadAllResult>` handling
  - Create:
    - `CreateCommand<TModelData>`: create a `TModelData` entity
+   - `SafeCreateCommand<TModelData>`: create a `TModelData` entity, the safe way with `IApizrResponse<TModelData>` handling
  - Update:
    - `UpdateCommand<TRequestData>`: update the `TRequestData` entity matching an int key
+   - `SafeUpdateCommand<TRequestData>`: update the `TRequestData` entity matching an int key, the safe way with `IApizrResponse` handling
    - `UpdateCommand<TKey, TRequestData>`: update the `TRequestData` entity matching a `TKey`
+   - `SafeUpdateCommand<TKey, TRequestData>`: update the `TRequestData` entity matching a `TKey`, the safe way with `IApizrResponse` handling
  - Delete:
    - `DeleteCommand<T>`: delete the `T` entity matching an int key
+   - `SafeDeleteCommand<T>`: delete the `T` entity matching an int key, the safe way with `IApizrResponse` handling
    - `DeleteCommand<T, TKey>`: delete the `T` entity matching a `TKey`
+   - `SafeDeleteCommand<T, TKey>`: delete the `T` entity matching a `TKey`, the safe way with `IApizrResponse` handling
 
 #### [`IApizrMediator`](#tab/tabid-iapizrmediator)
 
@@ -85,23 +105,40 @@ Classic mediator methods:
    - `SendFor<TWebApi, TModelData, TApiData>`: execute any method from `TWebApi` with `TModelData` request/result data mapped with `TApiData`
    - `SendFor<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>`: execute any method from `TWebApi`, sending `TApiRequestData` mapped from `TModelRequestData`, then returning `TModelResultData` mapped from `TApiResultData`
 
+>[!TIP]
+>
+>**Sending the safe way**
+>
+>Note that if your api returns an `IApiResponse<T>`, Apizr mediator will send a safe request so you can handle an `IApizrResponse<T>` back from it.
+
 CRUD mediator methods:
  - Read:
    - `SendReadQuery<TApiEntity, TApiEntityKey>`: get the `TApiEntity` matching a `TApiEntityKey`
+   - `SendSafeReadQuery<TApiEntity, TApiEntityKey>`: get the `TApiEntity` matching a `TApiEntityKey`, the safe way with `IApizrResponse<TApiEntity>` handling
    - `SendReadQuery<TModelEntity, TApiEntity, TApiEntityKey>`: get the `TModelEntity` mapped from `TApiEntity` and matching a `TApiEntityKey`
+   - `SendSafeReadQuery<TModelEntity, TApiEntity, TApiEntityKey>`: get the `TModelEntity` mapped from `TApiEntity` and matching a `TApiEntityKey`, the safe way with `IApizrResponse<TModelEntity>` handling
  - ReadAll:
    - `SendReadAllQuery<TReadAllResult>`: get `TReadAllResult` with `IDictionary<string, object>` optional query parameters
+   - `SendSafeReadAllQuery<TReadAllResult>`: get `TReadAllResult` with `IDictionary<string, object>` optional query parameters, the safe way with `IApizrResponse<TReadAllResult>` handling
    - `SendReadAllQuery<TModelReadAllResult, TApiReadAllResult>`: get `TModelReadAllResult` mapped from `TApiReadAllResult`
+   - `SendSafeReadAllQuery<TModelReadAllResult, TApiReadAllResult>`: get `TModelReadAllResult` mapped from `TApiReadAllResult`, the safe way with `IApizrResponse<TModelReadAllResult>` handling
    - `SendReadAllQuery<TReadAllResult, TReadAllParams>`: get `TReadAllResult` with `TReadAllParams` optional query parameters
+   - `SendSafeReadAllQuery<TReadAllResult, TReadAllParams>`: get `TReadAllResult` with `TReadAllParams` optional query parameters, the safe way with `IApizrResponse<TReadAllResult>` handling
    - `SendReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>`: get `TModelReadAllResult` mapped from `TApiReadAllResult` with `TReadAllParams` optional query parameters
+   - `SendSafeReadAllQuery<TModelReadAllResult, TApiReadAllResult, TReadAllParams>`: get `TModelReadAllResult` mapped from `TApiReadAllResult` with `TReadAllParams` optional query parameters, the safe way with `IApizrResponse<TModelReadAllResult>` handling
  - Create:
    - `SendCreateCommand<TApiEntity>`: create a `TApiEntity`
+   - `SendSafeCreateCommand<TApiEntity>`: create a `TApiEntity`, the safe way with `IApizrResponse<TApiEntity>` handling
    - `SendCreateCommand<TModelEntity, TApiEntity>`: create a `TApiEntity` mapped from `TModelEntity`
+   - `SendSafeCreateCommand<TModelEntity, TApiEntity>`: create a `TApiEntity` mapped from `TModelEntity`, the safe way with `IApizrResponse<TModelEntity>` handling
  - Update:
    - `SendUpdateCommand<TApiEntity, TApiEntityKey>`: update the `TApiEntity` entity matching a `TApiEntityKey`
+   - `SendSafeUpdateCommand<TApiEntity, TApiEntityKey>`: update the `TApiEntity` entity matching a `TApiEntityKey`, the safe way with `IApizrResponse` handling
    - `SendUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>`: update the `TApiEntity` mapped from `TModelEntity` and matching a `TApiEntityKey`
+   - `SendSafeUpdateCommand<TModelEntity, TApiEntity, TApiEntityKey>`: update the `TApiEntity` mapped from `TModelEntity` and matching a `TApiEntityKey`, the safe way with `IApizrResponse` handling
  - Delete:
    - `SendDeleteCommand<TApiEntity, TApiEntityKey>`: delete the `TApiEntity` matching a `TApiEntityKey`
+   - `SendSafeDeleteCommand<TApiEntity, TApiEntityKey>`: delete the `TApiEntity` matching a `TApiEntityKey`, the safe way with `IApizrResponse` handling
 
 #### [`IApizrMediator<TWebApi>`](#tab/tabid-iapizrmediator-twebapi)
 
@@ -131,20 +168,35 @@ Classic typed mediator methods:
   - `SendFor<TModelData, TApiData>`: execute any method from `TWebApi` with `TModelData` request/result data mapped with `TApiData`
   - `SendFor<TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>`: execute any method from `TWebApi`, sending `TApiRequestData` mapped from `TModelRequestData`, then returning `TModelResultData` mapped from `TApiResultData`
 
+>[!TIP]
+>
+>**Sending the safe way**
+>
+>Note that if your api returns an `IApiResponse<T>`, Apizr mediator will send a safe request so you can handle an `IApizrResponse<T>` back from it.
+
 CRUD typed mediator methods:
 - Read:
   - `SendReadQuery`: get the `TApiEntity` matching a `TApiEntityKey`
+  - `SendSafeReadQuery`: get the `TApiEntity` matching a `TApiEntityKey`, the safe way with `IApizrResponse<TApiEntity>` handling
   - `SendReadQuery<TModelEntity>`: get the `TModelEntity` mapped from `TApiEntity` and matching a `TApiEntityKey`
+  - `SendSafeReadQuery<TModelEntity>`: get the `TModelEntity` mapped from `TApiEntity` and matching a `TApiEntityKey`, the safe way with `IApizrResponse<TModelEntity>` handling
 - ReadAll:
   - `SendReadAllQuery`: get `TReadAllResult` with `TReadAllParams` optional query parameters
+  - `SendSafeReadAllQuery`: get `TReadAllResult` with `TReadAllParams` optional query parameters, the safe way with `IApizrResponse<TReadAllResult>` handling
   - `SendReadAllQuery<TModelReadAllResult>`: get `TModelReadAllResult` mapped from `TApiReadAllResult` with `TReadAllParams` optional query parameters
+  - `SendSafeReadAllQuery<TModelReadAllResult>`: get `TModelReadAllResult` mapped from `TApiReadAllResult` with `TReadAllParams` optional query parameters, the safe way with `IApizrResponse<TModelReadAllResult>` handling
 - Create:
   - `SendCreateCommand`: create a `TApiEntity`
+  - `SendSafeCreateCommand`: create a `TApiEntity`, the safe way with `IApizrResponse<TApiEntity>` handling
   - `SendCreateCommand<TModelEntity>`: create a `TApiEntity` mapped from `TModelEntity`
+  - `SendSafeCreateCommand<TModelEntity>`: create a `TApiEntity` mapped from `TModelEntity`, the safe way with `IApizrResponse<TModelEntity>` handling
 - Update:
   - `SendUpdateCommand`: update the `TApiEntity` entity matching a `TApiEntityKey`
+  - `SendSafeUpdateCommand`: update the `TApiEntity` entity matching a `TApiEntityKey`, the safe way with `IApizrResponse` handling
   - `SendUpdateCommand<TModelEntity>`: update the `TApiEntity` mapped from `TModelEntity` and matching a `TApiEntityKey`
+  - `SendSafeUpdateCommand<TModelEntity>`: update the `TApiEntity` mapped from `TModelEntity` and matching a `TApiEntityKey`, the safe way with `IApizrResponse` handling
 - Delete:
   - `SendDeleteCommand`: delete the `TApiEntity` matching a `TApiEntityKey`
+  - `SendSafeDeleteCommand`: delete the `TApiEntity` matching a `TApiEntityKey`, the safe way with `IApizrResponse` handling
 
 ***

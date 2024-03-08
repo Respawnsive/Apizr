@@ -7,6 +7,8 @@ items:
   children:
   - Apizr.ApizrException`1.#ctor(System.Exception)
   - Apizr.ApizrException`1.#ctor(System.Exception,`0)
+  - Apizr.ApizrException`1.#ctor(System.String)
+  - Apizr.ApizrException`1.#ctor(System.String,`0)
   - Apizr.ApizrException`1.CachedResult
   langs:
   - csharp
@@ -18,11 +20,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrException.cs
-      branch: dev
+      branch: feat/response
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrException
     path: ../../Src/Apizr/ApizrException.cs
-    startLine: 25
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr
@@ -61,6 +63,72 @@ items:
   nameWithType.vb: ApizrException(Of TResult)
   fullName.vb: Apizr.ApizrException(Of TResult)
   name.vb: ApizrException(Of TResult)
+- uid: Apizr.ApizrException`1.#ctor(System.String)
+  commentId: M:Apizr.ApizrException`1.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Apizr.ApizrException`1
+  langs:
+  - csharp
+  - vb
+  name: ApizrException(string)
+  nameWithType: ApizrException<TResult>.ApizrException(string)
+  fullName: Apizr.ApizrException<TResult>.ApizrException(string)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrException.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/ApizrException.cs
+    startLine: 25
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  syntax:
+    content: public ApizrException(string message)
+    parameters:
+    - id: message
+      type: System.String
+    content.vb: Public Sub New(message As String)
+  overload: Apizr.ApizrException`1.#ctor*
+  nameWithType.vb: ApizrException(Of TResult).New(String)
+  fullName.vb: Apizr.ApizrException(Of TResult).New(String)
+  name.vb: New(String)
+- uid: Apizr.ApizrException`1.#ctor(System.String,`0)
+  commentId: M:Apizr.ApizrException`1.#ctor(System.String,`0)
+  id: '#ctor(System.String,`0)'
+  parent: Apizr.ApizrException`1
+  langs:
+  - csharp
+  - vb
+  name: ApizrException(string, TResult)
+  nameWithType: ApizrException<TResult>.ApizrException(string, TResult)
+  fullName: Apizr.ApizrException<TResult>.ApizrException(string, TResult)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/ApizrException.cs
+      branch: feat/response
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/ApizrException.cs
+    startLine: 30
+  assemblies:
+  - Apizr
+  namespace: Apizr
+  syntax:
+    content: public ApizrException(string message, TResult cachedResult)
+    parameters:
+    - id: message
+      type: System.String
+    - id: cachedResult
+      type: '{TResult}'
+    content.vb: Public Sub New(message As String, cachedResult As TResult)
+  overload: Apizr.ApizrException`1.#ctor*
+  nameWithType.vb: ApizrException(Of TResult).New(String, TResult)
+  fullName.vb: Apizr.ApizrException(Of TResult).New(String, TResult)
+  name.vb: New(String, TResult)
 - uid: Apizr.ApizrException`1.#ctor(System.Exception)
   commentId: M:Apizr.ApizrException`1.#ctor(System.Exception)
   id: '#ctor(System.Exception)'
@@ -75,11 +143,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrException.cs
-      branch: dev
+      branch: feat/response
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/ApizrException.cs
-    startLine: 27
+    startLine: 35
   assemblies:
   - Apizr
   namespace: Apizr
@@ -107,11 +175,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrException.cs
-      branch: dev
+      branch: feat/response
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/ApizrException.cs
-    startLine: 32
+    startLine: 40
   assemblies:
   - Apizr
   namespace: Apizr
@@ -141,11 +209,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/ApizrException.cs
-      branch: dev
+      branch: feat/response
       repo: https://github.com/Respawnsive/Apizr.git
     id: CachedResult
     path: ../../Src/Apizr/ApizrException.cs
-    startLine: 37
+    startLine: 45
   assemblies:
   - Apizr
   namespace: Apizr
@@ -596,13 +664,24 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization
 - uid: Apizr.ApizrException`1.#ctor*
   commentId: Overload:Apizr.ApizrException`1.#ctor
-  href: Apizr.ApizrException-1.html#Apizr_ApizrException_1__ctor_System_Exception_
+  href: Apizr.ApizrException-1.html#Apizr_ApizrException_1__ctor_System_String_
   name: ApizrException
   nameWithType: ApizrException<TResult>.ApizrException
   fullName: Apizr.ApizrException<TResult>.ApizrException
   nameWithType.vb: ApizrException(Of TResult).New
   fullName.vb: Apizr.ApizrException(Of TResult).New
   name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
 - uid: '{TResult}'
   commentId: '!:TResult'
   definition: TResult

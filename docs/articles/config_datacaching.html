@@ -348,6 +348,7 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
 </div>
 <h3 id="using">Using</h3>
 <h4 id="reading">Reading</h4>
+<h5 id="from-thrown-apizrexceptiont">From thrown <code>ApizrException&lt;T&gt;</code></h5>
 <p>Using Apizr caching feature is just about catching exceptions like for example:</p>
 <pre><code class="lang-csharp">IList&lt;User&gt;? users = null;
 try
@@ -366,6 +367,39 @@ finally
 }
 </code></pre>
 <p>Here we catch an <code>ApizrException&lt;UserList&gt;</code> meaning that in case of exception, it will bring a typed object to you loaded from cache.</p>
+<h5 id="from-returned-iapizrresponset">From returned <code>IApizrResponse&lt;T&gt;</code></h5>
+<p>If your api methods return an <code>IApiResponse&lt;T&gt;</code> provided by Refit, you can handle the <code>IApizrResponse&lt;T&gt;</code> returned by Apizr to get your data from the cache, the safe way without throwing any exception.</p>
+<pre><code class="lang-csharp">// Here we wrap the response into an IApiResponse&lt;T&gt; provided by Refit
+[WebApi(&quot;https://reqres.in/api&quot;)]
+public interface IReqResService
+{
+    [Get(&quot;/users&quot;)]
+    Task&lt;IApiResponse&lt;UserList&gt;&gt; GetUsersAsync();
+}
+
+...
+
+// Then we can handle the IApizrResponse&lt;T&gt; response comming from Apizr
+var response = await _reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync());
+
+// Log potential errors and maybe inform the user about it
+if(!response.IsSuccess)
+{
+   _logger.LogError(response.Exception);
+    Alert.Show(&quot;Error&quot;, response.Exception.Message);
+}
+
+// Use the data, no matter the source
+if(response.Result?.Data?.Any() == true)
+{
+    Users = new ObservableCollection&lt;User&gt;(response.Result.Data);
+
+    // Inform the user that data comes from cache if so
+    if(response.DataSource == ApizrResponseDataSource.Cache)
+        Toast.Show(&quot;Data comes from cache&quot;);
+}
+</code></pre>
+<p>Read the exception handling documentation to get more details about it.</p>
 <h4 id="clearing">Clearing</h4>
 <p>You may need to clear cache.
 Remeber that cache will be cleared when it will expire, thanks to what you set within the <code>Cache</code> attribute.
@@ -390,7 +424,7 @@ var succeed = await _reqResManager.ClearCacheAsync();
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_datacaching.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/feat/response/Apizr/Docs/Apizr.Docs/articles/config_datacaching.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

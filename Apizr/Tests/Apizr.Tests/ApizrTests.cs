@@ -26,6 +26,7 @@ using Polly.Registry;
 using Polly.Retry;
 using Polly.Timeout;
 using Refit;
+using RichardSzalay.MockHttp;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -208,6 +209,71 @@ namespace Apizr.Tests
             // This one should fail but with cached result
             var ex2 = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
             ex2.And.CachedResult.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_Should_Cache_ApizrResponse()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .AddDelegatingHandler(new TestRequestHandler()));
+
+            // Clearing all cache
+            var cleared = await reqResManager.ClearCacheAsync();
+
+            cleared.Should().BeTrue();
+
+            // This one should fail with no cached result
+            var response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().BeNull();
+            response.DataSource.Should().Be(ApizrResponseDataSource.None);
+
+            // This one should succeed with request result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync());
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNull();
+            response.Result!.Data.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            // This one should fail but with cached result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().NotBeNull();
+            response.Result!.Data.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            // Clearing specific cache
+            cleared = await reqResManager.ClearCacheAsync(api => api.SafeGetUsersAsync());
+
+            cleared.Should().BeTrue();
+
+            // This one should fail with no cached result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().BeNull();
+            response.DataSource.Should().Be(ApizrResponseDataSource.None);
         }
 
         [Fact]

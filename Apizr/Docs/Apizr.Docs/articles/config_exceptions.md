@@ -27,6 +27,48 @@ if(users != null)
 We catch any ApizrException as it will contain the original inner exception, but also the previously cached result if some.
 If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw an IO inner exception without sending the request.
 
+### Using `IApizrResponse` or `IApizrResponse<T>`
+
+Refit has different exception handling behavior depending on if your Refit interface methods return `Task<T>` or if they return `Task<IApiResponse>`, `Task<IApiResponse<T>>`, or `Task<ApiResponse<T>>`.
+
+When returning `Task<IApiResponse>`, `Task<IApiResponse<T>>`, or `Task<ApiResponse<T>>` **(not `Apizr` but `Api`)**,
+Refit traps any `ApiException` raised by the `ExceptionFactory` when processing the response, and any errors that occur when attempting to deserialize the response to `ApiResponse<T>`, and populates the exception into the `Error` property on `ApiResponse<T>` without throwing the exception.
+
+Then, Apizr will wrap the `ApiResponse<T>` into an `ApizrResponse<T>` plus some cached data if any and return it as a final response.
+You can then decide what to do like so:
+
+```csharp
+// Here we wrap the response into an IApiResponse<T> provided by Refit
+[WebApi("https://reqres.in/api")]
+public interface IReqResService
+{
+    [Get("/users")]
+    Task<IApiResponse<UserList>> GetUsersAsync();
+}
+
+...
+
+// Then we can handle the IApizrResponse<T> response comming from Apizr
+var response = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+// Log potential errors and maybe inform the user about it
+if(!response.IsSuccess)
+{
+   _logger.LogError(response.Exception);
+    Alert.Show("Error", response.Exception.Message);
+}
+
+// Use the data, no matter the source
+if(response.Result?.Data?.Any() == true)
+{
+    Users = new ObservableCollection<User>(response.Result.Data);
+
+    // Inform the user that data comes from cache if so
+    if(response.DataSource == ApizrResponseDataSource.Cache)
+        Toast.Show("Data comes from cache");
+}
+```
+
 ### Using `Action<Exception>`
 
 Instead of trycatching all the things, you may want to provide an exception handling action, thanks to `WithExCatching` builder option, available at both register and request time.
@@ -98,6 +140,8 @@ Here I'm telling Apizr to:
 Feel free to configure your exception handlers at the level of your choice, depending on your needs.
 You definitly can mix it all with request option exception handling.
 
+Note that you can mix it too with previous IApizrResponse handling.
+
 ### [Requesting](#tab/tabid-requesting)
 
 Configuring an exception handler at request time allows you to set it at the very end, just before sending the request, like trycatching does.
@@ -122,6 +166,8 @@ Here I'm telling Apizr in case of exception while resting to:
 - Return result from cache to ```users``` if any
 
 You definitly can mix it with registration option exception handling.
+
+Note that you can mix it too with previous IApizrResponse handling.
 
 ***
 

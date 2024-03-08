@@ -143,7 +143,7 @@ var userList = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
 
 This request will be managed with the defined resilience strategies, data cached and all logged.
 
-Apizr has a lot more to offer, just [read the doc](articles/index.md)!
+Apizr has a lot more to offer, just [read the doc](https://apizr.net)!
 
 ## Where
 

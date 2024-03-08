@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.Optional/Optional/Commanding/IOptionalCommand.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IOptionalCommand
     path: ../../Src/Handling/Apizr.Integrations.Optional/Optional/Commanding/IOptionalCommand.cs
@@ -23,28 +23,45 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Commanding
-  summary: "\nA mediation command returning an optional error\n"
+  summary: A mediation command returning an optional error
   example: []
   syntax:
     content: 'public interface IOptionalCommand<TError> : IRequest<Option<Unit, TError>>, IBaseRequest'
     typeParameters:
     - id: TError
       description: The optional error
-    content.vb: >-
-      Public Interface IOptionalCommand(Of TError)
-          Inherits IRequest(Of  Option(Of Unit, TError) )
+    content.vb: Public Interface IOptionalCommand(Of TError) Inherits IRequest(Of Option(Of Unit, TError)), IBaseRequest
   nameWithType.vb: IOptionalCommand(Of TError)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Optional.Commanding.IOptionalCommand(Of TError)
   name.vb: IOptionalCommand(Of TError)
 references:
 - uid: Apizr.Optional.Commanding
   commentId: N:Apizr.Optional.Commanding
+  href: Apizr.html
   name: Apizr.Optional.Commanding
   nameWithType: Apizr.Optional.Commanding
   fullName: Apizr.Optional.Commanding
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Commanding
+    name: Commanding
+    href: Apizr.Optional.Commanding.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Commanding
+    name: Commanding
+    href: Apizr.Optional.Commanding.html

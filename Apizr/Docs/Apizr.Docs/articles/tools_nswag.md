@@ -137,7 +137,7 @@ That said, let's focus on Apizr dedicated settings into the ```openApiToApizrCli
   - ```Extended```: generate with the service collection extending method
   - ```Both```: generate both methods (could be interesting to read but not relevant for production)
 - ```withPriority``` (default: ```false```): include priority management into registration process
-- ```withRetry``` (default: ```false```): add a Policy assembly attribute handling transient http error and a policy registry into registration process
+- ```withRetry``` (default: ```false```): add a ResiliencePipeline assembly attribute handling transient http error and a pipeline registry into registration process
 - ```withLogs``` (default: ```false```): add a Log assembly attribute and a logger factory into static only registration process
 - ```withRequestOptions``` (default: ```false```): add a RequestOptions parameter to your api methods so that you can adjust configuration at request time
 - ```withCacheProvider``` (default: ```None```): 

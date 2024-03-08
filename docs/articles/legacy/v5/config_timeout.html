@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
+    
+    
+      <link rel="shortcut icon" href="../../../resources/favicon.ico">
+      <link rel="stylesheet" href="../../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../../styles/docfx.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc.html">
+      <meta property="docfx:tocrel" content="../../toc.html">
+    
+    <meta property="docfx:rel" content="../../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="configuring-timeout">Configuring Timeout</h2>
+<p>There's actually two kind of client timeout:</p>
+<ul>
+<li>Request timeout which is set to each request try</li>
+<li>Operation timeout which is set to overall request tries</li>
+</ul>
+<p>Both of it will throw a TimeoutRejectedException when time is out.</p>
+<ul>
+<li>If you configured a retry policy handling TimeoutRejectedException:
+<ul>
+<li>with a request timeout, the request will be sent again by Polly with your defined request timeout set to each individual try.</li>
+<li>with an operation timeout, Polly will stop sending retries if the operation timeout timed out.</li>
+</ul>
+</li>
+<li>Otherwise, if you didn't configure any retry policy handling TimeoutRejectedException, request timeout will behave like an operation timeout, so it doesn't matter which one you defined.</li>
+</ul>
+<p>You can configure a timeout at:</p>
+<ul>
+<li>Design time by attribute decoration</li>
+<li>Register time by fluent configuration</li>
+<li>Request time by fluent configuration</li>
+</ul>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_tabid-designing" role="tab" aria-controls="tabpanel_1_tabid-designing" data-tab="tabid-designing" tabindex="0" aria-selected="true">Designing</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_tabid-registering" role="tab" aria-controls="tabpanel_1_tabid-registering" data-tab="tabid-registering" tabindex="-1">Registering</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_tabid-requesting" role="tab" aria-controls="tabpanel_1_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
+</li>
+</ul>
+<section id="tabpanel_1_tabid-designing" role="tabpanel" data-tab="tabid-designing">
+
+<p>Apizr comes with a <code>RequestTimeout</code> and an <code>OperationTimeout</code> attribute which set a timeout at any level (all Assembly apis, interface apis or specific api method).</p>
+<p>Here is classic api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/api&quot;), OperationTimeout(&quot;00:03:00&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users&quot;), RequestTimeout(&quot;00:01:00&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync();
+
+        [Get(&quot;/users/{userId}&quot;), RequestTimeout(&quot;00:00:30&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
+    }
+}
+</code></pre>
+<p>You’ll find the same timeout attributes dedicated to CRUD apis (the ones starting with <code>Read</code>, <code>ReadAll</code>, <code>Create</code>, <code>Update</code> and <code>Delete</code> prefix), so you could define timeout settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>
+<p>Here is CRUD api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample.Models
+{
+    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [OperationTimeout(&quot;00:03:00&quot;)]
+    [ReadAllRequestTimeout(&quot;00:01:00&quot;)]
+    [ReadRequestTimeout(&quot;00:00:30&quot;)]
+    public class User
+    {
+        [JsonProperty(&quot;id&quot;)]
+        public int Id { get; set; }
+
+        [JsonProperty(&quot;first_name&quot;)]
+        public string FirstName { get; set; }
+
+        [JsonProperty(&quot;last_name&quot;)]
+        public string LastName { get; set; }
+
+        [JsonProperty(&quot;avatar&quot;)]
+        public string Avatar { get; set; }
+
+        [JsonProperty(&quot;email&quot;)]
+        public string Email { get; set; }
+    }
+}
+</code></pre>
+<p>Both (classic and CRUD) attributes define the same thing about timeout.</p>
+<p>The attribute value is actually a <code>TimeSpan</code> string representation which is parsed then.</p>
+<p>You definitly can set a global timeout by decorating the assembly or interface, then manage specific scenarios at method level.
+Apizr will apply the closest timeout settings to the request it could find.</p>
+<p>Back to previous examples, we are saying that:</p>
+<ul>
+<li>in details, any request try shouldn't take longer than:
+<ul>
+<li>1 min for GetUsers/ReadAll</li>
+<li>30 sec for GetUser/Read</li>
+</ul>
+</li>
+<li>in general, we don't want the user to wait too much, so let's retry if needed, but not longer than 3 min overall.</li>
+</ul>
+</section>
+<section id="tabpanel_1_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
+
+<p>Configuring a timeout fluently at register time allows you to set it dynamically (e.g. based on settings).</p>
+<p>You can set a request timeout thanks to this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithRequestTimeout(YOUR_TIMESPAN)
+
+// OR factory configuration
+options =&gt; options.WithRequestTimeout(() =&gt; YOUR_TIMESPAN)
+
+// OR extended factory configuration with the service provider instance
+options =&gt; options.WithRequestTimeout(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YOUR_TIMESPAN)
+</code></pre>
+<p>And/or you can set an operation timeout thanks to this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithOperationTimeout(YOUR_TIMESPAN)
+
+// OR factory configuration
+options =&gt; options.WithOperationTimeout(() =&gt; YOUR_TIMESPAN)
+
+// OR extended factory configuration with the service provider instance
+options =&gt; options.WithOperationTimeout(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YOUR_TIMESPAN)
+</code></pre>
+<p>All timeout fluent options are available with or without using registry.
+It means that you can share timeout configuration, setting it at registry level and/or set some specific one at api level.</p>
+</section>
+<section id="tabpanel_1_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
+
+<p>Configuring a timeout fluently at request time allows you to set it at the very end, just before sending the request.</p>
+<p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
+<p>You can set a request timeout thanks to this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithRequestTimeout(YOUR_TIMESPAN)
+</code></pre>
+<p>And/or you can set an operation timeout thanks to this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithOperationTimeout(YOUR_TIMESPAN)
+</code></pre>
+</section>
+</div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/legacy/v5/config_timeout.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Supported by Respawnsive
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

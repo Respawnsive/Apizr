@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrDownloadManager.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrDownloadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Managing/IApizrDownloadManager.cs
@@ -23,247 +23,203 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nThe download manager with a dictionary query parameters type\n"
+  summary: The download manager with a dictionary query parameters type
   example: []
   syntax:
     content: 'public interface IApizrDownloadManager<TDownloadApi> : IApizrDownloadManager<TDownloadApi, IDictionary<string, object>>, IApizrTransferManagerBase<TDownloadApi>, IApizrManager where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     typeParameters:
     - id: TDownloadApi
       description: The download api type to manage
-    content.vb: >-
-      Public Interface IApizrDownloadManager(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))
-          Inherits IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object))
+    content.vb: Public Interface IApizrDownloadManager(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object))) Inherits IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object)), IApizrTransferManagerBase(Of TDownloadApi), IApizrManager
   inheritedMembers:
   - Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: IApizrDownloadManager(Of TDownloadApi)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi)
   name.vb: IApizrDownloadManager(Of TDownloadApi)
 references:
 - uid: Apizr.Transferring.Managing
   commentId: N:Apizr.Transferring.Managing
+  href: Apizr.html
   name: Apizr.Transferring.Managing
   nameWithType: Apizr.Transferring.Managing
   fullName: Apizr.Transferring.Managing
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Managing
+    name: Managing
+    href: Apizr.Transferring.Managing.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Managing
+    name: Managing
+    href: Apizr.Transferring.Managing.html
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager{`0,System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},System.Collections.Generic.IDictionary{System.String,System.Object}}
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrDownloadManager<TDownloadApi, IDictionary<String, Object>>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, System.Collections.Generic.IDictionary<System.String, System.Object>>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  nameWithType: IApizrDownloadManager<TDownloadApi, IDictionary<string, object>>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, System.Collections.Generic.IDictionary<string, object>>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
   nameWithType.vb: IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object)).DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, System.Collections.Generic.IDictionary(Of System.String, System.Object)).DownloadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, System.Collections.Generic.IDictionary(Of String, Object)).DownloadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager{`0,System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TDownloadApi, IDictionary<String, Object>>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, System.Collections.Generic.IDictionary<System.String, System.Object>>.DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager{`0,System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object)).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, System.Collections.Generic.IDictionary(Of System.String, System.Object)).DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager{`0,System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},System.Collections.Generic.IDictionary{System.String,System.Object}}
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
-  name: DownloadAsync(FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
-  nameWithType: IApizrDownloadManager<TDownloadApi, IDictionary<String, Object>>.DownloadAsync(FileInfo, IDictionary<String, Object>, Action<IApizrRequestOptionsBuilder>)
-  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, System.Collections.Generic.IDictionary<System.String, System.Object>>.DownloadAsync(System.IO.FileInfo, System.Collections.Generic.IDictionary<System.String, System.Object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
+  name: DownloadAsync(FileInfo, IDictionary<string, object>, Action<IApizrRequestOptionsBuilder>)
+  nameWithType: IApizrDownloadManager<TDownloadApi, IDictionary<string, object>>.DownloadAsync(FileInfo, IDictionary<string, object>, Action<IApizrRequestOptionsBuilder>)
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, System.Collections.Generic.IDictionary<string, object>>.DownloadAsync(System.IO.FileInfo, System.Collections.Generic.IDictionary<string, object>, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
   nameWithType.vb: IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object)).DownloadAsync(FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
-  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, System.Collections.Generic.IDictionary(Of System.String, System.Object)).DownloadAsync(System.IO.FileInfo, System.Collections.Generic.IDictionary(Of System.String, System.Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, System.Collections.Generic.IDictionary(Of String, Object)).DownloadAsync(System.IO.FileInfo, System.Collections.Generic.IDictionary(Of String, Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager{`0,System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TDownloadApi, IDictionary<String, Object>>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, System.Collections.Generic.IDictionary<System.String, System.Object>>.DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager{`0,System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object)).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, System.Collections.Generic.IDictionary(Of System.String, System.Object)).DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -273,166 +229,116 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi},System.Collections.Generic.IDictionary{System.String,System.Object}}
   commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager{`0,System.Collections.Generic.IDictionary{System.String,System.Object}}
   parent: Apizr.Transferring.Managing
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2
-  name: IApizrDownloadManager<TDownloadApi, IDictionary<String, Object>>
-  nameWithType: IApizrDownloadManager<TDownloadApi, IDictionary<String, Object>>
-  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, System.Collections.Generic.IDictionary<System.String, System.Object>>
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
+  name: IApizrDownloadManager<TDownloadApi, IDictionary<string, object>>
+  nameWithType: IApizrDownloadManager<TDownloadApi, IDictionary<string, object>>
+  fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, System.Collections.Generic.IDictionary<string, object>>
   nameWithType.vb: IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object))
-  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, System.Collections.Generic.IDictionary(Of System.String, System.Object))
+  fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, System.Collections.Generic.IDictionary(Of String, Object))
   name.vb: IApizrDownloadManager(Of TDownloadApi, IDictionary(Of String, Object))
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
-    nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -442,85 +348,56 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
   commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager`2
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   name: IApizrDownloadManager<TDownloadApi, TDownloadParams>
   nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>
@@ -530,40 +407,22 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )

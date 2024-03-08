@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Threading;
 using Apizr.Configuring.Manager;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
-using Polly;
 
 namespace Apizr.Configuring.Shared
 {
@@ -48,11 +47,6 @@ namespace Apizr.Configuring.Shared
         /// HttpClientHandler factory
         /// </summary>
         Func<HttpClientHandler> HttpClientHandlerFactory { get; }
-
-        /// <summary>
-        /// HttpClient factory
-        /// </summary>
-        Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; }
 
         /// <summary>
         /// HttpClient configuration builder

@@ -1,24 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	  <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-	  <RootNamespace>Apizr</RootNamespace>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0</TargetFrameworks>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <RootNamespace>Apizr</RootNamespace>
   </PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>Apizr.Integrations.FileTransfer.xml</DocumentationFile>
-		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Apizr.Integrations.FileTransfer.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Apizr\Apizr.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="FileTransferResources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -26,12 +21,10 @@
       <DependentUpon>FileTransferResources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="FileTransferResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FileTransferResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

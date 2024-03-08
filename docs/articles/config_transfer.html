@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring file transfer | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring file transfer | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../resources/favicon.ico">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    
+      <link rel="shortcut icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
     
     <meta property="docfx:rel" content="../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../index.html">
                 <img id="logo" class="svg" src="../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,10 +77,10 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-file-transfer">Configuring file transfer</h2>
 
+<h2 id="configuring-file-transfer">Configuring file transfer</h2>
 <p>Apizr could extend its core features with file transfer management thanks to a dedicated integration package.</p>
-<p>Once installed, you&#39;ll be able to:</p>
+<p>Once installed, you'll be able to:</p>
 <ul>
 <li>Register upload, download or transfer (both) managers</li>
 <li>Upload files with dedicated methods</li>
@@ -126,21 +126,22 @@
 </tbody>
 </table>
 <h3 id="designing">Designing</h3>
-<p>File Transfer package comes with some built-in apis son you don&#39;t have to create it yourself.</p>
+<p>File Transfer package comes with some built-in apis son you don't have to create it yourself.</p>
 <p>Here is what the provided apis look like then:</p>
-<div class="tabGroup" id="tabgroup_c0GHexck6B">
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B_tabid-upload" role="tab" aria-controls="tabpanel_c0GHexck6B_tabid-upload" data-tab="tabid-upload" tabindex="0" aria-selected="true">Upload</a>
+<a href="#tabpanel_1_tabid-upload" role="tab" aria-controls="tabpanel_1_tabid-upload" data-tab="tabid-upload" tabindex="0" aria-selected="true">Upload</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B_tabid-download" role="tab" aria-controls="tabpanel_c0GHexck6B_tabid-download" data-tab="tabid-download" tabindex="-1">Download</a>
+<a href="#tabpanel_1_tabid-download" role="tab" aria-controls="tabpanel_1_tabid-download" data-tab="tabid-download" tabindex="-1">Download</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B_tabid-transfer" role="tab" aria-controls="tabpanel_c0GHexck6B_tabid-transfer" data-tab="tabid-transfer" tabindex="-1">Transfer</a>
+<a href="#tabpanel_1_tabid-transfer" role="tab" aria-controls="tabpanel_1_tabid-transfer" data-tab="tabid-transfer" tabindex="-1">Transfer</a>
 </li>
 </ul>
-<section id="tabpanel_c0GHexck6B_tabid-upload" role="tabpanel" data-tab="tabid-upload">
+<section id="tabpanel_1_tabid-upload" role="tabpanel" data-tab="tabid-upload">
+
 <pre><code class="lang-csharp">public interface IUploadApi&lt;TApiResultData&gt; : ITransferApiBase
 {
     #region ByteArrayPart
@@ -216,11 +217,13 @@
 public interface IUploadApi : IUploadApi&lt;HttpResponseMessage&gt;
 {
 }
-</code></pre><p>The Upload api offers you the choice between ByteArray, Stream or FileInfo sources. 
+</code></pre>
+<p>The Upload api offers you the choice between ByteArray, Stream or FileInfo sources.
 You can set your own return type or use the default HttpResponseMessage one.
 <code>filePath</code> is an unesacped uri file path optionaly provided at request time, in case you want to use the same api for different uris.</p>
 </section>
-<section id="tabpanel_c0GHexck6B_tabid-download" role="tabpanel" data-tab="tabid-download" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-download" role="tabpanel" data-tab="tabid-download" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">public interface IDownloadApi&lt;in TDownloadParams&gt; : 
     ITransferApiBase
 {
@@ -249,23 +252,29 @@ public interface IDownloadApi :
     IDownloadApi&lt;IDictionary&lt;string, object&gt;&gt;
 {
 }
-</code></pre><p>The Download api could be used with <code>IDictionary&lt;string, object&gt;</code> parameter type by default thanks to <code>IDownloadApi</code> or any provided custom type thanks to <code>IDownloadApi&lt;TDownloadParams&gt;</code>. If you don&#39;t need it you&#39;ll definitly be able to ignore it.
+</code></pre>
+<p>The Download api could be used with <code>IDictionary&lt;string, object&gt;</code> parameter type by default thanks to <code>IDownloadApi</code> or any provided custom type thanks to <code>IDownloadApi&lt;TDownloadParams&gt;</code>. If you don't need it you'll definitly be able to ignore it.
 <code>filePathOrName</code> is an unesacped uri file path provided at request time, so you could use the same api for different uris.</p>
 </section>
-<section id="tabpanel_c0GHexck6B_tabid-transfer" role="tabpanel" data-tab="tabid-transfer" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-transfer" role="tabpanel" data-tab="tabid-transfer" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">    public interface ITransferApi&lt;in TDownloadParams, TUploadApiResultData&gt; : 
         IDownloadApi&lt;TDownloadParams&gt;, IUploadApi&lt;TUploadApiResultData&gt; { }
 
     public interface ITransferApi : 
         ITransferApi&lt;IDictionary&lt;string, object&gt;, HttpResponseMessage&gt;, IDownloadApi, IUploadApi { }
-</code></pre><p>The Transfer api inherits from both the upload and the download one, in case you want to deal with the both of it from the same api.</p>
+</code></pre>
+<p>The Transfer api inherits from both the upload and the download one, in case you want to deal with the both of it from the same api.</p>
 </section>
 </div>
+
 <ul>
-<li>One may have only one transfer endpoint with no dynamic path to deal with, so there&#39;s nothing more to design here.</li>
-<li>Other may have several transfer endpoints or some dynamic paths to deal with:<ul>
-<li>feeling confortable with setting it at request time, so there&#39;s nothing more to design here.</li>
-<li>preferring getting a dedicated api with preconfigured base uri, so he should:<ul>
+<li>One may have only one transfer endpoint with no dynamic path to deal with, so there's nothing more to design here.</li>
+<li>Other may have several transfer endpoints or some dynamic paths to deal with:
+<ul>
+<li>feeling confortable with setting it at request time, so there's nothing more to design here.</li>
+<li>preferring getting a dedicated api with preconfigured base uri, so he should:
+<ul>
 <li>create his own named and blank api interface</li>
 <li>make sure to inherit from one of the above apis</li>
 <li>define its base uri thanks to the <code>WebApi</code> attribute decoration</li>
@@ -277,26 +286,29 @@ public interface IDownloadApi :
 <h3 id="registering">Registering</h3>
 <p>Designing your custom transfer apis or using the built-in ones directly, you still have to register you apis.
 Where you could register it as we used to do it with any other apis, FileTransfer package comes with some wrapping managers helping you to get things short and simple.</p>
-<div class="NOTE"><h5>Note</h5><p><strong>Upload/Download/Transfer</strong></p>
-<p>Following exemples use the <code>Transfer</code> manager but you definitly can use the <code>Upload</code> or the <code>Download</code> ones instead. </p>
+<div class="NOTE">
+<h5>Note</h5>
+<p><strong>Upload/Download/Transfer</strong></p>
+<p>Following exemples use the <code>Transfer</code> manager but you definitly can use the <code>Upload</code> or the <code>Download</code> ones instead.</p>
 </div>
 <h4 id="registering-a-single-manager">Registering a single manager</h4>
-<div class="tabGroup" id="tabgroup_c0GHexck6B-1">
+<div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-1_tabid-static" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-1_tabid-extended" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-1_tabid-mediatr" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
+<a href="#tabpanel_2_tabid-mediatr" role="tab" aria-controls="tabpanel_2_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-1_tabid-optional" role="tab" aria-controls="tabpanel_c0GHexck6B-1_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
+<a href="#tabpanel_2_tabid-optional" role="tab" aria-controls="tabpanel_2_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
 </ul>
-<section id="tabpanel_c0GHexck6B-1_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <pre><code class="lang-csharp">// register the built-in transfer api
 var transferManager = ApizrBuilder.Current.CreateTransferManager(
     options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;));
@@ -307,9 +319,11 @@ var transferManager = ApizrBuilder.Current.CreateTransferManagerWith&lt;MyDownlo
 
 // OR register a custom transfer api
 var transferManager = ApizrBuilder.Current.CreateTransferManagerFor&lt;ITransferSampleApi&gt;();
-</code></pre><p>Here you go with your <code>Transfer</code> manager instance.</p>
+</code></pre>
+<p>Here you go with your <code>Transfer</code> manager instance.</p>
 </section>
-<section id="tabpanel_c0GHexck6B-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">// register the built-in transfer api
 services.AddApizrTransferManager(
     options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;));
@@ -320,9 +334,11 @@ services.AddApizrTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&
 
 // OR register a custom transfer api
 services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;();
-</code></pre><p>Then, get your <code>Transfer</code> manager instance by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one.</p>
+</code></pre>
+<p>Then, get your <code>Transfer</code> manager instance by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one.</p>
 </section>
-<section id="tabpanel_c0GHexck6B-1_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">// register the built-in transfer api
 services.AddApizrTransferManager(
     options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;)
@@ -336,9 +352,11 @@ services.AddApizrTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&
 // OR register a custom transfer api
 services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
     options =&gt; options.WithFileTransferMediation());
-</code></pre><p>Then, get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code> to send some transfer requests.</p>
+</code></pre>
+<p>Then, get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code> to send some transfer requests.</p>
 </section>
-<section id="tabpanel_c0GHexck6B-1_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">// register the built-in transfer api
 services.AddApizrTransferManager(
     options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;)
@@ -352,26 +370,28 @@ services.AddApizrTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&
 // OR register a custom transfer api
 services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
     options =&gt; options.WithFileTransferOptionalMediation());
-</code></pre><p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
+</code></pre>
+<p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
 </section>
 </div>
 <h4 id="registering-multiple-managers">Registering multiple managers</h4>
-<div class="tabGroup" id="tabgroup_c0GHexck6B-2">
+<div class="tabGroup" id="tabgroup_3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-2_tabid-static" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-2_tabid-extended" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_3_tabid-extended" role="tab" aria-controls="tabpanel_3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-2_tabid-mediatr" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
+<a href="#tabpanel_3_tabid-mediatr" role="tab" aria-controls="tabpanel_3_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-2_tabid-optional" role="tab" aria-controls="tabpanel_c0GHexck6B-2_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
+<a href="#tabpanel_3_tabid-optional" role="tab" aria-controls="tabpanel_3_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
 </ul>
-<section id="tabpanel_c0GHexck6B-2_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
     // Built-in api
     .AddTransferManager(options =&gt; options
@@ -381,14 +401,17 @@ services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
         .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
     // Custom api
     .AddTransferManagerFor&lt;ITransferSampleApi&gt;());
-</code></pre><p>Then, get your <code>Transfer</code> manager instance by calling:</p>
+</code></pre>
+<p>Then, get your <code>Transfer</code> manager instance by calling:</p>
 <pre><code class="lang-csharp">// for the built-in transfer api
 var transferManager = apizrRegistry.GetTransferManager();
 
 // OR for a custom transfer api
 var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&gt;();
-</code></pre></section>
-<section id="tabpanel_c0GHexck6B-2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+</code></pre>
+</section>
+<section id="tabpanel_3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">services.AddApizr(registry =&gt; registry
     // Built-in api
     .AddTransferManager(options =&gt; options
@@ -398,7 +421,8 @@ var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&
         .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
     // Custom api
     .AddTransferManagerFor&lt;ITransferSampleApi&gt;());
-</code></pre><p>Then, get your <code>Transfer</code> manager instance directly by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one.</p>
+</code></pre>
+<p>Then, get your <code>Transfer</code> manager instance directly by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one.</p>
 <p>You otherwise can resolve/inject <code>IApizrExtendedRegistry</code> to get the regisrty instance itself and then get your <code>Transfer</code> manager instance by calling:</p>
 <pre><code class="lang-csharp">// for the built-in transfer api
 var transferManager = apizrRegistry.GetTransferManager();
@@ -408,8 +432,10 @@ var transferManager = apizrRegistry.GetTransferManagerWith&lt;MyDownloadParamTyp
 
 // OR for a custom transfer api
 var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&gt;();
-</code></pre></section>
-<section id="tabpanel_c0GHexck6B-2_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+</code></pre>
+</section>
+<section id="tabpanel_3_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">services.AddApizr(registry =&gt; registry
         // Built-in api
         .AddTransferManager(options =&gt; options
@@ -420,10 +446,12 @@ var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&
         // Custom api
         .AddTransferManagerFor&lt;ITransferSampleApi&gt;(),
     config =&gt; config.WithFileTransferMediation());
-</code></pre><p>Then, get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code> to send some transfer requests.</p>
+</code></pre>
+<p>Then, get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code> to send some transfer requests.</p>
 <p>For more info about MediatR intergration, see <a href="config_mediatr.html">Configuring MediatR</a>.</p>
 </section>
-<section id="tabpanel_c0GHexck6B-2_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_3_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">services.AddApizr(registry =&gt; registry
         // Built-in api
         .AddTransferManager(options =&gt; options
@@ -434,36 +462,41 @@ var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&
         // Custom api
         .AddTransferManagerFor&lt;ITransferSampleApi&gt;(),
     config =&gt; config.WithFileTransferOptionalMediation());
-</code></pre><p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
+</code></pre>
+<p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
 <p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
 </section>
 </div>
+
 <p>You definitly can group registrations if needed like illustrated into the <a href="gettingstarted_classic.html">Getting started</a>.</p>
 <p>Note that auto registration thanks to assembly scanning is not yet available for this package.</p>
 <h3 id="requesting">Requesting</h3>
-<div class="tabGroup" id="tabgroup_c0GHexck6B-3">
+<div class="tabGroup" id="tabgroup_4">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-3_tabid-static" role="tab" aria-controls="tabpanel_c0GHexck6B-3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_4_tabid-static" role="tab" aria-controls="tabpanel_4_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-3_tabid-extended" role="tab" aria-controls="tabpanel_c0GHexck6B-3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_4_tabid-extended" role="tab" aria-controls="tabpanel_4_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-3_tabid-mediatr" role="tab" aria-controls="tabpanel_c0GHexck6B-3_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
+<a href="#tabpanel_4_tabid-mediatr" role="tab" aria-controls="tabpanel_4_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-3_tabid-optional" role="tab" aria-controls="tabpanel_c0GHexck6B-3_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
+<a href="#tabpanel_4_tabid-optional" role="tab" aria-controls="tabpanel_4_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
 </ul>
-<section id="tabpanel_c0GHexck6B-3_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_4_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <p>Once you get an instance of your manager, here is how to play with it:</p>
 <pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre><p>Note that if you&#39;re in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
+</code></pre>
+<p>Note that if you're in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
 <pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
     options =&gt; options.WithDynamicPath(&quot;YOUR_DYNAMIC_PATH_HERE&quot;));
-</code></pre><p>If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
+</code></pre>
+<p>If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
 You can call download or upload methods directly from the registry itself.</p>
 <pre><code class="lang-csharp">// for the built-in transfer api
 var transferResult = await registry.DownloadAsync(
@@ -476,15 +509,19 @@ var transferResult = await registry.DownloadWithAsync&lt;MyDownloadParamType&gt;
 // OR for a custom transfer api
 var transferResult = await registry.DownloadAsync&lt;ITransferSampleApi&gt;(
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre></section>
-<section id="tabpanel_c0GHexck6B-3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+</code></pre>
+</section>
+<section id="tabpanel_4_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <p>Once you get an instance of your manager by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one, here is how to play with it:</p>
 <pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre><p>Note that if you&#39;re in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
+</code></pre>
+<p>Note that if you're in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
 <pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
     options =&gt; options.WithDynamicPath(&quot;YOUR_DYNAMIC_PATH_HERE&quot;));
-</code></pre><p>If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
+</code></pre>
+<p>If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
 You can call download or upload methods directly from the registry itself.</p>
 <pre><code class="lang-csharp">// for the built-in transfer api
 var transferResult = await registry.DownloadAsync(
@@ -497,8 +534,10 @@ var transferResult = await registry.DownloadWithAsync&lt;MyDownloadParamType&gt;
 // OR for a custom transfer api
 var transferResult = await registry.DownloadAsync&lt;ITransferSampleApi&gt;(
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre></section>
-<section id="tabpanel_c0GHexck6B-3_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+</code></pre>
+</section>
+<section id="tabpanel_4_tabid-mediatr" role="tabpanel" data-tab="tabid-mediatr" aria-hidden="true" hidden="hidden">
+
 <p>Once you get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code>, here is how to play with it:</p>
 <pre><code class="lang-csharp">// for the built-in transfer api
 var transferResult = await apizrMediator.SendDownloadQuery(
@@ -511,9 +550,11 @@ var transferResult = await apizrMediator.SendDownloadWithQuery&lt;MyDownloadPara
 // OR for a custom transfer api
 var transferResult = await apizrMediator.SendDownloadQuery&lt;ITransferSampleApi&gt;(
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre><p>For more info about MediatR intergration, see <a href="config_mediatr.html">Configuring MediatR</a>.</p>
+</code></pre>
+<p>For more info about MediatR intergration, see <a href="config_mediatr.html">Configuring MediatR</a>.</p>
 </section>
-<section id="tabpanel_c0GHexck6B-3_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_4_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
+
 <p>Once you get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code>, here is how to play with it:</p>
 <pre><code class="lang-csharp">// for the built-in transfer api
 var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery(
@@ -526,7 +567,8 @@ var transferResult = await apizrMediator.SendDownloadWithOptionalQuery&lt;MyDown
 // OR for a custom transfer api
 var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery&lt;ITransferSampleApi&gt;(
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre><p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
+</code></pre>
+<p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
 </section>
 </div>
 <h3 id="tracking-progress">Tracking progress</h3>
@@ -538,51 +580,59 @@ progress.ProgressChanged += (sender, args) =&gt;
     // Do whatever you want when progress reported
     var percentage = args.ProgressPercentage;
 };
-</code></pre><p>From here, you may want to track all transfer requests globally or some of it locally when ask for.</p>
-<div class="tabGroup" id="tabgroup_c0GHexck6B-4">
+</code></pre>
+<p>From here, you may want to track all transfer requests globally or some of it locally when ask for.</p>
+<div class="tabGroup" id="tabgroup_5">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-4_tabid-globally" role="tab" aria-controls="tabpanel_c0GHexck6B-4_tabid-globally" data-tab="tabid-globally" tabindex="0" aria-selected="true">Globally</a>
+<a href="#tabpanel_5_tabid-globally" role="tab" aria-controls="tabpanel_5_tabid-globally" data-tab="tabid-globally" tabindex="0" aria-selected="true">Globally</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c0GHexck6B-4_tabid-locally" role="tab" aria-controls="tabpanel_c0GHexck6B-4_tabid-locally" data-tab="tabid-locally" tabindex="-1">Locally</a>
+<a href="#tabpanel_5_tabid-locally" role="tab" aria-controls="tabpanel_5_tabid-locally" data-tab="tabid-locally" tabindex="-1">Locally</a>
 </li>
 </ul>
-<section id="tabpanel_c0GHexck6B-4_tabid-globally" role="tabpanel" data-tab="tabid-globally">
+<section id="tabpanel_5_tabid-globally" role="tabpanel" data-tab="tabid-globally">
+
 <p>Just provide your <code>ApizrProgress</code> instance with options builder at registration time:</p>
 <pre><code class="lang-csharp">options =&gt; options.WithProgress(progress);
-</code></pre><p>And that&#39;s it, you&#39;ll be notified when any transfer progress of any transfer request occcured, like for:</p>
+</code></pre>
+<p>And that's it, you'll be notified when any transfer progress of any transfer request occcured, like for:</p>
 <pre><code class="lang-csharp">var fileInfo = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre></section>
-<section id="tabpanel_c0GHexck6B-4_tabid-locally" role="tabpanel" data-tab="tabid-locally" aria-hidden="true" hidden="hidden">
+</code></pre>
+</section>
+<section id="tabpanel_5_tabid-locally" role="tabpanel" data-tab="tabid-locally" aria-hidden="true" hidden="hidden">
+
 <p>You have to tell Apizr that you want to track progress with options builder at registration time:</p>
 <pre><code class="lang-csharp">options =&gt; options.WithProgress()
-</code></pre><p>Then you can track progress of any transfer request of your choice, by providing your <code>ApizrProgress</code> instance with options builder at request time:</p>
+</code></pre>
+<p>Then you can track progress of any transfer request of your choice, by providing your <code>ApizrProgress</code> instance with options builder at request time:</p>
 <pre><code class="lang-csharp">var fileInfo = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
                     options =&gt; options.WithProgress(progress));
-</code></pre></section>
+</code></pre>
+</section>
 </div>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/master/Apizr/Docs/Apizr.Docs/articles/config_transfer.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_transfer.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -590,14 +640,14 @@ progress.ProgressChanged += (sender, args) =&gt;
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

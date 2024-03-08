@@ -27,7 +27,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IUploadApi
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -39,16 +39,8 @@ items:
     content: 'public interface IUploadApi<TApiResultData> : ITransferApiBase'
     typeParameters:
     - id: TApiResultData
-    content.vb: >-
-      Public Interface IUploadApi(Of TApiResultData)
-          Inherits ITransferApiBase
+    content.vb: Public Interface IUploadApi(Of TApiResultData) Inherits ITransferApiBase
   nameWithType.vb: IUploadApi(Of TApiResultData)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData)
   name.vb: IUploadApi(Of TApiResultData)
 - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart)
@@ -65,7 +57,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -79,7 +71,7 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] ByteArrayPart byteArrayPart)
+      Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart)
     parameters:
     - id: byteArrayPart
       type: Refit.ByteArrayPart
@@ -118,14 +110,14 @@ items:
   langs:
   - csharp
   - vb
-  name: UploadAsync(ByteArrayPart, String)
-  nameWithType: IUploadApi<TApiResultData>.UploadAsync(ByteArrayPart, String)
-  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.ByteArrayPart, System.String)
+  name: UploadAsync(ByteArrayPart, string)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(ByteArrayPart, string)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.ByteArrayPart, string)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -141,7 +133,7 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] ByteArrayPart byteArrayPart, string path)
+      Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, string path)
     parameters:
     - id: byteArrayPart
       type: Refit.ByteArrayPart
@@ -181,7 +173,8 @@ items:
     - type: System.UriFormat
       value: 2
   nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(ByteArrayPart, String)
-  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.ByteArrayPart, System.String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.ByteArrayPart, String)
+  name.vb: UploadAsync(ByteArrayPart, String)
 - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
   id: UploadAsync(Refit.ByteArrayPart,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -196,7 +189,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -210,7 +203,7 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] ByteArrayPart byteArrayPart, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, IApizrRequestOptions options)
     parameters:
     - id: byteArrayPart
       type: Refit.ByteArrayPart
@@ -255,14 +248,14 @@ items:
   langs:
   - csharp
   - vb
-  name: UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
-  nameWithType: IUploadApi<TApiResultData>.UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.ByteArrayPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(ByteArrayPart, string, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(ByteArrayPart, string, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.ByteArrayPart, string, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -278,7 +271,7 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] ByteArrayPart byteArrayPart, string path, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync(ByteArrayPart byteArrayPart, string path, IApizrRequestOptions options)
     parameters:
     - id: byteArrayPart
       type: Refit.ByteArrayPart
@@ -324,7 +317,8 @@ items:
     - type: System.UriFormat
       value: 2
   nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
-  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.ByteArrayPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.ByteArrayPart, String, Apizr.Configuring.Request.IApizrRequestOptions)
+  name.vb: UploadAsync(ByteArrayPart, String, IApizrRequestOptions)
 - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
   commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart)
   id: UploadAsync(Refit.StreamPart)
@@ -339,7 +333,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -353,7 +347,7 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] StreamPart streamPart)
+      Task<TApiResultData> UploadAsync(StreamPart streamPart)
     parameters:
     - id: streamPart
       type: Refit.StreamPart
@@ -392,14 +386,14 @@ items:
   langs:
   - csharp
   - vb
-  name: UploadAsync(StreamPart, String)
-  nameWithType: IUploadApi<TApiResultData>.UploadAsync(StreamPart, String)
-  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.StreamPart, System.String)
+  name: UploadAsync(StreamPart, string)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(StreamPart, string)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.StreamPart, string)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -415,7 +409,7 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] StreamPart streamPart, string path)
+      Task<TApiResultData> UploadAsync(StreamPart streamPart, string path)
     parameters:
     - id: streamPart
       type: Refit.StreamPart
@@ -455,7 +449,8 @@ items:
     - type: System.UriFormat
       value: 2
   nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(StreamPart, String)
-  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.StreamPart, System.String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.StreamPart, String)
+  name.vb: UploadAsync(StreamPart, String)
 - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
   id: UploadAsync(Refit.StreamPart,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -470,7 +465,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -484,7 +479,7 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] StreamPart streamPart, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync(StreamPart streamPart, IApizrRequestOptions options)
     parameters:
     - id: streamPart
       type: Refit.StreamPart
@@ -529,14 +524,14 @@ items:
   langs:
   - csharp
   - vb
-  name: UploadAsync(StreamPart, String, IApizrRequestOptions)
-  nameWithType: IUploadApi<TApiResultData>.UploadAsync(StreamPart, String, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.StreamPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(StreamPart, string, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(StreamPart, string, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.StreamPart, string, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -552,7 +547,7 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] StreamPart streamPart, string path, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync(StreamPart streamPart, string path, IApizrRequestOptions options)
     parameters:
     - id: streamPart
       type: Refit.StreamPart
@@ -598,7 +593,8 @@ items:
     - type: System.UriFormat
       value: 2
   nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(StreamPart, String, IApizrRequestOptions)
-  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.StreamPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.StreamPart, String, Apizr.Configuring.Request.IApizrRequestOptions)
+  name.vb: UploadAsync(StreamPart, String, IApizrRequestOptions)
 - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
   commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart)
   id: UploadAsync(Refit.FileInfoPart)
@@ -613,7 +609,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -627,7 +623,7 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] FileInfoPart fileInfoPart)
+      Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart)
     parameters:
     - id: fileInfoPart
       type: Refit.FileInfoPart
@@ -666,14 +662,14 @@ items:
   langs:
   - csharp
   - vb
-  name: UploadAsync(FileInfoPart, String)
-  nameWithType: IUploadApi<TApiResultData>.UploadAsync(FileInfoPart, String)
-  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.FileInfoPart, System.String)
+  name: UploadAsync(FileInfoPart, string)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(FileInfoPart, string)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.FileInfoPart, string)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -689,7 +685,7 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] FileInfoPart fileInfoPart, string filePath)
+      Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, string filePath)
     parameters:
     - id: fileInfoPart
       type: Refit.FileInfoPart
@@ -729,7 +725,8 @@ items:
     - type: System.UriFormat
       value: 2
   nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(FileInfoPart, String)
-  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.FileInfoPart, System.String)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.FileInfoPart, String)
+  name.vb: UploadAsync(FileInfoPart, String)
 - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
   id: UploadAsync(Refit.FileInfoPart,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -744,7 +741,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -758,7 +755,7 @@ items:
 
       [Post("")]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] FileInfoPart fileInfoPart, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, IApizrRequestOptions options)
     parameters:
     - id: fileInfoPart
       type: Refit.FileInfoPart
@@ -803,14 +800,14 @@ items:
   langs:
   - csharp
   - vb
-  name: UploadAsync(FileInfoPart, String, IApizrRequestOptions)
-  nameWithType: IUploadApi<TApiResultData>.UploadAsync(FileInfoPart, String, IApizrRequestOptions)
-  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.FileInfoPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  name: UploadAsync(FileInfoPart, string, IApizrRequestOptions)
+  nameWithType: IUploadApi<TApiResultData>.UploadAsync(FileInfoPart, string, IApizrRequestOptions)
+  fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync(Refit.FileInfoPart, string, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Transferring/Requesting/IUploadApi.cs
@@ -826,7 +823,7 @@ items:
 
       [QueryUriFormat(UriFormat.Unescaped)]
 
-      Task<TApiResultData> UploadAsync([AliasAs("file")] FileInfoPart fileInfoPart, string filePath, [RequestOptions] IApizrRequestOptions options)
+      Task<TApiResultData> UploadAsync(FileInfoPart fileInfoPart, string filePath, IApizrRequestOptions options)
     parameters:
     - id: fileInfoPart
       type: Refit.FileInfoPart
@@ -872,15 +869,42 @@ items:
     - type: System.UriFormat
       value: 2
   nameWithType.vb: IUploadApi(Of TApiResultData).UploadAsync(FileInfoPart, String, IApizrRequestOptions)
-  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.FileInfoPart, System.String, Apizr.Configuring.Request.IApizrRequestOptions)
+  fullName.vb: Apizr.Transferring.Requesting.IUploadApi(Of TApiResultData).UploadAsync(Refit.FileInfoPart, String, Apizr.Configuring.Request.IApizrRequestOptions)
+  name.vb: UploadAsync(FileInfoPart, String, IApizrRequestOptions)
 references:
 - uid: Apizr.Transferring.Requesting
   commentId: N:Apizr.Transferring.Requesting
+  href: Apizr.html
   name: Apizr.Transferring.Requesting
   nameWithType: Apizr.Transferring.Requesting
   fullName: Apizr.Transferring.Requesting
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Requesting
+    name: Requesting
+    href: Apizr.Transferring.Requesting.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Requesting
+    name: Requesting
+    href: Apizr.Transferring.Requesting.html
 - uid: Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync*
   commentId: Overload:Apizr.Transferring.Requesting.IUploadApi`1.UploadAsync
+  href: Apizr.Transferring.Requesting.IUploadApi-1.html#Apizr_Transferring_Requesting_IUploadApi_1_UploadAsync_Refit_ByteArrayPart_
   name: UploadAsync
   nameWithType: IUploadApi<TApiResultData>.UploadAsync
   fullName: Apizr.Transferring.Requesting.IUploadApi<TApiResultData>.UploadAsync
@@ -897,6 +921,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{`0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TApiResultData>
   nameWithType: Task<TApiResultData>
   fullName: System.Threading.Tasks.Task<TApiResultData>
@@ -906,33 +931,21 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApiResultData
-    nameWithType: TApiResultData
-    fullName: TApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApiResultData
-    nameWithType: TApiResultData
-    fullName: TApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Refit
   commentId: N:Refit
   isExternal: true
@@ -942,6 +955,7 @@ references:
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -951,63 +965,113 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: System.String
   commentId: T:System.String
   parent: System
   isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Configuring.Request.IApizrRequestOptions
   commentId: T:Apizr.Configuring.Request.IApizrRequestOptions
   parent: Apizr.Configuring.Request
+  href: Apizr.Configuring.Request.IApizrRequestOptions.html
   name: IApizrRequestOptions
   nameWithType: IApizrRequestOptions
   fullName: Apizr.Configuring.Request.IApizrRequestOptions
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
+  href: Apizr.html
   name: Apizr.Configuring.Request
   nameWithType: Apizr.Configuring.Request
   fullName: Apizr.Configuring.Request
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
 - uid: Refit.StreamPart
   commentId: T:Refit.StreamPart
   parent: Refit

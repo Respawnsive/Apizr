@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Commanding/IMediationCommand.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IMediationCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Commanding/IMediationCommand.cs
@@ -23,28 +23,45 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
-  summary: "\nA mediation command sending a request\n"
+  summary: A mediation command sending a request
   example: []
   syntax:
     content: 'public interface IMediationCommand<out TRequestData> : IRequest<Unit>, IBaseRequest'
     typeParameters:
     - id: TRequestData
       description: The api request type
-    content.vb: >-
-      Public Interface IMediationCommand(Of Out TRequestData)
-          Inherits IRequest(Of Unit)
+    content.vb: Public Interface IMediationCommand(Of Out TRequestData) Inherits IRequest(Of Unit), IBaseRequest
   nameWithType.vb: IMediationCommand(Of TRequestData)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Mediation.Commanding.IMediationCommand(Of TRequestData)
   name.vb: IMediationCommand(Of TRequestData)
 references:
 - uid: Apizr.Mediation.Commanding
   commentId: N:Apizr.Mediation.Commanding
+  href: Apizr.html
   name: Apizr.Mediation.Commanding
   nameWithType: Apizr.Mediation.Commanding
   fullName: Apizr.Mediation.Commanding
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html

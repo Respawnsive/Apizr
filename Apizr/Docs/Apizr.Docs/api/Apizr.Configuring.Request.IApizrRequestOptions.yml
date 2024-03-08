@@ -7,6 +7,7 @@ items:
   children:
   - Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken
   - Apizr.Configuring.Request.IApizrRequestOptions.ClearCache
+  - Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
   langs:
   - csharp
   - vb
@@ -17,22 +18,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrRequestOptions
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-    startLine: 6
+    startLine: 7
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
+  summary: Options available at request levels and for all (static and extended) registration types
   example: []
   syntax:
     content: 'public interface IApizrRequestOptions : IApizrRequestOptionsBase, IApizrGlobalSharedOptionsBase'
-    content.vb: >-
-      Public Interface IApizrRequestOptions
-          Inherits IApizrRequestOptionsBase
+    content.vb: Public Interface IApizrRequestOptions Inherits IApizrRequestOptionsBase, IApizrGlobalSharedOptionsBase
   inheritedMembers:
-  - Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
+  - Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
@@ -42,12 +42,6 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
 - uid: Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken
   commentId: P:Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken
   id: CancellationToken
@@ -62,15 +56,15 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: CancellationToken
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-    startLine: 11
+    startLine: 12
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
-  summary: "\nA cancellation token to pass through it all\n"
+  summary: A cancellation token to pass through it all
   example: []
   syntax:
     content: CancellationToken CancellationToken { get; }
@@ -79,10 +73,6 @@ items:
       type: System.Threading.CancellationToken
     content.vb: ReadOnly Property CancellationToken As CancellationToken
   overload: Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Configuring.Request.IApizrRequestOptions.ClearCache
   commentId: P:Apizr.Configuring.Request.IApizrRequestOptions.ClearCache
   id: ClearCache
@@ -97,15 +87,15 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCache
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
-  summary: "\nClear request cache before executing (default: false)\n"
+  summary: 'Clear request cache before executing (default: false)'
   example: []
   syntax:
     content: bool ClearCache { get; }
@@ -114,95 +104,185 @@ items:
       type: System.Boolean
     content.vb: ReadOnly Property ClearCache As Boolean
   overload: Apizr.Configuring.Request.IApizrRequestOptions.ClearCache*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
+- uid: Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
+  commentId: P:Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
+  id: ResilienceContextOptions
+  parent: Apizr.Configuring.Request.IApizrRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ResilienceContextOptions
+  nameWithType: IApizrRequestOptions.ResilienceContextOptions
+  fullName: Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ResilienceContextOptions
+    path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
+    startLine: 22
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: Options set to resilience context
+  example: []
+  syntax:
+    content: IApizrResilienceContextOptions ResilienceContextOptions { get; }
+    parameters: []
+    return:
+      type: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
+    content.vb: ReadOnly Property ResilienceContextOptions As IApizrResilienceContextOptions
+  overload: Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions*
 references:
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
+  href: Apizr.html
   name: Apizr.Configuring.Request
   nameWithType: Apizr.Configuring.Request
   fullName: Apizr.Configuring.Request
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
-  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
+  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   parent: Apizr.Configuring.Request.IApizrRequestOptionsBase
-  name: Context
-  nameWithType: IApizrRequestOptionsBase.Context
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBase.html#Apizr_Configuring_Request_IApizrRequestOptionsBase_ResilienceContext
+  name: ResilienceContext
+  nameWithType: IApizrRequestOptionsBase.ResilienceContext
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HttpTracerMode
   name: HttpTracerMode
   nameWithType: IApizrGlobalSharedOptionsBase.HttpTracerMode
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_TrafficVerbosity
   name: TrafficVerbosity
   nameWithType: IApizrGlobalSharedOptionsBase.TrafficVerbosity
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LogLevels
   name: LogLevels
   nameWithType: IApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OnException
   name: OnException
   nameWithType: IApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LetThrowOnExceptionWithEmptyCache
   name: LetThrowOnExceptionWithEmptyCache
   nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HandlersParameters
   name: HandlersParameters
   nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_Headers
   name: Headers
   nameWithType: IApizrGlobalSharedOptionsBase.Headers
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OperationTimeout
   name: OperationTimeout
   nameWithType: IApizrGlobalSharedOptionsBase.OperationTimeout
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_RequestTimeout
   name: RequestTimeout
   nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
 - uid: Apizr.Configuring.Request.IApizrRequestOptionsBase
   commentId: T:Apizr.Configuring.Request.IApizrRequestOptionsBase
   parent: Apizr.Configuring.Request
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBase.html
   name: IApizrRequestOptionsBase
   nameWithType: IApizrRequestOptionsBase
   fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken*
   commentId: Overload:Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken
+  href: Apizr.Configuring.Request.IApizrRequestOptions.html#Apizr_Configuring_Request_IApizrRequestOptions_CancellationToken
   name: CancellationToken
   nameWithType: IApizrRequestOptions.CancellationToken
   fullName: Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken
@@ -210,17 +290,40 @@ references:
   commentId: T:System.Threading.CancellationToken
   parent: System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
 - uid: System.Threading
   commentId: N:System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
 - uid: Apizr.Configuring.Request.IApizrRequestOptions.ClearCache*
   commentId: Overload:Apizr.Configuring.Request.IApizrRequestOptions.ClearCache
+  href: Apizr.Configuring.Request.IApizrRequestOptions.html#Apizr_Configuring_Request_IApizrRequestOptions_ClearCache
   name: ClearCache
   nameWithType: IApizrRequestOptions.ClearCache
   fullName: Apizr.Configuring.Request.IApizrRequestOptions.ClearCache
@@ -228,12 +331,68 @@ references:
   commentId: T:System.Boolean
   parent: System
   isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
+- uid: Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions*
+  commentId: Overload:Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
+  href: Apizr.Configuring.Request.IApizrRequestOptions.html#Apizr_Configuring_Request_IApizrRequestOptions_ResilienceContextOptions
+  name: ResilienceContextOptions
+  nameWithType: IApizrRequestOptions.ResilienceContextOptions
+  fullName: Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
+- uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
+  commentId: T:Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
+  parent: Apizr.Configuring.Shared.Context
+  href: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions.html
+  name: IApizrResilienceContextOptions
+  nameWithType: IApizrResilienceContextOptions
+  fullName: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
+- uid: Apizr.Configuring.Shared.Context
+  commentId: N:Apizr.Configuring.Shared.Context
+  href: Apizr.html
+  name: Apizr.Configuring.Shared.Context
+  nameWithType: Apizr.Configuring.Shared.Context
+  fullName: Apizr.Configuring.Shared.Context
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  - name: .
+  - uid: Apizr.Configuring.Shared.Context
+    name: Context
+    href: Apizr.Configuring.Shared.Context.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  - name: .
+  - uid: Apizr.Configuring.Shared.Context
+    name: Context
+    href: Apizr.Configuring.Shared.Context.html

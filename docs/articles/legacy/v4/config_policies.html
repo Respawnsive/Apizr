@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring Policies | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring Policies | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../../../resources/favicon.ico">
-    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../../../styles/docfx.css">
-    <link rel="stylesheet" href="../../../styles/main.css">
-    <meta property="docfx:navrel" content="../../../toc.html">
-    <meta property="docfx:tocrel" content="../../toc.html">
+    
+      <link rel="shortcut icon" href="../../../resources/favicon.ico">
+      <link rel="stylesheet" href="../../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../../styles/docfx.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc.html">
+      <meta property="docfx:tocrel" content="../../toc.html">
     
     <meta property="docfx:rel" content="../../../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../../../index.html">
                 <img id="logo" class="svg" src="../../../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,8 +77,8 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-policies">Configuring Policies</h2>
 
+<h2 id="configuring-policies">Configuring Policies</h2>
 <p>Apizr comes with a <code>Policy</code> attribute to apply some policies on apis, handled by <a href="https://github.com/App-vNext/Polly">Polly</a>.</p>
 <p>You’ll find also policy attributes dedicated to CRUD apis like <code>CreatePolicy</code>, <code>ReadPolicy</code> and so on…</p>
 <p>Polly will help you to manage some retry scenarios but can do more. Please refer to its <a href="https://github.com/App-vNext/Polly">official documentation</a> if you’d like to know more about it.</p>
@@ -95,32 +95,37 @@
         }, LoggedPolicies.OnLoggedRetry).WithPolicyKey(&quot;TransientHttpError&quot;)
     }
 };
-</code></pre><p><code>TransiantHttpError</code> policy is actually provided by Polly itself, so we jsut call its <code>HttpPolicyExtensions.HandleTransientHttpError()</code> method.</p>
-<p>We&#39;re also giving here an <code>OnLoggedRetry</code> method provided by Apizr, so we coud get some logging outputs when Polly comes in the party in case of handled failures.</p>
+</code></pre>
+<p><code>TransiantHttpError</code> policy is actually provided by Polly itself, so we jsut call its <code>HttpPolicyExtensions.HandleTransientHttpError()</code> method.</p>
+<p>We're also giving here an <code>OnLoggedRetry</code> method provided by Apizr, so we coud get some logging outputs when Polly comes in the party in case of handled failures.</p>
 <p><code>PolicyRegistry</code> is where you register all your named policies to be used by Polly thanks to attribute decoration, TransiantHttpError is just an example.</p>
 <p>Now we have to register our policy registry:</p>
-<div class="tabGroup" id="tabgroup_TXzmypKXRz">
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_TXzmypKXRz_tabid-static" role="tab" aria-controls="tabpanel_TXzmypKXRz_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_TXzmypKXRz_tabid-extended" role="tab" aria-controls="tabpanel_TXzmypKXRz_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_TXzmypKXRz_tabid-static" role="tabpanel" data-tab="tabid-static">
-<p>You&#39;ll be able to register your policy registry with this option:</p>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+
+<p>You'll be able to register your policy registry with this option:</p>
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithPolicyRegistry(registry)
 
 // OR factory configuration
 options =&gt; options.WithPolicyRegistry(() =&gt; registry)
-</code></pre></section>
-<section id="tabpanel_TXzmypKXRz_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-<p>There&#39;s nothing specific to do with Apizr about Polly when using the extended approach.</p>
-<p>Just don&#39;t forget to register it like you usualy do:</p>
+</code></pre>
+</section>
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
+<p>There's nothing specific to do with Apizr about Polly when using the extended approach.</p>
+<p>Just don't forget to register it like you usualy do:</p>
 <pre><code class="lang-csharp">services.AddPolicyRegistry(registry);
-</code></pre></section>
+</code></pre>
+</section>
 </div>
 <h3 id="defining">Defining</h3>
 <p>Now we can use it thanks to attribute decoration:</p>
@@ -134,31 +139,33 @@ namespace Apizr.Sample
         Task&lt;UserList&gt; GetUsersAsync();
     }
 }
-</code></pre><p>Here we are using it at assembly level, telling Apizr to apply <code>TransiantHttpError</code> policy to all apis.</p>
+</code></pre>
+<p>Here we are using it at assembly level, telling Apizr to apply <code>TransiantHttpError</code> policy to all apis.</p>
 <p>You can mix levels and mix policies as all will be wrapped.</p>
 <h3 id="using">Using</h3>
 <p>Apizr will automatically tell Polly to handle request of any decorated api method.</p>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/master/Apizr/Docs/Apizr.Docs/articles/legacy/v4/config_policies.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/legacy/v4/config_policies.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -166,14 +173,14 @@ namespace Apizr.Sample
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../../../styles/docfx.js"></script>
     <script type="text/javascript" src="../../../styles/main.js"></script>
   </body>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using Apizr.Caching;
 using Apizr.Cancelling.Attributes.Operation;
 using Apizr.Cancelling.Attributes.Request;
@@ -17,11 +18,11 @@ using Apizr.Helping;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
-using Apizr.Policing;
 using Apizr.Requesting;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
 using Polly;
-using Polly.NoOp;
 using Polly.Registry;
 using Refit;
 
@@ -56,20 +57,20 @@ namespace Apizr
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null) where T : class =>
             CreateCrudManagerFor<T, int, IEnumerable<T>, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyPolicyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyResiliencePipelineRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, int, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler, cacheHandler, mappingHandler,
-                        lazyPolicyRegistry, apizrOptions), optionsBuilder);
+                        lazyResiliencePipelineRegistry, apizrOptions), optionsBuilder);
 
         /// <inheritdoc/>
         public IApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>> CreateCrudManagerFor<T, TKey>(
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null) where T : class =>
             CreateCrudManagerFor<T, TKey, IEnumerable<T>, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyPolicyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyResiliencePipelineRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, IEnumerable<T>, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler, cacheHandler, mappingHandler,
-                        lazyPolicyRegistry, apizrOptions), optionsBuilder);
+                        lazyResiliencePipelineRegistry, apizrOptions), optionsBuilder);
 
         /// <inheritdoc/>
         public IApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>> CreateCrudManagerFor<T, TKey,
@@ -78,11 +79,11 @@ namespace Apizr
             where T : class =>
             CreateCrudManagerFor<T, TKey, TReadAllResult, IDictionary<string, object>,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyPolicyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyResiliencePipelineRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, IDictionary<string, object>>>(lazyWebApi,
                         connectivityHandler,
                         cacheHandler, mappingHandler,
-                        lazyPolicyRegistry, apizrOptions), optionsBuilder);
+                        lazyResiliencePipelineRegistry, apizrOptions), optionsBuilder);
 
         /// <inheritdoc/>
         public IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> CreateCrudManagerFor<T, TKey, TReadAllResult,
@@ -91,16 +92,16 @@ namespace Apizr
             where T : class =>
             CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams,
                 ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyPolicyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyResiliencePipelineRegistry, apizrOptions) =>
                     new ApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>(lazyWebApi,
                         connectivityHandler,
                         cacheHandler, mappingHandler,
-                        lazyPolicyRegistry, apizrOptions), optionsBuilder);
+                        lazyResiliencePipelineRegistry, apizrOptions), optionsBuilder);
 
         /// <inheritdoc/>
         public TApizrManager CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-                IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
+                IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<string>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
             where T : class
@@ -128,21 +129,21 @@ namespace Apizr
         public IApizrManager<TWebApi> CreateManagerFor<TWebApi>(
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null) =>
             CreateManagerFor<TWebApi, ApizrManager<TWebApi>>(
-                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyPolicyRegistry, apizrOptions) =>
+                (lazyWebApi, connectivityHandler, cacheHandler, mappingHandler, lazyResiliencePipelineRegistry, apizrOptions) =>
                     new ApizrManager<TWebApi>(lazyWebApi, connectivityHandler, cacheHandler, mappingHandler,
-                        lazyPolicyRegistry, apizrOptions), CreateCommonOptions(), optionsBuilder);
+                        lazyResiliencePipelineRegistry, apizrOptions), CreateCommonOptions(), optionsBuilder);
 
         /// <inheritdoc/>
         public TApizrManager CreateManagerFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
-                ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+                ILazyFactory<ResiliencePipelineRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi> =>
             CreateManagerFor(apizrManagerFactory, CreateCommonOptions(), optionsBuilder);
 
         private TApizrManager CreateManagerFor<TWebApi, TApizrManager>(
             Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler,
-                ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+                ILazyFactory<ResiliencePipelineRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             IApizrCommonOptions commonOptions,
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
             where TApizrManager : IApizrManager<TWebApi>
@@ -151,7 +152,7 @@ namespace Apizr
 
 
         internal TApizrManager CreateManagerFor<TWebApi, TApizrManager>(
-            Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<IReadOnlyPolicyRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
+            Func<ILazyFactory<TWebApi>, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<string>>, IApizrManagerOptions<TWebApi>, TApizrManager> apizrManagerFactory,
             IApizrCommonOptions commonOptions,
             IApizrProperOptions properOptions,
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
@@ -162,33 +163,32 @@ namespace Apizr
             var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
             {
                 var handlerBuilder = new ExtendedHttpHandlerBuilder(apizrOptions.HttpClientHandlerFactory.Invoke(), apizrOptions);
-
-                IAsyncPolicy<HttpResponseMessage> policy = Policy.NoOpAsync<HttpResponseMessage>();
-                var wrappedPolicyKeys = new List<string>();
-                if (apizrOptions.PolicyRegistryKeys != null && apizrOptions.PolicyRegistryKeys.Any())
+                var resiliencePipeline = ResiliencePipeline<HttpResponseMessage>.Empty;
+                var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>();
+                var wrappedResiliencePipelineKeys = new List<string>();
+                if (apizrOptions.ResiliencePipelineRegistryKeys != null && apizrOptions.ResiliencePipelineRegistryKeys.Any())
                 {
-                    var policyRegistry = apizrOptions.PolicyRegistryFactory.Invoke();
-                    foreach (var policyRegistryKey in apizrOptions.PolicyRegistryKeys)
+                    var resiliencePipelineRegistry = apizrOptions.ResiliencePipelineRegistryFactory.Invoke();
+                    foreach (var resiliencePipelineRegistryKey in apizrOptions.ResiliencePipelineRegistryKeys)
                     {
-                        if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy) &&
-                            registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
+                        if (resiliencePipelineRegistry.TryGetPipeline<HttpResponseMessage>(resiliencePipelineRegistryKey, out var registeredResiliencePipeline))
                         {
-                            policy = policy is INoOpPolicy
-                                ? registeredPolicyForHttpResponseMessage
-                                : policy.WrapAsync(registeredPolicyForHttpResponseMessage);
-
-                            wrappedPolicyKeys.Add(policyRegistryKey);
+                            resiliencePipelineBuilder.AddPipeline(registeredResiliencePipeline);
+                            wrappedResiliencePipelineKeys.Add(resiliencePipelineRegistryKey);
                         }
                     }
+
+                    if(wrappedResiliencePipelineKeys.Any())
+                        resiliencePipeline = resiliencePipelineBuilder.Build();
                 }
 
-                var policySelector = new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
-                    request =>
+                var pipelineProvider = new Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>>(
+                    (request, ct) =>
                     {
-                        var context = request.GetOrBuildApizrPolicyExecutionContext();
+                        var context = request.GetOrBuildApizrResilienceContext(ct);
                         if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                         {
-                            if (request.TryGetOptions(out var requestOptions))
+                            if (request.TryGetApizrRequestOptions(out var requestOptions))
                             {
                                 logLevels = requestOptions.LogLevels;
                                 verbosity = requestOptions.TrafficVerbosity;
@@ -203,15 +203,15 @@ namespace Apizr
                             contextLogger = apizrOptions.Logger;
 
                             context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
-                            request.SetApizrPolicyExecutionContext(context);
+                            request.SetApizrResilienceContext(context);
                         }
 
-                        foreach (var wrappedPolicyKey in wrappedPolicyKeys)
-                            contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {wrappedPolicyKey} will be applied");
+                        foreach (var wrappedResiliencePipelineKey in wrappedResiliencePipelineKeys)
+                            contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Resilience pipeline with key {wrappedResiliencePipelineKey} will be applied");
 
-                        return policy;
+                        return resiliencePipeline;
                     });
-                handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector, apizrOptions));
+                handlerBuilder.AddHandler(new ResilienceHttpMessageHandler(pipelineProvider, apizrOptions));
 
                 foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories.Values)
                     handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(apizrOptions.Logger, apizrOptions));
@@ -235,11 +235,11 @@ namespace Apizr
                 return RestService.For<TWebApi>(httpClient, apizrOptions.RefitSettings);
             });
             var lazyWebApi = new LazyFactory<TWebApi>(webApiFactory);
-            var lazyPolicyRegistry = new LazyFactory<IReadOnlyPolicyRegistry<string>>(apizrOptions.PolicyRegistryFactory);
+            var lazyResiliencePipelineRegistry = new LazyFactory<ResiliencePipelineRegistry<string>>(apizrOptions.ResiliencePipelineRegistryFactory);
             var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(),
                 apizrOptions.GetCacheHanderFactory()?.Invoke() ?? apizrOptions.CacheHandlerFactory.Invoke(),
                 apizrOptions.GetMappingHanderFactory()?.Invoke() ?? apizrOptions.MappingHandlerFactory.Invoke(),
-                lazyPolicyRegistry, new ApizrManagerOptions<TWebApi>(apizrOptions));
+                lazyResiliencePipelineRegistry, new ApizrManagerOptions<TWebApi>(apizrOptions));
 
             return apizrManager;
         }
@@ -294,7 +294,7 @@ namespace Apizr
             LogAttribute properLogAttribute, commonLogAttribute;
             OperationTimeoutAttribute properOperationTimeoutAttribute, commonOperationTimeoutAttribute;
             RequestTimeoutAttribute properRequestTimeoutAttribute, commonRequestTimeoutAttribute;
-            PolicyAttribute webApiPolicyAttribute;
+            ResiliencePipelineAttribute webApiResiliencePipelineAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
@@ -309,7 +309,7 @@ namespace Apizr
                 commonOperationTimeoutAttribute = modelType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
                 properRequestTimeoutAttribute = modelTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
                 commonRequestTimeoutAttribute = modelType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                webApiPolicyAttribute = modelTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
+                webApiResiliencePipelineAttribute = modelTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
             }
             else
             {
@@ -322,10 +322,10 @@ namespace Apizr
                 commonOperationTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
                 properRequestTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
                 commonRequestTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                webApiPolicyAttribute = webApiTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
+                webApiResiliencePipelineAttribute = webApiTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
             }
 
-            var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
+            var assemblyResiliencePipelineAttribute = webApiType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
 
             var handlersParameters = new Dictionary<string, object>();
             foreach (var commonParameterAttribute in commonParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
@@ -336,7 +336,7 @@ namespace Apizr
                 handlersParameters[properParameterAttribute.Key!] = properParameterAttribute.Value;
 
             var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType,
-                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys,
+                assemblyResiliencePipelineAttribute?.RegistryKeys, webApiResiliencePipelineAttribute?.RegistryKeys,
                 baseAddress,
                 basePath,
                 handlersParameters,
@@ -420,7 +420,6 @@ namespace Apizr
             builder.ApizrOptions.HeadersFactory?.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
-            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }

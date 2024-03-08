@@ -22,4 +22,16 @@ namespace Apizr.Mapping
         /// </summary>
         public Type MappedWithType { get; }
     }
+
+    /// <summary>
+    /// Tells Apizr to map api request object with model object
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Parameter)]
+    public class MappedWithAttribute<TMappedWith> : MappedWithAttribute
+    {
+        /// <inheritdoc />
+        public MappedWithAttribute() : base(typeof(TMappedWith))
+        {
+        }
+    }
 }

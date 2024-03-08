@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Commanding/IMediationCommandHandler.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IMediationCommandHandler
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Commanding/IMediationCommandHandler.cs
@@ -23,7 +23,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
-  summary: "\nThe mediation command handler\n"
+  summary: The mediation command handler
   example: []
   syntax:
     content: 'public interface IMediationCommandHandler<in TCommand, TResponse> : IRequestHandler<TCommand, TResponse> where TCommand : IRequest<TResponse>'
@@ -32,84 +32,83 @@ items:
       description: The handled command type
     - id: TResponse
       description: The response type
-    content.vb: >-
-      Public Interface IMediationCommandHandler(Of In TCommand As IRequest(Of TResponse), TResponse)
-          Inherits IRequestHandler(Of TCommand, TResponse)
+    content.vb: Public Interface IMediationCommandHandler(Of In TCommand As IRequest(Of TResponse), TResponse) Inherits IRequestHandler(Of TCommand, TResponse)
   inheritedMembers:
   - MediatR.IRequestHandler{{TCommand},{TResponse}}.Handle({TCommand},System.Threading.CancellationToken)
   nameWithType.vb: IMediationCommandHandler(Of TCommand, TResponse)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Mediation.Commanding.IMediationCommandHandler(Of TCommand, TResponse)
   name.vb: IMediationCommandHandler(Of TCommand, TResponse)
 references:
 - uid: Apizr.Mediation.Commanding
   commentId: N:Apizr.Mediation.Commanding
+  href: Apizr.html
   name: Apizr.Mediation.Commanding
   nameWithType: Apizr.Mediation.Commanding
   fullName: Apizr.Mediation.Commanding
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html
 - uid: MediatR.IRequestHandler{{TCommand},{TResponse}}.Handle({TCommand},System.Threading.CancellationToken)
   commentId: M:MediatR.IRequestHandler{`0,`1}.Handle(`0,System.Threading.CancellationToken)
   parent: MediatR.IRequestHandler{{TCommand},{TResponse}}
   definition: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: Handle(TCommand, CancellationToken)
   nameWithType: IRequestHandler<TCommand, TResponse>.Handle(TCommand, CancellationToken)
   fullName: MediatR.IRequestHandler<TCommand, TResponse>.Handle(TCommand, System.Threading.CancellationToken)
   nameWithType.vb: IRequestHandler(Of TCommand, TResponse).Handle(TCommand, CancellationToken)
   fullName.vb: MediatR.IRequestHandler(Of TCommand, TResponse).Handle(TCommand, System.Threading.CancellationToken)
   spec.csharp:
-  - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
+  - uid: MediatR.IRequestHandler{`0,`1}.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler<TCommand, TResponse>.Handle
-    fullName: MediatR.IRequestHandler<TCommand, TResponse>.Handle
     isExternal: true
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TCommand
-    nameWithType: TCommand
-    fullName: TCommand
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
+  - uid: MediatR.IRequestHandler{`0,`1}.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler(Of TCommand, TResponse).Handle
-    fullName: MediatR.IRequestHandler(Of TCommand, TResponse).Handle
     isExternal: true
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TCommand
-    nameWithType: TCommand
-    fullName: TCommand
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
   commentId: M:MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: Handle(TRequest, CancellationToken)
   nameWithType: IRequestHandler<TRequest, TResponse>.Handle(TRequest, CancellationToken)
   fullName: MediatR.IRequestHandler<TRequest, TResponse>.Handle(TRequest, System.Threading.CancellationToken)
@@ -118,49 +117,29 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler<TRequest, TResponse>.Handle
-    fullName: MediatR.IRequestHandler<TRequest, TResponse>.Handle
     isExternal: true
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler(Of TRequest, TResponse).Handle
-    fullName: MediatR.IRequestHandler(Of TRequest, TResponse).Handle
     isExternal: true
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequestHandler{{TCommand},{TResponse}}
   commentId: T:MediatR.IRequestHandler{`0,`1}
   parent: MediatR
@@ -174,45 +153,25 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TCommand
-    nameWithType: TCommand
-    fullName: TCommand
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TCommand
-    nameWithType: TCommand
-    fullName: TCommand
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequestHandler`2
   commentId: T:MediatR.IRequestHandler`2
   isExternal: true
@@ -225,45 +184,25 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR
   commentId: N:MediatR
   isExternal: true

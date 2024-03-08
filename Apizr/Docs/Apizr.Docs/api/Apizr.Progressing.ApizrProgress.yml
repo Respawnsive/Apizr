@@ -17,7 +17,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Progressing/ApizrProgress.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrProgress
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Progressing/ApizrProgress.cs
@@ -27,10 +27,7 @@ items:
   namespace: Apizr.Progressing
   syntax:
     content: 'public class ApizrProgress : Progress<ApizrProgressEventArgs>, IApizrProgress, IProgress<ApizrProgressEventArgs>'
-    content.vb: >-
-      Public Class ApizrProgress
-          Inherits Progress(Of ApizrProgressEventArgs)
-          Implements IApizrProgress, IProgress(Of ApizrProgressEventArgs)
+    content.vb: Public Class ApizrProgress Inherits Progress(Of ApizrProgressEventArgs) Implements IApizrProgress, IProgress(Of ApizrProgressEventArgs)
   inheritance:
   - System.Object
   - System.Progress{Apizr.Progressing.ApizrProgressEventArgs}
@@ -39,7 +36,6 @@ items:
   - System.IProgress{Apizr.Progressing.ApizrProgressEventArgs}
   inheritedMembers:
   - System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.OnReport(Apizr.Progressing.ApizrProgressEventArgs)
-  - System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.System#IProgress{T}#Report(Apizr.Progressing.ApizrProgressEventArgs)
   - System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.ProgressChanged
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -48,12 +44,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
 - uid: Apizr.Progressing.ApizrProgress.#ctor
   commentId: M:Apizr.Progressing.ApizrProgress.#ctor
   id: '#ctor'
@@ -68,7 +58,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Progressing/ApizrProgress.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Progressing/ApizrProgress.cs
@@ -78,12 +68,11 @@ items:
   namespace: Apizr.Progressing
   syntax:
     content: public ApizrProgress()
-    content.vb: Public Sub New
+    content.vb: Public Sub New()
   overload: Apizr.Progressing.ApizrProgress.#ctor*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
+  nameWithType.vb: ApizrProgress.New()
+  fullName.vb: Apizr.Progressing.ApizrProgress.New()
+  name.vb: New()
 - uid: Apizr.Progressing.ApizrProgress.#ctor(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
   commentId: M:Apizr.Progressing.ApizrProgress.#ctor(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
   id: '#ctor(System.Action{Apizr.Progressing.ApizrProgressEventArgs})'
@@ -98,7 +87,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer/Progressing/ApizrProgress.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Progressing/ApizrProgress.cs
@@ -113,30 +102,48 @@ items:
       type: System.Action{Apizr.Progressing.ApizrProgressEventArgs}
     content.vb: Public Sub New(handler As Action(Of ApizrProgressEventArgs))
   overload: Apizr.Progressing.ApizrProgress.#ctor*
-  nameWithType.vb: ApizrProgress.ApizrProgress(Action(Of ApizrProgressEventArgs))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Progressing.ApizrProgress.ApizrProgress(System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
-  name.vb: ApizrProgress(Action(Of ApizrProgressEventArgs))
+  nameWithType.vb: ApizrProgress.New(Action(Of ApizrProgressEventArgs))
+  fullName.vb: Apizr.Progressing.ApizrProgress.New(System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
+  name.vb: New(Action(Of ApizrProgressEventArgs))
 references:
 - uid: Apizr.Progressing
   commentId: N:Apizr.Progressing
+  href: Apizr.html
   name: Apizr.Progressing
   nameWithType: Apizr.Progressing
   fullName: Apizr.Progressing
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Progressing
+    name: Progressing
+    href: Apizr.Progressing.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Progressing
+    name: Progressing
+    href: Apizr.Progressing.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}
   commentId: T:System.Progress{Apizr.Progressing.ApizrProgressEventArgs}
   parent: System
   definition: System.Progress`1
+  href: https://learn.microsoft.com/dotnet/api/system.progress-1
   name: Progress<ApizrProgressEventArgs>
   nameWithType: Progress<ApizrProgressEventArgs>
   fullName: System.Progress<Apizr.Progressing.ApizrProgressEventArgs>
@@ -146,38 +153,29 @@ references:
   spec.csharp:
   - uid: System.Progress`1
     name: Progress
-    nameWithType: Progress
-    fullName: System.Progress
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.progress-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Progressing.ApizrProgressEventArgs
     name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Progress`1
     name: Progress
-    nameWithType: Progress
-    fullName: System.Progress
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.progress-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Progressing.ApizrProgressEventArgs
     name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Progressing.IApizrProgress
   commentId: T:Apizr.Progressing.IApizrProgress
   parent: Apizr.Progressing
+  href: Apizr.Progressing.IApizrProgress.html
   name: IApizrProgress
   nameWithType: IApizrProgress
   fullName: Apizr.Progressing.IApizrProgress
@@ -185,6 +183,7 @@ references:
   commentId: T:System.IProgress{Apizr.Progressing.ApizrProgressEventArgs}
   parent: System
   definition: System.IProgress`1
+  href: https://learn.microsoft.com/dotnet/api/system.iprogress-1
   name: IProgress<ApizrProgressEventArgs>
   nameWithType: IProgress<ApizrProgressEventArgs>
   fullName: System.IProgress<Apizr.Progressing.ApizrProgressEventArgs>
@@ -194,122 +193,60 @@ references:
   spec.csharp:
   - uid: System.IProgress`1
     name: IProgress
-    nameWithType: IProgress
-    fullName: System.IProgress
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iprogress-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Progressing.ApizrProgressEventArgs
     name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.IProgress`1
     name: IProgress
-    nameWithType: IProgress
-    fullName: System.IProgress
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.iprogress-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Progressing.ApizrProgressEventArgs
     name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.OnReport(Apizr.Progressing.ApizrProgressEventArgs)
   commentId: M:System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.OnReport(Apizr.Progressing.ApizrProgressEventArgs)
   parent: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}
   definition: System.Progress`1.OnReport(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.progress-1.onreport
   name: OnReport(ApizrProgressEventArgs)
   nameWithType: Progress<ApizrProgressEventArgs>.OnReport(ApizrProgressEventArgs)
   fullName: System.Progress<Apizr.Progressing.ApizrProgressEventArgs>.OnReport(Apizr.Progressing.ApizrProgressEventArgs)
   nameWithType.vb: Progress(Of ApizrProgressEventArgs).OnReport(ApizrProgressEventArgs)
   fullName.vb: System.Progress(Of Apizr.Progressing.ApizrProgressEventArgs).OnReport(Apizr.Progressing.ApizrProgressEventArgs)
   spec.csharp:
-  - uid: System.Progress`1.OnReport(`0)
+  - uid: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.OnReport(Apizr.Progressing.ApizrProgressEventArgs)
     name: OnReport
-    nameWithType: Progress<ApizrProgressEventArgs>.OnReport
-    fullName: System.Progress<Apizr.Progressing.ApizrProgressEventArgs>.OnReport
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.progress-1.onreport
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Progressing.ApizrProgressEventArgs
     name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: System.Progress`1.OnReport(`0)
+  - uid: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.OnReport(Apizr.Progressing.ApizrProgressEventArgs)
     name: OnReport
-    nameWithType: Progress(Of ApizrProgressEventArgs).OnReport
-    fullName: System.Progress(Of Apizr.Progressing.ApizrProgressEventArgs).OnReport
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.progress-1.onreport
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Progressing.ApizrProgressEventArgs
     name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.System#IProgress{T}#Report(Apizr.Progressing.ApizrProgressEventArgs)
-  commentId: M:System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.System#IProgress{T}#Report(Apizr.Progressing.ApizrProgressEventArgs)
-  parent: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}
-  definition: System.Progress`1.System#IProgress{T}#Report(`0)
-  name: IProgress<ApizrProgressEventArgs>.Report(ApizrProgressEventArgs)
-  nameWithType: Progress<ApizrProgressEventArgs>.IProgress<ApizrProgressEventArgs>.Report(ApizrProgressEventArgs)
-  fullName: System.Progress<Apizr.Progressing.ApizrProgressEventArgs>.System.IProgress<Apizr.Progressing.ApizrProgressEventArgs>.Report(Apizr.Progressing.ApizrProgressEventArgs)
-  nameWithType.vb: Progress(Of ApizrProgressEventArgs).System.IProgress<T>.Report(ApizrProgressEventArgs)
-  fullName.vb: System.Progress(Of Apizr.Progressing.ApizrProgressEventArgs).System.IProgress<T>.Report(Apizr.Progressing.ApizrProgressEventArgs)
-  name.vb: System.IProgress<T>.Report(ApizrProgressEventArgs)
-  spec.csharp:
-  - uid: System.Progress`1.System#IProgress{T}#Report(`0)
-    name: IProgress<ApizrProgressEventArgs>.Report
-    nameWithType: Progress<ApizrProgressEventArgs>.IProgress<ApizrProgressEventArgs>.Report
-    fullName: System.Progress<Apizr.Progressing.ApizrProgressEventArgs>.System.IProgress<Apizr.Progressing.ApizrProgressEventArgs>.Report
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Progress`1.System#IProgress{T}#Report(`0)
-    name: System.IProgress<T>.Report
-    nameWithType: Progress(Of ApizrProgressEventArgs).System.IProgress<T>.Report
-    fullName: System.Progress(Of Apizr.Progressing.ApizrProgressEventArgs).System.IProgress<T>.Report
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.ProgressChanged
   commentId: E:System.Progress{Apizr.Progressing.ApizrProgressEventArgs}.ProgressChanged
   parent: System.Progress{Apizr.Progressing.ApizrProgressEventArgs}
   definition: System.Progress`1.ProgressChanged
+  href: https://learn.microsoft.com/dotnet/api/system.progress-1.progresschanged
   name: ProgressChanged
   nameWithType: Progress<ApizrProgressEventArgs>.ProgressChanged
   fullName: System.Progress<Apizr.Progressing.ApizrProgressEventArgs>.ProgressChanged
@@ -319,290 +256,232 @@ references:
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Progress`1
   commentId: T:System.Progress`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.progress-1
   name: Progress<T>
   nameWithType: Progress<T>
   fullName: System.Progress<T>
@@ -612,36 +491,25 @@ references:
   spec.csharp:
   - uid: System.Progress`1
     name: Progress
-    nameWithType: Progress
-    fullName: System.Progress
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.progress-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Progress`1
     name: Progress
-    nameWithType: Progress
-    fullName: System.Progress
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.progress-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.IProgress`1
   commentId: T:System.IProgress`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iprogress-1
   name: IProgress<T>
   nameWithType: IProgress<T>
   fullName: System.IProgress<T>
@@ -651,36 +519,25 @@ references:
   spec.csharp:
   - uid: System.IProgress`1
     name: IProgress
-    nameWithType: IProgress
-    fullName: System.IProgress
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iprogress-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.IProgress`1
     name: IProgress
-    nameWithType: IProgress
-    fullName: System.IProgress
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.iprogress-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Progress`1.OnReport(`0)
   commentId: M:System.Progress`1.OnReport(`0)
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.progress-1.onreport
   name: OnReport(T)
   nameWithType: Progress<T>.OnReport(T)
   fullName: System.Progress<T>.OnReport(T)
@@ -689,75 +546,23 @@ references:
   spec.csharp:
   - uid: System.Progress`1.OnReport(`0)
     name: OnReport
-    nameWithType: Progress<T>.OnReport
-    fullName: System.Progress<T>.OnReport
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.progress-1.onreport
   - name: (
-    nameWithType: (
-    fullName: (
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Progress`1.OnReport(`0)
     name: OnReport
-    nameWithType: Progress(Of T).OnReport
-    fullName: System.Progress(Of T).OnReport
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.progress-1.onreport
   - name: (
-    nameWithType: (
-    fullName: (
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Progress`1.System#IProgress{T}#Report(`0)
-  commentId: M:System.Progress`1.System#IProgress{T}#Report(`0)
-  isExternal: true
-  name: IProgress<T>.Report(T)
-  nameWithType: Progress<T>.IProgress<T>.Report(T)
-  fullName: System.Progress<T>.System.IProgress<T>.Report(T)
-  nameWithType.vb: Progress(Of T).System.IProgress<T>.Report(T)
-  fullName.vb: System.Progress(Of T).System.IProgress<T>.Report(T)
-  name.vb: System.IProgress<T>.Report(T)
-  spec.csharp:
-  - uid: System.Progress`1.System#IProgress{T}#Report(`0)
-    name: IProgress<T>.Report
-    nameWithType: Progress<T>.IProgress<T>.Report
-    fullName: System.Progress<T>.System.IProgress<T>.Report
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Progress`1.System#IProgress{T}#Report(`0)
-    name: System.IProgress<T>.Report
-    nameWithType: Progress(Of T).System.IProgress<T>.Report
-    fullName: System.Progress(Of T).System.IProgress<T>.Report
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Progress`1.ProgressChanged
   commentId: E:System.Progress`1.ProgressChanged
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.progress-1.progresschanged
   name: ProgressChanged
   nameWithType: Progress<T>.ProgressChanged
   fullName: System.Progress<T>.ProgressChanged
@@ -765,13 +570,18 @@ references:
   fullName.vb: System.Progress(Of T).ProgressChanged
 - uid: Apizr.Progressing.ApizrProgress.#ctor*
   commentId: Overload:Apizr.Progressing.ApizrProgress.#ctor
+  href: Apizr.Progressing.ApizrProgress.html#Apizr_Progressing_ApizrProgress__ctor
   name: ApizrProgress
   nameWithType: ApizrProgress.ApizrProgress
   fullName: Apizr.Progressing.ApizrProgress.ApizrProgress
+  nameWithType.vb: ApizrProgress.New
+  fullName.vb: Apizr.Progressing.ApizrProgress.New
+  name.vb: New
 - uid: System.Action{Apizr.Progressing.ApizrProgressEventArgs}
   commentId: T:System.Action{Apizr.Progressing.ApizrProgressEventArgs}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<ApizrProgressEventArgs>
   nameWithType: Action<ApizrProgressEventArgs>
   fullName: System.Action<Apizr.Progressing.ApizrProgressEventArgs>
@@ -781,38 +591,29 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Progressing.ApizrProgressEventArgs
     name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Progressing.ApizrProgressEventArgs
     name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -822,30 +623,18 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )

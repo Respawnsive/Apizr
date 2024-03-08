@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using Apizr.Caching;
 using Apizr.Cancelling.Attributes.Operation;
 using Apizr.Cancelling.Attributes.Request;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
-using Apizr.Configuring.Request;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Extending.Configuring.Common;
@@ -19,16 +19,15 @@ using Apizr.Helping;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
-using Apizr.Policing;
 using Apizr.Requesting;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Polly;
-using Polly.NoOp;
 using Polly.Registry;
 using Refit;
-using PolicyHttpMessageHandler = Apizr.Policing.PolicyHttpMessageHandler;
 
 [assembly: Apizr.Preserve]
 namespace Apizr
@@ -605,41 +604,40 @@ namespace Apizr
                 {
                     var options = (IApizrExtendedManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
                     var handlerBuilder = new ExtendedHttpHandlerBuilder(options.HttpClientHandler, options);
-
-                    IAsyncPolicy<HttpResponseMessage> policy = Policy.NoOpAsync<HttpResponseMessage>();
-                    var wrappedPolicyKeys = new List<string>();
-                    if (options.PolicyRegistryKeys != null && options.PolicyRegistryKeys.Any())
+                    var resiliencePipeline = ResiliencePipeline<HttpResponseMessage>.Empty;
+                    var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>();
+                    var wrappedResiliencePipelineKeys = new List<string>();
+                    if (options.ResiliencePipelineRegistryKeys != null && options.ResiliencePipelineRegistryKeys.Any())
                     {
-                        var policyRegistry = serviceProvider.GetService<IReadOnlyPolicyRegistry<string>>();
-                        if(policyRegistry == null)
+                        var resiliencePipelineRegistry = serviceProvider.GetService<ResiliencePipelineRegistry<string>>();
+                        if(resiliencePipelineRegistry == null)
                         {
                             options.Logger.Log(options.LogLevels.Low(),
-                                $"Global policies: You defined some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for {webApiFriendlyName} instance");
+                                $"Global strategies: You defined some global strategies but didn't register any of it. Global strategies will be ignored for {webApiFriendlyName} instance");
                         }
                         else
                         {
-                            foreach (var policyRegistryKey in options.PolicyRegistryKeys)
+                            foreach (var resiliencePipelineRegistryKey in options.ResiliencePipelineRegistryKeys)
                             {
-                                if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy) && 
-                                    registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
+                                if (resiliencePipelineRegistry.TryGetPipeline<HttpResponseMessage>(resiliencePipelineRegistryKey, out var registeredResiliencePipeline))
                                 {
-                                    policy = policy is INoOpPolicy
-                                        ? registeredPolicyForHttpResponseMessage
-                                        : policy.WrapAsync(registeredPolicyForHttpResponseMessage);
-
-                                    wrappedPolicyKeys.Add(policyRegistryKey);
+                                    resiliencePipelineBuilder.AddPipeline(registeredResiliencePipeline);
+                                    wrappedResiliencePipelineKeys.Add(resiliencePipelineRegistryKey);
                                 }
                             }
+
+                            if (wrappedResiliencePipelineKeys.Any())
+                                resiliencePipeline = resiliencePipelineBuilder.Build();
                         }
                     }
 
-                    var policySelector = new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
-                            request =>
+                    var pipelineProvider = new Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>>(
+                        (request, ct) =>
                             {
-                                var context = request.GetOrBuildApizrPolicyExecutionContext();
+                                var context = request.GetOrBuildApizrResilienceContext(ct);
                                 if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
                                 {
-                                    if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions requestOptions)
+                                    if (request.TryGetApizrRequestOptions(out var requestOptions))
                                     {
                                         logLevels = requestOptions.LogLevels;
                                         verbosity = requestOptions.TrafficVerbosity;
@@ -647,22 +645,22 @@ namespace Apizr
                                     }
                                     else
                                     {
-                                        logLevels = options.LogLevels;
-                                        verbosity = options.TrafficVerbosity;
-                                        tracerMode = options.HttpTracerMode;
+                                        logLevels = apizrOptions.LogLevels;
+                                        verbosity = apizrOptions.TrafficVerbosity;
+                                        tracerMode = apizrOptions.HttpTracerMode;
                                     }
-                                    contextLogger = options.Logger;
+                                    contextLogger = apizrOptions.Logger;
 
                                     context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
-                                    HttpRequestMessageApizrExtensions.SetApizrPolicyExecutionContext(request, context);
+                                    request.SetApizrResilienceContext(context);
                                 }
 
-                                foreach (var wrappedPolicyKey in wrappedPolicyKeys)
-                                    contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {wrappedPolicyKey} will be applied");
+                                foreach (var wrappedResiliencePipelineKey in wrappedResiliencePipelineKeys)
+                                    contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Resilience pipeline with key {wrappedResiliencePipelineKey} will be applied");
 
-                                return policy;
+                                return resiliencePipeline;
                             });
-                    handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector, apizrOptions));
+                    handlerBuilder.AddHandler(new ResilienceHttpMessageHandler(pipelineProvider, apizrOptions));
 
                     foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories.Values)
                         handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));
@@ -695,9 +693,9 @@ namespace Apizr
             // Custom client config
             apizrOptions.HttpClientBuilder?.Invoke(builder);
 
-            services.TryAddSingleton(typeof(ILazyFactory<IReadOnlyPolicyRegistry<string>>), serviceProvider =>
-                new LazyFactory<IReadOnlyPolicyRegistry<string>>(
-                    () => serviceProvider.GetService<IReadOnlyPolicyRegistry<string>>() ?? new PolicyRegistry()));
+            services.TryAddSingleton(typeof(ILazyFactory<ResiliencePipelineRegistry<string>>), serviceProvider =>
+                new LazyFactory<ResiliencePipelineRegistry<string>>(
+                    () => serviceProvider.GetService<ResiliencePipelineRegistry<string>>() ?? new ResiliencePipelineRegistry<string>()));
 
             if (apizrOptions.ConnectivityHandlerFactory != null)
                 services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerFactory);
@@ -742,10 +740,12 @@ namespace Apizr
                 apizrOptions.RefitSettingsFactory.Invoke(serviceProvider);
                 apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
-                apizrOptions.HeadersFactory?.Invoke(serviceProvider);
                 apizrOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
                 apizrOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
                 apizrOptions.HeadersFactory?.Invoke(serviceProvider);
+                foreach (var resiliencePropertiesExtendedFactory in apizrOptions.ResiliencePropertiesExtendedFactories)
+                    apizrOptions.ResiliencePropertiesFactories[resiliencePropertiesExtendedFactory.Key] = () =>
+                        resiliencePropertiesExtendedFactory.Value.Invoke(serviceProvider);
 
                 return Activator.CreateInstance(typeof(ApizrExtendedManagerOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
             });
@@ -833,7 +833,7 @@ namespace Apizr
             LogAttribute properLogAttribute, commonLogAttribute;
             OperationTimeoutAttribute properOperationTimeoutAttribute, commonOperationTimeoutAttribute;
             RequestTimeoutAttribute properRequestTimeoutAttribute, commonRequestTimeoutAttribute;
-            PolicyAttribute webApiPolicyAttribute;
+            ResiliencePipelineAttribute webApiResiliencePipelineAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
@@ -846,7 +846,7 @@ namespace Apizr
                 commonOperationTimeoutAttribute = modelType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
                 properRequestTimeoutAttribute = modelTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
                 commonRequestTimeoutAttribute = modelType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                webApiPolicyAttribute = modelTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
+                webApiResiliencePipelineAttribute = modelTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
             }
             else
             {
@@ -859,10 +859,10 @@ namespace Apizr
                 commonOperationTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
                 properRequestTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
                 commonRequestTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                webApiPolicyAttribute = webApiTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
+                webApiResiliencePipelineAttribute = webApiTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
             }
 
-            var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
+            var assemblyResiliencePipelineAttribute = webApiType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
 
             var handlersParameters = new Dictionary<string, object>();
             foreach (var commonParameterAttribute in commonParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
@@ -873,7 +873,7 @@ namespace Apizr
                 handlersParameters[properParameterAttribute.Key!] = properParameterAttribute.Value;
 
             var builder = new ApizrExtendedProperOptionsBuilder(new ApizrExtendedProperOptions(commonOptions, webApiType, apizrManagerType,
-                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys, 
+                assemblyResiliencePipelineAttribute?.RegistryKeys, webApiResiliencePipelineAttribute?.RegistryKeys, 
                 baseAddress,
                 basePath,
                 handlersParameters,

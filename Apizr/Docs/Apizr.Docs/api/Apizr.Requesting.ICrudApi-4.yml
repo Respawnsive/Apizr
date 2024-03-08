@@ -7,38 +7,28 @@ items:
   children:
   - Apizr.Requesting.ICrudApi`4.Create(`0)
   - Apizr.Requesting.ICrudApi`4.Create(`0,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Requesting.ICrudApi`4.Create(`0,Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.Create(`0,Polly.Context,System.Threading.CancellationToken)
   - Apizr.Requesting.ICrudApi`4.Delete(`1)
   - Apizr.Requesting.ICrudApi`4.Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context,System.Threading.CancellationToken)
   - Apizr.Requesting.ICrudApi`4.Read(`1)
   - Apizr.Requesting.ICrudApi`4.Read(`1,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Requesting.ICrudApi`4.Read(`1,Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32)
-  - Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,Polly.Context,System.Threading.CancellationToken)
-  - Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,System.Threading.CancellationToken)
   - Apizr.Requesting.ICrudApi`4.ReadAll
+  - Apizr.Requesting.ICrudApi`4.ReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
   - Apizr.Requesting.ICrudApi`4.ReadAll(`3)
   - Apizr.Requesting.ICrudApi`4.ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(`3,Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(`3,Polly.Context,System.Threading.CancellationToken)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,Polly.Context,System.Threading.CancellationToken)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,System.Threading.CancellationToken)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(Polly.Context,System.Threading.CancellationToken)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32,Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32,System.Threading.CancellationToken)
+  - Apizr.Requesting.ICrudApi`4.SafeCreate(`0)
+  - Apizr.Requesting.ICrudApi`4.SafeCreate(`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Requesting.ICrudApi`4.SafeDelete(`1)
+  - Apizr.Requesting.ICrudApi`4.SafeDelete(`1,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Requesting.ICrudApi`4.SafeRead(`1)
+  - Apizr.Requesting.ICrudApi`4.SafeRead(`1,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Requesting.ICrudApi`4.SafeReadAll
+  - Apizr.Requesting.ICrudApi`4.SafeReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Requesting.ICrudApi`4.SafeReadAll(`3)
+  - Apizr.Requesting.ICrudApi`4.SafeReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
+  - Apizr.Requesting.ICrudApi`4.SafeUpdate(`1,`0)
+  - Apizr.Requesting.ICrudApi`4.SafeUpdate(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
   - Apizr.Requesting.ICrudApi`4.Update(`1,`0)
   - Apizr.Requesting.ICrudApi`4.Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
-  - Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context)
-  - Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context,System.Threading.CancellationToken)
   langs:
   - csharp
   - vb
@@ -49,180 +39,31 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ICrudApi
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 18
+    startLine: 14
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nThe crud api interface\n"
+  summary: The crud api interface
   example: []
   syntax:
-    content: >-
-      public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams>
-          where T : class
+    content: 'public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class'
     typeParameters:
     - id: T
       description: The entity type
     - id: TKey
-      description: The entity&apos;s crud key type
+      description: The entity's crud key type
     - id: TReadAllResult
-      description: The &quot;ReadAll&quot; query result type
+      description: The "ReadAll" query result type
     - id: TReadAllParams
       description: ReadAll query parameters type
     content.vb: Public Interface ICrudApi(Of T As Class, In TKey, TReadAllResult, In TReadAllParams)
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)
   name.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)
-- uid: Apizr.Requesting.ICrudApi`4.Create(`0,Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Create(`0,Polly.Context)
-  id: Create(`0,Polly.Context)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: Create(T, Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Create(T, Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Create(T, Polly.Context)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: Create
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 31
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload, passing a Polly context through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Post("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<T> Create([Body] T payload, [Context] Context context)
-    parameters:
-    - id: payload
-      type: '{T}'
-      description: The payload
-      attributes:
-      - type: Refit.BodyAttribute
-        ctor: Refit.BodyAttribute.#ctor
-        arguments: []
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    return:
-      type: System.Threading.Tasks.Task{{T}}
-      description: ''
-    content.vb: >-
-      <Post("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Create(payload As T, context As Context) As Task(Of T)
-  overload: Apizr.Requesting.ICrudApi`4.Create*
-  attributes:
-  - type: Refit.PostAttribute
-    ctor: Refit.PostAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Create(T, Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Create(T, Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.Create(`0,Polly.Context,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Create(`0,Polly.Context,System.Threading.CancellationToken)
-  id: Create(`0,Polly.Context,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: Create(T, Context, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Create(T, Context, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Create(T, Polly.Context, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: Create
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 42
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload, passing a Polly context and a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Post("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<T> Create([Body] T payload, [Context] Context context, CancellationToken cancellationToken)
-    parameters:
-    - id: payload
-      type: '{T}'
-      description: The payload
-      attributes:
-      - type: Refit.BodyAttribute
-        ctor: Refit.BodyAttribute.#ctor
-        arguments: []
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task{{T}}
-      description: ''
-    content.vb: >-
-      <Post("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Create(payload As T, context As Context, cancellationToken As CancellationToken) As Task(Of T)
-  overload: Apizr.Requesting.ICrudApi`4.Create*
-  attributes:
-  - type: Refit.PostAttribute
-    ctor: Refit.PostAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Create(T, Context, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Create(T, Polly.Context, System.Threading.CancellationToken)
 - uid: Apizr.Requesting.ICrudApi`4.Create(`0)
   commentId: M:Apizr.Requesting.ICrudApi`4.Create(`0)
   id: Create(`0)
@@ -237,21 +78,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Create
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 53
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload\n"
+  summary: Send a Create request with a <code class="typeparamref">T</code> payload
   example: []
   syntax:
     content: >-
       [Post("")]
 
-      Task<T> Create([Body] T payload)
+      Task<T> Create(T payload)
     parameters:
     - id: payload
       type: '{T}'
@@ -276,6 +117,59 @@ items:
       value: ''
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Create(T)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Create(T)
+- uid: Apizr.Requesting.ICrudApi`4.SafeCreate(`0)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeCreate(`0)
+  id: SafeCreate(`0)
+  parent: Apizr.Requesting.ICrudApi`4
+  langs:
+  - csharp
+  - vb
+  name: SafeCreate(T)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeCreate(T)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeCreate(T)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SafeCreate
+    path: ../../Src/Apizr/Requesting/ICrudApi.cs
+    startLine: 31
+  assemblies:
+  - Apizr
+  namespace: Apizr.Requesting
+  summary: Send a Create request with a <code class="typeparamref">T</code> payload
+  example: []
+  syntax:
+    content: >-
+      [Post("")]
+
+      Task<IApiResponse<T>> SafeCreate(T payload)
+    parameters:
+    - id: payload
+      type: '{T}'
+      description: The payload
+      attributes:
+      - type: Refit.BodyAttribute
+        ctor: Refit.BodyAttribute.#ctor
+        arguments: []
+    return:
+      type: System.Threading.Tasks.Task{Refit.IApiResponse{{T}}}
+      description: ''
+    content.vb: >-
+      <Post("")>
+
+      Function SafeCreate(payload As T) As Task(Of IApiResponse(Of T))
+  overload: Apizr.Requesting.ICrudApi`4.SafeCreate*
+  attributes:
+  - type: Refit.PostAttribute
+    ctor: Refit.PostAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: ''
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeCreate(T)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeCreate(T)
 - uid: Apizr.Requesting.ICrudApi`4.Create(`0,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Requesting.ICrudApi`4.Create(`0,Apizr.Configuring.Request.IApizrRequestOptions)
   id: Create(`0,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -290,21 +184,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Create
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 62
+    startLine: 40
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Create request with a <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> payload, passing a Polly context and a cancellation token through the request\n"
+  summary: Send a Create request with a <code class="typeparamref">T</code> payload, passing a Polly context and a cancellation token through the request
   example: []
   syntax:
     content: >-
       [Post("")]
 
-      Task<T> Create([Body] T payload, [RequestOptions] IApizrRequestOptions options)
+      Task<T> Create(T payload, IApizrRequestOptions options)
     parameters:
     - id: payload
       type: '{T}'
@@ -336,780 +230,66 @@ items:
       value: ''
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Create(T, IApizrRequestOptions)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Create(T, Apizr.Configuring.Request.IApizrRequestOptions)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32)
-  id: ReadAll(System.Int32)
+- uid: Apizr.Requesting.ICrudApi`4.SafeCreate(`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeCreate(`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  id: SafeCreate(`0,Apizr.Configuring.Request.IApizrRequestOptions)
   parent: Apizr.Requesting.ICrudApi`4
   langs:
   - csharp
   - vb
-  name: ReadAll(Int32)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(Int32)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(System.Int32)
+  name: SafeCreate(T, IApizrRequestOptions)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeCreate(T, IApizrRequestOptions)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeCreate(T, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
+    id: SafeCreate
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 76
+    startLine: 49
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with an execution priority level\n"
+  summary: Send a Create request with a <code class="typeparamref">T</code> payload, passing a Polly context and a cancellation token through the request
   example: []
   syntax:
     content: >-
-      [Get("")]
+      [Post("")]
 
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([Property("Priority")] int priority)
+      Task<IApiResponse<T>> SafeCreate(T payload, IApizrRequestOptions options)
     parameters:
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
+    - id: payload
+      type: '{T}'
+      description: The payload
       attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
+      - type: Refit.BodyAttribute
+        ctor: Refit.BodyAttribute.#ctor
+        arguments: []
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      description: The request options
+      attributes:
+      - type: Apizr.Configuring.Request.RequestOptionsAttribute
+        ctor: Apizr.Configuring.Request.RequestOptionsAttribute.#ctor
+        arguments: []
     return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
+      type: System.Threading.Tasks.Task{Refit.IApiResponse{{T}}}
       description: ''
     content.vb: >-
-      <Get("")>
+      <Post("")>
 
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(priority As Integer) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
+      Function SafeCreate(payload As T, options As IApizrRequestOptions) As Task(Of IApiResponse(Of T))
+  overload: Apizr.Requesting.ICrudApi`4.SafeCreate*
   attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
+  - type: Refit.PostAttribute
+    ctor: Refit.PostAttribute.#ctor(System.String)
     arguments:
     - type: System.String
       value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(Int32)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(System.Int32)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(Polly.Context)
-  id: ReadAll(Polly.Context)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(Polly.Context)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 85
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request, passing a Polly context through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([Context] Context context)
-    parameters:
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(context As Context) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32)
-  id: ReadAll(`3,System.Int32)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(TReadAllParams, Int32)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, Int32)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, System.Int32)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 95
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key and an execution priority level\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority)
-    parameters:
-    - id: readAllParams
-      type: '{TReadAllParams}'
-      description: Query params used as cache key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(readAllParams As TReadAllParams, priority As Integer) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Int32)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, System.Int32)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(`3,Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,Polly.Context)
-  id: ReadAll(`3,Polly.Context)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(TReadAllParams, Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, Polly.Context)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 105
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key and passing a Polly context through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Context] Context context)
-    parameters:
-    - id: readAllParams
-      type: '{TReadAllParams}'
-      description: Query params used as cache key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(readAllParams As TReadAllParams, context As Context) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32,Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32,Polly.Context)
-  id: ReadAll(System.Int32,Polly.Context)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(Int32, Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(Int32, Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(System.Int32, Polly.Context)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 115
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with an execution priority level and passing a Polly context through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([Property("Priority")] int priority, [Context] Context context)
-    parameters:
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(priority As Integer, context As Context) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(Int32, Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(System.Int32, Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(System.Int32,System.Threading.CancellationToken)
-  id: ReadAll(System.Int32,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(Int32, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(Int32, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(System.Int32, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 125
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with an execution priority level, passing a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([Property("Priority")] int priority, CancellationToken cancellationToken)
-    parameters:
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(priority As Integer, cancellationToken As CancellationToken) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(Int32, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(System.Int32, System.Threading.CancellationToken)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(Polly.Context,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(Polly.Context,System.Threading.CancellationToken)
-  id: ReadAll(Polly.Context,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(Context, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(Context, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(Polly.Context, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 135
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request, passing a Polly context and a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([Context] Context context, CancellationToken cancellationToken)
-    parameters:
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(context As Context, cancellationToken As CancellationToken) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(Context, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(Polly.Context, System.Threading.CancellationToken)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,Polly.Context)
-  id: ReadAll(`3,System.Int32,Polly.Context)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(TReadAllParams, Int32, Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, Int32, Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, System.Int32, Polly.Context)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 146
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key and an execution priority level, passing a Polly context through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority, [Context] Context context)
-    parameters:
-    - id: readAllParams
-      type: '{TReadAllParams}'
-      description: Query params used as cache key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(readAllParams As TReadAllParams, priority As Integer, context As Context) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Int32, Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, System.Int32, Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,System.Threading.CancellationToken)
-  id: ReadAll(`3,System.Int32,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(TReadAllParams, Int32, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, Int32, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, System.Int32, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 157
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key and an execution priority level, passing a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority, CancellationToken cancellationToken)
-    parameters:
-    - id: readAllParams
-      type: '{TReadAllParams}'
-      description: Query params used as cache key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(readAllParams As TReadAllParams, priority As Integer, cancellationToken As CancellationToken) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Int32, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, System.Int32, System.Threading.CancellationToken)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(`3,Polly.Context,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,Polly.Context,System.Threading.CancellationToken)
-  id: ReadAll(`3,Polly.Context,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(TReadAllParams, Context, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, Context, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, Polly.Context, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 168
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key, passing a Polly context and a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Context] Context context, CancellationToken cancellationToken)
-    parameters:
-    - id: readAllParams
-      type: '{TReadAllParams}'
-      description: Query params used as cache key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(readAllParams As TReadAllParams, context As Context, cancellationToken As CancellationToken) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Context, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Polly.Context, System.Threading.CancellationToken)
-- uid: Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,Polly.Context,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,System.Int32,Polly.Context,System.Threading.CancellationToken)
-  id: ReadAll(`3,System.Int32,Polly.Context,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: ReadAll(TReadAllParams, Int32, Context, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, Int32, Context, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll(TReadAllParams, System.Int32, Polly.Context, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ReadAll
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 180
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key and an execution priority level, passing a Polly context and a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [Property("Priority")] int priority, [Context] Context context, CancellationToken cancellationToken)
-    parameters:
-    - id: readAllParams
-      type: '{TReadAllParams}'
-      description: Query params used as cache key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task{{TReadAllResult}}
-      description: ''
-    content.vb: >-
-      <Get("")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function ReadAll(readAllParams As TReadAllParams, priority As Integer, context As Context, cancellationToken As CancellationToken) As Task(Of TReadAllResult)
-  overload: Apizr.Requesting.ICrudApi`4.ReadAll*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: ''
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Int32, Context, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, System.Int32, Polly.Context, System.Threading.CancellationToken)
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeCreate(T, IApizrRequestOptions)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeCreate(T, Apizr.Configuring.Request.IApizrRequestOptions)
 - uid: Apizr.Requesting.ICrudApi`4.ReadAll
   commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll
   id: ReadAll
@@ -1124,15 +304,15 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 190
+    startLine: 60
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request\n"
+  summary: Send a ReadAll request
   example: []
   syntax:
     content: >-
@@ -1145,7 +325,7 @@ items:
     content.vb: >-
       <Get("")>
 
-      Function ReadAll As Task(Of TReadAllResult)
+      Function ReadAll() As Task(Of TReadAllResult)
   overload: Apizr.Requesting.ICrudApi`4.ReadAll*
   attributes:
   - type: Refit.GetAttribute
@@ -1155,6 +335,51 @@ items:
       value: ''
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll()
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll()
+- uid: Apizr.Requesting.ICrudApi`4.SafeReadAll
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeReadAll
+  id: SafeReadAll
+  parent: Apizr.Requesting.ICrudApi`4
+  langs:
+  - csharp
+  - vb
+  name: SafeReadAll()
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll()
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll()
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SafeReadAll
+    path: ../../Src/Apizr/Requesting/ICrudApi.cs
+    startLine: 67
+  assemblies:
+  - Apizr
+  namespace: Apizr.Requesting
+  summary: Send a ReadAll request
+  example: []
+  syntax:
+    content: >-
+      [Get("")]
+
+      Task<IApiResponse<TReadAllResult>> SafeReadAll()
+    return:
+      type: System.Threading.Tasks.Task{Refit.IApiResponse{{TReadAllResult}}}
+      description: ''
+    content.vb: >-
+      <Get("")>
+
+      Function SafeReadAll() As Task(Of IApiResponse(Of TReadAllResult))
+  overload: Apizr.Requesting.ICrudApi`4.SafeReadAll*
+  attributes:
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: ''
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll()
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll()
 - uid: Apizr.Requesting.ICrudApi`4.ReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
   id: ReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
@@ -1169,21 +394,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 198
+    startLine: 75
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request\n"
+  summary: Send a ReadAll request
   example: []
   syntax:
     content: >-
       [Get("")]
 
-      Task<TReadAllResult> ReadAll([RequestOptions] IApizrRequestOptions options)
+      Task<TReadAllResult> ReadAll(IApizrRequestOptions options)
     parameters:
     - id: options
       type: Apizr.Configuring.Request.IApizrRequestOptions
@@ -1208,6 +433,59 @@ items:
       value: ''
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(IApizrRequestOptions)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
+- uid: Apizr.Requesting.ICrudApi`4.SafeReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
+  id: SafeReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Requesting.ICrudApi`4
+  langs:
+  - csharp
+  - vb
+  name: SafeReadAll(IApizrRequestOptions)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll(IApizrRequestOptions)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SafeReadAll
+    path: ../../Src/Apizr/Requesting/ICrudApi.cs
+    startLine: 83
+  assemblies:
+  - Apizr
+  namespace: Apizr.Requesting
+  summary: Send a ReadAll request
+  example: []
+  syntax:
+    content: >-
+      [Get("")]
+
+      Task<IApiResponse<TReadAllResult>> SafeReadAll(IApizrRequestOptions options)
+    parameters:
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      description: The request options
+      attributes:
+      - type: Apizr.Configuring.Request.RequestOptionsAttribute
+        ctor: Apizr.Configuring.Request.RequestOptionsAttribute.#ctor
+        arguments: []
+    return:
+      type: System.Threading.Tasks.Task{Refit.IApiResponse{{TReadAllResult}}}
+      description: ''
+    content.vb: >-
+      <Get("")>
+
+      Function SafeReadAll(options As IApizrRequestOptions) As Task(Of IApiResponse(Of TReadAllResult))
+  overload: Apizr.Requesting.ICrudApi`4.SafeReadAll*
+  attributes:
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: ''
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll(IApizrRequestOptions)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll(Apizr.Configuring.Request.IApizrRequestOptions)
 - uid: Apizr.Requesting.ICrudApi`4.ReadAll(`3)
   commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(`3)
   id: ReadAll(`3)
@@ -1222,21 +500,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 206
+    startLine: 91
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key\n"
+  summary: Send a ReadAll request with some query params used as cache key
   example: []
   syntax:
     content: >-
       [Get("")]
 
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams)
+      Task<TReadAllResult> ReadAll(TReadAllParams readAllParams)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
@@ -1261,6 +539,59 @@ items:
       value: ''
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams)
+- uid: Apizr.Requesting.ICrudApi`4.SafeReadAll(`3)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeReadAll(`3)
+  id: SafeReadAll(`3)
+  parent: Apizr.Requesting.ICrudApi`4
+  langs:
+  - csharp
+  - vb
+  name: SafeReadAll(TReadAllParams)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll(TReadAllParams)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll(TReadAllParams)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SafeReadAll
+    path: ../../Src/Apizr/Requesting/ICrudApi.cs
+    startLine: 99
+  assemblies:
+  - Apizr
+  namespace: Apizr.Requesting
+  summary: Send a ReadAll request with some query params used as cache key
+  example: []
+  syntax:
+    content: >-
+      [Get("")]
+
+      Task<IApiResponse<TReadAllResult>> SafeReadAll(TReadAllParams readAllParams)
+    parameters:
+    - id: readAllParams
+      type: '{TReadAllParams}'
+      description: Query params used as cache key
+      attributes:
+      - type: Apizr.Caching.Attributes.CacheKeyAttribute
+        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
+        arguments: []
+    return:
+      type: System.Threading.Tasks.Task{Refit.IApiResponse{{TReadAllResult}}}
+      description: ''
+    content.vb: >-
+      <Get("")>
+
+      Function SafeReadAll(readAllParams As TReadAllParams) As Task(Of IApiResponse(Of TReadAllResult))
+  overload: Apizr.Requesting.ICrudApi`4.SafeReadAll*
+  attributes:
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: ''
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll(TReadAllParams)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll(TReadAllParams)
 - uid: Apizr.Requesting.ICrudApi`4.ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Requesting.ICrudApi`4.ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
   id: ReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -1275,21 +606,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 215
+    startLine: 108
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a ReadAll request with some query params used as cache key\n"
+  summary: Send a ReadAll request with some query params used as cache key
   example: []
   syntax:
     content: >-
       [Get("")]
 
-      Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options)
+      Task<TReadAllResult> ReadAll(TReadAllParams readAllParams, IApizrRequestOptions options)
     parameters:
     - id: readAllParams
       type: '{TReadAllParams}'
@@ -1321,379 +652,66 @@ items:
       value: ''
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, IApizrRequestOptions)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll(TReadAllParams, Apizr.Configuring.Request.IApizrRequestOptions)
-- uid: Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32)
-  id: Read(`1,System.Int32)
+- uid: Apizr.Requesting.ICrudApi`4.SafeReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
+  id: SafeReadAll(`3,Apizr.Configuring.Request.IApizrRequestOptions)
   parent: Apizr.Requesting.ICrudApi`4
   langs:
   - csharp
   - vb
-  name: Read(TKey, Int32)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, Int32)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, System.Int32)
+  name: SafeReadAll(TReadAllParams, IApizrRequestOptions)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll(TReadAllParams, IApizrRequestOptions)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll(TReadAllParams, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: Read
+    id: SafeReadAll
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 230
+    startLine: 117
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param and an execution priority level\n"
+  summary: Send a ReadAll request with some query params used as cache key
   example: []
   syntax:
     content: >-
-      [Get("/{key}")]
+      [Get("")]
 
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority)
+      Task<IApiResponse<TReadAllResult>> SafeReadAll(TReadAllParams readAllParams, IApizrRequestOptions options)
     parameters:
-    - id: key
-      type: '{TKey}'
-      description: The key
+    - id: readAllParams
+      type: '{TReadAllParams}'
+      description: Query params used as cache key
       attributes:
       - type: Apizr.Caching.Attributes.CacheKeyAttribute
         ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      description: The request options
       attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
+      - type: Apizr.Configuring.Request.RequestOptionsAttribute
+        ctor: Apizr.Configuring.Request.RequestOptionsAttribute.#ctor
+        arguments: []
     return:
-      type: System.Threading.Tasks.Task{{T}}
+      type: System.Threading.Tasks.Task{Refit.IApiResponse{{TReadAllResult}}}
       description: ''
     content.vb: >-
-      <Get("/{key}")>
+      <Get("")>
 
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Read(key As TKey, priority As Integer) As Task(Of T)
-  overload: Apizr.Requesting.ICrudApi`4.Read*
+      Function SafeReadAll(readAllParams As TReadAllParams, options As IApizrRequestOptions) As Task(Of IApiResponse(Of TReadAllResult))
+  overload: Apizr.Requesting.ICrudApi`4.SafeReadAll*
   attributes:
   - type: Refit.GetAttribute
     ctor: Refit.GetAttribute.#ctor(System.String)
     arguments:
     - type: System.String
-      value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, Int32)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, System.Int32)
-- uid: Apizr.Requesting.ICrudApi`4.Read(`1,Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Read(`1,Polly.Context)
-  id: Read(`1,Polly.Context)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: Read(TKey, Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, Polly.Context)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: Read
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 240
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param, passing a Polly context through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("/{key}")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<T> Read([CacheKey] TKey key, [Context] Context context)
-    parameters:
-    - id: key
-      type: '{TKey}'
-      description: The key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    return:
-      type: System.Threading.Tasks.Task{{T}}
-      description: ''
-    content.vb: >-
-      <Get("/{key}")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Read(key As TKey, context As Context) As Task(Of T)
-  overload: Apizr.Requesting.ICrudApi`4.Read*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,Polly.Context)
-  id: Read(`1,System.Int32,Polly.Context)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: Read(TKey, Int32, Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, Int32, Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, System.Int32, Polly.Context)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: Read
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 251
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param and an execution priority level, passing a Polly context through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("/{key}")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority, [Context] Context context)
-    parameters:
-    - id: key
-      type: '{TKey}'
-      description: The key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    return:
-      type: System.Threading.Tasks.Task{{T}}
-      description: ''
-    content.vb: >-
-      <Get("/{key}")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Read(key As TKey, priority As Integer, context As Context) As Task(Of T)
-  overload: Apizr.Requesting.ICrudApi`4.Read*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, Int32, Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, System.Int32, Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,System.Threading.CancellationToken)
-  id: Read(`1,System.Int32,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: Read(TKey, Int32, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, Int32, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, System.Int32, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: Read
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 262
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param and an execution priority level, passing a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("/{key}")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority, CancellationToken cancellationToken)
-    parameters:
-    - id: key
-      type: '{TKey}'
-      description: The key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task{{T}}
-      description: ''
-    content.vb: >-
-      <Get("/{key}")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Read(key As TKey, priority As Integer, cancellationToken As CancellationToken) As Task(Of T)
-  overload: Apizr.Requesting.ICrudApi`4.Read*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, Int32, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, System.Int32, System.Threading.CancellationToken)
-- uid: Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,Polly.Context,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Read(`1,System.Int32,Polly.Context,System.Threading.CancellationToken)
-  id: Read(`1,System.Int32,Polly.Context,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: Read(TKey, Int32, Context, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, Int32, Context, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read(TKey, System.Int32, Polly.Context, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: Read
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 274
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param and an execution priority level, passing a Polly context and a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Get("/{key}")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task<T> Read([CacheKey] TKey key, [Property("Priority")] int priority, [Context] Context context, CancellationToken cancellationToken)
-    parameters:
-    - id: key
-      type: '{TKey}'
-      description: The key
-      attributes:
-      - type: Apizr.Caching.Attributes.CacheKeyAttribute
-        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-        arguments: []
-    - id: priority
-      type: System.Int32
-      description: The execution priority level
-      attributes:
-      - type: Refit.PropertyAttribute
-        ctor: Refit.PropertyAttribute.#ctor(System.String)
-        arguments:
-        - type: System.String
-          value: Priority
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task{{T}}
-      description: ''
-    content.vb: >-
-      <Get("/{key}")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Read(key As TKey, priority As Integer, context As Context, cancellationToken As CancellationToken) As Task(Of T)
-  overload: Apizr.Requesting.ICrudApi`4.Read*
-  attributes:
-  - type: Refit.GetAttribute
-    ctor: Refit.GetAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, Int32, Context, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, System.Int32, Polly.Context, System.Threading.CancellationToken)
+      value: ''
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll(TReadAllParams, IApizrRequestOptions)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll(TReadAllParams, Apizr.Configuring.Request.IApizrRequestOptions)
 - uid: Apizr.Requesting.ICrudApi`4.Read(`1)
   commentId: M:Apizr.Requesting.ICrudApi`4.Read(`1)
   id: Read(`1)
@@ -1708,21 +726,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Read
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 285
+    startLine: 129
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param\n"
+  summary: Send a Read request with a key param
   example: []
   syntax:
     content: >-
       [Get("/{key}")]
 
-      Task<T> Read([CacheKey] TKey key)
+      Task<T> Read(TKey key)
     parameters:
     - id: key
       type: '{TKey}'
@@ -1747,6 +765,59 @@ items:
       value: /{key}
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey)
+- uid: Apizr.Requesting.ICrudApi`4.SafeRead(`1)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeRead(`1)
+  id: SafeRead(`1)
+  parent: Apizr.Requesting.ICrudApi`4
+  langs:
+  - csharp
+  - vb
+  name: SafeRead(TKey)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeRead(TKey)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeRead(TKey)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SafeRead
+    path: ../../Src/Apizr/Requesting/ICrudApi.cs
+    startLine: 137
+  assemblies:
+  - Apizr
+  namespace: Apizr.Requesting
+  summary: Send a Read request with a key param
+  example: []
+  syntax:
+    content: >-
+      [Get("/{key}")]
+
+      Task<IApiResponse<T>> SafeRead(TKey key)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: The key
+      attributes:
+      - type: Apizr.Caching.Attributes.CacheKeyAttribute
+        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
+        arguments: []
+    return:
+      type: System.Threading.Tasks.Task{Refit.IApiResponse{{T}}}
+      description: ''
+    content.vb: >-
+      <Get("/{key}")>
+
+      Function SafeRead(key As TKey) As Task(Of IApiResponse(Of T))
+  overload: Apizr.Requesting.ICrudApi`4.SafeRead*
+  attributes:
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: /{key}
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeRead(TKey)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeRead(TKey)
 - uid: Apizr.Requesting.ICrudApi`4.Read(`1,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Requesting.ICrudApi`4.Read(`1,Apizr.Configuring.Request.IApizrRequestOptions)
   id: Read(`1,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -1761,21 +832,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Read
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 294
+    startLine: 146
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Read request with a key param\n"
+  summary: Send a Read request with a key param
   example: []
   syntax:
     content: >-
       [Get("/{key}")]
 
-      Task<T> Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options)
+      Task<T> Read(TKey key, IApizrRequestOptions options)
     parameters:
     - id: key
       type: '{TKey}'
@@ -1807,153 +878,66 @@ items:
       value: /{key}
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, IApizrRequestOptions)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Read(TKey, Apizr.Configuring.Request.IApizrRequestOptions)
-- uid: Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context)
-  id: Update(`1,`0,Polly.Context)
+- uid: Apizr.Requesting.ICrudApi`4.SafeRead(`1,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeRead(`1,Apizr.Configuring.Request.IApizrRequestOptions)
+  id: SafeRead(`1,Apizr.Configuring.Request.IApizrRequestOptions)
   parent: Apizr.Requesting.ICrudApi`4
   langs:
   - csharp
   - vb
-  name: Update(TKey, T, Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Update(TKey, T, Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Update(TKey, T, Polly.Context)
+  name: SafeRead(TKey, IApizrRequestOptions)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeRead(TKey, IApizrRequestOptions)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeRead(TKey, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: Update
+    id: SafeRead
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 310
+    startLine: 155
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend an Update request with a key and a payload, passing a Polly context through the request\n"
+  summary: Send a Read request with a key param
   example: []
   syntax:
     content: >-
-      [Put("/{key}")]
+      [Get("/{key}")]
 
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task Update(TKey key, [Body] T payload, [Context] Context context)
+      Task<IApiResponse<T>> SafeRead(TKey key, IApizrRequestOptions options)
     parameters:
     - id: key
       type: '{TKey}'
       description: The key
-    - id: payload
-      type: '{T}'
-      description: The payload
       attributes:
-      - type: Refit.BodyAttribute
-        ctor: Refit.BodyAttribute.#ctor
+      - type: Apizr.Caching.Attributes.CacheKeyAttribute
+        ctor: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
         arguments: []
-    - id: context
-      type: Polly.Context
-      description: The Polly context
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      description: The request options
       attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
+      - type: Apizr.Configuring.Request.RequestOptionsAttribute
+        ctor: Apizr.Configuring.Request.RequestOptionsAttribute.#ctor
         arguments: []
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Refit.IApiResponse{{T}}}
       description: ''
     content.vb: >-
-      <Put("/{key}")>
+      <Get("/{key}")>
 
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Update(key As TKey, payload As T, context As Context) As Task
-  overload: Apizr.Requesting.ICrudApi`4.Update*
+      Function SafeRead(key As TKey, options As IApizrRequestOptions) As Task(Of IApiResponse(Of T))
+  overload: Apizr.Requesting.ICrudApi`4.SafeRead*
   attributes:
-  - type: Refit.PutAttribute
-    ctor: Refit.PutAttribute.#ctor(System.String)
+  - type: Refit.GetAttribute
+    ctor: Refit.GetAttribute.#ctor(System.String)
     arguments:
     - type: System.String
       value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Update(TKey, T, Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Update(TKey, T, Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,Polly.Context,System.Threading.CancellationToken)
-  id: Update(`1,`0,Polly.Context,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: Update(TKey, T, Context, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Update(TKey, T, Context, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Update(TKey, T, Polly.Context, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: Update
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 322
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend an Update request with a key and a payload, passing a Polly context and a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Put("/{key}")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task Update(TKey key, [Body] T payload, [Context] Context context, CancellationToken cancellationToken)
-    parameters:
-    - id: key
-      type: '{TKey}'
-      description: The key
-    - id: payload
-      type: '{T}'
-      description: The payload
-      attributes:
-      - type: Refit.BodyAttribute
-        ctor: Refit.BodyAttribute.#ctor
-        arguments: []
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task
-      description: ''
-    content.vb: >-
-      <Put("/{key}")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Update(key As TKey, payload As T, context As Context, cancellationToken As CancellationToken) As Task
-  overload: Apizr.Requesting.ICrudApi`4.Update*
-  attributes:
-  - type: Refit.PutAttribute
-    ctor: Refit.PutAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Update(TKey, T, Context, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Update(TKey, T, Polly.Context, System.Threading.CancellationToken)
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeRead(TKey, IApizrRequestOptions)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeRead(TKey, Apizr.Configuring.Request.IApizrRequestOptions)
 - uid: Apizr.Requesting.ICrudApi`4.Update(`1,`0)
   commentId: M:Apizr.Requesting.ICrudApi`4.Update(`1,`0)
   id: Update(`1,`0)
@@ -1968,21 +952,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Update
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 334
+    startLine: 168
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend an Update request with a key and a payload\n"
+  summary: Send an Update request with a key and a payload
   example: []
   syntax:
     content: >-
       [Put("/{key}")]
 
-      Task Update(TKey key, [Body] T payload)
+      Task Update(TKey key, T payload)
     parameters:
     - id: key
       type: '{TKey}'
@@ -2010,6 +994,62 @@ items:
       value: /{key}
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Update(TKey, T)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Update(TKey, T)
+- uid: Apizr.Requesting.ICrudApi`4.SafeUpdate(`1,`0)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeUpdate(`1,`0)
+  id: SafeUpdate(`1,`0)
+  parent: Apizr.Requesting.ICrudApi`4
+  langs:
+  - csharp
+  - vb
+  name: SafeUpdate(TKey, T)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeUpdate(TKey, T)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeUpdate(TKey, T)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SafeUpdate
+    path: ../../Src/Apizr/Requesting/ICrudApi.cs
+    startLine: 177
+  assemblies:
+  - Apizr
+  namespace: Apizr.Requesting
+  summary: Send an Update request with a key and a payload
+  example: []
+  syntax:
+    content: >-
+      [Put("/{key}")]
+
+      Task<IApiResponse> SafeUpdate(TKey key, T payload)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: The key
+    - id: payload
+      type: '{T}'
+      description: The payload
+      attributes:
+      - type: Refit.BodyAttribute
+        ctor: Refit.BodyAttribute.#ctor
+        arguments: []
+    return:
+      type: System.Threading.Tasks.Task{Refit.IApiResponse}
+      description: ''
+    content.vb: >-
+      <Put("/{key}")>
+
+      Function SafeUpdate(key As TKey, payload As T) As Task(Of IApiResponse)
+  overload: Apizr.Requesting.ICrudApi`4.SafeUpdate*
+  attributes:
+  - type: Refit.PutAttribute
+    ctor: Refit.PutAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: /{key}
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeUpdate(TKey, T)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeUpdate(TKey, T)
 - uid: Apizr.Requesting.ICrudApi`4.Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Requesting.ICrudApi`4.Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
   id: Update(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -2024,21 +1064,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Update
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 344
+    startLine: 187
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend an Update request with a key and a payload\n"
+  summary: Send an Update request with a key and a payload
   example: []
   syntax:
     content: >-
       [Put("/{key}")]
 
-      Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options)
+      Task Update(TKey key, T payload, IApizrRequestOptions options)
     parameters:
     - id: key
       type: '{TKey}'
@@ -2073,139 +1113,69 @@ items:
       value: /{key}
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Update(TKey, T, IApizrRequestOptions)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Update(TKey, T, Apizr.Configuring.Request.IApizrRequestOptions)
-- uid: Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context)
-  id: Delete(`1,Polly.Context)
+- uid: Apizr.Requesting.ICrudApi`4.SafeUpdate(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeUpdate(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
+  id: SafeUpdate(`1,`0,Apizr.Configuring.Request.IApizrRequestOptions)
   parent: Apizr.Requesting.ICrudApi`4
   langs:
   - csharp
   - vb
-  name: Delete(TKey, Context)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Delete(TKey, Context)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Delete(TKey, Polly.Context)
+  name: SafeUpdate(TKey, T, IApizrRequestOptions)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeUpdate(TKey, T, IApizrRequestOptions)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeUpdate(TKey, T, Apizr.Configuring.Request.IApizrRequestOptions)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: Delete
+    id: SafeUpdate
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 359
+    startLine: 197
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Delete request with a key param, passing a Polly context through the request\n"
+  summary: Send an Update request with a key and a payload
   example: []
   syntax:
     content: >-
-      [Delete("/{key}")]
+      [Put("/{key}")]
 
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task Delete(TKey key, [Context] Context context)
+      Task<IApiResponse> SafeUpdate(TKey key, T payload, IApizrRequestOptions options)
     parameters:
     - id: key
       type: '{TKey}'
       description: The key
-    - id: context
-      type: Polly.Context
-      description: The Polly context
+    - id: payload
+      type: '{T}'
+      description: The payload
       attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
+      - type: Refit.BodyAttribute
+        ctor: Refit.BodyAttribute.#ctor
+        arguments: []
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      description: The request options
+      attributes:
+      - type: Apizr.Configuring.Request.RequestOptionsAttribute
+        ctor: Apizr.Configuring.Request.RequestOptionsAttribute.#ctor
         arguments: []
     return:
-      type: System.Threading.Tasks.Task
+      type: System.Threading.Tasks.Task{Refit.IApiResponse}
       description: ''
     content.vb: >-
-      <Delete("/{key}")>
+      <Put("/{key}")>
 
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Delete(key As TKey, context As Context) As Task
-  overload: Apizr.Requesting.ICrudApi`4.Delete*
+      Function SafeUpdate(key As TKey, payload As T, options As IApizrRequestOptions) As Task(Of IApiResponse)
+  overload: Apizr.Requesting.ICrudApi`4.SafeUpdate*
   attributes:
-  - type: Refit.DeleteAttribute
-    ctor: Refit.DeleteAttribute.#ctor(System.String)
+  - type: Refit.PutAttribute
+    ctor: Refit.PutAttribute.#ctor(System.String)
     arguments:
     - type: System.String
       value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete(TKey, Context)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete(TKey, Polly.Context)
-- uid: Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context,System.Threading.CancellationToken)
-  commentId: M:Apizr.Requesting.ICrudApi`4.Delete(`1,Polly.Context,System.Threading.CancellationToken)
-  id: Delete(`1,Polly.Context,System.Threading.CancellationToken)
-  parent: Apizr.Requesting.ICrudApi`4
-  langs:
-  - csharp
-  - vb
-  name: Delete(TKey, Context, CancellationToken)
-  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Delete(TKey, Context, CancellationToken)
-  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Delete(TKey, Polly.Context, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: Delete
-    path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 370
-  assemblies:
-  - Apizr
-  namespace: Apizr.Requesting
-  summary: "\nSend a Delete request with a key param, passing a Polly context and a cancellation token through the request\n"
-  example: []
-  syntax:
-    content: >-
-      [Delete("/{key}")]
-
-      [Obsolete("Use the one with the request options parameter instead")]
-
-      Task Delete(TKey key, [Context] Context context, CancellationToken cancellationToken)
-    parameters:
-    - id: key
-      type: '{TKey}'
-      description: The key
-    - id: context
-      type: Polly.Context
-      description: The Polly context
-      attributes:
-      - type: Apizr.Policing.ContextAttribute
-        ctor: Apizr.Policing.ContextAttribute.#ctor
-        arguments: []
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The cancellation token
-    return:
-      type: System.Threading.Tasks.Task
-      description: ''
-    content.vb: >-
-      <Delete("/{key}")>
-
-      <Obsolete("Use the one with the request options parameter instead")>
-
-      Function Delete(key As TKey, context As Context, cancellationToken As CancellationToken) As Task
-  overload: Apizr.Requesting.ICrudApi`4.Delete*
-  attributes:
-  - type: Refit.DeleteAttribute
-    ctor: Refit.DeleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: /{key}
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use the one with the request options parameter instead
-  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete(TKey, Context, CancellationToken)
-  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete(TKey, Polly.Context, System.Threading.CancellationToken)
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeUpdate(TKey, T, IApizrRequestOptions)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeUpdate(TKey, T, Apizr.Configuring.Request.IApizrRequestOptions)
 - uid: Apizr.Requesting.ICrudApi`4.Delete(`1)
   commentId: M:Apizr.Requesting.ICrudApi`4.Delete(`1)
   id: Delete(`1)
@@ -2220,15 +1190,15 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Delete
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 381
+    startLine: 209
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Delete request with a key param\n"
+  summary: Send a Delete request with a key param
   example: []
   syntax:
     content: >-
@@ -2255,6 +1225,55 @@ items:
       value: /{key}
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete(TKey)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete(TKey)
+- uid: Apizr.Requesting.ICrudApi`4.SafeDelete(`1)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeDelete(`1)
+  id: SafeDelete(`1)
+  parent: Apizr.Requesting.ICrudApi`4
+  langs:
+  - csharp
+  - vb
+  name: SafeDelete(TKey)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeDelete(TKey)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeDelete(TKey)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SafeDelete
+    path: ../../Src/Apizr/Requesting/ICrudApi.cs
+    startLine: 217
+  assemblies:
+  - Apizr
+  namespace: Apizr.Requesting
+  summary: Send a Delete request with a key param
+  example: []
+  syntax:
+    content: >-
+      [Delete("/{key}")]
+
+      Task<IApiResponse> SafeDelete(TKey key)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: The key
+    return:
+      type: System.Threading.Tasks.Task{Refit.IApiResponse}
+      description: ''
+    content.vb: >-
+      <Delete("/{key}")>
+
+      Function SafeDelete(key As TKey) As Task(Of IApiResponse)
+  overload: Apizr.Requesting.ICrudApi`4.SafeDelete*
+  attributes:
+  - type: Refit.DeleteAttribute
+    ctor: Refit.DeleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: /{key}
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeDelete(TKey)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeDelete(TKey)
 - uid: Apizr.Requesting.ICrudApi`4.Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions)
   commentId: M:Apizr.Requesting.ICrudApi`4.Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions)
   id: Delete(`1,Apizr.Configuring.Request.IApizrRequestOptions)
@@ -2269,21 +1288,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Delete
     path: ../../Src/Apizr/Requesting/ICrudApi.cs
-    startLine: 390
+    startLine: 226
   assemblies:
   - Apizr
   namespace: Apizr.Requesting
-  summary: "\nSend a Delete request with a key param\n"
+  summary: Send a Delete request with a key param
   example: []
   syntax:
     content: >-
       [Delete("/{key}")]
 
-      Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options)
+      Task Delete(TKey key, IApizrRequestOptions options)
     parameters:
     - id: key
       type: '{TKey}'
@@ -2311,14 +1330,88 @@ items:
       value: /{key}
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete(TKey, IApizrRequestOptions)
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete(TKey, Apizr.Configuring.Request.IApizrRequestOptions)
+- uid: Apizr.Requesting.ICrudApi`4.SafeDelete(`1,Apizr.Configuring.Request.IApizrRequestOptions)
+  commentId: M:Apizr.Requesting.ICrudApi`4.SafeDelete(`1,Apizr.Configuring.Request.IApizrRequestOptions)
+  id: SafeDelete(`1,Apizr.Configuring.Request.IApizrRequestOptions)
+  parent: Apizr.Requesting.ICrudApi`4
+  langs:
+  - csharp
+  - vb
+  name: SafeDelete(TKey, IApizrRequestOptions)
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeDelete(TKey, IApizrRequestOptions)
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeDelete(TKey, Apizr.Configuring.Request.IApizrRequestOptions)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Requesting/ICrudApi.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SafeDelete
+    path: ../../Src/Apizr/Requesting/ICrudApi.cs
+    startLine: 235
+  assemblies:
+  - Apizr
+  namespace: Apizr.Requesting
+  summary: Send a Delete request with a key param
+  example: []
+  syntax:
+    content: >-
+      [Delete("/{key}")]
+
+      Task<IApiResponse> SafeDelete(TKey key, IApizrRequestOptions options)
+    parameters:
+    - id: key
+      type: '{TKey}'
+      description: The key
+    - id: options
+      type: Apizr.Configuring.Request.IApizrRequestOptions
+      description: The request options
+      attributes:
+      - type: Apizr.Configuring.Request.RequestOptionsAttribute
+        ctor: Apizr.Configuring.Request.RequestOptionsAttribute.#ctor
+        arguments: []
+    return:
+      type: System.Threading.Tasks.Task{Refit.IApiResponse}
+      description: ''
+    content.vb: >-
+      <Delete("/{key}")>
+
+      Function SafeDelete(key As TKey, options As IApizrRequestOptions) As Task(Of IApiResponse)
+  overload: Apizr.Requesting.ICrudApi`4.SafeDelete*
+  attributes:
+  - type: Refit.DeleteAttribute
+    ctor: Refit.DeleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: /{key}
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeDelete(TKey, IApizrRequestOptions)
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeDelete(TKey, Apizr.Configuring.Request.IApizrRequestOptions)
 references:
 - uid: Apizr.Requesting
   commentId: N:Apizr.Requesting
+  href: Apizr.html
   name: Apizr.Requesting
   nameWithType: Apizr.Requesting
   fullName: Apizr.Requesting
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Requesting
+    name: Requesting
+    href: Apizr.Requesting.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Requesting
+    name: Requesting
+    href: Apizr.Requesting.html
 - uid: Apizr.Requesting.ICrudApi`4.Create*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Create
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_Create__0_
   name: Create
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Create
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Create
@@ -2330,17 +1423,11 @@ references:
   name: T
   nameWithType: T
   fullName: T
-- uid: Polly.Context
-  commentId: T:Polly.Context
-  parent: Polly
-  isExternal: true
-  name: Context
-  nameWithType: Context
-  fullName: Polly.Context
 - uid: System.Threading.Tasks.Task{{T}}
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<T>
   nameWithType: Task<T>
   fullName: System.Threading.Tasks.Task<T>
@@ -2350,46 +1437,29 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: T
   name: T
   nameWithType: T
   fullName: T
-- uid: Polly
-  commentId: N:Polly
-  isExternal: true
-  name: Polly
-  nameWithType: Polly
-  fullName: Polly
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -2399,81 +1469,157 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
-- uid: System.Threading.CancellationToken
-  commentId: T:System.Threading.CancellationToken
-  parent: System.Threading
-  isExternal: true
-  name: CancellationToken
-  nameWithType: CancellationToken
-  fullName: System.Threading.CancellationToken
-- uid: System.Threading
-  commentId: N:System.Threading
-  isExternal: true
-  name: System.Threading
-  nameWithType: System.Threading
-  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Apizr.Requesting.ICrudApi`4.SafeCreate*
+  commentId: Overload:Apizr.Requesting.ICrudApi`4.SafeCreate
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_SafeCreate__0_
+  name: SafeCreate
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeCreate
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeCreate
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeCreate
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeCreate
+- uid: System.Threading.Tasks.Task{Refit.IApiResponse{{T}}}
+  commentId: T:System.Threading.Tasks.Task{Refit.IApiResponse{`0}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IApiResponse<T>>
+  nameWithType: Task<IApiResponse<T>>
+  fullName: System.Threading.Tasks.Task<Refit.IApiResponse<T>>
+  nameWithType.vb: Task(Of IApiResponse(Of T))
+  fullName.vb: System.Threading.Tasks.Task(Of Refit.IApiResponse(Of T))
+  name.vb: Task(Of IApiResponse(Of T))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: Refit.IApiResponse`1
+    name: IApiResponse
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Refit.IApiResponse`1
+    name: IApiResponse
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
 - uid: Apizr.Configuring.Request.IApizrRequestOptions
   commentId: T:Apizr.Configuring.Request.IApizrRequestOptions
   parent: Apizr.Configuring.Request
+  href: Apizr.Configuring.Request.IApizrRequestOptions.html
   name: IApizrRequestOptions
   nameWithType: IApizrRequestOptions
   fullName: Apizr.Configuring.Request.IApizrRequestOptions
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
+  href: Apizr.html
   name: Apizr.Configuring.Request
   nameWithType: Apizr.Configuring.Request
   fullName: Apizr.Configuring.Request
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
 - uid: Apizr.Requesting.ICrudApi`4.ReadAll*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.ReadAll
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_ReadAll
   name: ReadAll
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.ReadAll
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).ReadAll
-- uid: System.Int32
-  commentId: T:System.Int32
-  parent: System
-  isExternal: true
-  name: Int32
-  nameWithType: Int32
-  fullName: System.Int32
 - uid: System.Threading.Tasks.Task{{TReadAllResult}}
   commentId: T:System.Threading.Tasks.Task{``2}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TReadAllResult>
   nameWithType: Task<TReadAllResult>
   fullName: System.Threading.Tasks.Task<TReadAllResult>
@@ -2483,39 +1629,70 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TReadAllResult
-    nameWithType: TReadAllResult
-    fullName: TReadAllResult
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: System
-  commentId: N:System
-  isExternal: true
-  name: System
-  nameWithType: System
-  fullName: System
+- uid: Apizr.Requesting.ICrudApi`4.SafeReadAll*
+  commentId: Overload:Apizr.Requesting.ICrudApi`4.SafeReadAll
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_SafeReadAll
+  name: SafeReadAll
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeReadAll
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeReadAll
+- uid: System.Threading.Tasks.Task{Refit.IApiResponse{{TReadAllResult}}}
+  commentId: T:System.Threading.Tasks.Task{Refit.IApiResponse{`2}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IApiResponse<TReadAllResult>>
+  nameWithType: Task<IApiResponse<TReadAllResult>>
+  fullName: System.Threading.Tasks.Task<Refit.IApiResponse<TReadAllResult>>
+  nameWithType.vb: Task(Of IApiResponse(Of TReadAllResult))
+  fullName.vb: System.Threading.Tasks.Task(Of Refit.IApiResponse(Of TReadAllResult))
+  name.vb: Task(Of IApiResponse(Of TReadAllResult))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: Refit.IApiResponse`1
+    name: IApiResponse
+    isExternal: true
+  - name: <
+  - name: TReadAllResult
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Refit.IApiResponse`1
+    name: IApiResponse
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TReadAllResult
+  - name: )
+  - name: )
 - uid: '{TReadAllParams}'
   commentId: '!:TReadAllParams'
   definition: TReadAllParams
@@ -2528,6 +1705,7 @@ references:
   fullName: TReadAllParams
 - uid: Apizr.Requesting.ICrudApi`4.Read*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Read
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_Read__1_
   name: Read
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Read
@@ -2543,8 +1721,17 @@ references:
   name: TKey
   nameWithType: TKey
   fullName: TKey
+- uid: Apizr.Requesting.ICrudApi`4.SafeRead*
+  commentId: Overload:Apizr.Requesting.ICrudApi`4.SafeRead
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_SafeRead__1_
+  name: SafeRead
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeRead
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeRead
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeRead
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeRead
 - uid: Apizr.Requesting.ICrudApi`4.Update*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Update
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_Update__1__0_
   name: Update
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Update
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Update
@@ -2554,13 +1741,64 @@ references:
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
+- uid: Apizr.Requesting.ICrudApi`4.SafeUpdate*
+  commentId: Overload:Apizr.Requesting.ICrudApi`4.SafeUpdate
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_SafeUpdate__1__0_
+  name: SafeUpdate
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeUpdate
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeUpdate
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeUpdate
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeUpdate
+- uid: System.Threading.Tasks.Task{Refit.IApiResponse}
+  commentId: T:System.Threading.Tasks.Task{Refit.IApiResponse}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IApiResponse>
+  nameWithType: Task<IApiResponse>
+  fullName: System.Threading.Tasks.Task<Refit.IApiResponse>
+  nameWithType.vb: Task(Of IApiResponse)
+  fullName.vb: System.Threading.Tasks.Task(Of Refit.IApiResponse)
+  name.vb: Task(Of IApiResponse)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: Refit.IApiResponse
+    name: IApiResponse
+    isExternal: true
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Refit.IApiResponse
+    name: IApiResponse
+    isExternal: true
+  - name: )
 - uid: Apizr.Requesting.ICrudApi`4.Delete*
   commentId: Overload:Apizr.Requesting.ICrudApi`4.Delete
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_Delete__1_
   name: Delete
   nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Delete
   fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.Delete
   nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete
   fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).Delete
+- uid: Apizr.Requesting.ICrudApi`4.SafeDelete*
+  commentId: Overload:Apizr.Requesting.ICrudApi`4.SafeDelete
+  href: Apizr.Requesting.ICrudApi-4.html#Apizr_Requesting_ICrudApi_4_SafeDelete__1_
+  name: SafeDelete
+  nameWithType: ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeDelete
+  fullName: Apizr.Requesting.ICrudApi<T, TKey, TReadAllResult, TReadAllParams>.SafeDelete
+  nameWithType.vb: ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeDelete
+  fullName.vb: Apizr.Requesting.ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams).SafeDelete

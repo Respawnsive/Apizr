@@ -325,8 +325,8 @@ namespace Apizr
                         #region Result
 
                         if (returnType.IsGenericType &&
-                                            (methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(Task<>)
-                                             || methodInfo.ReturnType.GetGenericTypeDefinition() != typeof(IObservable<>)))
+                                            (methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(Task<>)
+                                             || methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(IObservable<>)))
                         {
                             var apiResponseType = returnType.GetGenericArguments()[0];
 

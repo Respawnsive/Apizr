@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -66,5 +67,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// The request timeout factory (each request try)
         /// </summary>
         Func<IServiceProvider, TimeSpan> RequestTimeoutFactory { get; }
+
+        internal IDictionary<string, Func<IServiceProvider, object>> ResiliencePropertiesExtendedFactories { get; }
     }
 }

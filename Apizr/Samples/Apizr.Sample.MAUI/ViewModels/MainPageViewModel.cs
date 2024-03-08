@@ -7,6 +7,7 @@ using Fusillade;
 using MediatR;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Shiny;
 
 namespace Apizr.Sample.MAUI.ViewModels
 {
@@ -78,16 +79,12 @@ namespace Apizr.Sample.MAUI.ViewModels
                 var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
                 users = userList?.Data;
 
-                //var userList2 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.UserInitiated));
-
-                //var userList3 = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync((int)Priority.Background));
-
                 // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-                //var pagedUsers = await _userCrudManager.ExecuteAsync((ct, api) => api.ReadAll((int)Priority.UserInitiated, ct), CancellationToken.None);
+                //var pagedUsers = await _userCrudManager.ExecuteAsync(api => api.ReadAll());
                 //users = pagedUsers?.Data?.ToList();
 
                 // The same as before but with auto mediation handling
-                //var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);
+                //var pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>());
                 //users = pagedUsers?.Data?.ToList();
             }
             catch (ApizrException<UserList> e)
@@ -113,7 +110,7 @@ namespace Apizr.Sample.MAUI.ViewModels
             }
 
             // The same as before but with optional result
-            //var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>(), CancellationToken.None);
+            //var result = await _mediator.Send(new ReadAllOptionalQuery<PagedResult<User>>());
             //result.Match(pagedUsers =>
             //{
             //    if (pagedUsers.Data != null && pagedUsers.Data.Any())
@@ -162,11 +159,11 @@ namespace Apizr.Sample.MAUI.ViewModels
                 fetchedUser = userDetails?.User;
 
                 // This is the Crud way, with or without Crud attribute auto registration, but without mediation
-                //var userDetails = await _userDetailsCrudManager.ExecuteAsync((ct, api) => api.Read(user.Id, ct), CancellationToken.None);
+                //var userDetails = await _userDetailsCrudManager.ExecuteAsync(api => api.Read(user.Id));
                 //fetchedUser = userDetails?.User;
 
                 // The same as before but with auto mediation handling and without optional result this time
-                //var userDetails = await _mediator.Send(new ReadQuery<UserDetails>(user.Id), CancellationToken.None);
+                //var userDetails = await _mediator.Send(new ReadQuery<UserDetails>(user.Id));
                 //fetchedUser = userDetails?.User;
             }
             catch (ApizrException<UserDetails> e)

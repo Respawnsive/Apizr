@@ -9,9 +9,12 @@ using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
+using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -229,31 +232,6 @@ namespace Apizr.Extending.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithContext(Func<Context> contextFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
-        {
-            switch (strategy)
-            {
-                case ApizrDuplicateStrategy.Ignore:
-                    if (Options.ContextFactories.Count == 0)
-                        Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Replace:
-                    Options.ContextFactories.Clear();
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Add:
-                case ApizrDuplicateStrategy.Merge:
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
-            }
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
@@ -301,6 +279,18 @@ namespace Apizr.Extending.Configuring.Manager
         }
 
         /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+            => WithResilienceProperty(key, _ => value);
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<IServiceProvider, TValue> valueFactory)
+        {
+            ((IApizrExtendedSharedOptions)Options).ResiliencePropertiesExtendedFactories[key.Key] = serviceProvider => valueFactory(serviceProvider);
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All,
             params LogLevel[] logLevels)
@@ -330,12 +320,6 @@ namespace Apizr.Extending.Configuring.Manager
             => WithRefitSettings(_ => refitSettings);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithRefitSettings(
             Func<IServiceProvider, RefitSettings> refitSettingsFactory)
         {
@@ -343,6 +327,10 @@ namespace Apizr.Extending.Configuring.Manager
 
             return this;
         }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(IConnectivityHandler connectivityHandler)
+            => WithConnectivityHandler(_ => connectivityHandler);
 
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithConnectivityHandler(Func<IServiceProvider, IConnectivityHandler> connectivityHandlerFactory)
@@ -439,6 +427,22 @@ namespace Apizr.Extending.Configuring.Manager
                     $"Your mapping handler class must inherit from {nameof(IMappingHandler)} interface or derived");
 
             Options.MappingHandlerType = mappingHandlerType;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
 
             return this;
         }

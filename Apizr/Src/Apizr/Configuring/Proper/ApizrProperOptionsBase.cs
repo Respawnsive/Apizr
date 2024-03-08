@@ -13,24 +13,24 @@ namespace Apizr.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="assemblyPolicyRegistryKeys">Global policies</param>
-        /// <param name="webApiPolicyRegistryKeys">Specific policies</param>
+        /// <param name="assemblyResiliencePipelineRegistryKeys">Global resilience pipelines</param>
+        /// <param name="webApiResiliencePipelineRegistryKeys">Specific resilience pipelines</param>
         protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
-            string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(sharedOptions)
+            string[] assemblyResiliencePipelineRegistryKeys,
+            string[] webApiResiliencePipelineRegistryKeys) : base(sharedOptions)
         {
             WebApiType = webApiType;
-            PolicyRegistryKeys =
-                assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ??
-                webApiPolicyRegistryKeys ?? Array.Empty<string>();
+            ResiliencePipelineRegistryKeys =
+                assemblyResiliencePipelineRegistryKeys?.Union(webApiResiliencePipelineRegistryKeys ?? Array.Empty<string>()).ToArray() ??
+                webApiResiliencePipelineRegistryKeys ?? Array.Empty<string>();
         }
 
         /// <inheritdoc />
         public Type WebApiType { get; }
 
         /// <inheritdoc />
-        public string[] PolicyRegistryKeys { get; }
+        public string[] ResiliencePipelineRegistryKeys { get; }
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }

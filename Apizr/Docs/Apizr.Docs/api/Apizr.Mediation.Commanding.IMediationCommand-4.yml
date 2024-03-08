@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Commanding/IMediationCommand.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IMediationCommand
     path: ../../Src/Handling/Apizr.Integrations.MediatR/Mediation/Commanding/IMediationCommand.cs
@@ -23,7 +23,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
-  summary: "\nA mediation command sending mapped request and returning a mapped result\n"
+  summary: A mediation command sending mapped request and returning a mapped result
   example: []
   syntax:
     content: 'public interface IMediationCommand<out TModelResultData, TApiResultData, TApiRequestData, TModelRequestData> : IRequest<TModelResultData>, IBaseRequest'
@@ -36,21 +36,38 @@ items:
       description: The api result type to map from
     - id: TModelRequestData
       description: The model request type to map from
-    content.vb: >-
-      Public Interface IMediationCommand(Of Out TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)
-          Inherits IRequest(Of TModelResultData)
+    content.vb: Public Interface IMediationCommand(Of Out TModelResultData, TApiResultData, TApiRequestData, TModelRequestData) Inherits IRequest(Of TModelResultData), IBaseRequest
   nameWithType.vb: IMediationCommand(Of TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Mediation.Commanding.IMediationCommand(Of TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)
   name.vb: IMediationCommand(Of TModelResultData, TApiResultData, TApiRequestData, TModelRequestData)
 references:
 - uid: Apizr.Mediation.Commanding
   commentId: N:Apizr.Mediation.Commanding
+  href: Apizr.html
   name: Apizr.Mediation.Commanding
   nameWithType: Apizr.Mediation.Commanding
   fullName: Apizr.Mediation.Commanding
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html

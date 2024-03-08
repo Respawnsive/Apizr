@@ -6,11 +6,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
-using Apizr.Configuring.Common;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -133,14 +134,6 @@ namespace Apizr.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
-        {
-            Options.HttpClientFactory = httpClientFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
             Func<ILogger, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
             where TAuthenticationHandler : AuthenticationHandlerBase
@@ -190,8 +183,8 @@ namespace Apizr.Configuring.Manager
             Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty,
             Func<TTokenService> tokenServiceFactory,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
-            => AddDelegatingHandler((logHger, options) =>
-                new AuthenticationHandler<TSettingsService, TTokenService>(logHger,
+            => AddDelegatingHandler((logger, options) =>
+                new AuthenticationHandler<TSettingsService, TTokenService>(logger,
                     options,
                     settingsServiceFactory, tokenProperty,
                     tokenServiceFactory, refreshTokenMethod));
@@ -225,13 +218,14 @@ namespace Apizr.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
-            => WithPolicyRegistry(() => policyRegistry);
+        public IApizrManagerOptionsBuilder WithResiliencePipelineRegistry(
+            ResiliencePipelineRegistry<string> resiliencePipelineRegistry)
+            => WithResiliencePipelineRegistry(() => resiliencePipelineRegistry);
 
         /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
+        public IApizrManagerOptionsBuilder WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<string>> resiliencePipelineRegistryFactory)
         {
-            Options.PolicyRegistryFactory = policyRegistryFactory;
+            Options.ResiliencePipelineRegistryFactory = resiliencePipelineRegistryFactory;
 
             return this;
         }
@@ -260,31 +254,6 @@ namespace Apizr.Configuring.Manager
         public IApizrManagerOptionsBuilder WithCacheHandler(Func<ICacheHandler> cacheHandlerFactory)
         {
             Options.CacheHandlerFactory = cacheHandlerFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithContext(Func<Context> contextFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
-        {
-            switch (strategy)
-            {
-                case ApizrDuplicateStrategy.Ignore:
-                    if (Options.ContextFactories.Count == 0)
-                        Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Replace:
-                    Options.ContextFactories.Clear();
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Add:
-                case ApizrDuplicateStrategy.Merge:
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
-            }
 
             return this;
         }
@@ -398,6 +367,18 @@ namespace Apizr.Configuring.Manager
         }
 
         /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+            => WithResilienceProperty(key, () => value);
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory)
+        {
+            ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory();
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithLoggerFactory(ILoggerFactory loggerFactory)
             => WithLoggerFactory(() => loggerFactory);
 
@@ -417,6 +398,22 @@ namespace Apizr.Configuring.Manager
         public IApizrManagerOptionsBuilder WithMappingHandler(Func<IMappingHandler> mappingHandlerFactory)
         {
             Options.MappingHandlerFactory = mappingHandlerFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
 
             return this;
         }

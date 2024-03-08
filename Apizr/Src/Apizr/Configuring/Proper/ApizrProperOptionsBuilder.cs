@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -128,14 +130,6 @@ namespace Apizr.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
-        {
-            Options.HttpClientFactory = httpClientFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrProperOptionsBuilder WithAuthenticationHandler(
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
             => AddDelegatingHandler((logger, options) =>
@@ -201,31 +195,6 @@ namespace Apizr.Configuring.Proper
         public IApizrProperOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler
         {
             Options.DelegatingHandlersFactories[typeof(THandler)] = delegatingHandlerFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithContext(Func<Context> contextFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
-        {
-            switch (strategy)
-            {
-                case ApizrDuplicateStrategy.Ignore:
-                    if (Options.ContextFactories.Count == 0)
-                        Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Replace:
-                    Options.ContextFactories.Clear();
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                case ApizrDuplicateStrategy.Add:
-                case ApizrDuplicateStrategy.Merge:
-                    Options.ContextFactories.Add(contextFactory);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
-            }
 
             return this;
         }
@@ -332,6 +301,34 @@ namespace Apizr.Configuring.Proper
         public IApizrProperOptionsBuilder WithRequestTimeout(Func<TimeSpan> timeoutFactory)
         {
             Options.RequestTimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+            => WithResilienceProperty(key, () => value);
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory)
+        {
+            ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory();
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
 
             return this;
         }

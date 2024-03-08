@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Defining | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Defining | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../resources/favicon.ico">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    
+      <link rel="shortcut icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
     
     <meta property="docfx:rel" content="../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../index.html">
                 <img id="logo" class="svg" src="../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,10 +77,10 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="defining">Defining</h2>
 
+<h2 id="defining">Defining</h2>
 <p>We could define our web api service just like:</p>
-<pre><code class="lang-csharp">[assembly:Policy(&quot;TransientHttpError&quot;)]
+<pre><code class="lang-csharp">[assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
 namespace Apizr.Sample
 {
     [WebApi(&quot;https://reqres.in/&quot;), Cache, Log]
@@ -96,10 +96,11 @@ namespace Apizr.Sample
         Task&lt;User&gt; CreateUser(User user);
     }
 }
-</code></pre><p>And that&#39;s all.</p>
+</code></pre>
+<p>And that's all.</p>
 <p>Every attributes here will inform Apizr on how to manage each web api request. No more boilerplate.</p>
 <p>Actually, you should consider to add a special parameter called RequestOptions to each methods, allowing some option adjustments later at request time:</p>
-<pre><code class="lang-csharp">[assembly:Policy(&quot;TransientHttpError&quot;)]
+<pre><code class="lang-csharp">[assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
 namespace Apizr.Sample
 {
     [WebApi(&quot;https://reqres.in/&quot;), Cache, Log]
@@ -117,70 +118,89 @@ namespace Apizr.Sample
             [RequestOptions] IApizrRequestOptions options);
     }
 }
-</code></pre><h2 id="registering">Registering</h2>
-<p>It&#39;s not required to register anything in a container for DI purpose (you can use the returned static instance directly), but we&#39;ll describe here how to use it with DI anyway.</p>
+</code></pre>
+<h2 id="registering">Registering</h2>
+<p>It's not required to register anything in a container for DI purpose (you can use the returned static instance directly), but we'll describe here how to use it with DI anyway.</p>
 <h3 id="registering-a-single-interface">Registering a single interface</h3>
-<div class="tabGroup" id="tabgroup_LbStR6+alZ">
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_LbStR6+alZ_tabid-static" role="tab" aria-controls="tabpanel_LbStR6+alZ_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_LbStR6+alZ_tabid-extended" role="tab" aria-controls="tabpanel_LbStR6+alZ_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_LbStR6+alZ_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <p>Here is an example of how to register a managed instance of an api interface:</p>
-<pre><code class="lang-csharp">// Some policies
-var registry = new PolicyRegistry
-{
-    {
-        &quot;TransientHttpError&quot;, 
-        HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(new[]
+<pre><code class="lang-csharp">// (Polly) Create a resilience pipeline registry with some strategies
+var resiliencePipelineRegistry = new ResiliencePipelineRegistry&lt;string&gt;();
+resiliencePipelineRegistry.TryAddBuilder&lt;HttpResponseMessage&gt;(&quot;TransientHttpError&quot;, (builder, _) =&gt;
+    // Configure telemetry to get some logs from Polly process
+    builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =&gt;
+        loggingBuilder.Debug()))
+    // Add a retry strategy with some options
+    .AddRetry(
+        new RetryStrategyOptions&lt;HttpResponseMessage&gt;
         {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(5),
-            TimeSpan.FromSeconds(10)
-        })
-    }
-};
+            ShouldHandle = new PredicateBuilder&lt;HttpResponseMessage&gt;()
+                .Handle&lt;HttpRequestException&gt;()
+                .HandleResult(response =&gt;
+                    response.StatusCode is &gt;= HttpStatusCode.InternalServerError
+                        or HttpStatusCode.RequestTimeout),
+            Delay = TimeSpan.FromSeconds(1),
+            MaxRetryAttempts = 3,
+            UseJitter = true,
+            BackoffType = DelayBackoffType.Exponential
+        }));
 
 // Apizr registration
 myContainer.RegistrationMethodFactory(() =&gt; 
     ApizrBuilder.Current.CreateManagerFor&lt;IReqResService&gt;(options =&gt; options
-        .WithPolicyRegistry(registry)
+        // With a logger
+        .WithLoggerFactory(LoggerFactory.Create(loggingBuilder =&gt;
+            loggingBuilder.Debug()))
+        // With the defined resilience pipeline registry
+        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+        // And with a cache handler
         .WithAkavacheCacheHandler())
 );
-</code></pre><p>We provided a policy registry and a cache handler here as we asked for it with cache and policy attributes while designing the api interface.
+</code></pre>
+<p>We provided a resilience pipeline registry, a cache handler and a logger factory here as we asked for it with cache, log and resilience pipeline attributes while designing the api interface.
 Also, you could use the manager directly instead of registering it.</p>
 </section>
-<section id="tabpanel_LbStR6+alZ_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <p>Here is an example of how to register a managed api interface:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            &quot;TransientHttpError&quot;, 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
+    // (Logger) Configure logging the way you want, like
+    services.AddLogging(loggingBuilder =&gt; loggingBuilder.AddDebug());
 
-    // Apizr registration
-    services.AddApizrManagerFor&lt;IReqResService&gt;(options =&gt; options.WithAkavacheCacheHandler());
+    // (Apizr) Add an Apizr manager for the defined api to your container
+    services.AddApizrManagerFor&lt;IReqResService&gt;(options =&gt; 
+        // With a cache handler
+        options.WithAkavacheCacheHandler());
+
+    // (Polly) Add the resilience pipeline with its key to your container
+    services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
+        builder =&gt; builder.AddRetry(
+            new RetryStrategyOptions&lt;HttpResponseMessage&gt;
+            {
+                ShouldHandle = new PredicateBuilder&lt;HttpResponseMessage&gt;()
+                    .Handle&lt;HttpRequestException&gt;()
+                    .HandleResult(response =&gt;
+                        response.StatusCode is &gt;= HttpStatusCode.InternalServerError
+                            or HttpStatusCode.RequestTimeout),
+                Delay = TimeSpan.FromSeconds(1),
+                MaxRetryAttempts = 3,
+                UseJitter = true,
+                BackoffType = DelayBackoffType.Exponential
+            }));
 }
-</code></pre><p>We registered a policy registry and provided a cache handler here as we asked for it with cache and policy attributes while designing the api interface.</p>
+</code></pre>
+<p>We registered a resilience pipeline registry and a logger factory and provided a cache handler here as we asked for it with cache, log and resilience pipeline attributes while designing the api interface.</p>
 </section>
 </div>
 <h3 id="registering-multiple-interfaces">Registering multiple interfaces</h3>
@@ -189,33 +209,18 @@ Also, you may want to share some common configuration between apis without repea
 This is where the ApizrRegistry comes on stage.</p>
 <h4 id="single-common-configuration">Single common configuration</h4>
 <p>Here is an example of how to register a managed instance of multiple api interfaces, sharing a single common configuration:</p>
-<div class="tabGroup" id="tabgroup_LbStR6+alZ-1">
+<div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_LbStR6+alZ-1_tabid-static" role="tab" aria-controls="tabpanel_LbStR6+alZ-1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_LbStR6+alZ-1_tabid-extended" role="tab" aria-controls="tabpanel_LbStR6+alZ-1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_LbStR6+alZ-1_tabid-static" role="tabpanel" data-tab="tabid-static">
-<pre><code class="lang-csharp">// Some policies
-var registry = new PolicyRegistry
-{
-    {
-        &quot;TransientHttpError&quot;, 
-        HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(new[]
-        {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(5),
-            TimeSpan.FromSeconds(10)
-        })
-    }
-};
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
 
-// Apizr registry
+<pre><code class="lang-csharp">// Apizr registry
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry =&gt; registry
         .AddManagerFor&lt;IReqResService&gt;()
@@ -225,9 +230,8 @@ var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                     HttpTracerMode.Everything, 
                     HttpMessageParts.All, 
                     LogLevel.Trace)),
-
+    
     config =&gt; config
-        .WithPolicyRegistry(registry)
         .WithAkavacheCacheHandler()
         .WithLogging(
             HttpTracerMode.ExceptionsOnly, 
@@ -239,45 +243,31 @@ var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
 apizrRegistry.Populate((type, factory) =&gt; 
     myContainer.RegistrationMethodFactory(type, factory)
 );
-</code></pre><p>Here is what we&#39;re saying in this example:</p>
+</code></pre>
+<p>Here is what we're saying in this example:</p>
 <ul>
 <li>Add a manager for IReqResService api interface into the registry</li>
-<li>Add a manager for IHttpBinService api interface into the registry<ul>
-<li>Set some specific logging settings dedicated to IHttpBinService&#39;s manager</li>
+<li>Add a manager for IHttpBinService api interface into the registry
+<ul>
+<li>Set some specific logging settings dedicated to IHttpBinService's manager</li>
 </ul>
 </li>
-<li>Apply common configuration to all managers by:<ul>
-<li>Providing a policy registry</li>
+<li>Apply common configuration to all managers by:
+<ul>
 <li>Providing a cache handler</li>
-<li>Providing some logging settings (won&#39;t apply to IHttpBinService&#39;s manager as we set some specific ones)</li>
+<li>Providing some logging settings (won't apply to IHttpBinService's manager as we set some specific ones)</li>
 </ul>
 </li>
 </ul>
-<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+<p>It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
 And yes you can mix classic and CRUD manager registration into the same registry.</p>
 <p>Also, you could register the registry itslef, instead of its populated managers and then use its managers directly.</p>
 <p>Or, you could use the managers directly from the registry instead of registering anything.</p>
 </section>
-<section id="tabpanel_LbStR6+alZ-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            &quot;TransientHttpError&quot;, 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry
@@ -288,9 +278,8 @@ And yes you can mix classic and CRUD manager registration into the same registry
                         HttpTracerMode.Everything, 
                         HttpMessageParts.All, 
                         LogLevel.Trace)),
-
+    
         config =&gt; config
-            .WithPolicyRegistry(registry)
             .WithAkavacheCacheHandler()
             .WithLogging(
                 HttpTracerMode.ExceptionsOnly, 
@@ -298,60 +287,49 @@ And yes you can mix classic and CRUD manager registration into the same registry
                 LogLevel.Error)
     );
 }
-</code></pre><p>Here is what we&#39;re saying in this example:</p>
+</code></pre>
+<p>Here is what we're saying in this example:</p>
 <ul>
 <li>Add a manager for IReqResService api interface into the registry, to register it into the container</li>
-<li>Add a manager for IHttpBinService api interface into the registry, to register it into the container<ul>
-<li>Set some specific logging settings dedicated to IHttpBinService&#39;s manager</li>
+<li>Add a manager for IHttpBinService api interface into the registry, to register it into the container
+<ul>
+<li>Set some specific logging settings dedicated to IHttpBinService's manager</li>
 </ul>
 </li>
-<li>Apply common configuration to all managers by:<ul>
-<li>Providing a policy registry</li>
+<li>Apply common configuration to all managers by:
+<ul>
 <li>Providing a cache handler</li>
-<li>Providing some logging settings (won&#39;t apply to IHttpBinService&#39;s manager as we set some specific ones)</li>
+<li>Providing some logging settings (won't apply to IHttpBinService's manager as we set some specific ones)</li>
 </ul>
 </li>
 </ul>
-<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+<p>It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
 And yes you can mix classic and CRUD manager registration into the same registry.</p>
 <p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
 <p>Also, the registry itslef will be registered into the container, so you could resolve it to get its managers, instead of resolving each managers.</p>
 </section>
 </div>
+
 <p>Here is how to get a manager from the registry:</p>
 <pre><code class="lang-csharp">var reqResManager = apizrRegistry.GetManagerFor&lt;IReqResService&gt;();
 
 var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
-</code></pre><h4 id="multiple-common-configurations">Multiple common configurations</h4>
+</code></pre>
+<h4 id="multiple-common-configurations">Multiple common configurations</h4>
 <p>Here is an example of how to register a managed instance of multiple api interfaces, sharing multiple common configurations at different group level.
 It could be usefull when requesting mutliple apis (multiple base address) comming with multiple endpoints (multiple base path).</p>
-<div class="tabGroup" id="tabgroup_LbStR6+alZ-2">
+<div class="tabGroup" id="tabgroup_3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_LbStR6+alZ-2_tabid-static" role="tab" aria-controls="tabpanel_LbStR6+alZ-2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_LbStR6+alZ-2_tabid-extended" role="tab" aria-controls="tabpanel_LbStR6+alZ-2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_3_tabid-extended" role="tab" aria-controls="tabpanel_3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_LbStR6+alZ-2_tabid-static" role="tabpanel" data-tab="tabid-static">
-<pre><code class="lang-csharp">// Some policies
-var registry = new PolicyRegistry
-{
-    {
-        &quot;TransientHttpError&quot;, 
-        HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(new[]
-        {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(5),
-            TimeSpan.FromSeconds(10)
-        })
-    }
-};
+<section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static">
 
-// Apizr registry
+<pre><code class="lang-csharp">// Apizr registry
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
     registry =&gt; registry
         .AddGroup(
@@ -364,9 +342,8 @@ var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
 
         .AddManagerFor&lt;IHttpBinService&gt;(
             config =&gt; config.WithBaseAddress(&quot;https://httpbin.org&quot;)),
-
+    
     config =&gt; config
-        .WithPolicyRegistry(registry)
         .WithAkavacheCacheHandler()
         .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Error)
 );
@@ -375,44 +352,29 @@ var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
 apizrRegistry.Populate((type, factory) =&gt; 
     myContainer.RegistrationMethodFactory(type, factory)
 );
-</code></pre><p>Here is what we&#39;re saying in this example:</p>
+</code></pre>
+<p>Here is what we're saying in this example:</p>
 <ul>
 <li>Add a manager for IReqResUserService api interface into the registry with a common base address (<a href="https://reqres.in/api">https://reqres.in/api</a>) and a specific base path (users)</li>
 <li>Add a manager for IReqResResourceService api interface into the registry with a common base address (<a href="https://reqres.in/api">https://reqres.in/api</a>) and a specific base path (resources)</li>
 <li>Add a manager for IHttpBinService api interface into the registry with a speific base address (<a href="https://httpbin.org">https://httpbin.org</a>)</li>
-<li>Apply common configuration to all managers by:<ul>
-<li>Providing a policy registry</li>
+<li>Apply common configuration to all managers by:
+<ul>
 <li>Providing a cache handler</li>
 <li>Providing some logging settings</li>
 </ul>
 </li>
 </ul>
-<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+<p>It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
 And yes you can mix classic and CRUD manager registration into the same registry/group.
 You can add mutliple group at the same level and go deeper with group into group itself.</p>
 <p>Also, you could register the registry itslef, instead of its populated managers and then use its managers directly.</p>
 <p>Or, you could use the managers directly from the registry instead of registering anything.</p>
 </section>
-<section id="tabpanel_LbStR6+alZ-2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            &quot;TransientHttpError&quot;, 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizr(
         registry =&gt; registry
@@ -426,9 +388,8 @@ You can add mutliple group at the same level and go deeper with group into group
 
             .AddManagerFor&lt;IHttpBinService&gt;(
                 config =&gt; config.WithBaseAddress(&quot;https://httpbin.org&quot;)),
-
+    
         config =&gt; config
-            .WithPolicyRegistry(registry)
             .WithAkavacheCacheHandler()
             .WithLogging(
                 HttpTracerMode.ExceptionsOnly, 
@@ -436,80 +397,69 @@ You can add mutliple group at the same level and go deeper with group into group
                 LogLevel.Error)
     );
 }
-</code></pre><p>Here is what we&#39;re saying in this example:</p>
+</code></pre>
+<p>Here is what we're saying in this example:</p>
 <ul>
 <li>Add a manager for IReqResUserService api interface into the registry with a common base address (<a href="https://reqres.in/api">https://reqres.in/api</a>) and a specific base path (users), to register it into the container</li>
 <li>Add a manager for IReqResResourceService api interface into the registry with a common base address (<a href="https://reqres.in/api">https://reqres.in/api</a>) and a specific base path (resources), to register it into the container</li>
 <li>Add a manager for IHttpBinService api interface into the registry with a speific base address (<a href="https://httpbin.org">https://httpbin.org</a>), to register it into the container</li>
-<li>Apply common configuration to all managers by:<ul>
-<li>Providing a policy registry</li>
+<li>Apply common configuration to all managers by:
+<ul>
 <li>Providing a cache handler</li>
 <li>Providing some logging settings</li>
 </ul>
 </li>
 </ul>
-<p>It&#39;s an example, meaning if you don&#39;t need common and/or specific configuration, just don&#39;t provide it.
+<p>It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
 And yes you can mix classic and CRUD manager registration into the same registry.
 You can add mutliple group at the same level and go deeper with group into group itself.</p>
 <p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
 <p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
 </section>
 </div>
-<p>Here&#39;s how to get a manager from the registry:</p>
+
+<p>Here's how to get a manager from the registry:</p>
 <pre><code class="lang-csharp">var reqResUserManager = apizrRegistry.GetManagerFor&lt;IReqResUserService&gt;();
 
 var reqResResourceManager = apizrRegistry.GetManagerFor&lt;IReqResResourceService&gt;();
 
 var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
-</code></pre><h3 id="registering-all-scanned-interfaces">Registering all scanned interfaces</h3>
-<div class="tabGroup" id="tabgroup_LbStR6+alZ-3">
+</code></pre>
+<h3 id="registering-all-scanned-interfaces">Registering all scanned interfaces</h3>
+<div class="tabGroup" id="tabgroup_4">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_LbStR6+alZ-3_tabid-static" role="tab" aria-controls="tabpanel_LbStR6+alZ-3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_4_tabid-static" role="tab" aria-controls="tabpanel_4_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_LbStR6+alZ-3_tabid-extended" role="tab" aria-controls="tabpanel_LbStR6+alZ-3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_4_tabid-extended" role="tab" aria-controls="tabpanel_4_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_LbStR6+alZ-3_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_4_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <p>Not available.</p>
 </section>
-<section id="tabpanel_LbStR6+alZ-3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_4_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <p>Here is an example of how to auto register all scanned interfaces:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            &quot;TransientHttpError&quot;, 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizrManagerFor(options =&gt; options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_INTERFACES);
 }
-</code></pre><p>Apizr will scan assemblies to auto register managers for decorated api interfaces.</p>
-<p>We registered a policy registry and provided a cache handler here as we asked for it with cache and policy attributes while designing the api interface.</p>
+</code></pre>
+<p>Apizr will scan assemblies to auto register managers for decorated api interfaces.</p>
+<p>We registered provided a cache handler here as we asked for it with cache attributes while designing the api interface.</p>
 </section>
 </div>
 <h2 id="using">Using</h2>
-<p>Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.</p>
+<p>Here is an example of how to send a web request from an app - e.g. using Apizr in a MAUI mobile app.</p>
 <p>Inject <code>IApizrManager&lt;IYourDefinedInterface&gt;</code> where you need it - e.g. into your ViewModel constructor</p>
 <pre><code class="lang-csharp">public class YourViewModel
 {
     private readonly IApizrManager&lt;IReqResService&gt; _reqResManager;
     //private readonly IApizrRegistry _apizrRegistry;
-
+	
     public YouViewModel(IApizrManager&lt;IReqResService&gt; reqResManager)
     // OR registry injection
     //public YouViewModel(IApizrRegistry apizrRegistry)
@@ -522,7 +472,7 @@ var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
         // Or registry injection AND getting the manager
         //_reqResManager = apizrRegistry.GetManagerFor&lt;IReqResService&gt;();
     }
-
+    
     public ObservableCollection&lt;User&gt;? Users { get; set; }
 
     private async Task GetUsersAsync()
@@ -534,7 +484,7 @@ var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
 
             // OR with dedicated registry shortcut extension
             // var userList = await _apizrRegistry.ExecuteAsync&lt;IReqResService&gt;(api =&gt; api.GetUsersAsync());
-
+ 
             // OR with some option adjustments
             // var userList = await _reqResManager.ExecuteAsync((options, api) =&gt; api.GetUsersAsync(options),
             //                  options =&gt; options.WithPriority(Priority.Background)); 
@@ -553,29 +503,31 @@ var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
             Users = new ObservableCollection&lt;User&gt;(users);
     }
 }
-</code></pre><p>We catch any ApizrException as it will contain the original inner exception, but also the previously cached result if some.
-If you provided an IConnectivityHandler implementation and there&#39;s no network connectivity before sending request, Apizr will throw an IO inner exception without sending the request.</p>
+</code></pre>
+<p>We catch any ApizrException as it will contain the original inner exception, but also the previously cached result if some.
+If you provided an IConnectivityHandler implementation and there's no network connectivity before sending request, Apizr will throw an IO inner exception without sending the request.</p>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/master/Apizr/Docs/Apizr.Docs/articles/gettingstarted_classic.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/gettingstarted_classic.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -583,14 +535,14 @@ If you provided an IConnectivityHandler implementation and there&#39;s no networ
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

@@ -1,6 +1,5 @@
 ﻿using Apizr.Configuring.Manager;
 using Microsoft.Extensions.Logging;
-using Polly;
 using System;
 using System.Net.Http;
 
@@ -25,11 +24,6 @@ namespace Apizr.Configuring.Shared
         /// Base path
         /// </summary>
         string BasePath { get; }
-
-        /// <summary>
-        /// The Polly Context to pass through it all
-        /// </summary>
-        Func<Context> ContextFactory { get; }
 
         /// <summary>
         /// The primary Http message handler factory (set internally)

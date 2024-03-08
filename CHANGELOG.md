@@ -1,3 +1,22 @@
+6.0.0
+---
+
+### All
+
+- [New][Target] Now **targeting multiple frameworks based on Refit targets**: `netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0`
+- [New][Exceptions] Now we can **handle `IApizrResponse` safe response (based on Refit's `IApiResponse`) instead of catching exceptions**
+- [New][Attributes] Now we can **provide types to attributes thanks to generic arguments** instead of using typeof() as constructor parameters
+- [New/Breaking][Polly] Now **supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies
+- [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
+
+### Apizr.Integrations.MediatR
+
+- [New][Exceptions] Now we can **send safe request returning an `IApizrResponse` response to handle (based on Refit's `IApiResponse`) instead of catching exceptions**
+
+### Apizr.Tools.NSwag
+
+- [Update][Polly] Templates have been updated to **use the new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies
+
 5.4.0
 ---
 

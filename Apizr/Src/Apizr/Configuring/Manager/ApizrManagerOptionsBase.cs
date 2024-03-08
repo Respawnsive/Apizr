@@ -19,7 +19,7 @@ namespace Apizr.Configuring.Manager
         protected ApizrManagerOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions) : base(properOptions)
         {
             WebApiType = properOptions.WebApiType;
-            PolicyRegistryKeys = properOptions.PolicyRegistryKeys.ToArray();
+            ResiliencePipelineRegistryKeys = properOptions.ResiliencePipelineRegistryKeys.ToArray();
             Logger = properOptions.Logger;
             RefitSettings = commonOptions.RefitSettings;
         }
@@ -28,7 +28,7 @@ namespace Apizr.Configuring.Manager
         public Type WebApiType { get; }
 
         /// <inheritdoc />
-        public string[] PolicyRegistryKeys { get; }
+        public string[] ResiliencePipelineRegistryKeys { get; }
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }

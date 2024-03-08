@@ -5,9 +5,12 @@ using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
+using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -35,8 +38,7 @@ namespace Apizr.Configuring.Manager
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = properOptions.LoggerFactory.Invoke(loggerFactory, webApiFriendlyName);
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = properOptions.HttpClientConfigurationBuilder;
-            HttpClientFactory = properOptions.HttpClientFactory;
-            PolicyRegistryFactory = commonOptions.PolicyRegistryFactory;
+            ResiliencePipelineRegistryFactory = commonOptions.ResiliencePipelineRegistryFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
@@ -105,13 +107,10 @@ namespace Apizr.Configuring.Manager
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
-
-        /// <inheritdoc />
         public Action<HttpClient> HttpClientConfigurationBuilder { get; set; }
 
         /// <inheritdoc />
-        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
+        public Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; set; }
 
         private Func<RefitSettings> _refitSettingsFactory;
         /// <inheritdoc />
@@ -185,9 +184,6 @@ namespace Apizr.Configuring.Manager
         public string BasePath => Options.BasePath;
 
         /// <inheritdoc />
-        public Func<Context> ContextFactory => Options.ContextFactory;
-
-        /// <inheritdoc />
         public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory
             => Options.PrimaryHandlerFactory;
 
@@ -219,10 +215,20 @@ namespace Apizr.Configuring.Manager
         public TimeSpan? RequestTimeout => Options.RequestTimeout;
 
         /// <inheritdoc />
+        Action<IApizrResilienceContextOptionsBuilder> IApizrGlobalSharedOptionsBase.ContextOptionsBuilder
+        {
+            get => Options.ContextOptionsBuilder;
+            set {}
+        }
+
+        /// <inheritdoc />
+        IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResiliencePropertiesFactories => Options.ResiliencePropertiesFactories;
+
+        /// <inheritdoc />
         public ILogger Logger => Options.Logger;
 
         /// <inheritdoc />
-        public string[] PolicyRegistryKeys => Options.PolicyRegistryKeys;
+        public string[] ResiliencePipelineRegistryKeys => Options.ResiliencePipelineRegistryKeys;
 
         /// <inheritdoc />
         public RefitSettings RefitSettings => Options.RefitSettings;

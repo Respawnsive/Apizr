@@ -79,6 +79,9 @@
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.PostRegistrationActions">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.Apizr#Extending#Configuring#Shared#IApizrExtendedSharedOptions#ResiliencePropertiesExtendedFactories">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder">
             <summary>
             Builder options available at common level for extended registration
@@ -159,9 +162,6 @@
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
-            <inheritdoc />
-        </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
@@ -169,6 +169,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
@@ -226,6 +232,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithMappingHandler(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -473,6 +482,9 @@
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.PostRegistrationActions">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.Apizr#Extending#Configuring#Shared#IApizrExtendedSharedOptions#ResiliencePropertiesExtendedFactories">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions`1">
             <inheritdoc cref="T:Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase"/>
         </member>
@@ -571,9 +583,6 @@
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
-            <inheritdoc />
-        </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
@@ -581,6 +590,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
@@ -595,10 +610,10 @@
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithRefitSettings(Refit.RefitSettings)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithRefitSettings(System.Func{System.IServiceProvider,Refit.RefitSettings})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithRefitSettings(System.Func{System.IServiceProvider,Refit.RefitSettings})">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler(System.Func{System.IServiceProvider,Apizr.Connecting.IConnectivityHandler})">
@@ -638,6 +653,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithMappingHandler(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -723,6 +741,9 @@
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.DelegatingHandlersExtendedFactories">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.Apizr#Extending#Configuring#Shared#IApizrExtendedSharedOptions#ResiliencePropertiesExtendedFactories">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder">
             <summary>
             Builder options available at proper level for extended registrations
@@ -803,9 +824,6 @@
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
-            <inheritdoc />
-        </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
@@ -815,6 +833,12 @@
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
             <inheritdoc />
         </member>
@@ -822,6 +846,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -1379,6 +1406,14 @@
             Set a timeout to the request (each request try)
             </summary>
             <param name="timeoutFactory">The request timeout factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Set some resilience properties to the resilience context
+            </summary>
+            <param name="key">The resilience property's key</param>
+            <param name="valueFactory">The resilience property's value factory</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.ServiceCollectionExtensions">

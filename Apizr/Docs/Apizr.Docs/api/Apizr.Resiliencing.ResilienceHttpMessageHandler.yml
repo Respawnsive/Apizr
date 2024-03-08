@@ -1,0 +1,993 @@
+### YamlMime:ManagedReference
+items:
+- uid: Apizr.Resiliencing.ResilienceHttpMessageHandler
+  commentId: T:Apizr.Resiliencing.ResilienceHttpMessageHandler
+  id: ResilienceHttpMessageHandler
+  parent: Apizr.Resiliencing
+  children:
+  - Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage},Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  - Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}},Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  - Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  langs:
+  - csharp
+  - vb
+  name: ResilienceHttpMessageHandler
+  nameWithType: ResilienceHttpMessageHandler
+  fullName: Apizr.Resiliencing.ResilienceHttpMessageHandler
+  type: Class
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ResilienceHttpMessageHandler
+    path: ../../Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs
+    startLine: 18
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: Base class for resilience handler, i.e. handlers that use resilience strategies to send the requests.
+  example: []
+  syntax:
+    content: 'public class ResilienceHttpMessageHandler : DelegatingHandler, IDisposable'
+    content.vb: Public Class ResilienceHttpMessageHandler Inherits DelegatingHandler Implements IDisposable
+  inheritance:
+  - System.Object
+  - System.Net.Http.HttpMessageHandler
+  - System.Net.Http.DelegatingHandler
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  - System.Net.Http.DelegatingHandler.InnerHandler
+  - System.Net.Http.HttpMessageHandler.Dispose
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}},Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  commentId: M:Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}},Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  id: '#ctor(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}},Apizr.Configuring.Manager.IApizrManagerOptionsBase)'
+  parent: Apizr.Resiliencing.ResilienceHttpMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: ResilienceHttpMessageHandler(Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>>, IApizrManagerOptionsBase)
+  nameWithType: ResilienceHttpMessageHandler.ResilienceHttpMessageHandler(Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>>, IApizrManagerOptionsBase)
+  fullName: Apizr.Resiliencing.ResilienceHttpMessageHandler.ResilienceHttpMessageHandler(System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage>>, Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs
+    startLine: 29
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: Initializes a new instance of the <xref href="Apizr.Resiliencing.ResilienceHttpMessageHandler" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public ResilienceHttpMessageHandler(Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>> pipelineProvider, IApizrManagerOptionsBase apizrOptions)
+    parameters:
+    - id: pipelineProvider
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}}
+      description: The pipeline provider that supplies pipelines in response to an http message.
+    - id: apizrOptions
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+      description: The Apizr options
+    content.vb: Public Sub New(pipelineProvider As Func(Of HttpRequestMessage, CancellationToken, ResiliencePipeline(Of HttpResponseMessage)), apizrOptions As IApizrManagerOptionsBase)
+  overload: Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: If <code class="paramref">pipelineProvider</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  nameWithType.vb: ResilienceHttpMessageHandler.New(Func(Of HttpRequestMessage, CancellationToken, ResiliencePipeline(Of HttpResponseMessage)), IApizrManagerOptionsBase)
+  fullName.vb: Apizr.Resiliencing.ResilienceHttpMessageHandler.New(System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, Polly.ResiliencePipeline(Of System.Net.Http.HttpResponseMessage)), Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  name.vb: New(Func(Of HttpRequestMessage, CancellationToken, ResiliencePipeline(Of HttpResponseMessage)), IApizrManagerOptionsBase)
+- uid: Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage},Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  commentId: M:Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage},Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  id: '#ctor(Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage},Apizr.Configuring.Manager.IApizrManagerOptionsBase)'
+  parent: Apizr.Resiliencing.ResilienceHttpMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: ResilienceHttpMessageHandler(ResiliencePipeline<HttpResponseMessage>, IApizrManagerOptionsBase)
+  nameWithType: ResilienceHttpMessageHandler.ResilienceHttpMessageHandler(ResiliencePipeline<HttpResponseMessage>, IApizrManagerOptionsBase)
+  fullName: Apizr.Resiliencing.ResilienceHttpMessageHandler.ResilienceHttpMessageHandler(Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage>, Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs
+    startLine: 41
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: Initializes a new instance of the <xref href="Apizr.Resiliencing.ResilienceHttpMessageHandler" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public ResilienceHttpMessageHandler(ResiliencePipeline<HttpResponseMessage> pipeline, IApizrManagerOptionsBase apizrOptions)
+    parameters:
+    - id: pipeline
+      type: Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}
+      description: The pipeline to use for the message.
+    - id: apizrOptions
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+      description: The Apizr options
+    content.vb: Public Sub New(pipeline As ResiliencePipeline(Of HttpResponseMessage), apizrOptions As IApizrManagerOptionsBase)
+  overload: Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: If <code class="paramref">pipeline</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  nameWithType.vb: ResilienceHttpMessageHandler.New(ResiliencePipeline(Of HttpResponseMessage), IApizrManagerOptionsBase)
+  fullName.vb: Apizr.Resiliencing.ResilienceHttpMessageHandler.New(Polly.ResiliencePipeline(Of System.Net.Http.HttpResponseMessage), Apizr.Configuring.Manager.IApizrManagerOptionsBase)
+  name.vb: New(ResiliencePipeline(Of HttpResponseMessage), IApizrManagerOptionsBase)
+- uid: Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  commentId: M:Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  id: SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  parent: Apizr.Resiliencing.ResilienceHttpMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: SendAsync(HttpRequestMessage, CancellationToken)
+  nameWithType: ResilienceHttpMessageHandler.SendAsync(HttpRequestMessage, CancellationToken)
+  fullName: Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SendAsync
+    path: ../../Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs
+    startLine: 60
+  assemblies:
+  - Apizr
+  namespace: Apizr.Resiliencing
+  summary: Sends an HTTP request to the inner handler to send to the server as an asynchronous operation.
+  example: []
+  syntax:
+    content: protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+      description: The HTTP request message to send to the server.
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: A cancellation token to cancel operation.
+    return:
+      type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+      description: The task object representing the asynchronous operation.
+    content.vb: Protected Overrides Function SendAsync(request As HttpRequestMessage, cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
+  overridden: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  overload: Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: If <code class="paramref">request</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+references:
+- uid: Apizr.Resiliencing
+  commentId: N:Apizr.Resiliencing
+  href: Apizr.html
+  name: Apizr.Resiliencing
+  nameWithType: Apizr.Resiliencing
+  fullName: Apizr.Resiliencing
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Resiliencing
+    name: Resiliencing
+    href: Apizr.Resiliencing.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Resiliencing
+    name: Resiliencing
+    href: Apizr.Resiliencing.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Net.Http.HttpMessageHandler
+  commentId: T:System.Net.Http.HttpMessageHandler
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  name: HttpMessageHandler
+  nameWithType: HttpMessageHandler
+  fullName: System.Net.Http.HttpMessageHandler
+- uid: System.Net.Http.DelegatingHandler
+  commentId: T:System.Net.Http.DelegatingHandler
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler
+  name: DelegatingHandler
+  nameWithType: DelegatingHandler
+  fullName: System.Net.Http.DelegatingHandler
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  commentId: M:System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.dispose
+  name: Dispose(bool)
+  nameWithType: DelegatingHandler.Dispose(bool)
+  fullName: System.Net.Http.DelegatingHandler.Dispose(bool)
+  nameWithType.vb: DelegatingHandler.Dispose(Boolean)
+  fullName.vb: System.Net.Http.DelegatingHandler.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+  spec.csharp:
+  - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.dispose
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.DelegatingHandler.Dispose(System.Boolean)
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.dispose
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Net.Http.DelegatingHandler.InnerHandler
+  commentId: P:System.Net.Http.DelegatingHandler.InnerHandler
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.innerhandler
+  name: InnerHandler
+  nameWithType: DelegatingHandler.InnerHandler
+  fullName: System.Net.Http.DelegatingHandler.InnerHandler
+- uid: System.Net.Http.HttpMessageHandler.Dispose
+  commentId: M:System.Net.Http.HttpMessageHandler.Dispose
+  parent: System.Net.Http.HttpMessageHandler
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler.dispose#system-net-http-httpmessagehandler-dispose
+  name: Dispose()
+  nameWithType: HttpMessageHandler.Dispose()
+  fullName: System.Net.Http.HttpMessageHandler.Dispose()
+  spec.csharp:
+  - uid: System.Net.Http.HttpMessageHandler.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler.dispose#system-net-http-httpmessagehandler-dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpMessageHandler.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler.dispose#system-net-http-httpmessagehandler-dispose
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+- uid: Apizr.Resiliencing.ResilienceHttpMessageHandler
+  commentId: T:Apizr.Resiliencing.ResilienceHttpMessageHandler
+  href: Apizr.Resiliencing.ResilienceHttpMessageHandler.html
+  name: ResilienceHttpMessageHandler
+  nameWithType: ResilienceHttpMessageHandler
+  fullName: Apizr.Resiliencing.ResilienceHttpMessageHandler
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
+- uid: Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor*
+  commentId: Overload:Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor
+  href: Apizr.Resiliencing.ResilienceHttpMessageHandler.html#Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_Polly_ResiliencePipeline_System_Net_Http_HttpResponseMessage___Apizr_Configuring_Manager_IApizrManagerOptionsBase_
+  name: ResilienceHttpMessageHandler
+  nameWithType: ResilienceHttpMessageHandler.ResilienceHttpMessageHandler
+  fullName: Apizr.Resiliencing.ResilienceHttpMessageHandler.ResilienceHttpMessageHandler
+  nameWithType.vb: ResilienceHttpMessageHandler.New
+  fullName.vb: Apizr.Resiliencing.ResilienceHttpMessageHandler.New
+  name.vb: New
+- uid: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}}
+  commentId: T:System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>>
+  nameWithType: Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>>
+  fullName: System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage>>
+  nameWithType.vb: Func(Of HttpRequestMessage, CancellationToken, ResiliencePipeline(Of HttpResponseMessage))
+  fullName.vb: System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, Polly.ResiliencePipeline(Of System.Net.Http.HttpResponseMessage))
+  name.vb: Func(Of HttpRequestMessage, CancellationToken, ResiliencePipeline(Of HttpResponseMessage))
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: ','
+  - name: " "
+  - uid: Polly.ResiliencePipeline`1
+    name: ResiliencePipeline
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePipelineT.Async.cs
+  - name: <
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: ','
+  - name: " "
+  - uid: Polly.ResiliencePipeline`1
+    name: ResiliencePipeline
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePipelineT.Async.cs
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  commentId: T:Apizr.Configuring.Manager.IApizrManagerOptionsBase
+  parent: Apizr.Configuring.Manager
+  href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  name: IApizrManagerOptionsBase
+  nameWithType: IApizrManagerOptionsBase
+  fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Apizr.Configuring.Manager
+  commentId: N:Apizr.Configuring.Manager
+  href: Apizr.html
+  name: Apizr.Configuring.Manager
+  nameWithType: Apizr.Configuring.Manager
+  fullName: Apizr.Configuring.Manager
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Manager
+    name: Manager
+    href: Apizr.Configuring.Manager.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Manager
+    name: Manager
+    href: Apizr.Configuring.Manager.html
+- uid: Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}
+  commentId: T:Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}
+  parent: Polly
+  definition: Polly.ResiliencePipeline`1
+  href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePipelineT.Async.cs
+  name: ResiliencePipeline<HttpResponseMessage>
+  nameWithType: ResiliencePipeline<HttpResponseMessage>
+  fullName: Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: ResiliencePipeline(Of HttpResponseMessage)
+  fullName.vb: Polly.ResiliencePipeline(Of System.Net.Http.HttpResponseMessage)
+  name.vb: ResiliencePipeline(Of HttpResponseMessage)
+  spec.csharp:
+  - uid: Polly.ResiliencePipeline`1
+    name: ResiliencePipeline
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePipelineT.Async.cs
+  - name: <
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage
+  - name: '>'
+  spec.vb:
+  - uid: Polly.ResiliencePipeline`1
+    name: ResiliencePipeline
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePipelineT.Async.cs
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage
+  - name: )
+- uid: Polly.ResiliencePipeline`1
+  commentId: T:Polly.ResiliencePipeline`1
+  isExternal: true
+  href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePipelineT.Async.cs
+  name: ResiliencePipeline<T>
+  nameWithType: ResiliencePipeline<T>
+  fullName: Polly.ResiliencePipeline<T>
+  nameWithType.vb: ResiliencePipeline(Of T)
+  fullName.vb: Polly.ResiliencePipeline(Of T)
+  name.vb: ResiliencePipeline(Of T)
+  spec.csharp:
+  - uid: Polly.ResiliencePipeline`1
+    name: ResiliencePipeline
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePipelineT.Async.cs
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Polly.ResiliencePipeline`1
+    name: ResiliencePipeline
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePipelineT.Async.cs
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Polly
+  commentId: N:Polly
+  isExternal: true
+  name: Polly
+  nameWithType: Polly
+  fullName: Polly
+- uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  parent: System.Net.Http.DelegatingHandler
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.sendasync
+  name: SendAsync(HttpRequestMessage, CancellationToken)
+  nameWithType: DelegatingHandler.SendAsync(HttpRequestMessage, CancellationToken)
+  fullName: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+    name: SendAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.sendasync
+  - name: (
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+    name: SendAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.sendasync
+  - name: (
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync*
+  commentId: Overload:Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync
+  href: Apizr.Resiliencing.ResilienceHttpMessageHandler.html#Apizr_Resiliencing_ResilienceHttpMessageHandler_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_
+  name: SendAsync
+  nameWithType: ResilienceHttpMessageHandler.SendAsync
+  fullName: Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync
+- uid: System.Net.Http.HttpRequestMessage
+  commentId: T:System.Net.Http.HttpRequestMessage
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  name: HttpRequestMessage
+  nameWithType: HttpRequestMessage
+  fullName: System.Net.Http.HttpRequestMessage
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  commentId: T:System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<HttpResponseMessage>
+  nameWithType: Task<HttpResponseMessage>
+  fullName: System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>
+  nameWithType.vb: Task(Of HttpResponseMessage)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Net.Http.HttpResponseMessage)
+  name.vb: Task(Of HttpResponseMessage)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage
+  - name: )
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

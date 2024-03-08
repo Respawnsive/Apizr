@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 using Apizr;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
-using Apizr.Cancelling.Attributes;
 using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
-using Apizr.Policing;
+using Apizr.Resiliencing.Attributes;
 using Apizr.Tests.Models;
 using Fusillade;
 using Microsoft.Extensions.Logging;
-using Polly;
 using Refit;
 
-[assembly:Policy("TransientHttpError")]
+[assembly:ResiliencePipeline("TransientHttpError")]
 [assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
 //[assembly:Timeout("00:00:02")]
 //[assembly:Log(HttpMessageParts.All, HttpTracerMode.Everything, LogLevel.Trace)]
@@ -29,6 +27,12 @@ namespace Apizr.Tests.Apis
     Priority(Priority.Speculative)]//, Timeout("00:00:04")]
     public interface IReqResUserService
     {
+        [Get("/users")]
+        Task<IApiResponse<ApiResult<User>>> SafeGetUsersAsync();
+
+        [Get("/users")]
+        Task<ApiResponse<ApiResult<User>>> SafeGetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync();
 
@@ -48,9 +52,6 @@ namespace Apizr.Tests.Apis
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Priority] int priority);
-
-        [Get("/users"), Log(HttpMessageParts.RequestBody, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Warning)]
-        Task<ApiResult<User>> GetUsersAsync([Priority] int priority, [Context] Context context);
 
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync(CancellationToken cancellationToken);
@@ -90,6 +91,12 @@ namespace Apizr.Tests.Apis
 
         [Get("/users/{userId}")]
         Task<UserDetails> GetUserAsync(int userId, IDictionary<string, object> parameters, [Priority] int priority, CancellationToken cancellationToken);
+
+        [Get("/users/{userId}")]
+        Task<ApiResponse<UserDetails>> GetUserResponseAsync(int userId);
+
+        [Get("/users/{userId}")]
+        Task<ApiResponse<UserDetails>> GetUserResponseAsync(int userId, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
         [Post("/users")]
         Task<User> CreateUser(User user, CancellationToken cancellationToken);

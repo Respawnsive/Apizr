@@ -35,7 +35,12 @@ namespace Apizr.Logging
         /// Logs request cookies only
         /// </summary>
         RequestCookies = 32,
-        
+
+        /// <summary>
+        /// Logs request headers and cookies only
+        /// </summary>
+        RequestAllButBody = RequestHeaders | RequestCookies,
+
         /// <summary>
         /// Logs request body, headers and cookies only
         /// </summary>
@@ -55,7 +60,17 @@ namespace Apizr.Logging
         /// Logs response body and headers only
         /// </summary>
         ResponseAll = ResponseBody | ResponseHeaders,
-        
+
+        /// <summary>
+        /// Logs response body and headers only
+        /// </summary>
+        HeadersOnly = ResponseHeaders | RequestHeaders,
+
+        /// <summary>
+        /// Logs all parts but body
+        /// </summary>
+        AllButBody = ResponseAll | RequestAllButBody,
+
         /// <summary>
         /// Logs all parts
         /// </summary>

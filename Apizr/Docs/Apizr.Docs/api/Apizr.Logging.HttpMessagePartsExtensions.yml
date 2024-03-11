@@ -7,6 +7,7 @@ items:
   children:
   - Apizr.Logging.HttpMessagePartsExtensions.HasRequestFlags(Apizr.Logging.HttpMessageParts)
   - Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags(Apizr.Logging.HttpMessageParts)
+  - Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(System.Action{``0},Apizr.Logging.HttpMessageParts)
   langs:
   - csharp
   - vb
@@ -21,7 +22,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpMessagePartsExtensions
     path: ../../Src/Apizr/Logging/HttpMessagePartsExtensions.cs
-    startLine: 2
+    startLine: 5
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -57,7 +58,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HasRequestFlags
     path: ../../Src/Apizr/Logging/HttpMessagePartsExtensions.cs
-    startLine: 4
+    startLine: 7
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -89,7 +90,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HasResponseFlags
     path: ../../Src/Apizr/Logging/HttpMessagePartsExtensions.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -102,6 +103,45 @@ items:
       type: System.Boolean
     content.vb: Public Shared Function HasResponseFlags(parts As HttpMessageParts) As Boolean
   overload: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags*
+- uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(System.Action{``0},Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(System.Action{``0},Apizr.Logging.HttpMessageParts)
+  id: IgnoreMessageParts``1(System.Action{``0},Apizr.Logging.HttpMessageParts)
+  isExtensionMethod: true
+  parent: Apizr.Logging.HttpMessagePartsExtensions
+  langs:
+  - csharp
+  - vb
+  name: IgnoreMessageParts<T>(Action<T>, HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.IgnoreMessageParts<T>(Action<T>, HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts<T>(System.Action<T>, Apizr.Logging.HttpMessageParts)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Logging/HttpMessagePartsExtensions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: IgnoreMessageParts
+    path: ../../Src/Apizr/Logging/HttpMessagePartsExtensions.cs
+    startLine: 16
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  syntax:
+    content: 'public static Action<T> IgnoreMessageParts<T>(this Action<T> optionsBuilder, HttpMessageParts messageParts) where T : IApizrGlobalSharedOptionsBuilderBase'
+    parameters:
+    - id: optionsBuilder
+      type: System.Action{{T}}
+    - id: messageParts
+      type: Apizr.Logging.HttpMessageParts
+    typeParameters:
+    - id: T
+    return:
+      type: System.Action{{T}}
+    content.vb: Public Shared Function IgnoreMessageParts(Of T As IApizrGlobalSharedOptionsBuilderBase)(optionsBuilder As Action(Of T), messageParts As HttpMessageParts) As Action(Of T)
+  overload: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts*
+  nameWithType.vb: HttpMessagePartsExtensions.IgnoreMessageParts(Of T)(Action(Of T), HttpMessageParts)
+  fullName.vb: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts(Of T)(System.Action(Of T), Apizr.Logging.HttpMessageParts)
+  name.vb: IgnoreMessageParts(Of T)(Action(Of T), HttpMessageParts)
 references:
 - uid: Apizr.Logging
   commentId: N:Apizr.Logging
@@ -392,3 +432,66 @@ references:
   name: HasResponseFlags
   nameWithType: HttpMessagePartsExtensions.HasResponseFlags
   fullName: Apizr.Logging.HttpMessagePartsExtensions.HasResponseFlags
+- uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts*
+  commentId: Overload:Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts
+  href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1_System_Action___0__Apizr_Logging_HttpMessageParts_
+  name: IgnoreMessageParts
+  nameWithType: HttpMessagePartsExtensions.IgnoreMessageParts
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts
+- uid: System.Action{{T}}
+  commentId: T:System.Action{``0}
+  parent: System
+  definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

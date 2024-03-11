@@ -7,6 +7,8 @@
 - [New][Exceptions] Now we can **handle `IApizrResponse` safe response (based on Refit's `IApiResponse`) instead of catching exceptions**
 - [New][Attributes] Now we can **provide types to attributes thanks to generic arguments** instead of using typeof() as constructor parameters
 - [New/Breaking][Polly] Now **supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies
+- [New][HttpTracer] Now we can **filter out unwanted http message parts** with the brand new IgnoreMessageParts fluent option
+- [New][HttpTracer] Now we can **pick RequestAllButBody, HeadersOnly or AllButBody http message parts** when configuring logging options fluently or using attribute
 - [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
 
 ### Apizr.Integrations.MediatR

@@ -58,6 +58,11 @@ namespace Apizr.Configuring.Shared
         TimeSpan? RequestTimeout { get; }
 
         /// <summary>
+        /// The <see cref="Func{T, R}"/> which determines whether to redact the HTTP header value before logging.
+        /// </summary>
+        public Func<string, bool> ShouldRedactHeaderValue { get; }
+
+        /// <summary>
         /// The resilience context options builder
         /// </summary>
         internal Action<IApizrResilienceContextOptionsBuilder> ContextOptionsBuilder { get; set; }

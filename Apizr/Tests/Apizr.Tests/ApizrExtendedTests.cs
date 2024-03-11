@@ -1155,6 +1155,7 @@ namespace Apizr.Tests
                         .WithLogging()
                         .WithBaseAddress("https://reqres.in/api")
                         .WithHeaders("testKey2: testValue2.2", "testKey3: testValue3.1")
+                        .WithLoggedHeadersRedactionNames(new[] { "testKey2" })
                         .AddDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -1168,7 +1169,9 @@ namespace Apizr.Tests
             var apizrManager = scope.ServiceProvider.GetService<IApizrManager<IReqResSimpleService>>();
 
             // Shortcut
-            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithHeaders("testKey3: testValue3.2", "testKey4: testValue4"));
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => 
+                options.WithHeaders("testKey3: testValue3.2", "testKey4: testValue4")
+                    .WithLoggedHeadersRedactionRule(header => header == "testKey3"));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute

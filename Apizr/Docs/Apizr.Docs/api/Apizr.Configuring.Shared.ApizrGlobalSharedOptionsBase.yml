@@ -14,6 +14,7 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   langs:
   - csharp
@@ -103,7 +104,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerMode
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 32
+    startLine: 33
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -136,7 +137,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosity
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 35
+    startLine: 36
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -169,7 +170,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevels
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 39
+    startLine: 40
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -202,7 +203,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OnException
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 53
+    startLine: 54
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -235,7 +236,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LetThrowOnExceptionWithEmptyCache
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 56
+    startLine: 57
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -268,7 +269,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HandlersParameters
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 59
+    startLine: 60
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -301,7 +302,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Headers
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 62
+    startLine: 63
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -334,7 +335,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeout
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 65
+    startLine: 66
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -367,7 +368,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeout
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 68
+    startLine: 69
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -382,6 +383,39 @@ items:
   overload: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout*
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  id: ShouldRedactHeaderValue
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: ShouldRedactHeaderValue
+  nameWithType: ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ShouldRedactHeaderValue
+    path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
+    startLine: 72
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: The <xref href="System.Func%602" data-throw-if-not-resolved="false"></xref> which determines whether to redact the HTTP header value before logging.
+  example: []
+  syntax:
+    content: public Func<string, bool> ShouldRedactHeaderValue { get; }
+    parameters: []
+    return:
+      type: System.Func{System.String,System.Boolean}
+    content.vb: Public Property ShouldRedactHeaderValue As Func(Of String, Boolean)
+  overload: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
 references:
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
@@ -1143,3 +1177,97 @@ references:
   name: RequestTimeout
   nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue*
+  commentId: Overload:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ShouldRedactHeaderValue
+  name: ShouldRedactHeaderValue
+  nameWithType: ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ShouldRedactHeaderValue
+  name: ShouldRedactHeaderValue
+  nameWithType: IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: System.Func{System.String,System.Boolean}
+  commentId: T:System.Func{System.String,System.Boolean}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<string, bool>
+  nameWithType: Func<string, bool>
+  fullName: System.Func<string, bool>
+  nameWithType.vb: Func(Of String, Boolean)
+  fullName.vb: System.Func(Of String, Boolean)
+  name.vb: Func(Of String, Boolean)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )

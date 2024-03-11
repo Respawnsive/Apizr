@@ -447,6 +447,47 @@ namespace Apizr.Extending.Configuring.Manager
             return this;
         }
 
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithLoggedHeadersRedactionNames(IEnumerable<string> redactedLoggedHeaderNames,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            var sensitiveHeaders = new HashSet<string>(redactedLoggedHeaderNames, StringComparer.OrdinalIgnoreCase);
+
+            return WithLoggedHeadersRedactionRule(header => sensitiveHeaders.Contains(header), strategy);
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithLoggedHeadersRedactionRule(
+            Func<string, bool> shouldRedactHeaderValue, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.ShouldRedactHeaderValue ??= shouldRedactHeaderValue;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.ShouldRedactHeaderValue == null)
+                    {
+                        Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    }
+                    else
+                    {
+                        var previous = Options.ShouldRedactHeaderValue;
+                        Options.ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
+                    }
+
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
         #region Internal
 
         void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);

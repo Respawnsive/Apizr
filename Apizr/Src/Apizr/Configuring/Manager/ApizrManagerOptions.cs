@@ -215,6 +215,9 @@ namespace Apizr.Configuring.Manager
         public TimeSpan? RequestTimeout => Options.RequestTimeout;
 
         /// <inheritdoc />
+        public Func<string, bool> ShouldRedactHeaderValue => Options.ShouldRedactHeaderValue;
+
+        /// <inheritdoc />
         Action<IApizrResilienceContextOptionsBuilder> IApizrGlobalSharedOptionsBase.ContextOptionsBuilder
         {
             get => Options.ContextOptionsBuilder;

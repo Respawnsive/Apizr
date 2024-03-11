@@ -693,6 +693,9 @@ namespace Apizr
             // Custom client config
             apizrOptions.HttpClientBuilder?.Invoke(builder);
 
+            if(apizrOptions.ShouldRedactHeaderValue != null)
+                builder.RedactLoggedHeaders(apizrOptions.ShouldRedactHeaderValue);
+
             services.TryAddSingleton(typeof(ILazyFactory<ResiliencePipelineRegistry<string>>), serviceProvider =>
                 new LazyFactory<ResiliencePipelineRegistry<string>>(
                     () => serviceProvider.GetService<ResiliencePipelineRegistry<string>>() ?? new ResiliencePipelineRegistry<string>()));

@@ -23,7 +23,8 @@ namespace Apizr.Logging
     public class ExtendedHttpTracerHandler : DelegatingHandler
     {
         private readonly IApizrManagerOptionsBase _apizrOptions;
-        
+        private static readonly Func<string, bool> ShouldRedactHeaderValue = (header) => false;
+
         /// <summary>
         /// Duration string format. Defaults to "Duration: {0:ss\\:fffffff}"
         /// </summary>
@@ -61,11 +62,11 @@ namespace Apizr.Logging
         
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            IApizrRequestOptions requestOptions = null;
+            request.TryGetApizrRequestOptions(out var requestOptions);
             var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
             if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
-                if (request.TryGetApizrRequestOptions(out requestOptions))
+                if (requestOptions != null)
                 {
                     logLevels = requestOptions.LogLevels;
                     verbosity = requestOptions.TrafficVerbosity;
@@ -79,6 +80,8 @@ namespace Apizr.Logging
                 }
                 logger = _apizrOptions.Logger;
             }
+
+            var shouldRedactHeaderValue = requestOptions?.ShouldRedactHeaderValue ?? ShouldRedactHeaderValue;
 
             // Ignore some message parts if asked to
             if ((requestOptions != null || request.TryGetApizrRequestOptions(out requestOptions)) &&
@@ -94,7 +97,7 @@ namespace Apizr.Logging
             try
             {
                 if(verbosity.HasRequestFlags() && tracerMode == HttpTracerMode.Everything)
-                    await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
+                    await LogHttpRequest(request, logger, logLevels, verbosity, shouldRedactHeaderValue).ConfigureAwait(false);
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -106,13 +109,13 @@ namespace Apizr.Logging
                     if (!response.IsSuccessStatusCode && verbosity.HasRequestFlags())
                     {
                         if (tracerMode == HttpTracerMode.ErrorsAndExceptionsOnly)
-                            await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
+                            await LogHttpRequest(request, logger, logLevels, verbosity, shouldRedactHeaderValue).ConfigureAwait(false);
 
-                        await LogHttpErrorRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
+                        await LogHttpErrorRequest(request, logger, logLevels, verbosity, shouldRedactHeaderValue).ConfigureAwait(false);
                     }
 
                     if(verbosity.HasResponseFlags())
-                        await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevels, verbosity).ConfigureAwait(false);  
+                        await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevels, verbosity, shouldRedactHeaderValue).ConfigureAwait(false);  
                 }
 
                 return response;
@@ -122,7 +125,7 @@ namespace Apizr.Logging
                 if (verbosity.HasRequestFlags())
                 {
                     if (tracerMode == HttpTracerMode.ExceptionsOnly)
-                        await LogHttpRequest(request, logger, logLevels, verbosity).ConfigureAwait(false);
+                        await LogHttpRequest(request, logger, logLevels, verbosity, shouldRedactHeaderValue).ConfigureAwait(false);
 
                     LogHttpException(request, ex, logger, logLevels); 
                 }
@@ -130,14 +133,14 @@ namespace Apizr.Logging
             }
         }
 
-        private async Task LogHttpErrorRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
+        private async Task LogHttpErrorRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity, Func<string, bool> shouldRedactHeaderValue)
         {
             var sb = new StringBuilder();
             var httpErrorRequestPrefix =
                 $"{LogMessageIndicatorPrefix}HTTP ERROR REQUEST: [{request?.Method}]{LogMessageIndicatorSuffix}";
             sb.AppendLine(httpErrorRequestPrefix);
 
-            var httpErrorRequestHeaders = GetRequestHeaders(request, verbosity);
+            var httpErrorRequestHeaders = GetRequestHeaders(request, verbosity, shouldRedactHeaderValue);
             sb.AppendLine(httpErrorRequestHeaders);
 
             var httpErrorRequestBody = await GetRequestBody(request);
@@ -154,8 +157,10 @@ namespace Apizr.Logging
         /// <param name="logger">The logger</param>
         /// <param name="logLevels">The log levels</param>
         /// <param name="verbosity">The verbosity</param>
+        /// <param name="shouldRedactHeaderValue">Header values redaction rules</param>
         /// <returns></returns>
-        protected virtual async Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
+        protected virtual async Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels,
+            HttpMessageParts verbosity, Func<string, bool> shouldRedactHeaderValue)
         {
             var sb = new StringBuilder();
             if (verbosity.HasFlag(HttpMessageParts.RequestHeaders) || verbosity.HasFlag(HttpMessageParts.RequestBody))
@@ -170,7 +175,7 @@ namespace Apizr.Logging
 
             if (verbosity.HasFlag(HttpMessageParts.RequestHeaders))
             {
-                var httpErrorRequestHeaders = GetRequestHeaders(request, verbosity);
+                var httpErrorRequestHeaders = GetRequestHeaders(request, verbosity, shouldRedactHeaderValue);
                 sb.AppendLine(httpErrorRequestHeaders);
             }
 
@@ -192,8 +197,9 @@ namespace Apizr.Logging
         /// <param name="logger">The logger</param>
         /// <param name="logLevels">The log levels</param>
         /// <param name="verbosity">The verbosity</param>
+        /// <param name="shouldRedactHeaderValue">Header values redaction rules</param>
         /// <returns></returns>
-        protected virtual async Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
+        protected virtual async Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity, Func<string, bool> shouldRedactHeaderValue)
         {
             var sb = new StringBuilder();
             if (verbosity.HasFlag(HttpMessageParts.ResponseHeaders) || verbosity.HasFlag(HttpMessageParts.ResponseBody))
@@ -208,9 +214,11 @@ namespace Apizr.Logging
                 sb.AppendLine(httpRequestMethodUri);
             }
 
-            if (verbosity.HasFlag(HttpMessageParts.ResponseHeaders))
+            if (verbosity.HasFlag(HttpMessageParts.ResponseHeaders) && response != null)
             {
-                var httpResponseHeaders = $@"{response}";
+                var headersLogValue = new ApizrHttpHeadersLogValue(ApizrHttpHeadersLogValue.Kind.Response,
+                    response.Headers, response.Content?.Headers, shouldRedactHeaderValue);
+                var httpResponseHeaders = headersLogValue.ToString();
                 sb.AppendLine(httpResponseHeaders);
             }
 
@@ -260,7 +268,8 @@ namespace Apizr.Logging
             logger.Log(logLevels.High(), httpExceptionString);
         }
 
-        private string GetRequestHeaders(HttpRequestMessage request, HttpMessageParts verbosity)
+        private string GetRequestHeaders(HttpRequestMessage request, HttpMessageParts verbosity,
+            Func<string, bool> shouldRedactHeaderValue)
         {
             string httpRequestHeaders = string.Empty;
 
@@ -268,7 +277,11 @@ namespace Apizr.Logging
                 return httpRequestHeaders;
 
             if (verbosity.HasFlag(HttpMessageParts.RequestHeaders))
-                httpRequestHeaders = $@"{request.Headers.ToString().TrimEnd().TrimEnd('}').TrimStart('{')}";
+            {
+                var headersLogValue = new ApizrHttpHeadersLogValue(ApizrHttpHeadersLogValue.Kind.Request,
+                    request.Headers, request.Content?.Headers, shouldRedactHeaderValue);
+                httpRequestHeaders = headersLogValue.ToString();
+            }
 
             if (verbosity.HasFlag(HttpMessageParts.RequestCookies)
                 && InnerHandler is HttpClientHandler httpClientHandler)

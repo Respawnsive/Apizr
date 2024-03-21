@@ -44,9 +44,9 @@ namespace Apizr.Extending.Configuring.Proper
             HttpClientBuilder = sharedOptions.HttpClientBuilder;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            HeadersExtendedFactory = sharedOptions.HeadersExtendedFactory;
             OperationTimeoutFactory = operationTimeout.HasValue ? _ => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? _ => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
+            HeadersExtendedFactories = sharedOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
             _resiliencePropertiesExtendedFactories = sharedOptions?.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
                                              new Dictionary<string, Func<IServiceProvider, object>>();
         }
@@ -117,7 +117,7 @@ namespace Apizr.Extending.Configuring.Proper
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
         /// <inheritdoc />
-        public Func<IServiceProvider, Func<IList<string>>> HeadersExtendedFactory { get; internal set; }
+        public IDictionary<ApizrLifetimeScope, Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

@@ -163,9 +163,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if(freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if(requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -257,9 +260,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -379,9 +385,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -483,9 +492,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -649,9 +661,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -842,9 +857,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1009,9 +1027,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1217,9 +1238,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1326,9 +1350,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1499,9 +1526,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1707,9 +1737,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1878,9 +1911,12 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
-            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
-            if (freshHeaders?.Length > 0)
-                requestOptionsBuilder.WithHeaders(freshHeaders);
+            if (_apizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            {
+                var requestHeaders = factory?.Invoke()?.ToArray();
+                if (requestHeaders?.Length > 0)
+                    requestOptionsBuilder.WithHeaders(requestHeaders);
+            }
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");

@@ -188,30 +188,27 @@ namespace Apizr.Extending.Configuring.Manager
 
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api)
         {
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.HeadersExtendedFactory ??= serviceProvider => () => headersFactory(serviceProvider);
+                    Options.HeadersExtendedFactories[scope] ??= serviceProvider => () => headersFactory(serviceProvider);
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.HeadersExtendedFactory == null)
+                    if (Options.HeadersExtendedFactories.TryGetValue(scope, out var previous))
                     {
-                        Options.HeadersExtendedFactory = serviceProvider => () => headersFactory(serviceProvider);
+                        Options.HeadersExtendedFactories[scope] = serviceProvider => () => previous(serviceProvider).Invoke().Concat(headersFactory(serviceProvider)).ToList();
                     }
                     else
                     {
-                        var previous = Options.HeadersExtendedFactory;
-                        Options.HeadersExtendedFactory = servicesProvider => () =>
-                            previous(servicesProvider).Invoke().Concat(headersFactory(servicesProvider))
-                                .ToList();
+                        Options.HeadersExtendedFactories[scope] = serviceProvider => () => headersFactory(serviceProvider);
                     }
-
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.HeadersExtendedFactory = serviceProvider => () => headersFactory(serviceProvider);
+                    Options.HeadersExtendedFactories[scope] = serviceProvider => () => headersFactory(serviceProvider);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
@@ -527,9 +524,14 @@ namespace Apizr.Extending.Configuring.Manager
             Options.PrimaryHandlerFactory = primaryHandlerFactory;
         }
 
-        /// <inheritdoc />
         void IApizrInternalRegistrationOptionsBuilder.AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> handlerFactory) 
             => AddDelegatingHandler((_, opt) => handlerFactory.Invoke(opt));
+
+        /// <inheritdoc />
+        void IApizrExtendedManagerOptionsBuilder.WithHeaders(IDictionary<ApizrLifetimeScope, Func<IList<string>>> headersFactories)
+        {
+            Options.HeadersFactories = headersFactories;
+        }
 
         #endregion
     }

@@ -170,9 +170,11 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="headersFactory">Headers factory</param>
         /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithHeaders(Func<IList<string>> headersFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api);
 
         /// <summary>
         /// Set a timeout to the operation (overall request tries)

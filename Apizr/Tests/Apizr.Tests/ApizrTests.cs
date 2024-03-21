@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Apizr.Logging;
 using Apizr.Progressing;
 using Apizr.Resiliencing;
@@ -816,7 +817,8 @@ namespace Apizr.Tests
         public async Task Requesting_With_Headers_Factory_Should_Set_And_Keep_Updated_Headers()
         {
             var watcher = new WatchingRequestHandler();
-            var headers = new List<string> { "testKey2: testValue2.2" };
+            var testKey2 = new List<string> { "testKey2: testValue2.2" };
+            var testKey3 = new List<string> { "testKey3: testValue3.1" };
 
             var apizrManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
@@ -824,7 +826,8 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithBaseAddress("https://reqres.in/api")
-                    .WithHeaders(() => headers)
+                    .WithHeaders(() => testKey2, scope: ApizrLifetimeScope.Api)
+                    .WithHeaders(() => testKey3, scope: ApizrLifetimeScope.Request)
                     .AddDelegatingHandler(watcher));
 
             // Merge all
@@ -835,13 +838,15 @@ namespace Apizr.Tests
             watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
 
             // Keep updated
-            headers[0] = "testKey2: testValue2.3";
+            testKey2[0] = "testKey2: testValue2.3"; // will not be updated (scope: Api)
+            testKey3[0] = "testKey3: testValue3.2"; // will be updated (scope: Request)
 
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
-            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.3"); // Set by attribute then updated by common option
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Set by common option then updated
         }
 
         [Fact]

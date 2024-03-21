@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Logging;
 using Apizr.Mediation.Extending;
@@ -1187,7 +1188,8 @@ namespace Apizr.Tests
         public async Task Requesting_With_Headers_Factory_Should_Set_And_Keep_Updated_Headers()
         {
             var watcher = new WatchingRequestHandler();
-            var headers = new List<string> { "testKey2: testValue2.2" };
+            var testKey2 = new List<string> { "testKey2: testValue2.2" };
+            var testKey3 = new List<string> { "testKey3: testValue3.1" };
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
@@ -1200,11 +1202,12 @@ namespace Apizr.Tests
                     services.AddApizrManagerFor<IReqResSimpleService>(options => options
                         .WithLogging()
                         .WithBaseAddress("https://reqres.in/api")
-                        .WithHeaders(serviceProvider => headers.Concat(new[]
+                        .WithHeaders(_ => testKey2, scope: ApizrLifetimeScope.Api)
+                        .WithHeaders(serviceProvider => testKey3.Concat(new[]
                         {
                             $"TestJsonString: {serviceProvider.GetRequiredService<IOptions<TestSettings>>().Value.TestJsonString}"
-                        }).ToList())
-                        .WithHeaders("testKey3: testValue3")
+                        }).ToList(), scope: ApizrLifetimeScope.Request)
+                        .WithHeaders("testKey4: testValue4")
                         .AddDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -1223,22 +1226,25 @@ namespace Apizr.Tests
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
             watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
-            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3"); // Set fluently at registration without factory (no refreshing)
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.1"); // Set fluently at registration
+            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4"); // Set fluently at registration without factory (no refreshing)
             watcher.Headers.GetValues("TestJsonString").Should().HaveCount(1).And.Contain("TestJsonString");
 
             // Keep updated
-            headers[0] = "testKey2: testValue2.3";
+            testKey2[0] = "testKey2: testValue2.3"; // will not be updated (scope: Api)
+            testKey3[0] = "testKey3: testValue3.2"; // will be updated (scope: Request)
             var settings = scope.ServiceProvider.GetService<IOptions<TestSettings>>();
-            settings.Value.TestJsonString = "TestJsonStringUpdated";
+            settings.Value.TestJsonString = "TestJsonStringUpdated"; // will be updated (scope: Request)
 
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithHeaders("testKey4: testValue4"));
+                options => options.WithHeaders("testKey5: testValue5"));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
-            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.3"); // Set by attribute then updated by common option
-            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3"); // Set fluently at registration without factory (no refreshing)
-            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4"); // Set fluently at request
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option then not updated
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Set fluently at registration then updated
+            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4"); // Set fluently at registration
+            watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5"); // Set fluently at request
             watcher.Headers.GetValues("TestJsonString").Should().HaveCount(1).And.Contain("TestJsonStringUpdated");
         }
 

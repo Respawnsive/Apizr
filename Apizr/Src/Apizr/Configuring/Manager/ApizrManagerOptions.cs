@@ -203,7 +203,7 @@ namespace Apizr.Configuring.Manager
         public IList<string> Headers => Options.Headers;
 
         /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory => Options.HeadersFactory;
+        public IDictionary<ApizrLifetimeScope, Func<IList<string>>> HeadersFactories => Options.HeadersFactories;
 
         /// <inheritdoc />
         public TimeSpan? OperationTimeout => Options.OperationTimeout;

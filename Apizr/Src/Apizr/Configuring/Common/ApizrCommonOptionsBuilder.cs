@@ -339,28 +339,27 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithHeaders(Func<IList<string>> headersFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, 
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api)
         {
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.HeadersFactory ??= headersFactory;
+                    Options.HeadersFactories[scope] ??= headersFactory;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.HeadersFactory == null)
+                    if (Options.HeadersFactories.TryGetValue(scope, out var previous))
                     {
-                        Options.HeadersFactory = headersFactory;
+                        Options.HeadersFactories[scope] = () => previous().Concat(headersFactory()).ToList();
                     }
                     else
                     {
-                        var previous = Options.HeadersFactory;
-                        Options.HeadersFactory = () => previous().Concat(headersFactory()).ToList();
+                        Options.HeadersFactories[scope] = headersFactory;
                     }
-
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.HeadersFactory = headersFactory;
+                    Options.HeadersFactories[scope] = headersFactory;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);

@@ -3,6 +3,7 @@ using Apizr.Configuring.Manager;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Apizr.Configuring.Shared
 {
@@ -19,7 +20,7 @@ namespace Apizr.Configuring.Shared
             BaseAddress = sharedOptions?.BaseAddress;
             BasePath = sharedOptions?.BasePath;
             PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
-            HeadersFactory = sharedOptions?.HeadersFactory;
+            HeadersFactories = sharedOptions?.HeadersFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
         }
 
         /// <inheritdoc />
@@ -35,6 +36,6 @@ namespace Apizr.Configuring.Shared
         public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; internal set; }
 
         /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory { get; internal set; }
+        public IDictionary<ApizrLifetimeScope, Func<IList<string>>> HeadersFactories { get; internal set; }
     }
 }

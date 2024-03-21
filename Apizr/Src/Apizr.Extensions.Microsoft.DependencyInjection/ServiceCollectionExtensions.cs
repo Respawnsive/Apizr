@@ -745,7 +745,19 @@ namespace Apizr
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
                 apizrOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
                 apizrOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
-                apizrOptions.HeadersExtendedFactory?.Invoke(serviceProvider);
+
+                var headersFactories = apizrOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key,
+                    kvp => kvp.Value.Invoke(serviceProvider));
+                if (headersFactories?.Count > 0)
+                    apizrOptionsBuilder.WithHeaders(headersFactories);
+
+                if (headersFactories?.TryGetValue(ApizrLifetimeScope.Api, out var factory) == true)
+                {
+                    var headers = factory.Invoke()?.ToArray();
+                    if (headers?.Length > 0)
+                        apizrOptionsBuilder.WithHeaders(headers);
+                }
+
                 foreach (var resiliencePropertiesExtendedFactory in apizrOptions.ResiliencePropertiesExtendedFactories)
                     apizrOptions.ResiliencePropertiesFactories[resiliencePropertiesExtendedFactory.Key] = () =>
                         resiliencePropertiesExtendedFactory.Value.Invoke(serviceProvider);

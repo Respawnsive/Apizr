@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Apizr.Configuring;
 using Apizr.Logging;
 using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
@@ -64,9 +65,9 @@ namespace Apizr.Extending.Configuring.Shared
         Func<IServiceProvider, TimeSpan> RequestTimeoutFactory { get; }
 
         /// <summary>
-        /// Headers factory
+        /// Headers factories
         /// </summary>
-        Func<IServiceProvider, Func<IList<string>>> HeadersExtendedFactory { get; }
+        IDictionary<ApizrLifetimeScope, Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
         internal IDictionary<string, Func<IServiceProvider, object>> ResiliencePropertiesExtendedFactories { get; }
     }

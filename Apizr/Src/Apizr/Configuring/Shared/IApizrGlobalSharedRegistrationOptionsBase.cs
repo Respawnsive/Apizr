@@ -32,8 +32,8 @@ namespace Apizr.Configuring.Shared
         Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; }
 
         /// <summary>
-        /// Headers factory
+        /// Headers factories
         /// </summary>
-        Func<IList<string>> HeadersFactory { get; }
+        IDictionary<ApizrLifetimeScope, Func<IList<string>>> HeadersFactories { get; }
     }
 }

@@ -266,7 +266,6 @@ namespace Apizr
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
-            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -356,7 +355,6 @@ namespace Apizr
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
-            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -417,9 +415,14 @@ namespace Apizr
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
             builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
-            builder.ApizrOptions.HeadersFactory?.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
+            if (builder.ApizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Api, out var factory) == true)
+            {
+                var headers = factory.Invoke()?.ToArray();
+                if(headers?.Length > 0)
+                    builder.WithHeaders(headers);
+            }
 
             return builder.ApizrOptions;
         }

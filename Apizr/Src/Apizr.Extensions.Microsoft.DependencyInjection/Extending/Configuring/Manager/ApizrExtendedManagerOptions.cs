@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Apizr.Caching;
+using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Common;
@@ -52,9 +53,9 @@ namespace Apizr.Extending.Configuring.Manager
             ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistrationActions = commonOptions.PostRegistrationActions.ToList();
-            HeadersExtendedFactory = properOptions.HeadersExtendedFactory;
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
+            HeadersExtendedFactories = properOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
             _resiliencePropertiesExtendedFactories = properOptions.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
                                                      new Dictionary<string, Func<IServiceProvider, object>>();
         }
@@ -155,14 +156,9 @@ namespace Apizr.Extending.Configuring.Manager
 
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
-
-        private Func<IServiceProvider, Func<IList<string>>> _headersExtendedFactory;
+        
         /// <inheritdoc />
-        public Func<IServiceProvider, Func<IList<string>>> HeadersExtendedFactory
-        {
-            get => _headersExtendedFactory;
-            internal set => _headersExtendedFactory = value != null ? serviceProvider => HeadersFactory = value.Invoke(serviceProvider) : null;
-        }
+        public IDictionary<ApizrLifetimeScope, Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

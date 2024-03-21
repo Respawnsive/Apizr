@@ -332,12 +332,40 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public IApizrManagerOptionsBuilder WithHeaders(params string[] headers)
-            => WithHeaders(() => headers?.ToList());
+        {
+            headers?.ToList().ForEach(header => Options.Headers.Add(header));
+
+            return this;
+        }
 
         /// <inheritdoc />
-        public IApizrManagerOptionsBuilder WithHeaders(Func<IList<string>> headersFactory)
+        public IApizrManagerOptionsBuilder WithHeaders(Func<IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
         {
-            Options.HeadersFactories.Add(headersFactory);
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersFactory ??= headersFactory;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersFactory == null)
+                    {
+                        Options.HeadersFactory = headersFactory;
+                    }
+                    else
+                    {
+                        var previous = Options.HeadersFactory;
+                        Options.HeadersFactory = () => previous().Concat(headersFactory()).ToList();
+                    }
+
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersFactory = headersFactory;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }

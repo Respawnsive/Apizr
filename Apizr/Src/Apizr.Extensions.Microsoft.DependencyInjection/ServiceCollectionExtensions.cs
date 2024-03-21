@@ -745,7 +745,7 @@ namespace Apizr
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
                 apizrOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
                 apizrOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
-                apizrOptions.HeadersFactory?.Invoke(serviceProvider);
+                apizrOptions.HeadersExtendedFactory?.Invoke(serviceProvider);
                 foreach (var resiliencePropertiesExtendedFactory in apizrOptions.ResiliencePropertiesExtendedFactories)
                     apizrOptions.ResiliencePropertiesFactories[resiliencePropertiesExtendedFactory.Key] = () =>
                         resiliencePropertiesExtendedFactory.Value.Invoke(serviceProvider);

@@ -11,7 +11,7 @@ namespace Apizr.Configuring.Shared
     /// <summary>
     /// Options available at both common and proper level for static registrations
     /// </summary>
-    public interface IApizrSharedRegistrationOptions : IApizrSharedRegistrationOptionsBase
+    public interface IApizrSharedRegistrationOptions : IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedOptions
     {
         /// <summary>
         /// Base uri factory
@@ -57,12 +57,7 @@ namespace Apizr.Configuring.Shared
         /// Delegating handlers factories
         /// </summary>
         IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
-
-        /// <summary>
-        /// Headers factory
-        /// </summary>
-        Func<IList<string>> HeadersFactory { get; }
-
+        
         /// <summary>
         /// The operation timeout factory (overall request tries)
         /// </summary>

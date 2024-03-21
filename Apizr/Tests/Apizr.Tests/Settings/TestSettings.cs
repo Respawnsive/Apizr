@@ -12,7 +12,7 @@
         /// <summary>
         /// Bound from appsettings.json
         /// </summary>
-        public string TestJsonString { get; private set; }
+        public string TestJsonString { get; set; }
 
         public string TestSessionString { get; set; }
     }

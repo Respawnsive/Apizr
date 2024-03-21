@@ -1,5 +1,7 @@
 ﻿using Apizr.Configuring.Shared;
 using Polly;
+using System;
+using System.Collections.Generic;
 
 namespace Apizr.Configuring.Request
 {

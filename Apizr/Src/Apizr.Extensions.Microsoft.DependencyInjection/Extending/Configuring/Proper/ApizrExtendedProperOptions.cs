@@ -44,7 +44,7 @@ namespace Apizr.Extending.Configuring.Proper
             HttpClientBuilder = sharedOptions.HttpClientBuilder;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
             DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            HeadersFactories = new List<Func<IServiceProvider, IList<string>>> { sharedOptions.HeadersFactory };
+            HeadersExtendedFactory = sharedOptions.HeadersExtendedFactory;
             OperationTimeoutFactory = operationTimeout.HasValue ? _ => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? _ => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
             _resiliencePropertiesExtendedFactories = sharedOptions?.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
@@ -116,11 +116,8 @@ namespace Apizr.Extending.Configuring.Proper
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
-        internal IList<Func<IServiceProvider, IList<string>>> HeadersFactories { get; }
-        private Func<IServiceProvider, IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, IList<string>> HeadersFactory => _headersFactory ??= serviceProvider => Headers = HeadersFactories.SelectMany(factory => factory.Invoke(serviceProvider)).ToList();
-
+        public Func<IServiceProvider, Func<IList<string>>> HeadersExtendedFactory { get; internal set; }
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

@@ -1,6 +1,7 @@
 ﻿using Apizr.Configuring.Manager;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 
 namespace Apizr.Configuring.Shared
@@ -29,5 +30,10 @@ namespace Apizr.Configuring.Shared
         /// The primary Http message handler factory (set internally)
         /// </summary>
         Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; }
+
+        /// <summary>
+        /// Headers factory
+        /// </summary>
+        Func<IList<string>> HeadersFactory { get; }
     }
 }

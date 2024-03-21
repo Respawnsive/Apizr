@@ -54,11 +54,6 @@ namespace Apizr.Extending.Configuring.Shared
         Action<IHttpClientBuilder> HttpClientBuilder { get; }
 
         /// <summary>
-        /// Headers factory
-        /// </summary>
-        Func<IServiceProvider, IList<string>> HeadersFactory { get; }
-
-        /// <summary>
         /// The operation timeout factory (overall request tries)
         /// </summary>
         Func<IServiceProvider, TimeSpan> OperationTimeoutFactory { get; }
@@ -67,6 +62,11 @@ namespace Apizr.Extending.Configuring.Shared
         /// The request timeout factory (each request try)
         /// </summary>
         Func<IServiceProvider, TimeSpan> RequestTimeoutFactory { get; }
+
+        /// <summary>
+        /// Headers factory
+        /// </summary>
+        Func<IServiceProvider, Func<IList<string>>> HeadersExtendedFactory { get; }
 
         internal IDictionary<string, Func<IServiceProvider, object>> ResiliencePropertiesExtendedFactories { get; }
     }

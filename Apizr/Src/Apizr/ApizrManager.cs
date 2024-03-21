@@ -54,7 +54,7 @@ namespace Apizr
                 requestLogAttribute?.HttpTracerMode,
                 requestLogAttribute?.TrafficVerbosity,
                 operationTimeoutAttribute?.Timeout,
-                requestTimeoutAttribute?.Timeout, 
+                requestTimeoutAttribute?.Timeout,
                 requestLogAttribute?.LogLevels);
             var builder = new ApizrRequestOptionsBuilder(requestOptions) as IApizrRequestOptionsBuilder;
             optionsBuilder?.Invoke(builder);
@@ -163,6 +163,9 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if(freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -254,6 +257,9 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -373,6 +379,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -473,6 +483,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -635,6 +649,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -824,6 +842,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -987,6 +1009,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -1191,6 +1217,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -1296,6 +1326,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -1465,6 +1499,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -1669,6 +1707,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 
@@ -1836,6 +1878,10 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+            var freshHeaders = _apizrOptions.HeadersFactory?.Invoke()?.ToArray();
+            if (freshHeaders?.Length > 0)
+                requestOptionsBuilder.WithHeaders(freshHeaders);
+
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
 

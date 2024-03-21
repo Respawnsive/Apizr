@@ -149,12 +149,42 @@ namespace Apizr.Extending.Configuring.Common
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithHeaders(params string[] headers)
-            => WithHeaders(_ => headers?.ToList());
+        {
+            headers?.ToList().ForEach(header => Options.Headers.Add(header));
+
+            return this;
+        }
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory)
+        public IApizrExtendedCommonOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
         {
-            Options.HeadersFactories.Add(headersFactory);
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersExtendedFactory ??= serviceProvider => () => headersFactory(serviceProvider);
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersExtendedFactory == null)
+                    {
+                        Options.HeadersExtendedFactory = serviceProvider => () => headersFactory(serviceProvider);
+                    }
+                    else
+                    {
+                        var previous = Options.HeadersExtendedFactory;
+                        Options.HeadersExtendedFactory = servicesProvider => () =>
+                            previous(servicesProvider).Invoke().Concat(headersFactory(servicesProvider))
+                                .ToList();
+                    }
+
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersExtendedFactory = serviceProvider => () => headersFactory(serviceProvider);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }

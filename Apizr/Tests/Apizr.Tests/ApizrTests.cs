@@ -813,6 +813,38 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Requesting_With_Headers_Factory_Should_Set_And_Keep_Updated_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+            var headers = new List<string> { "testKey2: testValue2.2" };
+
+            var apizrManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithBaseAddress("https://reqres.in/api")
+                    .WithHeaders(() => headers)
+                    .AddDelegatingHandler(watcher));
+
+            // Merge all
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2");
+            watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
+
+            // Keep updated
+            headers[0] = "testKey2: testValue2.3";
+
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2");
+            watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.3"); // Set by attribute then updated by common option
+        }
+
+        [Fact]
         public async Task Sending_A_Get_Request_With_Both_Attribute_And_Fluent_Headers_Should_Set_Merged_Headers()
         {
             var watcher = new WatchingRequestHandler();

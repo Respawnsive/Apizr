@@ -43,11 +43,6 @@ namespace Apizr.Configuring.Shared
         IDictionary<string, object> HandlersParameters { get; }
 
         /// <summary>
-        /// Headers to add to the request
-        /// </summary>
-        IList<string> Headers { get; }
-
-        /// <summary>
         /// The operation timeout (overall request tries)
         /// </summary>
         TimeSpan? OperationTimeout { get; }
@@ -56,6 +51,11 @@ namespace Apizr.Configuring.Shared
         /// The request timeout (each request try)
         /// </summary>
         TimeSpan? RequestTimeout { get; }
+
+        /// <summary>
+        /// Headers to add to the request
+        /// </summary>
+        IList<string> Headers { get; }
 
         /// <summary>
         /// The <see cref="Func{T, R}"/> which determines whether to redact the HTTP header value before logging.

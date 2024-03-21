@@ -169,8 +169,10 @@ namespace Apizr.Configuring.Shared
         /// Add some headers to the request
         /// </summary>
         /// <param name="headersFactory">Headers factory</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithHeaders(Func<IList<string>> headersFactory);
+        TApizrOptionsBuilder WithHeaders(Func<IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
 
         /// <summary>
         /// Set a timeout to the operation (overall request tries)

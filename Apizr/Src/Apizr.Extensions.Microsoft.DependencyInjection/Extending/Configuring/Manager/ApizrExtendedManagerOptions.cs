@@ -52,7 +52,7 @@ namespace Apizr.Extending.Configuring.Manager
             ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistrationActions = commonOptions.PostRegistrationActions.ToList();
-            HeadersFactories = new List<Func<IServiceProvider, IList<string>>> { properOptions.HeadersFactory };
+            HeadersExtendedFactory = properOptions.HeadersExtendedFactory;
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
             _resiliencePropertiesExtendedFactories = properOptions.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
@@ -156,10 +156,13 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
-        internal IList<Func<IServiceProvider, IList<string>>> HeadersFactories { get; }
-        private Func<IServiceProvider, IList<string>> _headersFactory;
+        private Func<IServiceProvider, Func<IList<string>>> _headersExtendedFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, IList<string>> HeadersFactory => _headersFactory ??= serviceProvider => Headers = HeadersFactories.SelectMany(factory => factory.Invoke(serviceProvider)).ToList();
+        public Func<IServiceProvider, Func<IList<string>>> HeadersExtendedFactory
+        {
+            get => _headersExtendedFactory;
+            internal set => _headersExtendedFactory = value != null ? serviceProvider => HeadersFactory = value.Invoke(serviceProvider) : null;
+        }
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
@@ -201,6 +204,7 @@ namespace Apizr.Extending.Configuring.Manager
     public class ApizrExtendedManagerOptions<TWebApi> : ApizrManagerOptions<TWebApi>, IApizrExtendedManagerOptionsBase
     {
         private readonly IApizrExtendedManagerOptionsBase _apizrExtendedOptions;
+
         public ApizrExtendedManagerOptions(IApizrExtendedManagerOptionsBase apizrOptions) : base(apizrOptions)
         {
             _apizrExtendedOptions = apizrOptions;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -819,6 +820,7 @@ namespace Apizr.Tests
             var watcher = new WatchingRequestHandler();
             var apiHeaders = new List<string> { "testKey2: testValue2.2" };
             var requestHeaders = new List<string> { "testKey3: testValue3.1", "testKey4: testValue4.1" };
+            var testSettings = new TestSettings("testSettingsKey1: testSettingsValue1.1");
 
             var apizrManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
@@ -828,6 +830,7 @@ namespace Apizr.Tests
                     .WithBaseAddress("https://reqres.in/api")
                     .WithHeaders(() => apiHeaders, scope: ApizrLifetimeScope.Api)
                     .WithHeaders(() => requestHeaders, scope: ApizrLifetimeScope.Request)
+                    .WithHeaders(testSettings, [settings => settings.TestJsonString])
                     .WithHeaders("testKey5: testValue5.1", "testKey6: testValue6.1")
                     .AddDelegatingHandler(watcher));
 
@@ -836,30 +839,33 @@ namespace Apizr.Tests
                 options => options.WithHeaders("testKey4: testValue4.2",
                     "testKey5: testValue5.2"));
             watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6");
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6", "testSettingsKey1");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
             watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option within api scope factory
             watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.1"); // Set by common option within request scope factory
             watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4.2"); // Set by common option within request scope factory then updated by request option
             watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5.2"); // Set by common option then updated by request option
             watcher.Headers.GetValues("testKey6").Should().HaveCount(1).And.Contain("testValue6.1"); // Set by common option
+            watcher.Headers.GetValues("testSettingsKey1").Should().HaveCount(1).And.Contain("testSettingsValue1.1"); // Set by common option expression
 
             // Keep updated
             apiHeaders[0] = "testKey2: testValue2.3"; // will not be updated (scope: Api)
             requestHeaders[0] = "testKey3: testValue3.2"; // will be updated (scope: Request)
             requestHeaders[1] = "testKey4: testValue4.3"; // should be updated (scope: Request) but updated then by request option
+            testSettings.TestJsonString = "testSettingsKey1: testSettingsValue1.2";
 
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithHeaders("testKey4: testValue4.4", 
                     "testKey5: testValue5.3"));
             watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6");
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6", "testSettingsKey1");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Same as previous value
             watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Same as previous value
             watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Updated at request time (scope: Request)
             watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4.4"); // Updated at request time (scope: Request) then by request option
             watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5.3"); // Updated by request option
             watcher.Headers.GetValues("testKey6").Should().HaveCount(1).And.Contain("testValue6.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey1").Should().HaveCount(1).And.Contain("testSettingsValue1.2"); // Updated at request time (scope: Request)
         }
 
         [Fact]

@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Refit;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Apizr.Extending.Configuring.Common
 {
@@ -181,6 +182,32 @@ namespace Apizr.Extending.Configuring.Common
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithHeaders<TSettingsService>(Expression<Func<TSettingsService, string>>[] headerProperties)
+        {
+            var headersFactories = headerProperties.Select(exp => exp.Compile());
+            if (Options.HeadersExtendedFactories.TryGetValue(ApizrLifetimeScope.Request, out var previous))
+            {
+                Options.HeadersExtendedFactories[ApizrLifetimeScope.Request] = serviceProvider => () =>
+                {
+                    var settingsService = serviceProvider.GetRequiredService<TSettingsService>();
+                    return previous(serviceProvider).Invoke()
+                        .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
+                        .ToList();
+                };
+            }
+            else
+            {
+                Options.HeadersExtendedFactories[ApizrLifetimeScope.Request] = serviceProvider => () =>
+                {
+                    var settingsService = serviceProvider.GetRequiredService<TSettingsService>();
+                    return headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)).ToList();
+                };
             }
 
             return this;

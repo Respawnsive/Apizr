@@ -138,6 +138,14 @@ namespace Apizr.Extending.Configuring.Shared
             ApizrLifetimeScope scope = ApizrLifetimeScope.Api);
 
         /// <summary>
+        /// Add some headers to the request loaded from service properties
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
+        /// <param name="headerProperties">The header properties to get from</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithHeaders<TSettingsService>(Expression<Func<TSettingsService, string>>[] headerProperties);
+
+        /// <summary>
         /// Set a timeout to the operation (overall request tries)
         /// </summary>
         /// <param name="timeoutFactory">The operation timeout factory</param>

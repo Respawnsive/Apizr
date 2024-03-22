@@ -216,6 +216,32 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithHeaders<TSettingsService>(Expression<Func<TSettingsService, string>>[] headerProperties)
+        {
+            var headersFactories = headerProperties.Select(exp => exp.Compile());
+            if (Options.HeadersExtendedFactories.TryGetValue(ApizrLifetimeScope.Request, out var previous))
+            {
+                Options.HeadersExtendedFactories[ApizrLifetimeScope.Request] = serviceProvider => () =>
+                {
+                    var settingsService = serviceProvider.GetRequiredService<TSettingsService>();
+                    return previous(serviceProvider).Invoke()
+                        .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
+                        .ToList();
+                };
+            }
+            else
+            {
+                Options.HeadersExtendedFactories[ApizrLifetimeScope.Request] = serviceProvider => () =>
+                {
+                    var settingsService = serviceProvider.GetRequiredService<TSettingsService>();
+                    return headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)).ToList();
+                };
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithOperationTimeout(TimeSpan timeout)
             => WithOperationTimeout(_ => timeout);
 

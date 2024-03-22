@@ -11,7 +11,6 @@ using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
-using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -367,6 +366,54 @@ namespace Apizr.Configuring.Manager
             }
 
             return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService,
+            Expression<Func<TSettingsService, string>>[] headerProperties)
+            => WithHeaders(() => settingsService, headerProperties);
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>>[] headerProperties)
+        {
+            var settingsService = settingsServiceFactory.Invoke();
+            var headersFactories = headerProperties.Select(exp => exp.Compile());
+            if (Options.HeadersFactories.TryGetValue(ApizrLifetimeScope.Request, out var previous))
+            {
+                Options.HeadersFactories[ApizrLifetimeScope.Request] = () => previous()
+                    .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
+                    .ToList();
+            }
+            else
+            {
+                Options.HeadersFactories[ApizrLifetimeScope.Request] = () => headersFactories
+                    .Select(headerFactory => headerFactory.Invoke(settingsService))
+                    .ToList();
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithHeadersMapping(Func<IDictionary<string, string>> headersMappingFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, ApizrLifetimeScope scope = ApizrLifetimeScope.Api)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithHeadersMapping<TSettingsService>(TSettingsService settingsService,
+            params (string HeaderKey, Expression<Func<TSettingsService, string>> HeaderValue)[] headerProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public IApizrManagerOptionsBuilder WithHeadersMapping<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
+            params (string HeaderKey, Expression<Func<TSettingsService, string>> HeaderValue)[] headerProperties)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

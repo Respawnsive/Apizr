@@ -21,6 +21,7 @@ namespace Apizr.Configuring.Shared
             BasePath = sharedOptions?.BasePath;
             PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
             HeadersFactories = sharedOptions?.HeadersFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            Headers = sharedOptions?.Headers?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
         }
 
         /// <inheritdoc />
@@ -37,5 +38,8 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public IDictionary<ApizrLifetimeScope, Func<IList<string>>> HeadersFactories { get; internal set; }
+
+        /// <inheritdoc />
+        public IDictionary<ApizrRegistrationBehavior, IList<string>> Headers { get; internal set; }
     }
 }

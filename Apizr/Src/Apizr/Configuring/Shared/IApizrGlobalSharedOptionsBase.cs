@@ -53,11 +53,6 @@ namespace Apizr.Configuring.Shared
         TimeSpan? RequestTimeout { get; }
 
         /// <summary>
-        /// Headers to add to the request
-        /// </summary>
-        IList<string> Headers { get; }
-
-        /// <summary>
         /// The <see cref="Func{T, R}"/> which determines whether to redact the HTTP header value before logging.
         /// </summary>
         public Func<string, bool> ShouldRedactHeaderValue { get; }

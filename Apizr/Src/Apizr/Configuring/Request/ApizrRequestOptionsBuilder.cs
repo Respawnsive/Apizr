@@ -37,9 +37,30 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithHeaders(params string[] headers)
+    public IApizrRequestOptionsBuilder WithHeaders(IList<string> headers, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
     {
-        headers?.ToList().ForEach(header => Options.Headers.Add(header));
+        switch (strategy)
+        {
+            case ApizrDuplicateStrategy.Ignore:
+                Options.Headers ??= headers;
+                break;
+            case ApizrDuplicateStrategy.Add:
+            case ApizrDuplicateStrategy.Merge:
+                if (Options.Headers.Count > 0)
+                {
+                    headers?.ToList().ForEach(header => Options.Headers.Add(header));
+                }
+                else
+                {
+                    Options.Headers = headers;
+                }
+                break;
+            case ApizrDuplicateStrategy.Replace:
+                Options.Headers = headers;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+        }
 
         return this;
     }

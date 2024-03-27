@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -61,5 +62,16 @@ namespace Apizr.Configuring.Shared
         /// <param name="delegatingHandler">A delegating handler</param>
         /// <returns></returns>
         TApizrOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler;
+
+        /// <summary>
+        /// Add some headers to the request
+        /// </summary>
+        /// <param name="headers">Headers to add to the request</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
+        /// <param name="behavior">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set);
     }
 }

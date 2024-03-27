@@ -183,8 +183,13 @@ namespace Apizr.Configuring.Shared
         /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
         /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
         /// <param name="headerProperties">The header properties to get from</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>>[] headerProperties);
+        TApizrOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService, 
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api);
 
         /// <summary>
         /// Add some headers to the request loaded from service properties
@@ -192,37 +197,13 @@ namespace Apizr.Configuring.Shared
         /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
         /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
         /// <param name="headerProperties">The header properties to get from</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>>[] headerProperties);
-
-        /// <summary>
-        /// Map request attribute header keys to its values
-        /// </summary>
-        /// <param name="headersMappingFactory">Headers mapping factory</param>
         /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
         /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithHeadersMapping(Func<IDictionary<string, string>> headersMappingFactory,
+        TApizrOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory, 
+            Expression<Func<TSettingsService, string>>[] headerProperties,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
             ApizrLifetimeScope scope = ApizrLifetimeScope.Api);
-
-        /// <summary>
-        /// Map request attribute header keys to its values loaded from service properties
-        /// </summary>
-        /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
-        /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
-        /// <param name="headerProperties">The header properties to get from</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithHeadersMapping<TSettingsService>(TSettingsService settingsService, params (string HeaderKey, Expression<Func<TSettingsService, string>> HeaderValue)[] headerProperties);
-
-        /// <summary>
-        /// Map request attribute header keys to its values loaded from service properties
-        /// </summary>
-        /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
-        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
-        /// <param name="headerProperties">The header properties to get from</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithHeadersMapping<TSettingsService>(Func<TSettingsService> settingsServiceFactory, params (string HeaderKey, Expression<Func<TSettingsService, string>> HeaderValue)[] headerProperties);
 
         /// <summary>
         /// Set a timeout to the operation (overall request tries)

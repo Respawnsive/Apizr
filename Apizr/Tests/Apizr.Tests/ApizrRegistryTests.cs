@@ -1273,7 +1273,7 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResSimpleService>(options => options
                     .WithBaseAddress("https://reqres.in/api")
-                    .WithHeaders("testKey3: testValue3.2", "testKey4: testValue4.1")
+                    .WithHeaders(["testKey3: testValue3.2", "testKey4: testValue4.1"])
                     .AddDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
@@ -1281,13 +1281,13 @@ namespace Apizr.Tests
                     .WithLogging()
                     .WithResilienceContextOptions(opt =>
                         opt.ReturnToPoolOnComplete(false))
-                    .WithHeaders("testKey2: testValue2.2", "testKey3: testValue3.1"));
+                    .WithHeaders(["testKey2: testValue2.2", "testKey3: testValue3.1"]));
 
             // Shortcut
             apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var apizrTransferManager).Should().BeTrue();
 
             // Shortcut
-            await apizrTransferManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithHeaders("testKey4: testValue4.2", "testKey5: testValue5"));
+            await apizrTransferManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithHeaders(["testKey4: testValue4.2", "testKey5: testValue5"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
@@ -1308,7 +1308,7 @@ namespace Apizr.Tests
                 .AddManagerFor<IReqResSimpleService>(options => options
                     .WithBaseAddress("https://reqres.in/api")
                     .WithHeaders(() => requestHeaders, scope: ApizrLifetimeScope.Request)
-                    .WithHeaders("testKey6: testValue6.1", "testKey7: testValue7.2")
+                    .WithHeaders(["testKey6: testValue6.1", "testKey7: testValue7.2"])
                     .AddDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
@@ -1317,15 +1317,15 @@ namespace Apizr.Tests
                     .WithResilienceContextOptions(opt =>
                         opt.ReturnToPoolOnComplete(false))
                     .WithHeaders(() => apiHeaders, scope: ApizrLifetimeScope.Api)
-                    .WithHeaders("testKey7: testValue7.1", "testKey8: testValue8.1"));
+                    .WithHeaders(["testKey7: testValue7.1", "testKey8: testValue8.1"]));
 
             // Shortcut
             apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var apizrManager).Should().BeTrue();
 
             // Shortcut
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithHeaders("testKey5: testValue5.2",
-                    "testKey6: testValue6.2"));
+                options => options.WithHeaders(["testKey5: testValue5.2",
+                    "testKey6: testValue6.2"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6", "testKey7", "testKey8");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
@@ -1343,8 +1343,8 @@ namespace Apizr.Tests
             requestHeaders[2] = "testKey5: testValue5.3"; // should be updated (scope: Request) but updated then by request option
 
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithHeaders("testKey5: testValue5.4",
-                    "testKey6: testValue6.3"));
+                options => options.WithHeaders(["testKey5: testValue5.4",
+                    "testKey6: testValue6.3"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6", "testKey7", "testKey8");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Same as previous value
@@ -1363,21 +1363,19 @@ namespace Apizr.Tests
             var watcher = new WatchingRequestHandler();
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                    .AddManagerFor<IReqResSimpleService>(options => options
-                        .WithHeaders("testKey2: testValue2")
+                    .AddManagerFor<IReqResSimpleService>(options => options.WithHeaders(["testKey2: testValue2"])
                         .AddDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithResilienceContextOptions(opt =>
-                        opt.ReturnToPoolOnComplete(false))
-                    .WithHeaders("testKey3: testValue3"));
+                        opt.ReturnToPoolOnComplete(false)).WithHeaders(["testKey3: testValue3"]));
 
             apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var reqResManager).Should().BeTrue(); // Custom
             
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithHeaders("testKey4: testValue4"));
+                options => options.WithHeaders(["testKey4: testValue4"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
         }

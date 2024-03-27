@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
@@ -22,6 +23,13 @@ namespace Apizr.Configuring.Request
         /// Options set to resilience context
         /// </summary>
         IApizrResilienceContextOptions ResilienceContextOptions { get; }
+
+        /// <summary>
+        /// Headers to add to the request
+        /// </summary>
+        IList<string> Headers { get; }
+
+        internal IList<string> HeadersStore { get; }
 
         internal Expression OriginalExpression { get; set; }
     }

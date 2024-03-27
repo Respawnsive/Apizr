@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
+using Apizr.Extending;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -25,6 +26,12 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
     {
         foreach (var handlersParameter in handlersParameters)
             HandlersParameters[handlersParameter.Key] = handlersParameter.Value;
+
+        Headers = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationBehavior.Set, out var headers) == true ? headers : [];
+
+        if (sharedOptions?.Headers?.TryGetValue(ApizrRegistrationBehavior.Store, out var headersStore) == true)
+            _headersStore = headersStore;
+
     }
 
     /// <inheritdoc />
@@ -35,6 +42,13 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
 
     /// <inheritdoc />
     public IApizrResilienceContextOptions ResilienceContextOptions { get; internal set; }
+
+    /// <inheritdoc />
+    public IList<string> Headers { get; internal set; }
+
+    private readonly IList<string> _headersStore;
+    /// <inheritdoc />
+    IList<string> IApizrRequestOptions.HeadersStore => _headersStore;
 
     /// <inheritdoc />
     Expression IApizrRequestOptions.OriginalExpression { get; set; }

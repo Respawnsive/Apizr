@@ -35,5 +35,10 @@ namespace Apizr.Configuring.Shared
         /// Headers factories
         /// </summary>
         IDictionary<ApizrLifetimeScope, Func<IList<string>>> HeadersFactories { get; }
+
+        /// <summary>
+        /// Headers to add to the request
+        /// </summary>
+        IDictionary<ApizrRegistrationBehavior, IList<string>> Headers { get; }
     }
 }

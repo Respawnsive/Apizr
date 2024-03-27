@@ -177,9 +177,32 @@ namespace Apizr.Extending.Configuring.Proper
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
 
         /// <inheritdoc />
-        public IApizrExtendedProperOptionsBuilder WithHeaders(params string[] headers)
+        public IApizrExtendedProperOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set)
         {
-            headers?.ToList().ForEach(header => Options.Headers.Add(header));
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.Headers[behavior] ??= headers;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.Headers.TryGetValue(behavior, out var value))
+                    {
+                        headers?.ToList().ForEach(header => value.Add(header));
+                    }
+                    else
+                    {
+                        Options.Headers[behavior] = headers;
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.Headers[behavior] = headers;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }

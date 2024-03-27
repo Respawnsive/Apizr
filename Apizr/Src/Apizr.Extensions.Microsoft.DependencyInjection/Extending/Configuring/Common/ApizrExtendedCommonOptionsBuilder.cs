@@ -14,12 +14,10 @@ using Apizr.Connecting;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
-using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Refit;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Apizr.Extending.Configuring.Common
 {
@@ -149,9 +147,32 @@ namespace Apizr.Extending.Configuring.Common
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder WithHeaders(params string[] headers)
+        public IApizrExtendedCommonOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set)
         {
-            headers?.ToList().ForEach(header => Options.Headers.Add(header));
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.Headers[behavior] ??= headers;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.Headers.TryGetValue(behavior, out var value))
+                    {
+                        headers?.ToList().ForEach(header => value.Add(header));
+                    }
+                    else
+                    {
+                        Options.Headers[behavior] = headers;
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.Headers[behavior] = headers;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }

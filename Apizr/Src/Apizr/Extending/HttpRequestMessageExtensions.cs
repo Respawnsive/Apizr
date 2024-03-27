@@ -29,6 +29,27 @@ namespace Apizr.Extending
                     logLevels = apizrOptions.LogLevels;
                 }
 
+                var headersSetCount = 0;
+
+                // Handling header store
+                if (request.Headers.Any() && options.HeadersStore?.Count > 0)
+                {
+                    var matchingHeaders = options.HeadersStore.Where(storedHeader =>
+                        TryGetHeaderKeyValue(storedHeader, out var storedHeaderkey, out _) &&
+                        request.Headers.Any(requestHeader =>
+                            //TryGetHeaderKeyValue(requestHeader.Key, out var requestHeaderkey,out _) && 
+                            storedHeaderkey == requestHeader.Key)).ToList();
+
+                    foreach (var matchingHeader in matchingHeaders)
+                    {
+                        var headerSet = request.TrySetHeader(matchingHeader, out var key, out _);
+                        if (!headerSet)
+                            logger.Log(logLevels.Low(), "{0}: Header {1} can't be set.", context.OperationKey, matchingHeader);
+                        else
+                            headersSetCount++;
+                    }
+                }
+
                 // Handling headers
                 if (options.Headers?.Count > 0)
                 {
@@ -38,8 +59,6 @@ namespace Apizr.Extending
                     // provided the HttpClient will allow it for the method
                     if (request.Content == null && !Constants.BodylessMethods.Contains(request.Method))
                         request.Content = new ByteArrayContent(Array.Empty<byte>());
-
-                    var headersSetCount = 0;
 
                     foreach (var header in options.Headers)
                     {

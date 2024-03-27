@@ -269,9 +269,32 @@ namespace Apizr.Configuring.Proper
                 () => loggingConfigurationFactory.Invoke().Item3);
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithHeaders(params string[] headers)
+        public IApizrProperOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set)
         {
-            headers?.ToList().ForEach(header => Options.Headers.Add(header));
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.Headers[behavior] ??= headers;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.Headers.TryGetValue(behavior, out var value))
+                    {
+                        headers?.ToList().ForEach(header => value.Add(header));
+                    }
+                    else
+                    {
+                        Options.Headers[behavior] = headers;
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.Headers[behavior] = headers;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }
@@ -309,26 +332,49 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService,
-            Expression<Func<TSettingsService, string>>[] headerProperties)
-            => WithHeaders(() => settingsService, headerProperties);
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api)
+            => WithHeaders(() => settingsService, headerProperties, strategy, scope);
 
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
-            Expression<Func<TSettingsService, string>>[] headerProperties)
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api)
         {
             var settingsService = settingsServiceFactory.Invoke();
             var headersFactories = headerProperties.Select(exp => exp.Compile());
-            if (Options.HeadersFactories.TryGetValue(ApizrLifetimeScope.Request, out var previous))
+
+            switch (strategy)
             {
-                Options.HeadersFactories[ApizrLifetimeScope.Request] = () => previous()
-                    .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
-                    .ToList();
-            }
-            else
-            {
-                Options.HeadersFactories[ApizrLifetimeScope.Request] = () => headersFactories
-                    .Select(headerFactory => headerFactory.Invoke(settingsService))
-                    .ToList();
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersFactories[scope] ??= () => headersFactories
+                        .Select(headerFactory => headerFactory.Invoke(settingsService))
+                        .ToList();
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersFactories.TryGetValue(scope, out var previous))
+                    {
+                        Options.HeadersFactories[scope] = () => previous()
+                            .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
+                            .ToList();
+                    }
+                    else
+                    {
+                        Options.HeadersFactories[scope] = () => headersFactories
+                            .Select(headerFactory => headerFactory.Invoke(settingsService))
+                            .ToList();
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersFactories[scope] = () => headersFactories
+                        .Select(headerFactory => headerFactory.Invoke(settingsService))
+                        .ToList();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
             }
 
             return this;

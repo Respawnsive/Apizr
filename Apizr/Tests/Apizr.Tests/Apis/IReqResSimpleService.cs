@@ -11,7 +11,7 @@ namespace Apizr.Tests.Apis
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync();
 
-        [Get("/users")]
+        [Get("/users"), Headers("testStoreKey1:")]
         Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
     }
 }

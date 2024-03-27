@@ -200,7 +200,7 @@ namespace Apizr.Configuring.Manager
         public IDictionary<string, object> HandlersParameters => Options.HandlersParameters;
 
         /// <inheritdoc />
-        public IList<string> Headers => Options.Headers;
+        public IDictionary<ApizrRegistrationBehavior, IList<string>> Headers => Options.Headers;
 
         /// <inheritdoc />
         public IDictionary<ApizrLifetimeScope, Func<IList<string>>> HeadersFactories => Options.HeadersFactories;

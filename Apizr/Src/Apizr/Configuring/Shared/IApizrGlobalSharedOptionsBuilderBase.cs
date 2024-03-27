@@ -65,13 +65,6 @@ namespace Apizr.Configuring.Shared
             HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels);
 
         /// <summary>
-        /// Add some headers to the request
-        /// </summary>
-        /// <param name="headers">Headers to add to the request</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithHeaders(params string[] headers);
-
-        /// <summary>
         /// Set a timeout to the operation (overall request tries)
         /// </summary>
         /// <param name="timeout">The operation timeout</param>

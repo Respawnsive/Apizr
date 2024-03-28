@@ -417,11 +417,20 @@ namespace Apizr
             builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
-            if (builder.ApizrOptions.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Api, out var factory) == true)
+
+            if (builder.ApizrOptions.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Api), out var setFactory) == true)
             {
-                var headers = factory.Invoke()?.ToArray();
-                if(headers?.Length > 0)
-                    builder.WithHeaders(headers);
+                // Set api scoped headers right the way
+                var setHeaders = setFactory.Invoke()?.ToArray();
+                if(setHeaders?.Length > 0)
+                    builder.WithHeaders(setHeaders, mode: ApizrRegistrationMode.Set);
+            }
+            if (builder.ApizrOptions.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Store, ApizrLifetimeScope.Api), out var storeFactory) == true)
+            {
+                // Store api scoped headers for further attribute key match use
+                var storeHeaders = storeFactory.Invoke()?.ToArray();
+                if (storeHeaders?.Length > 0)
+                    builder.WithHeaders(storeHeaders, mode: ApizrRegistrationMode.Store);
             }
 
             return builder.ApizrOptions;

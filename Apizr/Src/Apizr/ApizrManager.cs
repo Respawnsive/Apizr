@@ -61,12 +61,21 @@ namespace Apizr
             // Create request options builder with request options
             var builder = new ApizrRequestOptionsBuilder(requestOptions) as IApizrRequestOptionsBuilder;
 
-            // Update request scoped headers if any
-            if (baseOptions?.HeadersFactories?.TryGetValue(ApizrLifetimeScope.Request, out var factory) == true)
+            // Refresh request scoped headers if any
+            if (baseOptions?.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Request), out var setFactory) == true)
             {
-                var requestHeaders = factory?.Invoke()?.ToArray();
-                if (requestHeaders?.Length > 0)
-                    builder.WithHeaders(requestHeaders);
+                // Set refreshed headers right the way
+                var setHeaders = setFactory?.Invoke()?.ToArray();
+                if (setHeaders?.Length > 0)
+                    builder.WithHeaders(setHeaders, ApizrRegistrationMode.Set);
+            }
+
+            if (baseOptions?.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Store, ApizrLifetimeScope.Request), out var storeFactory) == true)
+            {
+                // Store refreshed headers for further attribute key match use
+                var storeHeaders = storeFactory?.Invoke()?.ToArray();
+                if (storeHeaders?.Length > 0)
+                    builder.WithHeaders(storeHeaders, ApizrRegistrationMode.Store);
             }
 
             // Apply latest request options if any

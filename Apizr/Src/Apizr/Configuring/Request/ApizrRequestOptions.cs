@@ -27,11 +27,10 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
         foreach (var handlersParameter in handlersParameters)
             HandlersParameters[handlersParameter.Key] = handlersParameter.Value;
 
-        Headers = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationBehavior.Set, out var headers) == true ? headers : [];
+        Headers = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Set, out var headers) == true ? headers : [];
 
-        if (sharedOptions?.Headers?.TryGetValue(ApizrRegistrationBehavior.Store, out var headersStore) == true)
+        if (sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Store, out var headersStore) == true)
             _headersStore = headersStore;
-
     }
 
     /// <inheritdoc />

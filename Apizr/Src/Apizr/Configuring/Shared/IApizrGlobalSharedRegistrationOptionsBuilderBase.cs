@@ -68,10 +68,10 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="headers">Headers to add to the request</param>
         /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
-        /// <param name="behavior">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithHeaders(IList<string> headers,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
-            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set);
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
     }
 }

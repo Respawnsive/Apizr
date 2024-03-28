@@ -330,26 +330,26 @@ namespace Apizr.Configuring.Common
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithHeaders(IList<string> headers,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, 
-            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set)
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
         {
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.Headers[behavior] ??= headers;
+                    Options.Headers[mode] ??= headers;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.Headers.TryGetValue(behavior, out var value))
+                    if (Options.Headers.TryGetValue(mode, out var value))
                     {
                         headers?.ToList().ForEach(header => value.Add(header));
                     }
                     else
                     {
-                        Options.Headers[behavior] = headers;
+                        Options.Headers[mode] = headers;
                     }
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.Headers[behavior] = headers;
+                    Options.Headers[mode] = headers;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
@@ -360,27 +360,28 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithHeaders(Func<IList<string>> headersFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, 
-            ApizrLifetimeScope scope = ApizrLifetimeScope.Api)
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
         {
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.HeadersFactories[scope] ??= headersFactory;
+                    Options.HeadersFactories[(mode, scope)] ??= headersFactory;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.HeadersFactories.TryGetValue(scope, out var previous))
+                    if (Options.HeadersFactories.TryGetValue((mode, scope), out var previous))
                     {
-                        Options.HeadersFactories[scope] = () => previous().Concat(headersFactory()).ToList();
+                        Options.HeadersFactories[(mode, scope)] = () => previous().Concat(headersFactory()).ToList();
                     }
                     else
                     {
-                        Options.HeadersFactories[scope] = headersFactory;
+                        Options.HeadersFactories[(mode, scope)] = headersFactory;
                     }
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.HeadersFactories[scope] = headersFactory;
+                    Options.HeadersFactories[(mode, scope)] = headersFactory;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
@@ -393,14 +394,16 @@ namespace Apizr.Configuring.Common
         public IApizrCommonOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService,
             Expression<Func<TSettingsService, string>>[] headerProperties,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
-            ApizrLifetimeScope scope = ApizrLifetimeScope.Api)
-            => WithHeaders(() => settingsService, headerProperties, strategy, scope);
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+            => WithHeaders(() => settingsService, headerProperties, strategy, scope, mode);
 
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>>[] headerProperties,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
-            ApizrLifetimeScope scope = ApizrLifetimeScope.Api)
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, 
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
         {
             var settingsService = settingsServiceFactory.Invoke();
             var headersFactories = headerProperties.Select(exp => exp.Compile());
@@ -408,27 +411,27 @@ namespace Apizr.Configuring.Common
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.HeadersFactories[scope] ??= () => headersFactories
+                    Options.HeadersFactories[(mode, scope)] ??= () => headersFactories
                         .Select(headerFactory => headerFactory.Invoke(settingsService))
                         .ToList();
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.HeadersFactories.TryGetValue(scope, out var previous))
+                    if (Options.HeadersFactories.TryGetValue((mode, scope), out var previous))
                     {
-                        Options.HeadersFactories[scope] = () => previous()
+                        Options.HeadersFactories[(mode, scope)] = () => previous()
                             .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
                             .ToList();
                     }
                     else
                     {
-                        Options.HeadersFactories[scope] = () => headersFactories
+                        Options.HeadersFactories[(mode, scope)] = () => headersFactories
                             .Select(headerFactory => headerFactory.Invoke(settingsService))
                             .ToList();
                     }
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.HeadersFactories[scope] = () => headersFactories
+                    Options.HeadersFactories[(mode, scope)] = () => headersFactories
                         .Select(headerFactory => headerFactory.Invoke(settingsService))
                         .ToList();
                     break;

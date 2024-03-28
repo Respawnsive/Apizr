@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Apizr.Configuring
 {
-    public enum ApizrRegistrationBehavior
+    public enum ApizrRegistrationMode
     {
         Set,
         Store

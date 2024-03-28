@@ -200,10 +200,10 @@ namespace Apizr.Configuring.Manager
         public IDictionary<string, object> HandlersParameters => Options.HandlersParameters;
 
         /// <inheritdoc />
-        public IDictionary<ApizrRegistrationBehavior, IList<string>> Headers => Options.Headers;
+        public IDictionary<ApizrRegistrationMode, IList<string>> Headers => Options.Headers;
 
         /// <inheritdoc />
-        public IDictionary<ApizrLifetimeScope, Func<IList<string>>> HeadersFactories => Options.HeadersFactories;
+        public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> HeadersFactories => Options.HeadersFactories;
 
         /// <inheritdoc />
         public TimeSpan? OperationTimeout => Options.OperationTimeout;

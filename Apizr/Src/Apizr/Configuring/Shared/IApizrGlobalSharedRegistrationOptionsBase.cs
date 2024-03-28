@@ -34,11 +34,11 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Headers factories
         /// </summary>
-        IDictionary<ApizrLifetimeScope, Func<IList<string>>> HeadersFactories { get; }
+        IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> HeadersFactories { get; }
 
         /// <summary>
         /// Headers to add to the request
         /// </summary>
-        IDictionary<ApizrRegistrationBehavior, IList<string>> Headers { get; }
+        IDictionary<ApizrRegistrationMode, IList<string>> Headers { get; }
     }
 }

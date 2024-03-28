@@ -149,7 +149,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithHeaders(IList<string> headers,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
-            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set)
+            ApizrRegistrationMode behavior = ApizrRegistrationMode.Set)
         {
             switch (strategy)
             {

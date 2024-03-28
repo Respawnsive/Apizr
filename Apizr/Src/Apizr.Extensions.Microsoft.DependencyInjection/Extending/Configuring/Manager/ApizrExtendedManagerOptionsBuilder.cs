@@ -181,7 +181,7 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithHeaders(IList<string> headers,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
-            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set)
+            ApizrRegistrationMode behavior = ApizrRegistrationMode.Set)
         {
             switch (strategy)
             {
@@ -577,7 +577,8 @@ namespace Apizr.Extending.Configuring.Manager
             => AddDelegatingHandler((_, opt) => handlerFactory.Invoke(opt));
 
         /// <inheritdoc />
-        void IApizrExtendedManagerOptionsBuilder.WithHeaders(IDictionary<ApizrLifetimeScope, Func<IList<string>>> headersFactories)
+        void IApizrExtendedManagerOptionsBuilder.WithHeaders(
+            IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> headersFactories)
         {
             Options.HeadersFactories = headersFactories;
         }

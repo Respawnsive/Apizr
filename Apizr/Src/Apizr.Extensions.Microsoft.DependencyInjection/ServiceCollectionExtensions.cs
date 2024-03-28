@@ -749,7 +749,7 @@ namespace Apizr
                 var headersFactories = apizrOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key,
                     kvp => kvp.Value.Invoke(serviceProvider));
                 if (headersFactories?.Count > 0)
-                    apizrOptionsBuilder.WithHeaders(headersFactories);
+                    apizrOptionsBuilder.WithHeaders((IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>>) headersFactories);
 
                 if (headersFactories?.TryGetValue(ApizrLifetimeScope.Api, out var factory) == true)
                 {

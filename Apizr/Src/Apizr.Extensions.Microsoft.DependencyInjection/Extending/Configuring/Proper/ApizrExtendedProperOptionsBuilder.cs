@@ -179,7 +179,7 @@ namespace Apizr.Extending.Configuring.Proper
         /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithHeaders(IList<string> headers,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
-            ApizrRegistrationBehavior behavior = ApizrRegistrationBehavior.Set)
+            ApizrRegistrationMode behavior = ApizrRegistrationMode.Set)
         {
             switch (strategy)
             {

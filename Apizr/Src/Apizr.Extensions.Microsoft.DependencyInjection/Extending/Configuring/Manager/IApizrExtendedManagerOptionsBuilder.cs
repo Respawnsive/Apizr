@@ -26,6 +26,6 @@ namespace Apizr.Extending.Configuring.Manager
     {
         internal IApizrExtendedManagerOptions ApizrOptions { get; }
 
-        internal void WithHeaders(IDictionary<ApizrLifetimeScope, Func<IList<string>>> headersFactories);
+        internal void WithHeaders(IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> headersFactories);
     }
 }

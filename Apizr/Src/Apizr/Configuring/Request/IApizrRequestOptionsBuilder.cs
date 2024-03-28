@@ -37,6 +37,7 @@ namespace Apizr.Configuring.Request
         TApizrOptionsBuilder WithHeaders(IList<string> headers,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
 
+        internal TApizrOptionsBuilder WithHeaders(IList<string> headers, ApizrRegistrationMode mode);
         internal TApizrOptionsBuilder WithOriginalExpression(Expression originalExpression);
         internal TApizrOptionsBuilder WithResilienceContextOptions(IApizrResilienceContextOptions options);
         internal TApizrOptionsBuilder WithContext(ResilienceContext context);

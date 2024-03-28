@@ -214,6 +214,31 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     #region Internals
 
     /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithHeaders(IList<string> headers, ApizrRegistrationMode mode)
+    {
+        if (mode == ApizrRegistrationMode.Set)
+        {
+            // Set headers right the way
+            if (Options.Headers.Count > 0)
+            {
+                headers?.ToList().ForEach(header => Options.Headers.Add(header));
+            }
+            else
+            {
+                Options.Headers = headers;
+            } 
+        }
+        else
+        {
+            // Store headers for further attribute key match use
+            var headersStore = ((IApizrRequestOptions) Options).HeadersStore;
+            headers?.ToList().ForEach(header => headersStore.Add(header));
+        }
+
+        return this;
+    }
+
+    /// <inheritdoc />
     IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOriginalExpression(Expression originalExpression)
     {
         ((IApizrRequestOptions)Options).OriginalExpression = originalExpression;

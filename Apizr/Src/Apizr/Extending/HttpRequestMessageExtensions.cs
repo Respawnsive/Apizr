@@ -31,27 +31,8 @@ namespace Apizr.Extending
 
                 var headersSetCount = 0;
 
-                // Handling header store
-                if (request.Headers.Any() && options.HeadersStore?.Count > 0)
-                {
-                    var matchingHeaders = options.HeadersStore.Where(storedHeader =>
-                        TryGetHeaderKeyValue(storedHeader, out var storedHeaderkey, out _) &&
-                        request.Headers.Any(requestHeader =>
-                            //TryGetHeaderKeyValue(requestHeader.Key, out var requestHeaderkey,out _) && 
-                            storedHeaderkey == requestHeader.Key)).ToList();
-
-                    foreach (var matchingHeader in matchingHeaders)
-                    {
-                        var headerSet = request.TrySetHeader(matchingHeader, out var key, out _);
-                        if (!headerSet)
-                            logger.Log(logLevels.Low(), "{0}: Header {1} can't be set.", context.OperationKey, matchingHeader);
-                        else
-                            headersSetCount++;
-                    }
-                }
-
                 // Handling headers
-                if (options.Headers?.Count > 0)
+                if (options.Headers.Count > 0)
                 {
                     // Cloned and adjusted from Refit
                     // We could have content headers, so we need to make
@@ -71,21 +52,42 @@ namespace Apizr.Extending
                         else
                             headersSetCount++;
                     }
+                }
 
-                    if (headersSetCount > 0)
+                // Handling header store
+                if (request.Headers.Any() && options.HeadersStore?.Count > 0)
+                {
+                    var matchingHeaders = options.HeadersStore.Where(storedHeader =>
+                        TryGetHeaderKeyValue(storedHeader, out var storedHeaderkey, out _) &&
+                        request.Headers.Any(requestHeader =>
+                            storedHeaderkey == requestHeader.Key && 
+                            (requestHeader.Value == null || 
+                             requestHeader.Value.All(string.IsNullOrWhiteSpace))))
+                        .ToList();
+
+                    foreach (var matchingHeader in matchingHeaders)
                     {
-                        logger.Log(logLevels.Low(),
-                            headersSetCount < options.Headers.Count
-                                ? "{0}: Some provided header values have been set."
-                                : "{0}: All provided header values have been set.", context.OperationKey);
-
-                        var shouldRedactHeaderValue = options.ShouldRedactHeaderValue ?? ShouldRedactHeaderValue;
-
-                        var headersLogValue = new ApizrHttpHeadersLogValue(ApizrHttpHeadersLogValue.Kind.Request,
-                                                       request.Headers, request.Content?.Headers, shouldRedactHeaderValue);
-
-                        logger.Log(logLevels.Low(), headersLogValue.ToString());
+                        var headerSet = request.TrySetHeader(matchingHeader, out var key, out _);
+                        if (!headerSet)
+                            logger.Log(logLevels.Low(), "{0}: Header {1} can't be set.", context.OperationKey, matchingHeader);
+                        else
+                            headersSetCount++;
                     }
+                }
+
+                if (headersSetCount > 0)
+                {
+                    logger.Log(logLevels.Low(),
+                        headersSetCount < options.Headers.Count
+                            ? "{0}: Some provided header values have been set."
+                            : "{0}: All provided header values have been set.", context.OperationKey);
+
+                    var shouldRedactHeaderValue = options.ShouldRedactHeaderValue ?? ShouldRedactHeaderValue;
+
+                    var headersLogValue = new ApizrHttpHeadersLogValue(ApizrHttpHeadersLogValue.Kind.Request,
+                        request.Headers, request.Content?.Headers, shouldRedactHeaderValue);
+
+                    logger.Log(logLevels.Low(), headersLogValue.ToString());
                 }
 
                 // Handling cancellation

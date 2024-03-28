@@ -28,9 +28,7 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
             HandlersParameters[handlersParameter.Key] = handlersParameter.Value;
 
         Headers = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Set, out var headers) == true ? headers : [];
-
-        if (sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Store, out var headersStore) == true)
-            _headersStore = headersStore;
+        _headersStore = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Store, out var headersStore) == true ? headersStore : [];
     }
 
     /// <inheritdoc />

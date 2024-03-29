@@ -12,7 +12,6 @@ using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
-using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -329,13 +328,116 @@ namespace Apizr.Configuring.Common
                 () => loggingConfigurationFactory.Invoke().Item3);
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithHeaders(params string[] headers)
-            => WithHeaders(() => headers?.ToList());
+        public IApizrCommonOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, 
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.Headers[mode] ??= headers;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.Headers.TryGetValue(mode, out var value))
+                    {
+                        headers?.ToList().ForEach(header => value.Add(header));
+                    }
+                    else
+                    {
+                        Options.Headers[mode] = headers;
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.Headers[mode] = headers;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+            
+            return this;
+        }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithHeaders(Func<IList<string>> headersFactory)
+        public IApizrCommonOptionsBuilder WithHeaders(Func<IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
         {
-            Options.HeadersFactories.Add(headersFactory);
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersFactories[(mode, scope)] ??= headersFactory;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersFactories.TryGetValue((mode, scope), out var previous))
+                    {
+                        Options.HeadersFactories[(mode, scope)] = () => previous().Concat(headersFactory()).ToList();
+                    }
+                    else
+                    {
+                        Options.HeadersFactories[(mode, scope)] = headersFactory;
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersFactories[(mode, scope)] = headersFactory;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService,
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+            => WithHeaders(() => settingsService, headerProperties, strategy, scope, mode);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, 
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+        {
+            var settingsService = settingsServiceFactory.Invoke();
+            var headersFactories = headerProperties.Select(exp => exp.Compile());
+
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersFactories[(mode, scope)] ??= () => headersFactories
+                        .Select(headerFactory => headerFactory.Invoke(settingsService))
+                        .ToList();
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersFactories.TryGetValue((mode, scope), out var previous))
+                    {
+                        Options.HeadersFactories[(mode, scope)] = () => previous()
+                            .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
+                            .ToList();
+                    }
+                    else
+                    {
+                        Options.HeadersFactories[(mode, scope)] = () => headersFactories
+                            .Select(headerFactory => headerFactory.Invoke(settingsService))
+                            .ToList();
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersFactories[(mode, scope)] = () => headersFactories
+                        .Select(headerFactory => headerFactory.Invoke(settingsService))
+                        .ToList();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }
@@ -411,6 +513,47 @@ namespace Apizr.Configuring.Common
             else
             {
                 options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithLoggedHeadersRedactionNames(IEnumerable<string> redactedLoggedHeaderNames, 
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            var sensitiveHeaders = new HashSet<string>(redactedLoggedHeaderNames, StringComparer.OrdinalIgnoreCase);
+
+            return WithLoggedHeadersRedactionRule(header => sensitiveHeaders.Contains(header), strategy);
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithLoggedHeadersRedactionRule(Func<string, bool> shouldRedactHeaderValue,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.ShouldRedactHeaderValue ??= shouldRedactHeaderValue;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.ShouldRedactHeaderValue == null)
+                    {
+                        Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    }
+                    else
+                    {
+                        var previous = Options.ShouldRedactHeaderValue;
+                        Options.ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
+                    }
+
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
             }
 
             return this;

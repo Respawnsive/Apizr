@@ -130,8 +130,28 @@ namespace Apizr.Extending.Configuring.Shared
         /// Add some headers to the request
         /// </summary>
         /// <param name="headersFactory">Headers to add to the request</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory);
+        TApizrExtendedSharedOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
+
+        /// <summary>
+        /// Add some headers to the request loaded from service properties
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
+        /// <param name="headerProperties">The header properties to get from</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithHeaders<TSettingsService>(Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
 
         /// <summary>
         /// Set a timeout to the operation (overall request tries)

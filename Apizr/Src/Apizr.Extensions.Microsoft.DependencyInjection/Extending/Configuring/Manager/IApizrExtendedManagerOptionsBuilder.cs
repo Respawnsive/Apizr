@@ -1,4 +1,7 @@
-﻿using Apizr.Extending.Configuring.Common;
+﻿using System;
+using System.Collections.Generic;
+using Apizr.Configuring;
+using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
 
 namespace Apizr.Extending.Configuring.Manager
@@ -22,5 +25,7 @@ namespace Apizr.Extending.Configuring.Manager
         IApizrExtendedManagerOptionsBuilder : IApizrExtendedManagerOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>
     {
         internal IApizrExtendedManagerOptions ApizrOptions { get; }
+
+        internal void WithHeaders(IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> headersFactories);
     }
 }

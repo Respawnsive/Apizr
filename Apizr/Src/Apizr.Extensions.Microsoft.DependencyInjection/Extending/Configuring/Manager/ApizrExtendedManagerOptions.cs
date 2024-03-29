@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Apizr.Caching;
+using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Common;
@@ -52,9 +53,9 @@ namespace Apizr.Extending.Configuring.Manager
             ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistrationActions = commonOptions.PostRegistrationActions.ToList();
-            HeadersFactories = new List<Func<IServiceProvider, IList<string>>> { properOptions.HeadersFactory };
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
+            HeadersExtendedFactories = properOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
             _resiliencePropertiesExtendedFactories = properOptions.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
                                                      new Dictionary<string, Func<IServiceProvider, object>>();
         }
@@ -155,11 +156,9 @@ namespace Apizr.Extending.Configuring.Manager
 
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
-
-        internal IList<Func<IServiceProvider, IList<string>>> HeadersFactories { get; }
-        private Func<IServiceProvider, IList<string>> _headersFactory;
+        
         /// <inheritdoc />
-        public Func<IServiceProvider, IList<string>> HeadersFactory => _headersFactory ??= serviceProvider => Headers = HeadersFactories.SelectMany(factory => factory.Invoke(serviceProvider)).ToList();
+        public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
@@ -201,6 +200,7 @@ namespace Apizr.Extending.Configuring.Manager
     public class ApizrExtendedManagerOptions<TWebApi> : ApizrManagerOptions<TWebApi>, IApizrExtendedManagerOptionsBase
     {
         private readonly IApizrExtendedManagerOptionsBase _apizrExtendedOptions;
+
         public ApizrExtendedManagerOptions(IApizrExtendedManagerOptionsBase apizrOptions) : base(apizrOptions)
         {
             _apizrExtendedOptions = apizrOptions;

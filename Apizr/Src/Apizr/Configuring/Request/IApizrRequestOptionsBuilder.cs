@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared.Context;
 using Polly;
@@ -27,6 +28,16 @@ namespace Apizr.Configuring.Request
         /// <returns></returns>
         TApizrOptionsBuilder WithCacheClearing(bool clearCache);
 
+        /// <summary>
+        /// Add some headers to the request
+        /// </summary>
+        /// <param name="headers">Headers to add to the request</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
+
+        internal TApizrOptionsBuilder WithHeaders(IList<string> headers, ApizrRegistrationMode mode);
         internal TApizrOptionsBuilder WithOriginalExpression(Expression originalExpression);
         internal TApizrOptionsBuilder WithResilienceContextOptions(IApizrResilienceContextOptions options);
         internal TApizrOptionsBuilder WithContext(ResilienceContext context);

@@ -179,13 +179,115 @@ namespace Apizr.Extending.Configuring.Manager
                     serviceProvider.GetRequiredService<TSettingsService>, tokenProperty, refreshTokenFactory));
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithHeaders(params string[] headers)
-            => WithHeaders(_ => headers?.ToList());
+        public IApizrExtendedManagerOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.Headers[mode] ??= headers;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.Headers.TryGetValue(mode, out var value))
+                    {
+                        headers?.ToList().ForEach(header => value.Add(header));
+                    }
+                    else
+                    {
+                        Options.Headers[mode] = headers;
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.Headers[mode] = headers;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory)
+        public IApizrExtendedManagerOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
         {
-            Options.HeadersFactories.Add(headersFactory);
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersExtendedFactories[(mode, scope)] ??= serviceProvider => () => headersFactory(serviceProvider);
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersExtendedFactories.TryGetValue((mode, scope), out var previous))
+                    {
+                        Options.HeadersExtendedFactories[(mode, scope)] = serviceProvider => () => previous(serviceProvider).Invoke().Concat(headersFactory(serviceProvider)).ToList();
+                    }
+                    else
+                    {
+                        Options.HeadersExtendedFactories[(mode, scope)] = serviceProvider => () => headersFactory(serviceProvider);
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersExtendedFactories[(mode, scope)] = serviceProvider => () => headersFactory(serviceProvider);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithHeaders<TSettingsService>(
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+        {
+            var headersFactories = headerProperties.Select(exp => exp.Compile());
+
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersExtendedFactories[(mode, scope)] ??= serviceProvider => () =>
+                    {
+                        var settingsService = serviceProvider.GetRequiredService<TSettingsService>();
+                        return headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)).ToList();
+                    };
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersExtendedFactories.TryGetValue((mode, scope), out var previous))
+                    {
+                        Options.HeadersExtendedFactories[(mode, scope)] = serviceProvider => () =>
+                        {
+                            var settingsService = serviceProvider.GetRequiredService<TSettingsService>();
+                            return previous(serviceProvider).Invoke()
+                                .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
+                                .ToList();
+                        };
+                    }
+                    else
+                    {
+                        Options.HeadersExtendedFactories[(mode, scope)] = serviceProvider => () =>
+                        {
+                            var settingsService = serviceProvider.GetRequiredService<TSettingsService>();
+                            return headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)).ToList();
+                        };
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersExtendedFactories[(mode, scope)] = serviceProvider => () =>
+                    {
+                        var settingsService = serviceProvider.GetRequiredService<TSettingsService>();
+                        return headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)).ToList();
+                    };
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }
@@ -447,6 +549,47 @@ namespace Apizr.Extending.Configuring.Manager
             return this;
         }
 
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithLoggedHeadersRedactionNames(IEnumerable<string> redactedLoggedHeaderNames,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            var sensitiveHeaders = new HashSet<string>(redactedLoggedHeaderNames, StringComparer.OrdinalIgnoreCase);
+
+            return WithLoggedHeadersRedactionRule(header => sensitiveHeaders.Contains(header), strategy);
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithLoggedHeadersRedactionRule(
+            Func<string, bool> shouldRedactHeaderValue, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.ShouldRedactHeaderValue ??= shouldRedactHeaderValue;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.ShouldRedactHeaderValue == null)
+                    {
+                        Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    }
+                    else
+                    {
+                        var previous = Options.ShouldRedactHeaderValue;
+                        Options.ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
+                    }
+
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
         #region Internal
 
         void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
@@ -456,9 +599,15 @@ namespace Apizr.Extending.Configuring.Manager
             Options.PrimaryHandlerFactory = primaryHandlerFactory;
         }
 
-        /// <inheritdoc />
         void IApizrInternalRegistrationOptionsBuilder.AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> handlerFactory) 
             => AddDelegatingHandler((_, opt) => handlerFactory.Invoke(opt));
+
+        /// <inheritdoc />
+        void IApizrExtendedManagerOptionsBuilder.WithHeaders(
+            IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> headersFactories)
+        {
+            Options.HeadersFactories = headersFactories;
+        }
 
         #endregion
     }

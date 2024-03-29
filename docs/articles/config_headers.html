@@ -100,28 +100,58 @@
 <section id="tabpanel_1_tabid-designing" role="tabpanel" data-tab="tabid-designing">
 
 <p>You can set headers at design time, decorating interfaces or methods with the <code>Headers</code> attribute provided by Refit.</p>
-<p>You definitly can set a global header by decorating an interface, then manage specific scenarios at method level.
-Apizr will apply the closest header value to the request it could find.</p>
+<pre><code class="lang-csharp">[Headers(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)]
+public interface IYourApi
+{
+    [Headers(&quot;HeaderKey3: HeaderValue3&quot;)]
+    [Get(&quot;/your-endpoint&quot;)]
+    Task&lt;YourData&gt; GetYourDataAsync();
+}
+</code></pre>
 <div class="TIP">
 <h5>Tip</h5>
-<p>Please refer to Refit official documentation about header attribute. Note that decorating assembly is not available with Headers attribute.</p>
+<p>Please refer to Refit official documentation about Headers attribute. Note that decorating assembly is not available with Refit's Headers attribute.</p>
 </div>
+<p>You may want to set key-only headers at design time to provide values fluently at register or request time:</p>
+<pre><code class="lang-csharp">[Headers(&quot;HeaderKey1:&quot;, &quot;HeaderKey2:&quot;)]
+public interface IYourApi
+{
+    [Headers(&quot;HeaderKey3:&quot;)]
+    [Get(&quot;/your-endpoint&quot;)]
+    Task&lt;YourData&gt; GetYourDataAsync();
+}
+</code></pre>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Key-only headers need its ':' symbol so that Refit include it and then let Apizr process it.</p>
+</div>
+<p>Key-only headers attributes are mostly here to provide some common headers values fluently at register time, using the &quot;Store&quot; regististration mode (instead of &quot;Set&quot;), and deciding to use it or not at design time.</p>
 </section>
 <section id="tabpanel_1_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
 
-<p>Configuring the headers fluently at register time allows you to set it dynamically (e.g. based on settings).</p>
+<p>Configuring headers fluently at register time allows you to:</p>
+<ul>
+<li>Set it right the way to the request (default &quot;Set&quot; registration mode) or store it for further attribute key-only match use (&quot;Store&quot; registration mode)</li>
+<li>Load values dynamically (e.g. factory pointing to settings) or not.</li>
+<li>Refresh values at request time (&quot;Request&quot; lifetime scope) or not (default &quot;Api&quot; lifetime scope).</li>
+</ul>
 <p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
 <p>Now you can set headers thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
-options =&gt; options.AddHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)
+options =&gt; options.AddHeaders([&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
 
 // OR factory configuration
-options =&gt; options.AddHeaders(() =&gt; $&quot;HeaderKey3: {YourHeaderValue3}&quot;)
+options =&gt; options.AddHeaders(() =&gt; [$&quot;HeaderKey3: {YourHeaderValue3}&quot;])
 
 // OR extended factory configuration with the service provider instance
-options =&gt; options.AddHeaders(serviceProvider =&gt; $&quot;HeaderKey3: {serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourHeaderValue3}&quot;)
+options =&gt; options.AddHeaders(serviceProvider =&gt; [$&quot;HeaderKey3: {serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourHeaderValue3}&quot;])
+
+// OR extended factory configuration with your service instance
+options =&gt; options.AddHeaders&lt;IYourSettingsService&gt;([settings =&gt; $&quot;HeaderKey3: {settings.YourHeaderValue3}&quot;])
 </code></pre>
-<p>All headers fluent options are available with or without using registry.
+<p>There're many more overloads available with some optional parameters to make it suit your needs (duplicate strategy, lifetime scope and registration mode).
+You definitly can mix it all by calling the AddHeaders method multiple times but different ways.
+All headers fluent options are available with or without using registry.
 It means that you can share headers configuration, setting it at registry level and/or set some specific one at api level.</p>
 </section>
 <section id="tabpanel_1_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
@@ -130,7 +160,7 @@ It means that you can share headers configuration, setting it at registry level 
 <p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
 <p>You can now set headers thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
-options =&gt; options.AddHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)
+options =&gt; options.AddHeaders([&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
 </code></pre>
 </section>
 </div>

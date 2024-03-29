@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -169,8 +170,46 @@ namespace Apizr.Configuring.Shared
         /// Add some headers to the request
         /// </summary>
         /// <param name="headersFactory">Headers factory</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithHeaders(Func<IList<string>> headersFactory);
+        TApizrOptionsBuilder WithHeaders(Func<IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
+
+        /// <summary>
+        /// Add some headers to the request loaded from service properties
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
+        /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
+        /// <param name="headerProperties">The header properties to get from</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService, 
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
+
+        /// <summary>
+        /// Add some headers to the request loaded from service properties
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
+        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+        /// <param name="headerProperties">The header properties to get from</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory, 
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
 
         /// <summary>
         /// Set a timeout to the operation (overall request tries)

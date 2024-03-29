@@ -266,7 +266,6 @@ namespace Apizr
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
-            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -356,7 +355,6 @@ namespace Apizr
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
-            builder.ApizrOptions.HeadersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -417,9 +415,23 @@ namespace Apizr
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
             builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
-            builder.ApizrOptions.HeadersFactory?.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
+
+            if (builder.ApizrOptions.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Api), out var setFactory) == true)
+            {
+                // Set api scoped headers right the way
+                var setHeaders = setFactory.Invoke()?.ToArray();
+                if(setHeaders?.Length > 0)
+                    builder.WithHeaders(setHeaders, mode: ApizrRegistrationMode.Set);
+            }
+            if (builder.ApizrOptions.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Store, ApizrLifetimeScope.Api), out var storeFactory) == true)
+            {
+                // Store api scoped headers for further attribute key match use
+                var storeHeaders = storeFactory.Invoke()?.ToArray();
+                if (storeHeaders?.Length > 0)
+                    builder.WithHeaders(storeHeaders, mode: ApizrRegistrationMode.Store);
+            }
 
             return builder.ApizrOptions;
         }

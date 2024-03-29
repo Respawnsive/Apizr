@@ -32,10 +32,14 @@ items:
   - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHandlerParameter(System.String,System.Object)
-  - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
-  - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.String[])
+  - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+  - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
   - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})
   - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
+  - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)
   - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggerFactory(System.Func{Microsoft.Extensions.Logging.ILoggerFactory})
   - Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
@@ -68,7 +72,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrManagerOptionsBuilder
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 24
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -143,7 +147,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Options
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 29
+    startLine: 28
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -172,7 +176,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 40
+    startLine: 39
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -212,7 +216,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 62
+    startLine: 61
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -252,7 +256,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 70
+    startLine: 69
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -289,7 +293,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 74
+    startLine: 73
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -329,7 +333,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 82
+    startLine: 81
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -369,7 +373,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 86
+    startLine: 85
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -409,7 +413,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 94
+    startLine: 93
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -446,7 +450,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 98
+    startLine: 97
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -486,7 +490,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConfigureHttpClient
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 106
+    startLine: 105
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -529,7 +533,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 136
+    startLine: 135
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -572,7 +576,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 142
+    startLine: 141
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -612,7 +616,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 148
+    startLine: 147
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -658,7 +662,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 154
+    startLine: 153
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -707,7 +711,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 160
+    startLine: 159
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -753,7 +757,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 166
+    startLine: 165
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -802,7 +806,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 174
+    startLine: 173
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -856,7 +860,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 181
+    startLine: 180
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -910,7 +914,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 192
+    startLine: 191
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -952,7 +956,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 196
+    startLine: 195
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -994,7 +998,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDelegatingHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 200
+    startLine: 199
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1036,7 +1040,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRefitSettings
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 208
+    startLine: 207
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1073,7 +1077,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRefitSettings
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 212
+    startLine: 211
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1113,7 +1117,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResiliencePipelineRegistry
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 220
+    startLine: 219
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1153,7 +1157,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResiliencePipelineRegistry
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 225
+    startLine: 224
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1193,7 +1197,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 233
+    startLine: 232
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1233,7 +1237,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 237
+    startLine: 236
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1270,7 +1274,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 241
+    startLine: 240
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1310,7 +1314,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 249
+    startLine: 248
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1347,7 +1351,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 253
+    startLine: 252
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1387,7 +1391,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 261
+    startLine: 260
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1433,7 +1437,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 294
+    startLine: 293
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1481,7 +1485,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 301
+    startLine: 300
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1524,7 +1528,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 309
+    startLine: 308
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1570,7 +1574,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 315
+    startLine: 314
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1616,7 +1620,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 326
+    startLine: 325
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1638,16 +1642,16 @@ items:
   nameWithType.vb: ApizrManagerOptionsBuilder.WithLogging(Func(Of (HttpTracerMode, HttpMessageParts, LogLevel())))
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(System.Func(Of (Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())))
   name.vb: WithLogging(Func(Of (HttpTracerMode, HttpMessageParts, LogLevel())))
-- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.String[])
-  commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.String[])
-  id: WithHeaders(System.String[])
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+  id: WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
   parent: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithHeaders(params string[])
-  nameWithType: ApizrManagerOptionsBuilder.WithHeaders(params string[])
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(params string[])
+  name: WithHeaders(IList<string>, ApizrDuplicateStrategy, ApizrRegistrationMode)
+  nameWithType: ApizrManagerOptionsBuilder.WithHeaders(IList<string>, ApizrDuplicateStrategy, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Collections.Generic.IList<string>, Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrRegistrationMode)
   type: Method
   source:
     remote:
@@ -1656,38 +1660,44 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 333
+    startLine: 332
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
   summary: Add some headers to the request
   example: []
   syntax:
-    content: public IApizrManagerOptionsBuilder WithHeaders(params string[] headers)
+    content: public IApizrManagerOptionsBuilder WithHeaders(IList<string> headers, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
     parameters:
     - id: headers
-      type: System.String[]
+      type: System.Collections.Generic.IList{System.String}
       description: Headers to add to the request
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
+    - id: mode
+      type: Apizr.Configuring.ApizrRegistrationMode
+      description: 'Set headers right the way or store it for further attribute key match use (default: Set)'
     return:
       type: Apizr.Configuring.Manager.IApizrManagerOptionsBuilder
       description: ''
-    content.vb: Public Function WithHeaders(ParamArray headers As String()) As IApizrManagerOptionsBuilder
+    content.vb: Public Function WithHeaders(headers As IList(Of String), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add, mode As ApizrRegistrationMode = ApizrRegistrationMode.Set) As IApizrManagerOptionsBuilder
   overload: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.String[])
-  nameWithType.vb: ApizrManagerOptionsBuilder.WithHeaders(ParamArray String())
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(ParamArray String())
-  name.vb: WithHeaders(ParamArray String())
-- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
-  commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
-  id: WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: ApizrManagerOptionsBuilder.WithHeaders(IList(Of String), ApizrDuplicateStrategy, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Collections.Generic.IList(Of String), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(IList(Of String), ApizrDuplicateStrategy, ApizrRegistrationMode)
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  id: WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
   parent: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithHeaders(Func<IList<string>>)
-  nameWithType: ApizrManagerOptionsBuilder.WithHeaders(Func<IList<string>>)
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func<System.Collections.Generic.IList<string>>)
+  name: WithHeaders(Func<IList<string>>, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: ApizrManagerOptionsBuilder.WithHeaders(Func<IList<string>>, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func<System.Collections.Generic.IList<string>>, Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
   type: Method
   source:
     remote:
@@ -1696,28 +1706,147 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 337
+    startLine: 363
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
   summary: Add some headers to the request
   example: []
   syntax:
-    content: public IApizrManagerOptionsBuilder WithHeaders(Func<IList<string>> headersFactory)
+    content: public IApizrManagerOptionsBuilder WithHeaders(Func<IList<string>> headersFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, ApizrLifetimeScope scope = ApizrLifetimeScope.Api, ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
     parameters:
     - id: headersFactory
       type: System.Func{System.Collections.Generic.IList{System.String}}
       description: Headers factory
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's another one already (default: Add)"
+    - id: scope
+      type: Apizr.Configuring.ApizrLifetimeScope
+      description: 'Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)'
+    - id: mode
+      type: Apizr.Configuring.ApizrRegistrationMode
+      description: 'Set headers right the way or store it for further attribute key match use (default: Set)'
     return:
       type: Apizr.Configuring.Manager.IApizrManagerOptionsBuilder
       description: ''
-    content.vb: Public Function WithHeaders(headersFactory As Func(Of IList(Of String))) As IApizrManagerOptionsBuilder
+    content.vb: Public Function WithHeaders(headersFactory As Func(Of IList(Of String)), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add, scope As ApizrLifetimeScope = ApizrLifetimeScope.Api, mode As ApizrRegistrationMode = ApizrRegistrationMode.Set) As IApizrManagerOptionsBuilder
   overload: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders*
   implements:
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
-  nameWithType.vb: ApizrManagerOptionsBuilder.WithHeaders(Func(Of IList(Of String)))
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func(Of System.Collections.Generic.IList(Of String)))
-  name.vb: WithHeaders(Func(Of IList(Of String)))
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: ApizrManagerOptionsBuilder.WithHeaders(Func(Of IList(Of String)), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func(Of System.Collections.Generic.IList(Of String)), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Func(Of IList(Of String)), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  id: WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  parent: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithHeaders<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: ApizrManagerOptionsBuilder.WithHeaders<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders<TSettingsService>(TSettingsService, System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>[], Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithHeaders
+    path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
+    startLine: 395
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Manager
+  summary: Add some headers to the request loaded from service properties
+  example: []
+  syntax:
+    content: public IApizrManagerOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>>[] headerProperties, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, ApizrLifetimeScope scope = ApizrLifetimeScope.Api, ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+    parameters:
+    - id: settingsService
+      type: '{TSettingsService}'
+      description: A TSettingsService instance
+    - id: headerProperties
+      type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}[]
+      description: The header properties to get from
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's another one already (default: Add)"
+    - id: scope
+      type: Apizr.Configuring.ApizrLifetimeScope
+      description: 'Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)'
+    - id: mode
+      type: Apizr.Configuring.ApizrRegistrationMode
+      description: 'Set headers right the way or store it for further attribute key match use (default: Set)'
+    typeParameters:
+    - id: TSettingsService
+      description: Your settings management service (getting headers)
+    return:
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithHeaders(Of TSettingsService)(settingsService As TSettingsService, headerProperties As Expression(Of Func(Of TSettingsService, String))(), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add, scope As ApizrLifetimeScope = ApizrLifetimeScope.Api, mode As ApizrRegistrationMode = ApizrRegistrationMode.Set) As IApizrManagerOptionsBuilder
+  overload: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1({TSettingsService},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: ApizrManagerOptionsBuilder.WithHeaders(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(Of TSettingsService)(TSettingsService, System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String))(), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  id: WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  parent: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithHeaders<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: ApizrManagerOptionsBuilder.WithHeaders<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders<TSettingsService>(System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>[], Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithHeaders
+    path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
+    startLine: 403
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Manager
+  summary: Add some headers to the request loaded from service properties
+  example: []
+  syntax:
+    content: public IApizrManagerOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>>[] headerProperties, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, ApizrLifetimeScope scope = ApizrLifetimeScope.Api, ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+    parameters:
+    - id: settingsServiceFactory
+      type: System.Func{{TSettingsService}}
+      description: A TSettingsService instance factory
+    - id: headerProperties
+      type: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}[]
+      description: The header properties to get from
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's another one already (default: Add)"
+    - id: scope
+      type: Apizr.Configuring.ApizrLifetimeScope
+      description: 'Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)'
+    - id: mode
+      type: Apizr.Configuring.ApizrRegistrationMode
+      description: 'Set headers right the way or store it for further attribute key match use (default: Set)'
+    typeParameters:
+    - id: TSettingsService
+      description: Your settings management service (getting headers)
+    return:
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithHeaders(Of TSettingsService)(settingsServiceFactory As Func(Of TSettingsService), headerProperties As Expression(Of Func(Of TSettingsService, String))(), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add, scope As ApizrLifetimeScope = ApizrLifetimeScope.Api, mode As ApizrRegistrationMode = ApizrRegistrationMode.Set) As IApizrManagerOptionsBuilder
+  overload: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1(System.Func{{TSettingsService}},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: ApizrManagerOptionsBuilder.WithHeaders(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(Of TSettingsService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String))(), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
 - uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithOperationTimeout(System.TimeSpan)
   commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithOperationTimeout(System.TimeSpan)
   id: WithOperationTimeout(System.TimeSpan)
@@ -1736,7 +1865,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 345
+    startLine: 447
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1773,7 +1902,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 349
+    startLine: 451
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1813,7 +1942,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 357
+    startLine: 459
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1850,7 +1979,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 361
+    startLine: 463
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1890,7 +2019,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 369
+    startLine: 471
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1935,7 +2064,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 373
+    startLine: 475
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1980,7 +2109,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 381
+    startLine: 483
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -2017,7 +2146,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 385
+    startLine: 487
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -2057,7 +2186,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 393
+    startLine: 495
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -2094,7 +2223,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 397
+    startLine: 499
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -2134,7 +2263,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceContextOptions
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
-    startLine: 405
+    startLine: 507
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -2156,6 +2285,92 @@ items:
   nameWithType.vb: ApizrManagerOptionsBuilder.WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResilienceContextOptions(System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder))
   name.vb: WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  nameWithType: ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable<string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithLoggedHeadersRedactionNames
+    path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
+    startLine: 523
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Manager
+  summary: Sets the collection of HTTP headers names for which values should be redacted before logging.
+  example: []
+  syntax:
+    content: public IApizrManagerOptionsBuilder WithLoggedHeadersRedactionNames(IEnumerable<string> redactedLoggedHeaderNames, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+    parameters:
+    - id: redactedLoggedHeaderNames
+      type: System.Collections.Generic.IEnumerable{System.String}
+      description: The collection of HTTP headers names for which values should be redacted before logging.
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other names already (default: Add)"
+    return:
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithLoggedHeadersRedactionNames(redactedLoggedHeaderNames As IEnumerable(Of String), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrManagerOptionsBuilder
+  overload: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable(Of String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  nameWithType: ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func<string, bool>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithLoggedHeadersRedactionRule
+    path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs
+    startLine: 532
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Manager
+  summary: Sets the <xref href="System.Func%602" data-throw-if-not-resolved="false"></xref> which determines whether to redact the HTTP header value before logging.
+  example: []
+  syntax:
+    content: public IApizrManagerOptionsBuilder WithLoggedHeadersRedactionRule(Func<string, bool> shouldRedactHeaderValue, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+    parameters:
+    - id: shouldRedactHeaderValue
+      type: System.Func{System.String,System.Boolean}
+      description: The <xref href="System.Func%602" data-throw-if-not-resolved="false"></xref> which determines whether to redact the HTTP header value before logging
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other names already (default: Add)"
+    return:
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithLoggedHeadersRedactionRule(shouldRedactHeaderValue As Func(Of String, Boolean), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrManagerOptionsBuilder
+  overload: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func(Of String, Boolean), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
 references:
 - uid: Apizr.Configuring.Manager
   commentId: N:Apizr.Configuring.Manager
@@ -10773,125 +10988,261 @@ references:
   - name: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders
-  href: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.html#Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHeaders_System_String___
+  href: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.html#Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_
   name: WithHeaders
   nameWithType: ApizrManagerOptionsBuilder.WithHeaders
   fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.String[])
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.String[])
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
-  name: WithHeaders(params string[])
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrManagerOptions, IApizrManagerOptionsBuilder>.WithHeaders(params string[])
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>.WithHeaders(params string[])
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrManagerOptions, IApizrManagerOptionsBuilder).WithHeaders(ParamArray String())
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder).WithHeaders(ParamArray String())
-  name.vb: WithHeaders(ParamArray String())
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_
+  name: WithHeaders(IList<string>, ApizrDuplicateStrategy, ApizrRegistrationMode)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrManagerOptions, IApizrManagerOptionsBuilder>.WithHeaders(IList<string>, ApizrDuplicateStrategy, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>.WithHeaders(System.Collections.Generic.IList<string>, Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrManagerOptions, IApizrManagerOptionsBuilder).WithHeaders(IList(Of String), ApizrDuplicateStrategy, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder).WithHeaders(System.Collections.Generic.IList(Of String), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(IList(Of String), ApizrDuplicateStrategy, ApizrRegistrationMode)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.String[])
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
     name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_
   - name: (
-  - name: params
-  - name: " "
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
   - uid: System.String
     name: string
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: '['
-  - name: ']'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.String[])
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
     name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_
   - name: (
-  - name: ParamArray
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
   - name: " "
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+- uid: System.Collections.Generic.IList{System.String}
+  commentId: T:System.Collections.Generic.IList{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<string>
+  nameWithType: IList<string>
+  fullName: System.Collections.Generic.IList<string>
+  nameWithType.vb: IList(Of String)
+  fullName.vb: System.Collections.Generic.IList(Of String)
+  name.vb: IList(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
   - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-  - name: )
-- uid: System.String[]
+- uid: Apizr.Configuring.ApizrRegistrationMode
+  commentId: T:Apizr.Configuring.ApizrRegistrationMode
+  parent: Apizr.Configuring
+  href: Apizr.Configuring.ApizrRegistrationMode.html
+  name: ApizrRegistrationMode
+  nameWithType: ApizrRegistrationMode
+  fullName: Apizr.Configuring.ApizrRegistrationMode
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.string
-  name: string[]
-  nameWithType: string[]
-  fullName: string[]
-  nameWithType.vb: String()
-  fullName.vb: String()
-  name.vb: String()
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_
+  name: WithHeaders(IList<string>, ApizrDuplicateStrategy, ApizrRegistrationMode)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(IList<string>, ApizrDuplicateStrategy, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(System.Collections.Generic.IList<string>, Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(IList(Of String), ApizrDuplicateStrategy, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(System.Collections.Generic.IList(Of String), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(IList(Of String), ApizrDuplicateStrategy, ApizrRegistrationMode)
   spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_
+  - name: (
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
   - uid: System.String
     name: string
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: '['
-  - name: ']'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
   spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_
+  - name: (
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: (
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
   isExternal: true
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
-  name: WithHeaders(params string[])
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(params string[])
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(params string[])
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(ParamArray String())
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(ParamArray String())
-  name.vb: WithHeaders(ParamArray String())
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-    name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
-  - name: (
-  - name: params
-  - name: " "
-  - uid: System.String
-    name: string
+  - uid: System.Collections.Generic.IList`1
+    name: IList
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: '['
-  - name: ']'
-  - name: )
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-    name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
-  - name: (
-  - name: ParamArray
-  - name: " "
-  - uid: System.String
-    name: String
+  - uid: System.Collections.Generic.IList`1
+    name: IList
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
   - name: (
+  - name: Of
+  - name: " "
+  - name: T
   - name: )
-  - name: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
-  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___
-  name: WithHeaders(Func<IList<string>>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrManagerOptions, IApizrManagerOptionsBuilder>.WithHeaders(Func<IList<string>>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>.WithHeaders(System.Func<System.Collections.Generic.IList<string>>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrManagerOptions, IApizrManagerOptionsBuilder).WithHeaders(Func(Of IList(Of String)))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder).WithHeaders(System.Func(Of System.Collections.Generic.IList(Of String)))
-  name.vb: WithHeaders(Func(Of IList(Of String)))
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  name: WithHeaders(Func<IList<string>>, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrManagerOptions, IApizrManagerOptionsBuilder>.WithHeaders(Func<IList<string>>, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>.WithHeaders(System.Func<System.Collections.Generic.IList<string>>, Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrManagerOptions, IApizrManagerOptionsBuilder).WithHeaders(Func(Of IList(Of String)), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder).WithHeaders(System.Func(Of System.Collections.Generic.IList(Of String)), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Func(Of IList(Of String)), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
     name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
   - name: (
   - uid: System.Func`1
     name: Func
@@ -10909,11 +11260,26 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
     name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
   - name: (
   - uid: System.Func`1
     name: Func
@@ -10935,6 +11301,21 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
   - name: )
 - uid: System.Func{System.Collections.Generic.IList{System.String}}
   commentId: T:System.Func{System.Collections.Generic.IList{System.String}}
@@ -10985,20 +11366,27 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
+- uid: Apizr.Configuring.ApizrLifetimeScope
+  commentId: T:Apizr.Configuring.ApizrLifetimeScope
+  parent: Apizr.Configuring
+  href: Apizr.Configuring.ApizrLifetimeScope.html
+  name: ApizrLifetimeScope
+  nameWithType: ApizrLifetimeScope
+  fullName: Apizr.Configuring.ApizrLifetimeScope
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
   isExternal: true
-  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___
-  name: WithHeaders(Func<IList<string>>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(Func<IList<string>>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(System.Func<System.Collections.Generic.IList<string>>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(Func(Of IList(Of String)))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(System.Func(Of System.Collections.Generic.IList(Of String)))
-  name.vb: WithHeaders(Func(Of IList(Of String)))
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  name: WithHeaders(Func<IList<string>>, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(Func<IList<string>>, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(System.Func<System.Collections.Generic.IList<string>>, Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(Func(Of IList(Of String)), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(System.Func(Of System.Collections.Generic.IList(Of String)), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Func(Of IList(Of String)), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
     name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
   - name: (
   - uid: System.Func`1
     name: Func
@@ -11016,11 +11404,26 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
     name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
   - name: (
   - uid: System.Func`1
     name: Func
@@ -11042,6 +11445,556 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1({TSettingsService},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  name: WithHeaders<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrManagerOptions, IApizrManagerOptionsBuilder>.WithHeaders<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>.WithHeaders<TSettingsService>(TSettingsService, System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>[], Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrManagerOptions, IApizrManagerOptionsBuilder).WithHeaders(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder).WithHeaders(Of TSettingsService)(TSettingsService, System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String))(), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  - name: <
+  - name: TSettingsService
+  - name: '>'
+  - name: (
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: )
+  - name: (
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+- uid: System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  name: Expression<Func<TSettingsService, string>>[]
+  nameWithType: Expression<Func<TSettingsService, string>>[]
+  fullName: System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>[]
+  nameWithType.vb: Expression(Of Func(Of TSettingsService, String))()
+  fullName.vb: System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String))()
+  name.vb: Expression(Of Func(Of TSettingsService, String))()
+  spec.csharp:
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
+  - name: (
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  name: WithHeaders<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders<TSettingsService>(TSettingsService, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders<TSettingsService>(TSettingsService, System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>[], Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(Of TSettingsService)(TSettingsService, System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String))(), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Of TSettingsService)(TSettingsService, Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  - name: <
+  - name: TSettingsService
+  - name: '>'
+  - name: (
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: )
+  - name: (
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1(System.Func{{TSettingsService}},System.Linq.Expressions.Expression{System.Func{{TSettingsService},System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  name: WithHeaders<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrManagerOptions, IApizrManagerOptionsBuilder>.WithHeaders<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>.WithHeaders<TSettingsService>(System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>[], Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrManagerOptions, IApizrManagerOptionsBuilder).WithHeaders(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder).WithHeaders(Of TSettingsService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String))(), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  - name: <
+  - name: TSettingsService
+  - name: '>'
+  - name: (
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - name: TSettingsService
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: )
+  - name: (
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  name: WithHeaders<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders<TSettingsService>(Func<TSettingsService>, Expression<Func<TSettingsService, string>>[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders<TSettingsService>(System.Func<TSettingsService>, System.Linq.Expressions.Expression<System.Func<TSettingsService, string>>[], Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(Of TSettingsService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String))(), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrLifetimeScope, Apizr.Configuring.ApizrRegistrationMode)
+  name.vb: WithHeaders(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String))(), ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  - name: <
+  - name: TSettingsService
+  - name: '>'
+  - name: (
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - name: TSettingsService
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
+    name: WithHeaders
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: )
+  - name: (
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TSettingsService
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
   - name: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithOperationTimeout*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithOperationTimeout
@@ -12304,4 +13257,368 @@ references:
     name: IApizrResilienceContextOptionsBuilder
     href: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder.html
   - name: )
+  - name: )
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames*
+  commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames
+  href: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.html#Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionNames
+  nameWithType: ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrManagerOptions, IApizrManagerOptionsBuilder>.WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable<string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrManagerOptions, IApizrManagerOptionsBuilder).WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder).WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable(Of String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionNames
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionNames
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{System.String}
+  commentId: T:System.Collections.Generic.IEnumerable{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<string>
+  nameWithType: IEnumerable<string>
+  fullName: System.Collections.Generic.IEnumerable<string>
+  nameWithType.vb: IEnumerable(Of String)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of String)
+  name.vb: IEnumerable(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable<string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable(Of String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionNames
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionNames
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule*
+  commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule
+  href: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.html#Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionRule
+  nameWithType: ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrManagerOptions, IApizrManagerOptionsBuilder>.WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder>.WithLoggedHeadersRedactionRule(System.Func<string, bool>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrManagerOptions, IApizrManagerOptionsBuilder).WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Manager.IApizrManagerOptions, Apizr.Configuring.Manager.IApizrManagerOptionsBuilder).WithLoggedHeadersRedactionRule(System.Func(Of String, Boolean), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionRule
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Manager.IApizrManagerOptions,Apizr.Configuring.Manager.IApizrManagerOptionsBuilder}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionRule
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.Func{System.String,System.Boolean}
+  commentId: T:System.Func{System.String,System.Boolean}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<string, bool>
+  nameWithType: Func<string, bool>
+  fullName: System.Func<string, bool>
+  nameWithType.vb: Func(Of String, Boolean)
+  fullName.vb: System.Func(Of String, Boolean)
+  name.vb: Func(Of String, Boolean)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionRule(System.Func<string, bool>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionRule(System.Func(Of String, Boolean), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionRule
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionRule
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )

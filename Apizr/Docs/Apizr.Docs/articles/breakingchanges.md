@@ -119,6 +119,35 @@ Please find here some breaking changes while upgrading from previous versions
             }
         }
         ``` 
+
+- [Headers] Now **WithHeaders options take an enumerable parameter instead of a parameter array** so that we could provide some more optional parameters
+
+    Don't write anymore:
+    ```csharp
+    // direct configuration
+    options => options.AddHeaders("HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2")
+
+    // OR factory configuration
+    options => options.AddHeaders(() => $"HeaderKey3: {YourHeaderValue3}")
+
+    // OR extended factory configuration with the service provider instance
+    options => options.AddHeaders(serviceProvider => $"HeaderKey3: {serviceProvider.GetRequiredService<IYourSettingsService>().YourHeaderValue3}")
+    ```
+
+    Now write:
+    ```csharp
+    // direct configuration
+    options => options.AddHeaders(["HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2"])
+
+    // OR factory configuration
+    options => options.AddHeaders(() => [$"HeaderKey3: {YourHeaderValue3}"])
+
+    // OR extended factory configuration with the service provider instance
+    options => options.AddHeaders(serviceProvider => [$"HeaderKey3: {serviceProvider.GetRequiredService<IYourSettingsService>().YourHeaderValue3}"])
+
+    // OR extended factory configuration with your service instance
+    options => options.AddHeaders<IYourSettingsService>([settings => $"HeaderKey3: {settings.YourHeaderValue3}"])
+    ```
     
 ### 5.3
 

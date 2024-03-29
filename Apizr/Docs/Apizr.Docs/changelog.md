@@ -7,6 +7,13 @@
 - [New][Exceptions] Now we can **handle `IApizrResponse` safe response (based on Refit's `IApiResponse`) instead of catching exceptions**
 - [New][Attributes] Now we can **provide types to attributes thanks to generic arguments** instead of using typeof() as constructor parameters
 - [New/Breaking][Polly] Now **supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies
+- [New][HttpTracer] Now we can **filter out unwanted http message parts** with the brand new IgnoreMessageParts fluent option
+- [New][HttpTracer] Now we can **pick RequestAllButBody, HeadersOnly or AllButBody http message parts** when configuring logging options fluently or using attribute
+- [New][HttpTracer/Headers] Now we can **redact any header sensitive values from logs** thanks to `WithLoggedHeadersRedactionNames` or `WithLoggedHeadersRedactionRule` fluent options
+- [New][Headers] Now we can **choose to refresh a header value at request time or not**, depending on the brand new WithHeaders's ApizrLifetimeScope optional parameter
+- [New][Headers] Now we can **choose to set headers values right the way to the request or store it for further key-only header attribute match use**, depending on the brand new WithHeaders's ApizrRegistrationMode optional parameter
+- [New][Headers] Now we can **set headers values thanks to an expression tree**
+- [Breaking][Headers] Now **WithHeaders options take an enumerable parameter instead of a parameter array** so that we could provide some more optional parameters
 - [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
 
 ### Apizr.Integrations.MediatR

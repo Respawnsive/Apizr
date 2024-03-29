@@ -11,8 +11,8 @@ items:
   - Apizr.Logging.ExtendedHttpTracerHandler.GetRequestBody(System.Net.Http.HttpRequestMessage)
   - Apizr.Logging.ExtendedHttpTracerHandler.GetResponseBody(System.Net.Http.HttpResponseMessage)
   - Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[])
-  - Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)
-  - Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)
+  - Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})
+  - Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})
   - Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorPrefix
   - Apizr.Logging.ExtendedHttpTracerHandler.LogMessageIndicatorSuffix
   - Apizr.Logging.ExtendedHttpTracerHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
@@ -74,7 +74,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DefaultDurationFormat
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 37
+    startLine: 38
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -117,7 +117,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogMessageIndicatorPrefix
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 42
+    startLine: 43
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -144,7 +144,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogMessageIndicatorSuffix
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 43
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -171,7 +171,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 47
+    startLine: 48
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -206,7 +206,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 52
+    startLine: 53
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -244,7 +244,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: SendAsync
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 61
+    startLine: 62
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -261,16 +261,16 @@ items:
     content.vb: Protected Overrides Function SendAsync(request As HttpRequestMessage, cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
   overridden: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   overload: Apizr.Logging.ExtendedHttpTracerHandler.SendAsync*
-- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)
-  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)
-  id: LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})
+  id: LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})
   parent: Apizr.Logging.ExtendedHttpTracerHandler
   langs:
   - csharp
   - vb
-  name: LogHttpRequest(HttpRequestMessage, ILogger, LogLevel[], HttpMessageParts)
-  nameWithType: ExtendedHttpTracerHandler.LogHttpRequest(HttpRequestMessage, ILogger, LogLevel[], HttpMessageParts)
-  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel[], Apizr.Logging.HttpMessageParts)
+  name: LogHttpRequest(HttpRequestMessage, ILogger, LogLevel[], HttpMessageParts, Func<string, bool>)
+  nameWithType: ExtendedHttpTracerHandler.LogHttpRequest(HttpRequestMessage, ILogger, LogLevel[], HttpMessageParts, Func<string, bool>)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel[], Apizr.Logging.HttpMessageParts, System.Func<string, bool>)
   type: Method
   source:
     remote:
@@ -279,14 +279,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogHttpRequest
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 157
+    startLine: 161
   assemblies:
   - Apizr
   namespace: Apizr.Logging
   summary: Logs Http request
   example: []
   syntax:
-    content: protected virtual Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
+    content: protected virtual Task LogHttpRequest(HttpRequestMessage request, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity, Func<string, bool> shouldRedactHeaderValue)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
@@ -300,24 +300,27 @@ items:
     - id: verbosity
       type: Apizr.Logging.HttpMessageParts
       description: The verbosity
+    - id: shouldRedactHeaderValue
+      type: System.Func{System.String,System.Boolean}
+      description: Header values redaction rules
     return:
       type: System.Threading.Tasks.Task
       description: ''
-    content.vb: Protected Overridable Function LogHttpRequest(request As HttpRequestMessage, logger As ILogger, logLevels As LogLevel(), verbosity As HttpMessageParts) As Task
+    content.vb: Protected Overridable Function LogHttpRequest(request As HttpRequestMessage, logger As ILogger, logLevels As LogLevel(), verbosity As HttpMessageParts, shouldRedactHeaderValue As Func(Of String, Boolean)) As Task
   overload: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest*
-  nameWithType.vb: ExtendedHttpTracerHandler.LogHttpRequest(HttpRequestMessage, ILogger, LogLevel(), HttpMessageParts)
-  fullName.vb: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel(), Apizr.Logging.HttpMessageParts)
-  name.vb: LogHttpRequest(HttpRequestMessage, ILogger, LogLevel(), HttpMessageParts)
-- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)
-  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)
-  id: LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)
+  nameWithType.vb: ExtendedHttpTracerHandler.LogHttpRequest(HttpRequestMessage, ILogger, LogLevel(), HttpMessageParts, Func(Of String, Boolean))
+  fullName.vb: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel(), Apizr.Logging.HttpMessageParts, System.Func(Of String, Boolean))
+  name.vb: LogHttpRequest(HttpRequestMessage, ILogger, LogLevel(), HttpMessageParts, Func(Of String, Boolean))
+- uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})
+  commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})
+  id: LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})
   parent: Apizr.Logging.ExtendedHttpTracerHandler
   langs:
   - csharp
   - vb
-  name: LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel[], HttpMessageParts)
-  nameWithType: ExtendedHttpTracerHandler.LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel[], HttpMessageParts)
-  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage, System.TimeSpan, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel[], Apizr.Logging.HttpMessageParts)
+  name: LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel[], HttpMessageParts, Func<string, bool>)
+  nameWithType: ExtendedHttpTracerHandler.LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel[], HttpMessageParts, Func<string, bool>)
+  fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage, System.TimeSpan, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel[], Apizr.Logging.HttpMessageParts, System.Func<string, bool>)
   type: Method
   source:
     remote:
@@ -326,14 +329,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogHttpResponse
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 195
+    startLine: 201
   assemblies:
   - Apizr
   namespace: Apizr.Logging
   summary: Logs Http response
   example: []
   syntax:
-    content: protected virtual Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity)
+    content: protected virtual Task LogHttpResponse(HttpResponseMessage response, TimeSpan duration, ILogger logger, LogLevel[] logLevels, HttpMessageParts verbosity, Func<string, bool> shouldRedactHeaderValue)
     parameters:
     - id: response
       type: System.Net.Http.HttpResponseMessage
@@ -350,14 +353,17 @@ items:
     - id: verbosity
       type: Apizr.Logging.HttpMessageParts
       description: The verbosity
+    - id: shouldRedactHeaderValue
+      type: System.Func{System.String,System.Boolean}
+      description: Header values redaction rules
     return:
       type: System.Threading.Tasks.Task
       description: ''
-    content.vb: Protected Overridable Function LogHttpResponse(response As HttpResponseMessage, duration As TimeSpan, logger As ILogger, logLevels As LogLevel(), verbosity As HttpMessageParts) As Task
+    content.vb: Protected Overridable Function LogHttpResponse(response As HttpResponseMessage, duration As TimeSpan, logger As ILogger, logLevels As LogLevel(), verbosity As HttpMessageParts, shouldRedactHeaderValue As Func(Of String, Boolean)) As Task
   overload: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse*
-  nameWithType.vb: ExtendedHttpTracerHandler.LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel(), HttpMessageParts)
-  fullName.vb: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage, System.TimeSpan, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel(), Apizr.Logging.HttpMessageParts)
-  name.vb: LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel(), HttpMessageParts)
+  nameWithType.vb: ExtendedHttpTracerHandler.LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel(), HttpMessageParts, Func(Of String, Boolean))
+  fullName.vb: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage, System.TimeSpan, Microsoft.Extensions.Logging.ILogger, Microsoft.Extensions.Logging.LogLevel(), Apizr.Logging.HttpMessageParts, System.Func(Of String, Boolean))
+  name.vb: LogHttpResponse(HttpResponseMessage, TimeSpan, ILogger, LogLevel(), HttpMessageParts, Func(Of String, Boolean))
 - uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[])
   commentId: M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[])
   id: LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[])
@@ -376,7 +382,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogHttpException
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 254
+    startLine: 262
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -420,7 +426,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetRequestBody
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 290
+    startLine: 303
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -455,7 +461,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetResponseBody
     path: ../../Src/Apizr/Logging/ExtendedHttpTracerHandler.cs
-    startLine: 297
+    startLine: 310
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -1164,7 +1170,7 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest*
   commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest
-  href: Apizr.Logging.ExtendedHttpTracerHandler.html#Apizr_Logging_ExtendedHttpTracerHandler_LogHttpRequest_System_Net_Http_HttpRequestMessage_Microsoft_Extensions_Logging_ILogger_Microsoft_Extensions_Logging_LogLevel___Apizr_Logging_HttpMessageParts_
+  href: Apizr.Logging.ExtendedHttpTracerHandler.html#Apizr_Logging_ExtendedHttpTracerHandler_LogHttpRequest_System_Net_Http_HttpRequestMessage_Microsoft_Extensions_Logging_ILogger_Microsoft_Extensions_Logging_LogLevel___Apizr_Logging_HttpMessageParts_System_Func_System_String_System_Boolean__
   name: LogHttpRequest
   nameWithType: ExtendedHttpTracerHandler.LogHttpRequest
   fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest
@@ -1198,6 +1204,53 @@ references:
   name: HttpMessageParts
   nameWithType: HttpMessageParts
   fullName: Apizr.Logging.HttpMessageParts
+- uid: System.Func{System.String,System.Boolean}
+  commentId: T:System.Func{System.String,System.Boolean}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<string, bool>
+  nameWithType: Func<string, bool>
+  fullName: System.Func<string, bool>
+  nameWithType.vb: Func(Of String, Boolean)
+  fullName.vb: System.Func(Of String, Boolean)
+  name.vb: Func(Of String, Boolean)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -1206,9 +1259,43 @@ references:
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
 - uid: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse*
   commentId: Overload:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse
-  href: Apizr.Logging.ExtendedHttpTracerHandler.html#Apizr_Logging_ExtendedHttpTracerHandler_LogHttpResponse_System_Net_Http_HttpResponseMessage_System_TimeSpan_Microsoft_Extensions_Logging_ILogger_Microsoft_Extensions_Logging_LogLevel___Apizr_Logging_HttpMessageParts_
+  href: Apizr.Logging.ExtendedHttpTracerHandler.html#Apizr_Logging_ExtendedHttpTracerHandler_LogHttpResponse_System_Net_Http_HttpResponseMessage_System_TimeSpan_Microsoft_Extensions_Logging_ILogger_Microsoft_Extensions_Logging_LogLevel___Apizr_Logging_HttpMessageParts_System_Func_System_String_System_Boolean__
   name: LogHttpResponse
   nameWithType: ExtendedHttpTracerHandler.LogHttpResponse
   fullName: Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse

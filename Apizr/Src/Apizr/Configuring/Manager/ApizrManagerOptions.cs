@@ -44,7 +44,6 @@ namespace Apizr.Configuring.Manager
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
             DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            HeadersFactories = new List<Func<IList<string>>> { properOptions.HeadersFactory };
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
         }
@@ -132,11 +131,6 @@ namespace Apizr.Configuring.Manager
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
-        internal IList<Func<IList<string>>> HeadersFactories { get; }
-        private Func<IList<string>> _headersFactory;
-        /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory => _headersFactory ??= () => Headers = HeadersFactories.SelectMany(factory => factory.Invoke()).ToList();
-
         private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
         public Func<TimeSpan> OperationTimeoutFactory
@@ -206,13 +200,19 @@ namespace Apizr.Configuring.Manager
         public IDictionary<string, object> HandlersParameters => Options.HandlersParameters;
 
         /// <inheritdoc />
-        public IList<string> Headers => Options.Headers;
+        public IDictionary<ApizrRegistrationMode, IList<string>> Headers => Options.Headers;
+
+        /// <inheritdoc />
+        public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> HeadersFactories => Options.HeadersFactories;
 
         /// <inheritdoc />
         public TimeSpan? OperationTimeout => Options.OperationTimeout;
 
         /// <inheritdoc />
         public TimeSpan? RequestTimeout => Options.RequestTimeout;
+
+        /// <inheritdoc />
+        public Func<string, bool> ShouldRedactHeaderValue => Options.ShouldRedactHeaderValue;
 
         /// <inheritdoc />
         Action<IApizrResilienceContextOptionsBuilder> IApizrGlobalSharedOptionsBase.ContextOptionsBuilder

@@ -693,6 +693,9 @@ namespace Apizr
             // Custom client config
             apizrOptions.HttpClientBuilder?.Invoke(builder);
 
+            if(apizrOptions.ShouldRedactHeaderValue != null)
+                builder.RedactLoggedHeaders(apizrOptions.ShouldRedactHeaderValue);
+
             services.TryAddSingleton(typeof(ILazyFactory<ResiliencePipelineRegistry<string>>), serviceProvider =>
                 new LazyFactory<ResiliencePipelineRegistry<string>>(
                     () => serviceProvider.GetService<ResiliencePipelineRegistry<string>>() ?? new ResiliencePipelineRegistry<string>()));
@@ -742,7 +745,27 @@ namespace Apizr
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
                 apizrOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
                 apizrOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
-                apizrOptions.HeadersFactory?.Invoke(serviceProvider);
+
+                var headersFactories = apizrOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key,
+                    kvp => kvp.Value.Invoke(serviceProvider));
+                if (headersFactories?.Count > 0)
+                    apizrOptionsBuilder.WithHeaders(headersFactories);
+
+                if (headersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Api), out var setFactory) == true)
+                {
+                    // Set api scoped headers right the way
+                    var setHeaders = setFactory.Invoke()?.ToArray();
+                    if (setHeaders?.Length > 0)
+                        apizrOptionsBuilder.WithHeaders(setHeaders, mode: ApizrRegistrationMode.Set);
+                }
+                if (headersFactories?.TryGetValue((ApizrRegistrationMode.Store, ApizrLifetimeScope.Api), out var storeFactory) == true)
+                {
+                    // Store api scoped headers for further attribute key match use
+                    var storeHeaders = storeFactory.Invoke()?.ToArray();
+                    if (storeHeaders?.Length > 0)
+                        apizrOptionsBuilder.WithHeaders(storeHeaders, mode: ApizrRegistrationMode.Store);
+                }
+
                 foreach (var resiliencePropertiesExtendedFactory in apizrOptions.ResiliencePropertiesExtendedFactories)
                     apizrOptions.ResiliencePropertiesFactories[resiliencePropertiesExtendedFactory.Key] = () =>
                         resiliencePropertiesExtendedFactory.Value.Invoke(serviceProvider);

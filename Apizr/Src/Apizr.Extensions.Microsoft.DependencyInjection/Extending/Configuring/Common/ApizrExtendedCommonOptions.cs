@@ -39,7 +39,7 @@ namespace Apizr.Extending.Configuring.Common
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
             PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
             PostRegistrationActions = new List<Action<Type, IServiceCollection>>();
-            HeadersFactories = new List<Func<IServiceProvider, IList<string>>>();
+            HeadersExtendedFactories = new Dictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>();
             _resiliencePropertiesExtendedFactories = new Dictionary<string, Func<IServiceProvider, object>>();
         }
 
@@ -123,11 +123,9 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
-        internal IList<Func<IServiceProvider, IList<string>>> HeadersFactories { get; }
-        private Func<IServiceProvider, IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, IList<string>> HeadersFactory => _headersFactory ??= serviceProvider => Headers = HeadersFactories.SelectMany(factory => factory.Invoke(serviceProvider)).ToList();
-        
+        public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
+
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
         public Func<IServiceProvider, TimeSpan> OperationTimeoutFactory

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Apizr.Configuring;
 using Apizr.Logging;
 using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,11 +55,6 @@ namespace Apizr.Extending.Configuring.Shared
         Action<IHttpClientBuilder> HttpClientBuilder { get; }
 
         /// <summary>
-        /// Headers factory
-        /// </summary>
-        Func<IServiceProvider, IList<string>> HeadersFactory { get; }
-
-        /// <summary>
         /// The operation timeout factory (overall request tries)
         /// </summary>
         Func<IServiceProvider, TimeSpan> OperationTimeoutFactory { get; }
@@ -67,6 +63,11 @@ namespace Apizr.Extending.Configuring.Shared
         /// The request timeout factory (each request try)
         /// </summary>
         Func<IServiceProvider, TimeSpan> RequestTimeoutFactory { get; }
+
+        /// <summary>
+        /// Headers factories
+        /// </summary>
+        IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
         internal IDictionary<string, Func<IServiceProvider, object>> ResiliencePropertiesExtendedFactories { get; }
     }

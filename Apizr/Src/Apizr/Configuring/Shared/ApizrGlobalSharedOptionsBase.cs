@@ -23,7 +23,7 @@ namespace Apizr.Configuring.Shared
                                  new Dictionary<string, object>();
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
-            Headers = sharedOptions?.Headers ?? new List<string>();
+            ShouldRedactHeaderValue = sharedOptions?.ShouldRedactHeaderValue;
             _contextOptionsBuilder = sharedOptions?.ContextOptionsBuilder;
             _resiliencePropertiesFactories = sharedOptions?.ResiliencePropertiesFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? 
                                     new Dictionary<string, Func<object>>();
@@ -60,13 +60,13 @@ namespace Apizr.Configuring.Shared
         public IDictionary<string, object> HandlersParameters { get; protected set; }
 
         /// <inheritdoc />
-        public IList<string> Headers { get; internal set; }
-
-        /// <inheritdoc />
         public TimeSpan? OperationTimeout { get; internal set; }
 
         /// <inheritdoc />
         public TimeSpan? RequestTimeout { get; internal set; }
+
+        /// <inheritdoc />
+        public Func<string, bool> ShouldRedactHeaderValue { get; internal set; }
 
         private Action<IApizrResilienceContextOptionsBuilder> _contextOptionsBuilder;
         /// <inheritdoc />

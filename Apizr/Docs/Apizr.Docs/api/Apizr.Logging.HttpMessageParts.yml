@@ -6,8 +6,11 @@ items:
   parent: Apizr.Logging
   children:
   - Apizr.Logging.HttpMessageParts.All
+  - Apizr.Logging.HttpMessageParts.AllButBody
+  - Apizr.Logging.HttpMessageParts.HeadersOnly
   - Apizr.Logging.HttpMessageParts.None
   - Apizr.Logging.HttpMessageParts.RequestAll
+  - Apizr.Logging.HttpMessageParts.RequestAllButBody
   - Apizr.Logging.HttpMessageParts.RequestBody
   - Apizr.Logging.HttpMessageParts.RequestCookies
   - Apizr.Logging.HttpMessageParts.RequestHeaders
@@ -191,6 +194,35 @@ items:
     content: RequestCookies = 32
     return:
       type: Apizr.Logging.HttpMessageParts
+- uid: Apizr.Logging.HttpMessageParts.RequestAllButBody
+  commentId: F:Apizr.Logging.HttpMessageParts.RequestAllButBody
+  id: RequestAllButBody
+  parent: Apizr.Logging.HttpMessageParts
+  langs:
+  - csharp
+  - vb
+  name: RequestAllButBody
+  nameWithType: HttpMessageParts.RequestAllButBody
+  fullName: Apizr.Logging.HttpMessageParts.RequestAllButBody
+  type: Field
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Logging/HttpMessageParts.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestAllButBody
+    path: ../../Src/Apizr/Logging/HttpMessageParts.cs
+    startLine: 41
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  summary: Logs request headers and cookies only
+  example: []
+  syntax:
+    content: RequestAllButBody = RequestHeaders | RequestCookies
+    return:
+      type: Apizr.Logging.HttpMessageParts
+    content.vb: RequestAllButBody = RequestHeaders Or RequestCookies
 - uid: Apizr.Logging.HttpMessageParts.RequestAll
   commentId: F:Apizr.Logging.HttpMessageParts.RequestAll
   id: RequestAll
@@ -209,17 +241,17 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestAll
     path: ../../Src/Apizr/Logging/HttpMessageParts.cs
-    startLine: 41
+    startLine: 46
   assemblies:
   - Apizr
   namespace: Apizr.Logging
   summary: Logs request body, headers and cookies only
   example: []
   syntax:
-    content: RequestAll = RequestBody | RequestHeaders | RequestCookies
+    content: RequestAll = RequestBody | RequestAllButBody
     return:
       type: Apizr.Logging.HttpMessageParts
-    content.vb: RequestAll = RequestBody Or RequestHeaders Or RequestCookies
+    content.vb: RequestAll = RequestBody Or RequestAllButBody
 - uid: Apizr.Logging.HttpMessageParts.ResponseBody
   commentId: F:Apizr.Logging.HttpMessageParts.ResponseBody
   id: ResponseBody
@@ -238,7 +270,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResponseBody
     path: ../../Src/Apizr/Logging/HttpMessageParts.cs
-    startLine: 46
+    startLine: 51
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -266,7 +298,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResponseHeaders
     path: ../../Src/Apizr/Logging/HttpMessageParts.cs
-    startLine: 51
+    startLine: 56
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -294,7 +326,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResponseAll
     path: ../../Src/Apizr/Logging/HttpMessageParts.cs
-    startLine: 56
+    startLine: 61
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -305,6 +337,64 @@ items:
     return:
       type: Apizr.Logging.HttpMessageParts
     content.vb: ResponseAll = ResponseBody Or ResponseHeaders
+- uid: Apizr.Logging.HttpMessageParts.HeadersOnly
+  commentId: F:Apizr.Logging.HttpMessageParts.HeadersOnly
+  id: HeadersOnly
+  parent: Apizr.Logging.HttpMessageParts
+  langs:
+  - csharp
+  - vb
+  name: HeadersOnly
+  nameWithType: HttpMessageParts.HeadersOnly
+  fullName: Apizr.Logging.HttpMessageParts.HeadersOnly
+  type: Field
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Logging/HttpMessageParts.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HeadersOnly
+    path: ../../Src/Apizr/Logging/HttpMessageParts.cs
+    startLine: 66
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  summary: Logs response body and headers only
+  example: []
+  syntax:
+    content: HeadersOnly = RequestHeaders | ResponseHeaders
+    return:
+      type: Apizr.Logging.HttpMessageParts
+    content.vb: HeadersOnly = RequestHeaders Or ResponseHeaders
+- uid: Apizr.Logging.HttpMessageParts.AllButBody
+  commentId: F:Apizr.Logging.HttpMessageParts.AllButBody
+  id: AllButBody
+  parent: Apizr.Logging.HttpMessageParts
+  langs:
+  - csharp
+  - vb
+  name: AllButBody
+  nameWithType: HttpMessageParts.AllButBody
+  fullName: Apizr.Logging.HttpMessageParts.AllButBody
+  type: Field
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Logging/HttpMessageParts.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: AllButBody
+    path: ../../Src/Apizr/Logging/HttpMessageParts.cs
+    startLine: 71
+  assemblies:
+  - Apizr
+  namespace: Apizr.Logging
+  summary: Logs all parts but body
+  example: []
+  syntax:
+    content: AllButBody = ResponseAll | RequestAllButBody
+    return:
+      type: Apizr.Logging.HttpMessageParts
+    content.vb: AllButBody = ResponseAll Or RequestAllButBody
 - uid: Apizr.Logging.HttpMessageParts.All
   commentId: F:Apizr.Logging.HttpMessageParts.All
   id: All
@@ -323,17 +413,17 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: All
     path: ../../Src/Apizr/Logging/HttpMessageParts.cs
-    startLine: 61
+    startLine: 76
   assemblies:
   - Apizr
   namespace: Apizr.Logging
   summary: Logs all parts
   example: []
   syntax:
-    content: All = ResponseAll | RequestAll
+    content: All = RequestBody | AllButBody
     return:
       type: Apizr.Logging.HttpMessageParts
-    content.vb: All = ResponseAll Or RequestAll
+    content.vb: All = RequestBody Or AllButBody
 references:
 - uid: Apizr.Logging
   commentId: N:Apizr.Logging

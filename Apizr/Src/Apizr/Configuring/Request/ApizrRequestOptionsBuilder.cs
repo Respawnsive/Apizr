@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -36,9 +37,30 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithHeaders(params string[] headers)
+    public IApizrRequestOptionsBuilder WithHeaders(IList<string> headers, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
     {
-        headers?.ToList().ForEach(header => Options.Headers.Add(header));
+        switch (strategy)
+        {
+            case ApizrDuplicateStrategy.Ignore:
+                Options.Headers ??= headers;
+                break;
+            case ApizrDuplicateStrategy.Add:
+            case ApizrDuplicateStrategy.Merge:
+                if (Options.Headers.Count > 0)
+                {
+                    headers?.ToList().ForEach(header => Options.Headers.Add(header));
+                }
+                else
+                {
+                    Options.Headers = headers;
+                }
+                break;
+            case ApizrDuplicateStrategy.Replace:
+                Options.Headers = headers;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+        }
 
         return this;
     }
@@ -148,7 +170,73 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
         return this;
     }
 
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithLoggedHeadersRedactionNames(IEnumerable<string> redactedLoggedHeaderNames,
+        ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+    {
+        var sensitiveHeaders = new HashSet<string>(redactedLoggedHeaderNames, StringComparer.OrdinalIgnoreCase);
+
+        return WithLoggedHeadersRedactionRule(header => sensitiveHeaders.Contains(header), strategy);
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithLoggedHeadersRedactionRule(Func<string, bool> shouldRedactHeaderValue,
+        ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+    {
+        switch (strategy)
+        {
+            case ApizrDuplicateStrategy.Ignore:
+                Options.ShouldRedactHeaderValue ??= shouldRedactHeaderValue;
+                break;
+            case ApizrDuplicateStrategy.Add:
+            case ApizrDuplicateStrategy.Merge:
+                if (Options.ShouldRedactHeaderValue == null)
+                {
+                    Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                }
+                else
+                {
+                    var previous = Options.ShouldRedactHeaderValue;
+                    Options.ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
+                }
+
+                break;
+            case ApizrDuplicateStrategy.Replace:
+                Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+        }
+
+        return this;
+    }
+
     #region Internals
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithHeaders(IList<string> headers, ApizrRegistrationMode mode)
+    {
+        if (mode == ApizrRegistrationMode.Set)
+        {
+            // Set headers right the way
+            if (Options.Headers.Count > 0)
+            {
+                headers?.ToList().ForEach(header => Options.Headers.Add(header));
+            }
+            else
+            {
+                Options.Headers = headers;
+            } 
+        }
+        else
+        {
+            // Store headers for further attribute key match use
+            var headersStore = ((IApizrRequestOptions) Options).HeadersStore;
+            headers?.ToList().ForEach(header => headersStore.Add(header));
+        }
+
+        return this;
+    }
 
     /// <inheritdoc />
     IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOriginalExpression(Expression originalExpression)

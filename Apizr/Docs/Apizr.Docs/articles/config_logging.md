@@ -10,10 +10,13 @@ You can adjust logging configuration with:
   - `RequestBody`
   - `RequestHeaders`
   - `RequestCookies`
+  - `RequestAllButBody` = `RequestHeaders | RequestCookies`,
   - `RequestAll` = `RequestBody | RequestHeaders | RequestCookies`
   - `ResponseBody`
   - `ResponseHeaders`
   - `ResponseAll` = `ResponseBody | ResponseHeaders`
+  - `HeadersOnly` = `ResponseHeaders | RequestHeaders`,
+  - `AllButBody` = `ResponseAll | RequestAllButBody`,
   - `All` = `ResponseAll | RequestAll`
 - `logLevels` (default: [Low] `Trace`, [Medium] `Information` and [High] `Critical`) Log levels to apply while writing logs (see Microsoft.Enxtension.Logging), with:
   - `Trace`
@@ -29,7 +32,7 @@ Note that parameter logLevels is an array. It lets you provide from 0 to 3 diffe
 - Medium: logs all missconfigured things, like asking for cache without providing any cache provider
 - High: logs errors and exceptions
 
-Obviously, providing more than 3 log levels would be pointlees.
+Obviously, providing more than 3 log levels would be pointless.
 
 It means that:
 - if you don't provide any log level at all, default levels will be applied ([Low] `Trace`, [Medium] `Information` and [High] `Critical`)
@@ -140,3 +143,28 @@ Logging configuration duplicate strategy order:
 - otherwise the api attribute decoration one (interface)
 - otherwise the fluent common resgistration one (registry common options)
 - otherwise the global attribute decoration one (assembly)
+
+### Redacting
+
+You may want to hide some header sensitive data from logs.
+
+You can set which header values should be redacted before logging with this option:
+
+```csharp
+// direct configuration
+options => options.WithLoggedHeadersRedactionNames(new[]{ "MyHeaderKey" })
+
+// factory configuration
+options => options.WithLoggedHeadersRedactionRule(header => header == "MyHeaderKey")
+```
+
+From there, you should see your logs redacted like so:
+```csharp
+ ==================== HTTP REQUEST: [GET] ==================== 
+GET https://reqres.in/api/users
+Request Headers:
+MyHeaderKey: *
+```
+
+Note that you can mix register and request time redaction configurations. 
+Also, the ApizrDuplicateStrategy optional parameter let you tell Apizr whether to override or not any parent redaction rules.

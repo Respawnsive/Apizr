@@ -53,7 +53,6 @@ namespace Apizr.Configuring.Proper
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = sharedOptions.HttpClientConfigurationBuilder;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            HeadersFactories = new List<Func<IList<string>>>{sharedOptions.HeadersFactory};
             OperationTimeoutFactory = operationTimeout.HasValue ? () => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? () => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
         }
@@ -117,11 +116,6 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
-
-        internal IList<Func<IList<string>>> HeadersFactories { get; }
-        private Func<IList<string>> _headersFactory;
-        /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory => _headersFactory ??= () => Headers = HeadersFactories.SelectMany(factory => factory.Invoke()).ToList();
 
         private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

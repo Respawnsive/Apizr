@@ -4,6 +4,7 @@ using Polly;
 using System;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Resiliencing;
+using System.Collections.Generic;
 
 namespace Apizr.Configuring.Shared
 {
@@ -64,13 +65,6 @@ namespace Apizr.Configuring.Shared
             HttpMessageParts trafficVerbosity = HttpMessageParts.All, params LogLevel[] logLevels);
 
         /// <summary>
-        /// Add some headers to the request
-        /// </summary>
-        /// <param name="headers">Headers to add to the request</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithHeaders(params string[] headers);
-
-        /// <summary>
         /// Set a timeout to the operation (overall request tries)
         /// </summary>
         /// <param name="timeout">The operation timeout</param>
@@ -90,5 +84,21 @@ namespace Apizr.Configuring.Shared
         /// <param name="contextOptionsBuilder">The resilience context options builder</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder);
+
+        /// <summary>
+        /// Sets the collection of HTTP headers names for which values should be redacted before logging.
+        /// </summary>
+        /// <param name="redactedLoggedHeaderNames">The collection of HTTP headers names for which values should be redacted before logging.</param>
+        /// <param name="strategy">The duplicate strategy if there's any other names already (default: Add)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithLoggedHeadersRedactionNames(IEnumerable<string> redactedLoggedHeaderNames, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
+
+        /// <summary>
+        /// Sets the <see cref="Func{T, R}"/> which determines whether to redact the HTTP header value before logging.
+        /// </summary>
+        /// <param name="shouldRedactHeaderValue">The <see cref="Func{T, R}"/> which determines whether to redact the HTTP header value before logging</param>
+        /// <param name="strategy">The duplicate strategy if there's any other names already (default: Add)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithLoggedHeadersRedactionRule(Func<string, bool> shouldRedactHeaderValue, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
     }
 }

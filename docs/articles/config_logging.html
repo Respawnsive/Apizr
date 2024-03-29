@@ -94,10 +94,13 @@
 <li><code>RequestBody</code></li>
 <li><code>RequestHeaders</code></li>
 <li><code>RequestCookies</code></li>
+<li><code>RequestAllButBody</code> = <code>RequestHeaders | RequestCookies</code>,</li>
 <li><code>RequestAll</code> = <code>RequestBody | RequestHeaders | RequestCookies</code></li>
 <li><code>ResponseBody</code></li>
 <li><code>ResponseHeaders</code></li>
 <li><code>ResponseAll</code> = <code>ResponseBody | ResponseHeaders</code></li>
+<li><code>HeadersOnly</code> = <code>ResponseHeaders | RequestHeaders</code>,</li>
+<li><code>AllButBody</code> = <code>ResponseAll | RequestAllButBody</code>,</li>
 <li><code>All</code> = <code>ResponseAll | RequestAll</code></li>
 </ul>
 </li>
@@ -119,7 +122,7 @@
 <li>Medium: logs all missconfigured things, like asking for cache without providing any cache provider</li>
 <li>High: logs errors and exceptions</li>
 </ul>
-<p>Obviously, providing more than 3 log levels would be pointlees.</p>
+<p>Obviously, providing more than 3 log levels would be pointless.</p>
 <p>It means that:</p>
 <ul>
 <li>if you don't provide any log level at all, default levels will be applied ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>)</li>
@@ -234,6 +237,23 @@ In case of mixed configurations, the internal duplicate strategy will be to take
 <li>otherwise the fluent common resgistration one (registry common options)</li>
 <li>otherwise the global attribute decoration one (assembly)</li>
 </ul>
+<h3 id="redacting">Redacting</h3>
+<p>You may want to hide some header sensitive data from logs.</p>
+<p>You can set which header values should be redacted before logging with this option:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithLoggedHeadersRedactionNames(new[]{ &quot;MyHeaderKey&quot; })
+
+// factory configuration
+options =&gt; options.WithLoggedHeadersRedactionRule(header =&gt; header == &quot;MyHeaderKey&quot;)
+</code></pre>
+<p>From there, you should see your logs redacted like so:</p>
+<pre><code class="lang-csharp"> ==================== HTTP REQUEST: [GET] ==================== 
+GET https://reqres.in/api/users
+Request Headers:
+MyHeaderKey: *
+</code></pre>
+<p>Note that you can mix register and request time redaction configurations.
+Also, the ApizrDuplicateStrategy optional parameter let you tell Apizr whether to override or not any parent redaction rules.</p>
 
 </article>
           </div>

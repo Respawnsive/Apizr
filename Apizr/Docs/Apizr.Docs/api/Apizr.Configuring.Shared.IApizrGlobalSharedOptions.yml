@@ -1,34 +1,33 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase
-  commentId: T:Apizr.Configuring.Request.IApizrRequestOptionsBase
-  id: IApizrRequestOptionsBase
-  parent: Apizr.Configuring.Request
-  children:
-  - Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptions
+  commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptions
+  id: IApizrGlobalSharedOptions
+  parent: Apizr.Configuring.Shared
+  children: []
   langs:
   - csharp
   - vb
-  name: IApizrRequestOptionsBase
-  nameWithType: IApizrRequestOptionsBase
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase
+  name: IApizrGlobalSharedOptions
+  nameWithType: IApizrGlobalSharedOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptions
   type: Interface
   source:
     remote:
-      path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptions.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: IApizrRequestOptionsBase
-    path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
-    startLine: 10
+    id: IApizrGlobalSharedOptions
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptions.cs
+    startLine: 9
   assemblies:
   - Apizr
-  namespace: Apizr.Configuring.Request
-  summary: Options available at request levels and for all (static and extended) registration types
+  namespace: Apizr.Configuring.Shared
+  summary: Options available at all (common, proper and request) levels and for static registration type
   example: []
   syntax:
-    content: 'public interface IApizrRequestOptionsBase : IApizrGlobalSharedOptionsBase'
-    content.vb: Public Interface IApizrRequestOptionsBase Inherits IApizrGlobalSharedOptionsBase
+    content: 'public interface IApizrGlobalSharedOptions : IApizrGlobalSharedOptionsBase'
+    content.vb: Public Interface IApizrGlobalSharedOptions Inherits IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
@@ -39,44 +38,13 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
-  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
-  id: ResilienceContext
-  parent: Apizr.Configuring.Request.IApizrRequestOptionsBase
-  langs:
-  - csharp
-  - vb
-  name: ResilienceContext
-  nameWithType: IApizrRequestOptionsBase.ResilienceContext
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
-  type: Property
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
-      branch: dev
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: ResilienceContext
-    path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
-    startLine: 15
-  assemblies:
-  - Apizr
-  namespace: Apizr.Configuring.Request
-  summary: The Polly resilience context to pass through it all
-  example: []
-  syntax:
-    content: ResilienceContext ResilienceContext { get; }
-    parameters: []
-    return:
-      type: Polly.ResilienceContext
-    content.vb: ReadOnly Property ResilienceContext As ResilienceContext
-  overload: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext*
 references:
-- uid: Apizr.Configuring.Request
-  commentId: N:Apizr.Configuring.Request
+- uid: Apizr.Configuring.Shared
+  commentId: N:Apizr.Configuring.Shared
   href: Apizr.html
-  name: Apizr.Configuring.Request
-  nameWithType: Apizr.Configuring.Request
-  fullName: Apizr.Configuring.Request
+  name: Apizr.Configuring.Shared
+  nameWithType: Apizr.Configuring.Shared
+  fullName: Apizr.Configuring.Shared
   spec.csharp:
   - uid: Apizr
     name: Apizr
@@ -86,9 +54,9 @@ references:
     name: Configuring
     href: Apizr.Configuring.html
   - name: .
-  - uid: Apizr.Configuring.Request
-    name: Request
-    href: Apizr.Configuring.Request.html
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
   spec.vb:
   - uid: Apizr
     name: Apizr
@@ -98,9 +66,9 @@ references:
     name: Configuring
     href: Apizr.Configuring.html
   - name: .
-  - uid: Apizr.Configuring.Request
-    name: Request
-    href: Apizr.Configuring.Request.html
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
@@ -171,53 +139,3 @@ references:
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-- uid: Apizr.Configuring.Shared
-  commentId: N:Apizr.Configuring.Shared
-  href: Apizr.html
-  name: Apizr.Configuring.Shared
-  nameWithType: Apizr.Configuring.Shared
-  fullName: Apizr.Configuring.Shared
-  spec.csharp:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Configuring
-    name: Configuring
-    href: Apizr.Configuring.html
-  - name: .
-  - uid: Apizr.Configuring.Shared
-    name: Shared
-    href: Apizr.Configuring.Shared.html
-  spec.vb:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Configuring
-    name: Configuring
-    href: Apizr.Configuring.html
-  - name: .
-  - uid: Apizr.Configuring.Shared
-    name: Shared
-    href: Apizr.Configuring.Shared.html
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext*
-  commentId: Overload:Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
-  href: Apizr.Configuring.Request.IApizrRequestOptionsBase.html#Apizr_Configuring_Request_IApizrRequestOptionsBase_ResilienceContext
-  name: ResilienceContext
-  nameWithType: IApizrRequestOptionsBase.ResilienceContext
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
-- uid: Polly.ResilienceContext
-  commentId: T:Polly.ResilienceContext
-  parent: Polly
-  isExternal: true
-  href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResilienceContext.cs
-  name: ResilienceContext
-  nameWithType: ResilienceContext
-  fullName: Polly.ResilienceContext
-- uid: Polly
-  commentId: N:Polly
-  isExternal: true
-  name: Polly
-  nameWithType: Polly
-  fullName: Polly

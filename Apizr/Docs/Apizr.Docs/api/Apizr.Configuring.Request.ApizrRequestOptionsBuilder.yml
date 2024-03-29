@@ -12,7 +12,7 @@ items:
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHandlerParameter(System.String,System.Object)
-  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])
+  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
@@ -172,16 +172,16 @@ items:
   nameWithType.vb: ApizrRequestOptionsBuilder.WithLogging(HttpTracerMode, HttpMessageParts, ParamArray LogLevel())
   fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, ParamArray Microsoft.Extensions.Logging.LogLevel())
   name.vb: WithLogging(HttpTracerMode, HttpMessageParts, ParamArray LogLevel())
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])
-  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])
-  id: WithHeaders(System.String[])
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithHeaders(params string[])
-  nameWithType: ApizrRequestOptionsBuilder.WithHeaders(params string[])
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(params string[])
+  name: WithHeaders(IList<string>, ApizrDuplicateStrategy)
+  nameWithType: ApizrRequestOptionsBuilder.WithHeaders(IList<string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.Collections.Generic.IList<string>, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
@@ -197,21 +197,24 @@ items:
   summary: Add some headers to the request
   example: []
   syntax:
-    content: public IApizrRequestOptionsBuilder WithHeaders(params string[] headers)
+    content: public IApizrRequestOptionsBuilder WithHeaders(IList<string> headers, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
     parameters:
     - id: headers
-      type: System.String[]
+      type: System.Collections.Generic.IList{System.String}
       description: Headers to add to the request
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
     return:
       type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
       description: ''
-    content.vb: Public Function WithHeaders(ParamArray headers As String()) As IApizrRequestOptionsBuilder
+    content.vb: Public Function WithHeaders(headers As IList(Of String), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrRequestOptionsBuilder
   overload: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.String[])
-  nameWithType.vb: ApizrRequestOptionsBuilder.WithHeaders(ParamArray String())
-  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(ParamArray String())
-  name.vb: WithHeaders(ParamArray String())
+  - Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrRequestOptionsBuilder.WithHeaders(IList(Of String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.Collections.Generic.IList(Of String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithHeaders(IList(Of String), ApizrDuplicateStrategy)
 - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout(System.TimeSpan)
   commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout(System.TimeSpan)
   id: WithOperationTimeout(System.TimeSpan)
@@ -230,7 +233,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 47
+    startLine: 68
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -267,7 +270,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 55
+    startLine: 76
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -304,7 +307,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCancellation
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 63
+    startLine: 84
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -341,7 +344,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheClearing
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 71
+    startLine: 92
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -381,7 +384,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 79
+    startLine: 100
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -427,7 +430,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 111
+    startLine: 132
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -475,7 +478,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 118
+    startLine: 139
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -518,7 +521,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 128
+    startLine: 149
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -562,7 +565,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceContextOptions
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 136
+    startLine: 157
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -602,7 +605,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionNames
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 152
+    startLine: 173
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -645,7 +648,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionRule
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 161
+    startLine: 182
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -1997,110 +2000,248 @@ references:
     href: Apizr.Logging.html
 - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders*
   commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders
-  href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html#Apizr_Configuring_Request_ApizrRequestOptionsBuilder_WithHeaders_System_String___
+  href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html#Apizr_Configuring_Request_ApizrRequestOptionsBuilder_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   name: WithHeaders
   nameWithType: ApizrRequestOptionsBuilder.WithHeaders
   fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.String[])
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.String[])
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
-  name: WithHeaders(params string[])
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithHeaders(params string[])
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithHeaders(params string[])
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithHeaders(ParamArray String())
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithHeaders(ParamArray String())
-  name.vb: WithHeaders(ParamArray String())
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  definition: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithHeaders(IList<string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithHeaders(IList<string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithHeaders(System.Collections.Generic.IList<string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrRequestOptionsBuilder(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithHeaders(IList(Of String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Request.IApizrRequestOptionsBuilder(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithHeaders(System.Collections.Generic.IList(Of String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithHeaders(IList(Of String), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.String[])
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-  - name: params
-  - name: " "
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
   - uid: System.String
     name: string
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: '['
-  - name: ']'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.String[])
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-  - name: ParamArray
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
   - name: " "
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.Collections.Generic.IList{System.String}
+  commentId: T:System.Collections.Generic.IList{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<string>
+  nameWithType: IList<string>
+  fullName: System.Collections.Generic.IList<string>
+  nameWithType.vb: IList(Of String)
+  fullName.vb: System.Collections.Generic.IList(Of String)
+  name.vb: IList(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
   - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-  - name: )
-- uid: System.String[]
+- uid: Apizr.Configuring.ApizrDuplicateStrategy
+  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
+  parent: Apizr.Configuring
+  href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  name: ApizrDuplicateStrategy
+  nameWithType: ApizrDuplicateStrategy
+  fullName: Apizr.Configuring.ApizrDuplicateStrategy
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.string
-  name: string[]
-  nameWithType: string[]
-  fullName: string[]
-  nameWithType.vb: String()
-  fullName.vb: String()
-  name.vb: String()
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithHeaders(IList<string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(IList<string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(System.Collections.Generic.IList<string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrRequestOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(IList(Of String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Request.IApizrRequestOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(System.Collections.Generic.IList(Of String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithHeaders(IList(Of String), ApizrDuplicateStrategy)
   spec.csharp:
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithHeaders
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
   - uid: System.String
     name: string
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: '['
-  - name: ']'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
   spec.vb:
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithHeaders
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: (
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
   isExternal: true
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
-  name: WithHeaders(params string[])
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(params string[])
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(params string[])
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(ParamArray String())
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(ParamArray String())
-  name.vb: WithHeaders(ParamArray String())
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-    name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
-  - name: (
-  - name: params
-  - name: " "
-  - uid: System.String
-    name: string
+  - uid: System.Collections.Generic.IList`1
+    name: IList
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: '['
-  - name: ']'
-  - name: )
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-    name: WithHeaders
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHeaders_System_String___
-  - name: (
-  - name: ParamArray
-  - name: " "
-  - uid: System.String
-    name: String
+  - uid: System.Collections.Generic.IList`1
+    name: IList
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
   - name: (
+  - name: Of
+  - name: " "
+  - name: T
   - name: )
-  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  href: Apizr.html
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
 - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout*
   commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout
   href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html#Apizr_Configuring_Request_ApizrRequestOptionsBuilder_WithOperationTimeout_System_TimeSpan_
@@ -2521,13 +2662,6 @@ references:
     name: ApizrException
     href: Apizr.ApizrException.html
   - name: )
-- uid: Apizr.Configuring.ApizrDuplicateStrategy
-  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
-  parent: Apizr.Configuring
-  href: Apizr.Configuring.ApizrDuplicateStrategy.html
-  name: ApizrDuplicateStrategy
-  nameWithType: ApizrDuplicateStrategy
-  fullName: Apizr.Configuring.ApizrDuplicateStrategy
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
@@ -2620,28 +2754,6 @@ references:
   - name: " "
   - name: T
   - name: )
-- uid: Apizr.Configuring
-  commentId: N:Apizr.Configuring
-  href: Apizr.html
-  name: Apizr.Configuring
-  nameWithType: Apizr.Configuring
-  fullName: Apizr.Configuring
-  spec.csharp:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Configuring
-    name: Configuring
-    href: Apizr.Configuring.html
-  spec.vb:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Configuring
-    name: Configuring
-    href: Apizr.Configuring.html
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithExCatching``1(System.Action{Apizr.ApizrException{{TResult}}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
@@ -3432,43 +3544,6 @@ references:
   - name: " "
   - name: T
   - name: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
-  spec.csharp:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Collections
-    name: Collections
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections
-  - name: .
-  - uid: System.Collections.Generic
-    name: Generic
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
-  spec.vb:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Collections
-    name: Collections
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections
-  - name: .
-  - uid: System.Collections.Generic
-    name: Generic
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: System.Func`2
   commentId: T:System.Func`2
   isExternal: true

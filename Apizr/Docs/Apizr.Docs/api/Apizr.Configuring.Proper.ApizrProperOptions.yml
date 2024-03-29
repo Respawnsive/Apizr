@@ -10,7 +10,6 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptions.BasePathFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.BaseUriFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories
-  - Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpClientConfigurationBuilder
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpTracerModeFactory
@@ -40,8 +39,8 @@ items:
   summary: Options available at proper level for static registrations
   example: []
   syntax:
-    content: 'public class ApizrProperOptions : ApizrProperOptionsBase, IApizrProperOptions, IApizrProperOptionsBase, IApizrSharedRegistrationOptions, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase'
-    content.vb: Public Class ApizrProperOptions Inherits ApizrProperOptionsBase Implements IApizrProperOptions, IApizrProperOptionsBase, IApizrSharedRegistrationOptions, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase
+    content: 'public class ApizrProperOptions : ApizrProperOptionsBase, IApizrProperOptions, IApizrProperOptionsBase, IApizrSharedRegistrationOptions, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptions, IApizrGlobalSharedOptionsBase'
+    content.vb: Public Class ApizrProperOptions Inherits ApizrProperOptionsBase Implements IApizrProperOptions, IApizrProperOptionsBase, IApizrSharedRegistrationOptions, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptions, IApizrGlobalSharedOptionsBase
   inheritance:
   - System.Object
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -53,6 +52,7 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptions
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
@@ -62,13 +62,14 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.BasePath
   - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  - Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.Headers
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
-  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
@@ -165,7 +166,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 62
+    startLine: 61
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -198,7 +199,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 70
+    startLine: 69
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -231,7 +232,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 78
+    startLine: 77
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -264,7 +265,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 86
+    startLine: 85
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -297,7 +298,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 94
+    startLine: 93
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -330,7 +331,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 102
+    startLine: 101
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -363,7 +364,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 109
+    startLine: 108
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -396,7 +397,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 112
+    startLine: 111
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -429,7 +430,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientConfigurationBuilder
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 115
+    startLine: 114
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -462,7 +463,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersFactories
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 118
+    startLine: 117
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -477,39 +478,6 @@ items:
   overload: Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories*
   implements:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
-- uid: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
-  commentId: P:Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
-  id: HeadersFactory
-  parent: Apizr.Configuring.Proper.ApizrProperOptions
-  langs:
-  - csharp
-  - vb
-  name: HeadersFactory
-  nameWithType: ApizrProperOptions.HeadersFactory
-  fullName: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
-  type: Property
-  source:
-    remote:
-      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: HeadersFactory
-    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 123
-  assemblies:
-  - Apizr
-  namespace: Apizr.Configuring.Proper
-  summary: Headers factory
-  example: []
-  syntax:
-    content: public Func<IList<string>> HeadersFactory { get; }
-    parameters: []
-    return:
-      type: System.Func{System.Collections.Generic.IList{System.String}}
-    content.vb: Public ReadOnly Property HeadersFactory As Func(Of IList(Of String))
-  overload: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory*
-  implements:
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
 - uid: Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory
   commentId: P:Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory
   id: OperationTimeoutFactory
@@ -528,7 +496,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeoutFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 127
+    startLine: 121
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -561,7 +529,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeoutFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 135
+    startLine: 129
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -674,6 +642,13 @@ references:
   name: IApizrGlobalSharedRegistrationOptionsBase
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptions
+  commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptions
+  parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptions.html
+  name: IApizrGlobalSharedOptions
+  nameWithType: IApizrGlobalSharedOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptions
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
@@ -730,6 +705,20 @@ references:
   name: PrimaryHandlerFactory
   nameWithType: ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedRegistrationOptionsBase_HeadersFactories
+  name: HeadersFactories
+  nameWithType: ApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.Headers
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.Headers
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedRegistrationOptionsBase_Headers
+  name: Headers
+  nameWithType: ApizrGlobalSharedRegistrationOptionsBase.Headers
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -772,13 +761,6 @@ references:
   name: HandlersParameters
   nameWithType: ApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
-  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_Headers
-  name: Headers
-  nameWithType: ApizrGlobalSharedOptionsBase.Headers
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -1943,68 +1925,6 @@ references:
     name: DelegatingHandler
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler
-  - name: )
-  - name: )
-- uid: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory*
-  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
-  href: Apizr.Configuring.Proper.ApizrProperOptions.html#Apizr_Configuring_Proper_ApizrProperOptions_HeadersFactory
-  name: HeadersFactory
-  nameWithType: ApizrProperOptions.HeadersFactory
-  fullName: Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
-  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
-  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_HeadersFactory
-  name: HeadersFactory
-  nameWithType: IApizrSharedRegistrationOptions.HeadersFactory
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
-- uid: System.Func{System.Collections.Generic.IList{System.String}}
-  commentId: T:System.Func{System.Collections.Generic.IList{System.String}}
-  parent: System
-  definition: System.Func`1
-  href: https://learn.microsoft.com/dotnet/api/system.func-1
-  name: Func<IList<string>>
-  nameWithType: Func<IList<string>>
-  fullName: System.Func<System.Collections.Generic.IList<string>>
-  nameWithType.vb: Func(Of IList(Of String))
-  fullName.vb: System.Func(Of System.Collections.Generic.IList(Of String))
-  name.vb: Func(Of IList(Of String))
-  spec.csharp:
-  - uid: System.Func`1
-    name: Func
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-1
-  - name: <
-  - uid: System.Collections.Generic.IList`1
-    name: IList
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
-  - name: <
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: '>'
-  - name: '>'
-  spec.vb:
-  - uid: System.Func`1
-    name: Func
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-1
-  - name: (
-  - name: Of
-  - name: " "
-  - uid: System.Collections.Generic.IList`1
-    name: IList
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
-  - name: (
-  - name: Of
-  - name: " "
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
   - name: )
 - uid: Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory*

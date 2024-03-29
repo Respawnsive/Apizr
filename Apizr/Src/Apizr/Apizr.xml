@@ -707,6 +707,16 @@
             Duplicate strategy about options registration
             </summary>
         </member>
+        <member name="F:Apizr.Configuring.ApizrLifetimeScope.Api">
+            <summary>
+            Set once for all api requests (static values)
+            </summary>
+        </member>
+        <member name="F:Apizr.Configuring.ApizrLifetimeScope.Request">
+            <summary>
+            Refresh values for each api request (dynamic values)
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.Common.ApizrCommonOptions">
             <inheritdoc cref="T:Apizr.Configuring.Common.IApizrCommonOptions"/>
         </member>
@@ -749,9 +759,6 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.DelegatingHandlersFactories">
-            <inheritdoc />
-        </member>
-        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.HeadersFactory">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory">
@@ -899,10 +906,16 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.String[])">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
@@ -936,6 +949,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -1186,9 +1205,6 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.DelegatingHandlersFactories">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.HeadersFactory">
-            <inheritdoc />
-        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory">
             <inheritdoc />
         </member>
@@ -1245,10 +1261,16 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.HeadersFactories">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RequestTimeout">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ShouldRedactHeaderValue">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Apizr#Configuring#Shared#IApizrGlobalSharedOptionsBase#ContextOptionsBuilder">
@@ -1409,10 +1431,16 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.String[])">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
@@ -1446,6 +1474,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -1550,9 +1584,6 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories">
-            <inheritdoc />
-        </member>
-        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.HeadersFactory">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory">
@@ -1676,10 +1707,16 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.String[])">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
@@ -1701,6 +1738,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -2171,6 +2214,12 @@
         <member name="P:Apizr.Configuring.Request.ApizrRequestOptions.ResilienceContextOptions">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Request.ApizrRequestOptions.Headers">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Request.ApizrRequestOptions.Apizr#Configuring#Request#IApizrRequestOptions#HeadersStore">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Request.ApizrRequestOptions.Apizr#Configuring#Request#IApizrRequestOptions#OriginalExpression">
             <inheritdoc />
         </member>
@@ -2192,7 +2241,7 @@
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.String[])">
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
@@ -2222,6 +2271,15 @@
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr#Configuring#Request#IApizrRequestOptionsBuilder{Apizr#Configuring#Request#IApizrRequestOptions,Apizr#Configuring#Request#IApizrRequestOptionsBuilder}#WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrRegistrationMode)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr#Configuring#Request#IApizrRequestOptionsBuilder{Apizr#Configuring#Request#IApizrRequestOptions,Apizr#Configuring#Request#IApizrRequestOptionsBuilder}#WithOriginalExpression(System.Linq.Expressions.Expression)">
             <inheritdoc />
         </member>
@@ -2232,7 +2290,7 @@
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Request.IApizrRequestOptions">
-            <inheritdoc />
+            <inheritdoc cref="T:Apizr.Configuring.Request.IApizrRequestOptionsBase" />
         </member>
         <member name="P:Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken">
             <summary>
@@ -2247,6 +2305,11 @@
         <member name="P:Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions">
             <summary>
             Options set to resilience context
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Request.IApizrRequestOptions.Headers">
+            <summary>
+            Headers to add to the request
             </summary>
         </member>
         <member name="T:Apizr.Configuring.Request.IApizrRequestOptionsBase">
@@ -2276,6 +2339,14 @@
             Tells if you want to clear the potential cached data before requesting
             </summary>
             <param name="clearCache">Clear cache or not</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Add some headers to the request
+            </summary>
+            <param name="headers">Headers to add to the request</param>
+            <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Request.IApizrRequestOptionsBuilder">
@@ -2319,13 +2390,13 @@
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers">
-            <inheritdoc />
-        </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Apizr#Configuring#Shared#IApizrGlobalSharedOptionsBase#ContextOptionsBuilder">
@@ -2349,6 +2420,12 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.HeadersFactories">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.Headers">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Shared.Context.ApizrResilienceContextOptions.ContinueOnCapturedContext">
@@ -2386,6 +2463,11 @@
             Builder options available at both common and proper level for extended registration
             </summary>
         </member>
+        <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedOptions">
+            <summary>
+            Options available at all (common, proper and request) levels and for static registration type
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase">
             <summary>
             Options available at all (common, proper and request) levels and for all (static and extended) registration types
@@ -2421,11 +2503,6 @@
             Parameters passed through delegating handlers
             </summary>
         </member>
-        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers">
-            <summary>
-            Headers to add to the request
-            </summary>
-        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout">
             <summary>
             The operation timeout (overall request tries)
@@ -2434,6 +2511,11 @@
         <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout">
             <summary>
             The request timeout (each request try)
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue">
+            <summary>
+            The <see cref="T:System.Func`2"/> which determines whether to redact the HTTP header value before logging.
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ContextOptionsBuilder">
@@ -2492,13 +2574,6 @@
             <param name="logLevels">Log levels to apply while writing (default: Information)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])">
-            <summary>
-            Add some headers to the request
-            </summary>
-            <param name="headers">Headers to add to the request</param>
-            <returns></returns>
-        </member>
         <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)">
             <summary>
             Set a timeout to the operation (overall request tries)
@@ -2518,6 +2593,22 @@
             Set some options to the resilience context
             </summary>
             <param name="contextOptionsBuilder">The resilience context options builder</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Sets the collection of HTTP headers names for which values should be redacted before logging.
+            </summary>
+            <param name="redactedLoggedHeaderNames">The collection of HTTP headers names for which values should be redacted before logging.</param>
+            <param name="strategy">The duplicate strategy if there's any other names already (default: Add)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Sets the <see cref="T:System.Func`2"/> which determines whether to redact the HTTP header value before logging.
+            </summary>
+            <param name="shouldRedactHeaderValue">The <see cref="T:System.Func`2"/> which determines whether to redact the HTTP header value before logging</param>
+            <param name="strategy">The duplicate strategy if there's any other names already (default: Add)</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase">
@@ -2543,6 +2634,16 @@
         <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory">
             <summary>
             The primary Http message handler factory (set internally)
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories">
+            <summary>
+            Headers factories
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers">
+            <summary>
+            Headers to add to the request
             </summary>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase">
@@ -2595,6 +2696,15 @@
             <param name="delegatingHandler">A delegating handler</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
+            <summary>
+            Add some headers to the request
+            </summary>
+            <param name="headers">Headers to add to the request</param>
+            <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
+            <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+            <returns></returns>
+        </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions">
             <summary>
             Options available at both common and proper level for static registrations
@@ -2643,11 +2753,6 @@
         <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories">
             <summary>
             Delegating handlers factories
-            </summary>
-        </member>
-        <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory">
-            <summary>
-            Headers factory
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory">
@@ -2809,11 +2914,38 @@
             <param name="loggingConfigurationFactory">Logging configuration factory</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <summary>
             Add some headers to the request
             </summary>
             <param name="headersFactory">Headers factory</param>
+            <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+            <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+            <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
+            <summary>
+            Add some headers to the request loaded from service properties
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
+            <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
+            <param name="headerProperties">The header properties to get from</param>
+            <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+            <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+            <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
+            <summary>
+            Add some headers to the request loaded from service properties
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
+            <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+            <param name="headerProperties">The header properties to get from</param>
+            <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+            <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+            <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithOperationTimeout(System.Func{System.TimeSpan})">
@@ -4625,7 +4757,7 @@
             <param name="handler">User defined <see cref="T:System.Net.Http.HttpMessageHandler"/></param>
             <param name="apizrOptions">Apizr options</param>
         </member>
-        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)">
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpRequest(System.Net.Http.HttpRequestMessage,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})">
             <summary>
             Logs Http request
             </summary>
@@ -4633,9 +4765,10 @@
             <param name="logger">The logger</param>
             <param name="logLevels">The log levels</param>
             <param name="verbosity">The verbosity</param>
+            <param name="shouldRedactHeaderValue">Header values redaction rules</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts)">
+        <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpResponse(System.Net.Http.HttpResponseMessage,System.TimeSpan,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[],Apizr.Logging.HttpMessageParts,System.Func{System.String,System.Boolean})">
             <summary>
             Logs Http response
             </summary>
@@ -4644,6 +4777,7 @@
             <param name="logger">The logger</param>
             <param name="logLevels">The log levels</param>
             <param name="verbosity">The verbosity</param>
+            <param name="shouldRedactHeaderValue">Header values redaction rules</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Logging.ExtendedHttpTracerHandler.LogHttpException(System.Net.Http.HttpRequestMessage,System.Exception,Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel[])">

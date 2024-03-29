@@ -11,6 +11,7 @@ items:
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseUri
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.HandlersParameters
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers
+  - Apizr.Configuring.Manager.ApizrManagerOptions`1.HeadersFactories
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.HttpTracerMode
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Manager.ApizrManagerOptions`1.LogLevels
@@ -39,7 +40,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrManagerOptions
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 157
+    startLine: 151
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -92,7 +93,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Options
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 162
+    startLine: 156
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -123,7 +124,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 168
+    startLine: 162
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -158,7 +159,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApiType
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 174
+    startLine: 168
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -193,7 +194,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUri
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 177
+    startLine: 171
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -228,7 +229,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddress
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 180
+    startLine: 174
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -263,7 +264,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePath
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 183
+    startLine: 177
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -298,7 +299,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: PrimaryHandlerFactory
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 186
+    startLine: 180
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -333,7 +334,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerMode
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 190
+    startLine: 184
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -368,7 +369,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosity
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 193
+    startLine: 187
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -403,7 +404,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevels
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 196
+    startLine: 190
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -438,7 +439,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OnException
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 199
+    startLine: 193
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -473,7 +474,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LetThrowOnExceptionWithEmptyCache
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 202
+    startLine: 196
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -508,7 +509,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HandlersParameters
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 205
+    startLine: 199
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -543,23 +544,58 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Headers
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 208
+    startLine: 202
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
   summary: Headers to add to the request
   example: []
   syntax:
-    content: public IList<string> Headers { get; }
+    content: public IDictionary<ApizrRegistrationMode, IList<string>> Headers { get; }
     parameters: []
     return:
-      type: System.Collections.Generic.IList{System.String}
-    content.vb: Public ReadOnly Property Headers As IList(Of String)
+      type: System.Collections.Generic.IDictionary{Apizr.Configuring.ApizrRegistrationMode,System.Collections.Generic.IList{System.String}}
+    content.vb: Public ReadOnly Property Headers As IDictionary(Of ApizrRegistrationMode, IList(Of String))
   overload: Apizr.Configuring.Manager.ApizrManagerOptions`1.Headers*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Headers
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Headers
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.HeadersFactories
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.HeadersFactories
+  id: HeadersFactories
+  parent: Apizr.Configuring.Manager.ApizrManagerOptions`1
+  langs:
+  - csharp
+  - vb
+  name: HeadersFactories
+  nameWithType: ApizrManagerOptions<TWebApi>.HeadersFactories
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.HeadersFactories
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HeadersFactories
+    path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
+    startLine: 205
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Manager
+  summary: Headers factories
+  example: []
+  syntax:
+    content: public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> HeadersFactories { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IDictionary{System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope},System.Func{System.Collections.Generic.IList{System.String}}}
+    content.vb: Public ReadOnly Property HeadersFactories As IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IList(Of String)))
+  overload: Apizr.Configuring.Manager.ApizrManagerOptions`1.HeadersFactories*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).HeadersFactories
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).HeadersFactories
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout
   id: OperationTimeout
@@ -578,7 +614,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeout
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 211
+    startLine: 208
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -613,7 +649,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeout
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 214
+    startLine: 211
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -648,7 +684,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ShouldRedactHeaderValue
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 217
+    startLine: 214
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -683,7 +719,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Logger
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 230
+    startLine: 227
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -718,7 +754,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResiliencePipelineRegistryKeys
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 233
+    startLine: 230
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -753,7 +789,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettings
     path: ../../Src/Apizr/Configuring/Manager/ApizrManagerOptions.cs
-    startLine: 236
+    startLine: 233
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Manager
@@ -1795,25 +1831,35 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.Headers
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Headers
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Headers
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_Headers
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_Headers
   name: Headers
-  nameWithType: IApizrGlobalSharedOptionsBase.Headers
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-- uid: System.Collections.Generic.IList{System.String}
-  commentId: T:System.Collections.Generic.IList{System.String}
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.Headers
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+- uid: System.Collections.Generic.IDictionary{Apizr.Configuring.ApizrRegistrationMode,System.Collections.Generic.IList{System.String}}
+  commentId: T:System.Collections.Generic.IDictionary{Apizr.Configuring.ApizrRegistrationMode,System.Collections.Generic.IList{System.String}}
   parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
-  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
-  name: IList<string>
-  nameWithType: IList<string>
-  fullName: System.Collections.Generic.IList<string>
-  nameWithType.vb: IList(Of String)
-  fullName.vb: System.Collections.Generic.IList(Of String)
-  name.vb: IList(Of String)
+  definition: System.Collections.Generic.IDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<ApizrRegistrationMode, IList<string>>
+  nameWithType: IDictionary<ApizrRegistrationMode, IList<string>>
+  fullName: System.Collections.Generic.IDictionary<Apizr.Configuring.ApizrRegistrationMode, System.Collections.Generic.IList<string>>
+  nameWithType.vb: IDictionary(Of ApizrRegistrationMode, IList(Of String))
+  fullName.vb: System.Collections.Generic.IDictionary(Of Apizr.Configuring.ApizrRegistrationMode, System.Collections.Generic.IList(Of String))
+  name.vb: IDictionary(Of ApizrRegistrationMode, IList(Of String))
   spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IList`1
     name: IList
     isExternal: true
@@ -1824,7 +1870,20 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
+  - name: '>'
   spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: ','
+  - name: " "
   - uid: System.Collections.Generic.IList`1
     name: IList
     isExternal: true
@@ -1837,25 +1896,95 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-- uid: System.Collections.Generic.IList`1
-  commentId: T:System.Collections.Generic.IList`1
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
-  name: IList<T>
-  nameWithType: IList<T>
-  fullName: System.Collections.Generic.IList<T>
-  nameWithType.vb: IList(Of T)
-  fullName.vb: System.Collections.Generic.IList(Of T)
-  name.vb: IList(Of T)
+  - name: )
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.HeadersFactories*
+  commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.HeadersFactories
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_HeadersFactories
+  name: HeadersFactories
+  nameWithType: ApizrManagerOptions<TWebApi>.HeadersFactories
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.HeadersFactories
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).HeadersFactories
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).HeadersFactories
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_HeadersFactories
+  name: HeadersFactories
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+- uid: System.Collections.Generic.IDictionary{System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope},System.Func{System.Collections.Generic.IList{System.String}}}
+  commentId: T:System.Collections.Generic.IDictionary{System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope},System.Func{System.Collections.Generic.IList{System.String}}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>>
+  nameWithType: IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>>
+  fullName: System.Collections.Generic.IDictionary<(Apizr.Configuring.ApizrRegistrationMode, Apizr.Configuring.ApizrLifetimeScope), System.Func<System.Collections.Generic.IList<string>>>
+  nameWithType.vb: IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IList(Of String)))
+  fullName.vb: System.Collections.Generic.IDictionary(Of (Apizr.Configuring.ApizrRegistrationMode, Apizr.Configuring.ApizrLifetimeScope), System.Func(Of System.Collections.Generic.IList(Of String)))
+  name.vb: IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IList(Of String)))
   spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - name: (
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
   - uid: System.Collections.Generic.IList`1
     name: IList
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
   - name: <
-  - name: T
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
   - name: '>'
   spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: (
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Collections.Generic.IList`1
     name: IList
     isExternal: true
@@ -1863,7 +1992,12 @@ references:
   - name: (
   - name: Of
   - name: " "
-  - name: T
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
   - name: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions`1.OperationTimeout

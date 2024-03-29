@@ -7,6 +7,7 @@ items:
   children:
   - Apizr.Configuring.Request.IApizrRequestOptions.CancellationToken
   - Apizr.Configuring.Request.IApizrRequestOptions.ClearCache
+  - Apizr.Configuring.Request.IApizrRequestOptions.Headers
   - Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions
   langs:
   - csharp
@@ -22,15 +23,15 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrRequestOptions
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-    startLine: 7
+    startLine: 9
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
   summary: Options available at request levels and for all (static and extended) registration types
   example: []
   syntax:
-    content: 'public interface IApizrRequestOptions : IApizrRequestOptionsBase, IApizrGlobalSharedOptionsBase'
-    content.vb: Public Interface IApizrRequestOptions Inherits IApizrRequestOptionsBase, IApizrGlobalSharedOptionsBase
+    content: 'public interface IApizrRequestOptions : IApizrRequestOptionsBase, IApizrGlobalSharedOptions, IApizrGlobalSharedOptionsBase'
+    content.vb: Public Interface IApizrRequestOptions Inherits IApizrRequestOptionsBase, IApizrGlobalSharedOptions, IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
@@ -39,7 +40,6 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
@@ -61,7 +61,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CancellationToken
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-    startLine: 12
+    startLine: 14
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -92,7 +92,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ClearCache
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-    startLine: 17
+    startLine: 19
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -123,7 +123,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResilienceContextOptions
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
-    startLine: 22
+    startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -136,6 +136,37 @@ items:
       type: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptions
     content.vb: ReadOnly Property ResilienceContextOptions As IApizrResilienceContextOptions
   overload: Apizr.Configuring.Request.IApizrRequestOptions.ResilienceContextOptions*
+- uid: Apizr.Configuring.Request.IApizrRequestOptions.Headers
+  commentId: P:Apizr.Configuring.Request.IApizrRequestOptions.Headers
+  id: Headers
+  parent: Apizr.Configuring.Request.IApizrRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Headers
+  nameWithType: IApizrRequestOptions.Headers
+  fullName: Apizr.Configuring.Request.IApizrRequestOptions.Headers
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: Headers
+    path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptions.cs
+    startLine: 29
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: Headers to add to the request
+  example: []
+  syntax:
+    content: IList<string> Headers { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IList{System.String}
+    content.vb: ReadOnly Property Headers As IList(Of String)
+  overload: Apizr.Configuring.Request.IApizrRequestOptions.Headers*
 references:
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
@@ -216,13 +247,6 @@ references:
   name: HandlersParameters
   nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_Headers
-  name: Headers
-  nameWithType: IApizrGlobalSharedOptionsBase.Headers
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
@@ -404,3 +428,109 @@ references:
   - uid: Apizr.Configuring.Shared.Context
     name: Context
     href: Apizr.Configuring.Shared.Context.html
+- uid: Apizr.Configuring.Request.IApizrRequestOptions.Headers*
+  commentId: Overload:Apizr.Configuring.Request.IApizrRequestOptions.Headers
+  href: Apizr.Configuring.Request.IApizrRequestOptions.html#Apizr_Configuring_Request_IApizrRequestOptions_Headers
+  name: Headers
+  nameWithType: IApizrRequestOptions.Headers
+  fullName: Apizr.Configuring.Request.IApizrRequestOptions.Headers
+- uid: System.Collections.Generic.IList{System.String}
+  commentId: T:System.Collections.Generic.IList{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<string>
+  nameWithType: IList<string>
+  fullName: System.Collections.Generic.IList<string>
+  nameWithType.vb: IList(Of String)
+  fullName.vb: System.Collections.Generic.IList(Of String)
+  name.vb: IList(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

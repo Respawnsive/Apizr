@@ -158,7 +158,7 @@ namespace Apizr.Extending.Configuring.Manager
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
         
         /// <inheritdoc />
-        public IDictionary<ApizrLifetimeScope, Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
+        public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

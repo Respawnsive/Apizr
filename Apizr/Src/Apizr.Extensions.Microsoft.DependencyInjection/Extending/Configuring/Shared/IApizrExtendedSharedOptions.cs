@@ -67,7 +67,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// <summary>
         /// Headers factories
         /// </summary>
-        IDictionary<ApizrLifetimeScope, Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
+        IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
         internal IDictionary<string, Func<IServiceProvider, object>> ResiliencePropertiesExtendedFactories { get; }
     }

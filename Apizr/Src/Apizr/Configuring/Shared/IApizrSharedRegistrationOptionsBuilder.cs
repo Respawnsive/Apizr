@@ -136,18 +136,18 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
 
         /// <summary>
-        /// Add a custom delegating handler
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call) or <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
-        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <param name="httpMessageHandlerFactory">A http message handler factory</param>
         /// <returns></returns>
-        TApizrOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
+        TApizrOptionsBuilder AddHttpMessageHandler<THandler>(Func<ILogger, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler;
 
         /// <summary>
-        /// Add a custom delegating handler
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call) or <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
-        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <param name="httpMessageHandlerFactory">A http message handler factory</param>
         /// <returns></returns>
-        TApizrOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
+        TApizrOptionsBuilder AddHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler;
 
         /// <summary>
         /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)

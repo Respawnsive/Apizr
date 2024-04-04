@@ -131,14 +131,14 @@ namespace Apizr.Configuring.Proper
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithAuthenticationHandler(
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
-            => AddDelegatingHandler((logger, options) =>
+            => AddHttpMessageHandler((logger, options) =>
                 new AuthenticationHandler(logger, options, refreshTokenFactory));
 
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
             Func<ILogger, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
             where TAuthenticationHandler : AuthenticationHandlerBase
-            => AddDelegatingHandler(authenticationHandlerFactory);
+            => AddHttpMessageHandler(authenticationHandlerFactory);
 
         /// <inheritdoc />
         public IApizrProperOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(TSettingsService settingsService,
@@ -150,7 +150,7 @@ namespace Apizr.Configuring.Proper
             Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> tokenProperty, Func<TTokenService> tokenServiceFactory,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
-            => AddDelegatingHandler((logger, options) =>
+            => AddHttpMessageHandler((logger, options) =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(logger,
                     options,
                     settingsServiceFactory, tokenProperty,
@@ -178,22 +178,22 @@ namespace Apizr.Configuring.Proper
             Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
-            => AddDelegatingHandler((logger, options) =>
+            => AddHttpMessageHandler((logger, options) =>
                 new AuthenticationHandler<TSettingsService>(logger, options, settingsServiceFactory, tokenProperty,
                     refreshTokenFactory));
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler
-            => AddDelegatingHandler((_, _) => delegatingHandler);
+        public IApizrProperOptionsBuilder AddHttpMessageHandler<THandler>(THandler httpMessageHandler) where THandler : HttpMessageHandler
+            => AddHttpMessageHandler((_, _) => httpMessageHandler);
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler
-            => AddDelegatingHandler((logger, _) => delegatingHandlerFactory(logger));
+        public IApizrProperOptionsBuilder AddHttpMessageHandler<THandler>(Func<ILogger, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler
+            => AddHttpMessageHandler((logger, _) => httpMessageHandlerFactory(logger));
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler
+        public IApizrProperOptionsBuilder AddHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler
         {
-            Options.DelegatingHandlersFactories[typeof(THandler)] = delegatingHandlerFactory;
+            Options.HttpMessageHandlersFactories[typeof(THandler)] = httpMessageHandlerFactory;
 
             return this;
         }
@@ -487,7 +487,7 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         void IApizrInternalRegistrationOptionsBuilder.AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> handlerFactory) 
-            => AddDelegatingHandler((_, opt) => handlerFactory.Invoke(opt));
+            => AddHttpMessageHandler((_, opt) => handlerFactory.Invoke(opt));
 
         #endregion
     }

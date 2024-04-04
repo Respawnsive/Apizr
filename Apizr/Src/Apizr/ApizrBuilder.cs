@@ -213,8 +213,8 @@ namespace Apizr
                     });
                 handlerBuilder.AddHandler(new ResilienceHttpMessageHandler(pipelineProvider, apizrOptions));
 
-                foreach (var delegatingHandlersFactory in apizrOptions.DelegatingHandlersFactories.Values)
-                    handlerBuilder.AddHandler(delegatingHandlersFactory.Invoke(apizrOptions.Logger, apizrOptions));
+                foreach (var httpMessageHandlersFactory in apizrOptions.HttpMessageHandlersFactories.Values)
+                    handlerBuilder.AddHandler(httpMessageHandlersFactory.Invoke(apizrOptions.Logger, apizrOptions));
 
                 var innerHandler = handlerBuilder.Build();
                 var primaryHandler = apizrOptions.PrimaryHandlerFactory?.Invoke(innerHandler, apizrOptions.Logger, apizrOptions) ?? innerHandler;

@@ -662,7 +662,7 @@ namespace Apizr
                             });
                     handlerBuilder.AddHandler(new ResilienceHttpMessageHandler(pipelineProvider, apizrOptions));
 
-                    foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories.Values)
+                    foreach (var delegatingHandlerExtendedFactory in options.HttpMessageHandlersExtendedFactories.Values)
                         handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));
 
                     var innerHandler = handlerBuilder.Build();

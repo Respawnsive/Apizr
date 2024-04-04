@@ -27,7 +27,7 @@ namespace Apizr.Tests.Helpers
             Headers = request.Headers;
             Attempts++;
 
-            if (Options.CancellationToken != CancellationToken.None)
+            if (Options?.CancellationToken != CancellationToken.None)
                 await Task.Delay(5000, cancellationToken);
 
             return await base.SendAsync(request, cancellationToken);

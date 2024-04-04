@@ -43,7 +43,7 @@ namespace Apizr.Extending.Configuring.Proper
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientBuilder = sharedOptions.HttpClientBuilder;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
-            DelegatingHandlersExtendedFactories = sharedOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            HttpMessageHandlersExtendedFactories = sharedOptions.HttpMessageHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             OperationTimeoutFactory = operationTimeout.HasValue ? _ => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? _ => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
             HeadersExtendedFactories = sharedOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
@@ -136,7 +136,7 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         /// <inheritdoc />
-        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>> HttpMessageHandlersExtendedFactories { get; }
 
         private readonly IDictionary<string, Func<IServiceProvider, object>> _resiliencePropertiesExtendedFactories;
         /// <inheritdoc />

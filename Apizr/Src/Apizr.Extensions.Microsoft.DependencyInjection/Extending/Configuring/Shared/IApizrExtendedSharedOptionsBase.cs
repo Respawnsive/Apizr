@@ -13,8 +13,8 @@ namespace Apizr.Extending.Configuring.Shared
     public interface IApizrExtendedSharedOptionsBase : IApizrGlobalSharedRegistrationOptionsBase
     {
         /// <summary>
-        /// Delegating handlers factories
+        /// Http message handlers factories
         /// </summary>
-        IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+        IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>> HttpMessageHandlersExtendedFactories { get; }
     }
 }

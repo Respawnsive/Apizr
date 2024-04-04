@@ -33,7 +33,7 @@ namespace Apizr.Extending.Configuring.Common
             ConnectivityHandlerType = typeof(DefaultConnectivityHandler);
             CacheHandlerType = typeof(VoidCacheHandler);
             MappingHandlerType = typeof(VoidMappingHandler);
-            DelegatingHandlersExtendedFactories = new Dictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>();
+            HttpMessageHandlersExtendedFactories = new Dictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             WebApis = new Dictionary<Type, WebApiAttribute>();
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
@@ -143,7 +143,7 @@ namespace Apizr.Extending.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>> HttpMessageHandlersExtendedFactories { get; }
 
         /// <inheritdoc />
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }

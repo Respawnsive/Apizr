@@ -57,11 +57,11 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
 
         /// <summary>
-        /// Add a custom delegating handler
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call) or <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
-        /// <param name="delegatingHandler">A delegating handler</param>
+        /// <param name="httpMessageHandler">A http message handler</param>
         /// <returns></returns>
-        TApizrOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler;
+        TApizrOptionsBuilder AddHttpMessageHandler<THandler>(THandler httpMessageHandler) where THandler : HttpMessageHandler;
 
         /// <summary>
         /// Add some headers to the request

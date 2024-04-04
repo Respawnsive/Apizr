@@ -47,7 +47,7 @@ namespace Apizr.Extending.Configuring.Manager
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerType = commonOptions.MappingHandlerType;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
-            DelegatingHandlersExtendedFactories = properOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            HttpMessageHandlersExtendedFactories = properOptions.HttpMessageHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             CrudEntities = commonOptions.CrudEntities.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             WebApis = commonOptions.WebApis.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
@@ -211,6 +211,6 @@ namespace Apizr.Extending.Configuring.Manager
 
         /// <inheritdoc />
 
-        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories => _apizrExtendedOptions.DelegatingHandlersExtendedFactories;
+        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>> HttpMessageHandlersExtendedFactories => _apizrExtendedOptions.HttpMessageHandlersExtendedFactories;
     }
 }

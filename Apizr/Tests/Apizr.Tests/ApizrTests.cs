@@ -121,6 +121,30 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Calling_AddHttpMessageHandler_Should_Add_The_Handler()
+        {
+            var mockHttp = new MockHttpMessageHandler();
+
+            var json =
+                "{ \"page\": 1, \"per_page\": 6, \"total\": 12, \"total_pages\": 2, \"data\": [ { \"id\": 1, \"email\": \"george.bluth@reqres.in\", \"first_name\": \"George\", \"last_name\": \"Bluth\", \"avatar\": \"https://reqres.in/img/faces/1-image.jpg\" } ] }";
+
+            // Setup a respond for the user api (including a wildcard in the URL)
+            mockHttp.When("https://reqres.in/api/*")
+                .Respond("application/json", json); // Respond with JSON
+
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .AddHttpMessageHandler(new WatchingRequestHandler())
+                    .AddHttpMessageHandler(mockHttp));
+
+            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            result.Should().NotBeNull();
+        }
+
+        [Fact]
         public async Task Calling_WithAuthenticationHandler_Should_Authenticate_Request()
         {
             string token = null;
@@ -130,6 +154,7 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
+                    .AddHttpMessageHandler(new WatchingRequestHandler())
                     .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
@@ -189,7 +214,7 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace)))
                 .WithLogging()
                 .WithAkavacheCacheHandler()
-                .AddDelegatingHandler(new TestRequestHandler()));
+                .AddHttpMessageHandler(new TestRequestHandler()));
 
             // Clearing cache
             await reqResManager.ClearCacheAsync();
@@ -222,7 +247,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithAkavacheCacheHandler()
-                    .AddDelegatingHandler(new TestRequestHandler()));
+                    .AddHttpMessageHandler(new TestRequestHandler()));
 
             // Clearing all cache
             var cleared = await reqResManager.ClearCacheAsync();
@@ -313,7 +338,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-                    .AddDelegatingHandler(new TestRequestHandler()));
+                    .AddHttpMessageHandler(new TestRequestHandler()));
 
             // Defining a transient throwing request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout));
@@ -547,7 +572,7 @@ namespace Apizr.Tests
                     .WithLogging()
                     .WithResilienceContextOptions(opt => 
                         opt.ReturnToPoolOnComplete(false))
-                    .AddDelegatingHandler(watcher));
+                    .AddHttpMessageHandler(watcher));
 
             ResiliencePropertyKey<int> testKey = new("TestKey1");
             var testValue = 1;
@@ -576,7 +601,7 @@ namespace Apizr.Tests
                         opt.ReturnToPoolOnComplete(false))
                     .WithResilienceProperty(testKey1, () => "testValue1")
                     .WithResilienceProperty(testKey2, () => "testValue2.1")
-                    .AddDelegatingHandler(watcher));
+                    .AddHttpMessageHandler(watcher));
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithResilienceProperty(testKey2, "testValue2.2")
@@ -602,7 +627,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithResilienceContextOptions(opt =>
                         opt.ReturnToPoolOnComplete(false))
-                    .AddDelegatingHandler(watcher)
+                    .AddHttpMessageHandler(watcher)
                     .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseBody, LogLevel.Debug));
             
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options
@@ -779,7 +804,7 @@ namespace Apizr.Tests
                     .WithLogging()
                     .WithBaseAddress("https://httpbin.org/post")
                     .WithHeaders(["testKey2: testValue2"])
-                    .AddDelegatingHandler(watcher));
+                    .AddHttpMessageHandler(watcher));
 
             // Shortcut
             await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
@@ -800,7 +825,7 @@ namespace Apizr.Tests
                     .WithBaseAddress("https://reqres.in/api")
                     .WithHeaders(["testKey2: testValue2.2", "testKey3: testValue3.1"])
                     .WithLoggedHeadersRedactionNames(["testKey2"])
-                    .AddDelegatingHandler(watcher));
+                    .AddHttpMessageHandler(watcher));
 
             // Shortcut
             await apizrTransferManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => 
@@ -835,7 +860,7 @@ namespace Apizr.Tests
                     .WithHeaders(["testKey5: testValue5.1", "testKey6: testValue6.1"])
                     .WithHeaders(["testStoreKey1: testStoreValue1.1", "testStoreKey3: testStoreValue3.1"], mode: ApizrRegistrationMode.Store)
                     .WithHeaders(testStore, [settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request, mode: ApizrRegistrationMode.Store)
-                    .AddDelegatingHandler(watcher));
+                    .AddHttpMessageHandler(watcher));
 
             // Merge all
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
@@ -891,7 +916,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithHeaders(["testKey2: testValue2"])
-                    .AddDelegatingHandler(watcher));
+                    .AddHttpMessageHandler(watcher));
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithHeaders(["testKey3: testValue3", "testKey4: testValue4"]));
@@ -910,7 +935,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithHeaders(["testKey2: testValue2"])
-                    .AddDelegatingHandler(watcher));
+                    .AddHttpMessageHandler(watcher));
 
             var streamPart = FileHelper.GetTestFileStreamPart("medium");
 
@@ -993,7 +1018,7 @@ namespace Apizr.Tests
                     .WithLogging()
                     .ConfigureHttpClient(client =>
                         client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue"))
-                    .AddDelegatingHandler(watcher));
+                    .AddHttpMessageHandler(watcher));
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
             watcher.Headers.Should().NotBeNull();
@@ -1237,7 +1262,7 @@ namespace Apizr.Tests
                             opt.ReturnToPoolOnComplete(false))
                         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithRequestTimeout(TimeSpan.FromSeconds(3))
-                        .AddDelegatingHandler(watcher));
+                        .AddHttpMessageHandler(watcher));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt));//,
@@ -1303,7 +1328,7 @@ namespace Apizr.Tests
                             opt.ReturnToPoolOnComplete(false))
                         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithOperationTimeout(TimeSpan.FromSeconds(10))
-                        .AddDelegatingHandler(watcher));
+                        .AddHttpMessageHandler(watcher));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
@@ -1373,7 +1398,7 @@ namespace Apizr.Tests
                             opt.ReturnToPoolOnComplete(false))
                         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithOperationTimeout(TimeSpan.FromSeconds(10))
-                        .AddDelegatingHandler(watcher));
+                        .AddHttpMessageHandler(watcher));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
@@ -1438,7 +1463,7 @@ namespace Apizr.Tests
                         .WithResilienceContextOptions(opt =>
                             opt.ReturnToPoolOnComplete(false))
                         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-                        .AddDelegatingHandler(testHandler)
+                        .AddHttpMessageHandler(testHandler)
                         .WithOperationTimeout(TimeSpan.FromSeconds(3)));
 
             Func<Task> act = () =>

@@ -78,18 +78,18 @@ namespace Apizr.Extending.Configuring.Shared
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
 
         /// <summary>
-        /// Add a custom delegating handler
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call) or <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
-        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <param name="httpMessageHandlerFactory">A http message handler factory</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler<THandler>(Func<IServiceProvider, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
+        TApizrExtendedSharedOptionsBuilder AddHttpMessageHandler<THandler>(Func<IServiceProvider, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler;
 
         /// <summary>
-        /// Add a custom delegating handler
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call) or <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
-        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <param name="httpMessageHandlerFactory">A http message handler factory</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler<THandler>(Func<IServiceProvider, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
+        TApizrExtendedSharedOptionsBuilder AddHttpMessageHandler<THandler>(Func<IServiceProvider, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler;
 
         /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation

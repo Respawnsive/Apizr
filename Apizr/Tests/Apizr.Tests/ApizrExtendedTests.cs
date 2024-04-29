@@ -38,6 +38,7 @@ using Polly;
 using Polly.Retry;
 using Polly.Timeout;
 using Refit;
+using RichardSzalay.MockHttp;
 using Xunit;
 using Xunit.Abstractions;
 using IHttpBinService = Apizr.Tests.Apis.IHttpBinService;
@@ -217,6 +218,47 @@ namespace Apizr.Tests
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
             fixture.Options.BaseUri.Should().Be(baseUri);
+        }
+
+        [Fact]
+        public async Task Calling_AddHttpMessageHandler_Should_Add_The_Handler()
+        {
+            var mockHttp = new MockHttpMessageHandler();
+            var watcher = new WatchingRequestHandler();
+
+            var json =
+                "{ \"page\": 1, \"per_page\": 6, \"total\": 12, \"total_pages\": 2, \"data\": [ { \"id\": 1, \"email\": \"george.bluth@reqres.in\", \"first_name\": \"George\", \"last_name\": \"Bluth\", \"avatar\": \"https://reqres.in/img/faces/1-image.jpg\" } ] }";
+
+            // Setup a respond for the user api (including a wildcard in the URL)
+            mockHttp.When("https://reqres.in/api/*")
+                .Respond("application/json", json); // Respond with JSON
+
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddApizrManagerFor<IReqResSimpleService>(config => config
+                        .WithLogging()
+                        .AddHttpMessageHandler(watcher)
+                        .AddHttpMessageHandler(mockHttp));
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResSimpleService>>();
+
+            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            result.Should().NotBeNull();
+            result.Data.Should().NotBeNullOrEmpty();
+            result.Data.First().FirstName.Should().Be("George");
+            watcher.Attempts.Should().Be(1);
         }
 
         [Fact]

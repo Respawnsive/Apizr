@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -31,6 +32,7 @@ using Polly.Registry;
 using Polly.Retry;
 using Polly.Timeout;
 using Refit;
+using RichardSzalay.MockHttp;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -243,6 +245,37 @@ namespace Apizr.Tests
 
             resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
             resourceFixture.Options.BaseUri.Should().Be(uri3);
+        }
+
+        [Fact]
+        public async Task Calling_AddHttpMessageHandler_Should_Add_The_Handler()
+        {
+            var mockHttp = new MockHttpMessageHandler();
+            var watcher = new WatchingRequestHandler();
+
+            var json =
+                "{ \"page\": 1, \"per_page\": 6, \"total\": 12, \"total_pages\": 2, \"data\": [ { \"id\": 1, \"email\": \"george.bluth@reqres.in\", \"first_name\": \"George\", \"last_name\": \"Bluth\", \"avatar\": \"https://reqres.in/img/faces/1-image.jpg\" } ] }";
+
+            // Setup a respond for the user api (including a wildcard in the URL)
+            mockHttp.When("https://reqres.in/api/*")
+                .Respond("application/json", json); // Respond with JSON
+
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
+                registry => registry.AddManagerFor<IReqResSimpleService>(),
+                options => options.WithLoggerFactory(LoggerFactory.Create(
+                        builder => builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .AddHttpMessageHandler(watcher)
+                    .AddHttpMessageHandler(mockHttp));
+
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResSimpleService>();
+
+            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            result.Should().NotBeNull();
+            result.Data.Should().NotBeNullOrEmpty();
+            result.Data.First().FirstName.Should().Be("George");
+            watcher.Attempts.Should().Be(1);
         }
 
         [Fact]

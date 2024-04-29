@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
@@ -124,6 +125,7 @@ namespace Apizr.Tests
         public async Task Calling_AddHttpMessageHandler_Should_Add_The_Handler()
         {
             var mockHttp = new MockHttpMessageHandler();
+            var watcher = new WatchingRequestHandler();
 
             var json =
                 "{ \"page\": 1, \"per_page\": 6, \"total\": 12, \"total_pages\": 2, \"data\": [ { \"id\": 1, \"email\": \"george.bluth@reqres.in\", \"first_name\": \"George\", \"last_name\": \"Bluth\", \"avatar\": \"https://reqres.in/img/faces/1-image.jpg\" } ] }";
@@ -136,12 +138,15 @@ namespace Apizr.Tests
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
-                    .AddHttpMessageHandler(new WatchingRequestHandler())
+                    .AddHttpMessageHandler(watcher)
                     .AddHttpMessageHandler(mockHttp));
 
             var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
 
             result.Should().NotBeNull();
+            result.Data.Should().NotBeNullOrEmpty();
+            result.Data.First().FirstName.Should().Be("George");
+            watcher.Attempts.Should().Be(1);
         }
 
         [Fact]

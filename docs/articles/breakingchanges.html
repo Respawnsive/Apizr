@@ -214,6 +214,40 @@ options =&gt; options.AddHeaders(serviceProvider =&gt; [$&quot;HeaderKey3: {serv
 options =&gt; options.AddHeaders&lt;IYourSettingsService&gt;([settings =&gt; $&quot;HeaderKey3: {settings.YourHeaderValue3}&quot;])
 </code></pre>
 </li>
+<li><p>[DelegatingHandler] Now we can <strong>register DelegatingHandlers thanks to WithDelegatingHandler fluent option</strong> instead of the AddDelegatingHandler deleted one for consistency</p>
+<p>Don't write anymore:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.AddDelegatingHandler(YourDelegatingHandler)
+
+// OR factory configuration with the logger instance
+options =&gt; options.AddDelegatingHandler(logger =&gt; YourDelegatingHandler)
+
+// OR factory configuration with the logger and options instances
+options =&gt; options.AddDelegatingHandler((logger, options) =&gt; YourDelegatingHandler)
+
+// OR factory configuration with the service provider instance
+options =&gt; options.AddDelegatingHandler(serviceProvider =&gt; YourDelegatingHandler)
+
+// OR factory configuration with the service provider and options instances
+options =&gt; options.AddDelegatingHandler((serviceProvider, options) =&gt; YourDelegatingHandler)
+</code></pre>
+<p>Now write:</p>
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithDelegatingHandler(YourDelegatingHandler)
+
+// OR factory configuration with the logger instance
+options =&gt; options.WithDelegatingHandler(logger =&gt; YourDelegatingHandler)
+
+// OR factory configuration with the logger and options instances
+options =&gt; options.WithDelegatingHandler((logger, options) =&gt; YourDelegatingHandler)
+
+// OR factory configuration with the service provider instance
+options =&gt; options.WithDelegatingHandler(serviceProvider =&gt; YourDelegatingHandler)
+
+// OR factory configuration with the service provider and options instances
+options =&gt; options.WithDelegatingHandler((serviceProvider, options) =&gt; YourDelegatingHandler)
+</code></pre>
+</li>
 </ul>
 <h3 id="53">5.3</h3>
 <h4 id="apizr-1">Apizr</h4>

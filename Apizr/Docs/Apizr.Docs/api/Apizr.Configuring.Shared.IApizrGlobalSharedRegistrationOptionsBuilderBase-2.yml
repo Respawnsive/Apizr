@@ -5,13 +5,14 @@ items:
   id: IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   parent: Apizr.Configuring.Shared
   children:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
   langs:
   - csharp
   - vb
@@ -247,46 +248,89 @@ items:
   nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of HttpRequestMessage, Task(Of String)))
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String)))
   name.vb: WithAuthenticationHandler(Func(Of HttpRequestMessage, Task(Of String)))
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
-  id: AddDelegatingHandler``1(``0)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   langs:
   - csharp
   - vb
-  name: AddDelegatingHandler<THandler>(THandler)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
+  name: WithDelegatingHandler<THandler>(THandler, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler<THandler>(THandler, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler<THandler>(THandler, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: AddDelegatingHandler
+    id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 63
+    startLine: 64
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
-  summary: Add a custom delegating handler
+  summary: Add a custom delegating handler inheriting from <xref href="System.Net.Http.DelegatingHandler" data-throw-if-not-resolved="false"></xref> (serial call)
   example: []
   syntax:
-    content: 'TApizrOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler'
+    content: 'TApizrOptionsBuilder WithDelegatingHandler<THandler>(THandler delegatingHandler, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler'
     parameters:
     - id: delegatingHandler
       type: '{THandler}'
       description: A delegating handler
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
     typeParameters:
     - id: THandler
     return:
       type: '{TApizrOptionsBuilder}'
       description: ''
-    content.vb: Function AddDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandler As THandler) As TApizrOptionsBuilder
-  overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler*
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
-  name.vb: AddDelegatingHandler(Of THandler)(THandler)
+    content.vb: Function WithDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandler As THandler, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As TApizrOptionsBuilder
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler*
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler(Of THandler)(THandler, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler(Of THandler)(THandler, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(THandler, ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
+  id: WithHttpMessageHandler``1(``0)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
+  langs:
+  - csharp
+  - vb
+  name: WithHttpMessageHandler<THandler>(THandler)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler<THandler>(THandler)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler<THandler>(THandler)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithHttpMessageHandler
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
+    startLine: 72
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: Add a custom http message handler inheriting from <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref> (last call)
+  example: []
+  syntax:
+    content: 'TApizrOptionsBuilder WithHttpMessageHandler<THandler>(THandler httpMessageHandler) where THandler : HttpMessageHandler'
+    parameters:
+    - id: httpMessageHandler
+      type: '{THandler}'
+      description: A http message handler
+    typeParameters:
+    - id: THandler
+    return:
+      type: '{TApizrOptionsBuilder}'
+      description: ''
+    content.vb: Function WithHttpMessageHandler(Of THandler As HttpMessageHandler)(httpMessageHandler As THandler) As TApizrOptionsBuilder
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler*
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler(Of THandler)(THandler)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler(Of THandler)(THandler)
+  name.vb: WithHttpMessageHandler(Of THandler)(THandler)
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
   id: WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
@@ -305,7 +349,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 72
+    startLine: 81
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -2411,24 +2455,77 @@ references:
   - name: " "
   - name: TResult
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler*
-  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_
-  name: AddDelegatingHandler
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler
+- uid: System.Net.Http.DelegatingHandler
+  commentId: T:System.Net.Http.DelegatingHandler
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler
+  name: DelegatingHandler
+  nameWithType: DelegatingHandler
+  fullName: System.Net.Http.DelegatingHandler
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler
 - uid: '{THandler}'
   commentId: '!:THandler'
   definition: THandler
   name: THandler
   nameWithType: THandler
   fullName: THandler
+- uid: Apizr.Configuring.ApizrDuplicateStrategy
+  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
+  parent: Apizr.Configuring
+  href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  name: ApizrDuplicateStrategy
+  nameWithType: ApizrDuplicateStrategy
+  fullName: Apizr.Configuring.ApizrDuplicateStrategy
 - uid: THandler
   name: THandler
   nameWithType: THandler
   fullName: THandler
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  href: Apizr.html
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+- uid: System.Net.Http.HttpMessageHandler
+  commentId: T:System.Net.Http.HttpMessageHandler
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  name: HttpMessageHandler
+  nameWithType: HttpMessageHandler
+  fullName: System.Net.Http.HttpMessageHandler
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHttpMessageHandler__1___0_
+  name: WithHttpMessageHandler
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders*
   commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders
   href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_
@@ -2472,13 +2569,6 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-- uid: Apizr.Configuring.ApizrDuplicateStrategy
-  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
-  parent: Apizr.Configuring
-  href: Apizr.Configuring.ApizrDuplicateStrategy.html
-  name: ApizrDuplicateStrategy
-  nameWithType: ApizrDuplicateStrategy
-  fullName: Apizr.Configuring.ApizrDuplicateStrategy
 - uid: Apizr.Configuring.ApizrRegistrationMode
   commentId: T:Apizr.Configuring.ApizrRegistrationMode
   parent: Apizr.Configuring
@@ -2551,25 +2641,3 @@ references:
     name: Generic
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic
-- uid: Apizr.Configuring
-  commentId: N:Apizr.Configuring
-  href: Apizr.html
-  name: Apizr.Configuring
-  nameWithType: Apizr.Configuring
-  fullName: Apizr.Configuring
-  spec.csharp:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Configuring
-    name: Configuring
-    href: Apizr.Configuring.html
-  spec.vb:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Configuring
-    name: Configuring
-    href: Apizr.Configuring.html

@@ -5,9 +5,6 @@ items:
   id: ApizrProperOptionsBuilder
   parent: Apizr.Configuring.Proper
   children:
-  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(``0)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Options
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
@@ -24,6 +21,9 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress(System.Uri)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBasePath(System.Func{System.String})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBasePath(System.String)
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHandlerParameter(System.String,System.Object)
@@ -33,6 +33,9 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(``0)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
@@ -867,132 +870,267 @@ items:
   nameWithType.vb: ApizrProperOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
   fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(Of TSettingsService)(System.Func(Of TSettingsService), System.Linq.Expressions.Expression(Of System.Func(Of TSettingsService, String)), System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String)))
   name.vb: WithAuthenticationHandler(Of TSettingsService)(Func(Of TSettingsService), Expression(Of Func(Of TSettingsService, String)), Func(Of HttpRequestMessage, Task(Of String)))
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(``0)
-  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(``0)
-  id: AddDelegatingHandler``1(``0)
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
   langs:
   - csharp
   - vb
-  name: AddDelegatingHandler<THandler>(THandler)
-  nameWithType: ApizrProperOptionsBuilder.AddDelegatingHandler<THandler>(THandler)
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler<THandler>(THandler)
+  name: WithDelegatingHandler<THandler>(THandler, ApizrDuplicateStrategy)
+  nameWithType: ApizrProperOptionsBuilder.WithDelegatingHandler<THandler>(THandler, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler<THandler>(THandler, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: AddDelegatingHandler
+    id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
     startLine: 185
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: Add a custom delegating handler
+  summary: Add a custom delegating handler inheriting from <xref href="System.Net.Http.DelegatingHandler" data-throw-if-not-resolved="false"></xref> (serial call)
   example: []
   syntax:
-    content: 'public IApizrProperOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler'
+    content: 'public IApizrProperOptionsBuilder WithDelegatingHandler<THandler>(THandler delegatingHandler, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler'
     parameters:
     - id: delegatingHandler
       type: '{THandler}'
       description: A delegating handler
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
     typeParameters:
     - id: THandler
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
       description: ''
-    content.vb: Public Function AddDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandler As THandler) As IApizrProperOptionsBuilder
-  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler*
+    content.vb: Public Function WithDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandler As THandler, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1({THandler})
-  nameWithType.vb: ApizrProperOptionsBuilder.AddDelegatingHandler(Of THandler)(THandler)
-  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler(Of THandler)(THandler)
-  name.vb: AddDelegatingHandler(Of THandler)(THandler)
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-  id: AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1({THandler},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrProperOptionsBuilder.WithDelegatingHandler(Of THandler)(THandler, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler(Of THandler)(THandler, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(THandler, ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
   langs:
   - csharp
   - vb
-  name: AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
-  nameWithType: ApizrProperOptionsBuilder.AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
+  name: WithDelegatingHandler<THandler>(Func<ILogger, THandler>, ApizrDuplicateStrategy)
+  nameWithType: ApizrProperOptionsBuilder.WithDelegatingHandler<THandler>(Func<ILogger, THandler>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: AddDelegatingHandler
+    id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 189
+    startLine: 190
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: Add a custom delegating handler
+  summary: Add a custom delegating handler inheriting from <xref href="System.Net.Http.DelegatingHandler" data-throw-if-not-resolved="false"></xref> (serial call)
   example: []
   syntax:
-    content: 'public IApizrProperOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler'
+    content: 'public IApizrProperOptionsBuilder WithDelegatingHandler<THandler>(Func<ILogger, THandler> delegatingHandlerFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler'
     parameters:
     - id: delegatingHandlerFactory
       type: System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}}
       description: A delegating handler factory
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
     typeParameters:
     - id: THandler
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
       description: ''
-    content.vb: Public Function AddDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandlerFactory As Func(Of ILogger, THandler)) As IApizrProperOptionsBuilder
-  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler*
+    content.vb: Public Function WithDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandlerFactory As Func(Of ILogger, THandler), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler*
   implements:
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}})
-  nameWithType.vb: ApizrProperOptionsBuilder.AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
-  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
-  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-  id: AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrProperOptionsBuilder.WithDelegatingHandler(Of THandler)(Func(Of ILogger, THandler), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(Func(Of ILogger, THandler), ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
   langs:
   - csharp
   - vb
-  name: AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
-  nameWithType: ApizrProperOptionsBuilder.AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
+  name: WithDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>, ApizrDuplicateStrategy)
+  nameWithType: ApizrProperOptionsBuilder.WithDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: AddDelegatingHandler
+    id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 193
+    startLine: 196
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: Add a custom delegating handler
+  summary: Add a custom delegating handler inheriting from <xref href="System.Net.Http.DelegatingHandler" data-throw-if-not-resolved="false"></xref> (serial call)
   example: []
   syntax:
-    content: 'public IApizrProperOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler'
+    content: 'public IApizrProperOptionsBuilder WithDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler'
     parameters:
     - id: delegatingHandlerFactory
       type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}}
       description: A delegating handler factory
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
     typeParameters:
     - id: THandler
     return:
       type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
       description: ''
-    content.vb: Public Function AddDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandlerFactory As Func(Of ILogger, IApizrManagerOptionsBase, THandler)) As IApizrProperOptionsBuilder
-  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler*
+    content.vb: Public Function WithDelegatingHandler(Of THandler As DelegatingHandler)(delegatingHandlerFactory As Func(Of ILogger, IApizrManagerOptionsBase, THandler), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler*
   implements:
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}})
-  nameWithType.vb: ApizrProperOptionsBuilder.AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
-  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
-  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrProperOptionsBuilder.WithDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler), ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(``0)
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(``0)
+  id: WithHttpMessageHandler``1(``0)
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithHttpMessageHandler<THandler>(THandler)
+  nameWithType: ApizrProperOptionsBuilder.WithHttpMessageHandler<THandler>(THandler)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler<THandler>(THandler)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithHttpMessageHandler
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+    startLine: 223
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Add a custom http message handler inheriting from <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref> (last call)
+  example: []
+  syntax:
+    content: 'public IApizrProperOptionsBuilder WithHttpMessageHandler<THandler>(THandler httpMessageHandler) where THandler : HttpMessageHandler'
+    parameters:
+    - id: httpMessageHandler
+      type: '{THandler}'
+      description: A http message handler
+    typeParameters:
+    - id: THandler
+    return:
+      type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
+    content.vb: Public Function WithHttpMessageHandler(Of THandler As HttpMessageHandler)(httpMessageHandler As THandler) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1({THandler})
+  nameWithType.vb: ApizrProperOptionsBuilder.WithHttpMessageHandler(Of THandler)(THandler)
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler(Of THandler)(THandler)
+  name.vb: WithHttpMessageHandler(Of THandler)(THandler)
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  id: WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithHttpMessageHandler<THandler>(Func<ILogger, THandler>)
+  nameWithType: ApizrProperOptionsBuilder.WithHttpMessageHandler<THandler>(Func<ILogger, THandler>)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithHttpMessageHandler
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+    startLine: 227
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Add a custom http message handler inheriting from <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref> (last call)
+  example: []
+  syntax:
+    content: 'public IApizrProperOptionsBuilder WithHttpMessageHandler<THandler>(Func<ILogger, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler'
+    parameters:
+    - id: httpMessageHandlerFactory
+      type: System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}}
+      description: A http message handler factory
+    typeParameters:
+    - id: THandler
+    return:
+      type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
+    content.vb: Public Function WithHttpMessageHandler(Of THandler As HttpMessageHandler)(httpMessageHandlerFactory As Func(Of ILogger, THandler)) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}})
+  nameWithType.vb: ApizrProperOptionsBuilder.WithHttpMessageHandler(Of THandler)(Func(Of ILogger, THandler))
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
+  name.vb: WithHttpMessageHandler(Of THandler)(Func(Of ILogger, THandler))
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  id: WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  nameWithType: ApizrProperOptionsBuilder.WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithHttpMessageHandler
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+    startLine: 231
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Add a custom http message handler inheriting from <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref> (last call)
+  example: []
+  syntax:
+    content: 'public IApizrProperOptionsBuilder WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler'
+    parameters:
+    - id: httpMessageHandlerFactory
+      type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}}
+      description: A http message handler factory
+    typeParameters:
+    - id: THandler
+    return:
+      type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
+    content.vb: Public Function WithHttpMessageHandler(Of THandler As HttpMessageHandler)(httpMessageHandlerFactory As Func(Of ILogger, IApizrManagerOptionsBase, THandler)) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}})
+  nameWithType.vb: ApizrProperOptionsBuilder.WithHttpMessageHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
+  name.vb: WithHttpMessageHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   id: WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
@@ -1011,7 +1149,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 201
+    startLine: 242
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1057,7 +1195,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 233
+    startLine: 274
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1105,7 +1243,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 240
+    startLine: 281
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1148,7 +1286,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 248
+    startLine: 289
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1194,7 +1332,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 253
+    startLine: 294
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1240,7 +1378,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 264
+    startLine: 305
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1280,7 +1418,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 271
+    startLine: 312
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1326,7 +1464,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 302
+    startLine: 343
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1375,7 +1513,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 334
+    startLine: 375
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1430,7 +1568,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 342
+    startLine: 383
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1485,7 +1623,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 386
+    startLine: 427
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1522,7 +1660,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 390
+    startLine: 431
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1562,7 +1700,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 398
+    startLine: 439
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1599,7 +1737,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 402
+    startLine: 443
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1639,7 +1777,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 410
+    startLine: 451
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1684,7 +1822,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 414
+    startLine: 455
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1729,7 +1867,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceContextOptions
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 422
+    startLine: 463
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1769,7 +1907,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionNames
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 438
+    startLine: 479
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1812,7 +1950,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionRule
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 447
+    startLine: 488
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -6656,37 +6794,50 @@ references:
   - name: )
   - name: )
   - name: )
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler*
-  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler
-  href: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.html#Apizr_Configuring_Proper_ApizrProperOptionsBuilder_AddDelegatingHandler__1___0_
-  name: AddDelegatingHandler
-  nameWithType: ApizrProperOptionsBuilder.AddDelegatingHandler
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.AddDelegatingHandler
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1({THandler})
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(``0)
+- uid: System.Net.Http.DelegatingHandler
+  commentId: T:System.Net.Http.DelegatingHandler
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler
+  name: DelegatingHandler
+  nameWithType: DelegatingHandler
+  fullName: System.Net.Http.DelegatingHandler
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.html#Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler
+  nameWithType: ApizrProperOptionsBuilder.WithDelegatingHandler
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1({THandler},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_
-  name: AddDelegatingHandler<THandler>(THandler)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrProperOptions, IApizrProperOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
-  name.vb: AddDelegatingHandler(Of THandler)(THandler)
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler<THandler>(THandler, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>.WithDelegatingHandler<THandler>(THandler, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithDelegatingHandler<THandler>(THandler, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithDelegatingHandler(Of THandler)(THandler, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithDelegatingHandler(Of THandler)(THandler, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(THandler, ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(``0)
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: <
   - name: THandler
   - name: '>'
   - name: (
   - name: THandler
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(``0)
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - name: Of
   - name: " "
@@ -6694,6 +6845,11 @@ references:
   - name: )
   - name: (
   - name: THandler
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: '{THandler}'
   commentId: '!:THandler'
@@ -6701,29 +6857,34 @@ references:
   name: THandler
   nameWithType: THandler
   fullName: THandler
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_
-  name: AddDelegatingHandler<THandler>(THandler)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(THandler)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(THandler)
-  name.vb: AddDelegatingHandler(Of THandler)(THandler)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler<THandler>(THandler, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler<THandler>(THandler, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler<THandler>(THandler, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler(Of THandler)(THandler, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler(Of THandler)(THandler, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(THandler, ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: <
   - name: THandler
   - name: '>'
   - name: (
   - name: THandler
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.AddDelegatingHandler``1(``0)
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - name: Of
   - name: " "
@@ -6731,26 +6892,31 @@ references:
   - name: )
   - name: (
   - name: THandler
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: THandler
   name: THandler
   nameWithType: THandler
   fullName: THandler
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
-  name: AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
-  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler<THandler>(Func<ILogger, THandler>, ApizrDuplicateStrategy)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.WithDelegatingHandler<THandler>(Func<ILogger, THandler>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithDelegatingHandler(Of THandler)(Func(Of ILogger, THandler), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(Func(Of ILogger, THandler), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: <
   - name: THandler
   - name: '>'
@@ -6768,11 +6934,16 @@ references:
   - name: " "
   - name: THandler
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - name: Of
   - name: " "
@@ -6794,6 +6965,11 @@ references:
   - name: " "
   - name: THandler
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}}
   commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,``0}
@@ -6836,20 +7012,20 @@ references:
   - name: " "
   - name: THandler
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
-  name: AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(Func<ILogger, THandler>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
-  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, THandler))
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler<THandler>(Func<ILogger, THandler>, ApizrDuplicateStrategy)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler<THandler>(Func<ILogger, THandler>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler(Of THandler)(Func(Of ILogger, THandler), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(Func(Of ILogger, THandler), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: <
   - name: THandler
   - name: '>'
@@ -6867,11 +7043,16 @@ references:
   - name: " "
   - name: THandler
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - name: Of
   - name: " "
@@ -6893,22 +7074,27 @@ references:
   - name: " "
   - name: THandler
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
-  name: AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
-  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>, ApizrDuplicateStrategy)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.WithDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: <
   - name: THandler
   - name: '>'
@@ -6931,11 +7117,16 @@ references:
   - name: " "
   - name: THandler
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - name: Of
   - name: " "
@@ -6962,6 +7153,11 @@ references:
   - name: " "
   - name: THandler
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}}
   commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0}
@@ -7014,20 +7210,294 @@ references:
   - name: " "
   - name: THandler
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
-  name: AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
-  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.AddDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
-  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
-  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).AddDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
-  name.vb: AddDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>, ApizrDuplicateStrategy)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithDelegatingHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithDelegatingHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - name: THandler
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.Net.Http.HttpMessageHandler
+  commentId: T:System.Net.Http.HttpMessageHandler
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  name: HttpMessageHandler
+  nameWithType: HttpMessageHandler
+  fullName: System.Net.Http.HttpMessageHandler
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.html#Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHttpMessageHandler__1___0_
+  name: WithHttpMessageHandler
+  nameWithType: ApizrProperOptionsBuilder.WithHttpMessageHandler
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1({THandler})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(``0)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHttpMessageHandler__1___0_
+  name: WithHttpMessageHandler<THandler>(THandler)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>.WithHttpMessageHandler<THandler>(THandler)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithHttpMessageHandler<THandler>(THandler)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithHttpMessageHandler(Of THandler)(THandler)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithHttpMessageHandler(Of THandler)(THandler)
+  name.vb: WithHttpMessageHandler(Of THandler)(THandler)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(``0)
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHttpMessageHandler__1___0_
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - name: THandler
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(``0)
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHttpMessageHandler__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - name: THandler
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHttpMessageHandler__1___0_
+  name: WithHttpMessageHandler<THandler>(THandler)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler<THandler>(THandler)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler<THandler>(THandler)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler(Of THandler)(THandler)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler(Of THandler)(THandler)
+  name.vb: WithHttpMessageHandler(Of THandler)(THandler)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHttpMessageHandler__1___0_
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - name: THandler
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHttpMessageHandler__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - name: THandler
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,{THandler}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  name: WithHttpMessageHandler<THandler>(Func<ILogger, THandler>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.WithHttpMessageHandler<THandler>(Func<ILogger, THandler>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithHttpMessageHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithHttpMessageHandler(Of THandler)(Func(Of ILogger, THandler))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithHttpMessageHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
+  name.vb: WithHttpMessageHandler(Of THandler)(Func(Of ILogger, THandler))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - name: THandler
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  name: WithHttpMessageHandler<THandler>(Func<ILogger, THandler>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler<THandler>(Func<ILogger, THandler>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, THandler>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler(Of THandler)(Func(Of ILogger, THandler))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, THandler))
+  name.vb: WithHttpMessageHandler(Of THandler)(Func(Of ILogger, THandler))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - name: THandler
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,{THandler}})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
+  name: WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<IApizrProperOptions, IApizrProperOptionsBuilder>.WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithHttpMessageHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithHttpMessageHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithHttpMessageHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
+  name.vb: WithHttpMessageHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
   - name: <
   - name: THandler
   - name: '>'
@@ -7052,9 +7522,77 @@ references:
   - name: '>'
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
-    name: AddDelegatingHandler
-    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  commentId: M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
+  name: WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  nameWithType: IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler>)
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithHttpMessageHandler<THandler>(System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler>)
+  nameWithType.vb: IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  fullName.vb: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithHttpMessageHandler(Of THandler)(System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler))
+  name.vb: WithHttpMessageHandler(Of THandler)(Func(Of ILogger, IApizrManagerOptionsBase, THandler))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - name: THandler
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
+    name: WithHttpMessageHandler
+    href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder-2.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__
   - name: (
   - name: Of
   - name: " "

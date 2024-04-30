@@ -16,6 +16,18 @@
 - [Breaking][Headers] Now **WithHeaders options take an enumerable parameter instead of a parameter array** so that we could provide some more optional parameters
 - [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
 
+### Apizr
+
+- [Breaking][DelegatingHandler] Now we can **register DelegatingHandlers thanks to WithDelegatingHandler fluent option** instead of the AddDelegatingHandler deleted one for consistency.
+- [New][DelegatingHandler] Now we can **adjust the duplicate strategy while registering a DelegatingHandler**
+- [New][HttpMessageHandler] Now we can **register an HttpMessageHandler thanks to WithHttpMessageHandler fluent option**
+ 
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [Breaking][DelegatingHandler] Now we can **register DelegatingHandlers thanks to WithDelegatingHandler fluent option** instead of the AddDelegatingHandler deleted one for consistency.
+- [New][DelegatingHandler] Now we can **adjust the duplicate strategy while registering a DelegatingHandler**
+- [New][HttpMessageHandler] Now we can **register an HttpMessageHandler thanks to WithHttpMessageHandler fluent option**
+
 ### Apizr.Integrations.MediatR
 
 - [New][Exceptions] Now we can **send safe request returning an `IApizrResponse` response to handle (based on Refit's `IApiResponse`) instead of catching exceptions**

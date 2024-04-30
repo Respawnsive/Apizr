@@ -149,6 +149,44 @@ Please find here some breaking changes while upgrading from previous versions
     options => options.AddHeaders<IYourSettingsService>([settings => $"HeaderKey3: {settings.YourHeaderValue3}"])
     ```
     
+- [DelegatingHandler] Now we can **register DelegatingHandlers thanks to WithDelegatingHandler fluent option** instead of the AddDelegatingHandler deleted one for consistency
+
+    Don't write anymore:
+    ```csharp
+    // direct configuration
+    options => options.AddDelegatingHandler(YourDelegatingHandler)
+
+    // OR factory configuration with the logger instance
+    options => options.AddDelegatingHandler(logger => YourDelegatingHandler)
+
+    // OR factory configuration with the logger and options instances
+    options => options.AddDelegatingHandler((logger, options) => YourDelegatingHandler)
+
+    // OR factory configuration with the service provider instance
+    options => options.AddDelegatingHandler(serviceProvider => YourDelegatingHandler)
+
+    // OR factory configuration with the service provider and options instances
+    options => options.AddDelegatingHandler((serviceProvider, options) => YourDelegatingHandler)
+    ```
+
+    Now write:
+    ```csharp
+    // direct configuration
+    options => options.WithDelegatingHandler(YourDelegatingHandler)
+
+    // OR factory configuration with the logger instance
+    options => options.WithDelegatingHandler(logger => YourDelegatingHandler)
+
+    // OR factory configuration with the logger and options instances
+    options => options.WithDelegatingHandler((logger, options) => YourDelegatingHandler)
+
+    // OR factory configuration with the service provider instance
+    options => options.WithDelegatingHandler(serviceProvider => YourDelegatingHandler)
+
+    // OR factory configuration with the service provider and options instances
+    options => options.WithDelegatingHandler((serviceProvider, options) => YourDelegatingHandler)
+    ```
+    
 ### 5.3
 
 #### Apizr

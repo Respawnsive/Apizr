@@ -12,6 +12,7 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpClientConfigurationBuilder
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpClientHandlerFactory
+  - Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.HttpTracerModeFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.LogLevelsFactory
   - Apizr.Configuring.Proper.ApizrProperOptions.LoggerFactory
@@ -166,7 +167,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 61
+    startLine: 62
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -199,7 +200,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 69
+    startLine: 70
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -232,7 +233,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 77
+    startLine: 78
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -265,7 +266,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 85
+    startLine: 86
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -298,7 +299,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 93
+    startLine: 94
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -331,7 +332,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 101
+    startLine: 102
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -364,7 +365,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 108
+    startLine: 109
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -397,7 +398,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 111
+    startLine: 112
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -430,7 +431,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientConfigurationBuilder
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 114
+    startLine: 115
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -463,11 +464,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersFactories
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 117
+    startLine: 118
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: Delegating handlers factories
+  summary: DelegatingHandler factories
   example: []
   syntax:
     content: public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
@@ -478,6 +479,39 @@ items:
   overload: Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories*
   implements:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
+- uid: Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory
+  commentId: P:Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory
+  id: HttpMessageHandlerFactory
+  parent: Apizr.Configuring.Proper.ApizrProperOptions
+  langs:
+  - csharp
+  - vb
+  name: HttpMessageHandlerFactory
+  nameWithType: ApizrProperOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HttpMessageHandlerFactory
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
+    startLine: 121
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: HttpMessageHandler factory
+  example: []
+  syntax:
+    content: public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+    content.vb: Public Property HttpMessageHandlerFactory As Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  overload: Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
 - uid: Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory
   commentId: P:Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory
   id: OperationTimeoutFactory
@@ -496,7 +530,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeoutFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 121
+    startLine: 125
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -529,7 +563,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeoutFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-    startLine: 129
+    startLine: 133
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1926,6 +1960,76 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler
   - name: )
+  - name: )
+- uid: Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory
+  href: Apizr.Configuring.Proper.ApizrProperOptions.html#Apizr_Configuring_Proper_ApizrProperOptions_HttpMessageHandlerFactory
+  name: HttpMessageHandlerFactory
+  nameWithType: ApizrProperOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_HttpMessageHandlerFactory
+  name: HttpMessageHandlerFactory
+  nameWithType: IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+- uid: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  nameWithType: Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  fullName: System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
+  nameWithType.vb: Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  fullName.vb: System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
+  name.vb: Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
   - name: )
 - uid: Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory

@@ -14,6 +14,7 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptions.DelegatingHandlersFactories
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientHandlerFactory
+  - Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpTracerModeFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.LogLevelsFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.LoggerFactoryFactory
@@ -499,7 +500,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: Delegating handlers factories
+  summary: DelegatingHandler factories
   example: []
   syntax:
     content: public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
@@ -510,6 +511,39 @@ items:
   overload: Apizr.Configuring.Common.ApizrCommonOptions.DelegatingHandlersFactories*
   implements:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory
+  commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory
+  id: HttpMessageHandlerFactory
+  parent: Apizr.Configuring.Common.ApizrCommonOptions
+  langs:
+  - csharp
+  - vb
+  name: HttpMessageHandlerFactory
+  nameWithType: ApizrCommonOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HttpMessageHandlerFactory
+    path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+    startLine: 95
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  summary: HttpMessageHandler factory
+  example: []
+  syntax:
+    content: public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+    content.vb: Public Property HttpMessageHandlerFactory As Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  overload: Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
 - uid: Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
   commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
   id: OperationTimeoutFactory
@@ -528,7 +562,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeoutFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 96
+    startLine: 99
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -561,7 +595,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeoutFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 104
+    startLine: 107
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -594,7 +628,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 112
+    startLine: 115
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -627,7 +661,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 120
+    startLine: 123
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -660,7 +694,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 128
+    startLine: 131
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -1886,6 +1920,116 @@ references:
     name: Generic
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory
+  href: Apizr.Configuring.Common.ApizrCommonOptions.html#Apizr_Configuring_Common_ApizrCommonOptions_HttpMessageHandlerFactory
+  name: HttpMessageHandlerFactory
+  nameWithType: ApizrCommonOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_HttpMessageHandlerFactory
+  name: HttpMessageHandlerFactory
+  nameWithType: IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+- uid: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  nameWithType: Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
+  fullName: System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
+  nameWithType.vb: Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  fullName.vb: System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
+  name.vb: Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.Extensions.Logging.ILogger
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  - name: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
 - uid: Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory*
   commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.OperationTimeoutFactory
   href: Apizr.Configuring.Common.ApizrCommonOptions.html#Apizr_Configuring_Common_ApizrCommonOptions_OperationTimeoutFactory

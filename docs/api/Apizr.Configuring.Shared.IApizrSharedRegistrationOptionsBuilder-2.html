@@ -102,7 +102,10 @@
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String___">IApizrGlobalSharedRegistrationOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;.WithAuthenticationHandler(Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt;)</a>
     </div>
     <div>
-      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_AddDelegatingHandler__1___0_">IApizrGlobalSharedRegistrationOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;.AddDelegatingHandler&lt;THandler&gt;(THandler)</a>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_">IApizrGlobalSharedRegistrationOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;.WithDelegatingHandler&lt;THandler&gt;(THandler, ApizrDuplicateStrategy)</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHttpMessageHandler__1___0_">IApizrGlobalSharedRegistrationOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;.WithHttpMessageHandler&lt;THandler&gt;(THandler)</a>
     </div>
     <div>
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_">IApizrGlobalSharedRegistrationOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;.WithHeaders(IList&lt;string&gt;, ApizrDuplicateStrategy, ApizrRegistrationMode)</a>
@@ -165,134 +168,6 @@
   </table>
   <h3 id="methods">Methods
 </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.AddDelegatingHandler%60%601(System.Func%7BMicrosoft.Extensions.Logging.ILogger%2CApizr.Configuring.Manager.IApizrManagerOptionsBase%2C%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L150">View Source</a>
-  </span>
-  <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">AddDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt;)</h4>
-  <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder AddDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt; delegatingHandlerFactory) where THandler : DelegatingHandler</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</td>
-        <td><span class="parametername">delegatingHandlerFactory</span></td>
-        <td><p>A delegating handler factory</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrOptionsBuilder</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">THandler</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.AddDelegatingHandler%60%601(System.Func%7BMicrosoft.Extensions.Logging.ILogger%2C%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L143">View Source</a>
-  </span>
-  <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler*"></a>
-  <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_AddDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.AddDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})">AddDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt;)</h4>
-  <div class="markdown level1 summary"><p>Add a custom delegating handler</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder AddDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt; delegatingHandlerFactory) where THandler : DelegatingHandler</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, THandler&gt;</td>
-        <td><span class="parametername">delegatingHandlerFactory</span></td>
-        <td><p>A delegating handler factory</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrOptionsBuilder</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">THandler</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_ConfigureHttpClient_System_Action_System_Net_Http_HttpClient__Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.ConfigureHttpClient(System.Action%7BSystem.Net.Http.HttpClient%7D%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
@@ -1034,10 +909,150 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithDelegatingHandler%60%601(System.Func%7BMicrosoft.Extensions.Logging.ILogger%2CApizr.Configuring.Manager.IApizrManagerOptionsBase%2C%60%600%7D%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L153">View Source</a>
+  </span>
+  <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler*"></a>
+  <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt;, ApizrDuplicateStrategy)</h4>
+  <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt; delegatingHandlerFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</td>
+        <td><span class="parametername">delegatingHandlerFactory</span></td>
+        <td><p>A delegating handler factory</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></td>
+        <td><span class="parametername">strategy</span></td>
+        <td><p>The duplicate strategy if there's any other already (default: Add)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TApizrOptionsBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithDelegatingHandler%60%601(System.Func%7BMicrosoft.Extensions.Logging.ILogger%2C%60%600%7D%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L144">View Source</a>
+  </span>
+  <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler*"></a>
+  <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)">WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt;, ApizrDuplicateStrategy)</h4>
+  <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt; delegatingHandlerFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, THandler&gt;</td>
+        <td><span class="parametername">delegatingHandlerFactory</span></td>
+        <td><p>A delegating handler factory</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></td>
+        <td><span class="parametername">strategy</span></td>
+        <td><p>The duplicate strategy if there's any other already (default: Add)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TApizrOptionsBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithHeaders(System.Func%7BSystem.Collections.Generic.IList%7BSystem.String%7D%7D%2CApizr.Configuring.ApizrDuplicateStrategy%2CApizr.Configuring.ApizrLifetimeScope%2CApizr.Configuring.ApizrRegistrationMode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L177">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L195">View Source</a>
   </span>
   <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">WithHeaders(Func&lt;IList&lt;string&gt;&gt;, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)</h4>
@@ -1104,7 +1119,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithHeaders%60%601(System.Func%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.String%7D%7D%5B%5D%2CApizr.Configuring.ApizrDuplicateStrategy%2CApizr.Configuring.ApizrLifetimeScope%2CApizr.Configuring.ApizrRegistrationMode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L208">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L226">View Source</a>
   </span>
   <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">WithHeaders&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)</h4>
@@ -1193,7 +1208,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithHeaders%60%601(%60%600%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.String%7D%7D%5B%5D%2CApizr.Configuring.ApizrDuplicateStrategy%2CApizr.Configuring.ApizrLifetimeScope%2CApizr.Configuring.ApizrRegistrationMode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L192">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L210">View Source</a>
   </span>
   <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">WithHeaders&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)</h4>
@@ -1328,10 +1343,138 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithHttpMessageHandler%60%601(System.Func%7BMicrosoft.Extensions.Logging.ILogger%2CApizr.Configuring.Manager.IApizrManagerOptionsBase%2C%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L168">View Source</a>
+  </span>
+  <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler*"></a>
+  <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt; httpMessageHandlerFactory) where THandler : HttpMessageHandler</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</td>
+        <td><span class="parametername">httpMessageHandlerFactory</span></td>
+        <td><p>A http message handler factory</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TApizrOptionsBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithHttpMessageHandler%60%601(System.Func%7BMicrosoft.Extensions.Logging.ILogger%2C%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L161">View Source</a>
+  </span>
+  <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler*"></a>
+  <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})">WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt; httpMessageHandlerFactory) where THandler : HttpMessageHandler</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, THandler&gt;</td>
+        <td><span class="parametername">httpMessageHandlerFactory</span></td>
+        <td><p>A http message handler factory</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TApizrOptionsBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">THandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithLogging_System_Func_Apizr_Logging_HttpTracerMode__System_Func_Apizr_Logging_HttpMessageParts__System_Func_Microsoft_Extensions_Logging_LogLevel____.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithLogging(System.Func%7BApizr.Logging.HttpTracerMode%7D%2CSystem.Func%7BApizr.Logging.HttpMessageParts%7D%2CSystem.Func%7BMicrosoft.Extensions.Logging.LogLevel%5B%5D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L159">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L177">View Source</a>
   </span>
   <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithLogging_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithLogging*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithLogging_System_Func_Apizr_Logging_HttpTracerMode__System_Func_Apizr_Logging_HttpMessageParts__System_Func_Microsoft_Extensions_Logging_LogLevel____" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">WithLogging(Func&lt;HttpTracerMode&gt;, Func&lt;HttpMessageParts&gt;, Func&lt;LogLevel[]&gt;)</h4>
@@ -1392,7 +1535,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithLogging_System_Func_System_ValueTuple_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_____.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithLogging(System.Func%7BSystem.ValueTuple%7BApizr.Logging.HttpTracerMode%2CApizr.Logging.HttpMessageParts%2CMicrosoft.Extensions.Logging.LogLevel%5B%5D%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L167">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L185">View Source</a>
   </span>
   <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithLogging_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithLogging*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithLogging_System_Func_System_ValueTuple_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_____" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">WithLogging(Func&lt;(HttpTracerMode, HttpMessageParts, LogLevel[])&gt;)</h4>
@@ -1441,7 +1584,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithOperationTimeout_System_Func_System_TimeSpan__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithOperationTimeout(System.Func%7BSystem.TimeSpan%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L219">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L237">View Source</a>
   </span>
   <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithOperationTimeout_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithOperationTimeout*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithOperationTimeout_System_Func_System_TimeSpan__" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithOperationTimeout(System.Func{System.TimeSpan})">WithOperationTimeout(Func&lt;TimeSpan&gt;)</h4>
@@ -1490,7 +1633,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithRequestTimeout_System_Func_System_TimeSpan__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithRequestTimeout(System.Func%7BSystem.TimeSpan%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L226">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L244">View Source</a>
   </span>
   <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithRequestTimeout_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithRequestTimeout*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithRequestTimeout_System_Func_System_TimeSpan__" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithRequestTimeout(System.Func{System.TimeSpan})">WithRequestTimeout(Func&lt;TimeSpan&gt;)</h4>
@@ -1539,7 +1682,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0__System_Func___0__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder%602.WithResilienceProperty%60%601(Polly.ResiliencePropertyKey%7B%60%600%7D%2CSystem.Func%7B%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L234">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrSharedRegistrationOptionsBuilder.cs/#L252">View Source</a>
   </span>
   <a id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithResilienceProperty_" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty*"></a>
   <h4 id="Apizr_Configuring_Shared_IApizrSharedRegistrationOptionsBuilder_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0__System_Func___0__" data-uid="Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})">WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, Func&lt;TValue&gt;)</h4>

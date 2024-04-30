@@ -8,7 +8,7 @@ items:
   - Apizr.Logging.ExtendedHttpHandlerBuilder.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   - Apizr.Logging.ExtendedHttpHandlerBuilder.#ctor(Apizr.Logging.ExtendedHttpTracerHandler)
   - Apizr.Logging.ExtendedHttpHandlerBuilder.#ctor(System.Net.Http.HttpClientHandler,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
-  - Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.DelegatingHandler)
+  - Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.HttpMessageHandler)
   - Apizr.Logging.ExtendedHttpHandlerBuilder.Build
   - Apizr.Logging.ExtendedHttpHandlerBuilder.HttpTracerHandler
   langs:
@@ -62,7 +62,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerHandler
     path: ../../Src/Apizr/Logging/ExtendedHttpHandlerBuilder.cs
-    startLine: 24
+    startLine: 25
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -93,7 +93,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Logging/ExtendedHttpHandlerBuilder.cs
-    startLine: 30
+    startLine: 31
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -128,7 +128,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Logging/ExtendedHttpHandlerBuilder.cs
-    startLine: 37
+    startLine: 38
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -166,7 +166,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Logging/ExtendedHttpHandlerBuilder.cs
-    startLine: 43
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -183,16 +183,16 @@ items:
   nameWithType.vb: ExtendedHttpHandlerBuilder.New(ExtendedHttpTracerHandler)
   fullName.vb: Apizr.Logging.ExtendedHttpHandlerBuilder.New(Apizr.Logging.ExtendedHttpTracerHandler)
   name.vb: New(ExtendedHttpTracerHandler)
-- uid: Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.DelegatingHandler)
-  commentId: M:Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.DelegatingHandler)
-  id: AddHandler(System.Net.Http.DelegatingHandler)
+- uid: Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.HttpMessageHandler)
+  commentId: M:Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.HttpMessageHandler)
+  id: AddHandler(System.Net.Http.HttpMessageHandler)
   parent: Apizr.Logging.ExtendedHttpHandlerBuilder
   langs:
   - csharp
   - vb
-  name: AddHandler(DelegatingHandler)
-  nameWithType: ExtendedHttpHandlerBuilder.AddHandler(DelegatingHandler)
-  fullName: Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.DelegatingHandler)
+  name: AddHandler(HttpMessageHandler)
+  nameWithType: ExtendedHttpHandlerBuilder.AddHandler(HttpMessageHandler)
+  fullName: Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler(System.Net.Http.HttpMessageHandler)
   type: Method
   source:
     remote:
@@ -201,22 +201,22 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddHandler
     path: ../../Src/Apizr/Logging/ExtendedHttpHandlerBuilder.cs
-    startLine: 53
+    startLine: 54
   assemblies:
   - Apizr
   namespace: Apizr.Logging
   summary: Adds a <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref> to the chain of handlers.
   example: []
   syntax:
-    content: public ExtendedHttpHandlerBuilder AddHandler(DelegatingHandler handler)
+    content: public ExtendedHttpHandlerBuilder AddHandler(HttpMessageHandler handler)
     parameters:
     - id: handler
-      type: System.Net.Http.DelegatingHandler
+      type: System.Net.Http.HttpMessageHandler
       description: ''
     return:
       type: Apizr.Logging.ExtendedHttpHandlerBuilder
       description: ''
-    content.vb: Public Function [AddHandler](handler As DelegatingHandler) As ExtendedHttpHandlerBuilder
+    content.vb: Public Function [AddHandler](handler As HttpMessageHandler) As ExtendedHttpHandlerBuilder
   overload: Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler*
 - uid: Apizr.Logging.ExtendedHttpHandlerBuilder.Build
   commentId: M:Apizr.Logging.ExtendedHttpHandlerBuilder.Build
@@ -236,7 +236,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Build
     path: ../../Src/Apizr/Logging/ExtendedHttpHandlerBuilder.cs
-    startLine: 68
+    startLine: 78
   assemblies:
   - Apizr
   namespace: Apizr.Logging
@@ -623,10 +623,17 @@ references:
   fullName: System.Net.Http.HttpMessageHandler
 - uid: Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler*
   commentId: Overload:Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler
-  href: Apizr.Logging.ExtendedHttpHandlerBuilder.html#Apizr_Logging_ExtendedHttpHandlerBuilder_AddHandler_System_Net_Http_DelegatingHandler_
+  href: Apizr.Logging.ExtendedHttpHandlerBuilder.html#Apizr_Logging_ExtendedHttpHandlerBuilder_AddHandler_System_Net_Http_HttpMessageHandler_
   name: AddHandler
   nameWithType: ExtendedHttpHandlerBuilder.AddHandler
   fullName: Apizr.Logging.ExtendedHttpHandlerBuilder.AddHandler
+- uid: Apizr.Logging.ExtendedHttpHandlerBuilder
+  commentId: T:Apizr.Logging.ExtendedHttpHandlerBuilder
+  parent: Apizr.Logging
+  href: Apizr.Logging.ExtendedHttpHandlerBuilder.html
+  name: ExtendedHttpHandlerBuilder
+  nameWithType: ExtendedHttpHandlerBuilder
+  fullName: Apizr.Logging.ExtendedHttpHandlerBuilder
 - uid: System.Net.Http.DelegatingHandler
   commentId: T:System.Net.Http.DelegatingHandler
   parent: System.Net.Http
@@ -635,13 +642,6 @@ references:
   name: DelegatingHandler
   nameWithType: DelegatingHandler
   fullName: System.Net.Http.DelegatingHandler
-- uid: Apizr.Logging.ExtendedHttpHandlerBuilder
-  commentId: T:Apizr.Logging.ExtendedHttpHandlerBuilder
-  parent: Apizr.Logging
-  href: Apizr.Logging.ExtendedHttpHandlerBuilder.html
-  name: ExtendedHttpHandlerBuilder
-  nameWithType: ExtendedHttpHandlerBuilder
-  fullName: Apizr.Logging.ExtendedHttpHandlerBuilder
 - uid: Apizr.Logging.ExtendedHttpHandlerBuilder.Build*
   commentId: Overload:Apizr.Logging.ExtendedHttpHandlerBuilder.Build
   href: Apizr.Logging.ExtendedHttpHandlerBuilder.html#Apizr_Logging_ExtendedHttpHandlerBuilder_Build

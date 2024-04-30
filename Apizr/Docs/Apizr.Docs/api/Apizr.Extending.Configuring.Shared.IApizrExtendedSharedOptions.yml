@@ -11,6 +11,7 @@ items:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
@@ -30,7 +31,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrExtendedSharedOptions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -74,7 +75,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 19
+    startLine: 20
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -105,7 +106,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 24
+    startLine: 25
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -136,7 +137,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 29
+    startLine: 30
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -167,7 +168,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 34
+    startLine: 35
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -198,7 +199,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 39
+    startLine: 40
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -229,7 +230,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 44
+    startLine: 45
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -260,7 +261,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 49
+    startLine: 50
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -273,6 +274,37 @@ items:
       type: System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler}
     content.vb: ReadOnly Property HttpClientHandlerFactory As Func(Of IServiceProvider, HttpClientHandler)
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory*
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  id: HttpMessageHandlerFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  langs:
+  - csharp
+  - vb
+  name: HttpMessageHandlerFactory
+  nameWithType: IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HttpMessageHandlerFactory
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
+    startLine: 55
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Shared
+  summary: HttpMessageHandler factory
+  example: []
+  syntax:
+    content: Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+    content.vb: ReadOnly Property HttpMessageHandlerFactory As Func(Of IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler)
+  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory*
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   id: HttpClientBuilder
@@ -291,7 +323,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 54
+    startLine: 60
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -322,7 +354,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeoutFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 59
+    startLine: 65
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -353,7 +385,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeoutFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 64
+    startLine: 70
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -384,7 +416,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersExtendedFactories
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 69
+    startLine: 75
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
@@ -963,6 +995,109 @@ references:
     name: HttpClientHandler
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclienthandler
+  - name: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpMessageHandlerFactory
+  name: HttpMessageHandlerFactory
+  nameWithType: IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+- uid: System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  commentId: T:System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>
+  nameWithType: Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>
+  fullName: System.Func<System.IServiceProvider, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
+  nameWithType.vb: Func(Of IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler)
+  fullName.vb: System.Func(Of System.IServiceProvider, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
+  name.vb: Func(Of IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  - name: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
   - name: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder

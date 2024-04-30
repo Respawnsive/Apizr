@@ -265,8 +265,8 @@ namespace Apizr.Tests
                 options => options.WithLoggerFactory(LoggerFactory.Create(
                         builder => builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
-                    .AddHttpMessageHandler(watcher)
-                    .AddHttpMessageHandler(mockHttp));
+                    .WithDelegatingHandler(watcher)
+                    .WithHttpMessageHandler(mockHttp));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResSimpleService>();
 
@@ -282,11 +282,12 @@ namespace Apizr.Tests
         public async Task Calling_WithAuthenticationHandler_ProperOption_Should_Authenticate_Request()
         {
             string token = null;
+            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "token");
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
                     .AddManagerFor<IHttpBinService>(options =>
-                        options.WithAuthenticationHandler(_ => Task.FromResult(token = "token"))),
+                        options.WithAuthenticationHandler(OnRefreshToken)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
@@ -339,13 +340,15 @@ namespace Apizr.Tests
         {
             string token = null;
 
+            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "token");
+
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IHttpBinService>(),
                 config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
-                    .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
+                    .WithAuthenticationHandler(OnRefreshToken));
 
             var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 
@@ -360,14 +363,17 @@ namespace Apizr.Tests
         {
             string token = null;
 
+            Task<string> OnRefreshTokenA(HttpRequestMessage _) => Task.FromResult(token = "tokenA");
+            Task<string> OnRefreshTokenB(HttpRequestMessage _) => Task.FromResult(token = "tokenB");
+
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IHttpBinService>(options => options
-                        .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenA"))),
+                        .WithAuthenticationHandler(OnRefreshTokenA)),
                 config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
-                    .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenB")));
+                    .WithAuthenticationHandler(OnRefreshTokenB));
 
             var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 
@@ -387,7 +393,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithAkavacheCacheHandler()
-                    .AddHttpMessageHandler(new TestRequestHandler()));
+                    .WithDelegatingHandler(new TestRequestHandler()));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
@@ -449,7 +455,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-                    .AddHttpMessageHandler(new TestRequestHandler()));
+                    .WithDelegatingHandler(new TestRequestHandler()));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 
@@ -702,7 +708,7 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry.AddManagerFor<IReqResUserService>(options =>
-                    options.AddHttpMessageHandler(watcher)),
+                    options.WithDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
@@ -736,7 +742,7 @@ namespace Apizr.Tests
                             // proper
                             options => options.WithResilienceProperty(testKey3, () => "testValue3.2")
                                 .WithResilienceProperty(testKey4, () => "testValue4.1")
-                                .AddHttpMessageHandler(watcher)),
+                                .WithDelegatingHandler(watcher)),
                         // group
                         options => options.WithResilienceProperty(testKey2, () => "testValue2.2")
                             .WithResilienceProperty(testKey3, () => "testValue3.1")),
@@ -777,7 +783,7 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry.AddManagerFor<IReqResUserService>(options =>
-                    options.AddHttpMessageHandler(watcher)),
+                    options.WithDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
@@ -812,7 +818,7 @@ namespace Apizr.Tests
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(options => options
                                 .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add)
-                                .AddHttpMessageHandler(new TestRequestHandler()))
+                                .WithDelegatingHandler(new TestRequestHandler()))
                             .AddManagerFor<IReqResResourceService>(),
                         options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add))
                     .AddManagerFor<IHttpBinService>()
@@ -855,7 +861,7 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry.AddManagerFor<IReqResUserService>(options =>
-                    options.AddHttpMessageHandler(watcher)),
+                    options.WithDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
@@ -882,14 +888,14 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddGroup(group => group
                             .AddManagerFor<IReqResUserService>(options => options
-                                .AddHttpMessageHandler(watcher1)
+                                .WithHttpMessageHandler(watcher1)
                                 .WithPriority(Priority.UserInitiated))
                             .AddManagerFor<IReqResResourceService>(),
                         options => options.WithPriority(Priority.Background))
                     .AddManagerFor<IHttpBinService>()
                     .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(options => options
                         .WithBaseAddress("https://reqres.in/api/users")
-                        .AddHttpMessageHandler(watcher2)
+                        .WithHttpMessageHandler(watcher2)
                         .WithPriority(Priority.Speculative)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
@@ -1307,7 +1313,7 @@ namespace Apizr.Tests
                 .AddManagerFor<IReqResSimpleService>(options => options
                     .WithBaseAddress("https://reqres.in/api")
                     .WithHeaders(["testKey3: testValue3.2", "testKey4: testValue4.1"])
-                    .AddHttpMessageHandler(watcher)),
+                    .WithDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
@@ -1346,7 +1352,7 @@ namespace Apizr.Tests
                     .WithHeaders(["testKey6: testValue6.1", "testKey7: testValue7.2"])
                     .WithHeaders(testSettings, [settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request)
                     .WithHeaders(testStore, [settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request, mode: ApizrRegistrationMode.Store)
-                    .AddHttpMessageHandler(watcher)),
+                    .WithDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
@@ -1414,7 +1420,7 @@ namespace Apizr.Tests
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResSimpleService>(options => options.WithHeaders(["testKey2: testValue2"])
-                        .AddHttpMessageHandler(watcher)),
+                        .WithDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
@@ -1438,7 +1444,7 @@ namespace Apizr.Tests
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddManagerFor<IReqResUserService>(options =>
                 options.ConfigureHttpClient(client => client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue"))
-                    .AddHttpMessageHandler(watcher)),
+                    .WithDelegatingHandler(watcher)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace)))
@@ -1782,7 +1788,7 @@ namespace Apizr.Tests
                         opt.ReturnToPoolOnComplete(false))
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                     .WithRequestTimeout(TimeSpan.FromSeconds(3))
-                    .AddHttpMessageHandler(watcher));
+                    .WithDelegatingHandler(watcher));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1851,7 +1857,7 @@ namespace Apizr.Tests
                         opt.ReturnToPoolOnComplete(false))
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                     .WithOperationTimeout(TimeSpan.FromSeconds(10))
-                    .AddHttpMessageHandler(watcher));
+                    .WithDelegatingHandler(watcher));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1924,7 +1930,7 @@ namespace Apizr.Tests
                         opt.ReturnToPoolOnComplete(false))
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                     .WithOperationTimeout(TimeSpan.FromSeconds(10))
-                    .AddHttpMessageHandler(watcher));
+                    .WithDelegatingHandler(watcher));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
 
@@ -1991,7 +1997,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-                    .AddHttpMessageHandler(testHandler)
+                    .WithDelegatingHandler(testHandler)
                     .WithOperationTimeout(TimeSpan.FromSeconds(3)));
 
             apizrRegistry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();

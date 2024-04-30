@@ -241,8 +241,8 @@ namespace Apizr.Tests
                 {
                     services.AddApizrManagerFor<IReqResSimpleService>(config => config
                         .WithLogging()
-                        .AddHttpMessageHandler(watcher)
-                        .AddHttpMessageHandler(mockHttp));
+                        .WithDelegatingHandler(watcher)
+                        .WithHttpMessageHandler(mockHttp));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -266,6 +266,8 @@ namespace Apizr.Tests
         {
             string token = null;
 
+            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "token");
+
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
@@ -274,7 +276,7 @@ namespace Apizr.Tests
                 {
                     services.AddApizrManagerFor<IHttpBinService>(options => options
                         .WithLogging()
-                        .WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
+                        .WithAuthenticationHandler(OnRefreshToken));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -341,6 +343,8 @@ namespace Apizr.Tests
         {
             string token = null;
 
+            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "tokenA");
+
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
@@ -349,7 +353,7 @@ namespace Apizr.Tests
                 {
                     services.AddApizrManagerFor<IHttpBinService>(options => options
                         .WithLogging()
-                        .WithAuthenticationHandler(_ => Task.FromResult(token = "tokenA")));
+                        .WithAuthenticationHandler(OnRefreshToken));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -378,7 +382,7 @@ namespace Apizr.Tests
                     services.AddApizrManagerFor<IReqResUserService>(config => config
                         .WithLogging()
                         .WithAkavacheCacheHandler()
-                        .AddHttpMessageHandler(new TestRequestHandler()));
+                        .WithDelegatingHandler(new TestRequestHandler()));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -427,7 +431,7 @@ namespace Apizr.Tests
 
                     services.AddApizrManagerFor<IReqResUserService>(config => config
                         .WithLogging()
-                        .AddHttpMessageHandler(new TestRequestHandler()));
+                        .WithDelegatingHandler(new TestRequestHandler()));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddRetry(
@@ -683,7 +687,7 @@ namespace Apizr.Tests
                         .WithLogging()
                         .WithResilienceContextOptions(opt =>
                             opt.ReturnToPoolOnComplete(false))
-                        .AddHttpMessageHandler(watcher));
+                        .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -727,7 +731,7 @@ namespace Apizr.Tests
                                 opt.ReturnToPoolOnComplete(false))
                             .WithResilienceProperty(testKey1, _ => "testValue1")
                             .WithResilienceProperty(testKey2, _ => "testValue2.1")
-                            .AddHttpMessageHandler(watcher));
+                            .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1202,7 +1206,7 @@ namespace Apizr.Tests
                         .WithBaseAddress("https://reqres.in/api")
                         .WithHeaders(["testKey2: testValue2.2", "testKey3: testValue3.1"])
                         .WithLoggedHeadersRedactionNames(new[] { "testKey2" })
-                        .AddHttpMessageHandler(watcher));
+                        .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1252,7 +1256,7 @@ namespace Apizr.Tests
                         .WithHeaders(["testKey5: testValue5.1", "testKey6: testValue6.1"])
                         .WithHeaders(["testStoreKey1: testStoreValue1.1", "testStoreKey3: testStoreValue3.1"], mode: ApizrRegistrationMode.Store)
                         .WithHeaders<TestSettings>([settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request, mode: ApizrRegistrationMode.Store)
-                        .AddHttpMessageHandler(watcher));
+                        .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1321,7 +1325,7 @@ namespace Apizr.Tests
                 {
                     services.AddApizrManagerFor<IReqResSimpleService>(options => options
                         .WithLogging().WithHeaders(["testKey2: testValue2"])
-                        .AddHttpMessageHandler(watcher));
+                        .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1443,7 +1447,7 @@ namespace Apizr.Tests
                             .WithLogging()
                             .ConfigureHttpClientBuilder(builder => builder.ConfigureHttpClient(client =>
                                 client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue")))
-                            .AddHttpMessageHandler(watcher));
+                            .WithDelegatingHandler(watcher));
                 })
                 .Build();
 
@@ -1744,7 +1748,7 @@ namespace Apizr.Tests
                             .WithResilienceContextOptions(opt =>
                                 opt.ReturnToPoolOnComplete(false))
                             .WithRequestTimeout(TimeSpan.FromSeconds(3))
-                            .AddHttpMessageHandler(watcher));
+                            .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddRetry(
@@ -1815,7 +1819,7 @@ namespace Apizr.Tests
                             .WithResilienceContextOptions(opt =>
                                 opt.ReturnToPoolOnComplete(false))
                             .WithOperationTimeout(TimeSpan.FromSeconds(10))
-                            .AddHttpMessageHandler(watcher));
+                            .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddRetry(
@@ -1886,7 +1890,7 @@ namespace Apizr.Tests
                             .WithResilienceContextOptions(opt =>
                                 opt.ReturnToPoolOnComplete(false))
                             .WithOperationTimeout(TimeSpan.FromSeconds(10))
-                            .AddHttpMessageHandler(watcher));
+                            .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddRetry(
@@ -1960,7 +1964,7 @@ namespace Apizr.Tests
                             .WithLogging()
                             .WithResilienceContextOptions(opt =>
                                 opt.ReturnToPoolOnComplete(false))
-                            .AddHttpMessageHandler(testHandler)
+                            .WithDelegatingHandler(testHandler)
                             .WithOperationTimeout(TimeSpan.FromSeconds(3)));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Logging;
 using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +49,11 @@ namespace Apizr.Extending.Configuring.Shared
         /// HttpClientHandler factory
         /// </summary>
         Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; }
+
+        /// <summary>
+        /// HttpMessageHandler factory
+        /// </summary>
+        Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; }
 
         /// <summary>
         /// HttpClient builder

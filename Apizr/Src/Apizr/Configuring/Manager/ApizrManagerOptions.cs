@@ -43,7 +43,8 @@ namespace Apizr.Configuring.Manager
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
-            HttpMessageHandlersFactories = properOptions.HttpMessageHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            HttpMessageHandlerFactory = properOptions.HttpMessageHandlerFactory;
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
         }
@@ -129,7 +130,10 @@ namespace Apizr.Configuring.Manager
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>> HttpMessageHandlersFactories { get; }
+        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+
+        /// <inheritdoc />
+        public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set;  }
 
         private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

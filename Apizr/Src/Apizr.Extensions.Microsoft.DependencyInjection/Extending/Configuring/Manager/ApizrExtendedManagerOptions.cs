@@ -47,7 +47,8 @@ namespace Apizr.Extending.Configuring.Manager
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerType = commonOptions.MappingHandlerType;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
-            HttpMessageHandlersExtendedFactories = properOptions.HttpMessageHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            DelegatingHandlersExtendedFactories = properOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            HttpMessageHandlerFactory = properOptions.HttpMessageHandlerFactory;
             CrudEntities = commonOptions.CrudEntities.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             WebApis = commonOptions.WebApis.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
@@ -136,6 +137,8 @@ namespace Apizr.Extending.Configuring.Manager
             set => _httpClientHandlerFactory = serviceProvider => HttpClientHandler = value.Invoke(serviceProvider);
         }
 
+        /// <inheritdoc />
+        public Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
 
         private Func<IServiceProvider, RefitSettings> _refitSettingsFactory;
         /// <inheritdoc />
@@ -211,6 +214,6 @@ namespace Apizr.Extending.Configuring.Manager
 
         /// <inheritdoc />
 
-        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>> HttpMessageHandlersExtendedFactories => _apizrExtendedOptions.HttpMessageHandlersExtendedFactories;
+        public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories => _apizrExtendedOptions.DelegatingHandlersExtendedFactories;
     }
 }

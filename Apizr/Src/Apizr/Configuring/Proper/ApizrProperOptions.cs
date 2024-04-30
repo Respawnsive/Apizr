@@ -52,7 +52,8 @@ namespace Apizr.Configuring.Proper
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = sharedOptions.HttpClientConfigurationBuilder;
-            HttpMessageHandlersFactories = sharedOptions.HttpMessageHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            HttpMessageHandlerFactory = sharedOptions.HttpMessageHandlerFactory;
             OperationTimeoutFactory = operationTimeout.HasValue ? () => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? () => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
         }
@@ -115,7 +116,10 @@ namespace Apizr.Configuring.Proper
         public Action<HttpClient> HttpClientConfigurationBuilder { get; set;  }
 
         /// <inheritdoc />
-        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>> HttpMessageHandlersFactories { get; }
+        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+
+        /// <inheritdoc />
+        public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
 
         private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

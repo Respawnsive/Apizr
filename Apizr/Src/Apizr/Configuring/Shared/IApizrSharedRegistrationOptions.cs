@@ -54,9 +54,14 @@ namespace Apizr.Configuring.Shared
         Action<HttpClient> HttpClientConfigurationBuilder { get; }
 
         /// <summary>
-        /// Http message handlers factories
+        /// DelegatingHandler factories
         /// </summary>
-        IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>> HttpMessageHandlersFactories { get; }
+        IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+
+        /// <summary>
+        /// HttpMessageHandler factory
+        /// </summary>
+        Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; }
 
         /// <summary>
         /// The operation timeout factory (overall request tries)

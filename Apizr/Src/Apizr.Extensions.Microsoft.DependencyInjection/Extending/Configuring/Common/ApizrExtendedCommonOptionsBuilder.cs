@@ -11,6 +11,7 @@ using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
+using Apizr.Extending.Configuring.Manager;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -105,20 +106,22 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
-            => AddHttpMessageHandler((serviceProvider, options) =>
-                new AuthenticationHandler(serviceProvider.GetService<ILogger>(), options, refreshTokenFactory));
+            => WithDelegatingHandler((serviceProvider, options) =>
+                new AuthenticationHandler(serviceProvider.GetService<ILogger>(),
+                    options, 
+                    refreshTokenFactory));
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
             Func<IServiceProvider, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
             where TAuthenticationHandler : AuthenticationHandlerBase
-            => AddHttpMessageHandler(authenticationHandlerFactory);
+            => WithDelegatingHandler(authenticationHandlerFactory);
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
             Expression<Func<TSettingsService, string>> tokenProperty,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
-            => AddHttpMessageHandler((serviceProvider, options) =>
+            => WithDelegatingHandler((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(
                     serviceProvider.GetService<ILogger>(),
                     options,
@@ -128,7 +131,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler<TSettingsService>(
             Expression<Func<TSettingsService, string>> tokenProperty)
-            => AddHttpMessageHandler((serviceProvider, options) =>
+            => WithDelegatingHandler((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService>(
                     serviceProvider.GetService<ILogger>(),
                     options,
@@ -140,7 +143,7 @@ namespace Apizr.Extending.Configuring.Common
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler<TSettingsService>(
             Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
-            => AddHttpMessageHandler((serviceProvider, options) =>
+            => WithDelegatingHandler((serviceProvider, options) =>
                 new AuthenticationHandler<TSettingsService>(
                     serviceProvider.GetService<ILogger>(),
                     options,
@@ -287,18 +290,58 @@ namespace Apizr.Extending.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder AddHttpMessageHandler<THandler>(THandler httpMessageHandler) where THandler : HttpMessageHandler
-            => AddHttpMessageHandler((_, _) => httpMessageHandler);
+        public IApizrExtendedCommonOptionsBuilder WithDelegatingHandler<THandler>(THandler delegatingHandler,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler
+            => WithDelegatingHandler((_, _) => delegatingHandler, strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder AddHttpMessageHandler<THandler>(
-            Func<IServiceProvider, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler
-            => AddHttpMessageHandler((serviceProvider, _) => httpMessageHandlerFactory(serviceProvider));
+        public IApizrExtendedCommonOptionsBuilder WithDelegatingHandler<THandler>(Func<IServiceProvider, THandler> delegatingHandlerFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler
+            => WithDelegatingHandler((serviceProvider, _) => delegatingHandlerFactory.Invoke(serviceProvider), strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder AddHttpMessageHandler<THandler>(Func<IServiceProvider, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler
+        public IApizrExtendedCommonOptionsBuilder WithDelegatingHandler<THandler>(
+            Func<IServiceProvider, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler
         {
-            Options.HttpMessageHandlersExtendedFactories[typeof(THandler)] = httpMessageHandlerFactory;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.DelegatingHandlersExtendedFactories[typeof(THandler)] ??= delegatingHandlerFactory;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    Options.DelegatingHandlersExtendedFactories[typeof(THandler)] = delegatingHandlerFactory;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                {
+                    Options.DelegatingHandlersExtendedFactories.Clear();
+                    Options.DelegatingHandlersExtendedFactories[typeof(THandler)] = delegatingHandlerFactory;
+                }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithHttpMessageHandler<THandler>(Func<IServiceProvider, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler
+            => WithHttpMessageHandler((serviceProvider, _) => httpMessageHandlerFactory.Invoke(serviceProvider));
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithHttpMessageHandler<THandler>(THandler httpMessageHandler) where THandler : HttpMessageHandler
+            => WithHttpMessageHandler((_, _) => httpMessageHandler);
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithHttpMessageHandler<THandler>(
+            Func<IServiceProvider, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler
+        {
+            if (typeof(DelegatingHandler).IsAssignableFrom(typeof(THandler)))
+                return WithDelegatingHandler((serviceProvider, options) => httpMessageHandlerFactory.Invoke(serviceProvider, options) as DelegatingHandler);
+
+            Options.HttpMessageHandlerFactory = httpMessageHandlerFactory;
 
             return this;
         }
@@ -602,7 +645,8 @@ namespace Apizr.Extending.Configuring.Common
 
         /// <inheritdoc />
         void IApizrInternalRegistrationOptionsBuilder.AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> handlerFactory) 
-            => AddHttpMessageHandler((_, opt) => handlerFactory.Invoke(opt));
+            => WithDelegatingHandler((_, options) => handlerFactory.Invoke(
+                options));
 
         #endregion
     }

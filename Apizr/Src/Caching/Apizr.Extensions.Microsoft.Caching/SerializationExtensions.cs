@@ -11,38 +11,58 @@ namespace Apizr
 {
     internal static class SerializationExtensions
     {
-        internal static async Task<byte[]> ToByteArrayAsync(this object obj)
+        internal static async Task<byte[]> ToSerializedByteArrayAsync(this object obj, IHttpContentSerializer contentSerializer)
         {
             if (obj == null)
-            {
                 return null;
-            }
 
-            using var memoryStream = new MemoryStream();
-            await JsonSerializer.SerializeAsync(memoryStream, obj);
-            return memoryStream.ToArray();
+            try
+            {
+                var httpContent = contentSerializer.ToHttpContent(obj);
+                return await httpContent.ReadAsByteArrayAsync();
+            }
+            catch (System.Exception)
+            {
+                // only for retro-compatibility
+                using var memoryStream = new MemoryStream();
+                await JsonSerializer.SerializeAsync(memoryStream, obj);
+                return memoryStream.ToArray();
+            }
         }
 
-        internal static async Task<T> FromByteArrayAsync<T>(this byte[] byteArray)
+        internal static async Task<T> FromSerializedByteArrayAsync<T>(this byte[] byteArray, IHttpContentSerializer contentSerializer, CancellationToken cancellationToken = default)
         {
             if (byteArray == null)
-            {
                 return default;
-            }
 
-            using var memoryStream = new MemoryStream(byteArray);
-            return await JsonSerializer.DeserializeAsync<T>(memoryStream);
+            try
+            {
+                var content = new ByteArrayContent(byteArray);
+                return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken);
+            }
+            catch (System.Exception)
+            {
+                // only for retro-compatibility
+                using var memoryStream = new MemoryStream(byteArray);
+                return await JsonSerializer.DeserializeAsync<T>(memoryStream, cancellationToken: cancellationToken);
+            }
         }
 
-        internal static async Task<string> ToJsonStringAsync(this object obj, IHttpContentSerializer contentSerializer)
+        internal static async Task<string> ToSerializedStringAsync(this object obj, IHttpContentSerializer contentSerializer)
         {
+            if (obj == null)
+                return null;
+
             var httpContent = contentSerializer.ToHttpContent(obj);
             return await httpContent.ReadAsStringAsync();
         }
 
-        internal static async Task<T> FromJsonStringAsync<T>(this string str, IHttpContentSerializer contentSerializer, CancellationToken cancellationToken = default)
+        internal static async Task<T> FromSerializedStringAsync<T>(this string str, IHttpContentSerializer contentSerializer, CancellationToken cancellationToken = default)
         {
-            var content = new StringContent(str, Encoding.UTF8, "application/json");
+            if (string.IsNullOrEmpty(str))
+                return default;
+
+            var content = new StringContent(str);
             return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken);
         }
     }

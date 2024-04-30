@@ -2167,16 +2167,7 @@ namespace Apizr
             {
                 var methodToCacheData = methodDetails;
 
-                // Did we ask for it already ?
-                if (_cachingMethodsSet.TryGetValue(methodToCacheData, out var methodCacheDetails))
-                {
-                    // Yes we did so get saved specific details
-                    cacheAttribute = methodCacheDetails.cacheAttribute;
-                    cacheKey = methodCacheDetails.cacheKey;
-
-                    return cacheAttribute != null && !string.IsNullOrWhiteSpace(cacheKey);
-                }
-
+            
                 cacheAttribute = null;
                 cacheKey = null;
 
@@ -2216,7 +2207,7 @@ namespace Apizr
                 if (cacheAttribute == null || cacheAttribute.Mode == CacheMode.None)
                 {
                     // No we're not! Save details for next calls and return False
-                    _cachingMethodsSet.TryAdd(methodToCacheData, (cacheAttribute, cacheKey));
+                    _cachingMethodsSet.GetOrAdd(methodToCacheData, (cacheAttribute, cacheKey));
                     return false;
                 }
 
@@ -2237,7 +2228,7 @@ namespace Apizr
                     cacheKey += ")";
 
                     // Save details for next calls and return False
-                    _cachingMethodsSet.TryAdd(methodToCacheData, (cacheAttribute, cacheKey));
+                    _cachingMethodsSet.GetOrAdd(methodToCacheData, (cacheAttribute, cacheKey));
                     return true;
                 }
 
@@ -2324,7 +2315,7 @@ namespace Apizr
                 cacheKey += $"{string.Join(", ", parameters)})";
 
                 // Save details for next calls and return False
-                _cachingMethodsSet.TryAdd(methodToCacheData, (cacheAttribute, cacheKey));
+                _cachingMethodsSet.GetOrAdd(methodToCacheData, (cacheAttribute, cacheKey));
                 return true;
             }
         }

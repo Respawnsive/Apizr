@@ -42,6 +42,10 @@ namespace Apizr
 
         internal static async Task<T> FromJsonStringAsync<T>(this string str, IHttpContentSerializer contentSerializer, CancellationToken cancellationToken = default)
         {
+            if (str == null)
+            {
+                return default;
+            }
             var content = new StringContent(str, Encoding.UTF8, "application/json");
             return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken);
         }

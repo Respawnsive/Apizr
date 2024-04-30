@@ -21,7 +21,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: MicrosoftCachingOptionsBuilderExtensions
     path: ../../Src/Caching/Apizr.Extensions.Microsoft.Caching/MicrosoftCachingOptionsBuilderExtensions.cs
-    startLine: 8
+    startLine: 9
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
@@ -59,14 +59,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDistributedCacheHandler
     path: ../../Src/Caching/Apizr.Extensions.Microsoft.Caching/MicrosoftCachingOptionsBuilderExtensions.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
   summary: Use any registered IDistributedCache implementation
   example: []
   syntax:
-    content: 'public static TBuilder WithDistributedCacheHandler<TBuilder, TCache>(this TBuilder builder) where TBuilder : IApizrExtendedCommonOptionsBuilder'
+    content: 'public static TBuilder WithDistributedCacheHandler<TBuilder, TCache>(this TBuilder builder) where TBuilder : IApizrExtendedCommonOptionsBuilderBase'
     parameters:
     - id: builder
       type: '{TBuilder}'
@@ -76,7 +76,7 @@ items:
     return:
       type: '{TBuilder}'
       description: ''
-    content.vb: Public Shared Function WithDistributedCacheHandler(Of TBuilder As IApizrExtendedCommonOptionsBuilder, TCache)(builder As TBuilder) As TBuilder
+    content.vb: Public Shared Function WithDistributedCacheHandler(Of TBuilder As IApizrExtendedCommonOptionsBuilderBase, TCache)(builder As TBuilder) As TBuilder
   overload: Apizr.MicrosoftCachingOptionsBuilderExtensions.WithDistributedCacheHandler*
   nameWithType.vb: MicrosoftCachingOptionsBuilderExtensions.WithDistributedCacheHandler(Of TBuilder, TCache)(TBuilder)
   fullName.vb: Apizr.MicrosoftCachingOptionsBuilderExtensions.WithDistributedCacheHandler(Of TBuilder, TCache)(TBuilder)
@@ -100,14 +100,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithInMemoryCacheHandler
     path: ../../Src/Caching/Apizr.Extensions.Microsoft.Caching/MicrosoftCachingOptionsBuilderExtensions.cs
-    startLine: 26
+    startLine: 27
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
   summary: Use any registered IMemoryCache implementation
   example: []
   syntax:
-    content: 'public static TBuilder WithInMemoryCacheHandler<TBuilder>(this TBuilder builder) where TBuilder : IApizrExtendedCommonOptionsBuilder'
+    content: 'public static TBuilder WithInMemoryCacheHandler<TBuilder>(this TBuilder builder) where TBuilder : IApizrExtendedCommonOptionsBuilderBase'
     parameters:
     - id: builder
       type: '{TBuilder}'
@@ -116,7 +116,7 @@ items:
     return:
       type: '{TBuilder}'
       description: ''
-    content.vb: Public Shared Function WithInMemoryCacheHandler(Of TBuilder As IApizrExtendedCommonOptionsBuilder)(builder As TBuilder) As TBuilder
+    content.vb: Public Shared Function WithInMemoryCacheHandler(Of TBuilder As IApizrExtendedCommonOptionsBuilderBase)(builder As TBuilder) As TBuilder
   overload: Apizr.MicrosoftCachingOptionsBuilderExtensions.WithInMemoryCacheHandler*
   nameWithType.vb: MicrosoftCachingOptionsBuilderExtensions.WithInMemoryCacheHandler(Of TBuilder)(TBuilder)
   fullName.vb: Apizr.MicrosoftCachingOptionsBuilderExtensions.WithInMemoryCacheHandler(Of TBuilder)(TBuilder)

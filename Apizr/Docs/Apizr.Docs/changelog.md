@@ -28,6 +28,12 @@
 - [New][DelegatingHandler] Now we can **adjust the duplicate strategy while registering a DelegatingHandler**
 - [New][HttpMessageHandler] Now we can **register an HttpMessageHandler thanks to WithHttpMessageHandler fluent option**
 
+### Apizr.Extensions.Microsoft.Caching
+
+- [New] **WithDistributedCacheHandler & WithInMemoryCacheHandler fluent shortcut options are now both available** for single api registration too (no more limited to Registry)
+- [Fix] **Cache handlers now relies on content serializer** to get xml serialization work too
+- [Fix] **Distributed cache handler serialization is now null protected** to get it work without throwing exceptions #19
+
 ### Apizr.Integrations.MediatR
 
 - [New][Exceptions] Now we can **send safe request returning an `IApizrResponse` response to handle (based on Refit's `IApiResponse`) instead of catching exceptions**

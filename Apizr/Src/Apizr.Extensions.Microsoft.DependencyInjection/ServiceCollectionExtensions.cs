@@ -714,13 +714,27 @@ namespace Apizr
             if (cacheHandlerFactory != null)
                 services.AddOrReplaceSingleton(typeof(ICacheHandler), _ => cacheHandlerFactory.Invoke());
             else
-                services.TryAddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
+            {
+                var cacheHandlerType = apizrOptions.GetCacheHanderType();
+                if (cacheHandlerType != null)
+                    services.AddOrReplaceSingleton(typeof(ICacheHandler), cacheHandlerType);
+                else
+                    services.TryAddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
+            }
 
-            var mappingHandlerType = apizrOptions.GetMappingHanderType();
-            if (mappingHandlerType != null)
-                services.AddOrReplaceSingleton(typeof(IMappingHandler), mappingHandlerType);
-            else 
-                services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
+            var mappingHandlerFactory = apizrOptions.GetMappingHanderFactory();
+            if (mappingHandlerFactory != null)
+                services.AddOrReplaceSingleton(typeof(IMappingHandler), _ => mappingHandlerFactory.Invoke());
+            else
+            {
+                var mappingHandlerType = apizrOptions.GetMappingHanderType();
+                if (mappingHandlerType != null)
+                    services.AddOrReplaceSingleton(typeof(IMappingHandler), mappingHandlerType);
+                else
+                {
+                    services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
+                }
+            }
 
             services.TryAddSingleton(apizrOptionsRegistrationType, serviceProvider =>
             {

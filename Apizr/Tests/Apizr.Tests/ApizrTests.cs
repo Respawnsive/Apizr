@@ -226,22 +226,28 @@ namespace Apizr.Tests
             await reqResManager.ClearCacheAsync();
 
             // Defining a throwing request
-            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
+            Func<Task> act1 = () => reqResManager.ExecuteAsync(api => api.GetUserAsync(1, HttpStatusCode.BadRequest));
 
             // Calling it at first execution should throw as expected without any cached result
-            var ex = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
+            var ex = await act1.Should().ThrowAsync<ApizrException<UserDetails>>();
             ex.And.CachedResult.Should().BeNull();
 
             // This one should succeed
-            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+            var result = await reqResManager.ExecuteAsync(api => api.GetUserAsync(1));
 
             // and cache result in-memory
             result.Should().NotBeNull();
-            result.Data.Should().NotBeNullOrEmpty();
 
             // This one should fail but with cached result
-            var ex2 = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
+            var ex2 = await act1.Should().ThrowAsync<ApizrException<UserDetails>>();
             ex2.And.CachedResult.Should().NotBeNull();
+
+            // Defining another throwing request
+            Func<Task> act2 = () => reqResManager.ExecuteAsync(api => api.GetUserAsync(2, HttpStatusCode.BadRequest));
+
+            // Calling it again with another cache key value should throw as expected but without any cached result
+            var ex3 = await act2.Should().ThrowAsync<ApizrException<UserDetails>>();
+            ex3.And.CachedResult.Should().BeNull();
         }
 
         [Fact]

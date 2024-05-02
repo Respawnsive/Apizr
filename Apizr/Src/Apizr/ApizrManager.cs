@@ -2227,7 +2227,7 @@ namespace Apizr
                 // Get all method parameters
                 var methodParameters = methodToCacheData.MethodInfo.GetParameters().ToList();
 
-                // Is there any parameters except potential CancellationToken and Refit properties ?
+                // Are there any parameters except potential CancellationToken and Refit properties ?
                 if (!methodParameters.Any(x =>
                         !typeof(CancellationToken).GetTypeInfo().IsAssignableFrom(x.ParameterType.GetTypeInfo()) &&
                         x.CustomAttributes.All(y =>
@@ -2236,7 +2236,7 @@ namespace Apizr
                     // No there isn't!
                     cacheKey += ")";
 
-                    // Save details for next calls and return False
+                    // Save details for next calls and return True
                     _cachingMethodsSet.TryAdd(methodToCacheData, (cacheAttribute, cacheKey));
                     return true;
                 }
@@ -2323,8 +2323,6 @@ namespace Apizr
 
                 cacheKey += $"{string.Join(", ", parameters)})";
 
-                // Save details for next calls and return False
-                _cachingMethodsSet.TryAdd(methodToCacheData, (cacheAttribute, cacheKey));
                 return true;
             }
         }

@@ -93,6 +93,12 @@ namespace Apizr.Tests.Apis
         Task<UserDetails> GetUserAsync(int userId, IDictionary<string, object> parameters, [Priority] int priority, CancellationToken cancellationToken);
 
         [Get("/users/{userId}")]
+        Task<UserDetails> GetUserAsync(int userId);
+
+        [Get("/users/{userId}")]
+        Task<UserDetails> GetUserAsync(int userId, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+
+        [Get("/users/{userId}")]
         Task<ApiResponse<UserDetails>> GetUserResponseAsync(int userId);
 
         [Get("/users/{userId}")]

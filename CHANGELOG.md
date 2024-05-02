@@ -21,6 +21,7 @@
 - [Breaking][DelegatingHandler] Now we can **register DelegatingHandlers thanks to WithDelegatingHandler fluent option** instead of the AddDelegatingHandler deleted one for consistency.
 - [New][DelegatingHandler] Now we can **adjust the duplicate strategy while registering a DelegatingHandler**
 - [New][HttpMessageHandler] Now we can **register an HttpMessageHandler thanks to WithHttpMessageHandler fluent option**
+- [Fix][Cache] **Parameter based cache keys are now allways computed** to integrate value changes (skiping cachekey methodset) #20
  
 ### Apizr.Extensions.Microsoft.DependencyInjection
 

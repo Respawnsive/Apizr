@@ -8,6 +8,7 @@ using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Mapping;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Apizr.Extending.Configuring.Registry

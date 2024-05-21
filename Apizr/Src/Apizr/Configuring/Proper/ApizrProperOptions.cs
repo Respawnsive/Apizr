@@ -7,6 +7,7 @@ using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Apizr.Configuring.Proper
 {
@@ -27,6 +28,7 @@ namespace Apizr.Configuring.Proper
         /// <param name="trafficVerbosity">The traffic verbosity</param>
         /// <param name="operationTimeout">The operation timeout</param>
         /// <param name="requestTimeout">The request timeout</param>
+        /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         /// <param name="logLevels">The log levels</param>
         public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions,
             Type webApiType,
@@ -39,8 +41,9 @@ namespace Apizr.Configuring.Proper
             HttpMessageParts? trafficVerbosity,
             TimeSpan? operationTimeout,
             TimeSpan? requestTimeout,
+            Func<string, bool> shouldRedactHeaderValue = null,
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyResiliencePipelineRegistryKeys,
-            webApiResiliencePipelineRegistryKeys)
+            webApiResiliencePipelineRegistryKeys, shouldRedactHeaderValue)
         {
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
             BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? () => baseAddress : sharedOptions.BaseAddressFactory;

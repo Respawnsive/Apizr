@@ -1983,6 +1983,7 @@ namespace Apizr.Tests
                             .AddManagerFor<IReqResSimpleService>(options => options
                                 .WithBaseAddress("https://reqres.in/api")
                                 .WithHeaders(["testKey3: testValue3.2", "testKey4: testValue4.1"])
+                                .WithLoggedHeadersRedactionNames(["testKey2"])
                                 .WithDelegatingHandler(watcher)),
                         options => options
                             .WithLogging()
@@ -1999,7 +2000,9 @@ namespace Apizr.Tests
             var apizrManager = scope.ServiceProvider.GetService<IApizrManager<IReqResSimpleService>>(); // Custom
 
             // Shortcut
-            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithHeaders(["testKey4: testValue4.2", "testKey5: testValue5"]));
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), 
+                options => options.WithHeaders(["testKey4: testValue4.2", "testKey5: testValue5"])
+                    .WithLoggedHeadersRedactionRule(header => header == "testKey3"));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
@@ -2082,7 +2085,7 @@ namespace Apizr.Tests
                 options => options.WithHeaders(["testKey5: testValue5.4",
                     "testKey6: testValue6.3",
                     "testStoreKey1: testStoreValue1.2",
-                    "testStoreKey3:"]));
+                    "testStoreKey3: {}"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6", "testKey7", "testKey8");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Same as previous value

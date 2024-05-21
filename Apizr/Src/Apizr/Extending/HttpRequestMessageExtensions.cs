@@ -1,5 +1,6 @@
 ﻿using Apizr.Configuring.Manager;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -14,8 +15,33 @@ namespace Apizr.Extending
     {
         private static readonly Func<string, bool> ShouldRedactHeaderValue = (header) => false;
 
-        internal static CancellationTokenSource ProcessApizrOptions(this HttpRequestMessage request, CancellationToken cancellationToken, IApizrManagerOptionsBase apizrOptions, out CancellationToken optionsCancellationToken)
+        internal static CancellationTokenSource ProcessRequest(this HttpRequestMessage request, CancellationToken cancellationToken, IApizrManagerOptionsBase apizrOptions, out CancellationToken optionsCancellationToken)
         {
+            // Remove redact stars (*) from headers
+            if (request.Headers.Any())
+            {
+                foreach (var header in request.Headers)
+                {
+                    var trimmedHeader = new List<string>();
+                    var replaceHeader = false;
+                    foreach (var headerValue in header.Value)
+                    {
+                        if (headerValue.StartsWith("*") && headerValue.EndsWith("*"))
+                        {
+                            trimmedHeader.Add(headerValue.Trim('*'));
+                            replaceHeader = true;
+                        }
+                        else
+                        {
+                            trimmedHeader.Add(headerValue);
+                        }
+                    }
+
+                    if (replaceHeader) 
+                        request.Headers.TrySetHeader(header.Key, trimmedHeader);
+                }
+            }
+
             CancellationTokenSource cts = null;
 
             var options = request.GetApizrRequestOptions();
@@ -61,18 +87,28 @@ namespace Apizr.Extending
                         TryGetHeaderKeyValue(storedHeader, out var storedHeaderkey, out _) &&
                         request.Headers.Any(requestHeader =>
                             storedHeaderkey == requestHeader.Key && 
-                            (requestHeader.Value == null || 
-                             requestHeader.Value.All(string.IsNullOrWhiteSpace))))
+                            requestHeader.Value.All(value => value == "{}")))
                         .ToList();
 
                     foreach (var matchingHeader in matchingHeaders)
                     {
-                        var headerSet = request.TrySetHeader(matchingHeader, out var key, out _);
+                        var headerSet = request.TrySetHeader(matchingHeader, out _, out _);
                         if (!headerSet)
                             logger.Log(logLevels.Low(), "{0}: Header {1} can't be set.", context.OperationKey, matchingHeader);
                         else
                             headersSetCount++;
                     }
+                }
+
+                var emptyHeaders = request.Headers.Where(requestHeader =>
+                        requestHeader.Value.Any(requestHeaderValue => requestHeaderValue == "{}"))
+                    .Select(requestHeader => requestHeader.Key)
+                    .ToList();
+
+                foreach (var emptyHeader in emptyHeaders)
+                {
+                    logger.Log(logLevels.Medium(), "{0}: Header {1} has been removed because Apizr can't find any matching value.", context.OperationKey, emptyHeader);
+                    request.Headers.Remove(emptyHeader);
                 }
 
                 if (headersSetCount > 0)
@@ -160,6 +196,29 @@ namespace Apizr.Extending
                 return true;
 
             return headers.TryAddWithoutValidation(key, value);
+        }
+
+        /// <summary>
+        /// Cloned from Refit repository
+        /// </summary>
+        internal static bool TrySetHeader(this HttpHeaders headers, string key, IEnumerable<string> values, bool removeOnly = false)
+        {
+            // Clear any existing version of this header that might be set, because
+            // we want to allow removal/redefinition of headers.
+            // We also don't want to double up content headers which may have been
+            // set for us automatically.
+
+            // NB: We have to enumerate the header names to check existence because
+            // Contains throws if it's the wrong header type for the collection.
+            if (headers.Any(x => x.Key == key))
+                headers.Remove(key);
+
+            // We don't even bother trying to add the header as a content header
+            // if we just added it to the other collection, neither if its value is null
+            if (values == null || removeOnly)
+                return true;
+
+            return headers.TryAddWithoutValidation(key, values);
         }
 
         internal static bool TryGetHeaderKeyValue(string header, out string key, out string value)

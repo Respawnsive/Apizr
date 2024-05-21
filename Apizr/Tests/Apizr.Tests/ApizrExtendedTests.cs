@@ -1205,7 +1205,7 @@ namespace Apizr.Tests
                         .WithLogging()
                         .WithBaseAddress("https://reqres.in/api")
                         .WithHeaders(["testKey2: testValue2.2", "testKey3: testValue3.1"])
-                        .WithLoggedHeadersRedactionNames(new[] { "testKey2" })
+                        .WithLoggedHeadersRedactionNames(["testKey2"])
                         .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -1297,7 +1297,7 @@ namespace Apizr.Tests
                 options => options.WithHeaders(["testKey4: testValue4.4",
                     "testKey5: testValue5.3",
                     "testStoreKey1: testStoreValue1.2",
-                    "testStoreKey3:"]));
+                    "testStoreKey3: {}"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6", "testSettingsKey1", "testStoreKey1", "testStoreKey2", "testStoreKey3");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Same as previous value

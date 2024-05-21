@@ -5,13 +5,13 @@ using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://reqres.in/api"), Headers("testKey1: testValue1", "testKey2: testValue2.1")]
+    [WebApi("https://reqres.in/api"), Headers("testKey1: *testValue1*", "testKey2: testValue2.1")]
     public interface IReqResSimpleService
     {
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync();
 
-        [Get("/users"), Headers("testStoreKey1:", "testStoreKey2:")]
+        [Get("/users"), Headers("testStoreKey1: *{}*", "testStoreKey2: {}")]
         Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
     }
 }

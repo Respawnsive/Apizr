@@ -12,6 +12,7 @@ using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

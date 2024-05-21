@@ -8,6 +8,7 @@ using Apizr.Configuring.Proper;
 using Apizr.Connecting;
 using Apizr.Mapping;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 using Polly.Registry;
 
 namespace Apizr.Configuring.Registry

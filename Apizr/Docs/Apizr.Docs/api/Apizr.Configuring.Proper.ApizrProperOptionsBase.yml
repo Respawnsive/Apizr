@@ -5,7 +5,7 @@ items:
   id: ApizrProperOptionsBase
   parent: Apizr.Configuring.Proper
   children:
-  - Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[])
+  - Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
@@ -19,7 +19,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: master
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrProperOptionsBase
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
@@ -67,32 +67,32 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[])
-  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[])
-  id: '#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[])'
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})
+  id: '#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})'
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBase
   langs:
   - csharp
   - vb
-  name: ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Type, string[], string[])
-  nameWithType: ApizrProperOptionsBase.ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Type, string[], string[])
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.ApizrProperOptionsBase(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, string[], string[])
+  name: ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Type, string[], string[], Func<string, bool>)
+  nameWithType: ApizrProperOptionsBase.ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Type, string[], string[], Func<string, bool>)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.ApizrProperOptionsBase(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, string[], string[], System.Func<string, bool>)
   type: Constructor
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: master
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 17
+    startLine: 18
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
   summary: The proper options constructor
   example: []
   syntax:
-    content: protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, Type webApiType, string[] assemblyResiliencePipelineRegistryKeys, string[] webApiResiliencePipelineRegistryKeys)
+    content: protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, Type webApiType, string[] assemblyResiliencePipelineRegistryKeys, string[] webApiResiliencePipelineRegistryKeys, Func<string, bool> shouldRedactHeaderValue = null)
     parameters:
     - id: sharedOptions
       type: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
@@ -106,11 +106,14 @@ items:
     - id: webApiResiliencePipelineRegistryKeys
       type: System.String[]
       description: Specific resilience pipelines
-    content.vb: Protected Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, webApiType As Type, assemblyResiliencePipelineRegistryKeys As String(), webApiResiliencePipelineRegistryKeys As String())
+    - id: shouldRedactHeaderValue
+      type: System.Func{System.String,System.Boolean}
+      description: Headers to redact value
+    content.vb: Protected Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, webApiType As Type, assemblyResiliencePipelineRegistryKeys As String(), webApiResiliencePipelineRegistryKeys As String(), shouldRedactHeaderValue As Func(Of String, Boolean) = Nothing)
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor*
-  nameWithType.vb: ApizrProperOptionsBase.New(IApizrGlobalSharedRegistrationOptionsBase, Type, String(), String())
-  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBase.New(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, String(), String())
-  name.vb: New(IApizrGlobalSharedRegistrationOptionsBase, Type, String(), String())
+  nameWithType.vb: ApizrProperOptionsBase.New(IApizrGlobalSharedRegistrationOptionsBase, Type, String(), String(), Func(Of String, Boolean))
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBase.New(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, String(), String(), System.Func(Of String, Boolean))
+  name.vb: New(IApizrGlobalSharedRegistrationOptionsBase, Type, String(), String(), Func(Of String, Boolean))
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   id: WebApiType
@@ -125,11 +128,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: master
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApiType
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 29
+    startLine: 41
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -158,11 +161,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: master
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResiliencePipelineRegistryKeys
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 32
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -191,11 +194,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: master
       repo: https://github.com/Respawnsive/Apizr.git
     id: Logger
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 35
+    startLine: 47
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -657,7 +660,7 @@ references:
     href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor
-  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase__ctor_Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_System_Type_System_String___System_String___
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase__ctor_Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_System_Type_System_String___System_String___System_Func_System_String_System_Boolean__
   name: ApizrProperOptionsBase
   nameWithType: ApizrProperOptionsBase.ApizrProperOptionsBase
   fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.ApizrProperOptionsBase
@@ -694,6 +697,87 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: (
+  - name: )
+- uid: System.Func{System.String,System.Boolean}
+  commentId: T:System.Func{System.String,System.Boolean}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<string, bool>
+  nameWithType: Func<string, bool>
+  fullName: System.Func<string, bool>
+  nameWithType.vb: Func(Of String, Boolean)
+  fullName.vb: System.Func(Of String, Boolean)
+  name.vb: Func(Of String, Boolean)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
   - name: )
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType

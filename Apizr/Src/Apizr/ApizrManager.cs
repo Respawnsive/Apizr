@@ -25,6 +25,7 @@ using Apizr.Extending;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 using Apizr.Resiliencing;
 using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
@@ -110,9 +111,8 @@ namespace Apizr
         private readonly string _webApiFriendlyName;
         private readonly IApizrManagerOptions<TWebApi> _apizrOptions;
 
-        private readonly ConcurrentDictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>
-            _cachingMethodsSet;
-
+        private readonly ConcurrentDictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)> _cachingMethodsSet;
+        private readonly ConcurrentDictionary<MethodDetails, List<string>> _headersMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, object> _resiliencePipelineMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>> _handlerParameterMethodsSet;
@@ -145,6 +145,7 @@ namespace Apizr
             _webApiFriendlyName = typeof(TWebApi).GetFriendlyName();
             _apizrOptions = apizrOptions;
 
+            _headersMethodsSet = new ConcurrentDictionary<MethodDetails, List<string>>();
             _cachingMethodsSet = new ConcurrentDictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>();
             _loggingMethodsSet = new ConcurrentDictionary<MethodDetails, LogAttributeBase>();
             _resiliencePipelineMethodsSet = new ConcurrentDictionary<MethodDetails, object>();
@@ -181,6 +182,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -220,6 +222,13 @@ namespace Apizr
                     requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                     requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                 requestOptionsBuilder.WithContext(resilienceContext);
+
+                if (requestRedactHeaders.Count > 0)
+                    requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -272,6 +281,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -317,6 +327,13 @@ namespace Apizr
                     requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                     requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                 requestOptionsBuilder.WithContext(resilienceContext);
+
+                if (requestRedactHeaders.Count > 0)
+                    requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -391,6 +408,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<IApiResponse>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -434,6 +452,13 @@ namespace Apizr
                     requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                     requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                 requestOptionsBuilder.WithContext(resilienceContext);
+
+                if (requestRedactHeaders.Count > 0)
+                    requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -492,6 +517,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -549,9 +575,9 @@ namespace Apizr
                             $"{methodDetails.MethodInfo.Name}: Connectivity check failed, throw {nameof(IOException)}");
                         throw new IOException("Connectivity check failed");
                     }
-                    else
-                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                            $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
+
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
                     var resiliencePipeline =
                         GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
@@ -569,6 +595,13 @@ namespace Apizr
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(resilienceContext);
+
+                    if (requestRedactHeaders.Count > 0)
+                        requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                    if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -655,6 +688,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -742,6 +776,13 @@ namespace Apizr
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(resilienceContext);
+
+                    if (requestRedactHeaders.Count > 0)
+                        requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                    if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -845,6 +886,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -923,6 +965,13 @@ namespace Apizr
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(resilienceContext);
+
+                    if (requestRedactHeaders.Count > 0)
+                        requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                    if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -1009,6 +1058,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -1098,6 +1148,13 @@ namespace Apizr
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(resilienceContext);
+
+                    if (requestRedactHeaders.Count > 0)
+                        requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                    if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -1214,6 +1271,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<IApiResponse>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -1261,6 +1319,13 @@ namespace Apizr
                     requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                     requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                 requestOptionsBuilder.WithContext(resilienceContext);
+
+                if (requestRedactHeaders.Count > 0)
+                    requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                 requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -1320,6 +1385,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -1402,6 +1468,13 @@ namespace Apizr
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(resilienceContext);
+
+                    if (requestRedactHeaders.Count > 0)
+                        requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                    if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -1490,6 +1563,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<TApiData>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -1583,6 +1657,13 @@ namespace Apizr
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(resilienceContext);
+
+                    if (requestRedactHeaders.Count > 0)
+                        requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                    if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -1695,6 +1776,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<TApiResultData>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -1777,6 +1859,13 @@ namespace Apizr
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(resilienceContext);
+
+                    if (requestRedactHeaders.Count > 0)
+                        requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                    if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -1863,6 +1952,7 @@ namespace Apizr
             var requestOnlyOptionsBuilder = CreateRequestOptionsBuilder(optionsBuilder);
             var originalExpression = requestOnlyOptionsBuilder.ApizrOptions.OriginalExpression ?? executeApiMethod;
             var methodDetails = GetMethodDetails<TApiResultData>(originalExpression);
+            var requestRedactHeaders = GetRequestHeadersAttributeRedactFactory(methodDetails);
             var requestLogAttribute = GetRequestLogAttribute(methodDetails);
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
@@ -1956,6 +2046,13 @@ namespace Apizr
                         requestOptionsBuilder.ApizrOptions.TrafficVerbosity,
                         requestOptionsBuilder.ApizrOptions.HttpTracerMode);
                     requestOptionsBuilder.WithContext(resilienceContext);
+
+                    if (requestRedactHeaders.Count > 0)
+                        requestOptionsBuilder.WithLoggedHeadersRedactionNames(requestRedactHeaders);
+
+                    if (requestOptionsBuilder.ApizrOptions.ShouldRedactHeaderValue != null)
+                        _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Applying some header redaction rules to the request");
 
                     requestOptionsBuilder.ApizrOptions.CancellationToken.ThrowIfCancellationRequested();
 
@@ -2121,6 +2218,50 @@ namespace Apizr
         }
 
         #endregion
+
+        #endregion
+
+        #region Requesting
+
+        private List<string> GetRequestHeadersAttributeRedactFactory(MethodDetails methodDetails)
+        {
+            if (_headersMethodsSet.TryGetValue(methodDetails, out var redactHeaders))
+                return redactHeaders;
+
+            HeadersAttribute headersAttribute;
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            {
+                // Crud api headers
+                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                headersAttribute = methodDetails.MethodInfo.Name switch // Request headers
+                {
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllHeadersAttribute>(true),
+                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadHeadersAttribute>(true),
+                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateHeadersAttribute>(true),
+                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateHeadersAttribute>(true),
+                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteHeadersAttribute>(true),
+                    _ => null
+                };
+            }
+            else
+            {
+                // Classic api headers
+                headersAttribute = methodDetails.MethodInfo.GetCustomAttribute<HeadersAttribute>(); // Request headers
+            }
+
+            // Redact headers
+            redactHeaders = [];
+            if (headersAttribute?.Headers.Length > 0)
+            {
+                foreach (var header in headersAttribute.Headers)
+                    if (HttpRequestMessageExtensions.TryGetHeaderKeyValue(header, out var key, out var value) && value.StartsWith("*") && value.EndsWith("*"))
+                        redactHeaders.Add(key);
+            }
+
+            // Return headers attribute
+            _headersMethodsSet.TryAdd(methodDetails, redactHeaders);
+            return redactHeaders;
+        }
 
         #endregion
 

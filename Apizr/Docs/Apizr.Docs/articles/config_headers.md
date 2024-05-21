@@ -1,13 +1,14 @@
 ﻿## Configuring Headers
 
-You can configure headers at:
-- Design time by attribute decoration
-- Register time by fluent configuration
-- Request time by fluent configuration
+You can set headers with static or dynamic values, with clear or redacted logged values (if logging is enabled with headers included).
 
-### [Designing](#tab/tabid-designing)
+First, please add the request options parameter to your api methods: ```[RequestOptions] IApizrRequestOptions options```
 
-You can set headers at design time, decorating interfaces or methods with the `Headers` attribute provided by Refit.
+### Static headers
+
+#### [Designing](#tab/tabid-design)
+
+You can set headers with static values at design time by decorating interfaces or methods with the `Headers` attribute provided by Refit.
     
 ```csharp
 [Headers("HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2")]
@@ -21,66 +22,203 @@ public interface IYourApi
 
 >[!TIP]
 >
-> Please refer to Refit official documentation about Headers attribute. Note that decorating assembly is not available with Refit's Headers attribute.
+> Please refer to Refit official documentation about Headers attribute with static values. 
+> Note that decorating assembly to share headers between several api interfaces is not available with Refit's Headers attribute, 
+> but you can do it with fluent configuration at register time.
 
-You may want to set key-only headers at design time to provide values fluently at register or request time:
+#### [Registering](#tab/tabid-register)
+
+You can set headers with static values at register time by configuring fluent options:
 
 ```csharp
-[Headers("HeaderKey1:", "HeaderKey2:")]
+// direct configuration
+options => options.WithHeaders(["HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2"])
+
+// OR static factory configuration
+options => options.WithHeaders(() => ["HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2"])
+
+// OR extended factory configuration
+options => options.WithHeaders(_ => ["HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2"])
+```
+
+>[!TIP]
+>
+> You can share headers between several api interfaces by configuring fluent options at registry common level.
+
+#### [Requesting](#tab/tabid-request)
+
+You can set headers with static values at request time by configuring fluent options:
+
+```csharp
+options => options.WithHeaders(["HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2"])
+```
+
+***
+
+You definitly can mix it all as Apiz will merge your headers at the very end while sending the request.
+
+### Dynamic headers
+
+#### Setting dynamic headers
+
+##### [Designing](#tab/tabid-design)
+
+You can set headers with dynamic values at design time by:
+- Decorating an api method parameter with the `Header` or `HeaderCollection` attribute
+- Decorating interfaces or methods with the `Headers` attribute using key matching
+
+###### Parameter header
+
+You can set headers with dynamic values at design time by decorating an api method parameter with the `Header` attribute:
+```csharp
 public interface IYourApi
 {
-    [Headers("HeaderKey3:")]
+    [Get("/your-endpoint")]
+    Task<YourData> GetYourDataAsync([Header("HeaderKey1")] string headerValue1);
+}
+```
+
+ or `HeaderCollection` attribute:
+```csharp
+public interface IYourApi
+{
+    [Get("/your-endpoint")]
+    Task<YourData> GetYourDataAsync([HeaderCollection] IDictionary<string, string> headers);
+}
+```
+
+Please refer to Refit official documentation about `Header` and `HeaderCollection` attributes with dynamic values.
+
+###### Key matching header
+
+You can set headers with dynamic values at design time by decorating interfaces or methods with the `Headers` attribute and using key matching:
+```csharp
+[Headers("HeaderKey1: {}", "HeaderKey2: {}")]
+public interface IYourApi
+{
+    [Headers("HeaderKey3: {}")]
+    [Get("/your-endpoint")]
+    Task<YourData> GetYourFirstDataAsync();
+
+    [Get("/your-endpoint")]
+    Task<YourData> GetYourSecondDataAsync();
+}
+```
+
+Here we are asking Apizr to set headers 1, 2 and 3 to `GetYourFirstDataAsync` and the same but 3 to `GetYourSecondDataAsync`.
+It's here to let you choose at design time which request needs which headers, but provide values later in one place.
+So we don't provide any value here but the `{}` string placeholder and let Apizr set it at request time from its headers store if keys match.
+
+>[!WARNING]
+>
+> Key matching headers need you to [provide its values fluently](#tab/tabid-register) at register with `Store` registration mode.
+
+##### [Registering](#tab/tabid-register)
+
+You can set headers with dynamic values at register time by configuring fluent options:
+```csharp
+// expression factory configuration
+options => options.WithHeaders(settingsService, [settings => settings.Header1, settings => settings.Header2])
+
+// OR extended expression factory configuration
+options => options.WithHeaders<IOptions<TestSettings>>([settings => settings.Value.Header1, settings => settings.Value.Header2])
+```
+
+>[!TIP]
+>
+> You can share headers between several api interfaces by configuring fluent options at registry common level.
+
+If you [designed your api interfaces](#tab/tabid-design) with key matching headers, don't forget to provide its values to Apizr with the `Store` registration mode:
+```csharp
+// expression factory configuration
+options => options.WithHeaders(settingsService, [settings => settings.Header1, 
+    settings => settings.Header2], 
+    mode: ApizrRegistrationMode.Store)
+
+// OR extended expression factory configuration
+options => options.WithHeaders<IOptions<TestSettings>>([settings => settings.Value.Header1, 
+    settings => settings.Value.Header2], 
+    mode: ApizrRegistrationMode.Store)
+```
+
+Apizr will store these values and set it at request time if keys match.
+
+***
+
+You definitly can mix it all as Apiz will merge your headers at the very end while sending the request.
+
+#### Refreshing dynamic header values
+
+You may want to refresh your dynamic header values on each request.
+
+If so, you can set your header values at register time with the `Request` lifetime scope (instead of the `Api` default one):
+```csharp
+// expression factory configuration
+options => options.WithHeaders(settingsService, [settings => settings.Header1, 
+    settings => settings.Header2], 
+    scope: ApizrLifetimeScope.Request)
+
+// OR extended expression factory configuration
+options => options.WithHeaders<IOptions<TestSettings>>([settings => settings.Value.Header1, 
+    settings => settings.Value.Header2], 
+    scope: ApizrLifetimeScope.Request)
+```
+
+### Redacting logged header values
+
+You may want to log http traces, including headers, but be concerned about its values sensitivity.
+
+In such ssenario, you should redact header values so that logs would never contain any header sensitive value but a `*` replacement.
+
+#### [Designing](#tab/tabid-design)
+
+You can tell Apizr to do so by surrounding values with a `*` and `*` star symbol into the `Headers` attribute:
+```csharp
+[Headers("HeaderKey1: *HeaderValue1*", "HeaderKey2: HeaderValue2")]
+public interface IYourApi
+{
+    [Headers("HeaderKey3: *HeaderValue3*", "HeaderKey4: *{}*)]
     [Get("/your-endpoint")]
     Task<YourData> GetYourDataAsync();
 }
 ```
 
->[!WARNING]
->
-> Key-only headers need its ':' symbol so that Refit include it and then let Apizr process it.
+Here we are asking Apizr to redact both headers 1 and 3 values, but also key matching header 4 value.
 
-Key-only headers attributes are mostly here to provide some common headers values fluently at register time, using the "Store" regististration mode (instead of "Set"), and deciding to use it or not at design time.
+#### [Registering](#tab/tabid-register)
 
-### [Registering](#tab/tabid-registering)
-
-Configuring headers fluently at register time allows you to:
-- Set it right the way to the request (default "Set" registration mode) or store it for further attribute key-only match use ("Store" registration mode)
-- Load values dynamically (e.g. factory pointing to settings) or not.
-- Refresh values at request time ("Request" lifetime scope) or not (default "Api" lifetime scope).
-
-First, please add the request options parameter to your api methods: ```[RequestOptions] IApizrRequestOptions options```
-
-Now you can set headers thanks to this option:
-
+You can tell Apizr to do so by surrounding values with a `*` and `*` star symbol while adding headers fluently:
 ```csharp
-// direct configuration
-options => options.AddHeaders(["HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2"])
-
-// OR factory configuration
-options => options.AddHeaders(() => [$"HeaderKey3: {YourHeaderValue3}"])
-
-// OR extended factory configuration with the service provider instance
-options => options.AddHeaders(serviceProvider => [$"HeaderKey3: {serviceProvider.GetRequiredService<IYourSettingsService>().YourHeaderValue3}"])
-
-// OR extended factory configuration with your service instance
-options => options.AddHeaders<IYourSettingsService>([settings => $"HeaderKey3: {settings.YourHeaderValue3}"])
+options => options.WithHeaders(["HeaderKey1: *HeaderValue1*", "HeaderKey2: HeaderValue2"])
 ```
 
-There're many more overloads available with some optional parameters to make it suit your needs (duplicate strategy, lifetime scope and registration mode).
-You definitly can mix it all by calling the AddHeaders method multiple times but different ways.
-All headers fluent options are available with or without using registry. 
-It means that you can share headers configuration, setting it at registry level and/or set some specific one at api level.
+Here we are asking Apizr to redact header 1 value, but leave the 2 clear in logs.
 
-### [Requesting](#tab/tabid-requesting)
-
-Configuring the headers fluently at request time allows you to set it at the very end, just before sending the request.
-
-First, please add the request options parameter to your api methods: ```[RequestOptions] IApizrRequestOptions options```
-
-You can now set headers thanks to this option:
+Or you can tell the same with dedicated fluent options:
 ```csharp
-// direct configuration
-options => options.AddHeaders(["HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2"])
+// By header names
+options => options.WithLoggedHeadersRedactionNames(["testKey2"])
+
+// OR by any rules
+options => options.WithLoggedHeadersRedactionRule(header => header == "testKey3")
+```
+
+#### [Requesting](#tab/tabid-request)
+
+You can tell Apizr to do so by surrounding values with `*` and `*` star symbol while adding headers fluently:
+```csharp
+options => options.WithHeaders(["HeaderKey1: *HeaderValue1*", "HeaderKey2: HeaderValue2"])
+```
+
+Here we are asking Apizr to redact header 1 value, but leave the 2 clear in logs.
+
+Or you can tell the same with dedicated fluent options:
+```csharp
+// By header names
+options => options.WithLoggedHeadersRedactionNames(["testKey2"])
+
+// OR by any rules
+options => options.WithLoggedHeadersRedactionRule(header => header == "testKey3")
 ```
 
 ***

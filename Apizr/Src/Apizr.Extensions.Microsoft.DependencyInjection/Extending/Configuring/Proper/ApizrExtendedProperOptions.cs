@@ -27,10 +27,12 @@ namespace Apizr.Extending.Configuring.Proper
             HttpMessageParts? trafficVerbosity,
             TimeSpan? operationTimeout,
             TimeSpan? requestTimeout,
+            Func<string, bool> shouldRedactHeaderValue = null,
             params LogLevel[] logLevels) : base(sharedOptions, 
             webApiType, 
             assemblyResiliencePipelineRegistryKeys, 
-            webApiResiliencePipelineRegistryKeys)
+            webApiResiliencePipelineRegistryKeys, 
+            shouldRedactHeaderValue)
         {
             ApizrManagerType = apizrManagerType;
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;

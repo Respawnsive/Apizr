@@ -7,6 +7,7 @@ using Apizr.Configuring.Registry;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 
 namespace Apizr.Extending.Configuring.Registry
 {

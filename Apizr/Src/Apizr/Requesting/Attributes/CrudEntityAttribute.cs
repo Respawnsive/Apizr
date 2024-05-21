@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Apizr.Extending;
 
-namespace Apizr.Requesting
+namespace Apizr.Requesting.Attributes
 {
     /// <summary>
     /// Tells Apizr to auto register an <see cref="IApizrManager{ICrudApi}"/> for this decorated entity (works only with IServiceCollection extensions registration)

@@ -19,6 +19,7 @@ using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 using Apizr.Resiliencing;
 using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
@@ -293,6 +294,7 @@ namespace Apizr
             }
 
             IList<HandlerParameterAttribute> properParameterAttributes, commonParameterAttributes;
+            HeadersAttribute properHeadersAttribute, commonHeadersAttribute;
             LogAttribute properLogAttribute, commonLogAttribute;
             OperationTimeoutAttribute properOperationTimeoutAttribute, commonOperationTimeoutAttribute;
             RequestTimeoutAttribute properRequestTimeoutAttribute, commonRequestTimeoutAttribute;
@@ -305,6 +307,8 @@ namespace Apizr
                     .Where(att => att is not CrudHandlerParameterAttribute)
                     .ToList();
                 commonParameterAttributes = modelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
+                properHeadersAttribute = modelTypeInfo.GetCustomAttribute<HeadersAttribute>(true);
+                commonHeadersAttribute = modelType.Assembly.GetCustomAttribute<HeadersAttribute>();
                 properLogAttribute = modelTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = modelType.Assembly.GetCustomAttribute<LogAttribute>();
                 properOperationTimeoutAttribute = modelTypeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
@@ -318,6 +322,8 @@ namespace Apizr
                 var webApiTypeInfo = webApiType.GetTypeInfo();
                 properParameterAttributes = webApiTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
                 commonParameterAttributes = webApiType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
+                properHeadersAttribute = webApiTypeInfo.GetCustomAttribute<HeadersAttribute>(true);
+                commonHeadersAttribute = webApiType.Assembly.GetCustomAttribute<HeadersAttribute>();
                 properLogAttribute = webApiTypeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
                 properOperationTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
@@ -328,6 +334,15 @@ namespace Apizr
             }
 
             var assemblyResiliencePipelineAttribute = webApiType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
+
+            var headers = (properHeadersAttribute?.Headers ?? [])
+                .Concat(commonHeadersAttribute?.Headers ?? [])
+                .ToList();
+            var redactHeaders = new List<string>();
+            if (headers.Any())
+                foreach (var header in headers)
+                    if(HttpRequestMessageExtensions.TryGetHeaderKeyValue(header, out var key, out var value) && value.StartsWith("*") && value.EndsWith("*"))
+                        redactHeaders.Add(key);
 
             var handlersParameters = new Dictionary<string, object>();
             foreach (var commonParameterAttribute in commonParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
@@ -346,6 +361,7 @@ namespace Apizr
                 properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity),
                 properOperationTimeoutAttribute?.Timeout ?? commonOperationTimeoutAttribute?.Timeout,
                 properRequestTimeoutAttribute?.Timeout ?? commonRequestTimeoutAttribute?.Timeout,
+                redactHeaders.Any() ? header => redactHeaders.Contains(header) : null,
                 properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrProperOptionsBuilder;
 
             properOptionsBuilder?.Invoke(builder);

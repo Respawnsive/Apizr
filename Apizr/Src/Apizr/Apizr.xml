@@ -1563,7 +1563,7 @@
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptions">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptions"/>
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},System.Func{System.String,System.Boolean},Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
             The common options constructor
             </summary>
@@ -1578,6 +1578,7 @@
             <param name="trafficVerbosity">The traffic verbosity</param>
             <param name="operationTimeout">The operation timeout</param>
             <param name="requestTimeout">The request timeout</param>
+            <param name="shouldRedactHeaderValue">Headers to redact value</param>
             <param name="logLevels">The log levels</param>
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.BaseUriFactory">
@@ -1622,7 +1623,7 @@
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptionsBase" />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[])">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})">
             <summary>
             The proper options constructor
             </summary>
@@ -1630,6 +1631,7 @@
             <param name="webApiType">The web api type</param>
             <param name="assemblyResiliencePipelineRegistryKeys">Global resilience pipelines</param>
             <param name="webApiResiliencePipelineRegistryKeys">Specific resilience pipelines</param>
+            <param name="shouldRedactHeaderValue">Headers to redact value</param>
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType">
             <inheritdoc />
@@ -3905,6 +3907,11 @@
             Cloned from Refit repository
             </summary>
         </member>
+        <member name="M:Apizr.Extending.HttpRequestMessageExtensions.TrySetHeader(System.Net.Http.Headers.HttpHeaders,System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Cloned from Refit repository
+            </summary>
+        </member>
         <member name="T:Apizr.Extending.TypeExtensions">
             <summary>
             Some Type extensions
@@ -5132,12 +5139,17 @@
         <member name="M:Apizr.PreserveAttribute.#ctor">
             <inheritdoc />
         </member>
-        <member name="T:Apizr.Requesting.CrudEntityAttribute">
+        <member name="T:Apizr.Requesting.Attributes.CreateHeadersAttribute">
+            <summary>
+            Tells Apizr to set headers on Create method
+            </summary>
+        </member>
+        <member name="T:Apizr.Requesting.Attributes.CrudEntityAttribute">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
         </member>
-        <member name="M:Apizr.Requesting.CrudEntityAttribute.#ctor(System.String,System.Type,System.Type,System.Type,System.Type)">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute.#ctor(System.String,System.Type,System.Type,System.Type,System.Type)">
             <summary>
             Define some crud api settings from this api entity
             </summary>
@@ -5147,54 +5159,46 @@
             <param name="readAllParamsType">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</param>
             <param name="modelEntityType">Model entity type mapped with this api entity type (default: null = decorated api entity type)</param>
         </member>
-        <member name="P:Apizr.Requesting.CrudEntityAttribute.BaseUri">
+        <member name="P:Apizr.Requesting.Attributes.CrudEntityAttribute.BaseUri">
             <summary>
             This specific entity's base crud uri
             </summary>
         </member>
-        <member name="P:Apizr.Requesting.CrudEntityAttribute.KeyType">
+        <member name="P:Apizr.Requesting.Attributes.CrudEntityAttribute.KeyType">
             <summary>
             This specific object's crud key type
             </summary>
         </member>
-        <member name="P:Apizr.Requesting.CrudEntityAttribute.ReadAllResultType">
+        <member name="P:Apizr.Requesting.Attributes.CrudEntityAttribute.ReadAllResultType">
             <summary>
             "ReadAll" query result type
             </summary>
         </member>
-        <member name="P:Apizr.Requesting.CrudEntityAttribute.ReadAllParamsType">
+        <member name="P:Apizr.Requesting.Attributes.CrudEntityAttribute.ReadAllParamsType">
             <summary>
             "ReadAll" query parameters type
             </summary>
         </member>
-        <member name="P:Apizr.Requesting.CrudEntityAttribute.MappedEntityType">
+        <member name="P:Apizr.Requesting.Attributes.CrudEntityAttribute.MappedEntityType">
             <summary>
             Model entity type mapped with this Api entity type
             </summary>
         </member>
-        <member name="T:Apizr.Requesting.CrudEntityAttribute`1">
+        <member name="T:Apizr.Requesting.Attributes.CrudEntityAttribute`1">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
             <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="M:Apizr.Requesting.CrudEntityAttribute`1.#ctor(System.String)">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`1.#ctor(System.String)">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
             <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="T:Apizr.Requesting.CrudEntityAttribute`2">
-            <summary>
-            Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
-            </summary>
-            <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
-            <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
-        </member>
-        <member name="M:Apizr.Requesting.CrudEntityAttribute`2.#ctor(System.String)">
+        <member name="T:Apizr.Requesting.Attributes.CrudEntityAttribute`2">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
@@ -5202,16 +5206,15 @@
             <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
             <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="T:Apizr.Requesting.CrudEntityAttribute`3">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`2.#ctor(System.String)">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
             <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
-            <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
             <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="M:Apizr.Requesting.CrudEntityAttribute`3.#ctor(System.String)">
+        <member name="T:Apizr.Requesting.Attributes.CrudEntityAttribute`3">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
@@ -5220,7 +5223,26 @@
             <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
             <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="T:Apizr.Requesting.CrudEntityAttribute`4">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`3.#ctor(System.String)">
+            <summary>
+            Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
+            </summary>
+            <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
+            <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
+            <param name="baseUri">This specific api entity's base crud uri</param>
+        </member>
+        <member name="T:Apizr.Requesting.Attributes.CrudEntityAttribute`4">
+            <summary>
+            Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
+            </summary>
+            <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
+            <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
+            <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
+            <typeparam name="TModelEntity">Model entity type mapped with this api entity type (default: null = decorated api entity type)</typeparam>
+            <param name="baseUri">This specific api entity's base crud uri</param>
+        </member>
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`4.#ctor(System.String)">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
@@ -5230,15 +5252,25 @@
             <typeparam name="TModelEntity">Model entity type mapped with this api entity type (default: null = decorated api entity type)</typeparam>
             <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="M:Apizr.Requesting.CrudEntityAttribute`4.#ctor(System.String)">
+        <member name="T:Apizr.Requesting.Attributes.DeleteHeadersAttribute">
             <summary>
-            Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
+            Tells Apizr to set headers on Delete method
             </summary>
-            <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
-            <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
-            <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
-            <typeparam name="TModelEntity">Model entity type mapped with this api entity type (default: null = decorated api entity type)</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
+        </member>
+        <member name="T:Apizr.Requesting.Attributes.ReadAllHeadersAttribute">
+            <summary>
+            Tells Apizr to set headers on ReadAll method
+            </summary>
+        </member>
+        <member name="T:Apizr.Requesting.Attributes.ReadHeadersAttribute">
+            <summary>
+            Tells Apizr to set headers on Read method
+            </summary>
+        </member>
+        <member name="T:Apizr.Requesting.Attributes.UpdateHeadersAttribute">
+            <summary>
+            Tells Apizr to set headers on Update method
+            </summary>
         </member>
         <member name="T:Apizr.Requesting.ICrudApi`4">
             <summary>

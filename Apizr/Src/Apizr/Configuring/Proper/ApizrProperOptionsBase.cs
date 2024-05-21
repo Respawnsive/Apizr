@@ -15,15 +15,27 @@ namespace Apizr.Configuring.Proper
         /// <param name="webApiType">The web api type</param>
         /// <param name="assemblyResiliencePipelineRegistryKeys">Global resilience pipelines</param>
         /// <param name="webApiResiliencePipelineRegistryKeys">Specific resilience pipelines</param>
+        /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
             string[] assemblyResiliencePipelineRegistryKeys,
-            string[] webApiResiliencePipelineRegistryKeys) : base(sharedOptions)
+            string[] webApiResiliencePipelineRegistryKeys,
+            Func<string, bool> shouldRedactHeaderValue = null) : base(sharedOptions)
         {
             WebApiType = webApiType;
             ResiliencePipelineRegistryKeys =
-                assemblyResiliencePipelineRegistryKeys?.Union(webApiResiliencePipelineRegistryKeys ?? Array.Empty<string>()).ToArray() ??
-                webApiResiliencePipelineRegistryKeys ?? Array.Empty<string>();
+                assemblyResiliencePipelineRegistryKeys?.Union(webApiResiliencePipelineRegistryKeys ?? []).ToArray() ??
+                webApiResiliencePipelineRegistryKeys ?? [];
+
+            if (ShouldRedactHeaderValue == null)
+            {
+                ShouldRedactHeaderValue = shouldRedactHeaderValue;
+            }
+            else if (shouldRedactHeaderValue != null)
+            {
+                var previous = ShouldRedactHeaderValue;
+                ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
+            }
         }
 
         /// <inheritdoc />

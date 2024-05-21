@@ -20,7 +20,7 @@ namespace Apizr
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            using (var cts = request.ProcessApizrOptions(cancellationToken, _apizrOptions, out var optionsCancellationToken))
+            using (var cts = request.ProcessRequest(cancellationToken, _apizrOptions, out var optionsCancellationToken))
             {
                 try
                 {

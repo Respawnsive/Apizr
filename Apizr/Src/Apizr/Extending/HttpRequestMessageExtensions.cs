@@ -65,7 +65,7 @@ namespace Apizr.Extending
                     // sure we have an HttpContent object to add them to,
                     // provided the HttpClient will allow it for the method
                     if (request.Content == null && !Constants.BodylessMethods.Contains(request.Method))
-                        request.Content = new ByteArrayContent(Array.Empty<byte>());
+                        request.Content = new ByteArrayContent([]);
 
                     foreach (var header in options.Headers)
                     {
@@ -87,7 +87,7 @@ namespace Apizr.Extending
                         TryGetHeaderKeyValue(storedHeader, out var storedHeaderkey, out _) &&
                         request.Headers.Any(requestHeader =>
                             storedHeaderkey == requestHeader.Key && 
-                            requestHeader.Value.All(value => value == "{}")))
+                            requestHeader.Value.All(value => value == "{0}")))
                         .ToList();
 
                     foreach (var matchingHeader in matchingHeaders)
@@ -101,7 +101,7 @@ namespace Apizr.Extending
                 }
 
                 var emptyHeaders = request.Headers.Where(requestHeader =>
-                        requestHeader.Value.Any(requestHeaderValue => requestHeaderValue == "{}"))
+                        requestHeader.Value.Any(requestHeaderValue => requestHeaderValue == "{0}"))
                     .Select(requestHeader => requestHeader.Key)
                     .ToList();
 

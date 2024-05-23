@@ -80,9 +80,10 @@
 <li>[New/Breaking][Polly] Now <strong>supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry</strong> instead of former Polly v7- Policies</li>
 <li>[New][HttpTracer] Now we can <strong>filter out unwanted http message parts</strong> with the brand new IgnoreMessageParts fluent option</li>
 <li>[New][HttpTracer] Now we can <strong>pick RequestAllButBody, HeadersOnly or AllButBody http message parts</strong> when configuring logging options fluently or using attribute</li>
-<li>[New][HttpTracer/Headers] Now we can <strong>redact any header sensitive values from logs</strong> thanks to <code>WithLoggedHeadersRedactionNames</code> or <code>WithLoggedHeadersRedactionRule</code> fluent options</li>
+<li>[New][HttpTracer/Headers] Now we can <strong>redact any header sensitive values from logs</strong> at design time by surrounding header values with a <code>*</code> star symbol rigth into the <code>Headers</code> attribute</li>
+<li>[New][HttpTracer/Headers] Now we can <strong>redact any header sensitive values from logs</strong> at register time thanks to <code>WithLoggedHeadersRedactionNames</code> or <code>WithLoggedHeadersRedactionRule</code> fluent options</li>
 <li>[New][Headers] Now we can <strong>choose to refresh a header value at request time or not</strong>, depending on the brand new WithHeaders's ApizrLifetimeScope optional parameter</li>
-<li>[New][Headers] Now we can <strong>choose to set headers values right the way to the request or store it for further key-only header attribute match use</strong>, depending on the brand new WithHeaders's ApizrRegistrationMode optional parameter</li>
+<li>[New][Headers] Now we can <strong>choose to set headers values straight to the request or store it for further headers attribute key match use</strong>, depending on the brand new WithHeaders's ApizrRegistrationMode optional parameter</li>
 <li>[New][Headers] Now we can <strong>set headers values thanks to an expression tree</strong></li>
 <li>[Breaking][Headers] Now <strong>WithHeaders options take an enumerable parameter instead of a parameter array</strong> so that we could provide some more optional parameters</li>
 <li>[Breaking][Removed] <strong>Previsoulsy deprecated extensions methods for backward compatibility have been removed</strong> as they were not suitable anymore</li>

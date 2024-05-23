@@ -61,13 +61,13 @@ You definitly can mix it all as Apiz will merge your headers at the very end whi
 
 #### Setting dynamic headers
 
-##### [Designing](#tab/tabid-design)
+#### [Designing](#tab/tabid-design)
 
 You can set headers with dynamic values at design time by:
 - Decorating an api method parameter with the `Header` or `HeaderCollection` attribute
 - Decorating interfaces or methods with the `Headers` attribute using key matching
 
-###### Parameter header
+##### Parameter header
 
 You can set headers with dynamic values at design time by decorating an api method parameter with the `Header` attribute:
 ```csharp
@@ -89,14 +89,14 @@ public interface IYourApi
 
 Please refer to Refit official documentation about `Header` and `HeaderCollection` attributes with dynamic values.
 
-###### Key matching header
+##### Key matching header
 
 You can set headers with dynamic values at design time by decorating interfaces or methods with the `Headers` attribute and using key matching:
 ```csharp
-[Headers("HeaderKey1: {}", "HeaderKey2: {}")]
+[Headers("HeaderKey1: {0}", "HeaderKey2: {0}")]
 public interface IYourApi
 {
-    [Headers("HeaderKey3: {}")]
+    [Headers("HeaderKey3: {0}")]
     [Get("/your-endpoint")]
     Task<YourData> GetYourFirstDataAsync();
 
@@ -107,13 +107,15 @@ public interface IYourApi
 
 Here we are asking Apizr to set headers 1, 2 and 3 to `GetYourFirstDataAsync` and the same but 3 to `GetYourSecondDataAsync`.
 It's here to let you choose at design time which request needs which headers, but provide values later in one place.
-So we don't provide any value here but the `{}` string placeholder and let Apizr set it at request time from its headers store if keys match.
+So we don't provide any value here but the `{0}` string placeholder and let Apizr set it at request time from its headers store if keys match.
 
 >[!WARNING]
 >
-> Key matching headers need you to [provide its values fluently](#tab/tabid-register) at register with `Store` registration mode.
+> Key matching headers need you to provide values fluently at register time with `Store` registration mode (see Registering tab).
 
-##### [Registering](#tab/tabid-register)
+#### [Registering](#tab/tabid-register)
+
+##### Setting headers
 
 You can set headers with dynamic values at register time by configuring fluent options:
 ```csharp
@@ -128,7 +130,15 @@ options => options.WithHeaders<IOptions<TestSettings>>([settings => settings.Val
 >
 > You can share headers between several api interfaces by configuring fluent options at registry common level.
 
-If you [designed your api interfaces](#tab/tabid-design) with key matching headers, don't forget to provide its values to Apizr with the `Store` registration mode:
+##### Storing headers
+
+By storing headers, Apizr will set it at request time only if keys match from Headers attribute decoration. It lets you provide values once fluently at register time, but apply it only where you actually decided to put the Headers attribute with the same key.
+
+>[!WARNING]
+>
+> Don't forget to design your api interfaces with key matching headers (see Designing tab).
+
+To store values for further headers attribute key match use, you have to tell it to Apizr by registering it with the `Store` registration mode:
 ```csharp
 // expression factory configuration
 options => options.WithHeaders(settingsService, [settings => settings.Header1, 
@@ -140,8 +150,6 @@ options => options.WithHeaders<IOptions<TestSettings>>([settings => settings.Val
     settings => settings.Value.Header2], 
     mode: ApizrRegistrationMode.Store)
 ```
-
-Apizr will store these values and set it at request time if keys match.
 
 ***
 
@@ -177,7 +185,7 @@ You can tell Apizr to do so by surrounding values with a `*` and `*` star symbol
 [Headers("HeaderKey1: *HeaderValue1*", "HeaderKey2: HeaderValue2")]
 public interface IYourApi
 {
-    [Headers("HeaderKey3: *HeaderValue3*", "HeaderKey4: *{}*)]
+    [Headers("HeaderKey3: *HeaderValue3*", "HeaderKey4: *{0}*)]
     [Get("/your-endpoint")]
     Task<YourData> GetYourDataAsync();
 }

@@ -122,6 +122,7 @@ Of course, you can implement your own integration, but here we'll talk about the
 <p>This integration package offers you to work with any of MS Extension Caching compatible caching engines. It means that you still have to install the one of your choice right after Apizr.Extensions.Microsoft.Caching.</p>
 </div>
 <h3 id="defining">Defining</h3>
+<h4 id="cache-attribute">Cache attribute</h4>
 <p>Apizr comes with a <code>Cache</code> attribute which activate result data caching at any level (all Assembly apis, interface apis or specific api method).</p>
 <p>Here is classic api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample
@@ -133,7 +134,7 @@ Of course, you can implement your own integration, but here we'll talk about the
         Task&lt;UserList&gt; GetUsersAsync();
 
         [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
-        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
+        Task&lt;UserDetails&gt; GetUserAsync(int userId);
     }
 }
 </code></pre>
@@ -195,6 +196,25 @@ Apizr will apply the lowest level settings it could find.</p>
 </ul>
 </li>
 </ul>
+<h4 id="cachekey-attribute">CacheKey attribute</h4>
+<p>By default, Apizr will use all the method parameters (name and value) to generate a cache key (excepting attribute decorated parameters, neither cancellation token parameters).
+But you may want to define your own cache key, choosing by yourself which parameter to include and which not.
+That's what the <code>CacheKey</code> attribute is made for.
+You can decorate one or more parameters with it, then it will be included in the cache key generation:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, int organizationId, [CacheKey] string serviceName);
+    }
+}
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Cache key generation supports complex type parameters so you can group your parameters into a single one to include them all.</p>
+</div>
 <h3 id="registering">Registering</h3>
 <p>Please register the one corresponding to the package you just installed</p>
 <h4 id="ms-extensions-caching">MS Extensions Caching</h4>

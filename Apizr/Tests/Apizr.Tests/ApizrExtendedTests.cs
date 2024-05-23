@@ -416,6 +416,142 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_Should_Cache_ApizrResponse()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddApizrManagerFor<IReqResUserService>(config => config
+                        .WithLogging()
+                        .WithAkavacheCacheHandler()
+                        .WithDelegatingHandler(new TestRequestHandler()));
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            // Clearing all cache
+            var cleared = await reqResManager.ClearCacheAsync();
+
+            cleared.Should().BeTrue();
+
+            // This one should fail with no cached result
+            var response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().BeNull();
+            response.DataSource.Should().Be(ApizrResponseDataSource.None);
+
+            // This one should succeed with request result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync());
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNull();
+            response.Result!.Data.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            // This one should fail but with cached result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().NotBeNull();
+            response.Result!.Data.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            // Clearing specific cache
+            cleared = await reqResManager.ClearCacheAsync(api => api.SafeGetUsersAsync());
+
+            cleared.Should().BeTrue();
+
+            // This one should fail with no cached result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().BeNull();
+            response.DataSource.Should().Be(ApizrResponseDataSource.None);
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_With_Multiple_CacheKey_Should_Cache_Result()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddApizrManagerFor<IReqResUserService>(config => config
+                        .WithLogging()
+                        .WithAkavacheCacheHandler()
+                        .WithDelegatingHandler(new TestRequestHandler()));
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            // Clearing cache
+            await reqResManager.ClearCacheAsync();
+
+            var testDictionary = new Dictionary<string, object>
+            {
+                { "test1", "test1" },
+                { "test2", 2 }
+            };
+
+            var customTypeParam = new ReadAllUsersParams("test1", 2);
+
+            // Defining a throwing request
+            Func<Task> act1 = () => reqResManager.ExecuteAsync(api => api.GetUserAsync(1, testDictionary, customTypeParam, HttpStatusCode.BadRequest));
+
+            // Calling it at first execution should throw as expected without any cached result
+            var ex = await act1.Should().ThrowAsync<ApizrException<UserDetails>>();
+            ex.And.CachedResult.Should().BeNull();
+
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync(api => api.GetUserAsync(1, testDictionary, customTypeParam, HttpStatusCode.OK));
+
+            // and cache result in-memory
+            result.Should().NotBeNull();
+
+            // This one should fail but with cached result
+            var ex2 = await act1.Should().ThrowAsync<ApizrException<UserDetails>>();
+            ex2.And.CachedResult.Should().NotBeNull();
+
+            // Defining another throwing request
+            Func<Task> act2 = () => reqResManager.ExecuteAsync(api => api.GetUserAsync(2, testDictionary, customTypeParam, HttpStatusCode.BadRequest));
+
+            // Calling it again with another cache key value should throw as expected but without any cached result
+            var ex3 = await act2.Should().ThrowAsync<ApizrException<UserDetails>>();
+            ex3.And.CachedResult.Should().BeNull();
+        }
+
+        [Fact]
         public async Task RequestTimeout_Should_Be_Handled_By_Polly()
         {
             var maxRetryAttempts = 3;

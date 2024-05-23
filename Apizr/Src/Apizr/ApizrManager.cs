@@ -2389,25 +2389,31 @@ namespace Apizr
                     .ToList();
 
                 // Get a potential specific cache key
-                var specificCacheKey = methodParameters
-                    .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(CacheKeyAttribute)))
-                    .Select((x, index) => new
+                var specificCacheKeys = methodParameters
+                    .Select((methodParameter, index) => new
                     {
                         Index = index,
-                        ParameterInfo = x
-                    }).FirstOrDefault();
+                        ParameterInfo = methodParameter
+                    })
+                    .Where(x => x.ParameterInfo.CustomAttributes.Any(y => y.AttributeType == typeof(CacheKeyAttribute)))
+                    .ToList();
 
                 var parameters = new List<string>();
                 for (var i = 0; i <= extractedArguments.Count - 1; i++)
                 {
-                    // If there's a specific cache key, ignore all other arguments
-                    if (specificCacheKey != null)
+                    // If we get any specific cache keys, ignore all other arguments
+                    if (specificCacheKeys.Count > 0)
                     {
-                        if (i < specificCacheKey.Index)
+                        if (i < specificCacheKeys.Min(specificCacheKey => specificCacheKey.Index))
                             continue;
-                        if (i > specificCacheKey.Index)
+                        if (i > specificCacheKeys.Max(specificCacheKey => specificCacheKey.Index))
                             break;
+                        if(specificCacheKeys.All(specificCacheKey => specificCacheKey.Index != i))
+                            continue;
                     }
+
+                    // Get a potential specific cache key
+                    var specificCacheKey = specificCacheKeys.FirstOrDefault(x => x.Index == i);
 
                     // Ignore CancellationToken and Refit Property parameters
                     var parameterInfo = methodParameters[i];

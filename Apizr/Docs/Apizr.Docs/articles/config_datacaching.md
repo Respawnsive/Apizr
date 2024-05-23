@@ -27,6 +27,8 @@ Where:
 
 ### Defining
 
+#### Cache attribute
+
 Apizr comes with a `Cache` attribute which activate result data caching at any level (all Assembly apis, interface apis or specific api method).
 
 Here is classic api an example:
@@ -40,7 +42,7 @@ namespace Apizr.Sample
         Task<UserList> GetUsersAsync();
 
         [Get("/users/{userId}"), Cache(CacheMode.GetOrFetch, "1.00:00:00")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId);
+        Task<UserDetails> GetUserAsync(int userId);
     }
 }
 ```
@@ -97,6 +99,28 @@ Back to the example, we are saying:
 - When getting a specific user, let’s admit its details won’t change so much each day, so:
     - Try to load it from cache first
         - if no previous cached data or cache expired after 1 day, fetch it and update cached data but make it expire after 1 day
+
+#### CacheKey attribute
+
+By default, Apizr will use all the method parameters (name and value) to generate a cache key (excepting attribute decorated parameters, neither cancellation token parameters).
+But you may want to define your own cache key, choosing by yourself which parameter to include and which not. 
+That's what the `CacheKey` attribute is made for.
+You can decorate one or more parameters with it, then it will be included in the cache key generation:
+```csharp
+namespace Apizr.Sample
+{
+    [WebApi("https://reqres.in/api")]
+    public interface IReqResService
+    {
+        [Get("/users/{userId}"), Cache(CacheMode.GetOrFetch, "1.00:00:00")]
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, int organizationId, [CacheKey] string serviceName);
+    }
+}
+```
+
+>[!TIP]
+>
+>Cache key generation supports complex type parameters so you can group your parameters into a single one to include them all.
 
 ### Registering
 

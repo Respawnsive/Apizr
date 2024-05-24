@@ -61,15 +61,12 @@ namespace Apizr.Sample.MAUI.ViewModels
 
         /// <summary>
         /// Managing crud entities comes with many web api call flavors
-        /// Choosing one of it depends of your registration settings
-        /// and how you like to play with api calls
+        /// Choosing one of it depends on your registration settings
+        /// and how you'd like to play with api calls
         /// </summary>
         /// <returns></returns>
         private async Task GetUsersAsync()
         {
-            if (IsRefreshing)
-                return;
-
             IsRefreshing = true;
 
             IList<User>? users = null;
@@ -219,7 +216,7 @@ namespace Apizr.Sample.MAUI.ViewModels
         {
             base.OnAppearing();
 
-            GetUsersCommand.Execute(null);
+            IsRefreshing = true;
         }
 
         #endregion

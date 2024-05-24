@@ -4,9 +4,11 @@ using Apizr.Sample.MAUI.ViewModels;
 using Apizr.Sample.Models;
 using CommunityToolkit.Maui;
 using System.Reflection;
+using Apizr.Sample.MAUI.Infrastructure;
 using Shiny;
 using Polly;
 using Polly.Retry;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Sample.MAUI
 {
@@ -20,13 +22,26 @@ namespace Apizr.Sample.MAUI
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .UseShinyFramework(
-                    new DryIocContainerExtension(),
-                    prism => prism.OnAppStart("NavigationPage/MainPage")
+                    new DryIocKeyedContainerExtension(),
+                    prism => prism.CreateWindow(
+                        "NavigationPage/MainPage",
+                        ex =>
+                        {
+                            Console.WriteLine(ex);
+                        }
+                    ),
+                    new(ErrorAlertType.FullError)
                 )
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSansRegular.ttf", "OpenSansRegular");
                 });
+
+#if DEBUG
+            // Define Debug logging options
+            builder.Logging.SetMinimumLevel(LogLevel.Trace);
+            builder.Logging.AddDebug();
+#endif
 
             var services = builder.Services; 
 

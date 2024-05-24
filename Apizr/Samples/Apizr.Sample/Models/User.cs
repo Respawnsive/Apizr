@@ -4,6 +4,7 @@ using Apizr.Caching.Attributes;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 
 namespace Apizr.Sample.Models
 {

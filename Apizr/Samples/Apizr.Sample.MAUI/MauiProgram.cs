@@ -48,6 +48,9 @@ namespace Apizr.Sample.MAUI
             // Navigation
             services.RegisterForNavigation<MainPage, MainPageViewModel>();
 
+            // Plugins
+            services.AddSingleton(_ => SecureStorage.Default);
+
             // Polly
             services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                 pipelineBuilder => pipelineBuilder.AddRetry(
@@ -73,6 +76,7 @@ namespace Apizr.Sample.MAUI
                     .AddCrudManagerFor(typeof(User).Assembly),
 
                 config => config
+                    .WithDelegatingHandler(serviceProvider => new TestRequestHandler(serviceProvider.GetRequiredService<ISecureStorage>()))
                     .WithAkavacheCacheHandler()
                     .WithLogging()
                     //.WithConnectivityHandler<IConnectivity>(connectivity => connectivity.NetworkAccess == NetworkAccess.Internet)

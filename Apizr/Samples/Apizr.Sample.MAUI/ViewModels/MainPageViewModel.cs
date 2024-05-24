@@ -72,6 +72,8 @@ namespace Apizr.Sample.MAUI.ViewModels
             IList<User>? users = null;
             try
             {
+                await SecureStorage.SetAsync("IdentityKey", "123456789");
+
                 // This is a manually defined web api call into IReqResService (classic actually)
                 var userList = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
                 users = userList?.Data;

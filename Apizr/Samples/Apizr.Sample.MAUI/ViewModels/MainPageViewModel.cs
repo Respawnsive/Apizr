@@ -6,6 +6,7 @@ using Apizr.Requesting;
 using Apizr.Sample.Models;
 using Fusillade;
 using MediatR;
+using MetroLog.Maui;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -41,6 +42,8 @@ namespace Apizr.Sample.MAUI.ViewModels
             //_userDetailsCrudManager = userDetailsCrudManager;
             //_mediator = mediator;
             //_userOptionalMediator = userOptionalMediator;
+
+            LogController = new LogController{IsShakeEnabled = true};
             GetUsersCommand = ReactiveCommand.CreateFromTask(GetUsersAsync);
             GetUserDetailsCommand = ReactiveCommand.CreateFromTask<User>(GetUserDetailsAsync);
             AuthCommand = ReactiveCommand.CreateFromTask(AuthAsync);
@@ -48,6 +51,8 @@ namespace Apizr.Sample.MAUI.ViewModels
         }
 
         #region Properties
+
+        [Reactive] public LogController LogController { get; private set; }
 
         [Reactive] public ObservableCollection<User> Users { get; set; }
 

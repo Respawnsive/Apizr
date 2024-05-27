@@ -5,6 +5,9 @@ using Apizr.Sample.Models;
 using CommunityToolkit.Maui;
 using System.Reflection;
 using Apizr.Sample.MAUI.Infrastructure;
+using MetroLog.Maui;
+using MetroLog.MicrosoftExtensions;
+using MetroLog.Operators;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Polly;
 using Polly.Retry;
@@ -48,14 +51,48 @@ namespace Apizr.Sample.MAUI
                 )
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSansRegular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            
+            #region Logging
 
+            builder.Logging
 #if DEBUG
-            // Define Debug logging options
-            builder.Logging.SetMinimumLevel(LogLevel.Trace);
-            builder.Logging.AddDebug();
+                .AddTraceLogger(
+                    options =>
+                    {
+                        options.MinLevel = LogLevel.Trace;
+                        options.MaxLevel = LogLevel.Critical;
+                    }) // Will write to the Debug Output
 #endif
+                .AddInMemoryLogger(
+                    options =>
+                    {
+                        options.MaxLines = 1024;
+                        options.MinLevel = LogLevel.Debug;
+                        options.MaxLevel = LogLevel.Critical;
+                    })
+#if RELEASE
+                .AddStreamingFileLogger(
+                    options =>
+                    {
+                        options.RetainDays = 2;
+                        options.FolderPath = Path.Combine(
+                            FileSystem.CacheDirectory,
+                            "MetroLogs");
+                    })
+#endif
+                .AddConsoleLogger(
+                    options =>
+                    {
+                        options.MinLevel = LogLevel.Information;
+                        options.MaxLevel = LogLevel.Critical;
+                    }); // Will write to the Console Output (logcat for android)
+
+            builder.Services.AddSingleton(LogOperatorRetriever.Instance);
+
+            #endregion
 
             var services = builder.Services; 
 

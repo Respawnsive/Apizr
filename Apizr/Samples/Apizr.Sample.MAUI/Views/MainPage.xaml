@@ -7,7 +7,9 @@
     Title="MAUI Apizr Sample"
     x:DataType="viewModels:MainPageViewModel"
     BackgroundColor="{DynamicResource SecondaryColor}">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding LogController.GoToLogsPageCommand}" Text="Logs" />
+    </ContentPage.ToolbarItems>
     <Grid RowDefinitions="*,Auto">
         <RefreshView
             Grid.Row="0"

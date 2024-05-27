@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Optional.Cruding.Sending;
 using Apizr.Requesting;
@@ -7,13 +8,14 @@ using Fusillade;
 using MediatR;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Shiny;
 
 namespace Apizr.Sample.MAUI.ViewModels
 {
 
-    public class MainPageViewModel : ViewModel
+    public class MainPageViewModel : ReactiveObject, IPageLifecycleAware
     {
+        private readonly INavigationService _navigationService;
+        private readonly IPageDialogService _dialogService;
         private readonly IApizrManager<IReqResService> _reqResManager;
         private readonly IApizrManager<IHttpBinService> _httpBinManager;
         private readonly IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> _userCrudManager;
@@ -21,7 +23,9 @@ namespace Apizr.Sample.MAUI.ViewModels
         private readonly IMediator _mediator;
         private readonly IApizrCrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
 
-        public MainPageViewModel(BaseServices services, IApizrExtendedRegistry apizrRegistry) : base(services)
+        public MainPageViewModel(INavigationService navigationService, 
+                IPageDialogService dialogService, 
+                IApizrExtendedRegistry apizrRegistry)
         //IApizrManager<IReqResService> reqResManager),
         //IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager,
         //IApizrManager<IHttpBinService> httpBinManager,
@@ -29,6 +33,8 @@ namespace Apizr.Sample.MAUI.ViewModels
         //IMediator mediator,
         //ICrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> userOptionalMediator)
         {
+            _navigationService = navigationService;
+            _dialogService = dialogService;
             _reqResManager = apizrRegistry.GetManagerFor<IReqResService>(); //reqResManager;
             _userCrudManager = apizrRegistry.GetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(); //userCrudManager;
             _httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>(); //httpBinManager;
@@ -38,14 +44,12 @@ namespace Apizr.Sample.MAUI.ViewModels
             GetUsersCommand = ReactiveCommand.CreateFromTask(GetUsersAsync);
             GetUserDetailsCommand = ReactiveCommand.CreateFromTask<User>(GetUserDetailsAsync);
             AuthCommand = ReactiveCommand.CreateFromTask(AuthAsync);
-            Users = new ObservableList<User>();
-
-            Title = "Main Page";
+            Users = new ObservableCollection<User>();
         }
 
         #region Properties
 
-        [Reactive] public ObservableList<User> Users { get; set; }
+        [Reactive] public ObservableCollection<User> Users { get; set; }
 
         [Reactive] public bool IsRefreshing { get; set; }
 
@@ -89,21 +93,23 @@ namespace Apizr.Sample.MAUI.ViewModels
             catch (ApizrException<UserList> e)
             {
                 var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                await Dialogs.Snackbar(message);
+                await _dialogService.DisplayAlertAsync("Error", message, "Ok");
 
                 users = e.CachedResult?.Data;
             }
             catch (ApizrException<PagedResult<User>> e)
             {
                 var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                await Dialogs.Snackbar(message);
+                await _dialogService.DisplayAlertAsync("Error", message, "Ok");
 
                 users = e.CachedResult?.Data?.ToList();
             }
             finally
             {
                 if (users != null && users.Any())
-                    Users.ReplaceAll(users);
+                    Users = new ObservableCollection<User>(users);
+                else
+                    Users.Clear();
 
                 IsRefreshing = false;
             }
@@ -168,7 +174,7 @@ namespace Apizr.Sample.MAUI.ViewModels
             catch (ApizrException<UserDetails> e)
             {
                 var message = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
-                await Dialogs.Snackbar(message);
+                await _dialogService.DisplayAlertAsync("Error", message, "Ok");
 
                 fetchedUser = e.CachedResult?.User;
             }
@@ -187,8 +193,7 @@ namespace Apizr.Sample.MAUI.ViewModels
             //});
 
             if (fetchedUser != null)
-                await Dialogs.Alert(
-                    $"{fetchedUser.FirstName} {fetchedUser.LastName}\n {fetchedUser.Email}", fetchedUser.FirstName);
+                await _dialogService.DisplayAlertAsync(fetchedUser.FirstName, $"{fetchedUser.FirstName} {fetchedUser.LastName}\n {fetchedUser.Email}", "Ok");
         }
 
         private async Task AuthAsync()
@@ -207,18 +212,22 @@ namespace Apizr.Sample.MAUI.ViewModels
             }
 
             if (!string.IsNullOrWhiteSpace(result))
-                await Dialogs.Snackbar(result);
+                await _dialogService.DisplayAlertAsync("Auth", result, "Ok");
         }
 
         #endregion
 
         #region Lifecycle
 
-        public override void OnAppearing()
+        public void OnAppearing()
         {
-            base.OnAppearing();
-
             IsRefreshing = true;
+        }
+
+        /// <inheritdoc />
+        public void OnDisappearing()
+        {
+            
         }
 
         #endregion

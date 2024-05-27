@@ -5,10 +5,11 @@ using Apizr.Sample.Models;
 using CommunityToolkit.Maui;
 using System.Reflection;
 using Apizr.Sample.MAUI.Infrastructure;
-using Shiny;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Polly;
 using Polly.Retry;
 using Microsoft.Extensions.Logging;
+using ReactiveUI;
 
 namespace Apizr.Sample.MAUI
 {
@@ -21,16 +22,29 @@ namespace Apizr.Sample.MAUI
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
-                .UseShinyFramework(
+                .UsePrism(
                     new DryIocKeyedContainerExtension(),
-                    prism => prism.CreateWindow(
-                        "NavigationPage/MainPage",
-                        ex =>
+                    prism => prism
+                        .RegisterTypes(containerRegistry =>
                         {
-                            Console.WriteLine(ex);
-                        }
-                    ),
-                    new(ErrorAlertType.FullError)
+                            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+                        })
+                        .AddGlobalNavigationObserver(context => context.Subscribe(x =>
+                        {
+                            Console.WriteLine(x.Type == NavigationRequestType.Navigate
+                                ? $"Navigation: {x.Uri}"
+                                : $"Navigation: {x.Type}");
+
+                            var status = x.Cancelled ? "Cancelled" : x.Result.Success ? "Success" : "Failed";
+                            Console.WriteLine($@"Result: {status}");
+
+                            if (status == "Failed" && !string.IsNullOrEmpty(x.Result?.Exception?.Message))
+                                Console.Error.WriteLine(x.Result.Exception.Message);
+                        }))
+                        .CreateWindow(navigationService => navigationService.CreateBuilder()
+                            .AddNavigationPage()
+                            .AddSegment<MainPageViewModel>()
+                            .NavigateAsync(HandleNavigationError))
                 )
                 .ConfigureFonts(fonts =>
                 {
@@ -86,6 +100,12 @@ namespace Apizr.Sample.MAUI
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             return builder.Build();
+        }
+
+        private static void HandleNavigationError(Exception ex)
+        {
+            Console.WriteLine(ex);
+            System.Diagnostics.Debugger.Break();
         }
 
         private static Task<string> OnRefreshToken(HttpRequestMessage request) => Task.FromResult("tokenValue");

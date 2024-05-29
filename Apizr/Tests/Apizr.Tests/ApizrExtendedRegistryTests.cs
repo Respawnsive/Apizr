@@ -2166,9 +2166,10 @@ namespace Apizr.Tests
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
-                .ConfigureServices((_, services) =>
+                .ConfigureServices((context, services) =>
                 {
-                    services.AddSettings();
+                    services.Configure<TestSettings>(context.Configuration.GetSection(nameof(TestSettings)),
+                        option => option.BindNonPublicProperties = true);
                     services.AddSingleton(_ => testStore);
 
                     services.AddApizr(registry => registry
@@ -2253,9 +2254,10 @@ namespace Apizr.Tests
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
-                .ConfigureServices((_, services) =>
+                .ConfigureServices((context, services) =>
                 {
-                    services.AddSettings();
+                    services.Configure<TestSettings>(context.Configuration.GetSection(nameof(TestSettings)),
+                        option => option.BindNonPublicProperties = true);
 
                     services.AddApizr(registry => registry
                             .AddManagerFor<IReqResSimpleService>(options => options.WithHeaders(["testKey2: testValue2"])

@@ -1378,13 +1378,15 @@ namespace Apizr.Tests
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
-                .ConfigureServices((_, services) =>
+                .ConfigureServices((context, services) =>
                 {
-                    services.AddSettings();
+                    services.Configure<TestSettings>(context.Configuration.GetSection(nameof(TestSettings)),
+                        option => option.BindNonPublicProperties = true);
                     services.AddSingleton(_ => testStore);
 
                     services.AddApizrManagerFor<IReqResSimpleService>(options => options
-                        .WithLogging()
+                        .WithBaseConfiguration(context.Configuration.GetSection("Apizr"))
+                        //.WithLogging()
                         .WithBaseAddress("https://reqres.in/api")
                         .WithHeaders(_ => apiHeaders, scope: ApizrLifetimeScope.Api)
                         .WithHeaders(_ => requestHeaders, scope: ApizrLifetimeScope.Request)

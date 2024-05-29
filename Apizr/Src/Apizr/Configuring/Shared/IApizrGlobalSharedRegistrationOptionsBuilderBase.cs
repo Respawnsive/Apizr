@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Apizr.Configuring.Shared
 {
@@ -19,6 +20,15 @@ namespace Apizr.Configuring.Shared
         where TApizrOptions : IApizrGlobalSharedRegistrationOptionsBase
         where TApizrOptionsBuilder : IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {
+        /// <summary>
+        /// Define base configuration
+        /// </summary>
+        /// <param name="configurationSection">The configuration to set values from</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithBaseConfiguration(IConfigurationSection configurationSection,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
+
         /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>

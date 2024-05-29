@@ -9,9 +9,9 @@ using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
-using Apizr.Extending.Configuring.Manager;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -58,6 +58,54 @@ namespace Apizr.Extending.Configuring.Proper
         /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithBaseAddress(Uri baseAddress)
             => WithBaseAddress(_ => baseAddress);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithBaseConfiguration(IConfigurationSection configurationSection,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        {
+            if (configurationSection is not null)
+            {
+                var configs = configurationSection.GetChildren();
+                foreach (var config in configs)
+                {
+                    switch (config.Key)
+                    {
+                        case "BaseAddress":
+                            WithBaseAddress(config.Value);
+                            break;
+                        case "BasePath":
+                            WithBasePath(config.Value);
+                            break;
+                        case "OperationTimeout":
+                            WithOperationTimeout(TimeSpan.Parse(config.Value!));
+                            break;
+                        case "RequestTimeout":
+                            WithRequestTimeout(TimeSpan.Parse(config.Value!));
+                            break;
+                        case "Logging":
+                            WithBaseConfiguration(config, strategy);
+                            break;
+                        case "HttpTracerMode":
+                            Options.HttpTracerModeFactory = _ => (HttpTracerMode)Enum.Parse(typeof(HttpTracerMode), config.Value!);
+                            break;
+                        case "TrafficVerbosity":
+                            Options.TrafficVerbosityFactory = _ => (HttpMessageParts)Enum.Parse(typeof(HttpMessageParts), config.Value!);
+                            break;
+                        case "LogLevels":
+                            Options.LogLevelsFactory = _ => config.GetChildren().Select(c => (LogLevel)Enum.Parse(typeof(LogLevel), c.Value!)).ToArray();
+                            break;
+                        default:
+                            if (!config.GetChildren().Any())
+                                throw new ArgumentOutOfRangeException(config.Key, config.Key, null);
+
+                            WithBaseConfiguration(config, strategy);
+                            break;
+                    }
+                }
+            }
+
+            return this;
+        }
 
         /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)

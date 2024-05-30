@@ -21,13 +21,11 @@ namespace Apizr.Configuring.Shared
         where TApizrOptionsBuilder : IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {
         /// <summary>
-        /// Define base configuration
+        /// Set options from configuration
         /// </summary>
-        /// <param name="configurationSection">The configuration to set values from</param>
-        /// <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
+        /// <param name="configurationSection">The configuration to set options from</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithBaseConfiguration(IConfigurationSection configurationSection,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
+        TApizrOptionsBuilder WithConfiguration(IConfigurationSection configurationSection);
 
         /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)

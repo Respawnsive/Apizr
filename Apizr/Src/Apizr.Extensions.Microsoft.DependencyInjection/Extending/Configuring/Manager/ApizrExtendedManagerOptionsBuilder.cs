@@ -61,8 +61,7 @@ namespace Apizr.Extending.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithBaseConfiguration(IConfigurationSection configurationSection,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        public IApizrExtendedManagerOptionsBuilder WithConfiguration(IConfigurationSection configurationSection)
         {
             if (configurationSection is not null)
             {
@@ -83,9 +82,6 @@ namespace Apizr.Extending.Configuring.Manager
                         case "RequestTimeout":
                             WithRequestTimeout(TimeSpan.Parse(config.Value!));
                             break;
-                        case "Logging":
-                            WithBaseConfiguration(config, strategy);
-                            break;
                         case "HttpTracerMode":
                             Options.HttpTracerModeFactory = _ => (HttpTracerMode)Enum.Parse(typeof(HttpTracerMode), config.Value!);
                             break;
@@ -95,11 +91,23 @@ namespace Apizr.Extending.Configuring.Manager
                         case "LogLevels":
                             Options.LogLevelsFactory = _ => config.GetChildren().Select(c => (LogLevel)Enum.Parse(typeof(LogLevel), c.Value!)).ToArray();
                             break;
+                        case "Headers":
+                            WithHeaders(config.GetChildren().Select(c => c.Value!).ToList());
+                            break;
+                        case "LoggedHeadersRedactionNames":
+                            WithLoggedHeadersRedactionNames(config.GetChildren().Select(c => c.Value!).ToList());
+                            break;
+                        case "ContinueOnCapturedContext":
+                            WithResilienceContextOptions(options => options.ContinueOnCapturedContext(bool.Parse(config.Value!)));
+                            break;
+                        case "ReturnContextToPoolOnComplete":
+                            WithResilienceContextOptions(options => options.ReturnToPoolOnComplete(bool.Parse(config.Value!)));
+                            break;
                         default:
                             if (!config.GetChildren().Any())
-                                throw new ArgumentOutOfRangeException(config.Key, config.Key, null);
+                                throw new ArgumentOutOfRangeException(config.Key, $"Apizr does not handle any {config.Key} option. Make sure that your key target an option that Apizr could configure.");
 
-                            WithBaseConfiguration(config, strategy);
+                            WithConfiguration(config);
                             break;
                     }
                 }
@@ -267,7 +275,8 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
-            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, 
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
         {
             switch (strategy)
             {
@@ -299,7 +308,8 @@ namespace Apizr.Extending.Configuring.Manager
         public IApizrExtendedManagerOptionsBuilder WithHeaders<TSettingsService>(
             Expression<Func<TSettingsService, string>>[] headerProperties,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
-            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, 
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
         {
             var headersFactories = headerProperties.Select(exp => exp.Compile());
 

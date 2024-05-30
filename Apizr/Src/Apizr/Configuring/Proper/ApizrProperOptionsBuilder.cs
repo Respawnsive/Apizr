@@ -34,8 +34,7 @@ namespace Apizr.Configuring.Proper
         IApizrProperOptions IApizrProperOptionsBuilder.ApizrOptions => Options;
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithBaseConfiguration(IConfigurationSection configurationSection,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        public IApizrProperOptionsBuilder WithConfiguration(IConfigurationSection configurationSection)
         {
             if (configurationSection is not null)
             {
@@ -56,9 +55,6 @@ namespace Apizr.Configuring.Proper
                         case "RequestTimeout":
                             WithRequestTimeout(TimeSpan.Parse(config.Value!));
                             break;
-                        case "Logging":
-                            WithBaseConfiguration(config, strategy);
-                            break;
                         case "HttpTracerMode":
                             Options.HttpTracerModeFactory = () => (HttpTracerMode)Enum.Parse(typeof(HttpTracerMode), config.Value!);
                             break;
@@ -68,11 +64,23 @@ namespace Apizr.Configuring.Proper
                         case "LogLevels":
                             Options.LogLevelsFactory = () => config.GetChildren().Select(c => (LogLevel)Enum.Parse(typeof(LogLevel), c.Value!)).ToArray();
                             break;
+                        case "Headers":
+                            WithHeaders(config.GetChildren().Select(c => c.Value!).ToList());
+                            break;
+                        case "LoggedHeadersRedactionNames":
+                            WithLoggedHeadersRedactionNames(config.GetChildren().Select(c => c.Value!).ToList());
+                            break;
+                        case "ContinueOnCapturedContext":
+                            WithResilienceContextOptions(options => options.ContinueOnCapturedContext(bool.Parse(config.Value!)));
+                            break;
+                        case "ReturnContextToPoolOnComplete":
+                            WithResilienceContextOptions(options => options.ReturnToPoolOnComplete(bool.Parse(config.Value!)));
+                            break;
                         default:
                             if (!config.GetChildren().Any())
-                                throw new ArgumentOutOfRangeException(config.Key, config.Key, null);
+                                throw new ArgumentOutOfRangeException(config.Key, $"Apizr does not handle any {config.Key} option. Make sure that your key target an option that Apizr could configure.");
 
-                            WithBaseConfiguration(config, strategy);
+                            WithConfiguration(config);
                             break;
                     }
                 }

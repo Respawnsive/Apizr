@@ -1385,14 +1385,15 @@ namespace Apizr.Tests
                     services.AddSingleton(_ => testStore);
 
                     services.AddApizrManagerFor<IReqResSimpleService>(options => options
-                        .WithBaseConfiguration(context.Configuration.GetSection("Apizr"))
+                        .WithConfiguration(context.Configuration.GetSection("Apizr:Common"))
+                        .WithConfiguration(context.Configuration.GetSection("Apizr:IReqResSimpleService"))
                         //.WithLogging()
-                        .WithBaseAddress("https://reqres.in/api")
+                        //.WithBaseAddress("https://reqres.in/api")
                         .WithHeaders(_ => apiHeaders, scope: ApizrLifetimeScope.Api)
                         .WithHeaders(_ => requestHeaders, scope: ApizrLifetimeScope.Request)
                         .WithHeaders<IOptions<TestSettings>>([settings => settings.Value.TestJsonString], scope: ApizrLifetimeScope.Request)
-                        .WithHeaders(["testKey5: testValue5.1", "testKey6: testValue6.1"])
-                        .WithHeaders(["testStoreKey1: testStoreValue1.1", "testStoreKey3: testStoreValue3.1"], mode: ApizrRegistrationMode.Store)
+                        .WithHeaders(["testKey5: testValue5.1", "testKey6: *testValue6.1*"])
+                        .WithHeaders(["testStoreKey1: testStoreValue1.1", "testStoreKey3: testStoreValue3.1", "testSettingsKey4: testSettingsValue4.1", "testSettingsKey5: testSettingsValue5.1"], mode: ApizrRegistrationMode.Store)
                         .WithHeaders<TestSettings>([settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request, mode: ApizrRegistrationMode.Store)
                         .WithDelegatingHandler(watcher));
 
@@ -1420,6 +1421,10 @@ namespace Apizr.Tests
             watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5.2"); // Set by common option then updated by request option
             watcher.Headers.GetValues("testKey6").Should().HaveCount(1).And.Contain("testValue6.1"); // Set by common option
             watcher.Headers.GetValues("testSettingsKey1").Should().HaveCount(1).And.Contain("testSettingsValue1.1"); // Set by common option expression
+            watcher.Headers.GetValues("testSettingsKey2").Should().HaveCount(1).And.Contain("testSettingsValue2.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey3").Should().HaveCount(1).And.Contain("testSettingsValue3.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey4").Should().HaveCount(1).And.Contain("testSettingsValue4.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey5").Should().HaveCount(1).And.Contain("testSettingsValue5.1"); // Set by common option configuration
             watcher.Headers.GetValues("testStoreKey1").Should().HaveCount(1).And.Contain("testStoreValue1.1"); // Set by common option from Store
             watcher.Headers.GetValues("testStoreKey2").Should().HaveCount(1).And.Contain("testStoreValue2.1"); // Set by common option from Store
 
@@ -1429,13 +1434,13 @@ namespace Apizr.Tests
             requestHeaders[1] = "testKey4: testValue4.3"; // should be updated (scope: Request) but updated then by request option
             testStore.TestJsonString = "testStoreKey2: testStoreValue2.2";
             var settings = scope.ServiceProvider.GetService<IOptions<TestSettings>>();
-            settings.Value.TestJsonString = "testSettingsKey1: testSettingsValue1.2"; // will be updated (scope: Request)
+            settings.Value.TestJsonString = "testSettingsKey1: *testSettingsValue1.2*"; // will be updated (scope: Request)
 
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithHeaders(["testKey4: testValue4.4",
                     "testKey5: testValue5.3",
-                    "testStoreKey1: testStoreValue1.2",
-                    "testStoreKey3: {0}"]));
+                    "testStoreKey1: *testStoreValue1.2*",
+                    "testStoreKey3: *{0}*"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6", "testSettingsKey1", "testStoreKey1", "testStoreKey2", "testStoreKey3");
             watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Same as previous value
@@ -1445,6 +1450,10 @@ namespace Apizr.Tests
             watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5.3"); // Updated by request option
             watcher.Headers.GetValues("testKey6").Should().HaveCount(1).And.Contain("testValue6.1"); // Same as previous value
             watcher.Headers.GetValues("testSettingsKey1").Should().HaveCount(1).And.Contain("testSettingsValue1.2"); // Updated at request time (scope: Request)
+            watcher.Headers.GetValues("testSettingsKey2").Should().HaveCount(1).And.Contain("testSettingsValue2.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey3").Should().HaveCount(1).And.Contain("testSettingsValue3.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey4").Should().HaveCount(1).And.Contain("testSettingsValue4.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey5").Should().HaveCount(1).And.Contain("testSettingsValue5.1"); // Same as previous value
             watcher.Headers.GetValues("testStoreKey1").Should().HaveCount(1).And.Contain("testStoreValue1.2"); // Updated by request option
             watcher.Headers.GetValues("testStoreKey2").Should().HaveCount(1).And.Contain("testStoreValue2.2"); // Updated at request time (scope: Request)
             watcher.Headers.GetValues("testStoreKey3").Should().HaveCount(1).And.Contain("testStoreValue3.1"); // Set by request option from Store

@@ -2113,7 +2113,8 @@ namespace Apizr.Tests
         [Fact]
         public async Task Requesting_With_Headers_Should_Set_Headers()
         {
-            var watcher = new WatchingRequestHandler();
+            var watcher1 = new WatchingRequestHandler();
+            var watcher2 = new WatchingRequestHandler();
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
@@ -2126,7 +2127,12 @@ namespace Apizr.Tests
                                 .WithBaseAddress("https://reqres.in/api")
                                 .WithHeaders(["testKey3: testValue3.2", "testKey4: testValue4.1"])
                                 .WithLoggedHeadersRedactionNames(["testKey2"])
-                                .WithDelegatingHandler(watcher)),
+                                .WithDelegatingHandler(watcher1))
+                            .AddManagerFor<IReqResUserService>(options => options
+                                .WithBaseAddress("https://reqres.in/api")
+                                .WithHeaders(["testKey3: testValue3.4", "testKey4: testValue4.2"])
+                                .WithLoggedHeadersRedactionNames(["testKey4"])
+                                .WithDelegatingHandler(watcher2)),
                         options => options
                             .WithLogging()
                             .WithHeaders(["testKey2: testValue2.2", "testKey3: testValue3.1"]));
@@ -2139,19 +2145,34 @@ namespace Apizr.Tests
             var scope = host.Services.CreateScope();
 
             // Get instances from the container
-            var apizrManager = scope.ServiceProvider.GetService<IApizrManager<IReqResSimpleService>>(); // Custom
+            var simpleManager = scope.ServiceProvider.GetService<IApizrManager<IReqResSimpleService>>(); // Custom
 
             // Shortcut
-            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), 
+            await simpleManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), 
                 options => options.WithHeaders(["testKey4: testValue4.2", "testKey5: testValue5"])
                     .WithLoggedHeadersRedactionRule(header => header == "testKey3"));
-            watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5");
-            watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
-            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
-            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Set by common option then updated by proper option
-            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4.2"); // Set by proper option then updated by request option
-            watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5"); // Set by request option
+            watcher1.Headers.Should().NotBeNull();
+            watcher1.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5");
+            watcher1.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
+            watcher1.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
+            watcher1.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Set by common option then updated by proper option
+            watcher1.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4.2"); // Set by proper option then updated by request option
+            watcher1.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5"); // Set by request option
+
+            // Get instances from the container
+            var userManager = scope.ServiceProvider.GetService<IApizrManager<IReqResUserService>>(); // Custom
+
+            // Shortcut
+            await userManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithHeaders(["testKey4: testValue4.3", "testKey5: testValue5"])
+                    .WithLoggedHeadersRedactionRule(header => header == "testKey5"));
+            watcher2.Headers.Should().NotBeNull();
+            watcher2.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5");
+            watcher2.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
+            watcher2.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
+            watcher2.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.4"); // Set by common option then updated by proper option
+            watcher2.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4.3"); // Set by proper option then updated by request option
+            watcher2.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5"); // Set by request option
         }
 
         [Fact]

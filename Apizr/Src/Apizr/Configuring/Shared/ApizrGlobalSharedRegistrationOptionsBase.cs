@@ -21,7 +21,7 @@ namespace Apizr.Configuring.Shared
             BasePath = sharedOptions?.BasePath;
             PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
             HeadersFactories = sharedOptions?.HeadersFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
-            Headers = sharedOptions?.Headers?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            Headers = sharedOptions?.Headers?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToList() as IList<string>) ?? [];
         }
 
         /// <inheritdoc />

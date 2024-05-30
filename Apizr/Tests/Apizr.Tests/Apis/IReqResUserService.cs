@@ -23,8 +23,10 @@ using Refit;
 [assembly:Priority(Priority.Background)]
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.RequestAll, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information),
-    Priority(Priority.Speculative)]//, Timeout("00:00:04")]
+    [WebApi("https://reqres.in/api"), 
+     Log(HttpMessageParts.RequestAll, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information),
+     Headers("testKey1: *testValue1*", "testKey2: testValue2.1"),
+     Priority(Priority.Speculative)]//, Timeout("00:00:04")]
     public interface IReqResUserService
     {
         [Get("/users")]

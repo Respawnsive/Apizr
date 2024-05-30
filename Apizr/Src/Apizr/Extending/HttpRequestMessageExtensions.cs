@@ -17,30 +17,10 @@ namespace Apizr.Extending
 
         internal static CancellationTokenSource ProcessRequest(this HttpRequestMessage request, CancellationToken cancellationToken, IApizrManagerOptionsBase apizrOptions, out CancellationToken optionsCancellationToken)
         {
-            // Remove redact stars (*) from headers
-            if (request.Headers.Any())
-            {
-                foreach (var header in request.Headers)
-                {
-                    var trimmedHeader = new List<string>();
-                    var replaceHeader = false;
-                    foreach (var headerValue in header.Value)
-                    {
-                        if (headerValue.StartsWith("*") && headerValue.EndsWith("*"))
-                        {
-                            trimmedHeader.Add(headerValue.Trim('*'));
-                            replaceHeader = true;
-                        }
-                        else
-                        {
-                            trimmedHeader.Add(headerValue);
-                        }
-                    }
-
-                    if (replaceHeader) 
-                        request.Headers.TrySetHeader(header.Key, trimmedHeader);
-                }
-            }
+            // Remove redact stars (*) if any
+            var headersToTrim = request.Headers.Where(header => header.Value.Any(value => value.StartsWith("*") && value.EndsWith("*"))).ToList();
+            foreach (var headerToTrim in headersToTrim)
+                request.Headers.TrySetHeader(headerToTrim.Key, headerToTrim.Value);
 
             CancellationTokenSource cts = null;
 
@@ -87,7 +67,7 @@ namespace Apizr.Extending
                         TryGetHeaderKeyValue(storedHeader, out var storedHeaderkey, out _) &&
                         request.Headers.Any(requestHeader =>
                             storedHeaderkey == requestHeader.Key && 
-                            requestHeader.Value.All(value => value == "{0}")))
+                            requestHeader.Value.All(value => value is "{0}" or "*{0}*")))
                         .ToList();
 
                     foreach (var matchingHeader in matchingHeaders)
@@ -101,7 +81,7 @@ namespace Apizr.Extending
                 }
 
                 var emptyHeaders = request.Headers.Where(requestHeader =>
-                        requestHeader.Value.Any(requestHeaderValue => requestHeaderValue == "{0}"))
+                        requestHeader.Value.Any(requestHeaderValue => requestHeaderValue is "{0}" or "*{0}*"))
                     .Select(requestHeader => requestHeader.Key)
                     .ToList();
 
@@ -195,7 +175,10 @@ namespace Apizr.Extending
             if (value == null || removeOnly) 
                 return true;
 
-            return headers.TryAddWithoutValidation(key, value);
+            // Remove redact stars (*) if any
+            var headerValue = value.StartsWith("*") && value.EndsWith("*") ? value.Trim('*') : value;
+
+            return headers.TryAddWithoutValidation(key, headerValue);
         }
 
         /// <summary>
@@ -218,7 +201,12 @@ namespace Apizr.Extending
             if (values == null || removeOnly)
                 return true;
 
-            return headers.TryAddWithoutValidation(key, values);
+            // Remove redact stars (*) if any
+            var headerValues = values.Select(headerValue =>
+                    headerValue.StartsWith("*") && headerValue.EndsWith("*") ? headerValue.Trim('*') : headerValue)
+                .ToList();
+
+            return headers.TryAddWithoutValidation(key, headerValues);
         }
 
         internal static bool TryGetHeaderKeyValue(string header, out string key, out string value)

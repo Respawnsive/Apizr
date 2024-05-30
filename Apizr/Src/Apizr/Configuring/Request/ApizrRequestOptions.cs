@@ -5,10 +5,8 @@ using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
-using Apizr.Extending;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
-using Polly;
 
 namespace Apizr.Configuring.Request;
 
@@ -27,8 +25,8 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
         foreach (var handlersParameter in handlersParameters)
             HandlersParameters[handlersParameter.Key] = handlersParameter.Value;
 
-        Headers = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Set, out var headers) == true ? headers : [];
-        _headersStore = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Store, out var headersStore) == true ? headersStore : [];
+        Headers = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Set, out var headers) == true ? headers.ToList() : [];
+        _headersStore = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Store, out var headersStore) == true ? headersStore.ToList() : [];
     }
 
     /// <inheritdoc />

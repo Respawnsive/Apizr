@@ -62,33 +62,51 @@ namespace Apizr
             // Create request options builder with request options
             var builder = new ApizrRequestOptionsBuilder(requestOptions) as IApizrRequestOptionsBuilder;
 
-            // Refresh request scoped headers if any
-            if (baseOptions?.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Request), out var setFactory) == true)
+            // Only once with full options building
+            if (baseOptions != null)
             {
-                // Set refreshed headers right the way
-                var setHeaders = setFactory?.Invoke()?.ToArray();
-                if (setHeaders?.Length > 0)
-                    builder.WithHeaders(setHeaders, ApizrRegistrationMode.Set);
-            }
+                // Refresh request scoped headers if any
+                if (baseOptions.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Request), out var setFactory) == true)
+                {
+                    // Set refreshed headers right the way
+                    var setHeaders = setFactory?.Invoke()?.ToArray();
+                    if (setHeaders?.Length > 0)
+                        builder.WithHeaders(setHeaders, ApizrRegistrationMode.Set);
+                }
 
-            if (baseOptions?.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Store, ApizrLifetimeScope.Request), out var storeFactory) == true)
-            {
-                // Store refreshed headers for further attribute key match use
-                var storeHeaders = storeFactory?.Invoke()?.ToArray();
-                if (storeHeaders?.Length > 0)
-                    builder.WithHeaders(storeHeaders, ApizrRegistrationMode.Store);
+                if (baseOptions.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Store, ApizrLifetimeScope.Request), out var storeFactory) == true)
+                {
+                    // Store refreshed headers for further attribute key match use
+                    var storeHeaders = storeFactory?.Invoke()?.ToArray();
+                    if (storeHeaders?.Length > 0)
+                        builder.WithHeaders(storeHeaders, ApizrRegistrationMode.Store);
+                } 
             }
 
             // Apply latest request options if any
             optionsBuilder?.Invoke(builder);
 
-            // Apply context options if any
-            if (builder.ApizrOptions.ContextOptionsBuilder != null)
+            // Only once with full options building
+            if (baseOptions != null)
             {
-                var contextOptions = new ApizrResilienceContextOptions();
-                var contextOptionsBuilder = new ApizrResilienceContextOptionsBuilder(contextOptions) as IApizrResilienceContextOptionsBuilder;
-                builder.ApizrOptions.ContextOptionsBuilder.Invoke(contextOptionsBuilder);
-                builder.WithResilienceContextOptions(contextOptionsBuilder.ResilienceContextOptions);
+                // Check for header values redaction
+                var redactHeaders = new List<string>();
+                foreach (var header in builder.ApizrOptions.Headers)
+                    if (HttpRequestMessageExtensions.TryGetHeaderKeyValue(header, out var key, out var value) && value.StartsWith("*") && value.EndsWith("*"))
+                        redactHeaders.Add(key);
+
+                // Apply redacted headers if any
+                if (redactHeaders.Count > 0)
+                    builder.WithLoggedHeadersRedactionNames(redactHeaders);
+
+                // Apply context options if any
+                if (builder.ApizrOptions.ContextOptionsBuilder != null)
+                {
+                    var contextOptions = new ApizrResilienceContextOptions();
+                    var contextOptionsBuilder = new ApizrResilienceContextOptionsBuilder(contextOptions) as IApizrResilienceContextOptionsBuilder;
+                    builder.ApizrOptions.ContextOptionsBuilder.Invoke(contextOptionsBuilder);
+                    builder.WithResilienceContextOptions(contextOptionsBuilder.ResilienceContextOptions);
+                }
             }
 
             // Return the builder

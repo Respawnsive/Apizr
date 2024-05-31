@@ -2195,6 +2195,7 @@ namespace Apizr.Tests
                     services.AddSingleton(_ => testStore);
 
                     services.AddApizr(registry => registry
+
                             .AddManagerFor<IReqResSimpleService>(options => options
                                 //.WithConfiguration(context.Configuration.GetSection("Apizr:IReqResSimpleService")) // Specific section (manual mapped config)
                                 .WithBaseAddress("https://reqres.in/api")
@@ -2203,11 +2204,15 @@ namespace Apizr.Tests
                                 .WithHeaders<IOptions<TestSettings>>([settings => settings.Value.TestJsonString], scope: ApizrLifetimeScope.Request)
                                 .WithHeaders<TestSettings>([settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request, mode: ApizrRegistrationMode.Store)
                                 .WithDelegatingHandler(watcher))
+
                             .AddManagerFor<IHttpBinService>(options => options
                                 //.WithConfiguration(context.Configuration.GetSection("Apizr:IHttpBinService")) // Specific section (manual mapped config)
                                 .WithHeaders(["testKey3: testValue3.4", "testKey4: testValue4.2"])
                                 .WithLoggedHeadersRedactionNames(["testKey4"])
-                                .WithDelegatingHandler(watcher2)),
+                                .WithDelegatingHandler(watcher2))
+
+                            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+
                         options => options
                             .WithConfiguration(context.Configuration) // Whole configuration (auto mapped config)
                             //.WithConfiguration(context.Configuration.GetSection("Apizr")) // Root section (auto mapped config)
@@ -2230,11 +2235,14 @@ namespace Apizr.Tests
             // Get instances from the container
             var simpleManager = scope.ServiceProvider.GetService<IApizrManager<IReqResSimpleService>>(); // Custom
             var httpBinManager = scope.ServiceProvider.GetService<IApizrManager<IHttpBinService>>(); // Custom
+            var userManager = scope.ServiceProvider.GetService<IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>>(); // Custom
 
             simpleManager.Options.OperationTimeout.Should().Be(TimeSpan.Parse("00:00:10"));
             httpBinManager.Options.OperationTimeout.Should().Be(TimeSpan.Parse("00:00:10"));
+            userManager.Options.OperationTimeout.Should().Be(TimeSpan.Parse("00:00:10"));
             simpleManager.Options.RequestTimeout.Should().Be(TimeSpan.Parse("00:00:03"));
             httpBinManager.Options.RequestTimeout.Should().Be(TimeSpan.Parse("00:00:04"));
+            userManager.Options.RequestTimeout.Should().Be(TimeSpan.Parse("00:00:05"));
 
             // Shortcut
             await simpleManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),

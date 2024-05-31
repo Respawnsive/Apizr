@@ -1477,6 +1477,7 @@ namespace Apizr.Tests
             await stream.DisposeAsync();
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+
                 .AddManagerFor<IReqResSimpleService>(options => options
                     //.WithConfiguration(context.Configuration.GetSection("Apizr:IReqResSimpleService")) // Specific section (manual mapped config)
                     .WithBaseAddress("https://reqres.in/api")
@@ -1485,11 +1486,15 @@ namespace Apizr.Tests
                     .WithHeaders(testSettings, [settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request)
                     .WithHeaders(testStore, [settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request, mode: ApizrRegistrationMode.Store)
                     .WithDelegatingHandler(watcher))
+
                 .AddManagerFor<IHttpBinService>(options => options
                     //.WithConfiguration(context.Configuration.GetSection("Apizr:IHttpBinService")) // Specific section (manual mapped config)
                     .WithHeaders(["testKey3: testValue3.4", "testKey4: testValue4.2"])
                     .WithLoggedHeadersRedactionNames(["testKey4"])
-                    .WithDelegatingHandler(watcher2)),
+                    .WithDelegatingHandler(watcher2))
+
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
@@ -1507,11 +1512,14 @@ namespace Apizr.Tests
             // Shortcut
             apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var simpleManager).Should().BeTrue();
             apizrRegistry.TryGetManagerFor<IHttpBinService>(out var httpBinManager).Should().BeTrue();
+            apizrRegistry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out var userManager).Should().BeTrue();
 
             simpleManager.Options.OperationTimeout.Should().Be(TimeSpan.Parse("00:00:10"));
             httpBinManager.Options.OperationTimeout.Should().Be(TimeSpan.Parse("00:00:10"));
+            userManager.Options.OperationTimeout.Should().Be(TimeSpan.Parse("00:00:10"));
             simpleManager.Options.RequestTimeout.Should().Be(TimeSpan.Parse("00:00:03"));
             httpBinManager.Options.RequestTimeout.Should().Be(TimeSpan.Parse("00:00:04"));
+            userManager.Options.RequestTimeout.Should().Be(TimeSpan.Parse("00:00:05"));
 
             // Shortcut
             await simpleManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),

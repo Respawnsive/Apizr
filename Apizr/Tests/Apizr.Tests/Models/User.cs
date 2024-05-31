@@ -13,7 +13,7 @@ namespace Apizr.Tests.Models
         CrudEntity<int, PagedResult<User>>("https://reqres.in/api/users"),
         CacheReadAll(CacheMode.GetAndFetch),
         CacheRead(CacheMode.GetOrFetch),
-        ReadAllHeaders("testKey1: testValue1", "testKey2: *testValue2*", "testKey3:", "testKey4: *"),
+        ReadAllHeaders("testKey1: testValue1", "testKey2: *testValue2*", "testKey3: {0}", "testKey4: *{0}*"),
         Log(HttpMessageParts.All),
         ReadAllPriority(Priority.Background)]
     public class User

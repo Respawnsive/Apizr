@@ -11,6 +11,7 @@ using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Requesting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -69,8 +70,11 @@ namespace Apizr.Extending.Configuring.Proper
             if (configurationSection is not null)
             {
                 var isApizrSection = configurationSection.Key == "Apizr";
+                var apiName = typeof(ICrudApi<,,,>).IsAssignableFromGenericType(Options.WebApiType)
+                    ? Options.WebApiType.GetGenericArguments().First().Name
+                    : Options.WebApiType.Name;
                 var configs = configurationSection.GetChildren().Where(config =>
-                    !isApizrSection || config.Key == Options.WebApiType.Name);
+                    !isApizrSection || config.Key == apiName);
                 foreach (var config in configs)
                 {
                     switch (config.Key)

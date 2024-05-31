@@ -20,11 +20,14 @@ public interface IYourApi
 }
 ```
 
->[!TIP]
+>[!NOTE]
 >
 > Please refer to Refit official documentation about Headers attribute with static values. 
 > Note that decorating assembly to share headers between several api interfaces is not available with Refit's Headers attribute, 
 > but you can do it with fluent configuration at register time.
+
+>[!TIP]
+> CRUD api headers could be set using provided dedicted method headers attributes (`ReadAllHeaders, ...`) 
 
 #### [Registering](#tab/tabid-register)
 
@@ -109,6 +112,9 @@ Here we are asking Apizr to set headers 1, 2 and 3 to `GetYourFirstDataAsync` an
 It's here to let you choose at design time which request needs which headers, but provide values later in one place.
 So we don't provide any value here but the `{0}` string placeholder and let Apizr set it at request time from its headers store if keys match.
 
+>[!TIP]
+> CRUD api headers could be set using provided dedicted method headers attributes (`ReadAllHeaders, ...`) 
+
 >[!WARNING]
 >
 > Key matching headers need you to provide values fluently at register time with `Store` registration mode (see Registering tab).
@@ -192,6 +198,9 @@ public interface IYourApi
 ```
 
 Here we are asking Apizr to redact both headers 1 and 3 values, but also key matching header 4 value.
+
+>[!TIP]
+> CRUD api headers could be set using provided dedicted method headers attributes (`ReadAllHeaders, ...`) 
 
 #### [Registering](#tab/tabid-register)
 

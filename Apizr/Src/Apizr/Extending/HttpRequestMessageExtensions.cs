@@ -80,6 +80,7 @@ namespace Apizr.Extending
                     }
                 }
 
+                // Remove not key matching headers
                 var emptyHeaders = request.Headers.Where(requestHeader =>
                         requestHeader.Value.Any(requestHeaderValue => requestHeaderValue is "{0}" or "*{0}*"))
                     .Select(requestHeader => requestHeader.Key)
@@ -91,6 +92,14 @@ namespace Apizr.Extending
                     request.Headers.Remove(emptyHeader);
                 }
 
+                // Sort headers for readability
+                request.Headers
+                    .OrderBy(header => header.Key)
+                    .ToList()
+                    .ForEach(header => request.Headers
+                        .TrySetHeader(header.Key, header.Value));
+
+                // Log headers
                 if (headersSetCount > 0)
                 {
                     logger.Log(logLevels.Low(),
@@ -130,14 +139,6 @@ namespace Apizr.Extending
             }
 
             return cts;
-        }
-
-        internal static bool TrySetHeader(this HttpClient httpClient, string header, out string key, out string value)
-        {
-            if (TryGetHeaderKeyValue(header, out key, out value))
-                return httpClient.DefaultRequestHeaders.TrySetHeader(key, value);
-
-            return false;
         }
 
         internal static bool TrySetHeader(this HttpRequestMessage request, string header, out string key, out string value)

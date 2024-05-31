@@ -940,6 +940,9 @@ namespace Apizr
                 redactHeaders.Any() ? header => redactHeaders.Contains(header) : null,
                 properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrExtendedProperOptionsBuilder;
 
+            if(commonOptions.ApizrConfigurationSection != null)
+                builder.WithConfiguration(commonOptions.ApizrConfigurationSection);
+
             properOptionsBuilder?.Invoke(builder);
 
             return builder.ApizrOptions;

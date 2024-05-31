@@ -60,11 +60,17 @@ namespace Apizr.Extending.Configuring.Proper
             => WithBaseAddress(_ => baseAddress);
 
         /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithConfiguration(IConfiguration configuration)
+            => WithConfiguration(configuration?.GetSection("Apizr"));
+
+        /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithConfiguration(IConfigurationSection configurationSection)
         {
             if (configurationSection is not null)
             {
-                var configs = configurationSection.GetChildren();
+                var isApizrSection = configurationSection.Key == "Apizr";
+                var configs = configurationSection.GetChildren().Where(config =>
+                    !isApizrSection || config.Key == Options.WebApiType.Name);
                 foreach (var config in configs)
                 {
                     switch (config.Key)

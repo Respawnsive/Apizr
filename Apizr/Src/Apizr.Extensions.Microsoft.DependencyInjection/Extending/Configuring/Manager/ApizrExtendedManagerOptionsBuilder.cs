@@ -61,11 +61,17 @@ namespace Apizr.Extending.Configuring.Manager
         }
 
         /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithConfiguration(IConfiguration configuration)
+            => WithConfiguration(configuration?.GetSection("Apizr"));
+
+        /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithConfiguration(IConfigurationSection configurationSection)
         {
             if (configurationSection is not null)
             {
-                var configs = configurationSection.GetChildren();
+                var isApizrSection = configurationSection.Key == "Apizr";
+                var configs = configurationSection.GetChildren().Where(config =>
+                    !isApizrSection || config.Key == "Common" || config.Key == Options.WebApiType.Name);
                 foreach (var config in configs)
                 {
                     switch (config.Key)

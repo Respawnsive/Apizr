@@ -11,6 +11,7 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Resiliencing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -236,5 +237,8 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public RefitSettings RefitSettings => Options.RefitSettings;
+
+        /// <inheritdoc />
+        public IConfigurationSection ApizrConfigurationSection => Options.ApizrConfigurationSection;
     }
 }

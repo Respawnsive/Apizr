@@ -4,6 +4,7 @@ using System.Linq;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Shared;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Refit;
 
@@ -23,6 +24,7 @@ namespace Apizr.Configuring.Manager
             ResiliencePipelineRegistryKeys = properOptions.ResiliencePipelineRegistryKeys.ToArray();
             Logger = properOptions.Logger;
             RefitSettings = commonOptions.RefitSettings;
+            ApizrConfigurationSection = commonOptions.ApizrConfigurationSection;
         }
 
         /// <inheritdoc />
@@ -36,5 +38,8 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public RefitSettings RefitSettings { get; protected set; }
+
+        /// <inheritdoc />
+        public IConfigurationSection ApizrConfigurationSection { get; }
     }
 }

@@ -38,11 +38,20 @@ namespace Apizr.Extending.Configuring.Common
         IApizrExtendedCommonOptions IApizrExtendedCommonOptionsBuilder.ApizrOptions => Options;
 
         /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithConfiguration(IConfiguration configuration)
+            => WithConfiguration(configuration?.GetSection("Apizr"));
+
+        /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithConfiguration(IConfigurationSection configurationSection)
         {
             if (configurationSection is not null)
             {
-                var configs = configurationSection.GetChildren();
+                var isApizrSection = configurationSection.Key == "Apizr";
+                if(isApizrSection)
+                    Options.ApizrConfigurationSection = configurationSection;
+
+                var configs = configurationSection.GetChildren().Where(config =>
+                    !isApizrSection || config.Key == "Common");
                 foreach (var config in configs)
                 {
                     switch (config.Key)

@@ -23,7 +23,14 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Set options from configuration
         /// </summary>
-        /// <param name="configurationSection">The configuration to set options from</param>
+        /// <param name="configuration">The configuration to set options from</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithConfiguration(IConfiguration configuration);
+
+        /// <summary>
+        /// Set options from a specific configuration section
+        /// </summary>
+        /// <param name="configurationSection">The configuration section to set options from</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithConfiguration(IConfigurationSection configurationSection);
 

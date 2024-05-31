@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="appsettings.json" />
     <None Remove="Files\Test_large.pdf" />
     <None Remove="Files\Test_medium.pdf" />
     <None Remove="Files\Test_small.pdf" />
@@ -11,9 +12,9 @@
     <None Remove="xunit.runner.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
     <EmbeddedResource Include="Files\Test_medium.pdf" />
     <EmbeddedResource Include="Files\Test_small.pdf" />
-    <None Update="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>

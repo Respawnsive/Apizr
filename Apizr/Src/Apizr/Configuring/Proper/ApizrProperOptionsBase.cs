@@ -13,19 +13,22 @@ namespace Apizr.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="assemblyResiliencePipelineRegistryKeys">Global resilience pipelines</param>
-        /// <param name="webApiResiliencePipelineRegistryKeys">Specific resilience pipelines</param>
+        /// <param name="assemblyResiliencePipelineKeys">Global resilience pipelines</param>
+        /// <param name="webApiResiliencePipelineKeys">Specific resilience pipelines</param>
         /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
-            string[] assemblyResiliencePipelineRegistryKeys,
-            string[] webApiResiliencePipelineRegistryKeys,
+            string[] assemblyResiliencePipelineKeys,
+            string[] webApiResiliencePipelineKeys,
             Func<string, bool> shouldRedactHeaderValue = null) : base(sharedOptions)
         {
             WebApiType = webApiType;
-            ResiliencePipelineRegistryKeys =
-                assemblyResiliencePipelineRegistryKeys?.Union(webApiResiliencePipelineRegistryKeys ?? []).ToArray() ??
-                webApiResiliencePipelineRegistryKeys ?? [];
+            var resiliencePipelineKeys = (assemblyResiliencePipelineKeys ?? []) // Resilience pipeline assembly attributes come first
+                .Union(sharedOptions?.ResiliencePipelineKeys ?? []) // Then common fluent options
+                .Union(webApiResiliencePipelineKeys ?? []) // Then api attributes
+                .ToArray();
+            if(resiliencePipelineKeys.Any())
+                ResiliencePipelineKeys = resiliencePipelineKeys;
 
             if (ShouldRedactHeaderValue == null)
             {
@@ -40,9 +43,6 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public Type WebApiType { get; }
-
-        /// <inheritdoc />
-        public string[] ResiliencePipelineRegistryKeys { get; }
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }

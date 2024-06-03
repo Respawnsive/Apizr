@@ -113,6 +113,9 @@ namespace Apizr.Extending.Configuring.Manager
                         case "ReturnContextToPoolOnComplete":
                             WithResilienceContextOptions(options => options.ReturnToPoolOnComplete(bool.Parse(config.Value!)));
                             break;
+                        case "ResiliencePipelineKeys":
+                            WithResiliencePipelineKeys(config.GetChildren().Select(c => c.Value!).ToArray());
+                            break;
                         default:
                             if (!config.GetChildren().Any())
                                 throw new ArgumentOutOfRangeException(config.Key, $"Apizr does not handle any {config.Key} option. Make sure that your key target an option that Apizr could configure.");
@@ -692,6 +695,32 @@ namespace Apizr.Extending.Configuring.Manager
                     break;
                 case ApizrDuplicateStrategy.Replace:
                     Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.ResiliencePipelineKeys ??= resiliencePipelineKeys;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    Options.ResiliencePipelineKeys = Options.ResiliencePipelineKeys == null
+                        ? resiliencePipelineKeys
+                        : Options.ResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
+
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.ResiliencePipelineKeys = resiliencePipelineKeys;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);

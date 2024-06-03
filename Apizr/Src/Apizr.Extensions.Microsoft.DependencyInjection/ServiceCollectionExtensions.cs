@@ -609,7 +609,7 @@ namespace Apizr
                     var resiliencePipeline = ResiliencePipeline<HttpResponseMessage>.Empty;
                     var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>();
                     var wrappedResiliencePipelineKeys = new List<string>();
-                    if (options.ResiliencePipelineRegistryKeys != null && options.ResiliencePipelineRegistryKeys.Any())
+                    if (options.ResiliencePipelineKeys != null && options.ResiliencePipelineKeys.Any())
                     {
                         var resiliencePipelineRegistry = serviceProvider.GetService<ResiliencePipelineRegistry<string>>();
                         if(resiliencePipelineRegistry == null)
@@ -619,7 +619,7 @@ namespace Apizr
                         }
                         else
                         {
-                            foreach (var resiliencePipelineRegistryKey in options.ResiliencePipelineRegistryKeys)
+                            foreach (var resiliencePipelineRegistryKey in options.ResiliencePipelineKeys)
                             {
                                 if (resiliencePipelineRegistry.TryGetPipeline<HttpResponseMessage>(resiliencePipelineRegistryKey, out var registeredResiliencePipeline))
                                 {

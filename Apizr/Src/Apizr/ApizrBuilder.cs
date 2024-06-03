@@ -167,10 +167,10 @@ namespace Apizr
                 var resiliencePipeline = ResiliencePipeline<HttpResponseMessage>.Empty;
                 var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>();
                 var wrappedResiliencePipelineKeys = new List<string>();
-                if (apizrOptions.ResiliencePipelineRegistryKeys != null && apizrOptions.ResiliencePipelineRegistryKeys.Any())
+                if (apizrOptions.ResiliencePipelineKeys != null && apizrOptions.ResiliencePipelineKeys.Any())
                 {
                     var resiliencePipelineRegistry = apizrOptions.ResiliencePipelineRegistryFactory.Invoke();
-                    foreach (var resiliencePipelineRegistryKey in apizrOptions.ResiliencePipelineRegistryKeys)
+                    foreach (var resiliencePipelineRegistryKey in apizrOptions.ResiliencePipelineKeys)
                     {
                         if (resiliencePipelineRegistry.TryGetPipeline<HttpResponseMessage>(resiliencePipelineRegistryKey, out var registeredResiliencePipeline))
                         {

@@ -455,7 +455,7 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
                 var resiliencePipeline =
-                    GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder.ApizrOptions);
                 if (resiliencePipeline != ResiliencePipeline<IApiResponse>.Empty)
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -598,7 +598,7 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
                     var resiliencePipeline =
-                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -777,7 +777,7 @@ namespace Apizr
 
                     var resiliencePipeline =
                         GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails,
-                            requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                            requestOptionsBuilder.ApizrOptions);
                     if (resiliencePipeline != ResiliencePipeline<IApiResponse<TApiData>>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -968,7 +968,7 @@ namespace Apizr
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
                     var resiliencePipeline =
-                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -1149,7 +1149,7 @@ namespace Apizr
 
                     var resiliencePipeline =
                         GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails,
-                            requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                            requestOptionsBuilder.ApizrOptions);
                     if (resiliencePipeline != ResiliencePipeline<IApiResponse<TApiData>>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -1318,7 +1318,7 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
                 var resiliencePipeline =
-                    GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                    GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder.ApizrOptions);
                 if (resiliencePipeline != ResiliencePipeline<IApiResponse>.Empty)
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -1467,7 +1467,7 @@ namespace Apizr
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
                     var resiliencePipeline =
-                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                        GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     if (resiliencePipeline != ResiliencePipeline<TApiData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -1654,7 +1654,7 @@ namespace Apizr
 
                     var resiliencePipeline =
                         GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails,
-                            requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                            requestOptionsBuilder.ApizrOptions);
                     if (resiliencePipeline != ResiliencePipeline<IApiResponse<TApiData>>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -1858,7 +1858,7 @@ namespace Apizr
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
                     var resiliencePipeline =
-                        GetMethodResiliencePipeline<TApiResultData>(methodDetails, requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                        GetMethodResiliencePipeline<TApiResultData>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     if (resiliencePipeline != ResiliencePipeline<TApiResultData>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -2043,7 +2043,7 @@ namespace Apizr
 
                     var resiliencePipeline =
                         GetMethodResiliencePipeline<IApiResponse<TApiResultData>>(methodDetails,
-                            requestOptionsBuilder.ApizrOptions.LogLevels.Low());
+                            requestOptionsBuilder.ApizrOptions);
                     if (resiliencePipeline != ResiliencePipeline<IApiResponse<TApiResultData>>.Empty)
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Applying some resilience strategies to the request");
@@ -2517,44 +2517,70 @@ namespace Apizr
 
         #region Resiliencing
 
-        private ResiliencePipeline<TResult> GetMethodResiliencePipeline<TResult>(MethodDetails methodDetails, LogLevel logLevel)
+        private ResiliencePipeline<TResult> GetMethodResiliencePipeline<TResult>(MethodDetails methodDetails, IApizrRequestOptions requestOptions)
         {
-            if (_resiliencePipelineMethodsSet.TryGetValue(methodDetails, out var resiliencePipelineObject) &&
-                resiliencePipelineObject is ResiliencePipeline<TResult> resiliencePipeline)
-                return resiliencePipeline;
-
-            resiliencePipeline = ResiliencePipeline<TResult>.Empty;
 
             if (_lazyResiliencePipelineRegistry == null)
-                return resiliencePipeline;
+                return ResiliencePipeline<TResult>.Empty;
 
-            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
-            if (resiliencePipelineAttribute != null)
+            var resiliencePipelineBuilder = new ResiliencePipelineBuilder<TResult>();
+
+            // Resilience pipeline method attribute
+            if (_resiliencePipelineMethodsSet.TryGetValue(methodDetails, out var resiliencePipelineObject) &&
+                resiliencePipelineObject is ResiliencePipeline<TResult> cachedResiliencePipeline)
             {
-                var resiliencePipelineBuilder = new ResiliencePipelineBuilder<TResult>();
-                foreach (var registryKey in resiliencePipelineAttribute.RegistryKeys)
+                resiliencePipelineBuilder.AddPipeline(cachedResiliencePipeline);
+            }
+            else
+            {
+                var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
+                if (resiliencePipelineAttribute != null)
+                {
+                    foreach (var registryKey in resiliencePipelineAttribute.RegistryKeys)
+                    {
+                        if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline(registryKey, out var registeredResiliencePipeline))
+                        {
+                            _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                                $"{methodDetails.MethodInfo.Name}: Found a resilience pipeline with attribute key {registryKey}");
+
+                            resiliencePipelineBuilder.AddPipeline(registeredResiliencePipeline);
+
+                            _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                                $"{methodDetails.MethodInfo.Name}: Resilience pipeline with attribute key {registryKey} will be applied");
+                        }
+                        else
+                            _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                                $"{methodDetails.MethodInfo.Name}: No resilience pipeline found for attribute key {registryKey}");
+                    }
+                }
+
+                var resiliencePipeline = resiliencePipelineBuilder.Build();
+
+                _resiliencePipelineMethodsSet.TryAdd(methodDetails, resiliencePipeline);
+            }
+
+            // Resilience pipeline option keys
+            if (requestOptions.RequestResiliencePipelineKeys?.Length > 0)
+            {
+                foreach (var registryKey in requestOptions.RequestResiliencePipelineKeys)
                 {
                     if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline(registryKey, out var registeredResiliencePipeline))
                     {
-                        _apizrOptions.Logger.Log(logLevel,
-                            $"{methodDetails.MethodInfo.Name}: Found a resilience pipeline with key {registryKey}");
+                        _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Found a resilience pipeline with option key {registryKey}");
 
                         resiliencePipelineBuilder.AddPipeline(registeredResiliencePipeline);
 
-                        _apizrOptions.Logger.Log(logLevel,
-                            $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {registryKey} will be applied");
+                        _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: Resilience pipeline with option key {registryKey} will be applied");
                     }
                     else
-                        _apizrOptions.Logger.Log(logLevel,
-                            $"{methodDetails.MethodInfo.Name}: No resilience pipeline found for key {registryKey}");
-                }
-
-                resiliencePipeline = resiliencePipelineBuilder.Build();
+                        _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                            $"{methodDetails.MethodInfo.Name}: No resilience pipeline found for option key {registryKey}");
+                } 
             }
 
-            _resiliencePipelineMethodsSet.TryAdd(methodDetails, resiliencePipeline);
-
-            return resiliencePipeline;
+            return resiliencePipelineBuilder.Build();
         }
 
         private ResiliencePipeline GetMethodResiliencePipeline(MethodDetails methodDetails, LogLevel logLevel)

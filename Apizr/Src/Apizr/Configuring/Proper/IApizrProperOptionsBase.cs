@@ -15,11 +15,6 @@ namespace Apizr.Configuring.Proper
         Type WebApiType { get; }
 
         /// <summary>
-        /// Resilience pipeline keys from the registry
-        /// </summary>
-        string[] ResiliencePipelineRegistryKeys { get; }
-
-        /// <summary>
         /// The logger instance
         /// </summary>
         ILogger Logger { get; }

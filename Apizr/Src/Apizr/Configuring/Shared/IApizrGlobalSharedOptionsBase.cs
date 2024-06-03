@@ -58,6 +58,11 @@ namespace Apizr.Configuring.Shared
         public Func<string, bool> ShouldRedactHeaderValue { get; }
 
         /// <summary>
+        /// Resilience pipeline keys from the registry
+        /// </summary>
+        string[] ResiliencePipelineKeys { get; }
+
+        /// <summary>
         /// The resilience context options builder
         /// </summary>
         internal Action<IApizrResilienceContextOptionsBuilder> ContextOptionsBuilder { get; set; }

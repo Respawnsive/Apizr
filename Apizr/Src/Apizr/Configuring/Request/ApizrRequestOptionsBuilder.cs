@@ -211,6 +211,39 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
         return this;
     }
 
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys,
+        ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+    {
+        var options = Options as IApizrRequestOptions;
+        switch (strategy)
+        {
+            case ApizrDuplicateStrategy.Ignore:
+                Options.ResiliencePipelineKeys ??= resiliencePipelineKeys;
+                options.RequestResiliencePipelineKeys ??= resiliencePipelineKeys;
+                break;
+            case ApizrDuplicateStrategy.Add:
+            case ApizrDuplicateStrategy.Merge:
+                Options.ResiliencePipelineKeys = Options.ResiliencePipelineKeys == null
+                    ? resiliencePipelineKeys
+                    : Options.ResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
+
+                options.RequestResiliencePipelineKeys = Options.ResiliencePipelineKeys == null
+                    ? resiliencePipelineKeys
+                    : options.RequestResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
+
+                break;
+            case ApizrDuplicateStrategy.Replace:
+                Options.ResiliencePipelineKeys = resiliencePipelineKeys;
+                options.RequestResiliencePipelineKeys = resiliencePipelineKeys;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+        }
+
+        return this;
+    }
+
     #region Internals
 
     /// <inheritdoc />

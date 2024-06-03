@@ -47,4 +47,7 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
 
     /// <inheritdoc />
     Expression IApizrRequestOptions.OriginalExpression { get; set; }
+
+    /// <inheritdoc />
+    string[] IApizrRequestOptions.RequestResiliencePipelineKeys { get; set; }
 }

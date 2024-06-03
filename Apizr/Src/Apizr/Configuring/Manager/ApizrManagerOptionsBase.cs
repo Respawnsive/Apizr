@@ -21,7 +21,7 @@ namespace Apizr.Configuring.Manager
         protected ApizrManagerOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions) : base(properOptions)
         {
             WebApiType = properOptions.WebApiType;
-            ResiliencePipelineRegistryKeys = properOptions.ResiliencePipelineRegistryKeys.ToArray();
+            ResiliencePipelineKeys = properOptions.ResiliencePipelineKeys.ToArray();
             Logger = properOptions.Logger;
             RefitSettings = commonOptions.RefitSettings;
             ApizrConfigurationSection = commonOptions.ApizrConfigurationSection;
@@ -29,9 +29,6 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public Type WebApiType { get; }
-
-        /// <inheritdoc />
-        public string[] ResiliencePipelineRegistryKeys { get; }
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }

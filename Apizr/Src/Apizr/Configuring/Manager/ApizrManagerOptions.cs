@@ -233,7 +233,7 @@ namespace Apizr.Configuring.Manager
         public ILogger Logger => Options.Logger;
 
         /// <inheritdoc />
-        public string[] ResiliencePipelineRegistryKeys => Options.ResiliencePipelineRegistryKeys;
+        public string[] ResiliencePipelineKeys => Options.ResiliencePipelineKeys;
 
         /// <inheritdoc />
         public RefitSettings RefitSettings => Options.RefitSettings;

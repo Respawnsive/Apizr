@@ -2,7 +2,8 @@
 
 You can set headers with static or dynamic values, with clear or redacted logged values (if logging is enabled with headers included).
 
-First, please add the request options parameter to your api methods: ```[RequestOptions] IApizrRequestOptions options```
+>[!TIP]
+> You should add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to get all the Apizr goodness.
 
 ### Static headers
 
@@ -16,7 +17,7 @@ public interface IYourApi
 {
     [Headers("HeaderKey3: HeaderValue3")]
     [Get("/your-endpoint")]
-    Task<YourData> GetYourDataAsync();
+    Task<YourData> GetYourDataAsync([RequestOptions] IApizrRequestOptions options);
 }
 ```
 
@@ -77,7 +78,7 @@ You can set headers with dynamic values at design time by decorating an api meth
 public interface IYourApi
 {
     [Get("/your-endpoint")]
-    Task<YourData> GetYourDataAsync([Header("HeaderKey1")] string headerValue1);
+    Task<YourData> GetYourDataAsync([Header("HeaderKey1")] string headerValue1, [RequestOptions] IApizrRequestOptions options);
 }
 ```
 
@@ -86,7 +87,7 @@ public interface IYourApi
 public interface IYourApi
 {
     [Get("/your-endpoint")]
-    Task<YourData> GetYourDataAsync([HeaderCollection] IDictionary<string, string> headers);
+    Task<YourData> GetYourDataAsync([HeaderCollection] IDictionary<string, string> headers, [RequestOptions] IApizrRequestOptions options);
 }
 ```
 
@@ -101,10 +102,10 @@ public interface IYourApi
 {
     [Headers("HeaderKey3: {0}")]
     [Get("/your-endpoint")]
-    Task<YourData> GetYourFirstDataAsync();
+    Task<YourData> GetYourFirstDataAsync([RequestOptions] IApizrRequestOptions options);
 
     [Get("/your-endpoint")]
-    Task<YourData> GetYourSecondDataAsync();
+    Task<YourData> GetYourSecondDataAsync([RequestOptions] IApizrRequestOptions options);
 }
 ```
 
@@ -193,7 +194,7 @@ public interface IYourApi
 {
     [Headers("HeaderKey3: *HeaderValue3*", "HeaderKey4: *{0}*)]
     [Get("/your-endpoint")]
-    Task<YourData> GetYourDataAsync();
+    Task<YourData> GetYourDataAsync([RequestOptions] IApizrRequestOptions options);
 }
 ```
 

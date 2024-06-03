@@ -100,5 +100,13 @@ namespace Apizr.Configuring.Shared
         /// <param name="strategy">The duplicate strategy if there's any other names already (default: Add)</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithLoggedHeadersRedactionRule(Func<string, bool> shouldRedactHeaderValue, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
+
+        /// <summary>
+        /// Apply some resilience strategies by getting pipelines from registry with key matching.
+        /// </summary>
+        /// <param name="resiliencePipelineKeys">Resilience pipeline keys from the registry.</param>
+        /// <param name="strategy">The duplicate strategy if there's any other names already (default: Add)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
     }
 }

@@ -35,6 +35,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
+using Polly.CircuitBreaker;
+using Polly.Fallback;
 using Polly.Retry;
 using Polly.Timeout;
 using Refit;
@@ -1400,7 +1402,17 @@ namespace Apizr.Tests
                         .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
-                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                            builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()))
+                        .AddResiliencePipeline<string, HttpResponseMessage>("TestPipeline1",
+                            builder => builder.AddCircuitBreaker(new CircuitBreakerStrategyOptions<HttpResponseMessage>()).Build())
+                        .AddResiliencePipeline<string, HttpResponseMessage>("TestPipeline2",
+                            builder => builder.AddTimeout(TimeSpan.FromSeconds(60)).Build())
+                        .AddResiliencePipeline<string, HttpResponseMessage>("TestPipeline3",
+                            builder => builder.AddFallback(new FallbackStrategyOptions<HttpResponseMessage>
+                            {
+                                FallbackAction = static _ =>
+                                    Outcome.FromResultAsValueTask(new HttpResponseMessage(HttpStatusCode.OK))
+                            }).Build());
                 })
                 .Build();
 

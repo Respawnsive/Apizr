@@ -215,27 +215,26 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     public IApizrRequestOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys,
         ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
     {
-        var options = Options as IApizrRequestOptions;
         switch (strategy)
         {
             case ApizrDuplicateStrategy.Ignore:
-                Options.ResiliencePipelineKeys ??= resiliencePipelineKeys;
-                options.RequestResiliencePipelineKeys ??= resiliencePipelineKeys;
+                if (Options.ResiliencePipelineKeys.Count == 0)
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOptions] = resiliencePipelineKeys;
                 break;
             case ApizrDuplicateStrategy.Add:
             case ApizrDuplicateStrategy.Merge:
-                Options.ResiliencePipelineKeys = Options.ResiliencePipelineKeys == null
-                    ? resiliencePipelineKeys
-                    : Options.ResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
-
-                options.RequestResiliencePipelineKeys = options.RequestResiliencePipelineKeys == null
-                    ? resiliencePipelineKeys
-                    : options.RequestResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
-
+                if (Options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.RequestOptions, out var keys))
+                {
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOptions] = keys.Union(resiliencePipelineKeys).ToArray();
+                }
+                else
+                {
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOptions] = resiliencePipelineKeys;
+                }
                 break;
             case ApizrDuplicateStrategy.Replace:
-                Options.ResiliencePipelineKeys = resiliencePipelineKeys;
-                options.RequestResiliencePipelineKeys = resiliencePipelineKeys;
+                Options.ResiliencePipelineKeys.Clear();
+                Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOptions] = resiliencePipelineKeys;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);

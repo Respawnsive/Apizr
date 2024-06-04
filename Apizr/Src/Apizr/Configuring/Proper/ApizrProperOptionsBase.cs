@@ -23,12 +23,12 @@ namespace Apizr.Configuring.Proper
             Func<string, bool> shouldRedactHeaderValue = null) : base(sharedOptions)
         {
             WebApiType = webApiType;
-            var resiliencePipelineKeys = (assemblyResiliencePipelineKeys ?? []) // Resilience pipeline assembly attributes come first
-                .Union(sharedOptions?.ResiliencePipelineKeys ?? []) // Then common fluent options
-                .Union(webApiResiliencePipelineKeys ?? []) // Then api attributes
-                .ToArray();
-            if(resiliencePipelineKeys.Any())
-                ResiliencePipelineKeys = resiliencePipelineKeys;
+
+            if(assemblyResiliencePipelineKeys?.Length > 0)
+                ResiliencePipelineKeys[ApizrConfigurationSource.CommonAttributes] = assemblyResiliencePipelineKeys;
+
+            if (webApiResiliencePipelineKeys?.Length > 0)
+                ResiliencePipelineKeys[ApizrConfigurationSource.ProperAttributes] = webApiResiliencePipelineKeys;
 
             if (ShouldRedactHeaderValue == null)
             {

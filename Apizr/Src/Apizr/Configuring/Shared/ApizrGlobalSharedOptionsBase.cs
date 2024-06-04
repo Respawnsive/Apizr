@@ -19,15 +19,13 @@ namespace Apizr.Configuring.Shared
             LogLevels = sharedOptions?.LogLevels.ToArray();
             OnException = sharedOptions?.OnException;
             LetThrowOnExceptionWithEmptyCache = sharedOptions?.LetThrowOnExceptionWithEmptyCache ?? true;
-            HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
-                                 new Dictionary<string, object>();
+            HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
             ShouldRedactHeaderValue = sharedOptions?.ShouldRedactHeaderValue;
-            ResiliencePipelineKeys = sharedOptions?.ResiliencePipelineKeys?.ToArray();
+            ResiliencePipelineKeys = sharedOptions?.ResiliencePipelineKeys?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()) ?? [];
             _contextOptionsBuilder = sharedOptions?.ContextOptionsBuilder;
-            _resiliencePropertiesFactories = sharedOptions?.ResiliencePropertiesFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? 
-                                    new Dictionary<string, Func<object>>();
+            _resiliencePropertiesFactories = sharedOptions?.ResiliencePropertiesFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? [];
         }
 
         /// <inheritdoc />
@@ -70,7 +68,7 @@ namespace Apizr.Configuring.Shared
         public Func<string, bool> ShouldRedactHeaderValue { get; internal set; }
 
         /// <inheritdoc />
-        public string[] ResiliencePipelineKeys { get; internal set; }
+        public IDictionary<ApizrConfigurationSource, string[]> ResiliencePipelineKeys { get; internal set; }
 
         private Action<IApizrResilienceContextOptionsBuilder> _contextOptionsBuilder;
         /// <inheritdoc />

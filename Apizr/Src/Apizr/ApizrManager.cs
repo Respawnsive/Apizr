@@ -48,16 +48,17 @@ namespace Apizr
             LogAttributeBase requestLogAttribute = null,
             IList<HandlerParameterAttribute> requestHandlerParameterAttributes = null,
             TimeoutAttributeBase operationTimeoutAttribute = null,
-            TimeoutAttributeBase requestTimeoutAttribute = null)
+            TimeoutAttributeBase requestTimeoutAttribute = null,
+            ResiliencePipelineAttributeBase resiliencePipelineAttribute = null)
         {
             // Create base request options from parent options
             var requestOptions = new ApizrRequestOptions(baseOptions,
-                requestHandlerParameterAttributes?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
-                new Dictionary<string, object>(),
+                requestHandlerParameterAttributes?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [],
                 requestLogAttribute?.HttpTracerMode,
                 requestLogAttribute?.TrafficVerbosity,
                 operationTimeoutAttribute?.Timeout,
                 requestTimeoutAttribute?.Timeout,
+                resiliencePipelineAttribute?.RegistryKeys,
                 requestLogAttribute?.LogLevels);
 
             // Create request options builder with request options
@@ -133,7 +134,6 @@ namespace Apizr
         private readonly ConcurrentDictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)> _cachingMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, List<string>> _headersMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, LogAttributeBase> _loggingMethodsSet;
-        private readonly ConcurrentDictionary<MethodDetails, object> _resiliencePipelineMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>> _handlerParameterMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, TimeoutAttributeBase> _operationTimeoutMethodsSet;
         private readonly ConcurrentDictionary<MethodDetails, TimeoutAttributeBase> _requestTimeoutMethodsSet;
@@ -167,7 +167,6 @@ namespace Apizr
             _headersMethodsSet = new ConcurrentDictionary<MethodDetails, List<string>>();
             _cachingMethodsSet = new ConcurrentDictionary<MethodDetails, (CacheAttributeBase cacheAttribute, string cacheKey)>();
             _loggingMethodsSet = new ConcurrentDictionary<MethodDetails, LogAttributeBase>();
-            _resiliencePipelineMethodsSet = new ConcurrentDictionary<MethodDetails, object>();
             _handlerParameterMethodsSet = new ConcurrentDictionary<MethodDetails, IList<HandlerParameterAttribute>>();
             _operationTimeoutMethodsSet = new ConcurrentDictionary<MethodDetails, TimeoutAttributeBase>();
             _requestTimeoutMethodsSet = new ConcurrentDictionary<MethodDetails, TimeoutAttributeBase>();
@@ -206,8 +205,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -225,7 +225,7 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                var resiliencePipeline = GetMethodResiliencePipeline(methodDetails, requestOptionsBuilder);
+                var resiliencePipeline = GetMethodResiliencePipeline(methodDetails, requestOptionsBuilder.ApizrOptions);
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                     requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -300,8 +300,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -321,7 +322,7 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                var resiliencePipeline = GetMethodResiliencePipeline(methodDetails, requestOptionsBuilder);
+                var resiliencePipeline = GetMethodResiliencePipeline(methodDetails, requestOptionsBuilder.ApizrOptions);
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                     requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -422,8 +423,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -445,7 +447,7 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder);
+                var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder.ApizrOptions);
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                     requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -526,8 +528,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -583,7 +586,7 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var resiliencePipeline = GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder);
+                    var resiliencePipeline = GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -692,8 +695,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -756,7 +760,7 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails, requestOptionsBuilder);
+                    var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -884,8 +888,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -942,7 +947,7 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var resiliencePipeline = GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder);
+                    var resiliencePipeline = GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -1051,8 +1056,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1117,7 +1123,7 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails, requestOptionsBuilder);
+                    var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -1258,8 +1264,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1281,7 +1288,7 @@ namespace Apizr
                 _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                     $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder);
+                var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse>(methodDetails, requestOptionsBuilder.ApizrOptions);
                 resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                     requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                     requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -1367,8 +1374,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1425,7 +1433,7 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var resiliencePipeline = GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder);
+                    var resiliencePipeline = GetMethodResiliencePipeline<TApiData>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -1540,8 +1548,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1606,7 +1615,7 @@ namespace Apizr
                         _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                             $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails, requestOptionsBuilder);
+                    var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse<TApiData>>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -1747,8 +1756,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1805,7 +1815,7 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var resiliencePipeline = GetMethodResiliencePipeline<TApiResultData>(methodDetails, requestOptionsBuilder);
+                    var resiliencePipeline = GetMethodResiliencePipeline<TApiResultData>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -1918,8 +1928,9 @@ namespace Apizr
             var requestHandlerParameterAttributes = GetRequestHandlerParameterAttributes(methodDetails);
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
+            var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
-                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute);
+                requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -1984,7 +1995,7 @@ namespace Apizr
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Connectivity check succeed");
 
-                    var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse<TApiResultData>>(methodDetails, requestOptionsBuilder);
+                    var resiliencePipeline = GetMethodResiliencePipeline<IApiResponse<TApiResultData>>(methodDetails, requestOptionsBuilder.ApizrOptions);
                     resilienceContext = ResilienceContextPool.Shared.Get(methodDetails.MethodInfo.Name,
                         requestOptionsBuilder.ApizrOptions.ResilienceContextOptions?.ContinueOnCapturedContext,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
@@ -2454,135 +2465,74 @@ namespace Apizr
 
         #region Resiliencing
 
-        private ResiliencePipeline<TResult> GetMethodResiliencePipeline<TResult>(MethodDetails methodDetails, IApizrRequestOptionsBuilder requestOptionsBuilder)
+        private ResiliencePipeline<TResult> GetMethodResiliencePipeline<TResult>(MethodDetails methodDetails, IApizrRequestOptions requestOptions)
         {
             if (_lazyResiliencePipelineRegistry == null)
                 return ResiliencePipeline<TResult>.Empty;
 
-            var keysToAdd = new List<string>();
+            var resiliencePipelineKeys = requestOptions.ResiliencePipelineKeys
+                .Where(kvp => kvp.Key != ApizrConfigurationSource.All)
+                .OrderBy(kvp => kvp.Key)
+                .SelectMany(kvp => kvp.Value)
+                .Distinct()
+                .ToArray();
+            if(resiliencePipelineKeys.Length == 0)
+                return ResiliencePipeline<TResult>.Empty;
 
-            // Method attribute keys
-            if (!_resiliencePipelineMethodsSet.TryGetValue(methodDetails, out var resiliencePipelineObject) ||
-                resiliencePipelineObject is not ResiliencePipeline<TResult> attributeResiliencePipeline)
+            var resiliencePipelineBuilder = new ResiliencePipelineBuilder<TResult>();
+            var includedKeys = new List<string>();
+            if (requestOptions.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.All, out var yetIncludedKeys)) 
+                includedKeys.AddRange(yetIncludedKeys);
+
+            foreach (var resiliencePipelineKey in resiliencePipelineKeys)
             {
-                var attributeResiliencePipelineBuilder = new ResiliencePipelineBuilder<TResult>();
-
-                var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
-                if (resiliencePipelineAttribute != null)
+                if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline<TResult>(resiliencePipelineKey, out var resiliencePipeline))
                 {
-                    foreach (var registryKey in resiliencePipelineAttribute.RegistryKeys.Distinct())
-                    {
-                        if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline<TResult>(registryKey,
-                                out var resultPipeline))
-                        {
-                            attributeResiliencePipelineBuilder.AddPipeline(resultPipeline);
-
-                            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                                $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {registryKey} will be applied");
-                        }
-                        else
-                            keysToAdd.Add(registryKey);
-                    }
-                }
-
-                attributeResiliencePipeline = attributeResiliencePipelineBuilder.Build();
-
-                _resiliencePipelineMethodsSet.TryAdd(methodDetails, attributeResiliencePipeline);
-            }
-
-            if (!(requestOptionsBuilder.ApizrOptions.RequestResiliencePipelineKeys?.Length > 0))
-            {
-                if (keysToAdd.Any())
-                    requestOptionsBuilder.WithResiliencePipelineKeys(keysToAdd.ToArray());
-
-                return attributeResiliencePipeline;
-            }
-
-            // Request options keys
-            var optionsResiliencePipelineBuilder = new ResiliencePipelineBuilder<TResult>();
-            optionsResiliencePipelineBuilder.AddPipeline(attributeResiliencePipeline);
-
-            foreach (var registryKey in requestOptionsBuilder.ApizrOptions.RequestResiliencePipelineKeys.Distinct())
-            {
-                if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline<TResult>(registryKey, out var resultPipeline))
-                {
-                    optionsResiliencePipelineBuilder.AddPipeline(resultPipeline);
-
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {registryKey} will be applied");
+                    resiliencePipelineBuilder.AddPipeline(resiliencePipeline);
+                    includedKeys.Add(resiliencePipelineKey);
+                    _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {resiliencePipelineKey} will be applied");
                 }
             }
 
-            if (keysToAdd.Any())
-                requestOptionsBuilder.WithResiliencePipelineKeys(keysToAdd.ToArray());
+            requestOptions.ResiliencePipelineKeys[ApizrConfigurationSource.All] = includedKeys.ToArray();
 
-            return optionsResiliencePipelineBuilder.Build();
+            return resiliencePipelineBuilder.Build();
         }
 
-        private ResiliencePipeline GetMethodResiliencePipeline(MethodDetails methodDetails, IApizrRequestOptionsBuilder requestOptionsBuilder)
+        private ResiliencePipeline GetMethodResiliencePipeline(MethodDetails methodDetails, IApizrRequestOptions requestOptions)
         {
             if (_lazyResiliencePipelineRegistry == null)
                 return ResiliencePipeline.Empty;
 
-            var keysToAdd = new List<string>();
+            var resiliencePipelineKeys = requestOptions.ResiliencePipelineKeys
+                .Where(kvp => kvp.Key != ApizrConfigurationSource.All)
+                .OrderBy(kvp => kvp.Key)
+                .SelectMany(kvp => kvp.Value)
+                .Distinct()
+                .ToArray();
+            if (resiliencePipelineKeys.Length == 0)
+                return ResiliencePipeline.Empty;
 
-            // Method attribute keys
-            if (!_resiliencePipelineMethodsSet.TryGetValue(methodDetails, out var resiliencePipelineObject) ||
-                resiliencePipelineObject is not ResiliencePipeline attributeResiliencePipeline)
+            var resiliencePipelineBuilder = new ResiliencePipelineBuilder();
+            var includedKeys = new List<string>();
+            if (requestOptions.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.All, out var yetIncludedKeys))
+                includedKeys.AddRange(yetIncludedKeys);
+
+            foreach (var resiliencePipelineKey in resiliencePipelineKeys)
             {
-                var attributeResiliencePipelineBuilder = new ResiliencePipelineBuilder();
-
-                var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
-                if (resiliencePipelineAttribute != null)
+                if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline(resiliencePipelineKey, out var resiliencePipeline))
                 {
-                    foreach (var registryKey in resiliencePipelineAttribute.RegistryKeys.Distinct())
-                    {
-                        if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline(registryKey,
-                                out var resultPipeline))
-                        {
-                            attributeResiliencePipelineBuilder.AddPipeline(resultPipeline);
-
-                            _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                                $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {registryKey} will be applied");
-                        }
-                        else
-                            keysToAdd.Add(registryKey);
-                    }
-                }
-
-                attributeResiliencePipeline = attributeResiliencePipelineBuilder.Build();
-
-                _resiliencePipelineMethodsSet.TryAdd(methodDetails, attributeResiliencePipeline);
-            }
-
-            if (!(requestOptionsBuilder.ApizrOptions.RequestResiliencePipelineKeys?.Length > 0))
-            {
-                if (keysToAdd.Any())
-                    requestOptionsBuilder.WithResiliencePipelineKeys(keysToAdd.ToArray());
-
-                return attributeResiliencePipeline;
-            }
-
-            // Request options keys
-            var optionsResiliencePipelineBuilder = new ResiliencePipelineBuilder();
-            optionsResiliencePipelineBuilder.AddPipeline(attributeResiliencePipeline);
-
-            foreach (var registryKey in requestOptionsBuilder.ApizrOptions.RequestResiliencePipelineKeys.Distinct())
-            {
-                if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline(registryKey, out var resultPipeline))
-                {
-                    optionsResiliencePipelineBuilder.AddPipeline(resultPipeline);
-
-                    _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {registryKey} will be applied");
+                    resiliencePipelineBuilder.AddPipeline(resiliencePipeline);
+                    includedKeys.Add(resiliencePipelineKey);
+                    _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                        $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {resiliencePipelineKey} will be applied");
                 }
             }
 
-            // Method's attribute keys to check from the http handler side
-            if (keysToAdd.Any())
-                requestOptionsBuilder.WithResiliencePipelineKeys(keysToAdd.ToArray());
+            requestOptions.ResiliencePipelineKeys[ApizrConfigurationSource.All] = includedKeys.ToArray();
 
-            return optionsResiliencePipelineBuilder.Build();
+            return resiliencePipelineBuilder.Build();
         }
 
         private ResiliencePipelineAttributeBase GetMethodResiliencePipelineAttribute(MethodDetails methodDetails)
@@ -2705,7 +2655,7 @@ namespace Apizr
             }
 
             // Return request timeout attribute
-            _operationTimeoutMethodsSet.TryAdd(methodDetails, timeoutAttribute);
+            _requestTimeoutMethodsSet.TryAdd(methodDetails, timeoutAttribute);
             return timeoutAttribute;
         }
 

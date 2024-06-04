@@ -591,22 +591,23 @@ namespace Apizr.Extending.Configuring.Proper
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.ResiliencePipelineKeys ??= resiliencePipelineKeys;
+                    if (Options.ResiliencePipelineKeys.Count == 0)
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOptions] = resiliencePipelineKeys;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.ResiliencePipelineKeys == null)
+                    if (Options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.ProperOptions, out var keys))
                     {
-                        Options.ResiliencePipelineKeys = resiliencePipelineKeys;
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOptions] = keys.Union(resiliencePipelineKeys).ToArray();
                     }
                     else
                     {
-                        Options.ResiliencePipelineKeys = Options.ResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOptions] = resiliencePipelineKeys;
                     }
-
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.ResiliencePipelineKeys = resiliencePipelineKeys;
+                    Options.ResiliencePipelineKeys.Clear();
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOptions] = resiliencePipelineKeys;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);

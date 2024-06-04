@@ -12,7 +12,7 @@ namespace Apizr.Tests.Apis
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync();
 
-        [Get("/users"), Headers("testStoreKey1: *{0}*", "testStoreKey2: {0}"), ResiliencePipeline("TestPipeline1")]
+        [Get("/users"), Headers("testStoreKey1: *{0}*", "testStoreKey2: {0}", "testKeyOver1: testValueOver1.1"), ResiliencePipeline("TestPipeline1")]
         Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
     }
 }

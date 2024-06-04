@@ -676,22 +676,23 @@ namespace Apizr.Configuring.Common
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.ResiliencePipelineKeys ??= resiliencePipelineKeys;
+                    if(Options.ResiliencePipelineKeys.Count == 0)
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.CommonOptions] = resiliencePipelineKeys;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.ResiliencePipelineKeys == null)
+                    if (Options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.CommonOptions, out var keys))
                     {
-                        Options.ResiliencePipelineKeys = resiliencePipelineKeys;
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.CommonOptions] = keys.Union(resiliencePipelineKeys).ToArray();
                     }
                     else
                     {
-                        Options.ResiliencePipelineKeys = Options.ResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.CommonOptions] = resiliencePipelineKeys;
                     }
-
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.ResiliencePipelineKeys = resiliencePipelineKeys;
+                    Options.ResiliencePipelineKeys.Clear();
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.CommonOptions] = resiliencePipelineKeys;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);

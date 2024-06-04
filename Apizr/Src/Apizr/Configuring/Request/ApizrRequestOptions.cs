@@ -19,8 +19,9 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
         HttpMessageParts? trafficVerbosity,
         TimeSpan? operationTimeout,
         TimeSpan? requestTimeout,
+        string[] requestResiliencePipelineKeys,
         params LogLevel[] logLevels) : 
-        base(sharedOptions, httpTracerMode, trafficVerbosity, operationTimeout, requestTimeout, logLevels)
+        base(sharedOptions, httpTracerMode, trafficVerbosity, operationTimeout, requestTimeout, requestResiliencePipelineKeys, logLevels)
     {
         foreach (var handlersParameter in handlersParameters)
             HandlersParameters[handlersParameter.Key] = handlersParameter.Value;
@@ -47,7 +48,4 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
 
     /// <inheritdoc />
     Expression IApizrRequestOptions.OriginalExpression { get; set; }
-
-    /// <inheritdoc />
-    string[] IApizrRequestOptions.RequestResiliencePipelineKeys { get; set; }
 }

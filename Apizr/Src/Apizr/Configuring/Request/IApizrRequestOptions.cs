@@ -32,7 +32,5 @@ namespace Apizr.Configuring.Request
         internal IList<string> HeadersStore { get; }
 
         internal Expression OriginalExpression { get; set; }
-
-        internal string[] RequestResiliencePipelineKeys { get; set; }
     }
 }

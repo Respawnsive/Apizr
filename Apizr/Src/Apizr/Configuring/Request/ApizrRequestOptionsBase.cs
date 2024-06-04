@@ -17,6 +17,7 @@ namespace Apizr.Configuring.Request
             HttpMessageParts? trafficVerbosity,
             TimeSpan? operationTimeout,
             TimeSpan? requestTimeout,
+            string[] requestResiliencePipelineKeys,
             params LogLevel[] logLevels) : base(sharedOptions)
         {
             if (httpTracerMode != null)
@@ -29,6 +30,8 @@ namespace Apizr.Configuring.Request
                 OperationTimeout = operationTimeout.Value;
             if (requestTimeout.HasValue)
                 RequestTimeout = requestTimeout.Value;
+            if(requestResiliencePipelineKeys?.Length > 0)
+                ResiliencePipelineKeys[ApizrConfigurationSource.RequestAttributes] = requestResiliencePipelineKeys;
         }
 
         /// <inheritdoc />

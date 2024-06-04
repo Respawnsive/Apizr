@@ -60,7 +60,7 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Resilience pipeline keys from the registry
         /// </summary>
-        string[] ResiliencePipelineKeys { get; }
+        IDictionary<ApizrConfigurationSource, string[]> ResiliencePipelineKeys { get; }
 
         /// <summary>
         /// The resilience context options builder

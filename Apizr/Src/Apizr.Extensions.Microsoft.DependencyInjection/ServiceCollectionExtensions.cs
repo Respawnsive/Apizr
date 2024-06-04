@@ -606,63 +606,7 @@ namespace Apizr
                 {
                     var options = (IApizrExtendedManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
                     var handlerBuilder = new ExtendedHttpHandlerBuilder(options.HttpClientHandler, options);
-                    var resiliencePipeline = ResiliencePipeline<HttpResponseMessage>.Empty;
-                    var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>();
-                    var wrappedResiliencePipelineKeys = new List<string>();
-                    if (options.ResiliencePipelineKeys != null && options.ResiliencePipelineKeys.Any())
-                    {
-                        var resiliencePipelineRegistry = serviceProvider.GetService<ResiliencePipelineRegistry<string>>();
-                        if(resiliencePipelineRegistry == null)
-                        {
-                            options.Logger.Log(options.LogLevels.Low(),
-                                $"Global strategies: You defined some global strategies but didn't register any of it. Global strategies will be ignored for {webApiFriendlyName} instance");
-                        }
-                        else
-                        {
-                            foreach (var resiliencePipelineRegistryKey in options.ResiliencePipelineKeys)
-                            {
-                                if (resiliencePipelineRegistry.TryGetPipeline<HttpResponseMessage>(resiliencePipelineRegistryKey, out var registeredResiliencePipeline))
-                                {
-                                    resiliencePipelineBuilder.AddPipeline(registeredResiliencePipeline);
-                                    wrappedResiliencePipelineKeys.Add(resiliencePipelineRegistryKey);
-                                }
-                            }
-
-                            if (wrappedResiliencePipelineKeys.Any())
-                                resiliencePipeline = resiliencePipelineBuilder.Build();
-                        }
-                    }
-
-                    var pipelineProvider = new Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>>(
-                        (request, ct) =>
-                            {
-                                var context = request.GetOrBuildApizrResilienceContext(ct);
-                                if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
-                                {
-                                    if (request.TryGetApizrRequestOptions(out var requestOptions))
-                                    {
-                                        logLevels = requestOptions.LogLevels;
-                                        verbosity = requestOptions.TrafficVerbosity;
-                                        tracerMode = requestOptions.HttpTracerMode;
-                                    }
-                                    else
-                                    {
-                                        logLevels = apizrOptions.LogLevels;
-                                        verbosity = apizrOptions.TrafficVerbosity;
-                                        tracerMode = apizrOptions.HttpTracerMode;
-                                    }
-                                    contextLogger = apizrOptions.Logger;
-
-                                    context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
-                                    request.SetApizrResilienceContext(context);
-                                }
-
-                                foreach (var wrappedResiliencePipelineKey in wrappedResiliencePipelineKeys)
-                                    contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Resilience pipeline with key {wrappedResiliencePipelineKey} will be applied");
-
-                                return resiliencePipeline;
-                            });
-                    handlerBuilder.AddHandler(new ResilienceHttpMessageHandler(pipelineProvider, apizrOptions));
+                    handlerBuilder.AddHandler(new ResilienceHttpMessageHandler(serviceProvider.GetService<ResiliencePipelineRegistry<string>>(), apizrOptions));
 
                     foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories.Values)
                         handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));

@@ -10,6 +10,9 @@ using Apizr.Configuring.Shared;
 using Apizr.Extending;
 using Microsoft.Extensions.Logging;
 using Polly.Timeout;
+using Polly.Registry;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Apizr.Resiliencing
 {
@@ -18,8 +21,15 @@ namespace Apizr.Resiliencing
     /// </summary>
     public class ResilienceHttpMessageHandler : DelegatingHandler
     {
+        private readonly ResiliencePipelineRegistry<string> _registry;
         private readonly Func<HttpRequestMessage, CancellationToken, ResiliencePipeline<HttpResponseMessage>> _pipelineProvider;
         private readonly IApizrManagerOptionsBase _apizrOptions;
+
+        public ResilienceHttpMessageHandler(ResiliencePipelineRegistry<string> registry, IApizrManagerOptionsBase apizrOptions)
+        {
+            _registry = registry;
+            _apizrOptions = apizrOptions ?? throw new ArgumentNullException(nameof(apizrOptions));
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResilienceHttpMessageHandler"/> class.
@@ -67,6 +77,7 @@ namespace Apizr.Resiliencing
                 throw new ArgumentNullException(nameof(request));
 #endif
 
+            // Get a context from the pool or create a new one
             var created = false;
             if (request.GetApizrResilienceContext() is not { } context)
             {
@@ -75,20 +86,34 @@ namespace Apizr.Resiliencing
                 request.SetApizrResilienceContext(context);
             }
 
-            context.Properties.Set(Constants.RequestMessagePropertyKey, request);
-
             // Get a configured logger instance
-            if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
+            if (!context.TryGetLogger(out var logger, out var logLevels, out var verbosity, out var tracerMode))
             {
+                if (request.TryGetApizrRequestOptions(out var requestOptions))
+                {
+                    logLevels = requestOptions.LogLevels;
+                    verbosity = requestOptions.TrafficVerbosity;
+                    tracerMode = requestOptions.HttpTracerMode;
+                }
+                else
+                {
+                    logLevels = _apizrOptions.LogLevels;
+                    verbosity = _apizrOptions.TrafficVerbosity;
+                    tracerMode = _apizrOptions.HttpTracerMode;
+                }
                 logger = _apizrOptions.Logger;
-                logLevels = _apizrOptions.LogLevels;
+
+                context.WithLogger(logger, logLevels, verbosity, tracerMode);
+                request.SetApizrResilienceContext(context);
             }
+
+            context.Properties.Set(Constants.RequestMessagePropertyKey, request);
 
             var pipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>();
             var options = request.GetApizrRequestOptions() as IApizrGlobalSharedOptionsBase ?? _apizrOptions;
 
             // Set an operation timeout first if provided
-            if (options?.OperationTimeout.HasValue == true)
+            if (options.OperationTimeout.HasValue)
             {
                 // Set the request timeout
                 if (options.OperationTimeout.Value > TimeSpan.Zero)
@@ -106,11 +131,33 @@ namespace Apizr.Resiliencing
                 }
             }
 
-            // Add user defined resilience pipelines
-            pipelineBuilder.AddPipeline(_pipelineProvider(request, cancellationToken));
-
+            // Add HttpResponseMessage resilience pipelines
+            if (options.ResiliencePipelineKeys?.Length > 0)
+            {
+                if (_registry == null)
+                {
+                    logger.Log(options.LogLevels.Low(),
+                        $"Global strategies: You defined some resilience strategies but didn't register any of it. Global strategies will be ignored for {context.OperationKey}");
+                }
+                else
+                {
+                    foreach (var resiliencePipelineKey in options.ResiliencePipelineKeys.Distinct())
+                    {
+                        if (_registry.TryGetPipeline<HttpResponseMessage>(resiliencePipelineKey, out var registeredResiliencePipeline))
+                        {
+                            pipelineBuilder.AddPipeline(registeredResiliencePipeline);
+                            logger.Log(logLevels.Low(), "{0}: Resilience pipeline with key {1} will be applied", context.OperationKey, resiliencePipelineKey);
+                        }
+                        //else
+                        //{
+                        //    logger.Log(logLevels.Low(), "{0}: Resilience pipeline with key '{1}' could not be found.", context.OperationKey, resiliencePipelineKey);
+                        //}
+                    }
+                } 
+            }
+            
             // Set a request timeout if provided
-            if (options?.RequestTimeout.HasValue == true)
+            if (options.RequestTimeout.HasValue)
             {
                 // Set the request timeout
                 if (options.RequestTimeout.Value > TimeSpan.Zero)

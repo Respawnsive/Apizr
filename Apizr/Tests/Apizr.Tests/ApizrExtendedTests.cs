@@ -1399,6 +1399,7 @@ namespace Apizr.Tests
                         .WithHeaders(["testKey5: testValue5.1", "testKey6: *testValue6.1*"])
                         .WithHeaders(["testStoreKey1: testStoreValue1.1", "testStoreKey3: testStoreValue3.1", "testSettingsKey4: testSettingsValue4.1", "testSettingsKey5: testSettingsValue5.1"], mode: ApizrRegistrationMode.Store)
                         .WithHeaders<TestSettings>([settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request, mode: ApizrRegistrationMode.Store)
+                        .WithResiliencePipelineKeys(["TestPipeline2"])
                         .WithDelegatingHandler(watcher));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -1407,11 +1408,11 @@ namespace Apizr.Tests
                             builder => builder.AddCircuitBreaker(new CircuitBreakerStrategyOptions<HttpResponseMessage>()).Build())
                         .AddResiliencePipeline<string, HttpResponseMessage>("TestPipeline2",
                             builder => builder.AddTimeout(TimeSpan.FromSeconds(60)).Build())
-                        .AddResiliencePipeline<string, HttpResponseMessage>("TestPipeline3",
-                            builder => builder.AddFallback(new FallbackStrategyOptions<HttpResponseMessage>
+                        .AddResiliencePipeline<string, ApiResult<User>>("TestPipeline3",
+                            builder => builder.AddFallback(new FallbackStrategyOptions<ApiResult<User>>
                             {
                                 FallbackAction = static _ =>
-                                    Outcome.FromResultAsValueTask(new HttpResponseMessage(HttpStatusCode.OK))
+                                    Outcome.FromResultAsValueTask(new ApiResult<User>())
                             }).Build());
                 })
                 .Build();
@@ -1423,7 +1424,9 @@ namespace Apizr.Tests
 
             // Merge all
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithHeaders(["testKey4: testValue4.2",
+                options => options
+                    .WithResiliencePipelineKeys(["TestPipeline3"])
+                    .WithHeaders(["testKey4: testValue4.2",
                     "testKey5: testValue5.2"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6",

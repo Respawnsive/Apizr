@@ -228,7 +228,7 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
                     ? resiliencePipelineKeys
                     : Options.ResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
 
-                options.RequestResiliencePipelineKeys = Options.ResiliencePipelineKeys == null
+                options.RequestResiliencePipelineKeys = options.RequestResiliencePipelineKeys == null
                     ? resiliencePipelineKeys
                     : options.RequestResiliencePipelineKeys.Union(resiliencePipelineKeys).ToArray();
 

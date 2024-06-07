@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ namespace Apizr.Configuring.Shared
             RequestTimeout = sharedOptions?.RequestTimeout;
             ShouldRedactHeaderValue = sharedOptions?.ShouldRedactHeaderValue;
             ResiliencePipelineKeys = sharedOptions?.ResiliencePipelineKeys?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()) ?? [];
+            CacheOptions = sharedOptions?.CacheOptions?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
             _contextOptionsBuilder = sharedOptions?.ContextOptionsBuilder;
             _resiliencePropertiesFactories = sharedOptions?.ResiliencePropertiesFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? [];
         }
@@ -39,14 +41,14 @@ namespace Apizr.Configuring.Shared
         public LogLevel[] LogLevels
         {
             get => _logLevels;
-            internal set => _logLevels = value?.Any() == true
+            internal set => _logLevels = value?.Length > 0
                 ? value
-                : new[]
-                {
+                :
+                [
                     Constants.LowLogLevel, 
                     Constants.MediumLogLevel, 
                     Constants.HighLogLevel
-                };
+                ];
         }
 
         /// <inheritdoc />
@@ -69,6 +71,9 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public IDictionary<ApizrConfigurationSource, string[]> ResiliencePipelineKeys { get; internal set; }
+
+        /// <inheritdoc />
+        public IDictionary<ApizrConfigurationSource, CacheAttributeBase> CacheOptions { get; internal set; }
 
         private Action<IApizrResilienceContextOptionsBuilder> _contextOptionsBuilder;
         /// <inheritdoc />

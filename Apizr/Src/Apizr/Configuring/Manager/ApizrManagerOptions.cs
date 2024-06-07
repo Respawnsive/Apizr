@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Shared;
@@ -218,6 +219,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public Func<string, bool> ShouldRedactHeaderValue => Options.ShouldRedactHeaderValue;
+
+        /// <inheritdoc />
+        public IDictionary<ApizrConfigurationSource, CacheAttributeBase> CacheOptions => Options.CacheOptions;
 
         /// <inheritdoc />
         Action<IApizrResilienceContextOptionsBuilder> IApizrGlobalSharedOptionsBase.ContextOptionsBuilder

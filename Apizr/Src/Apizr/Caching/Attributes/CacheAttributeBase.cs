@@ -9,19 +9,19 @@ namespace Apizr.Caching.Attributes
     public abstract class CacheAttributeBase : Attribute
     {
         /// <summary>
-        /// This specific caching life time
+        /// This specific caching lifetime
         /// </summary>
-        public TimeSpan? LifeSpan { get; }
+        public TimeSpan? LifeSpan { get; protected set; }
 
         /// <summary>
         /// Tells Apizr to return a value if we get a cached result for it (GetOrFetch) or to try fetching fresh data every time (GetAndFetch)
         /// </summary>
-        public CacheMode Mode { get; } = CacheMode.GetAndFetch;
+        public CacheMode Mode { get; protected set; } = CacheMode.GetAndFetch;
 
         /// <summary>
         /// Tells Apizr to remove the cache on error
         /// </summary>
-        public bool ShouldInvalidateOnError { get; }
+        public bool ShouldInvalidateOnError { get; protected set; }
 
         /// <summary>
         /// Cache with no specific lifetime, default GetAndFetch mode and no invalidation on error
@@ -100,6 +100,13 @@ namespace Apizr.Caching.Attributes
         {
             Mode = mode;
             LifeSpan = TimeSpan.Parse(lifeSpanRepresentation);
+            ShouldInvalidateOnError = shouldInvalidateOnError;
+        }
+
+        protected CacheAttributeBase(CacheMode mode, TimeSpan? lifeSpan, bool shouldInvalidateOnError)
+        {
+            Mode = mode;
+            LifeSpan = lifeSpan;
             ShouldInvalidateOnError = shouldInvalidateOnError;
         }
     }

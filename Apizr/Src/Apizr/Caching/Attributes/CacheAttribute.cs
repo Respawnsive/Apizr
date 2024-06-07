@@ -48,5 +48,9 @@ namespace Apizr.Caching.Attributes
         public CacheAttribute(CacheMode mode, string lifeSpanRepresentation, bool shouldInvalidateOnError) : base(mode, lifeSpanRepresentation, shouldInvalidateOnError)
         {
         }
+
+        internal CacheAttribute(CacheMode mode, TimeSpan? lifeSpan, bool shouldInvalidateOnError) : base(mode, lifeSpan, shouldInvalidateOnError)
+        {
+        }
     }
 }

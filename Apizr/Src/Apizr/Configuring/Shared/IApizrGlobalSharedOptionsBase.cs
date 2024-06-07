@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Resiliencing;
 
@@ -61,6 +62,11 @@ namespace Apizr.Configuring.Shared
         /// Resilience pipeline keys from the registry
         /// </summary>
         IDictionary<ApizrConfigurationSource, string[]> ResiliencePipelineKeys { get; }
+
+        /// <summary>
+        /// The caching options to apply
+        /// </summary>
+        IDictionary<ApizrConfigurationSource, CacheAttributeBase> CacheOptions { get; }
 
         /// <summary>
         /// The resilience context options builder

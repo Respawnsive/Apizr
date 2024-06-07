@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Cancelling.Attributes.Operation;
 using Apizr.Cancelling.Attributes.Request;
 using Apizr.Configuring;
@@ -250,7 +251,8 @@ namespace Apizr
             LogAttribute properLogAttribute, commonLogAttribute;
             OperationTimeoutAttribute properOperationTimeoutAttribute, commonOperationTimeoutAttribute;
             RequestTimeoutAttribute properRequestTimeoutAttribute, commonRequestTimeoutAttribute;
-            ResiliencePipelineAttribute webApiResiliencePipelineAttribute;
+            CacheAttribute properCacheAttribute, commonCacheAttribute;
+            ResiliencePipelineAttribute properResiliencePipelineAttribute, commonResiliencePipelineAttribute;
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
             {
                 var modelType = webApiType.GetGenericArguments().First();
@@ -267,7 +269,10 @@ namespace Apizr
                 commonOperationTimeoutAttribute = modelType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
                 properRequestTimeoutAttribute = modelTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
                 commonRequestTimeoutAttribute = modelType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                webApiResiliencePipelineAttribute = modelTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
+                properCacheAttribute = modelTypeInfo.GetCustomAttribute<CacheAttribute>(true);
+                commonCacheAttribute = modelType.Assembly.GetCustomAttribute<CacheAttribute>();
+                properResiliencePipelineAttribute = modelTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
+                commonResiliencePipelineAttribute = modelType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
             }
             else
             {
@@ -282,10 +287,11 @@ namespace Apizr
                 commonOperationTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
                 properRequestTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
                 commonRequestTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                webApiResiliencePipelineAttribute = webApiTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
+                properCacheAttribute = webApiTypeInfo.GetCustomAttribute<CacheAttribute>(true);
+                commonCacheAttribute = webApiType.Assembly.GetCustomAttribute<CacheAttribute>();
+                properResiliencePipelineAttribute = webApiTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
+                commonResiliencePipelineAttribute = webApiType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
             }
-
-            var assemblyResiliencePipelineAttribute = webApiType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
 
             var headers = (properHeadersAttribute?.Headers ?? [])
                 .Concat(commonHeadersAttribute?.Headers ?? [])
@@ -304,8 +310,10 @@ namespace Apizr
             foreach (var properParameterAttribute in properParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
                 handlersParameters[properParameterAttribute.Key!] = properParameterAttribute.Value;
 
-            var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, webApiType,
-                assemblyResiliencePipelineAttribute?.RegistryKeys, webApiResiliencePipelineAttribute?.RegistryKeys,
+            var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, 
+                webApiType,
+                commonResiliencePipelineAttribute?.RegistryKeys, 
+                properResiliencePipelineAttribute?.RegistryKeys,
                 baseAddress,
                 basePath,
                 handlersParameters,
@@ -313,6 +321,8 @@ namespace Apizr
                 properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity),
                 properOperationTimeoutAttribute?.Timeout ?? commonOperationTimeoutAttribute?.Timeout,
                 properRequestTimeoutAttribute?.Timeout ?? commonRequestTimeoutAttribute?.Timeout,
+                commonCacheAttribute,
+                properCacheAttribute,
                 redactHeaders.Any() ? header => redactHeaders.Contains(header) : null,
                 properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrProperOptionsBuilder;
 

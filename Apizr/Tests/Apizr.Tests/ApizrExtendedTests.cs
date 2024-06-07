@@ -375,15 +375,20 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
         {
+            var watcher = new WatchingRequestHandler();
+
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
-                .ConfigureServices((_, services) =>
+                .ConfigureServices((context, services) =>
                 {
                     services.AddApizrManagerFor<IReqResUserService>(config => config
+                        .WithConfiguration(context.Configuration)
                         .WithLogging()
                         .WithAkavacheCacheHandler()
+                        .WithCaching(lifeSpan: TimeSpan.Parse("00:07:00"))
+                        .WithDelegatingHandler(watcher)
                         .WithDelegatingHandler(new TestRequestHandler()));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -399,18 +404,29 @@ namespace Apizr.Tests
             await reqResManager.ClearCacheAsync();
 
             // Defining a throwing request
-            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
+            Func<Task> act = () => reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(HttpStatusCode.BadRequest, opt));
 
             // Calling it at first execution should throw as expected without any cached result
             var ex = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
             ex.And.CachedResult.Should().BeNull();
 
+            // Checking cache config
+            watcher.Options.CacheOptions.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var firstCacheAttribute).Should().BeTrue();
+            firstCacheAttribute.Should().NotBeNull();
+            firstCacheAttribute!.LifeSpan.Should().Be(TimeSpan.Parse("00:08:00")); // Method attribute value
+
             // This one should succeed
-            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+            var result = await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithCaching(lifeSpan: TimeSpan.Parse("00:06:00")));
 
             // and cache result in-memory
             result.Should().NotBeNull();
             result.Data.Should().NotBeNullOrEmpty();
+
+            // Checking cache config
+            watcher.Options.CacheOptions.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var secondCacheAttribute).Should().BeTrue();
+            secondCacheAttribute.Should().NotBeNull();
+            secondCacheAttribute!.LifeSpan.Should().Be(TimeSpan.Parse("00:06:00")); // Method attribute value
 
             // This one should fail but with cached result
             var ex2 = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();

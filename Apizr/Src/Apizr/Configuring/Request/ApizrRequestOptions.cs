@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
@@ -20,14 +21,20 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
         TimeSpan? operationTimeout,
         TimeSpan? requestTimeout,
         string[] requestResiliencePipelineKeys,
-        params LogLevel[] logLevels) : 
-        base(sharedOptions, httpTracerMode, trafficVerbosity, operationTimeout, requestTimeout, requestResiliencePipelineKeys, logLevels)
+        CacheAttributeBase requestCacheAttribute,
+        params LogLevel[] logLevels) :
+        base(sharedOptions, httpTracerMode, trafficVerbosity, operationTimeout, requestTimeout,
+            requestResiliencePipelineKeys, requestCacheAttribute, logLevels)
     {
         foreach (var handlersParameter in handlersParameters)
             HandlersParameters[handlersParameter.Key] = handlersParameter.Value;
 
-        Headers = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Set, out var headers) == true ? headers.ToList() : [];
-        _headersStore = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Store, out var headersStore) == true ? headersStore.ToList() : [];
+        Headers = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Set, out var headers) == true
+            ? headers.ToList()
+            : [];
+        _headersStore = sharedOptions?.Headers?.TryGetValue(ApizrRegistrationMode.Store, out var headersStore) == true
+            ? headersStore.ToList()
+            : [];
     }
 
     /// <inheritdoc />

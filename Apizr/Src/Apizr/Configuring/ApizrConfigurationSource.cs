@@ -2,14 +2,14 @@
 {
     public enum ApizrConfigurationSource
     {
-        CommonAttributes,
-        CommonOptions,
-        ProperAttributes,
-        ProperOptions,
-        ManagerAttributes,
-        ManagerOptions,
-        RequestAttributes,
-        RequestOptions,
-        All
+        CommonAttribute,
+        CommonOption,
+        ProperAttribute,
+        ProperOption,
+        ManagerAttribute,
+        ManagerOption,
+        RequestAttribute,
+        RequestOption,
+        FinalConfiguration
     }
 }

@@ -134,7 +134,7 @@ namespace Apizr.Resiliencing
 
             // Add HttpResponseMessage resilience pipelines
             var resiliencePipelineKeys = options.ResiliencePipelineKeys
-                .Where(kvp => kvp.Key != ApizrConfigurationSource.All)
+                .Where(kvp => kvp.Key != ApizrConfigurationSource.FinalConfiguration)
                 .OrderBy(kvp => kvp.Key)
                 .SelectMany(kvp => kvp.Value)
                 .Distinct()
@@ -149,7 +149,7 @@ namespace Apizr.Resiliencing
                 else
                 {
                     var includedKeys = new List<string>();
-                    if (options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.All, out var yetIncludedKeys))
+                    if (options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var yetIncludedKeys))
                         includedKeys.AddRange(yetIncludedKeys);
 
                     foreach (var resiliencePipelineKey in resiliencePipelineKeys)
@@ -163,7 +163,7 @@ namespace Apizr.Resiliencing
                     }
 
                     // Report for missing keys
-                    options.ResiliencePipelineKeys[ApizrConfigurationSource.All] = includedKeys.ToArray();
+                    options.ResiliencePipelineKeys[ApizrConfigurationSource.FinalConfiguration] = includedKeys.ToArray();
                     var ignoredKeys = resiliencePipelineKeys.Except(includedKeys);
                     foreach (var ignoredKey in ignoredKeys)
                     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
 using Microsoft.Extensions.Logging;
@@ -18,6 +19,7 @@ namespace Apizr.Configuring.Request
             TimeSpan? operationTimeout,
             TimeSpan? requestTimeout,
             string[] requestResiliencePipelineKeys,
+            CacheAttributeBase requestCacheAttribute,
             params LogLevel[] logLevels) : base(sharedOptions)
         {
             if (httpTracerMode != null)
@@ -31,7 +33,9 @@ namespace Apizr.Configuring.Request
             if (requestTimeout.HasValue)
                 RequestTimeout = requestTimeout.Value;
             if(requestResiliencePipelineKeys?.Length > 0)
-                ResiliencePipelineKeys[ApizrConfigurationSource.RequestAttributes] = requestResiliencePipelineKeys;
+                ResiliencePipelineKeys[ApizrConfigurationSource.RequestAttribute] = requestResiliencePipelineKeys;
+            if(requestCacheAttribute != null)
+                CacheOptions[ApizrConfigurationSource.RequestAttribute] = requestCacheAttribute;
         }
 
         /// <inheritdoc />

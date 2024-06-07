@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
+using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
@@ -115,6 +117,18 @@ namespace Apizr.Extending.Configuring.Proper
                         case "ResiliencePipelineKeys":
                             WithResiliencePipelineKeys(config.GetChildren().Select(c => c.Value!).ToArray());
                             break;
+                        case "Caching":
+                        {
+                            var cacheSection = config.GetChildren().ToList();
+                            var modeValue = cacheSection.FirstOrDefault(c => c.Key == "Mode")?.Value;
+                            var mode = !string.IsNullOrEmpty(modeValue) ? (CacheMode)Enum.Parse(typeof(CacheMode), modeValue) : CacheMode.GetAndFetch;
+                            var lifeSpanValue = cacheSection.FirstOrDefault(c => c.Key == "LifeSpan")?.Value;
+                            var lifeSpan = !string.IsNullOrEmpty(lifeSpanValue) ? TimeSpan.Parse(lifeSpanValue) : TimeSpan.Zero;
+                            var shouldInvalidateOnErrorValue = cacheSection.FirstOrDefault(c => c.Key == "ShouldInvalidateOnError")?.Value;
+                            var shouldInvalidateOnError = !string.IsNullOrEmpty(shouldInvalidateOnErrorValue) && bool.Parse(shouldInvalidateOnErrorValue);
+                            WithCaching(mode, lifeSpan, shouldInvalidateOnError);
+                            break;
+                        }
                         default:
                             if (!config.GetChildren().Any())
                                 throw new ArgumentOutOfRangeException(config.Key, $"Apizr does not handle any {config.Key} option. Make sure that your key target an option that Apizr could configure.");
@@ -592,26 +606,35 @@ namespace Apizr.Extending.Configuring.Proper
             {
                 case ApizrDuplicateStrategy.Ignore:
                     if (Options.ResiliencePipelineKeys.Count == 0)
-                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOptions] = resiliencePipelineKeys;
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOption] = resiliencePipelineKeys;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.ProperOptions, out var keys))
+                    if (Options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.ProperOption, out var keys))
                     {
-                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOptions] = keys.Union(resiliencePipelineKeys).ToArray();
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOption] = keys.Union(resiliencePipelineKeys).ToArray();
                     }
                     else
                     {
-                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOptions] = resiliencePipelineKeys;
+                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOption] = resiliencePipelineKeys;
                     }
                     break;
                 case ApizrDuplicateStrategy.Replace:
                     Options.ResiliencePipelineKeys.Clear();
-                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOptions] = resiliencePipelineKeys;
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.ProperOption] = resiliencePipelineKeys;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
             }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null,
+            bool shouldInvalidateOnError = false)
+        {
+            Options.CacheOptions[ApizrConfigurationSource.ProperOption] = new CacheAttribute(mode, lifeSpan, shouldInvalidateOnError);
 
             return this;
         }

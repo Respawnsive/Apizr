@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
 using Microsoft.Extensions.Logging;
 
@@ -13,22 +14,32 @@ namespace Apizr.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="assemblyResiliencePipelineKeys">Global resilience pipelines</param>
-        /// <param name="webApiResiliencePipelineKeys">Specific resilience pipelines</param>
+        /// <param name="commonResiliencePipelineKeys">Global resilience pipelines</param>
+        /// <param name="properResiliencePipelineKeys">Specific resilience pipelines</param>
+        /// <param name="commonCacheAttribute">Global caching options</param>
+        /// <param name="properCacheAttribute">Specific caching options</param>
         /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
-            string[] assemblyResiliencePipelineKeys,
-            string[] webApiResiliencePipelineKeys,
+            string[] commonResiliencePipelineKeys,
+            string[] properResiliencePipelineKeys,
+            CacheAttribute commonCacheAttribute,
+            CacheAttribute properCacheAttribute,
             Func<string, bool> shouldRedactHeaderValue = null) : base(sharedOptions)
         {
             WebApiType = webApiType;
 
-            if(assemblyResiliencePipelineKeys?.Length > 0)
-                ResiliencePipelineKeys[ApizrConfigurationSource.CommonAttributes] = assemblyResiliencePipelineKeys;
+            if(commonResiliencePipelineKeys?.Length > 0)
+                ResiliencePipelineKeys[ApizrConfigurationSource.CommonAttribute] = commonResiliencePipelineKeys;
 
-            if (webApiResiliencePipelineKeys?.Length > 0)
-                ResiliencePipelineKeys[ApizrConfigurationSource.ProperAttributes] = webApiResiliencePipelineKeys;
+            if (properResiliencePipelineKeys?.Length > 0)
+                ResiliencePipelineKeys[ApizrConfigurationSource.ProperAttribute] = properResiliencePipelineKeys;
+
+            if(commonCacheAttribute != null)
+                CacheOptions[ApizrConfigurationSource.CommonAttribute] = commonCacheAttribute;
+
+            if (properCacheAttribute != null)
+                CacheOptions[ApizrConfigurationSource.ProperAttribute] = properCacheAttribute;
 
             if (ShouldRedactHeaderValue == null)
             {

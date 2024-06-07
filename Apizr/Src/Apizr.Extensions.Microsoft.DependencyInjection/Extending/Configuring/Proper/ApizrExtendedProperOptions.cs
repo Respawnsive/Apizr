@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
@@ -16,10 +17,29 @@ namespace Apizr.Extending.Configuring.Proper
     /// <inheritdoc cref="IApizrExtendedProperOptions"/>
     public class ApizrExtendedProperOptions : ApizrProperOptionsBase, IApizrExtendedProperOptions
     {
+        /// <summary>
+        /// The proper options constructor
+        /// </summary>
+        /// <param name="sharedOptions">The shared options</param>
+        /// <param name="webApiType">The web api type</param>
+        /// <param name="apizrManagerType">The manager type</param>
+        /// <param name="commonResiliencePipelineRegistryKeys">Global resilience pipelines</param>
+        /// <param name="properResiliencePipelineRegistryKeys">Specific resilience pipeline</param>
+        /// <param name="baseAddress">The web api base address</param>
+        /// <param name="basePath">The web api base path</param>
+        /// <param name="handlersParameters">Some handlers parameters</param>
+        /// <param name="httpTracerMode">The http tracer mode</param>
+        /// <param name="trafficVerbosity">The traffic verbosity</param>
+        /// <param name="operationTimeout">The operation timeout</param>
+        /// <param name="requestTimeout">The request timeout</param>
+        /// <param name="commonCacheAttribute">Global caching options</param>
+        /// <param name="properCacheAttribute">Specific caching options</param>
+        /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
+        /// <param name="logLevels">The log levels</param>
         public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions,
             Type webApiType, Type apizrManagerType,
-            string[] assemblyResiliencePipelineRegistryKeys, 
-            string[] webApiResiliencePipelineRegistryKeys,
+            string[] commonResiliencePipelineRegistryKeys, 
+            string[] properResiliencePipelineRegistryKeys,
             string baseAddress,
             string basePath,
             IDictionary<string, object> handlersParameters,
@@ -27,11 +47,15 @@ namespace Apizr.Extending.Configuring.Proper
             HttpMessageParts? trafficVerbosity,
             TimeSpan? operationTimeout,
             TimeSpan? requestTimeout,
+            CacheAttribute commonCacheAttribute,
+            CacheAttribute properCacheAttribute,
             Func<string, bool> shouldRedactHeaderValue = null,
             params LogLevel[] logLevels) : base(sharedOptions, 
             webApiType, 
-            assemblyResiliencePipelineRegistryKeys, 
-            webApiResiliencePipelineRegistryKeys, 
+            commonResiliencePipelineRegistryKeys, 
+            properResiliencePipelineRegistryKeys,
+            commonCacheAttribute, 
+            properCacheAttribute, 
             shouldRedactHeaderValue)
         {
             ApizrManagerType = apizrManagerType;
@@ -41,7 +65,7 @@ namespace Apizr.Extending.Configuring.Proper
             HandlersParameters = handlersParameters;
             HttpTracerModeFactory = httpTracerMode.HasValue ? _ => httpTracerMode.Value : sharedOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = trafficVerbosity.HasValue ? _ => trafficVerbosity.Value : sharedOptions.TrafficVerbosityFactory;
-            LogLevelsFactory = logLevels?.Any() == true ? _ => logLevels : sharedOptions.LogLevelsFactory;
+            LogLevelsFactory = logLevels?.Length > 0 ? _ => logLevels : sharedOptions.LogLevelsFactory;
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientBuilder = sharedOptions.HttpClientBuilder;
             LoggerFactory = (serviceProvider, webApiFriendlyName) => serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(webApiFriendlyName);
@@ -50,8 +74,7 @@ namespace Apizr.Extending.Configuring.Proper
             OperationTimeoutFactory = operationTimeout.HasValue ? _ => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? _ => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
             HeadersExtendedFactories = sharedOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
-            _resiliencePropertiesExtendedFactories = sharedOptions?.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
-                                             new Dictionary<string, Func<IServiceProvider, object>>();
+            _resiliencePropertiesExtendedFactories = sharedOptions?.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? [];
         }
 
         /// <inheritdoc />

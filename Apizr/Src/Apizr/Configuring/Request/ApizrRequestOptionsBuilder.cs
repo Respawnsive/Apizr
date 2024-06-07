@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
+using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
@@ -219,26 +221,35 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
         {
             case ApizrDuplicateStrategy.Ignore:
                 if (Options.ResiliencePipelineKeys.Count == 0)
-                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOptions] = resiliencePipelineKeys;
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOption] = resiliencePipelineKeys;
                 break;
             case ApizrDuplicateStrategy.Add:
             case ApizrDuplicateStrategy.Merge:
-                if (Options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.RequestOptions, out var keys))
+                if (Options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.RequestOption, out var keys))
                 {
-                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOptions] = keys.Union(resiliencePipelineKeys).ToArray();
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOption] = keys.Union(resiliencePipelineKeys).ToArray();
                 }
                 else
                 {
-                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOptions] = resiliencePipelineKeys;
+                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOption] = resiliencePipelineKeys;
                 }
                 break;
             case ApizrDuplicateStrategy.Replace:
                 Options.ResiliencePipelineKeys.Clear();
-                Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOptions] = resiliencePipelineKeys;
+                Options.ResiliencePipelineKeys[ApizrConfigurationSource.RequestOption] = resiliencePipelineKeys;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
         }
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null,
+        bool shouldInvalidateOnError = false)
+    {
+        Options.CacheOptions[ApizrConfigurationSource.RequestOption] = new CacheAttribute(mode, lifeSpan, shouldInvalidateOnError);
 
         return this;
     }

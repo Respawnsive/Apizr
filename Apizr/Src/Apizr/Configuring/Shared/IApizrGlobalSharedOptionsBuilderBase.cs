@@ -5,6 +5,7 @@ using System;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Resiliencing;
 using System.Collections.Generic;
+using Apizr.Caching;
 
 namespace Apizr.Configuring.Shared
 {
@@ -108,5 +109,14 @@ namespace Apizr.Configuring.Shared
         /// <param name="strategy">The duplicate strategy if there's any other names already (default: Add)</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
+
+        /// <summary>
+        /// Cache data.
+        /// </summary>
+        /// <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
+        /// <param name="lifeSpan">This specific caching lifetime (Default: null = cache handler lifetime</param>
+        /// <param name="shouldInvalidateOnError">Should invalidate on error (Default: false)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null, bool shouldInvalidateOnError = false);
     }
 }

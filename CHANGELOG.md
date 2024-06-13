@@ -3,10 +3,11 @@
 
 ### All
 
-- [New][Target] Now **targeting multiple frameworks based on Refit targets**: `netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0`
 - [New][Exceptions] Now we can **handle `IApizrResponse` safe response (based on Refit's `IApiResponse`) instead of catching exceptions**
-- [New][Attributes] Now we can **provide types to attributes thanks to generic arguments** instead of using typeof() as constructor parameters
+- [New][Configuration] Now we can **configure Apizr thanks to `IConfiguration` from Microsoft.Extensions** (e.g. from appsetings.json)
 - [New/Breaking][Polly] Now **supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies
+- [New][Polly] Now **we can set resilience pipelines to apply fluently to the request** thanks to the brand new WithResiliencePipelineKeys fluent option
+- [New][Cache] Now **we can set caching options to apply fluently to the request** thanks to the brand new WithCaching fluent option
 - [New][HttpTracer] Now we can **filter out unwanted http message parts** with the brand new IgnoreMessageParts fluent option
 - [New][HttpTracer] Now we can **pick RequestAllButBody, HeadersOnly or AllButBody http message parts** when configuring logging options fluently or using attribute
 - [New][HttpTracer/Headers] Now we can **redact any header sensitive values from logs** at design time by surrounding header values with a `*` star symbol rigth into the `Headers` attribute
@@ -14,6 +15,8 @@
 - [New][Headers] Now we can **choose to refresh a header value at request time or not**, depending on the brand new WithHeaders's ApizrLifetimeScope optional parameter
 - [New][Headers] Now we can **choose to set headers values straight to the request or store it for further headers attribute key match use**, depending on the brand new WithHeaders's ApizrRegistrationMode optional parameter
 - [New][Headers] Now we can **set headers values thanks to an expression tree**
+- [New][Attributes] Now we can **provide types to attributes thanks to generic arguments** instead of using typeof() as constructor parameters
+- [New][Target] Now **targeting multiple frameworks based on Refit targets**: `netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0`
 - [Breaking][Headers] Now **WithHeaders options take an enumerable parameter instead of a parameter array** so that we could provide some more optional parameters
 - [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
 

@@ -29,10 +29,13 @@ using Apizr.Requesting;
 using Apizr.Requesting.Attributes;
 using Apizr.Resiliencing;
 using Apizr.Resiliencing.Attributes;
+using Apizr.Resiliencing.Attributes.Crud;
+using Apizr.Resiliencing.Attributes.Rest;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
 using Refit;
+using DeleteResiliencePipelineAttribute = Apizr.Resiliencing.Attributes.Crud.DeleteResiliencePipelineAttribute;
 
 namespace Apizr
 {
@@ -2568,18 +2571,59 @@ namespace Apizr
                 var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
                 resilienceAttribute = methodDetails.MethodInfo.Name switch // Specific method policies
                 {
-                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateResiliencePipelineAttribute>(),
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllResiliencePipelineAttribute>(),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadResiliencePipelineAttribute>(),
-                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateResiliencePipelineAttribute>(),
-                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteResiliencePipelineAttribute>(),
+                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateResiliencePipelineAttribute>(true) ?? // Proper Create
+                                modelType.Assembly.GetCustomAttribute<CreateResiliencePipelineAttribute>(), // Common Create
+                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllResiliencePipelineAttribute>(true) ?? // Proper ReadAll
+                                 modelType.Assembly.GetCustomAttribute<ReadAllResiliencePipelineAttribute>(), // Common ReadAll
+                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadResiliencePipelineAttribute>(true) ?? // Proper Read
+                              modelType.Assembly.GetCustomAttribute<ReadResiliencePipelineAttribute>(), // Common Read
+                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateResiliencePipelineAttribute>(true) ?? // Proper Update
+                                modelType.Assembly.GetCustomAttribute<UpdateResiliencePipelineAttribute>(), // Common Update
+                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteResiliencePipelineAttribute>(true) ?? // Proper Delete
+                                modelType.Assembly.GetCustomAttribute<DeleteResiliencePipelineAttribute>(), // Common Delete
                     _ => null
                 };
             }
             else
             {
-                // Standard api method
+                // Standard api method attribute
                 resilienceAttribute = methodDetails.MethodInfo.GetCustomAttribute<ResiliencePipelineAttribute>();
+
+                // No method attribute ?
+                if (resilienceAttribute == null)
+                {
+                    var httpMethodAttribute = methodDetails.MethodInfo.GetCustomAttribute<HttpMethodAttribute>(true);
+                    if (httpMethodAttribute != null)
+                    {
+                        resilienceAttribute = httpMethodAttribute.Method.Method switch
+                        {
+                            var method when method == HttpMethod.Get.Method => 
+                                methodDetails.ApiInterfaceType.GetCustomAttribute<GetResiliencePipelineAttribute>(true) ?? // Proper Get
+                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<GetResiliencePipelineAttribute>(), // Common Get
+                            var method when method == HttpMethod.Post.Method => 
+                                methodDetails.ApiInterfaceType.GetCustomAttribute<PostResiliencePipelineAttribute>(true) ?? // Proper Post
+                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<PostResiliencePipelineAttribute>(), // Common Post
+                            var method when method == HttpMethod.Put.Method => 
+                                methodDetails.ApiInterfaceType.GetCustomAttribute<PutResiliencePipelineAttribute>(true) ?? // Proper Put
+                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<PutResiliencePipelineAttribute>(), // Common Put
+                            var method when method == HttpMethod.Delete.Method => 
+                                methodDetails.ApiInterfaceType.GetCustomAttribute<DeleteResiliencePipelineAttribute>(true) ?? // Proper Delete
+                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<DeleteResiliencePipelineAttribute>(), // Common Delete
+#if NETSTANDARD2_1 || NET6_0_OR_GREATER
+                            var method when method == HttpMethod.Patch.Method =>
+                                                    methodDetails.ApiInterfaceType.GetCustomAttribute<PatchResiliencePipelineAttribute>(true) ?? // Proper Patch
+                                                    methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<PatchResiliencePipelineAttribute>(), // Common Patch  
+#endif
+                            var method when method == HttpMethod.Head.Method => 
+                                methodDetails.ApiInterfaceType.GetCustomAttribute<HeadResiliencePipelineAttribute>(true) ?? // Proper Head
+                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<HeadResiliencePipelineAttribute>(), // Common Head
+                            var method when method == HttpMethod.Options.Method => 
+                                methodDetails.ApiInterfaceType.GetCustomAttribute<OptionsResiliencePipelineAttribute>(true) ?? // Proper Options
+                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<OptionsResiliencePipelineAttribute>(), // Common Options
+                            _ => null
+                        };
+                    }
+                }
             }
 
             _resilienceMethodsSet.TryAdd(methodDetails, resilienceAttribute);

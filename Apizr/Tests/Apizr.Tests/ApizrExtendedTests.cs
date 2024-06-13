@@ -614,7 +614,7 @@ namespace Apizr.Tests
             var reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
 
             // Defining a transient throwing request
-            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout));
+            Func<Task> act = () => reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(HttpStatusCode.RequestTimeout, opt));
 
             // Calling it should throw but handled by Polly
             await act.Should().ThrowAsync<ApizrException>();

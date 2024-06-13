@@ -11,12 +11,13 @@ using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Resiliencing.Attributes;
+using Apizr.Resiliencing.Attributes.Rest;
 using Apizr.Tests.Models;
 using Fusillade;
 using Microsoft.Extensions.Logging;
 using Refit;
 
-[assembly:ResiliencePipeline("TransientHttpError")]
+[assembly:GetResiliencePipeline("TransientHttpError")]
 [assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
 //[assembly:Timeout("00:00:02")]
 //[assembly:Log(HttpMessageParts.All, HttpTracerMode.Everything, LogLevel.Trace)]

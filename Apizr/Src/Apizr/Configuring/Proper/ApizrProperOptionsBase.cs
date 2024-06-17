@@ -2,6 +2,7 @@
 using System.Linq;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Proper
@@ -14,26 +15,26 @@ namespace Apizr.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="commonResiliencePipelineKeys">Global resilience pipelines</param>
-        /// <param name="properResiliencePipelineKeys">Specific resilience pipelines</param>
+        /// <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
+        /// <param name="properResiliencePipelineAttributes">Specific resilience pipelines</param>
         /// <param name="commonCacheAttribute">Global caching options</param>
         /// <param name="properCacheAttribute">Specific caching options</param>
         /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
-            string[] commonResiliencePipelineKeys,
-            string[] properResiliencePipelineKeys,
+            ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes,
+            ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes,
             CacheAttribute commonCacheAttribute,
             CacheAttribute properCacheAttribute,
             Func<string, bool> shouldRedactHeaderValue = null) : base(sharedOptions)
         {
             WebApiType = webApiType;
 
-            if(commonResiliencePipelineKeys?.Length > 0)
-                ResiliencePipelineKeys[ApizrConfigurationSource.CommonAttribute] = commonResiliencePipelineKeys;
+            if(commonResiliencePipelineAttributes?.Length > 0)
+                ResiliencePipelineOptions[ApizrConfigurationSource.CommonAttribute] = commonResiliencePipelineAttributes;
 
-            if (properResiliencePipelineKeys?.Length > 0)
-                ResiliencePipelineKeys[ApizrConfigurationSource.ProperAttribute] = properResiliencePipelineKeys;
+            if(properResiliencePipelineAttributes?.Length > 0)
+                ResiliencePipelineOptions[ApizrConfigurationSource.ProperAttribute] = properResiliencePipelineAttributes;
 
             if(commonCacheAttribute != null)
                 CacheOptions[ApizrConfigurationSource.CommonAttribute] = commonCacheAttribute;

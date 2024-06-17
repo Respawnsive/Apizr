@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading;
 using Apizr.Configuring.Shared.Context;
+using Apizr.Resiliencing.Attributes;
 using Polly;
 
 namespace Apizr.Configuring.Request
@@ -41,6 +42,7 @@ namespace Apizr.Configuring.Request
         internal TApizrOptionsBuilder WithOriginalExpression(Expression originalExpression);
         internal TApizrOptionsBuilder WithResilienceContextOptions(IApizrResilienceContextOptions options);
         internal TApizrOptionsBuilder WithContext(ResilienceContext context);
+        internal TApizrOptionsBuilder WithResiliencePipelineOptions(IDictionary<ApizrConfigurationSource, ResiliencePipelineAttributeBase[]> resiliencePipelineOptions);
     }
     
     /// <inheritdoc />

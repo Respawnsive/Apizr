@@ -30,7 +30,7 @@ using Apizr.Requesting.Attributes;
 using Apizr.Resiliencing;
 using Apizr.Resiliencing.Attributes;
 using Apizr.Resiliencing.Attributes.Crud;
-using Apizr.Resiliencing.Attributes.Rest;
+using Apizr.Resiliencing.Attributes.Http;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -53,7 +53,8 @@ namespace Apizr
             TimeoutAttributeBase operationTimeoutAttribute = null,
             TimeoutAttributeBase requestTimeoutAttribute = null,
             ResiliencePipelineAttributeBase resiliencePipelineAttribute = null,
-            CacheAttributeBase requestCacheAttribute = null)
+            CacheAttributeBase requestCacheAttribute = null,
+            ApizrRequestMethod requestMethod = null)
         {
             // Create base request options from parent options
             var requestOptions = new ApizrRequestOptions(baseOptions,
@@ -62,8 +63,9 @@ namespace Apizr
                 requestLogAttribute?.TrafficVerbosity,
                 operationTimeoutAttribute?.Timeout,
                 requestTimeoutAttribute?.Timeout,
-                resiliencePipelineAttribute?.RegistryKeys,
+                resiliencePipelineAttribute,
                 requestCacheAttribute,
+                requestMethod,
                 requestLogAttribute?.LogLevels);
 
             // Create request options builder with request options
@@ -121,6 +123,13 @@ namespace Apizr
                         .OrderBy(x => x.Key)
                         .LastOrDefault(x => x.Key != ApizrConfigurationSource.FinalConfiguration)
                         .Value;
+
+                // Filter out all resilience pipeline keys that are not related to the current request method
+                var filteredPipelineOptions = builder.ApizrOptions.ResiliencePipelineOptions
+                    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Where(attribute => attribute.RequestMethod >= requestMethod).ToArray()) // Remove all attributes with a lower request method
+                    .Where(kvp => kvp.Value.Length > 0) // Ignore keys with empty attribute values
+                    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value); // Return the filtered dictionary
+                builder.WithResiliencePipelineOptions(filteredPipelineOptions);
             }
 
             // Return the builder
@@ -548,7 +557,7 @@ namespace Apizr
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
             var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
-                resiliencePipelineAttribute, requestCacheAttribute);
+                resiliencePipelineAttribute, requestCacheAttribute, methodDetails.RequestMethod);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                 $"{methodDetails.MethodInfo.Name}: Calling method");
@@ -2219,10 +2228,10 @@ namespace Apizr
                 return redactHeaders;
 
             HeadersAttribute headersAttribute;
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
             {
                 // Crud api headers
-                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
                 headersAttribute = methodDetails.MethodInfo.Name switch // Request headers
                 {
                     "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllHeadersAttribute>(true),
@@ -2262,10 +2271,10 @@ namespace Apizr
             if (_loggingMethodsSet.TryGetValue(methodDetails, out var logAttribute))
                 return logAttribute;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
             {
                 // Crud api logging
-                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
                 logAttribute = methodDetails.MethodInfo.Name switch // Request logging
                 {
                     "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<LogReadAllAttribute>(true),
@@ -2444,7 +2453,7 @@ namespace Apizr
 
             if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(_apizrOptions.WebApiType)) // Crud api method
             {
-                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
                 cacheAttribute = methodDetails.MethodInfo.Name switch // Specific method policies
                 {
                     "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<CacheReadAllAttribute>(true),
@@ -2490,23 +2499,31 @@ namespace Apizr
 
         private ResiliencePipeline<TResult> GetMethodResiliencePipeline<TResult>(MethodDetails methodDetails, IApizrRequestOptions requestOptions)
         {
-            if (_lazyResiliencePipelineRegistry == null)
-                return ResiliencePipeline<TResult>.Empty;
-
-            var resiliencePipelineKeys = requestOptions.ResiliencePipelineKeys
+            var resiliencePipelineKeys = requestOptions.ResiliencePipelineOptions
                 .Where(kvp => kvp.Key != ApizrConfigurationSource.FinalConfiguration)
                 .OrderBy(kvp => kvp.Key)
-                .SelectMany(kvp => kvp.Value)
+                .SelectMany(kvp => kvp.Value.SelectMany(attribute => attribute.RegistryKeys))
                 .Distinct()
                 .ToArray();
             if(resiliencePipelineKeys.Length == 0)
                 return ResiliencePipeline<TResult>.Empty;
 
-            var resiliencePipelineBuilder = new ResiliencePipelineBuilder<TResult>();
             var includedKeys = new List<string>();
-            if (requestOptions.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var yetIncludedKeys)) 
-                includedKeys.AddRange(yetIncludedKeys);
+            if (requestOptions.ResiliencePipelineOptions.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var yetIncludedAttributeKeys))
+                includedKeys.AddRange(yetIncludedAttributeKeys.SelectMany(attribute => attribute.RegistryKeys));
 
+            var keysToInclude = resiliencePipelineKeys.Except(includedKeys).ToList();
+            if (keysToInclude.Count == 0)
+                return ResiliencePipeline<TResult>.Empty;
+
+            if (_lazyResiliencePipelineRegistry == null)
+            {
+                _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: You asked to apply some resilience pipelines but didn't register any of it. Resilience pipelines will be ignored.");
+                return ResiliencePipeline<TResult>.Empty;
+            }
+
+            var resiliencePipelineBuilder = new ResiliencePipelineBuilder<TResult>();
             foreach (var resiliencePipelineKey in resiliencePipelineKeys)
             {
                 if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline<TResult>(resiliencePipelineKey, out var resiliencePipeline))
@@ -2514,34 +2531,42 @@ namespace Apizr
                     resiliencePipelineBuilder.AddPipeline(resiliencePipeline);
                     includedKeys.Add(resiliencePipelineKey);
                     _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {resiliencePipelineKey} will be applied");
-                }
+                        $"{methodDetails.MethodInfo.Name}: Resilience pipeline named '{resiliencePipelineKey}' will be applied");
+                } 
             }
 
-            requestOptions.ResiliencePipelineKeys[ApizrConfigurationSource.FinalConfiguration] = includedKeys.ToArray();
+            requestOptions.ResiliencePipelineOptions[ApizrConfigurationSource.FinalConfiguration] = [new ResiliencePipelineAttribute([.. includedKeys])];
 
             return resiliencePipelineBuilder.Build();
         }
 
         private ResiliencePipeline GetMethodResiliencePipeline(MethodDetails methodDetails, IApizrRequestOptions requestOptions)
         {
-            if (_lazyResiliencePipelineRegistry == null)
-                return ResiliencePipeline.Empty;
-
-            var resiliencePipelineKeys = requestOptions.ResiliencePipelineKeys
+            var resiliencePipelineKeys = requestOptions.ResiliencePipelineOptions
                 .Where(kvp => kvp.Key != ApizrConfigurationSource.FinalConfiguration)
                 .OrderBy(kvp => kvp.Key)
-                .SelectMany(kvp => kvp.Value)
+                .SelectMany(kvp => kvp.Value.SelectMany(attribute => attribute.RegistryKeys))
                 .Distinct()
                 .ToArray();
             if (resiliencePipelineKeys.Length == 0)
                 return ResiliencePipeline.Empty;
 
-            var resiliencePipelineBuilder = new ResiliencePipelineBuilder();
             var includedKeys = new List<string>();
-            if (requestOptions.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var yetIncludedKeys))
-                includedKeys.AddRange(yetIncludedKeys);
+            if (requestOptions.ResiliencePipelineOptions.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var yetIncludedAttributeKeys))
+                includedKeys.AddRange(yetIncludedAttributeKeys.SelectMany(attribute => attribute.RegistryKeys));
 
+            var keysToInclude = resiliencePipelineKeys.Except(includedKeys).ToList();
+            if (keysToInclude.Count == 0)
+                return ResiliencePipeline.Empty;
+
+            if (_lazyResiliencePipelineRegistry == null)
+            {
+                _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: You asked to apply some resilience pipelines but didn't register any of it. Resilience pipelines will be ignored.");
+                return ResiliencePipeline.Empty;
+            }
+
+            var resiliencePipelineBuilder = new ResiliencePipelineBuilder();
             foreach (var resiliencePipelineKey in resiliencePipelineKeys)
             {
                 if (_lazyResiliencePipelineRegistry.Value.TryGetPipeline(resiliencePipelineKey, out var resiliencePipeline))
@@ -2549,82 +2574,27 @@ namespace Apizr
                     resiliencePipelineBuilder.AddPipeline(resiliencePipeline);
                     includedKeys.Add(resiliencePipelineKey);
                     _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
-                        $"{methodDetails.MethodInfo.Name}: Resilience pipeline with key {resiliencePipelineKey} will be applied");
+                        $"{methodDetails.MethodInfo.Name}: Resilience pipeline named '{resiliencePipelineKey}' will be applied");
                 }
             }
 
-            requestOptions.ResiliencePipelineKeys[ApizrConfigurationSource.FinalConfiguration] = includedKeys.ToArray();
+            requestOptions.ResiliencePipelineOptions[ApizrConfigurationSource.FinalConfiguration] = [new ResiliencePipelineAttribute([.. includedKeys])];
 
             return resiliencePipelineBuilder.Build();
         }
 
         private ResiliencePipelineAttributeBase GetMethodResiliencePipelineAttribute(MethodDetails methodDetails)
         {
-            if (methodDetails == null)
+            if (methodDetails == null || methodDetails.IsCrudApi)
                 return null;
 
             if (_resilienceMethodsSet.TryGetValue(methodDetails, out var resilienceAttribute))
                 return resilienceAttribute;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(_apizrOptions.WebApiType)) // Crud api method
-            {
-                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
-                resilienceAttribute = methodDetails.MethodInfo.Name switch // Specific method policies
-                {
-                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateResiliencePipelineAttribute>(true) ?? // Proper Create
-                                modelType.Assembly.GetCustomAttribute<CreateResiliencePipelineAttribute>(), // Common Create
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllResiliencePipelineAttribute>(true) ?? // Proper ReadAll
-                                 modelType.Assembly.GetCustomAttribute<ReadAllResiliencePipelineAttribute>(), // Common ReadAll
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadResiliencePipelineAttribute>(true) ?? // Proper Read
-                              modelType.Assembly.GetCustomAttribute<ReadResiliencePipelineAttribute>(), // Common Read
-                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateResiliencePipelineAttribute>(true) ?? // Proper Update
-                                modelType.Assembly.GetCustomAttribute<UpdateResiliencePipelineAttribute>(), // Common Update
-                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteResiliencePipelineAttribute>(true) ?? // Proper Delete
-                                modelType.Assembly.GetCustomAttribute<DeleteResiliencePipelineAttribute>(), // Common Delete
-                    _ => null
-                };
-            }
-            else
-            {
-                // Standard api method attribute
-                resilienceAttribute = methodDetails.MethodInfo.GetCustomAttribute<ResiliencePipelineAttribute>();
-
-                // No method attribute ?
-                if (resilienceAttribute == null)
-                {
-                    var httpMethodAttribute = methodDetails.MethodInfo.GetCustomAttribute<HttpMethodAttribute>(true);
-                    if (httpMethodAttribute != null)
-                    {
-                        resilienceAttribute = httpMethodAttribute.Method.Method switch
-                        {
-                            var method when method == HttpMethod.Get.Method => 
-                                methodDetails.ApiInterfaceType.GetCustomAttribute<GetResiliencePipelineAttribute>(true) ?? // Proper Get
-                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<GetResiliencePipelineAttribute>(), // Common Get
-                            var method when method == HttpMethod.Post.Method => 
-                                methodDetails.ApiInterfaceType.GetCustomAttribute<PostResiliencePipelineAttribute>(true) ?? // Proper Post
-                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<PostResiliencePipelineAttribute>(), // Common Post
-                            var method when method == HttpMethod.Put.Method => 
-                                methodDetails.ApiInterfaceType.GetCustomAttribute<PutResiliencePipelineAttribute>(true) ?? // Proper Put
-                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<PutResiliencePipelineAttribute>(), // Common Put
-                            var method when method == HttpMethod.Delete.Method => 
-                                methodDetails.ApiInterfaceType.GetCustomAttribute<DeleteResiliencePipelineAttribute>(true) ?? // Proper Delete
-                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<DeleteResiliencePipelineAttribute>(), // Common Delete
-#if NETSTANDARD2_1 || NET6_0_OR_GREATER
-                            var method when method == HttpMethod.Patch.Method =>
-                                                    methodDetails.ApiInterfaceType.GetCustomAttribute<PatchResiliencePipelineAttribute>(true) ?? // Proper Patch
-                                                    methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<PatchResiliencePipelineAttribute>(), // Common Patch  
-#endif
-                            var method when method == HttpMethod.Head.Method => 
-                                methodDetails.ApiInterfaceType.GetCustomAttribute<HeadResiliencePipelineAttribute>(true) ?? // Proper Head
-                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<HeadResiliencePipelineAttribute>(), // Common Head
-                            var method when method == HttpMethod.Options.Method => 
-                                methodDetails.ApiInterfaceType.GetCustomAttribute<OptionsResiliencePipelineAttribute>(true) ?? // Proper Options
-                                methodDetails.ApiInterfaceType.Assembly.GetCustomAttribute<OptionsResiliencePipelineAttribute>(), // Common Options
-                            _ => null
-                        };
-                    }
-                }
-            }
+            // Standard api method attribute
+            resilienceAttribute = methodDetails.MethodInfo.GetCustomAttribute<ResiliencePipelineAttribute>();
+            if(resilienceAttribute != null)
+                resilienceAttribute.RequestMethod = methodDetails.RequestMethod;
 
             _resilienceMethodsSet.TryAdd(methodDetails, resilienceAttribute);
 
@@ -2640,10 +2610,10 @@ namespace Apizr
             if (_handlerParameterMethodsSet.TryGetValue(methodDetails, out var handlerParameterAttributes))
                 return handlerParameterAttributes;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
             {
                 // Crud api parameters
-                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
                 handlerParameterAttributes = methodDetails.MethodInfo.Name switch // Request parameters
                 {
                     "ReadAll" => modelType.GetTypeInfo().GetCustomAttributes<ReadAllHandlerParameterAttribute>(true)
@@ -2675,10 +2645,10 @@ namespace Apizr
             if (_operationTimeoutMethodsSet.TryGetValue(methodDetails, out var timeoutAttribute))
                 return timeoutAttribute;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
             {
                 // Crud api operation timeout
-                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
                 timeoutAttribute = methodDetails.MethodInfo.Name switch // Operation timeout
                 {
                     "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllOperationTimeoutAttribute>(true),
@@ -2705,10 +2675,10 @@ namespace Apizr
             if (_requestTimeoutMethodsSet.TryGetValue(methodDetails, out var timeoutAttribute))
                 return timeoutAttribute;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.ApiInterfaceType))
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
             {
                 // Crud api request timeout
-                var modelType = methodDetails.ApiInterfaceType.GetGenericArguments().First();
+                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
                 timeoutAttribute = methodDetails.MethodInfo.Name switch // Request timeout
                 {
                     "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllRequestTimeoutAttribute>(true),
@@ -2765,15 +2735,65 @@ namespace Apizr
         private MethodDetails GetMethodDetails(Expression restExpression)
         {
             var webApiType = typeof(TWebApi);
+            Type crudModelType = null;
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType)) // Crud api method
+                crudModelType = webApiType.GetGenericArguments().First();
             var methodCallExpression = GetMethodCallExpression(restExpression);
-            return new MethodDetails(webApiType, methodCallExpression.Method);
+            var requestMethod = GetApizrRequestMethod(methodCallExpression, crudModelType != null);
+
+            return new MethodDetails(webApiType, crudModelType, methodCallExpression.Method, requestMethod);
         }
 
         private MethodDetails GetMethodDetails<TResult>(Expression restExpression)
         {
             var webApiType = typeof(TWebApi);
+            Type crudModelType = null;
+            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType)) // Crud api method
+                crudModelType = webApiType.GetGenericArguments().First();
             var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
-            return new MethodDetails(webApiType, methodCallExpression.Method);
+            var requestMethod = GetApizrRequestMethod(methodCallExpression, crudModelType != null);
+            return new MethodDetails(webApiType, crudModelType, methodCallExpression.Method, requestMethod);
+        }
+
+        private ApizrRequestMethod GetApizrRequestMethod(MethodCallExpression methodCallExpression, bool isCrudApi)
+        {
+            ApizrRequestMethod requestMethod;
+            if (isCrudApi) // Crud api method
+            {
+                requestMethod = methodCallExpression.Method.Name switch // Specific method policies
+                {
+                    var method when method == ApizrRequestMethod.CrudCreate.Method => ApizrRequestMethod.CrudCreate,
+                    var method when method == ApizrRequestMethod.CrudReadAll.Method => ApizrRequestMethod.CrudReadAll,
+                    var method when method == ApizrRequestMethod.CrudRead.Method => ApizrRequestMethod.CrudRead,
+                    var method when method == ApizrRequestMethod.CrudUpdate.Method => ApizrRequestMethod.CrudUpdate,
+                    var method when method == ApizrRequestMethod.CrudDelete.Method => ApizrRequestMethod.CrudDelete,
+                    var method when method == ApizrRequestMethod.CrudSafeCreate.Method => ApizrRequestMethod.CrudSafeCreate,
+                    var method when method == ApizrRequestMethod.CrudSafeReadAll.Method => ApizrRequestMethod.CrudSafeReadAll,
+                    var method when method == ApizrRequestMethod.CrudSafeRead.Method => ApizrRequestMethod.CrudSafeRead,
+                    var method when method == ApizrRequestMethod.CrudSafeUpdate.Method => ApizrRequestMethod.CrudSafeUpdate,
+                    var method when method == ApizrRequestMethod.CrudSafeDelete.Method => ApizrRequestMethod.CrudSafeDelete,
+                    _ => throw new NotImplementedException($"{methodCallExpression.Method.Name} method is not yet handled by Apizr. Please open an issue if needed")
+                };
+            }
+            else
+            {
+                var httpMethodAttribute = methodCallExpression.Method.GetCustomAttribute<HttpMethodAttribute>(true);
+                requestMethod = httpMethodAttribute!.Method.Method switch
+                {
+                    var method when method == ApizrRequestMethod.HttpGet.Method => ApizrRequestMethod.HttpGet,
+                    var method when method == ApizrRequestMethod.HttpPost.Method => ApizrRequestMethod.HttpPost,
+                    var method when method == ApizrRequestMethod.HttpPut.Method => ApizrRequestMethod.HttpPut,
+                    var method when method == ApizrRequestMethod.HttpDelete.Method => ApizrRequestMethod.HttpDelete,
+#if NETSTANDARD2_1 || NET6_0_OR_GREATER
+                    var method when method == ApizrRequestMethod.HttpPatch.Method => ApizrRequestMethod.HttpPatch,
+#endif
+                    var method when method == ApizrRequestMethod.HttpHead.Method => ApizrRequestMethod.HttpHead,
+                    var method when method == ApizrRequestMethod.HttpOptions.Method => ApizrRequestMethod.HttpOptions,
+                    _ => throw new NotImplementedException($"{httpMethodAttribute!.Method.Method} method is not yet handled by Apizr. Please open an issue if needed")
+                };
+            }
+
+            return requestMethod;
         }
 
         private static IEnumerable<ExtractedConstant> ExtractConstants(Expression expression)
@@ -2962,23 +2982,31 @@ namespace Apizr
 
         class MethodDetails
         {
-            public MethodDetails(Type apiInterfaceType, MethodInfo methodInfo)
+            public MethodDetails(Type webApiType, Type crudModelType, MethodInfo methodInfo, ApizrRequestMethod requestMethod)
             {
-                ApiInterfaceType = apiInterfaceType;
+                WebApiType = webApiType;
+                CrudModelType = crudModelType;
                 MethodInfo = methodInfo;
+                RequestMethod = requestMethod;
             }
 
-            public Type ApiInterfaceType { get; }
+            public Type WebApiType { get; }
+
+            public Type CrudModelType { get; }
 
             public MethodInfo MethodInfo { get; }
 
+            public ApizrRequestMethod RequestMethod { get; }
+
+            public bool IsCrudApi => CrudModelType != null;
+
             public override int GetHashCode() =>
-                ApiInterfaceType.GetHashCode() * 23 * MethodInfo.GetHashCode() * 23 * 29;
+                WebApiType.GetHashCode() * 23 * MethodInfo.GetHashCode() * 23 * 29;
 
             public override bool Equals(object obj)
             {
                 return obj is MethodDetails methodCacheDetails &&
-                       methodCacheDetails.ApiInterfaceType == ApiInterfaceType &&
+                       methodCacheDetails.WebApiType == WebApiType &&
                        methodCacheDetails.MethodInfo.Equals(MethodInfo);
             }
         }

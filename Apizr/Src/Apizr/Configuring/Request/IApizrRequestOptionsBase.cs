@@ -14,5 +14,10 @@ namespace Apizr.Configuring.Request
         /// The Polly resilience context to pass through it all
         /// </summary>
         ResilienceContext ResilienceContext { get; }
+
+        /// <summary>
+        /// The Apizr request method
+        /// </summary>
+        ApizrRequestMethod RequestMethod { get; }
     }
 }

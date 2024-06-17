@@ -12,6 +12,7 @@ using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -209,7 +210,7 @@ namespace Apizr.Configuring.Manager
         public IDictionary<ApizrRegistrationMode, IList<string>> Headers => Options.Headers;
 
         /// <inheritdoc />
-        public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> HeadersFactories => Options.HeadersFactories;
+        public IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>> HeadersFactories => Options.HeadersFactories;
 
         /// <inheritdoc />
         public TimeSpan? OperationTimeout => Options.OperationTimeout;
@@ -219,6 +220,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public Func<string, bool> ShouldRedactHeaderValue => Options.ShouldRedactHeaderValue;
+
+        /// <inheritdoc />
+        public IDictionary<ApizrConfigurationSource, ResiliencePipelineAttributeBase[]> ResiliencePipelineOptions => Options.ResiliencePipelineOptions;
 
         /// <inheritdoc />
         public IDictionary<ApizrConfigurationSource, CacheAttributeBase> CacheOptions => Options.CacheOptions;
@@ -235,9 +239,6 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public ILogger Logger => Options.Logger;
-
-        /// <inheritdoc />
-        public IDictionary<ApizrConfigurationSource, string[]> ResiliencePipelineKeys => Options.ResiliencePipelineKeys;
 
         /// <inheritdoc />
         public RefitSettings RefitSettings => Options.RefitSettings;

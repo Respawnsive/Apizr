@@ -9,6 +9,7 @@ using Apizr.Configuring.Proper;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -23,8 +24,6 @@ namespace Apizr.Extending.Configuring.Proper
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
         /// <param name="apizrManagerType">The manager type</param>
-        /// <param name="commonResiliencePipelineRegistryKeys">Global resilience pipelines</param>
-        /// <param name="properResiliencePipelineRegistryKeys">Specific resilience pipeline</param>
         /// <param name="baseAddress">The web api base address</param>
         /// <param name="basePath">The web api base path</param>
         /// <param name="handlersParameters">Some handlers parameters</param>
@@ -32,14 +31,14 @@ namespace Apizr.Extending.Configuring.Proper
         /// <param name="trafficVerbosity">The traffic verbosity</param>
         /// <param name="operationTimeout">The operation timeout</param>
         /// <param name="requestTimeout">The request timeout</param>
+        /// <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
+        /// <param name="properResiliencePipelineAttributes">Specific resilience pipeline</param>
         /// <param name="commonCacheAttribute">Global caching options</param>
         /// <param name="properCacheAttribute">Specific caching options</param>
         /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         /// <param name="logLevels">The log levels</param>
         public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions,
             Type webApiType, Type apizrManagerType,
-            string[] commonResiliencePipelineRegistryKeys, 
-            string[] properResiliencePipelineRegistryKeys,
             string baseAddress,
             string basePath,
             IDictionary<string, object> handlersParameters,
@@ -47,13 +46,15 @@ namespace Apizr.Extending.Configuring.Proper
             HttpMessageParts? trafficVerbosity,
             TimeSpan? operationTimeout,
             TimeSpan? requestTimeout,
+            ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes,
+            ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes,
             CacheAttribute commonCacheAttribute,
             CacheAttribute properCacheAttribute,
             Func<string, bool> shouldRedactHeaderValue = null,
             params LogLevel[] logLevels) : base(sharedOptions, 
-            webApiType, 
-            commonResiliencePipelineRegistryKeys, 
-            properResiliencePipelineRegistryKeys,
+            webApiType,
+            commonResiliencePipelineAttributes,
+            properResiliencePipelineAttributes,
             commonCacheAttribute, 
             properCacheAttribute, 
             shouldRedactHeaderValue)

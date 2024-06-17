@@ -34,7 +34,7 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Headers factories
         /// </summary>
-        IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> HeadersFactories { get; }
+        IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>> HeadersFactories { get; }
 
         /// <summary>
         /// Headers to add to the request

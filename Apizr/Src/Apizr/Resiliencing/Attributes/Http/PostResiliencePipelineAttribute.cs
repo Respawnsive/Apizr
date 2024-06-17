@@ -1,6 +1,7 @@
 ﻿using System;
+using Apizr.Configuring;
 
-namespace Apizr.Resiliencing.Attributes.Rest
+namespace Apizr.Resiliencing.Attributes.Http
 {
     /// <summary>
     /// Tells Apizr to apply some policies to Post http method
@@ -12,6 +13,7 @@ namespace Apizr.Resiliencing.Attributes.Rest
         /// <inheritdoc />
         public PostResiliencePipelineAttribute(params string[] registryKeys) : base(registryKeys)
         {
+            RequestMethod = ApizrRequestMethod.HttpPost;
         }
     }
 }

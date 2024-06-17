@@ -13,6 +13,7 @@ using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -94,6 +95,20 @@ namespace Apizr.Configuring.Common
                         case "ResiliencePipelineKeys":
                             WithResiliencePipelineKeys(config.GetChildren().Select(c => c.Value!).ToArray());
                             break;
+                        case "ResiliencePipelineOptions":
+                        {
+                            var resiliencePipelineOptions = config.GetChildren().ToList();
+                            foreach (var resiliencePipelineOption in resiliencePipelineOptions)
+                            {
+                                if (!ApizrRequestMethod.TryParse(resiliencePipelineOption.Key, out var requestMethod))
+                                    continue;
+
+                                var resiliencePipelineKeys = resiliencePipelineOption.GetChildren().Select(c => c.Value!).ToArray();
+                                WithResiliencePipelineKeys(resiliencePipelineKeys, [requestMethod]);
+                            }
+
+                            break;
+                        }
                         case "Caching":
                         {
                             var cacheSection = config.GetChildren().ToList();
@@ -107,11 +122,13 @@ namespace Apizr.Configuring.Common
                             break;
                         }
                         default:
+                        {
                             if (!config.GetChildren().Any())
                                 throw new ArgumentOutOfRangeException(config.Key, $"Apizr does not handle any {config.Key} option. Make sure that your key target an option that Apizr could configure.");
 
                             WithConfiguration(config);
                             break;
+                        }
                     }
                 }
             }
@@ -684,31 +701,53 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+            IEnumerable<ApizrRequestMethod> methodScope = null,
+            ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
         {
-            switch (strategy)
+            methodScope ??= [ApizrRequestMethod.All];
+
+            switch (duplicateStrategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    if(Options.ResiliencePipelineKeys.Count == 0)
-                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.CommonOption] = resiliencePipelineKeys;
+                    if (Options.ResiliencePipelineOptions.Count == 0)
+                        Options.ResiliencePipelineOptions[ApizrConfigurationSource.CommonOption] = methodScope
+                            .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) {RequestMethod = method})
+                            .Cast<ResiliencePipelineAttributeBase>()
+                            .ToArray();
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.CommonOption, out var keys))
+                    if (Options.ResiliencePipelineOptions.TryGetValue(ApizrConfigurationSource.CommonOption, out var attributes))
                     {
-                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.CommonOption] = keys.Union(resiliencePipelineKeys).ToArray();
+                        foreach (var method in methodScope)
+                        {
+                            var attribute = attributes.FirstOrDefault(attribute => attribute.RequestMethod == method);
+                            if(attribute != null)
+                                attribute.RegistryKeys = attribute.RegistryKeys.Union(resiliencePipelineKeys).ToArray();
+                            else
+                                attributes = attributes.Concat([new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method }]).ToArray();
+                        }
+
+                        Options.ResiliencePipelineOptions[ApizrConfigurationSource.CommonOption] = attributes;
                     }
                     else
                     {
-                        Options.ResiliencePipelineKeys[ApizrConfigurationSource.CommonOption] = resiliencePipelineKeys;
+                        Options.ResiliencePipelineOptions[ApizrConfigurationSource.CommonOption] = methodScope
+                            .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method })
+                            .Cast<ResiliencePipelineAttributeBase>()
+                            .ToArray();
                     }
+
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.ResiliencePipelineKeys.Clear();
-                    Options.ResiliencePipelineKeys[ApizrConfigurationSource.CommonOption] = resiliencePipelineKeys;
+                    Options.ResiliencePipelineOptions.Clear();
+                    Options.ResiliencePipelineOptions[ApizrConfigurationSource.CommonOption] = methodScope
+                        .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method })
+                        .Cast<ResiliencePipelineAttributeBase>()
+                        .ToArray();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+                    throw new ArgumentOutOfRangeException(nameof(duplicateStrategy), duplicateStrategy, null);
             }
 
             return this;

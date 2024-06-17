@@ -37,7 +37,7 @@ namespace Apizr.Configuring.Shared
         public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; internal set; }
 
         /// <inheritdoc />
-        public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> HeadersFactories { get; internal set; }
+        public IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>> HeadersFactories { get; internal set; }
 
         /// <inheritdoc />
         public IDictionary<ApizrRegistrationMode, IList<string>> Headers { get; internal set; }

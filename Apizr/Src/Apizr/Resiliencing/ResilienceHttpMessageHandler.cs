@@ -14,6 +14,7 @@ using Polly.Registry;
 using System.Collections.Generic;
 using System.Linq;
 using Apizr.Configuring;
+using Apizr.Resiliencing.Attributes;
 
 namespace Apizr.Resiliencing
 {
@@ -133,43 +134,47 @@ namespace Apizr.Resiliencing
             }
 
             // Add HttpResponseMessage resilience pipelines
-            var resiliencePipelineKeys = options.ResiliencePipelineKeys
+            var resiliencePipelineKeys = options.ResiliencePipelineOptions
                 .Where(kvp => kvp.Key != ApizrConfigurationSource.FinalConfiguration)
                 .OrderBy(kvp => kvp.Key)
-                .SelectMany(kvp => kvp.Value)
+                .SelectMany(kvp => kvp.Value.SelectMany(attribute => attribute.RegistryKeys))
                 .Distinct()
                 .ToArray();
             if (resiliencePipelineKeys.Length > 0)
             {
-                if (_registry == null)
-                {
-                    logger.Log(options.LogLevels.Low(),
-                        $"Global strategies: You defined some resilience strategies but didn't register any of it. Global strategies will be ignored for {context.OperationKey}");
-                }
-                else
-                {
-                    var includedKeys = new List<string>();
-                    if (options.ResiliencePipelineKeys.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var yetIncludedKeys))
-                        includedKeys.AddRange(yetIncludedKeys);
+                var includedKeys = new List<string>();
+                if (options.ResiliencePipelineOptions.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out var yetIncludedAttributeKeys))
+                    includedKeys.AddRange(yetIncludedAttributeKeys.SelectMany(attribute => attribute.RegistryKeys));
 
-                    foreach (var resiliencePipelineKey in resiliencePipelineKeys)
+                var keysToInclude = resiliencePipelineKeys.Except(includedKeys).ToList();
+                if (keysToInclude.Count > 0)
+                {
+                    if (_registry == null)
                     {
-                        if (_registry.TryGetPipeline<HttpResponseMessage>(resiliencePipelineKey, out var registeredResiliencePipeline))
+                        logger.Log(options.LogLevels.Low(),
+                            $"Global strategies: You defined some resilience strategies but didn't register any of it. Global strategies will be ignored for {context.OperationKey}");
+                    }
+                    else
+                    {
+                        foreach (var keyToInclude in keysToInclude)
                         {
-                            pipelineBuilder.AddPipeline(registeredResiliencePipeline);
-                            includedKeys.Add(resiliencePipelineKey);
-                            logger.Log(logLevels.Low(), "{0}: Resilience pipeline with key {1} will be applied", context.OperationKey, resiliencePipelineKey);
+                            if (_registry.TryGetPipeline<HttpResponseMessage>(keyToInclude, out var registeredResiliencePipeline))
+                            {
+                                pipelineBuilder.AddPipeline(registeredResiliencePipeline);
+                                includedKeys.Add(keyToInclude);
+                                logger.Log(logLevels.Low(), "{0}: Resilience pipeline named '{1}' will be applied", context.OperationKey, keyToInclude);
+                            }
                         }
-                    }
 
-                    // Report for missing keys
-                    options.ResiliencePipelineKeys[ApizrConfigurationSource.FinalConfiguration] = includedKeys.ToArray();
-                    var ignoredKeys = resiliencePipelineKeys.Except(includedKeys);
-                    foreach (var ignoredKey in ignoredKeys)
-                    {
-                        logger.Log(logLevels.Low(), "{0}: Resilience pipeline with key {1} could not be found.", context.OperationKey, ignoredKey);
-                    }
-                } 
+                        // Report for missing keys
+                        options.ResiliencePipelineOptions[ApizrConfigurationSource.FinalConfiguration] = [new ResiliencePipelineAttribute(includedKeys.ToArray())];
+                        var ignoredKeys = resiliencePipelineKeys.Except(includedKeys).ToList();
+                        foreach (var ignoredKey in ignoredKeys)
+                        {
+                            logger.Log(logLevels.Low(), "{0}: Resilience pipeline named '{1}' could not be found.", context.OperationKey, ignoredKey);
+                        }
+                    }  
+                }
             }
             
             // Set a request timeout if provided

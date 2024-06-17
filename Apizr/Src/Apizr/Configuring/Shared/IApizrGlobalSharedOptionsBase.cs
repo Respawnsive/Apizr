@@ -5,6 +5,7 @@ using System;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 
 namespace Apizr.Configuring.Shared
 {
@@ -61,7 +62,7 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Resilience pipeline keys from the registry
         /// </summary>
-        IDictionary<ApizrConfigurationSource, string[]> ResiliencePipelineKeys { get; }
+        IDictionary<ApizrConfigurationSource, ResiliencePipelineAttributeBase[]> ResiliencePipelineOptions { get; }
 
         /// <summary>
         /// The caching options to apply

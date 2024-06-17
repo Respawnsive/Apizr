@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring;
 
 namespace Apizr.Resiliencing.Attributes.Crud
 {
@@ -12,6 +13,7 @@ namespace Apizr.Resiliencing.Attributes.Crud
         /// <inheritdoc />
         public UpdateResiliencePipelineAttribute(params string[] registryKeys) : base(registryKeys)
         {
+            RequestMethod = ApizrRequestMethod.CrudUpdate;
         }
     }
 }

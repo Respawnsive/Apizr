@@ -11,7 +11,7 @@ using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Resiliencing.Attributes;
-using Apizr.Resiliencing.Attributes.Rest;
+using Apizr.Resiliencing.Attributes.Http;
 using Apizr.Tests.Models;
 using Fusillade;
 using Microsoft.Extensions.Logging;
@@ -28,6 +28,7 @@ namespace Apizr.Tests.Apis
      Log(HttpMessageParts.RequestAll, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information),
      Headers("testKey1: *testValue1*", "testKey2: testValue2.1"),
      Cache(CacheMode.GetAndFetch, "00:09:00"),
+     PostResiliencePipeline("TransientHttpError2"),
      Priority(Priority.Speculative)]//, Timeout("00:00:04")]
     public interface IReqResUserService
     {

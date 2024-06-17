@@ -4,6 +4,7 @@ using System.Linq;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -18,8 +19,9 @@ namespace Apizr.Configuring.Request
             HttpMessageParts? trafficVerbosity,
             TimeSpan? operationTimeout,
             TimeSpan? requestTimeout,
-            string[] requestResiliencePipelineKeys,
+            ResiliencePipelineAttributeBase requestResiliencePipelineAttribute,
             CacheAttributeBase requestCacheAttribute,
+            ApizrRequestMethod requestMethod,
             params LogLevel[] logLevels) : base(sharedOptions)
         {
             if (httpTracerMode != null)
@@ -32,13 +34,18 @@ namespace Apizr.Configuring.Request
                 OperationTimeout = operationTimeout.Value;
             if (requestTimeout.HasValue)
                 RequestTimeout = requestTimeout.Value;
-            if(requestResiliencePipelineKeys?.Length > 0)
-                ResiliencePipelineKeys[ApizrConfigurationSource.RequestAttribute] = requestResiliencePipelineKeys;
+            if(requestResiliencePipelineAttribute?.RegistryKeys.Length > 0)
+                ResiliencePipelineOptions[ApizrConfigurationSource.RequestAttribute] = [requestResiliencePipelineAttribute];
             if(requestCacheAttribute != null)
                 CacheOptions[ApizrConfigurationSource.RequestAttribute] = requestCacheAttribute;
+            if(requestMethod != null)
+                RequestMethod = requestMethod;
         }
 
         /// <inheritdoc />
         public ResilienceContext ResilienceContext { get; internal set; }
+
+        /// <inheritdoc />
+        public ApizrRequestMethod RequestMethod { get; }
     }
 }

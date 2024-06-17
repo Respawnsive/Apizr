@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Apizr.Configuring.Request;
 using Apizr.Resiliencing.Attributes;
+using Apizr.Resiliencing.Attributes.Http;
 using Apizr.Tests.Models;
 using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://reqres.in/api"), Headers("testKey1: *testValue1*", "testKey2: testValue2.1")]
+    [WebApi("https://reqres.in/api"), Headers("testKey1: *testValue1*", "testKey2: testValue2.1"), PostResiliencePipeline("TransientHttpError2")]
     public interface IReqResSimpleService
     {
         [Get("/users")]

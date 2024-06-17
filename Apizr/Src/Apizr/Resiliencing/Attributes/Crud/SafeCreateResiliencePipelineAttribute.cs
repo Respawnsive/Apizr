@@ -8,12 +8,12 @@ namespace Apizr.Resiliencing.Attributes.Crud
     /// You have to provide a strategy registry to Apizr to use this feature
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class)]
-    public class CreateResiliencePipelineAttribute : ResiliencePipelineAttributeBase
+    public class SafeCreateResiliencePipelineAttribute : ResiliencePipelineAttributeBase
     {
         /// <inheritdoc />
-        public CreateResiliencePipelineAttribute(params string[] registryKeys) : base(registryKeys)
+        public SafeCreateResiliencePipelineAttribute(params string[] registryKeys) : base(registryKeys)
         {
-            RequestMethod = ApizrRequestMethod.CrudCreate;
+            RequestMethod = ApizrRequestMethod.CrudSafeCreate;
         }
     }
 }

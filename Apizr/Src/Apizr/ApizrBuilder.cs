@@ -252,8 +252,9 @@ namespace Apizr
             OperationTimeoutAttribute properOperationTimeoutAttribute, commonOperationTimeoutAttribute;
             RequestTimeoutAttribute properRequestTimeoutAttribute, commonRequestTimeoutAttribute;
             CacheAttribute properCacheAttribute, commonCacheAttribute;
-            ResiliencePipelineAttribute properResiliencePipelineAttribute, commonResiliencePipelineAttribute;
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
+            ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes, commonResiliencePipelineAttributes;
+            var isCrudApi = typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType);
+            if (isCrudApi)
             {
                 var modelType = webApiType.GetGenericArguments().First();
                 var modelTypeInfo = modelType.GetTypeInfo();
@@ -271,8 +272,8 @@ namespace Apizr
                 commonRequestTimeoutAttribute = modelType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
                 properCacheAttribute = modelTypeInfo.GetCustomAttribute<CacheAttribute>(true);
                 commonCacheAttribute = modelType.Assembly.GetCustomAttribute<CacheAttribute>();
-                properResiliencePipelineAttribute = modelTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
-                commonResiliencePipelineAttribute = modelType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
+                properResiliencePipelineAttributes = modelTypeInfo.GetCustomAttributes<ResiliencePipelineAttributeBase>(true).ToArray();
+                commonResiliencePipelineAttributes = modelType.Assembly.GetCustomAttributes<ResiliencePipelineAttributeBase>().ToArray();
             }
             else
             {
@@ -289,10 +290,11 @@ namespace Apizr
                 commonRequestTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
                 properCacheAttribute = webApiTypeInfo.GetCustomAttribute<CacheAttribute>(true);
                 commonCacheAttribute = webApiType.Assembly.GetCustomAttribute<CacheAttribute>();
-                properResiliencePipelineAttribute = webApiTypeInfo.GetCustomAttribute<ResiliencePipelineAttribute>(true);
-                commonResiliencePipelineAttribute = webApiType.Assembly.GetCustomAttribute<ResiliencePipelineAttribute>();
+                properResiliencePipelineAttributes = webApiTypeInfo.GetCustomAttributes<ResiliencePipelineAttributeBase>(true).ToArray();
+                commonResiliencePipelineAttributes = webApiType.Assembly.GetCustomAttributes<ResiliencePipelineAttributeBase>().ToArray();
             }
 
+            // Headers redaction
             var headers = (properHeadersAttribute?.Headers ?? [])
                 .Concat(commonHeadersAttribute?.Headers ?? [])
                 .ToList();
@@ -302,6 +304,7 @@ namespace Apizr
                     if(HttpRequestMessageExtensions.TryGetHeaderKeyValue(header, out var key, out var value) && value.StartsWith("*") && value.EndsWith("*"))
                         redactHeaders.Add(key);
 
+            // Handlers parameters
             var handlersParameters = new Dictionary<string, object>();
             foreach (var commonParameterAttribute in commonParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
                 handlersParameters[commonParameterAttribute.Key!] = commonParameterAttribute.Value;
@@ -310,10 +313,14 @@ namespace Apizr
             foreach (var properParameterAttribute in properParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
                 handlersParameters[properParameterAttribute.Key!] = properParameterAttribute.Value;
 
+            // Resilience pipelines
+            foreach (var commonResiliencePipelineAttribute in commonResiliencePipelineAttributes.Where(attribute => attribute is ResiliencePipelineAttribute))
+                commonResiliencePipelineAttribute.RequestMethod = isCrudApi ? ApizrRequestMethod.AllCrud : ApizrRequestMethod.AllHttp;
+            foreach (var properResiliencePipelineAttribute in properResiliencePipelineAttributes.Where(attribute => attribute is ResiliencePipelineAttribute))
+                properResiliencePipelineAttribute.RequestMethod = isCrudApi ? ApizrRequestMethod.AllCrud : ApizrRequestMethod.AllHttp;
+
             var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, 
                 webApiType,
-                commonResiliencePipelineAttribute?.RegistryKeys, 
-                properResiliencePipelineAttribute?.RegistryKeys,
                 baseAddress,
                 basePath,
                 handlersParameters,
@@ -321,6 +328,8 @@ namespace Apizr
                 properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity),
                 properOperationTimeoutAttribute?.Timeout ?? commonOperationTimeoutAttribute?.Timeout,
                 properRequestTimeoutAttribute?.Timeout ?? commonRequestTimeoutAttribute?.Timeout,
+                commonResiliencePipelineAttributes,
+                properResiliencePipelineAttributes,
                 commonCacheAttribute,
                 properCacheAttribute,
                 redactHeaders.Any() ? header => redactHeaders.Contains(header) : null,

@@ -1,4 +1,5 @@
 ﻿using System;
+using Apizr.Configuring;
 
 namespace Apizr.Resiliencing.Attributes
 {
@@ -20,6 +21,8 @@ namespace Apizr.Resiliencing.Attributes
         /// <summary>
         /// Strategy registry keys
         /// </summary>
-        public string[] RegistryKeys { get; }
+        public string[] RegistryKeys { get; internal set; }
+
+        internal ApizrRequestMethod RequestMethod { get; set; }
     }
 }

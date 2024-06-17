@@ -7,6 +7,7 @@ using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Request;
@@ -20,11 +21,12 @@ public class ApizrRequestOptions : ApizrRequestOptionsBase, IApizrRequestOptions
         HttpMessageParts? trafficVerbosity,
         TimeSpan? operationTimeout,
         TimeSpan? requestTimeout,
-        string[] requestResiliencePipelineKeys,
+        ResiliencePipelineAttributeBase requestResiliencePipelineAttribute,
         CacheAttributeBase requestCacheAttribute,
+        ApizrRequestMethod requestMethod,
         params LogLevel[] logLevels) :
         base(sharedOptions, httpTracerMode, trafficVerbosity, operationTimeout, requestTimeout,
-            requestResiliencePipelineKeys, requestCacheAttribute, logLevels)
+            requestResiliencePipelineAttribute, requestCacheAttribute, requestMethod, logLevels)
     {
         foreach (var handlersParameter in handlersParameters)
             HandlersParameters[handlersParameter.Key] = handlersParameter.Value;

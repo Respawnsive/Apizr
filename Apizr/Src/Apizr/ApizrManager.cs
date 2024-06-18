@@ -2788,7 +2788,6 @@ namespace Apizr
             }
             else
             {
-                var test = methodCallExpression.Method.DeclaringType!.GetInterfaces();
                 var httpMethodAttribute = methodCallExpression.Method.GetCustomAttribute<HttpMethodAttribute>(true);
                 requestMethod = httpMethodAttribute?.Method.Method switch
                 {

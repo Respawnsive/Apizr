@@ -97,5 +97,15 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithHeaders(IList<string> headers,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
             ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
+
+        /// <summary>
+        /// Apply some resilience strategies by getting pipelines from registry with key matching.
+        /// </summary>
+        /// <param name="resiliencePipelineKeys">Resilience pipeline keys from the registry.</param>
+        /// <param name="methodScope">Http or Crud methods to apply pipelines on (default: null = All)</param>
+        /// <param name="duplicateStrategy">The duplicate strategy if there's any other names already (default: Add)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys, IEnumerable<ApizrRequestMethod> methodScope = null, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add);
+
     }
 }

@@ -103,15 +103,6 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithLoggedHeadersRedactionRule(Func<string, bool> shouldRedactHeaderValue, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add);
 
         /// <summary>
-        /// Apply some resilience strategies by getting pipelines from registry with key matching.
-        /// </summary>
-        /// <param name="resiliencePipelineKeys">Resilience pipeline keys from the registry.</param>
-        /// <param name="methodScope">Http or Crud methods to apply pipelines on (default: null = All)</param>
-        /// <param name="duplicateStrategy">The duplicate strategy if there's any other names already (default: Add)</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys, IEnumerable<ApizrRequestMethod> methodScope = null, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add);
-
-        /// <summary>
         /// Cache data.
         /// </summary>
         /// <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>

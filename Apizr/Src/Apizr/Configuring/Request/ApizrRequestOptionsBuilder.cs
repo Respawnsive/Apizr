@@ -216,10 +216,9 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
 
     /// <inheritdoc />
     public IApizrRequestOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys,
-        IEnumerable<ApizrRequestMethod> methodScope = null,
         ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
     {
-        methodScope ??= [ApizrRequestMethod.All];
+        var methodScope = new[]{Options.RequestMethod};
 
         switch (duplicateStrategy)
         {

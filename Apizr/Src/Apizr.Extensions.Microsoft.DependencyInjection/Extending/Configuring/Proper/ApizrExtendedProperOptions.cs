@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
@@ -23,6 +24,8 @@ namespace Apizr.Extending.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
+        /// <param name="crudModelType">The crud model type if any</param>
+        /// <param name="typeInfo">The type info</param>
         /// <param name="apizrManagerType">The manager type</param>
         /// <param name="baseAddress">The web api base address</param>
         /// <param name="basePath">The web api base path</param>
@@ -38,7 +41,10 @@ namespace Apizr.Extending.Configuring.Proper
         /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         /// <param name="logLevels">The log levels</param>
         public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions,
-            Type webApiType, Type apizrManagerType,
+            Type webApiType,
+            Type crudModelType,
+            TypeInfo typeInfo,
+            Type apizrManagerType,
             string baseAddress,
             string basePath,
             IDictionary<string, object> handlersParameters,
@@ -52,7 +58,9 @@ namespace Apizr.Extending.Configuring.Proper
             CacheAttribute properCacheAttribute,
             Func<string, bool> shouldRedactHeaderValue = null,
             params LogLevel[] logLevels) : base(sharedOptions, 
-            webApiType,
+            webApiType, 
+            crudModelType, 
+            typeInfo,
             commonResiliencePipelineAttributes,
             properResiliencePipelineAttributes,
             commonCacheAttribute, 

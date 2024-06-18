@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Shared;
@@ -19,6 +20,9 @@ namespace Apizr.Configuring.Manager
         protected ApizrManagerOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions) : base(properOptions)
         {
             WebApiType = properOptions.WebApiType;
+            CrudModelType = properOptions.CrudModelType;
+            TypeInfo = properOptions.TypeInfo;
+            IsCrudApi = properOptions.IsCrudApi;
             Logger = properOptions.Logger;
             RefitSettings = commonOptions.RefitSettings;
             ApizrConfigurationSection = commonOptions.ApizrConfigurationSection;
@@ -26,6 +30,15 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public Type WebApiType { get; }
+
+        /// <inheritdoc />
+        public Type CrudModelType { get; }
+
+        /// <inheritdoc />
+        public TypeInfo TypeInfo { get; }
+
+        /// <inheritdoc />
+        public bool IsCrudApi { get; }
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }

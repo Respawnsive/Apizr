@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
@@ -21,6 +22,8 @@ namespace Apizr.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
+        /// <param name="crudModelType">The crud model type if any</param>
+        /// <param name="typeInfo">The type info</param>
         /// <param name="baseAddress">The web api base address</param>
         /// <param name="basePath">The web api base path</param>
         /// <param name="handlersParameters">Some handlers parameters</param>
@@ -36,6 +39,8 @@ namespace Apizr.Configuring.Proper
         /// <param name="logLevels">The log levels</param>
         public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions,
             Type webApiType,
+            Type crudModelType,
+            TypeInfo typeInfo,
             string baseAddress,
             string basePath,
             IDictionary<string, object> handlersParameters,
@@ -48,7 +53,7 @@ namespace Apizr.Configuring.Proper
             CacheAttribute commonCacheAttribute,
             CacheAttribute properCacheAttribute,
             Func<string, bool> shouldRedactHeaderValue = null,
-            params LogLevel[] logLevels) : base(sharedOptions, webApiType, commonResiliencePipelineAttributes, 
+            params LogLevel[] logLevels) : base(sharedOptions, webApiType, crudModelType, typeInfo, commonResiliencePipelineAttributes, 
             properResiliencePipelineAttributes, commonCacheAttribute, properCacheAttribute, shouldRedactHeaderValue)
         {
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;

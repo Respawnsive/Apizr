@@ -246,6 +246,8 @@ namespace Apizr
                     basePath = webApiAttribute.BaseAddressOrPath;
             }
 
+            Type crudModelType = null;
+            TypeInfo typeInfo = null;
             IList<HandlerParameterAttribute> properParameterAttributes, commonParameterAttributes;
             HeadersAttribute properHeadersAttribute, commonHeadersAttribute;
             LogAttribute properLogAttribute, commonLogAttribute;
@@ -256,41 +258,41 @@ namespace Apizr
             var isCrudApi = typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType);
             if (isCrudApi)
             {
-                var modelType = webApiType.GetGenericArguments().First();
-                var modelTypeInfo = modelType.GetTypeInfo();
-                properParameterAttributes = modelTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true)
+                crudModelType = webApiType.GetGenericArguments().First();
+                typeInfo = crudModelType.GetTypeInfo();
+                properParameterAttributes = typeInfo.GetCustomAttributes<HandlerParameterAttribute>(true)
                     .Where(att => att is not CrudHandlerParameterAttribute)
                     .ToList();
-                commonParameterAttributes = modelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
-                properHeadersAttribute = modelTypeInfo.GetCustomAttribute<HeadersAttribute>(true);
-                commonHeadersAttribute = modelType.Assembly.GetCustomAttribute<HeadersAttribute>();
-                properLogAttribute = modelTypeInfo.GetCustomAttribute<LogAttribute>(true);
-                commonLogAttribute = modelType.Assembly.GetCustomAttribute<LogAttribute>();
-                properOperationTimeoutAttribute = modelTypeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
-                commonOperationTimeoutAttribute = modelType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
-                properRequestTimeoutAttribute = modelTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
-                commonRequestTimeoutAttribute = modelType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                properCacheAttribute = modelTypeInfo.GetCustomAttribute<CacheAttribute>(true);
-                commonCacheAttribute = modelType.Assembly.GetCustomAttribute<CacheAttribute>();
-                properResiliencePipelineAttributes = modelTypeInfo.GetCustomAttributes<ResiliencePipelineAttributeBase>(true).ToArray();
-                commonResiliencePipelineAttributes = modelType.Assembly.GetCustomAttributes<ResiliencePipelineAttributeBase>().ToArray();
+                commonParameterAttributes = crudModelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
+                properHeadersAttribute = typeInfo.GetCustomAttribute<HeadersAttribute>(true);
+                commonHeadersAttribute = crudModelType.Assembly.GetCustomAttribute<HeadersAttribute>();
+                properLogAttribute = typeInfo.GetCustomAttribute<LogAttribute>(true);
+                commonLogAttribute = crudModelType.Assembly.GetCustomAttribute<LogAttribute>();
+                properOperationTimeoutAttribute = typeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
+                commonOperationTimeoutAttribute = crudModelType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
+                properRequestTimeoutAttribute = typeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
+                commonRequestTimeoutAttribute = crudModelType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
+                properCacheAttribute = typeInfo.GetCustomAttribute<CacheAttribute>(true);
+                commonCacheAttribute = crudModelType.Assembly.GetCustomAttribute<CacheAttribute>();
+                properResiliencePipelineAttributes = typeInfo.GetCustomAttributes<ResiliencePipelineAttributeBase>(true).ToArray();
+                commonResiliencePipelineAttributes = crudModelType.Assembly.GetCustomAttributes<ResiliencePipelineAttributeBase>().ToArray();
             }
             else
             {
-                var webApiTypeInfo = webApiType.GetTypeInfo();
-                properParameterAttributes = webApiTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
+                typeInfo = webApiType.GetTypeInfo();
+                properParameterAttributes = typeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
                 commonParameterAttributes = webApiType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
-                properHeadersAttribute = webApiTypeInfo.GetCustomAttribute<HeadersAttribute>(true);
+                properHeadersAttribute = typeInfo.GetCustomAttribute<HeadersAttribute>(true);
                 commonHeadersAttribute = webApiType.Assembly.GetCustomAttribute<HeadersAttribute>();
-                properLogAttribute = webApiTypeInfo.GetCustomAttribute<LogAttribute>(true);
+                properLogAttribute = typeInfo.GetCustomAttribute<LogAttribute>(true);
                 commonLogAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
-                properOperationTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
+                properOperationTimeoutAttribute = typeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
                 commonOperationTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
-                properRequestTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
+                properRequestTimeoutAttribute = typeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
                 commonRequestTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                properCacheAttribute = webApiTypeInfo.GetCustomAttribute<CacheAttribute>(true);
+                properCacheAttribute = typeInfo.GetCustomAttribute<CacheAttribute>(true);
                 commonCacheAttribute = webApiType.Assembly.GetCustomAttribute<CacheAttribute>();
-                properResiliencePipelineAttributes = webApiTypeInfo.GetCustomAttributes<ResiliencePipelineAttributeBase>(true).ToArray();
+                properResiliencePipelineAttributes = typeInfo.GetCustomAttributes<ResiliencePipelineAttributeBase>(true).ToArray();
                 commonResiliencePipelineAttributes = webApiType.Assembly.GetCustomAttributes<ResiliencePipelineAttributeBase>().ToArray();
             }
 
@@ -321,6 +323,8 @@ namespace Apizr
 
             var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, 
                 webApiType,
+                crudModelType,
+                typeInfo,
                 baseAddress,
                 basePath,
                 handlersParameters,

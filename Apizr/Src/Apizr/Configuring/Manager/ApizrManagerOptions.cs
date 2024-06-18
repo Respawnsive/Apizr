@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Common;
@@ -174,6 +175,15 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public Type WebApiType => Options.WebApiType;
+
+        /// <inheritdoc />
+        public Type CrudModelType => Options.CrudModelType;
+
+        /// <inheritdoc />
+        public TypeInfo TypeInfo => Options.TypeInfo;
+
+        /// <inheritdoc />
+        public bool IsCrudApi => Options.IsCrudApi;
 
         /// <inheritdoc />
         public Uri BaseUri => Options.BaseUri;

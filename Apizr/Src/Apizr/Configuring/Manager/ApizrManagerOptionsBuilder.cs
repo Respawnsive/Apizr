@@ -51,9 +51,7 @@ namespace Apizr.Configuring.Manager
             if (configurationSection is not null)
             {
                 var isApizrSection = configurationSection.Key == "Apizr";
-                var apiName = typeof(ICrudApi<,,,>).IsAssignableFromGenericType(Options.WebApiType)
-                    ? Options.WebApiType.GetGenericArguments().First().Name
-                    : Options.WebApiType.Name;
+                var apiName = Options.CrudModelType?.Name ?? Options.WebApiType.Name;
                 var configs = configurationSection.GetChildren().Where(config =>
                     !isApizrSection || config.Key == "Common" || config.Key == apiName);
                 foreach (var config in configs)

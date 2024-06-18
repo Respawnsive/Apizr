@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,17 +24,13 @@ using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
-using Apizr.Requesting;
 using Apizr.Requesting.Attributes;
 using Apizr.Resiliencing;
 using Apizr.Resiliencing.Attributes;
-using Apizr.Resiliencing.Attributes.Crud;
-using Apizr.Resiliencing.Attributes.Http;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
 using Refit;
-using DeleteResiliencePipelineAttribute = Apizr.Resiliencing.Attributes.Crud.DeleteResiliencePipelineAttribute;
 
 namespace Apizr
 {
@@ -2228,17 +2223,21 @@ namespace Apizr
                 return redactHeaders;
 
             HeadersAttribute headersAttribute;
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
+            if (_apizrOptions.IsCrudApi)
             {
                 // Crud api headers
-                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
-                headersAttribute = methodDetails.MethodInfo.Name switch // Request headers
+                headersAttribute = methodDetails.RequestMethod switch // Request headers
                 {
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllHeadersAttribute>(true),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadHeadersAttribute>(true),
-                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateHeadersAttribute>(true),
-                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateHeadersAttribute>(true),
-                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteHeadersAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudReadAll || method == ApizrRequestMethod.CrudSafeReadAll =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<ReadAllHeadersAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudRead || method == ApizrRequestMethod.CrudSafeRead =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<ReadHeadersAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudCreate || method == ApizrRequestMethod.CrudSafeCreate =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<CreateHeadersAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudUpdate || method == ApizrRequestMethod.CrudSafeUpdate =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<UpdateHeadersAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudDelete || method == ApizrRequestMethod.CrudSafeDelete =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<DeleteHeadersAttribute>(true),
                     _ => null
                 };
             }
@@ -2271,17 +2270,21 @@ namespace Apizr
             if (_loggingMethodsSet.TryGetValue(methodDetails, out var logAttribute))
                 return logAttribute;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
+            if (_apizrOptions.IsCrudApi)
             {
                 // Crud api logging
-                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
-                logAttribute = methodDetails.MethodInfo.Name switch // Request logging
+                logAttribute = methodDetails.RequestMethod switch // Request logging
                 {
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<LogReadAllAttribute>(true),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<LogReadAttribute>(true),
-                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<LogCreateAttribute>(true),
-                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<LogUpdateAttribute>(true),
-                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<LogDeleteAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudReadAll || method == ApizrRequestMethod.CrudSafeReadAll =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<LogReadAllAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudRead || method == ApizrRequestMethod.CrudSafeRead =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<LogReadAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudCreate || method == ApizrRequestMethod.CrudSafeCreate =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<LogCreateAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudUpdate || method == ApizrRequestMethod.CrudSafeUpdate =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<LogUpdateAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudDelete || method == ApizrRequestMethod.CrudSafeDelete =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<LogDeleteAttribute>(true),
                     _ => null
                 };
             }
@@ -2451,13 +2454,14 @@ namespace Apizr
             if(_cachingMethodsSet.TryGetValue(methodDetails, out var cacheAttribute))
                 return cacheAttribute;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(_apizrOptions.WebApiType)) // Crud api method
+            if (_apizrOptions.IsCrudApi) // Crud api method
             {
-                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
-                cacheAttribute = methodDetails.MethodInfo.Name switch // Specific method policies
+                cacheAttribute = methodDetails.RequestMethod switch // Specific method policies
                 {
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<CacheReadAllAttribute>(true),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<CacheReadAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudReadAll || method == ApizrRequestMethod.CrudSafeReadAll =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<CacheReadAllAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudRead || method == ApizrRequestMethod.CrudSafeRead =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<CacheReadAttribute>(true),
                     _ => null
                 };
             }
@@ -2585,7 +2589,7 @@ namespace Apizr
 
         private ResiliencePipelineAttributeBase GetMethodResiliencePipelineAttribute(MethodDetails methodDetails)
         {
-            if (methodDetails == null || methodDetails.IsCrudApi)
+            if (methodDetails == null || _apizrOptions.IsCrudApi)
                 return null;
 
             if (_resilienceMethodsSet.TryGetValue(methodDetails, out var resilienceAttribute))
@@ -2610,16 +2614,21 @@ namespace Apizr
             if (_handlerParameterMethodsSet.TryGetValue(methodDetails, out var handlerParameterAttributes))
                 return handlerParameterAttributes;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
+            if (_apizrOptions.IsCrudApi)
             {
                 // Crud api parameters
-                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
-                handlerParameterAttributes = methodDetails.MethodInfo.Name switch // Request parameters
+                handlerParameterAttributes = methodDetails.RequestMethod switch // Request parameters
                 {
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttributes<ReadAllHandlerParameterAttribute>(true)
-                        .Cast<HandlerParameterAttribute>().ToList(),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttributes<ReadHandlerParameterAttribute>(true)
-                        .Cast<HandlerParameterAttribute>().ToList(),
+                    var method when method == ApizrRequestMethod.CrudReadAll || method == ApizrRequestMethod.CrudSafeReadAll =>
+                        _apizrOptions.TypeInfo
+                            .GetCustomAttributes<ReadAllHandlerParameterAttribute>(true)
+                            .Cast<HandlerParameterAttribute>()
+                            .ToList(),
+                    var method when method == ApizrRequestMethod.CrudRead || method == ApizrRequestMethod.CrudSafeRead =>
+                        _apizrOptions.TypeInfo
+                            .GetCustomAttributes<ReadHandlerParameterAttribute>(true)
+                            .Cast<HandlerParameterAttribute>()
+                            .ToList(),
                     _ => null
                 };
             }
@@ -2645,17 +2654,21 @@ namespace Apizr
             if (_operationTimeoutMethodsSet.TryGetValue(methodDetails, out var timeoutAttribute))
                 return timeoutAttribute;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
+            if (_apizrOptions.IsCrudApi)
             {
                 // Crud api operation timeout
-                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
-                timeoutAttribute = methodDetails.MethodInfo.Name switch // Operation timeout
+                timeoutAttribute = methodDetails.RequestMethod switch // Operation timeout
                 {
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllOperationTimeoutAttribute>(true),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadOperationTimeoutAttribute>(true),
-                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateOperationTimeoutAttribute>(true),
-                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateOperationTimeoutAttribute>(true),
-                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteOperationTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudReadAll || method == ApizrRequestMethod.CrudSafeReadAll =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<ReadAllOperationTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudRead || method == ApizrRequestMethod.CrudSafeRead =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<ReadOperationTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudCreate || method == ApizrRequestMethod.CrudSafeCreate =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<CreateOperationTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudUpdate || method == ApizrRequestMethod.CrudSafeUpdate =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<UpdateOperationTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudDelete || method == ApizrRequestMethod.CrudSafeDelete =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<DeleteOperationTimeoutAttribute>(true),
                     _ => null
                 };
             }
@@ -2675,17 +2688,21 @@ namespace Apizr
             if (_requestTimeoutMethodsSet.TryGetValue(methodDetails, out var timeoutAttribute))
                 return timeoutAttribute;
 
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(methodDetails.WebApiType))
+            if (_apizrOptions.IsCrudApi)
             {
                 // Crud api request timeout
-                var modelType = methodDetails.WebApiType.GetGenericArguments().First();
-                timeoutAttribute = methodDetails.MethodInfo.Name switch // Request timeout
+                timeoutAttribute = methodDetails.RequestMethod switch // Request timeout
                 {
-                    "ReadAll" => modelType.GetTypeInfo().GetCustomAttribute<ReadAllRequestTimeoutAttribute>(true),
-                    "Read" => modelType.GetTypeInfo().GetCustomAttribute<ReadRequestTimeoutAttribute>(true),
-                    "Create" => modelType.GetTypeInfo().GetCustomAttribute<CreateRequestTimeoutAttribute>(true),
-                    "Update" => modelType.GetTypeInfo().GetCustomAttribute<UpdateRequestTimeoutAttribute>(true),
-                    "Delete" => modelType.GetTypeInfo().GetCustomAttribute<DeleteRequestTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudReadAll || method == ApizrRequestMethod.CrudSafeReadAll =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<ReadAllRequestTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudRead || method == ApizrRequestMethod.CrudSafeRead =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<ReadRequestTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudCreate || method == ApizrRequestMethod.CrudSafeCreate =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<CreateRequestTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudUpdate || method == ApizrRequestMethod.CrudSafeUpdate =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<UpdateRequestTimeoutAttribute>(true),
+                    var method when method == ApizrRequestMethod.CrudDelete || method == ApizrRequestMethod.CrudSafeDelete =>
+                        _apizrOptions.TypeInfo.GetCustomAttribute<DeleteRequestTimeoutAttribute>(true),
                     _ => null
                 };
             }
@@ -2735,30 +2752,24 @@ namespace Apizr
         private MethodDetails GetMethodDetails(Expression restExpression)
         {
             var webApiType = typeof(TWebApi);
-            Type crudModelType = null;
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType)) // Crud api method
-                crudModelType = webApiType.GetGenericArguments().First();
             var methodCallExpression = GetMethodCallExpression(restExpression);
-            var requestMethod = GetApizrRequestMethod(methodCallExpression, crudModelType != null);
+            var requestMethod = GetApizrRequestMethod(methodCallExpression);
 
-            return new MethodDetails(webApiType, crudModelType, methodCallExpression.Method, requestMethod);
+            return new MethodDetails(webApiType, methodCallExpression.Method, requestMethod);
         }
 
         private MethodDetails GetMethodDetails<TResult>(Expression restExpression)
         {
             var webApiType = typeof(TWebApi);
-            Type crudModelType = null;
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType)) // Crud api method
-                crudModelType = webApiType.GetGenericArguments().First();
             var methodCallExpression = GetMethodCallExpression<TResult>(restExpression);
-            var requestMethod = GetApizrRequestMethod(methodCallExpression, crudModelType != null);
-            return new MethodDetails(webApiType, crudModelType, methodCallExpression.Method, requestMethod);
+            var requestMethod = GetApizrRequestMethod(methodCallExpression);
+            return new MethodDetails(webApiType, methodCallExpression.Method, requestMethod);
         }
 
-        private ApizrRequestMethod GetApizrRequestMethod(MethodCallExpression methodCallExpression, bool isCrudApi)
+        private ApizrRequestMethod GetApizrRequestMethod(MethodCallExpression methodCallExpression)
         {
             ApizrRequestMethod requestMethod;
-            if (isCrudApi) // Crud api method
+            if (_apizrOptions.IsCrudApi) // Crud api method
             {
                 requestMethod = methodCallExpression.Method.Name switch // Specific method policies
                 {
@@ -2777,8 +2788,9 @@ namespace Apizr
             }
             else
             {
+                var test = methodCallExpression.Method.DeclaringType!.GetInterfaces();
                 var httpMethodAttribute = methodCallExpression.Method.GetCustomAttribute<HttpMethodAttribute>(true);
-                requestMethod = httpMethodAttribute!.Method.Method switch
+                requestMethod = httpMethodAttribute?.Method.Method switch
                 {
                     var method when method == ApizrRequestMethod.HttpGet.Method => ApizrRequestMethod.HttpGet,
                     var method when method == ApizrRequestMethod.HttpPost.Method => ApizrRequestMethod.HttpPost,
@@ -2789,7 +2801,7 @@ namespace Apizr
 #endif
                     var method when method == ApizrRequestMethod.HttpHead.Method => ApizrRequestMethod.HttpHead,
                     var method when method == ApizrRequestMethod.HttpOptions.Method => ApizrRequestMethod.HttpOptions,
-                    _ => throw new NotImplementedException($"{httpMethodAttribute!.Method.Method} method is not yet handled by Apizr. Please open an issue if needed")
+                    _ => throw new NotImplementedException($"{httpMethodAttribute?.Method.Method} method is not yet handled by Apizr. Please open an issue if needed")
                 };
             }
 
@@ -2982,23 +2994,18 @@ namespace Apizr
 
         class MethodDetails
         {
-            public MethodDetails(Type webApiType, Type crudModelType, MethodInfo methodInfo, ApizrRequestMethod requestMethod)
+            public MethodDetails(Type webApiType, MethodInfo methodInfo, ApizrRequestMethod requestMethod)
             {
                 WebApiType = webApiType;
-                CrudModelType = crudModelType;
                 MethodInfo = methodInfo;
                 RequestMethod = requestMethod;
             }
 
-            public Type WebApiType { get; }
-
-            public Type CrudModelType { get; }
+            private Type WebApiType { get; }
 
             public MethodInfo MethodInfo { get; }
 
             public ApizrRequestMethod RequestMethod { get; }
-
-            public bool IsCrudApi => CrudModelType != null;
 
             public override int GetHashCode() =>
                 WebApiType.GetHashCode() * 23 * MethodInfo.GetHashCode() * 23 * 29;

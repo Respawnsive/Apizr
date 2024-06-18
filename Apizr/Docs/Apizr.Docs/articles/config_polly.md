@@ -2,9 +2,51 @@
 
 Apizr comes with a `ResiliencePipeline` attribute to apply some resilience strategies on apis, handled by [Polly](https://github.com/App-vNext/Polly).
 
-You’ll find also resilience pipeline attributes dedicated to CRUD apis like `CreateResiliencePipeline`, `ReadResiliencePipeline` and so on…
+You’ll find also resilience pipeline attributes dedicated to each Http methods like `GetResiliencePipeline`, `PostResiliencePipeline` and so on, and some others to CRUD apis like `CreateResiliencePipeline`, `ReadResiliencePipeline` and so on…
 
 Polly will help you to manage some retry scenarios but can do more. Please refer to its [official documentation](https://github.com/App-vNext/Polly) if you’d like to know more about it.
+
+We could set pipelines to requests at:
+- Design time with attributes
+- Register time with fluent options
+- Request time with fluent options
+
+### Designing
+
+```csharp
+[assembly:ResiliencePipeline("TransientHttpError")]
+namespace Apizr.Sample
+{
+    [WebApi("https://reqres.in/api")]
+    public interface IReqResService
+    {
+        [Get("/users")]
+        Task<UserList> GetUsersAsync();
+    }
+}
+```
+
+Here we are using the `ResiliencePipeline` attribute at assembly level (all methods of all apis), 
+but you can use it at interface/class level (all methods of one api) or method level (decorated api methods only).
+
+You may want to set pipelines to a group of methods instead, like all Get http methods or Post ones, or maybe all Create crud methods or Read ones.
+You can do it at assembly or interface/class levels thanks to one of the provided restricted attributes:
+- Http methods grouping: 
+  - `GetResiliencePipeline`
+  - `PostResiliencePipeline`
+  - `PutResiliencePipeline`
+  - `DeleteResiliencePipeline`
+  - `PatchResiliencePipeline`
+  - `OptionsResiliencePipeline`
+  - `HeadResiliencePipeline`
+- Crud methods grouping: 
+  - `CreateResiliencePipeline` / `SafeCreateResiliencePipeline`
+  - `ReadResiliencePipeline` / `SafeReadResiliencePipeline`
+  - `ReadAllResiliencePipeline` / `SafeReadAllResiliencePipeline`
+  - `UpdateResiliencePipeline` / `SafeUpdateResiliencePipeline`
+  - `DeleteResiliencePipeline` / `SafeDeleteResiliencePipeline`
+
+As usual, you can mix levels and pipelines as all will be wrapped in the end.
 
 ### Registering
 
@@ -71,34 +113,28 @@ Note that `TransientHttpError` here is a key that will be used to identify the p
 
 ***
 
-### Defining
-
-Now we can use it thanks to attribute decoration:
-
+Optionaly, you can set pipeline keys fluently here at register time, no matter of previous attribute decorations:
 ```csharp
-[assembly:ResiliencePipeline("TransientHttpError")]
-namespace Apizr.Sample
-{
-    [WebApi("https://reqres.in/api")]
-    public interface IReqResService
-    {
-        [Get("/users")]
-        Task<UserList> GetUsersAsync();
-    }
-}
+// pipeline keys
+options => options.WithResiliencePipelineKeys(["TransientHttpError"])
+
+// OR the same with method scope
+options => options.WithResiliencePipelineKeys(["TransientHttpError"], [ApizrRequestMethod.HttpGet, ApizrRequestMethod.CrudRead])
 ```
-
-Here we are using it at assembly level, telling Apizr to apply `TransiantHttpError` policy to all apis.
-
-You can mix levels and mix pipelines as all will be wrapped in the end.
 
 ### Using
 
-Apizr will automatically tell Polly to handle request of any decorated api method or parent interface or assembly.
+Apizr will automatically tell Polly to handle request with pipelines that get a key matching the one provided by attributes or fluent options.
 
-### Configuring
+Optionaly, you can set pipeline keys fluently here at request time, no matter of previous attribute decorations or fluent options registration:
+```csharp
+// pipeline keys
+options => options.WithResiliencePipelineKeys(["TransientHttpError"])
+```
 
-Some advanced options are available to configure Polly context itself at any level:
+### Tunning
+
+Some advanced options are also available to configure Polly context itself at any level:
 
 ```csharp
 options => options.WithResilienceContextOptions(contextOptions =>

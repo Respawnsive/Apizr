@@ -987,8 +987,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMapsterMappingHandler_Should_Map_Data()
         {
-            var mapsterConfig = new TypeAdapterConfig();
-            mapsterConfig.NewConfig<User, MinUser>()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -998,7 +999,7 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace))
                 .ConfigureServices((_, services) =>
                 {
-                    services.AddSingleton(mapsterConfig);
+                    services.AddSingleton(typeAdapterConfig);
                     services.AddSingleton<IMapper, ServiceMapper>();
 
                     services.AddApizr(
@@ -1031,8 +1032,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMappingHandler_With_Mapster_Should_Map_Data()
         {
-            var mapsterConfig = new TypeAdapterConfig();
-            mapsterConfig.NewConfig<User, MinUser>()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -1042,7 +1044,7 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace))
                 .ConfigureServices((_, services) =>
                 {
-                    services.AddSingleton(mapsterConfig);
+                    services.AddSingleton(typeAdapterConfig);
                     services.AddSingleton<IMapper, ServiceMapper>();
 
                     services.AddApizr(
@@ -1550,7 +1552,7 @@ namespace Apizr.Tests
             apizrTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             apizrCustomTransferManagerResult.Should().NotBeNull();
             apizrCustomTransferManagerResult.Length.Should().BePositive();
 
@@ -1566,7 +1568,7 @@ namespace Apizr.Tests
             apizrDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             apizrCustomDownloadManagerResult.Should().NotBeNull();
             apizrCustomDownloadManagerResult.Length.Should().BePositive();
 
@@ -1604,7 +1606,7 @@ namespace Apizr.Tests
             regTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
             regCustomTransferTypedManagerResult.Length.Should().BePositive();
 
@@ -1620,7 +1622,7 @@ namespace Apizr.Tests
             regDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             regCustomDownloadTypedManagerResult.Should().NotBeNull();
             regCustomDownloadTypedManagerResult.Length.Should().BePositive();
         }
@@ -1645,7 +1647,8 @@ namespace Apizr.Tests
                         .AddTransferManager(options => options
                             .WithLogging()
                             .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
-                            .WithProgress()));
+                            .WithProgress()
+                            .IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1683,7 +1686,8 @@ namespace Apizr.Tests
                         .AddTransferManager(options => options
                             .WithLogging()
                             .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
-                            .WithProgress(progress)));
+                            .WithProgress(progress)
+                            .IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1717,7 +1721,8 @@ namespace Apizr.Tests
                             .AddUploadManagerFor<ITransferUndefinedApi>(),
                         options => options
                             .WithLogging()
-                            .WithBaseAddress("https://httpbin.org/post"));
+                            .WithBaseAddress("https://httpbin.org/post")
+                            .IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1845,7 +1850,8 @@ namespace Apizr.Tests
                                 .AddUploadManagerFor<ITransferUndefinedApi>()),
                         options => options
                             .WithLogging()
-                            .WithBaseAddress("https://httpbin.org/post"));
+                            .WithBaseAddress("https://httpbin.org/post")
+                            .IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1969,7 +1975,8 @@ namespace Apizr.Tests
                         .AddTransferManager(options => options
                             .WithLogging()
                             .WithBaseAddress("https://httpbin.org/post")
-                            .WithProgress()));
+                            .WithProgress()
+                            .IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -2052,7 +2059,8 @@ namespace Apizr.Tests
                                     .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
                         config => config
                             .WithLogging()
-                            .WithFileTransferMediation());
+                            .WithFileTransferMediation()
+                            .IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -2064,7 +2072,7 @@ namespace Apizr.Tests
             var apizrMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator>();
 
             apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test100k.db"));
+            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
         }
@@ -2087,7 +2095,8 @@ namespace Apizr.Tests
                                 .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")),
                         config => config
                             .WithLogging()
-                            .WithFileTransferOptionalMediation());
+                            .WithFileTransferOptionalMediation()
+                            .IgnoreMessageParts(HttpMessageParts.ResponseBody));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -2099,7 +2108,7 @@ namespace Apizr.Tests
             var apizrMediator = scope.ServiceProvider.GetRequiredService<IApizrOptionalMediator>();
 
             apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadOptionalQuery(new FileInfo("test100k.db"));
+            var result = await apizrMediator.SendDownloadOptionalQuery(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             result.Should().NotBeNull();
             result.Match(fileInfo =>
                 {
@@ -2327,7 +2336,7 @@ namespace Apizr.Tests
                             .WithLogging()
                             .WithHeaders(serviceProvider => new[]
                             {
-                                $"TestJsonString: {serviceProvider.GetRequiredService<IOptions<TestSettings>>().Value.TestJsonString}",
+                                serviceProvider.GetRequiredService<IOptions<TestSettings>>().Value.TestJsonString,
                                 "testKey3: testValue3"
                             }));
 
@@ -2344,8 +2353,8 @@ namespace Apizr.Tests
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithHeaders(["testKey4: testValue4"]));
             watcher.Headers.Should().NotBeNull();
-            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "TestJsonString", "testKey3", "testKey4");
-            watcher.Headers.GetValues("TestJsonString").Should().HaveCount(1).And.Contain("TestJsonString");
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testSettingsKey1", "testKey3", "testKey4");
+            watcher.Headers.GetValues("testSettingsKey1").Should().HaveCount(1).And.Contain("testSettingsValue1.1");
         }
 
         [Fact]

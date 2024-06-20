@@ -85,13 +85,19 @@ namespace Apizr.Logging
 
             // Ignore some message parts if asked to
             if ((requestOptions != null || request.TryGetApizrRequestOptions(out requestOptions)) &&
-                requestOptions.HandlersParameters.TryGetValue(Constants.ApizrIgnoreMessagePartsKey,
-                    out var ignoreMessagePartsProperty) &&
+                requestOptions.HandlersParameters.TryGetValue(Constants.ApizrIgnoreMessagePartsKey, out var ignoreMessagePartsProperty) &&
                 ignoreMessagePartsProperty is HttpMessageParts ignoreMessageParts)
             {
-                foreach (var ignoreMessagePart in Enum.GetValues(ignoreMessageParts.GetType()).Cast<Enum>()
-                             .Where(ignoreMessageParts.HasFlag).Cast<HttpMessageParts>())
-                    verbosity &= ~ignoreMessagePart;
+                if(ignoreMessageParts.HasFlag(HttpMessageParts.None))
+                    verbosity = HttpMessageParts.All;
+                else if(verbosity > HttpMessageParts.None)
+                {
+                    foreach (HttpMessageParts flag in Enum.GetValues(typeof(HttpMessageParts)))
+                    {
+                        if (ignoreMessageParts.HasFlag(flag))
+                            verbosity = verbosity.IgnoreMessageParts(flag);
+                    }
+                }
             }
 
             try

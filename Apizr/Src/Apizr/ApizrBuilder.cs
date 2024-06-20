@@ -246,55 +246,38 @@ namespace Apizr
                     basePath = webApiAttribute.BaseAddressOrPath;
             }
 
-            Type crudModelType = null;
-            TypeInfo typeInfo = null;
-            IList<HandlerParameterAttribute> properParameterAttributes, commonParameterAttributes;
-            HeadersAttribute properHeadersAttribute, commonHeadersAttribute;
-            LogAttribute properLogAttribute, commonLogAttribute;
-            OperationTimeoutAttribute properOperationTimeoutAttribute, commonOperationTimeoutAttribute;
-            RequestTimeoutAttribute properRequestTimeoutAttribute, commonRequestTimeoutAttribute;
-            CacheAttribute properCacheAttribute, commonCacheAttribute;
-            ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes, commonResiliencePipelineAttributes;
             var isCrudApi = typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType);
-            if (isCrudApi)
-            {
-                crudModelType = webApiType.GetGenericArguments().First();
-                typeInfo = crudModelType.GetTypeInfo();
-                properParameterAttributes = typeInfo.GetCustomAttributes<HandlerParameterAttribute>(true)
-                    .Where(att => att is not CrudHandlerParameterAttribute)
-                    .ToList();
-                commonParameterAttributes = crudModelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
-                properHeadersAttribute = typeInfo.GetCustomAttribute<HeadersAttribute>(true);
-                commonHeadersAttribute = crudModelType.Assembly.GetCustomAttribute<HeadersAttribute>();
-                properLogAttribute = typeInfo.GetCustomAttribute<LogAttribute>(true);
-                commonLogAttribute = crudModelType.Assembly.GetCustomAttribute<LogAttribute>();
-                properOperationTimeoutAttribute = typeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
-                commonOperationTimeoutAttribute = crudModelType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
-                properRequestTimeoutAttribute = typeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
-                commonRequestTimeoutAttribute = crudModelType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                properCacheAttribute = typeInfo.GetCustomAttribute<CacheAttribute>(true);
-                commonCacheAttribute = crudModelType.Assembly.GetCustomAttribute<CacheAttribute>();
-                properResiliencePipelineAttributes = typeInfo.GetCustomAttributes<ResiliencePipelineAttributeBase>(true).ToArray();
-                commonResiliencePipelineAttributes = crudModelType.Assembly.GetCustomAttributes<ResiliencePipelineAttributeBase>().ToArray();
-            }
-            else
-            {
-                typeInfo = webApiType.GetTypeInfo();
-                properParameterAttributes = typeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
-                commonParameterAttributes = webApiType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
-                properHeadersAttribute = typeInfo.GetCustomAttribute<HeadersAttribute>(true);
-                commonHeadersAttribute = webApiType.Assembly.GetCustomAttribute<HeadersAttribute>();
-                properLogAttribute = typeInfo.GetCustomAttribute<LogAttribute>(true);
-                commonLogAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
-                properOperationTimeoutAttribute = typeInfo.GetCustomAttribute<OperationTimeoutAttribute>(true);
-                commonOperationTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<OperationTimeoutAttribute>();
-                properRequestTimeoutAttribute = typeInfo.GetCustomAttribute<RequestTimeoutAttribute>(true);
-                commonRequestTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<RequestTimeoutAttribute>();
-                properCacheAttribute = typeInfo.GetCustomAttribute<CacheAttribute>(true);
-                commonCacheAttribute = webApiType.Assembly.GetCustomAttribute<CacheAttribute>();
-                properResiliencePipelineAttributes = typeInfo.GetCustomAttributes<ResiliencePipelineAttributeBase>(true).ToArray();
-                commonResiliencePipelineAttributes = webApiType.Assembly.GetCustomAttributes<ResiliencePipelineAttributeBase>().ToArray();
-            }
+            var crudModelType = isCrudApi ? webApiType.GetGenericArguments().First() : null;
+            var typeInfo = isCrudApi ? crudModelType.GetTypeInfo() : webApiType.GetTypeInfo();
+
+            var properDeclaringTypeAttributes = typeInfo.DeclaringType != null
+                ? typeInfo.DeclaringType.GetTypeInfo().GetCustomAttributes(true)
+                : typeInfo.GetTypeInfo().GetCustomAttributes(true);
+
+            var properInheritedAttributes = typeInfo.DeclaringType != null
+                ? typeInfo.DeclaringType.GetInterfaces().SelectMany(i => i.GetTypeInfo().GetCustomAttributes(true)).ToArray()
+                : typeInfo.GetInterfaces().SelectMany(i => i.GetTypeInfo().GetCustomAttributes(true)).ToArray();
+
+            var properAttributesAsc = properDeclaringTypeAttributes.Concat(properInheritedAttributes).ToList();
+            var properAttributesDesc = properInheritedAttributes.Reverse().Concat(properDeclaringTypeAttributes).ToList();
+            var commonAttributes = typeInfo.Assembly.GetCustomAttributes().ToList();
+
+            var properParameterAttributes = isCrudApi
+                ? properAttributesDesc.OfType<HandlerParameterAttribute>().Where(att => att is not CrudHandlerParameterAttribute).ToList()
+                : properAttributesDesc.OfType<HandlerParameterAttribute>().ToList();
+            var commonParameterAttributes = commonAttributes.OfType<HandlerParameterAttribute>().ToList();
+            var properHeadersAttribute = properAttributesAsc.OfType<HeadersAttribute>().FirstOrDefault();
+            var commonHeadersAttribute = commonAttributes.OfType<HeadersAttribute>().FirstOrDefault();
+            var properLogAttribute = properAttributesAsc.OfType<LogAttribute>().FirstOrDefault();
+            var commonLogAttribute = commonAttributes.OfType<LogAttribute>().FirstOrDefault();
+            var properOperationTimeoutAttribute = properAttributesAsc.OfType<OperationTimeoutAttribute>().FirstOrDefault();
+            var commonOperationTimeoutAttribute = commonAttributes.OfType<OperationTimeoutAttribute>().FirstOrDefault();
+            var properRequestTimeoutAttribute = properAttributesAsc.OfType<RequestTimeoutAttribute>().FirstOrDefault();
+            var commonRequestTimeoutAttribute = commonAttributes.OfType<RequestTimeoutAttribute>().FirstOrDefault();
+            var properCacheAttribute = properAttributesAsc.OfType<CacheAttribute>().FirstOrDefault();
+            var commonCacheAttribute = commonAttributes.OfType<CacheAttribute>().FirstOrDefault();
+            var properResiliencePipelineAttributes = properAttributesDesc.OfType<ResiliencePipelineAttributeBase>().ToArray();
+            var commonResiliencePipelineAttributes = commonAttributes.OfType<ResiliencePipelineAttributeBase>().ToArray();
 
             // Headers redaction
             var headers = (properHeadersAttribute?.Headers ?? [])

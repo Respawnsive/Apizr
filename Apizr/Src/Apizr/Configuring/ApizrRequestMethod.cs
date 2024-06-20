@@ -26,6 +26,8 @@ namespace Apizr.Configuring
 
         public static ApizrRequestMethod HttpPost { get; } = new(HttpMethod.Post.Method, nameof(HttpPost), [1], 1);
 
+        public static ApizrRequestMethod HttpPostMultipart { get; } = new(HttpMethod.Post.Method, nameof(HttpPostMultipart), [1], 1);
+
         public static ApizrRequestMethod HttpPut { get; } = new(HttpMethod.Put.Method, nameof(HttpPut), [1], 1);
 #if NETSTANDARD2_1 || NET6_0_OR_GREATER
         public static ApizrRequestMethod HttpPatch { get; } = new(HttpMethod.Patch.Method, nameof(HttpPatch), [1], 1);
@@ -128,7 +130,7 @@ namespace Apizr.Configuring
 #if NETSTANDARD2_1 || NET6_0_OR_GREATER
                 HttpPatch,
 #endif
-                HttpGet, HttpPost, HttpPut, HttpDelete, HttpHead, HttpOptions,
+                HttpGet, HttpPost, HttpPostMultipart, HttpPut, HttpDelete, HttpHead, HttpOptions,
                 CrudCreate, CrudReadAll, CrudRead, CrudUpdate, CrudDelete,
                 CrudSafeCreate, CrudSafeReadAll, CrudSafeRead, CrudSafeUpdate, CrudSafeDelete,
                 AllHttp, AllCrud, All

@@ -226,7 +226,7 @@ namespace Apizr.Tests
             userPathFixture.Options.BaseUri.Should().Be(fullUri3);
 
             var resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
-            resourceFixture.Options.BaseUri.Should().Be(uri3);
+            resourceFixture.Options.BaseUri.Should().Be(attributeUri);
 
             // By proper option overriding all common options and attribute
             apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
@@ -246,7 +246,7 @@ namespace Apizr.Tests
             userPathFixture.Options.BaseUri.Should().Be(fullUri4);
 
             resourceFixture = apizrRegistry.GetManagerFor<IReqResResourceService>();
-            resourceFixture.Options.BaseUri.Should().Be(uri3);
+            resourceFixture.Options.BaseUri.Should().Be(attributeUri);
         }
 
         [Fact]
@@ -698,8 +698,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMapsterMappingHandler_Should_Map_Data()
         {
-            TypeAdapterConfig<User, MinUser>
-                .NewConfig()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -729,8 +730,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMappingHandler_With_Mapster_Should_Map_Data()
         {
-            TypeAdapterConfig<User, MinUser>
-                .NewConfig()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -1595,7 +1597,8 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithResilienceContextOptions(opt =>
-                        opt.ReturnToPoolOnComplete(false)).WithHeaders(["testKey3: testValue3"]));
+                        opt.ReturnToPoolOnComplete(false))
+                    .WithHeaders(["testKey3: testValue3"]));
 
             apizrRegistry.TryGetManagerFor<IReqResSimpleService>(out var reqResManager).Should().BeTrue(); // Custom
             

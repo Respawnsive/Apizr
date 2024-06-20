@@ -22,6 +22,7 @@ using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Extending;
+using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
 using Apizr.Requesting.Attributes;
@@ -2292,6 +2293,12 @@ namespace Apizr
             {
                 // Classic api logging
                 logAttribute = methodDetails.MethodInfo.GetCustomAttribute<LogAttribute>(); // Request logging
+                if (logAttribute == null && methodDetails.RequestMethod == ApizrRequestMethod.HttpPostMultipart) // No log attribute and multipart upload?
+                {
+                    // Then ignore request body (file data)
+                    var verbosity = _apizrOptions.TrafficVerbosity.IgnoreMessageParts(HttpMessageParts.RequestBody);
+                    logAttribute = new LogAttribute(verbosity, _apizrOptions.HttpTracerMode, _apizrOptions.LogLevels);
+                }
             }
 
             // Return log attribute
@@ -2307,9 +2314,15 @@ namespace Apizr
             IApizrRequestOptions requestOptions, out CacheAttributeBase cacheAttribute, out string cacheKey)
         {
             cacheKey = null;
-            return requestOptions.CacheOptions.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out cacheAttribute) &&
+            var shouldCache = requestOptions.CacheOptions.TryGetValue(ApizrConfigurationSource.FinalConfiguration, out cacheAttribute) &&
                    cacheAttribute.Mode != CacheMode.None &&
                    TryGetCacheKey<TResult>(methodDetails, originalExpression, out cacheKey);
+
+            if(shouldCache)
+                _apizrOptions.Logger.Log(requestOptions.LogLevels.Low(),
+                    $"{methodDetails.MethodInfo.Name}: Method is cacheable");
+
+            return shouldCache;
         }
 
         private bool TryGetCacheKey<TResult>(MethodDetails methodDetails, Expression restExpression, out string cacheKey)
@@ -2792,7 +2805,10 @@ namespace Apizr
                 requestMethod = httpMethodAttribute?.Method.Method switch
                 {
                     var method when method == ApizrRequestMethod.HttpGet.Method => ApizrRequestMethod.HttpGet,
-                    var method when method == ApizrRequestMethod.HttpPost.Method => ApizrRequestMethod.HttpPost,
+                    var method when method == ApizrRequestMethod.HttpPost.Method =>
+                        methodCallExpression.Method.GetCustomAttribute<MultipartAttribute>(true) != null
+                        ? ApizrRequestMethod.HttpPostMultipart
+                        : ApizrRequestMethod.HttpPost,
                     var method when method == ApizrRequestMethod.HttpPut.Method => ApizrRequestMethod.HttpPut,
                     var method when method == ApizrRequestMethod.HttpDelete.Method => ApizrRequestMethod.HttpDelete,
 #if NETSTANDARD2_1 || NET6_0_OR_GREATER
@@ -2800,7 +2816,8 @@ namespace Apizr
 #endif
                     var method when method == ApizrRequestMethod.HttpHead.Method => ApizrRequestMethod.HttpHead,
                     var method when method == ApizrRequestMethod.HttpOptions.Method => ApizrRequestMethod.HttpOptions,
-                    _ => throw new NotImplementedException($"{httpMethodAttribute?.Method.Method} method is not yet handled by Apizr. Please open an issue if needed")
+                    _ => throw new NotImplementedException(
+                        $"{httpMethodAttribute?.Method.Method} method is not yet handled by Apizr. Please open an issue if needed")
                 };
             }
 

@@ -747,8 +747,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMapsterMappingHandler_Should_Map_Data()
         {
-            var mapsterConfig = new TypeAdapterConfig();
-            mapsterConfig.NewConfig<User, MinUser>()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -758,7 +759,7 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace))
                 .ConfigureServices((_, services) =>
                 {
-                    services.AddSingleton(mapsterConfig);
+                    services.AddSingleton(typeAdapterConfig);
                     services.AddSingleton<IMapper, ServiceMapper>();
 
                     services.AddApizrManagerFor<IReqResUserService>(config => config
@@ -788,8 +789,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMappingHandler_With_Mapster_Should_Map_Data()
         {
-            var mapsterConfig = new TypeAdapterConfig();
-            mapsterConfig.NewConfig<User, MinUser>()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -799,7 +801,7 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace))
                 .ConfigureServices((_, services) =>
                 {
-                    services.AddSingleton(mapsterConfig);
+                    services.AddSingleton(typeAdapterConfig);
                     services.AddSingleton<IMapper, ServiceMapper>();
 
                     services.AddApizrManagerFor<IReqResUserService>(config => config

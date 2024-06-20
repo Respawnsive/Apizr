@@ -538,8 +538,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Classic_WithMapsterMappingHandler_Should_Map_Data()
         {
-            TypeAdapterConfig<User, MinUser>
-                .NewConfig()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -566,8 +567,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Crud_WithMapsterMappingHandler_Should_Map_Data()
         {
-            TypeAdapterConfig<User, MinUser>
-                .NewConfig()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -596,8 +598,9 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMappingHandler_With_Mapster_Should_Map_Data()
         {
-            TypeAdapterConfig<User, MinUser>
-                .NewConfig()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
@@ -1562,6 +1565,19 @@ namespace Apizr.Tests
             // attempts should be equal to 2 as request timed out before the 3rd retry
             retryCount.Should().Be(2);
             testHandler.Attempts.Should().Be(2);
+        }
+
+        [Fact]
+        public async Task Inherited_Apis_Should_Merge_Attributes()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResChildApi>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))));
+
+            var result = await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
+
+            result.Should().NotBeNull();
         }
     }
 }

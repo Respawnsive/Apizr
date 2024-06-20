@@ -20,11 +20,22 @@ public static class HttpMessagePartsExtensions
     {
         if (optionsBuilder == null)
             optionsBuilder = optionsBuilderInstance =>
-                ((IApizrInternalOptionsBuilder)optionsBuilderInstance).SetHandlerParameter(Constants.ApizrIgnoreMessagePartsKey, messageParts);
+                optionsBuilderInstance.IgnoreMessageParts(messageParts);
         else
             optionsBuilder += optionsBuilderInstance =>
-                ((IApizrInternalOptionsBuilder)optionsBuilderInstance).SetHandlerParameter(Constants.ApizrIgnoreMessagePartsKey, messageParts);
+                optionsBuilderInstance.IgnoreMessageParts(messageParts);
 
         return optionsBuilder;
     }
+
+    public static T IgnoreMessageParts<T>(this
+        T optionsBuilder, HttpMessageParts messageParts)
+        where T : IApizrGlobalSharedOptionsBuilderBase
+    {
+        ((IApizrInternalOptionsBuilder)optionsBuilder).SetHandlerParameter(Constants.ApizrIgnoreMessagePartsKey, messageParts);
+        return optionsBuilder;
+    }
+
+    public static HttpMessageParts IgnoreMessageParts(this HttpMessageParts messageParts, HttpMessageParts partsToIgnore) =>
+        messageParts & ~partsToIgnore;
 }

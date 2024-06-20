@@ -8,6 +8,7 @@ items:
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.#ctor(Apizr.Configuring.Request.ApizrRequestOptions)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Options
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCacheClearing(System.Boolean)
+  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCancellation(System.Threading.CancellationToken)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
@@ -19,6 +20,7 @@ items:
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithOperationTimeout(System.TimeSpan)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithRequestTimeout(System.TimeSpan)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
   langs:
   - csharp
@@ -30,11 +32,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrRequestOptionsBuilder
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 15
+    startLine: 18
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -67,6 +69,7 @@ items:
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
   - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+  - Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Logging.HttpMessageParts)
 - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Options
   commentId: F:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Options
   id: Options
@@ -81,11 +84,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Options
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 17
+    startLine: 20
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -108,11 +111,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 19
+    startLine: 22
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -140,11 +143,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 28
+    startLine: 31
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -186,11 +189,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 39
+    startLine: 42
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -229,11 +232,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 68
+    startLine: 71
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -266,11 +269,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 76
+    startLine: 79
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -303,11 +306,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCancellation
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 84
+    startLine: 87
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -340,11 +343,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheClearing
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 92
+    startLine: 95
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -380,11 +383,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 100
+    startLine: 103
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -426,11 +429,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 132
+    startLine: 135
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -474,11 +477,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 139
+    startLine: 142
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -517,11 +520,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 149
+    startLine: 152
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -561,11 +564,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceContextOptions
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 157
+    startLine: 160
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -601,11 +604,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionNames
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 173
+    startLine: 176
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -644,11 +647,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionRule
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
-    startLine: 182
+    startLine: 185
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
@@ -673,6 +676,95 @@ items:
   nameWithType.vb: ApizrRequestOptionsBuilder.WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
   fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func(Of String, Boolean), Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithResiliencePipelineKeys(string[], ApizrDuplicateStrategy)
+  nameWithType: ApizrRequestOptionsBuilder.WithResiliencePipelineKeys(string[], ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys(string[], Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithResiliencePipelineKeys
+    path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
+    startLine: 217
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: Apply some resilience strategies by getting pipelines from registry with key matching.
+  example: []
+  syntax:
+    content: public IApizrRequestOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+    parameters:
+    - id: resiliencePipelineKeys
+      type: System.String[]
+      description: Resilience pipeline keys from the registry.
+    - id: duplicateStrategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other names already (default: Add)"
+    return:
+      type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+      description: ''
+    content.vb: Public Function WithResiliencePipelineKeys(resiliencePipelineKeys As String(), duplicateStrategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrRequestOptionsBuilder
+  overload: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys*
+  implements:
+  - Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrRequestOptionsBuilder.WithResiliencePipelineKeys(String(), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys(String(), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithResiliencePipelineKeys(String(), ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  id: WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  parent: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithCaching(CacheMode, TimeSpan?, bool)
+  nameWithType: ApizrRequestOptionsBuilder.WithCaching(CacheMode, TimeSpan?, bool)
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, bool)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithCaching
+    path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBuilder.cs
+    startLine: 270
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: Cache data.
+  example: []
+  syntax:
+    content: public IApizrRequestOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null, bool shouldInvalidateOnError = false)
+    parameters:
+    - id: mode
+      type: Apizr.Caching.CacheMode
+      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+    - id: lifeSpan
+      type: System.Nullable{System.TimeSpan}
+      description: 'This specific caching lifetime (Default: null = cache handler lifetime'
+    - id: shouldInvalidateOnError
+      type: System.Boolean
+      description: 'Should invalidate on error (Default: false)'
+    return:
+      type: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+      description: ''
+    content.vb: Public Function WithCaching(mode As CacheMode = CacheMode.GetAndFetch, lifeSpan As TimeSpan? = Nothing, shouldInvalidateOnError As Boolean = False) As IApizrRequestOptionsBuilder
+  overload: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  nameWithType.vb: ApizrRequestOptionsBuilder.WithCaching(CacheMode, TimeSpan?, Boolean)
+  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
+  name.vb: WithCaching(CacheMode, TimeSpan?, Boolean)
 references:
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
@@ -1392,6 +1484,57 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.int32
   - name: )
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  parent: Apizr.Logging.HttpMessagePartsExtensions
+  definition: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  name: IgnoreMessageParts<ApizrRequestOptionsBuilder>(ApizrRequestOptionsBuilder, HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.IgnoreMessageParts<ApizrRequestOptionsBuilder>(ApizrRequestOptionsBuilder, HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts<Apizr.Configuring.Request.ApizrRequestOptionsBuilder>(Apizr.Configuring.Request.ApizrRequestOptionsBuilder, Apizr.Logging.HttpMessageParts)
+  nameWithType.vb: HttpMessagePartsExtensions.IgnoreMessageParts(Of ApizrRequestOptionsBuilder)(ApizrRequestOptionsBuilder, HttpMessageParts)
+  fullName.vb: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts(Of Apizr.Configuring.Request.ApizrRequestOptionsBuilder)(Apizr.Configuring.Request.ApizrRequestOptionsBuilder, Apizr.Logging.HttpMessageParts)
+  name.vb: IgnoreMessageParts(Of ApizrRequestOptionsBuilder)(ApizrRequestOptionsBuilder, HttpMessageParts)
+  spec.csharp:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Configuring.Request.ApizrRequestOptionsBuilder,Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: <
+  - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
+    name: ApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
+    name: ApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Configuring.Request.ApizrRequestOptionsBuilder,Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
+    name: ApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder
+    name: ApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
 - uid: System
   commentId: N:System
   isExternal: true
@@ -1794,12 +1937,82 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.int32
   - name: )
+- uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  name: IgnoreMessageParts<T>(T, HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.IgnoreMessageParts<T>(T, HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts<T>(T, Apizr.Logging.HttpMessageParts)
+  nameWithType.vb: HttpMessagePartsExtensions.IgnoreMessageParts(Of T)(T, HttpMessageParts)
+  fullName.vb: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts(Of T)(T, Apizr.Logging.HttpMessageParts)
+  name.vb: IgnoreMessageParts(Of T)(T, HttpMessageParts)
+  spec.csharp:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+- uid: Apizr.Logging.HttpMessagePartsExtensions
+  commentId: T:Apizr.Logging.HttpMessagePartsExtensions
+  parent: Apizr.Logging
+  href: Apizr.Logging.HttpMessagePartsExtensions.html
+  name: HttpMessagePartsExtensions
+  nameWithType: HttpMessagePartsExtensions
+  fullName: Apizr.Logging.HttpMessagePartsExtensions
 - uid: Apizr
   commentId: N:Apizr
   href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
+- uid: Apizr.Logging
+  commentId: N:Apizr.Logging
+  href: Apizr.html
+  name: Apizr.Logging
+  nameWithType: Apizr.Logging
+  fullName: Apizr.Logging
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Logging
+    name: Logging
+    href: Apizr.Logging.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Logging
+    name: Logging
+    href: Apizr.Logging.html
 - uid: Apizr.Configuring.Request.ApizrRequestOptions
   commentId: T:Apizr.Configuring.Request.ApizrRequestOptions
   parent: Apizr.Configuring.Request
@@ -1976,28 +2189,6 @@ references:
   - name: (
   - name: )
   - name: )
-- uid: Apizr.Logging
-  commentId: N:Apizr.Logging
-  href: Apizr.html
-  name: Apizr.Logging
-  nameWithType: Apizr.Logging
-  fullName: Apizr.Logging
-  spec.csharp:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Logging
-    name: Logging
-    href: Apizr.Logging.html
-  spec.vb:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Logging
-    name: Logging
-    href: Apizr.Logging.html
 - uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders*
   commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHeaders
   href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html#Apizr_Configuring_Request_ApizrRequestOptionsBuilder_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
@@ -3763,4 +3954,314 @@ references:
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
     href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys
+  href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html#Apizr_Configuring_Request_ApizrRequestOptionsBuilder_WithResiliencePipelineKeys_System_String___Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithResiliencePipelineKeys
+  nameWithType: ApizrRequestOptionsBuilder.WithResiliencePipelineKeys
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  definition: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithResiliencePipelineKeys_System_String___Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithResiliencePipelineKeys(string[], ApizrDuplicateStrategy)
+  nameWithType: IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithResiliencePipelineKeys(string[], ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithResiliencePipelineKeys(string[], Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrRequestOptionsBuilder(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithResiliencePipelineKeys(String(), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Request.IApizrRequestOptionsBuilder(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithResiliencePipelineKeys(String(), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithResiliencePipelineKeys(String(), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithResiliencePipelineKeys
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithResiliencePipelineKeys_System_String___Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithResiliencePipelineKeys
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithResiliencePipelineKeys_System_String___Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithResiliencePipelineKeys_System_String___Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithResiliencePipelineKeys(string[], ApizrDuplicateStrategy)
+  nameWithType: IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithResiliencePipelineKeys(string[], ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder<TApizrOptions, TApizrOptionsBuilder>.WithResiliencePipelineKeys(string[], Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrRequestOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithResiliencePipelineKeys(String(), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Request.IApizrRequestOptionsBuilder(Of TApizrOptions, TApizrOptionsBuilder).WithResiliencePipelineKeys(String(), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithResiliencePipelineKeys(String(), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithResiliencePipelineKeys
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithResiliencePipelineKeys_System_String___Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithResiliencePipelineKeys
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder-2.html#Apizr_Configuring_Request_IApizrRequestOptionsBuilder_2_WithResiliencePipelineKeys_System_String___Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching
+  href: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.html#Apizr_Configuring_Request_ApizrRequestOptionsBuilder_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  name: WithCaching
+  nameWithType: ApizrRequestOptionsBuilder.WithCaching
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  name: WithCaching(CacheMode, TimeSpan?, bool)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithCaching(CacheMode, TimeSpan?, bool)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, bool)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder).WithCaching(CacheMode, TimeSpan?, Boolean)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder).WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
+  name.vb: WithCaching(CacheMode, TimeSpan?, Boolean)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Apizr.Caching.CacheMode
+  commentId: T:Apizr.Caching.CacheMode
+  parent: Apizr.Caching
+  href: Apizr.Caching.CacheMode.html
+  name: CacheMode
+  nameWithType: CacheMode
+  fullName: Apizr.Caching.CacheMode
+- uid: System.Nullable{System.TimeSpan}
+  commentId: T:System.Nullable{System.TimeSpan}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.timespan
+  name: TimeSpan?
+  nameWithType: TimeSpan?
+  fullName: System.TimeSpan?
+  spec.csharp:
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  spec.vb:
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  name: WithCaching(CacheMode, TimeSpan?, bool)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(CacheMode, TimeSpan?, bool)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, bool)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(CacheMode, TimeSpan?, Boolean)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
+  name.vb: WithCaching(CacheMode, TimeSpan?, Boolean)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Apizr.Caching
+  commentId: N:Apizr.Caching
+  href: Apizr.html
+  name: Apizr.Caching
+  nameWithType: Apizr.Caching
+  fullName: Apizr.Caching
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Caching
+    name: Caching
+    href: Apizr.Caching.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Caching
+    name: Caching
+    href: Apizr.Caching.html
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
   - name: )

@@ -9,10 +9,13 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpMessageHandler``1(``0)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)
   langs:
   - csharp
   - vb
@@ -23,11 +26,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrGlobalSharedRegistrationOptionsBuilderBase
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -50,6 +53,7 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
   extensionMethods:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
@@ -57,9 +61,84 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Logging.HttpMessageParts)
   nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder)
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder)
   name.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
+  id: WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
+  langs:
+  - csharp
+  - vb
+  name: WithConfiguration(IConfiguration)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithConfiguration(IConfiguration)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithConfiguration
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
+    startLine: 27
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: Set options from configuration
+  example: []
+  syntax:
+    content: TApizrOptionsBuilder WithConfiguration(IConfiguration configuration)
+    parameters:
+    - id: configuration
+      type: Microsoft.Extensions.Configuration.IConfiguration
+      description: The configuration to set options from
+    return:
+      type: '{TApizrOptionsBuilder}'
+      description: ''
+    content.vb: Function WithConfiguration(configuration As IConfiguration) As TApizrOptionsBuilder
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration*
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithConfiguration(IConfiguration)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)
+  id: WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
+  langs:
+  - csharp
+  - vb
+  name: WithConfiguration(IConfigurationSection)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithConfiguration(IConfigurationSection)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithConfiguration
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
+    startLine: 34
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: Set options from a specific configuration section
+  example: []
+  syntax:
+    content: TApizrOptionsBuilder WithConfiguration(IConfigurationSection configurationSection)
+    parameters:
+    - id: configurationSection
+      type: Microsoft.Extensions.Configuration.IConfigurationSection
+      description: The configuration section to set options from
+    return:
+      type: '{TApizrOptionsBuilder}'
+      description: ''
+    content.vb: Function WithConfiguration(configurationSection As IConfigurationSection) As TApizrOptionsBuilder
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration*
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithConfiguration(IConfigurationSection)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
   id: WithBaseAddress(System.String)
@@ -74,11 +153,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 26
+    startLine: 41
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -112,11 +191,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 35
+    startLine: 50
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -149,11 +228,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 42
+    startLine: 57
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -187,11 +266,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 49
+    startLine: 64
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -224,11 +303,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 56
+    startLine: 71
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -262,11 +341,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 64
+    startLine: 79
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -305,11 +384,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpMessageHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 72
+    startLine: 87
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -345,11 +424,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 81
+    startLine: 96
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -375,6 +454,50 @@ items:
   nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(IList(Of String), ApizrDuplicateStrategy, ApizrRegistrationMode)
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(System.Collections.Generic.IList(Of String), Apizr.Configuring.ApizrDuplicateStrategy, Apizr.Configuring.ApizrRegistrationMode)
   name.vb: WithHeaders(IList(Of String), ApizrDuplicateStrategy, ApizrRegistrationMode)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
+  langs:
+  - csharp
+  - vb
+  name: WithResiliencePipelineKeys(string[], IEnumerable<ApizrRequestMethod>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResiliencePipelineKeys(string[], IEnumerable<ApizrRequestMethod>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResiliencePipelineKeys(string[], System.Collections.Generic.IEnumerable<Apizr.Configuring.ApizrRequestMethod>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithResiliencePipelineKeys
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
+    startLine: 107
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: Apply some resilience strategies by getting pipelines from registry with key matching.
+  example: []
+  syntax:
+    content: TApizrOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys, IEnumerable<ApizrRequestMethod> methodScope = null, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+    parameters:
+    - id: resiliencePipelineKeys
+      type: System.String[]
+      description: Resilience pipeline keys from the registry.
+    - id: methodScope
+      type: System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod}
+      description: 'Http or Crud methods to apply pipelines on (default: null = All)'
+    - id: duplicateStrategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other names already (default: Add)"
+    return:
+      type: '{TApizrOptionsBuilder}'
+      description: ''
+    content.vb: Function WithResiliencePipelineKeys(resiliencePipelineKeys As String(), methodScope As IEnumerable(Of ApizrRequestMethod) = Nothing, duplicateStrategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As TApizrOptionsBuilder
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithResiliencePipelineKeys*
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResiliencePipelineKeys(String(), IEnumerable(Of ApizrRequestMethod), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResiliencePipelineKeys(String(), System.Collections.Generic.IEnumerable(Of Apizr.Configuring.ApizrRequestMethod), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithResiliencePipelineKeys(String(), IEnumerable(Of ApizrRequestMethod), ApizrDuplicateStrategy)
 references:
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
@@ -932,6 +1055,61 @@ references:
     name: ApizrDuplicateStrategy
     href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  name: WithCaching(CacheMode, TimeSpan?, bool)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(CacheMode, TimeSpan?, bool)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, bool)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(CacheMode, TimeSpan?, Boolean)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
+  name.vb: WithCaching(CacheMode, TimeSpan?, Boolean)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
   parent: Apizr.FileTransferOptionsBuilderExtensions
@@ -1401,6 +1579,85 @@ references:
     name: Integer
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  parent: Apizr.Logging.HttpMessagePartsExtensions
+  definition: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  name: IgnoreMessageParts<IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.IgnoreMessageParts<IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts<Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, Apizr.Logging.HttpMessageParts)
+  nameWithType.vb: HttpMessagePartsExtensions.IgnoreMessageParts(Of IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), HttpMessageParts)
+  fullName.vb: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts(Of Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Apizr.Logging.HttpMessageParts)
+  name.vb: IgnoreMessageParts(Of IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), HttpMessageParts)
+  spec.csharp:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{`0,`1},Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: <
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
+    name: IApizrGlobalSharedRegistrationOptionsBuilderBase
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
+    name: IApizrGlobalSharedRegistrationOptionsBuilderBase
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{`0,`1},Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
+    name: IApizrGlobalSharedRegistrationOptionsBuilderBase
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
+    name: IApizrGlobalSharedRegistrationOptionsBuilderBase
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
   - name: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
@@ -1951,6 +2208,60 @@ references:
     name: ApizrDuplicateStrategy
     href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  name: WithCaching(CacheMode, TimeSpan?, bool)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(CacheMode, TimeSpan?, bool)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, bool)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(CacheMode, TimeSpan?, Boolean)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
+  name.vb: WithCaching(CacheMode, TimeSpan?, Boolean)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
 - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
   href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
@@ -2210,6 +2521,54 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.int32
   - name: )
+- uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  name: IgnoreMessageParts<T>(T, HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.IgnoreMessageParts<T>(T, HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts<T>(T, Apizr.Logging.HttpMessageParts)
+  nameWithType.vb: HttpMessagePartsExtensions.IgnoreMessageParts(Of T)(T, HttpMessageParts)
+  fullName.vb: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts(Of T)(T, Apizr.Logging.HttpMessageParts)
+  name.vb: IgnoreMessageParts(Of T)(T, HttpMessageParts)
+  spec.csharp:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+- uid: Apizr.Logging.HttpMessagePartsExtensions
+  commentId: T:Apizr.Logging.HttpMessagePartsExtensions
+  parent: Apizr.Logging
+  href: Apizr.Logging.HttpMessagePartsExtensions.html
+  name: HttpMessagePartsExtensions
+  nameWithType: HttpMessagePartsExtensions
+  fullName: Apizr.Logging.HttpMessagePartsExtensions
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
   href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html
@@ -2247,6 +2606,99 @@ references:
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
+- uid: Apizr.Logging
+  commentId: N:Apizr.Logging
+  href: Apizr.html
+  name: Apizr.Logging
+  nameWithType: Apizr.Logging
+  fullName: Apizr.Logging
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Logging
+    name: Logging
+    href: Apizr.Logging.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Logging
+    name: Logging
+    href: Apizr.Logging.html
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithConfiguration_Microsoft_Extensions_Configuration_IConfiguration_
+  name: WithConfiguration
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithConfiguration
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithConfiguration
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithConfiguration
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithConfiguration
+- uid: Microsoft.Extensions.Configuration.IConfiguration
+  commentId: T:Microsoft.Extensions.Configuration.IConfiguration
+  parent: Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration
+  name: IConfiguration
+  nameWithType: IConfiguration
+  fullName: Microsoft.Extensions.Configuration.IConfiguration
+- uid: '{TApizrOptionsBuilder}'
+  commentId: '!:TApizrOptionsBuilder'
+  definition: TApizrOptionsBuilder
+  name: TApizrOptionsBuilder
+  nameWithType: TApizrOptionsBuilder
+  fullName: TApizrOptionsBuilder
+- uid: Microsoft.Extensions.Configuration
+  commentId: N:Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Configuration
+  nameWithType: Microsoft.Extensions.Configuration
+  fullName: Microsoft.Extensions.Configuration
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration
+- uid: TApizrOptionsBuilder
+  name: TApizrOptionsBuilder
+  nameWithType: TApizrOptionsBuilder
+  fullName: TApizrOptionsBuilder
+- uid: Microsoft.Extensions.Configuration.IConfigurationSection
+  commentId: T:Microsoft.Extensions.Configuration.IConfigurationSection
+  parent: Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfigurationsection
+  name: IConfigurationSection
+  nameWithType: IConfigurationSection
+  fullName: Microsoft.Extensions.Configuration.IConfigurationSection
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress*
   commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress
   href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_
@@ -2266,12 +2718,6 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
-- uid: '{TApizrOptionsBuilder}'
-  commentId: '!:TApizrOptionsBuilder'
-  definition: TApizrOptionsBuilder
-  name: TApizrOptionsBuilder
-  nameWithType: TApizrOptionsBuilder
-  fullName: TApizrOptionsBuilder
 - uid: System
   commentId: N:System
   isExternal: true
@@ -2279,10 +2725,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: TApizrOptionsBuilder
-  name: TApizrOptionsBuilder
-  nameWithType: TApizrOptionsBuilder
-  fullName: TApizrOptionsBuilder
 - uid: System.Uri
   commentId: T:System.Uri
   parent: System
@@ -2641,3 +3083,95 @@ references:
     name: Generic
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithResiliencePipelineKeys*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithResiliencePipelineKeys
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithResiliencePipelineKeys_System_String___System_Collections_Generic_IEnumerable_Apizr_Configuring_ApizrRequestMethod__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithResiliencePipelineKeys
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResiliencePipelineKeys
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResiliencePipelineKeys
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResiliencePipelineKeys
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResiliencePipelineKeys
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod}
+  commentId: T:System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<ApizrRequestMethod>
+  nameWithType: IEnumerable<ApizrRequestMethod>
+  fullName: System.Collections.Generic.IEnumerable<Apizr.Configuring.ApizrRequestMethod>
+  nameWithType.vb: IEnumerable(Of ApizrRequestMethod)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Apizr.Configuring.ApizrRequestMethod)
+  name.vb: IEnumerable(Of ApizrRequestMethod)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Apizr.Configuring.ApizrRequestMethod
+    name: ApizrRequestMethod
+    href: Apizr.Configuring.ApizrRequestMethod.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.ApizrRequestMethod
+    name: ApizrRequestMethod
+    href: Apizr.Configuring.ApizrRequestMethod.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

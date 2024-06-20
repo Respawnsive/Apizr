@@ -5,6 +5,7 @@ items:
   id: IApizrRequestOptionsBase
   parent: Apizr.Configuring.Request
   children:
+  - Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
   - Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   langs:
   - csharp
@@ -16,7 +17,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrRequestOptionsBase
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
@@ -39,6 +40,8 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   id: ResilienceContext
@@ -53,7 +56,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResilienceContext
     path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
@@ -70,6 +73,37 @@ items:
       type: Polly.ResilienceContext
     content.vb: ReadOnly Property ResilienceContext As ResilienceContext
   overload: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext*
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
+  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
+  id: RequestMethod
+  parent: Apizr.Configuring.Request.IApizrRequestOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: RequestMethod
+  nameWithType: IApizrRequestOptionsBase.RequestMethod
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestMethod
+    path: ../../Src/Apizr/Configuring/Request/IApizrRequestOptionsBase.cs
+    startLine: 20
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: The Apizr request method
+  example: []
+  syntax:
+    content: ApizrRequestMethod RequestMethod { get; }
+    parameters: []
+    return:
+      type: Apizr.Configuring.ApizrRequestMethod
+    content.vb: ReadOnly Property RequestMethod As ApizrRequestMethod
+  overload: Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod*
 references:
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
@@ -164,6 +198,20 @@ references:
   name: ShouldRedactHeaderValue
   nameWithType: IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
@@ -221,3 +269,38 @@ references:
   name: Polly
   nameWithType: Polly
   fullName: Polly
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod*
+  commentId: Overload:Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBase.html#Apizr_Configuring_Request_IApizrRequestOptionsBase_RequestMethod
+  name: RequestMethod
+  nameWithType: IApizrRequestOptionsBase.RequestMethod
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
+- uid: Apizr.Configuring.ApizrRequestMethod
+  commentId: T:Apizr.Configuring.ApizrRequestMethod
+  parent: Apizr.Configuring
+  href: Apizr.Configuring.ApizrRequestMethod.html
+  name: ApizrRequestMethod
+  nameWithType: ApizrRequestMethod
+  fullName: Apizr.Configuring.ApizrRequestMethod
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  href: Apizr.html
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html

@@ -80,7 +80,10 @@
 
 <h2 id="configuring-headers">Configuring Headers</h2>
 <p>You can set headers with static or dynamic values, with clear or redacted logged values (if logging is enabled with headers included).</p>
-<p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>You should add the request options parameter <code>[RequestOptions] IApizrRequestOptions options</code> to your api methods to get all the Apizr goodness.</p>
+</div>
 <h3 id="static-headers">Static headers</h3>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
@@ -102,14 +105,18 @@ public interface IYourApi
 {
     [Headers(&quot;HeaderKey3: HeaderValue3&quot;)]
     [Get(&quot;/your-endpoint&quot;)]
-    Task&lt;YourData&gt; GetYourDataAsync();
+    Task&lt;YourData&gt; GetYourDataAsync([RequestOptions] IApizrRequestOptions options);
 }
 </code></pre>
-<div class="TIP">
-<h5>Tip</h5>
+<div class="NOTE">
+<h5>Note</h5>
 <p>Please refer to Refit official documentation about Headers attribute with static values.
 Note that decorating assembly to share headers between several api interfaces is not available with Refit's Headers attribute,
 but you can do it with fluent configuration at register time.</p>
+</div>
+<div class="TIP">
+<h5>Tip</h5>
+<p>CRUD api headers could be set using provided dedicted method headers attributes (<code>ReadAllHeaders, ...</code>)</p>
 </div>
 </section>
 <section id="tabpanel_1_tabid-register" role="tabpanel" data-tab="tabid-register" aria-hidden="true" hidden="hidden">
@@ -161,14 +168,14 @@ options =&gt; options.WithHeaders(_ =&gt; [&quot;HeaderKey1: HeaderValue1&quot;,
 <pre><code class="lang-csharp">public interface IYourApi
 {
     [Get(&quot;/your-endpoint&quot;)]
-    Task&lt;YourData&gt; GetYourDataAsync([Header(&quot;HeaderKey1&quot;)] string headerValue1);
+    Task&lt;YourData&gt; GetYourDataAsync([Header(&quot;HeaderKey1&quot;)] string headerValue1, [RequestOptions] IApizrRequestOptions options);
 }
 </code></pre>
 <p>or <code>HeaderCollection</code> attribute:</p>
 <pre><code class="lang-csharp">public interface IYourApi
 {
     [Get(&quot;/your-endpoint&quot;)]
-    Task&lt;YourData&gt; GetYourDataAsync([HeaderCollection] IDictionary&lt;string, string&gt; headers);
+    Task&lt;YourData&gt; GetYourDataAsync([HeaderCollection] IDictionary&lt;string, string&gt; headers, [RequestOptions] IApizrRequestOptions options);
 }
 </code></pre>
 <p>Please refer to Refit official documentation about <code>Header</code> and <code>HeaderCollection</code> attributes with dynamic values.</p>
@@ -179,15 +186,19 @@ public interface IYourApi
 {
     [Headers(&quot;HeaderKey3: {0}&quot;)]
     [Get(&quot;/your-endpoint&quot;)]
-    Task&lt;YourData&gt; GetYourFirstDataAsync();
+    Task&lt;YourData&gt; GetYourFirstDataAsync([RequestOptions] IApizrRequestOptions options);
 
     [Get(&quot;/your-endpoint&quot;)]
-    Task&lt;YourData&gt; GetYourSecondDataAsync();
+    Task&lt;YourData&gt; GetYourSecondDataAsync([RequestOptions] IApizrRequestOptions options);
 }
 </code></pre>
 <p>Here we are asking Apizr to set headers 1, 2 and 3 to <code>GetYourFirstDataAsync</code> and the same but 3 to <code>GetYourSecondDataAsync</code>.
 It's here to let you choose at design time which request needs which headers, but provide values later in one place.
 So we don't provide any value here but the <code>{0}</code> string placeholder and let Apizr set it at request time from its headers store if keys match.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>CRUD api headers could be set using provided dedicted method headers attributes (<code>ReadAllHeaders, ...</code>)</p>
+</div>
 <div class="WARNING">
 <h5>Warning</h5>
 <p>Key matching headers need you to provide values fluently at register time with <code>Store</code> registration mode (see Registering tab).</p>
@@ -263,10 +274,14 @@ public interface IYourApi
 {
     [Headers(&quot;HeaderKey3: *HeaderValue3*&quot;, &quot;HeaderKey4: *{0}*)]
     [Get(&quot;/your-endpoint&quot;)]
-    Task&lt;YourData&gt; GetYourDataAsync();
+    Task&lt;YourData&gt; GetYourDataAsync([RequestOptions] IApizrRequestOptions options);
 }
 </code></pre>
 <p>Here we are asking Apizr to redact both headers 1 and 3 values, but also key matching header 4 value.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>CRUD api headers could be set using provided dedicted method headers attributes (<code>ReadAllHeaders, ...</code>)</p>
+</div>
 </section>
 <section id="tabpanel_3_tabid-register" role="tabpanel" data-tab="tabid-register" aria-hidden="true" hidden="hidden">
 
@@ -306,7 +321,7 @@ options =&gt; options.WithLoggedHeadersRedactionRule(header =&gt; header == &quo
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/master/Apizr/Docs/Apizr.Docs/articles/config_headers.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_headers.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

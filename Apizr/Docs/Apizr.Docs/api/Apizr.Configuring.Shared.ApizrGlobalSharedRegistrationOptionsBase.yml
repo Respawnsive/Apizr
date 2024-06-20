@@ -22,7 +22,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrGlobalSharedRegistrationOptionsBase
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
@@ -55,6 +55,8 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -76,7 +78,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
@@ -108,7 +110,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUri
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
@@ -141,7 +143,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddress
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
@@ -174,7 +176,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePath
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
@@ -207,7 +209,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: PrimaryHandlerFactory
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
@@ -240,7 +242,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersFactories
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
@@ -251,11 +253,11 @@ items:
   summary: Headers factories
   example: []
   syntax:
-    content: public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>> HeadersFactories { get; }
+    content: public IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>> HeadersFactories { get; }
     parameters: []
     return:
       type: System.Collections.Generic.IDictionary{System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope},System.Func{System.Collections.Generic.IList{System.String}}}
-    content.vb: Public Property HeadersFactories As IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IList(Of String)))
+    content.vb: Public Property HeadersFactories As IDictionary(Of (Mode As ApizrRegistrationMode, Scope As ApizrLifetimeScope), Func(Of IList(Of String)))
   overload: Apizr.Configuring.Shared.ApizrGlobalSharedRegistrationOptionsBase.HeadersFactories*
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
@@ -273,7 +275,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Headers
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedRegistrationOptionsBase.cs
@@ -418,6 +420,20 @@ references:
   name: ShouldRedactHeaderValue
   nameWithType: ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: ApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -857,12 +873,12 @@ references:
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IDictionary`2
   href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
-  name: IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>>
-  nameWithType: IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IList<string>>>
-  fullName: System.Collections.Generic.IDictionary<(Apizr.Configuring.ApizrRegistrationMode, Apizr.Configuring.ApizrLifetimeScope), System.Func<System.Collections.Generic.IList<string>>>
-  nameWithType.vb: IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IList(Of String)))
-  fullName.vb: System.Collections.Generic.IDictionary(Of (Apizr.Configuring.ApizrRegistrationMode, Apizr.Configuring.ApizrLifetimeScope), System.Func(Of System.Collections.Generic.IList(Of String)))
-  name.vb: IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IList(Of String)))
+  name: IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>>
+  nameWithType: IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>>
+  fullName: System.Collections.Generic.IDictionary<(Apizr.Configuring.ApizrRegistrationMode Mode, Apizr.Configuring.ApizrLifetimeScope Scope), System.Func<System.Collections.Generic.IList<string>>>
+  nameWithType.vb: IDictionary(Of (Mode As ApizrRegistrationMode, Scope As ApizrLifetimeScope), Func(Of IList(Of String)))
+  fullName.vb: System.Collections.Generic.IDictionary(Of (Mode As Apizr.Configuring.ApizrRegistrationMode, Scope As Apizr.Configuring.ApizrLifetimeScope), System.Func(Of System.Collections.Generic.IList(Of String)))
+  name.vb: IDictionary(Of (Mode As ApizrRegistrationMode, Scope As ApizrLifetimeScope), Func(Of IList(Of String)))
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
@@ -873,11 +889,19 @@ references:
   - uid: Apizr.Configuring.ApizrRegistrationMode
     name: ApizrRegistrationMode
     href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: " "
+  - uid: System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope}.Mode
+    name: Mode
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-apizr.configuring.apizrregistrationmode,apizr.configuring.apizrlifetimescope-.mode
   - name: ','
   - name: " "
   - uid: Apizr.Configuring.ApizrLifetimeScope
     name: ApizrLifetimeScope
     href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: " "
+  - uid: System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope}.Scope
+    name: Scope
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-apizr.configuring.apizrregistrationmode,apizr.configuring.apizrlifetimescope-.scope
   - name: )
   - name: ','
   - name: " "
@@ -907,10 +931,22 @@ references:
   - name: Of
   - name: " "
   - name: (
+  - uid: System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope}.Mode
+    name: Mode
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-apizr.configuring.apizrregistrationmode,apizr.configuring.apizrlifetimescope-.mode
+  - name: " "
+  - name: As
+  - name: " "
   - uid: Apizr.Configuring.ApizrRegistrationMode
     name: ApizrRegistrationMode
     href: Apizr.Configuring.ApizrRegistrationMode.html
   - name: ','
+  - name: " "
+  - uid: System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope}.Scope
+    name: Scope
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-apizr.configuring.apizrregistrationmode,apizr.configuring.apizrlifetimescope-.scope
+  - name: " "
+  - name: As
   - name: " "
   - uid: Apizr.Configuring.ApizrLifetimeScope
     name: ApizrLifetimeScope

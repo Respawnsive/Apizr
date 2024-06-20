@@ -8,6 +8,7 @@ items:
   - Apizr.Caching.Attributes.CacheAttributeBase.#ctor
   - Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode)
   - Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.Boolean)
+  - Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
   - Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.String)
   - Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.String,System.Boolean)
   - Apizr.Caching.Attributes.CacheAttributeBase.#ctor(System.Boolean)
@@ -26,7 +27,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheAttributeBase
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -106,7 +107,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: LifeSpan
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -114,14 +115,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: This specific caching life time
+  summary: This specific caching lifetime
   example: []
   syntax:
-    content: public TimeSpan? LifeSpan { get; }
+    content: public TimeSpan? LifeSpan { get; protected set; }
     parameters: []
     return:
       type: System.Nullable{System.TimeSpan}
-    content.vb: Public ReadOnly Property LifeSpan As TimeSpan?
+    content.vb: Public Property LifeSpan As TimeSpan?
   overload: Apizr.Caching.Attributes.CacheAttributeBase.LifeSpan*
 - uid: Apizr.Caching.Attributes.CacheAttributeBase.Mode
   commentId: P:Apizr.Caching.Attributes.CacheAttributeBase.Mode
@@ -137,7 +138,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Mode
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -148,11 +149,11 @@ items:
   summary: Tells Apizr to return a value if we get a cached result for it (GetOrFetch) or to try fetching fresh data every time (GetAndFetch)
   example: []
   syntax:
-    content: public CacheMode Mode { get; }
+    content: public CacheMode Mode { get; protected set; }
     parameters: []
     return:
       type: Apizr.Caching.CacheMode
-    content.vb: Public ReadOnly Property Mode As CacheMode
+    content.vb: Public Property Mode As CacheMode
   overload: Apizr.Caching.Attributes.CacheAttributeBase.Mode*
 - uid: Apizr.Caching.Attributes.CacheAttributeBase.ShouldInvalidateOnError
   commentId: P:Apizr.Caching.Attributes.CacheAttributeBase.ShouldInvalidateOnError
@@ -168,7 +169,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ShouldInvalidateOnError
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -179,11 +180,11 @@ items:
   summary: Tells Apizr to remove the cache on error
   example: []
   syntax:
-    content: public bool ShouldInvalidateOnError { get; }
+    content: public bool ShouldInvalidateOnError { get; protected set; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: Public ReadOnly Property ShouldInvalidateOnError As Boolean
+    content.vb: Public Property ShouldInvalidateOnError As Boolean
   overload: Apizr.Caching.Attributes.CacheAttributeBase.ShouldInvalidateOnError*
 - uid: Apizr.Caching.Attributes.CacheAttributeBase.#ctor
   commentId: M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor
@@ -199,7 +200,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -230,7 +231,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -265,7 +266,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -300,7 +301,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -335,7 +336,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -373,7 +374,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -411,7 +412,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -449,7 +450,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
@@ -476,6 +477,42 @@ items:
   nameWithType.vb: CacheAttributeBase.New(CacheMode, String, Boolean)
   fullName.vb: Apizr.Caching.Attributes.CacheAttributeBase.New(Apizr.Caching.CacheMode, String, Boolean)
   name.vb: New(CacheMode, String, Boolean)
+- uid: Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  commentId: M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  id: '#ctor(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)'
+  parent: Apizr.Caching.Attributes.CacheAttributeBase
+  langs:
+  - csharp
+  - vb
+  name: CacheAttributeBase(CacheMode, TimeSpan?, bool)
+  nameWithType: CacheAttributeBase.CacheAttributeBase(CacheMode, TimeSpan?, bool)
+  fullName: Apizr.Caching.Attributes.CacheAttributeBase.CacheAttributeBase(Apizr.Caching.CacheMode, System.TimeSpan?, bool)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/Caching/Attributes/CacheAttributeBase.cs
+    startLine: 105
+  assemblies:
+  - Apizr
+  namespace: Apizr.Caching.Attributes
+  syntax:
+    content: protected CacheAttributeBase(CacheMode mode, TimeSpan? lifeSpan, bool shouldInvalidateOnError)
+    parameters:
+    - id: mode
+      type: Apizr.Caching.CacheMode
+    - id: lifeSpan
+      type: System.Nullable{System.TimeSpan}
+    - id: shouldInvalidateOnError
+      type: System.Boolean
+    content.vb: Protected Sub New(mode As CacheMode, lifeSpan As TimeSpan?, shouldInvalidateOnError As Boolean)
+  overload: Apizr.Caching.Attributes.CacheAttributeBase.#ctor*
+  nameWithType.vb: CacheAttributeBase.New(CacheMode, TimeSpan?, Boolean)
+  fullName.vb: Apizr.Caching.Attributes.CacheAttributeBase.New(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
+  name.vb: New(CacheMode, TimeSpan?, Boolean)
 references:
 - uid: Apizr.Caching.ICacheHandler
   commentId: T:Apizr.Caching.ICacheHandler

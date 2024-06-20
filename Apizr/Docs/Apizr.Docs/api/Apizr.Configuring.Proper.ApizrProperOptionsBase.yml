@@ -5,9 +5,11 @@ items:
   id: ApizrProperOptionsBase
   parent: Apizr.Configuring.Proper
   children:
-  - Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})
+  - Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.Type,System.Reflection.TypeInfo,Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean})
+  - Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+  - Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
-  - Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  - Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   langs:
   - csharp
@@ -19,11 +21,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrProperOptionsBase
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 8
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -60,6 +62,8 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -67,32 +71,32 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})
-  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})
-  id: '#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})'
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.Type,System.Reflection.TypeInfo,Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean})
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.Type,System.Reflection.TypeInfo,Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean})
+  id: '#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.Type,System.Reflection.TypeInfo,Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean})'
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBase
   langs:
   - csharp
   - vb
-  name: ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Type, string[], string[], Func<string, bool>)
-  nameWithType: ApizrProperOptionsBase.ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Type, string[], string[], Func<string, bool>)
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.ApizrProperOptionsBase(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, string[], string[], System.Func<string, bool>)
+  name: ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Type, Type, TypeInfo, ResiliencePipelineAttributeBase[], ResiliencePipelineAttributeBase[], CacheAttribute, CacheAttribute, Func<string, bool>)
+  nameWithType: ApizrProperOptionsBase.ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Type, Type, TypeInfo, ResiliencePipelineAttributeBase[], ResiliencePipelineAttributeBase[], CacheAttribute, CacheAttribute, Func<string, bool>)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.ApizrProperOptionsBase(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, System.Type, System.Reflection.TypeInfo, Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[], Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[], Apizr.Caching.Attributes.CacheAttribute, Apizr.Caching.Attributes.CacheAttribute, System.Func<string, bool>)
   type: Constructor
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 18
+    startLine: 27
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
   summary: The proper options constructor
   example: []
   syntax:
-    content: protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, Type webApiType, string[] assemblyResiliencePipelineRegistryKeys, string[] webApiResiliencePipelineRegistryKeys, Func<string, bool> shouldRedactHeaderValue = null)
+    content: protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, Type webApiType, Type crudModelType, TypeInfo typeInfo, ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes, ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes, CacheAttribute commonCacheAttribute, CacheAttribute properCacheAttribute, Func<string, bool> shouldRedactHeaderValue = null)
     parameters:
     - id: sharedOptions
       type: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
@@ -100,20 +104,32 @@ items:
     - id: webApiType
       type: System.Type
       description: The web api type
-    - id: assemblyResiliencePipelineRegistryKeys
-      type: System.String[]
+    - id: crudModelType
+      type: System.Type
+      description: The crud model type if any
+    - id: typeInfo
+      type: System.Reflection.TypeInfo
+      description: The type info
+    - id: commonResiliencePipelineAttributes
+      type: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[]
       description: Global resilience pipelines
-    - id: webApiResiliencePipelineRegistryKeys
-      type: System.String[]
+    - id: properResiliencePipelineAttributes
+      type: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[]
       description: Specific resilience pipelines
+    - id: commonCacheAttribute
+      type: Apizr.Caching.Attributes.CacheAttribute
+      description: Global caching options
+    - id: properCacheAttribute
+      type: Apizr.Caching.Attributes.CacheAttribute
+      description: Specific caching options
     - id: shouldRedactHeaderValue
       type: System.Func{System.String,System.Boolean}
       description: Headers to redact value
-    content.vb: Protected Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, webApiType As Type, assemblyResiliencePipelineRegistryKeys As String(), webApiResiliencePipelineRegistryKeys As String(), shouldRedactHeaderValue As Func(Of String, Boolean) = Nothing)
+    content.vb: Protected Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, webApiType As Type, crudModelType As Type, typeInfo As TypeInfo, commonResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), properResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), commonCacheAttribute As CacheAttribute, properCacheAttribute As CacheAttribute, shouldRedactHeaderValue As Func(Of String, Boolean) = Nothing)
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor*
-  nameWithType.vb: ApizrProperOptionsBase.New(IApizrGlobalSharedRegistrationOptionsBase, Type, String(), String(), Func(Of String, Boolean))
-  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBase.New(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, String(), String(), System.Func(Of String, Boolean))
-  name.vb: New(IApizrGlobalSharedRegistrationOptionsBase, Type, String(), String(), Func(Of String, Boolean))
+  nameWithType.vb: ApizrProperOptionsBase.New(IApizrGlobalSharedRegistrationOptionsBase, Type, Type, TypeInfo, ResiliencePipelineAttributeBase(), ResiliencePipelineAttributeBase(), CacheAttribute, CacheAttribute, Func(Of String, Boolean))
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBase.New(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, System.Type, System.Reflection.TypeInfo, Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase(), Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase(), Apizr.Caching.Attributes.CacheAttribute, Apizr.Caching.Attributes.CacheAttribute, System.Func(Of String, Boolean))
+  name.vb: New(IApizrGlobalSharedRegistrationOptionsBase, Type, Type, TypeInfo, ResiliencePipelineAttributeBase(), ResiliencePipelineAttributeBase(), CacheAttribute, CacheAttribute, Func(Of String, Boolean))
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
   id: WebApiType
@@ -128,11 +144,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApiType
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 41
+    startLine: 65
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -147,39 +163,105 @@ items:
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType*
   implements:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
-  commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
-  id: ResiliencePipelineRegistryKeys
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+  commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+  id: CrudModelType
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBase
   langs:
   - csharp
   - vb
-  name: ResiliencePipelineRegistryKeys
-  nameWithType: ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  name: CrudModelType
+  nameWithType: ApizrProperOptionsBase.CrudModelType
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: ResiliencePipelineRegistryKeys
+    id: CrudModelType
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 44
+    startLine: 68
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: Resilience pipeline keys from the registry
+  summary: Crud model type if any
   example: []
   syntax:
-    content: public string[] ResiliencePipelineRegistryKeys { get; }
+    content: public Type CrudModelType { get; }
     parameters: []
     return:
-      type: System.String[]
-    content.vb: Public ReadOnly Property ResiliencePipelineRegistryKeys As String()
-  overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys*
+      type: System.Type
+    content.vb: Public ReadOnly Property CrudModelType As Type
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType*
   implements:
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
+  commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
+  id: TypeInfo
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: TypeInfo
+  nameWithType: ApizrProperOptionsBase.TypeInfo
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: TypeInfo
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
+    startLine: 71
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Web api interface or Crud model class type info
+  example: []
+  syntax:
+    content: public TypeInfo TypeInfo { get; }
+    parameters: []
+    return:
+      type: System.Reflection.TypeInfo
+    content.vb: Public ReadOnly Property TypeInfo As TypeInfo
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo*
+  implements:
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi
+  commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi
+  id: IsCrudApi
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: IsCrudApi
+  nameWithType: ApizrProperOptionsBase.IsCrudApi
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: IsCrudApi
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
+    startLine: 74
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: True if it's a CRUD api
+  example: []
+  syntax:
+    content: public bool IsCrudApi { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsCrudApi As Boolean
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi*
+  implements:
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
   commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
   id: Logger
@@ -194,11 +276,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: Logger
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-    startLine: 47
+    startLine: 77
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -402,6 +484,20 @@ references:
   name: ShouldRedactHeaderValue
   nameWithType: ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: ApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -660,7 +756,7 @@ references:
     href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor
-  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase__ctor_Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_System_Type_System_String___System_String___System_Func_System_String_System_Boolean__
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase__ctor_Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_System_Type_System_Type_System_Reflection_TypeInfo_Apizr_Resiliencing_Attributes_ResiliencePipelineAttributeBase___Apizr_Resiliencing_Attributes_ResiliencePipelineAttributeBase___Apizr_Caching_Attributes_CacheAttribute_Apizr_Caching_Attributes_CacheAttribute_System_Func_System_String_System_Boolean__
   name: ApizrProperOptionsBase
   nameWithType: ApizrProperOptionsBase.ApizrProperOptionsBase
   fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.ApizrProperOptionsBase
@@ -675,29 +771,42 @@ references:
   name: Type
   nameWithType: Type
   fullName: System.Type
-- uid: System.String[]
+- uid: System.Reflection.TypeInfo
+  commentId: T:System.Reflection.TypeInfo
+  parent: System.Reflection
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.string
-  name: string[]
-  nameWithType: string[]
-  fullName: string[]
-  nameWithType.vb: String()
-  fullName.vb: String()
-  name.vb: String()
+  href: https://learn.microsoft.com/dotnet/api/system.reflection.typeinfo
+  name: TypeInfo
+  nameWithType: TypeInfo
+  fullName: System.Reflection.TypeInfo
+- uid: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[]
+  isExternal: true
+  href: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase.html
+  name: ResiliencePipelineAttributeBase[]
+  nameWithType: ResiliencePipelineAttributeBase[]
+  fullName: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[]
+  nameWithType.vb: ResiliencePipelineAttributeBase()
+  fullName.vb: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase()
+  name.vb: ResiliencePipelineAttributeBase()
   spec.csharp:
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
+  - uid: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase
+    name: ResiliencePipelineAttributeBase
+    href: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase.html
   - name: '['
   - name: ']'
   spec.vb:
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
+  - uid: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase
+    name: ResiliencePipelineAttributeBase
+    href: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase.html
   - name: (
   - name: )
+- uid: Apizr.Caching.Attributes.CacheAttribute
+  commentId: T:Apizr.Caching.Attributes.CacheAttribute
+  parent: Apizr.Caching.Attributes
+  href: Apizr.Caching.Attributes.CacheAttribute.html
+  name: CacheAttribute
+  nameWithType: CacheAttribute
+  fullName: Apizr.Caching.Attributes.CacheAttribute
 - uid: System.Func{System.String,System.Boolean}
   commentId: T:System.Func{System.String,System.Boolean}
   parent: System
@@ -745,6 +854,63 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
+- uid: System.Reflection
+  commentId: N:System.Reflection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Reflection
+  nameWithType: System.Reflection
+  fullName: System.Reflection
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Reflection
+    name: Reflection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.reflection
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Reflection
+    name: Reflection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.reflection
+- uid: Apizr.Caching.Attributes
+  commentId: N:Apizr.Caching.Attributes
+  href: Apizr.html
+  name: Apizr.Caching.Attributes
+  nameWithType: Apizr.Caching.Attributes
+  fullName: Apizr.Caching.Attributes
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Caching
+    name: Caching
+    href: Apizr.Caching.html
+  - name: .
+  - uid: Apizr.Caching.Attributes
+    name: Attributes
+    href: Apizr.Caching.Attributes.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Caching
+    name: Caching
+    href: Apizr.Caching.html
+  - name: .
+  - uid: Apizr.Caching.Attributes
+    name: Attributes
+    href: Apizr.Caching.Attributes.html
 - uid: System.Func`2
   commentId: T:System.Func`2
   isExternal: true
@@ -792,19 +958,56 @@ references:
   name: WebApiType
   nameWithType: IApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys*
-  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
-  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_ResiliencePipelineRegistryKeys
-  name: ResiliencePipelineRegistryKeys
-  nameWithType: ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_CrudModelType
+  name: CrudModelType
+  nameWithType: ApizrProperOptionsBase.CrudModelType
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
-  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_ResiliencePipelineRegistryKeys
-  name: ResiliencePipelineRegistryKeys
-  nameWithType: IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_CrudModelType
+  name: CrudModelType
+  nameWithType: IApizrProperOptionsBase.CrudModelType
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_TypeInfo
+  name: TypeInfo
+  nameWithType: ApizrProperOptionsBase.TypeInfo
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_TypeInfo
+  name: TypeInfo
+  nameWithType: IApizrProperOptionsBase.TypeInfo
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_IsCrudApi
+  name: IsCrudApi
+  nameWithType: ApizrProperOptionsBase.IsCrudApi
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_IsCrudApi
+  name: IsCrudApi
+  nameWithType: IApizrProperOptionsBase.IsCrudApi
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
   href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_Logger

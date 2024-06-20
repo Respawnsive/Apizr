@@ -74,34 +74,34 @@
 <h2 id="600">6.0.0</h2>
 <h3 id="all">All</h3>
 <ul>
-<li>[New][Target] Now <strong>targeting multiple frameworks based on Refit targets</strong>: <code>netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0</code></li>
 <li>[New][Exceptions] Now we can <strong>handle <code>IApizrResponse</code> safe response (based on Refit's <code>IApiResponse</code>) instead of catching exceptions</strong></li>
-<li>[New][Attributes] Now we can <strong>provide types to attributes thanks to generic arguments</strong> instead of using typeof() as constructor parameters</li>
+<li>[New][Configuration] Now we can <strong>configure Apizr thanks to <code>IConfiguration</code> from Microsoft.Extensions</strong> (e.g. from appsetings.json)</li>
 <li>[New/Breaking][Polly] Now <strong>supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry</strong> instead of former Polly v7- Policies</li>
-<li>[New][HttpTracer] Now we can <strong>filter out unwanted http message parts</strong> with the brand new IgnoreMessageParts fluent option</li>
-<li>[New][HttpTracer] Now we can <strong>pick RequestAllButBody, HeadersOnly or AllButBody http message parts</strong> when configuring logging options fluently or using attribute</li>
+<li>[New][Polly] Now <strong>we can set resilience pipelines to apply fluently to the request</strong> thanks to the brand new WithResiliencePipelineKeys fluent option</li>
+<li>[New][Polly] Now <strong>we can scope resilience pipelines executions to specific http method groups</strong> thanks to the brand new <code>WithResiliencePipelineKeys's ApizrRequestMethod[]</code> optional parameter</li>
+<li>[New][Polly] Now <strong>we can scope resilience pipelines executions to specific http method groups</strong> thanks to all brand new restricted <code>{RequestMethod}ResiliencePipeline</code> attributes like <code>GetResiliencePipeline</code></li>
+<li>[New][Cache] Now <strong>we can set caching options to apply fluently to the request</strong> thanks to the brand new <code>WithCaching</code> fluent option</li>
+<li>[New][HttpTracer] Now we can <strong>filter out unwanted http message parts</strong> with the brand new <code>IgnoreMessageParts</code> fluent option</li>
+<li>[New][HttpTracer] Now we can <strong>pick <code>RequestAllButBody</code>, <code>HeadersOnly</code>, <code>AllButRequestBody</code>, <code>AllButResponseBody</code> or <code>AllButBodies</code> http message parts</strong> when configuring logging options fluently or using attribute</li>
 <li>[New][HttpTracer/Headers] Now we can <strong>redact any header sensitive values from logs</strong> at design time by surrounding header values with a <code>*</code> star symbol rigth into the <code>Headers</code> attribute</li>
 <li>[New][HttpTracer/Headers] Now we can <strong>redact any header sensitive values from logs</strong> at register time thanks to <code>WithLoggedHeadersRedactionNames</code> or <code>WithLoggedHeadersRedactionRule</code> fluent options</li>
-<li>[New][Headers] Now we can <strong>choose to refresh a header value at request time or not</strong>, depending on the brand new WithHeaders's ApizrLifetimeScope optional parameter</li>
-<li>[New][Headers] Now we can <strong>choose to set headers values straight to the request or store it for further headers attribute key match use</strong>, depending on the brand new WithHeaders's ApizrRegistrationMode optional parameter</li>
+<li>[New][Headers] Now we can <strong>choose to refresh a header value at request time or not</strong>, depending on the brand new <code>WithHeaders's ApizrLifetimeScope</code> optional parameter</li>
+<li>[New][Headers] Now we can <strong>choose to set headers values straight to the request or store it for further headers attribute key match use</strong>, depending on the brand new <code>WithHeaders's ApizrRegistrationMode</code> optional parameter</li>
 <li>[New][Headers] Now we can <strong>set headers values thanks to an expression tree</strong></li>
+<li>[New][Attributes] Now we can <strong>provide types to attributes thanks to generic arguments</strong> instead of using typeof() as constructor parameters</li>
+<li>[New][DelegatingHandler] Now we can <strong>adjust the duplicate strategy while registering a DelegatingHandler</strong></li>
+<li>[New][HttpMessageHandler] Now we can <strong>register an HttpMessageHandler thanks to <code>WithHttpMessageHandler</code> fluent option</strong></li>
+<li>[New][Cache] Now <strong>CacheKey attribute allows composite cache key generation</strong> from multiple decorated parameters</li>
+<li>[New][Target] Now <strong>targeting multiple frameworks based on Refit targets</strong>: <code>netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0</code></li>
 <li>[Breaking][Headers] Now <strong>WithHeaders options take an enumerable parameter instead of a parameter array</strong> so that we could provide some more optional parameters</li>
 <li>[Breaking][Removed] <strong>Previsoulsy deprecated extensions methods for backward compatibility have been removed</strong> as they were not suitable anymore</li>
-</ul>
-<h3 id="apizr">Apizr</h3>
-<ul>
-<li>[Breaking][DelegatingHandler] Now we can <strong>register DelegatingHandlers thanks to WithDelegatingHandler fluent option</strong> instead of the AddDelegatingHandler deleted one for consistency.</li>
-<li>[New][DelegatingHandler] Now we can <strong>adjust the duplicate strategy while registering a DelegatingHandler</strong></li>
-<li>[New][HttpMessageHandler] Now we can <strong>register an HttpMessageHandler thanks to WithHttpMessageHandler fluent option</strong></li>
-<li>[New][Cache] Now <strong>CacheKey attribute allows composite cache key generation</strong> from multiple decorated parameters</li>
-<li>[Fix][Cache] Now <strong>parameters decorated with CacheKey attribute are included no matter of position or index</strong></li>
+<li>[Breaking][DelegatingHandler] Now we can <strong>register DelegatingHandlers thanks to <code>WithDelegatingHandler</code> fluent option</strong> instead of the <code>AddDelegatingHandler</code> deleted one for consistency.</li>
+<li>[Fix][Cache] Now <strong>parameters decorated with <code>CacheKey</code> attribute are included no matter of position or index</strong></li>
 <li>[Fix][Cache] <strong>Parameter based cache keys are now allways computed</strong> to integrate value changes (skiping cachekey methodset) #20</li>
-</ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection">Apizr.Extensions.Microsoft.DependencyInjection</h3>
-<ul>
-<li>[Breaking][DelegatingHandler] Now we can <strong>register DelegatingHandlers thanks to WithDelegatingHandler fluent option</strong> instead of the AddDelegatingHandler deleted one for consistency.</li>
-<li>[New][DelegatingHandler] Now we can <strong>adjust the duplicate strategy while registering a DelegatingHandler</strong></li>
-<li>[New][HttpMessageHandler] Now we can <strong>register an HttpMessageHandler thanks to WithHttpMessageHandler fluent option</strong></li>
+<li>[Fix][Attributes] Now Apizr finally can <strong>get attributes decorating parent api interfaces or crud classes</strong></li>
+<li>[Fix][Polly] Now Apizr <strong>wraps correctly resilience strategies, including typed result ones</strong></li>
+<li>[Fix][Manager] <strong>ApizrManager has been optimized and refactored</strong> to improve performances</li>
+<li></li>
 </ul>
 <h3 id="apizrextensionsmicrosoftcaching">Apizr.Extensions.Microsoft.Caching</h3>
 <ul>
@@ -136,11 +136,11 @@
 <li>[Fix][Cancellation] Now we really can <strong>cancel a request by providing a token trough the options</strong></li>
 <li>[Fix][Log] <strong>CRUD's log attributes now target Class only</strong></li>
 </ul>
-<h3 id="apizr-1">Apizr</h3>
+<h3 id="apizr">Apizr</h3>
 <ul>
 <li>[Breaking][HttpClient] Now we can <strong>configure the HttpClient instead of providing one</strong> (same as extended experience) with the brand new ConfigureHttpClient fluent option</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-1">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[Fix][HttpClient] Now <strong>HttpClientBuilder really apply composite configurations</strong></li>
 </ul>
@@ -175,12 +175,12 @@
 <ul>
 <li>[Bump] <strong>NuGet reference packages updated</strong></li>
 </ul>
-<h3 id="apizr-2">Apizr</h3>
+<h3 id="apizr-1">Apizr</h3>
 <ul>
 <li>[New][Polly] Now providing a <strong>PolicyRegistry is not mandatory anymore</strong> so that Polly could be turned off by default</li>
 </ul>
 <h2 id="501">5.0.1</h2>
-<h3 id="apizr-3">Apizr</h3>
+<h3 id="apizr-2">Apizr</h3>
 <ul>
 <li>[Fix] <strong>No more NullRefEx</strong> when getting cookies from CookieContainer</li>
 <li>[Fix] Typo fix</li>
@@ -195,7 +195,7 @@
 <li>[New] Now we can <strong>set headers</strong> with the brand new WithHeaders fluent option</li>
 <li>[New] Now we can <strong>set a default readonly authentication token</strong> with a dedicated WithAuthenticationHandler fluent option</li>
 </ul>
-<h3 id="apizr-4">Apizr</h3>
+<h3 id="apizr-3">Apizr</h3>
 <ul>
 <li>[New] [Core] Now we can <strong>set a custom HttpClient</strong> with the brand new WithHttpClient fluent option</li>
 <li>[Improvement] [Core] <strong>No more dependency to Microsoft.Extensions.Http.Polly</strong> from the core package</li>
@@ -228,7 +228,7 @@
 <li>[New] Brand new CLI tool so that <strong>Apizr files can now be generated by command line</strong> (Models, Apis and Registrations) from an OpenApi/Swagger definition using NSwag</li>
 </ul>
 <h2 id="41">4.1</h2>
-<h3 id="apizr-5">Apizr</h3>
+<h3 id="apizr-4">Apizr</h3>
 <ul>
 <li>[Breaking] [Naming] <strong>Apizr static class renamed to ApizrBuilder to match its purpose</strong> and doesn't conflict with its namespace anymore</li>
 <li>[Breaking] [Naming] <strong>ApizrBuilder's methods renamed to match their return type</strong> so that we know what we're about to build (e.g. CreateRegistry, AddManagerFor, CreateManagerFor)</li>
@@ -236,7 +236,7 @@
 <li>[Fix] [Connectivity] <strong>No more exception</strong> while using Apizr the extended way but <strong>without providing any IConnectivityHandler implementation</strong> with Fusillade priority management enabled</li>
 <li>[Improvement] [Address] Now we can <strong>set base address at both common and proper levels</strong> so we can define a base address shared by all apis, but also a specific one if needed</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-2">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-1">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[Breaking] [Naming] <strong>Extension methods renamed to match their return type</strong> so that we know what we're about to build (e.g. AddManagerFor, AddCrudManagerFor)</li>
 <li>[Breaking] [Naming] <strong>ApizrExtendedRegistry's methods renamed to match their return type</strong> so that we know what we're about to get (e.g. GetManagerFor, GetCrudManagerFor, ContainsManagerFor)</li>
@@ -250,7 +250,7 @@
 <li>[Breaking] [Naming] <strong>ApizrOptionalMediationRegistry's methods renamed to match their return type</strong> so that we know what we're about to get (e.g. GetOptionalMediatorFor, GetCrudOptionalMediatorFor, ContainsOptionalMediatorFor)</li>
 </ul>
 <h2 id="40">4.0</h2>
-<h3 id="apizr-6">Apizr</h3>
+<h3 id="apizr-5">Apizr</h3>
 <ul>
 <li>[New] [Logging] Now fully relies on <strong>MS Logging extensions</strong></li>
 <li>[New] [Logging] Static fluent configuration now offers a <strong>WithLoggerFactory option</strong> to provide a custom logger factory</li>
@@ -268,7 +268,7 @@
 <li>[New] [Caching] Now we can ask for <strong>clearing request cache before executing</strong></li>
 <li>[New] [Exceptions] Brand new <strong>onException Action parameter to handle it globally</strong> (e.g. user dialog/toast) and let potential cached data return to caller as expected (e.g. refreshing UI)</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-3">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-2">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now <strong>auto register crud managers for all scanned classes</strong> decorated by crud attributes</li>
 </ul>
@@ -308,7 +308,7 @@
 <p>This integration project has been dropped out as Shiny no longer provide built-in caching and logging feature anymore. Apizr now either relies on MS Caching extensions, Akavache or MonkeyCache for caching feature and MS Logging extensions for logging feature. You'll have to provide a connectivity handler if you want Apizr to check it.</p>
 </div>
 <h2 id="30">3.0</h2>
-<h3 id="apizr-7">Apizr</h3>
+<h3 id="apizr-6">Apizr</h3>
 <ul>
 <li>[New] Now <strong>based on Refit v6+ which introduce properties parameter</strong> provided to DelegateHandlers by the Http message. This is used by the new Fusillade priority management package.</li>
 <li>[New] Now <strong>based on Refit v6+ which introduce dynamic headers dictionary parameter</strong> allowing adding multiple dynamic headers in a single parameter thanks to [HeaderCollection] IDictionary&lt;string, string&gt; headers</li>
@@ -326,7 +326,7 @@
 <li>[New] Brand new integration package to use Apizr with Fusillade, only if you need it (no more core references and NuGet dependencies)</li>
 </ul>
 <h2 id="20">2.0</h2>
-<h3 id="apizr-8">Apizr</h3>
+<h3 id="apizr-7">Apizr</h3>
 <ul>
 <li>[New] Now <strong>initialization options are typed to be dedicated</strong> to each api interface manager. It means you can now get a specific configuration for each Apizr manager instance, like for caching, logging, and so on...</li>
 <li>[New] Now <strong>caching could be defined at method level</strong> for CRUD api to. It means you can define specific cache settings for each Read and ReadAll request for each your CRUD model class</li>
@@ -341,7 +341,7 @@
 <li>[BreakingChange] <strong>No more cache and policy attribute decorating CRUD api</strong> by default. You can activate it fluently with the options builder.</li>
 </ul>
 <h2 id="19">1.9</h2>
-<h3 id="apizr-9">Apizr</h3>
+<h3 id="apizr-8">Apizr</h3>
 <ul>
 <li>[New] Handling complex type as CacheKey</li>
 <li>[New] Now we can set Apizr log level within TraceAttribute to manage execution tracing verbosity</li>
@@ -351,7 +351,7 @@
 <li>[Change] Mediation's ICommand interface renamed to IMediationCommand, avoiding conflict with System.Windows.Input.ICommand</li>
 </ul>
 <h2 id="181">1.8.1</h2>
-<h3 id="apizr-10">Apizr</h3>
+<h3 id="apizr-9">Apizr</h3>
 <ul>
 <li>[Fix] Parsing life span representation as TimeSpan from CacheAttribute</li>
 </ul>
@@ -361,12 +361,12 @@
 <li>[New] Introducing CatchAsync optional extension method to return result from fetch or cache, no matter of execption handled on the other side by an action callback to inform the user</li>
 </ul>
 <h2 id="17">1.7</h2>
-<h3 id="apizr-11">Apizr</h3>
+<h3 id="apizr-10">Apizr</h3>
 <ul>
 <li>[New] Now we can toggle Fusillade priority management activation</li>
 <li>[New] Now we can provide a base uri factory (e.g. depending on config)</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-4">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-3">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Now we can toggle Fusillade priority management activation</li>
 <li>[New] Now we can provide a base uri factory (e.g. depending on DI resovled settings)</li>
@@ -375,16 +375,16 @@
 <ul>
 <li>[Fix] Preserve attribute added</li>
 </ul>
-<h3 id="apizr-12">Apizr</h3>
+<h3 id="apizr-11">Apizr</h3>
 <ul>
 <li>[New] Now we can provide a custom HttpClientHandler instance</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-5">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-4">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Now we can provide a custom HttpClientHandler instance</li>
 </ul>
 <h2 id="15">1.5</h2>
-<h3 id="apizr-13">Apizr</h3>
+<h3 id="apizr-12">Apizr</h3>
 <ul>
 <li>[Fix] Now the manager waits for task with no result to handle exceptions properly</li>
 </ul>
@@ -409,7 +409,7 @@
 <li>[Fix] Now nuget package as library both reference MediatR.Extensions.Microsoft.DependencyInjection nuget package for assembly version compatibility</li>
 </ul>
 <h2 id="141">1.4.1</h2>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-6">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-5">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[Fix] Now Apizr works with DryIoc and Unity containers, returning a single UserInitiated instance, while waiting for external issues beeing fixed</li>
 </ul>
@@ -419,7 +419,7 @@
 <li>[Fix] No more <code>WithCrudMediation</code> method available but only <code>WithMediation</code></li>
 </ul>
 <h2 id="140">1.4.0</h2>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-7">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-6">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now auto register both crud and classic api interfaces</li>
 </ul>
@@ -444,11 +444,11 @@
 <li>[New] We can now use auto mapping with both crud and classic api mediation and optional mediation</li>
 </ul>
 <h2 id="130">1.3.0</h2>
-<h3 id="apizr-14">Apizr</h3>
+<h3 id="apizr-13">Apizr</h3>
 <ul>
 <li>[New] We can now define mapped model entity type from the <code>CrudEntityAttribute</code> above api entities for automatic crud registration</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-8">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-7">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] We can now provide an IMappingHandler implementation to the options builder for auto mapping</li>
 <li>[New] We can now decorate model entities with <code>MappedCrudEntityAttribute</code> to define mapped crud settings for automatic crud registration</li>
@@ -468,12 +468,12 @@
 <li>[New] Brand new integration with AutoMapper, to let Apizr handle crud entity mapping during mediation handling</li>
 </ul>
 <h2 id="120">1.2.0</h2>
-<h3 id="apizr-15">Apizr</h3>
+<h3 id="apizr-14">Apizr</h3>
 <ul>
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to Apizr.For and Apizr.CrudFor</li>
 <li>[New] Introducing ICrudApi service to manage standard CRUD api calls built-in</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-9">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-8">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[BreakingChange] Apizr instantiation/registration methods names standardized to services.AddApizrFor and services.AddApizrCrudFor</li>
 <li>[New] Enabling ICrudApi auto registration feature with CrudEntityAttribute and assembly scanning</li>
@@ -492,11 +492,11 @@
 <li>[New] Brand new integration with Optional, to let Apizr handle crud requests execution with mediation and optional result</li>
 </ul>
 <h2 id="110">1.1.0</h2>
-<h3 id="apizr-16">Apizr</h3>
+<h3 id="apizr-15">Apizr</h3>
 <ul>
 <li>[New] Aibility to manage generic web apis by setting base address with the options builder</li>
 </ul>
-<h3 id="apizrextensionsmicrosoftdependencyinjection-10">Apizr.Extensions.Microsoft.DependencyInjection</h3>
+<h3 id="apizrextensionsmicrosoftdependencyinjection-9">Apizr.Extensions.Microsoft.DependencyInjection</h3>
 <ul>
 <li>[New] Same as Apizr</li>
 </ul>
@@ -522,7 +522,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/master/Apizr/Docs/Apizr.Docs/changelog.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/changelog.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

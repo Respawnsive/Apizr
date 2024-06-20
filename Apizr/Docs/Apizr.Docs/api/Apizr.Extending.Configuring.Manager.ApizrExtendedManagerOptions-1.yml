@@ -18,7 +18,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrExtendedManagerOptions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
@@ -51,6 +51,9 @@ items:
   inheritedMembers:
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.Options
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.WebApiType
+  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.CrudModelType
+  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.TypeInfo
+  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.IsCrudApi
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.BaseUri
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.BaseAddress
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.BasePath
@@ -66,9 +69,11 @@ items:
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.OperationTimeout
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.RequestTimeout
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ShouldRedactHeaderValue
+  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ResiliencePipelineOptions
+  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.CacheOptions
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.Logger
-  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ResiliencePipelineRegistryKeys
   - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.RefitSettings
+  - Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ApizrConfigurationSection
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -93,7 +98,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
@@ -125,7 +130,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
@@ -159,7 +164,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersExtendedFactories
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
@@ -374,6 +379,36 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.WebApiType
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).WebApiType
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).WebApiType
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.CrudModelType
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.CrudModelType
+  parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
+  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.CrudModelType
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_CrudModelType
+  name: CrudModelType
+  nameWithType: ApizrManagerOptions<TWebApi>.CrudModelType
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.CrudModelType
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).CrudModelType
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).CrudModelType
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.TypeInfo
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.TypeInfo
+  parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
+  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.TypeInfo
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_TypeInfo
+  name: TypeInfo
+  nameWithType: ApizrManagerOptions<TWebApi>.TypeInfo
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.TypeInfo
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).TypeInfo
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).TypeInfo
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.IsCrudApi
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.IsCrudApi
+  parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
+  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.IsCrudApi
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_IsCrudApi
+  name: IsCrudApi
+  nameWithType: ApizrManagerOptions<TWebApi>.IsCrudApi
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.IsCrudApi
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).IsCrudApi
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).IsCrudApi
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.BaseUri
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.BaseUri
   parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
@@ -524,6 +559,26 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ShouldRedactHeaderValue
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).ShouldRedactHeaderValue
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
+  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineOptions
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: ApizrManagerOptions<TWebApi>.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ResiliencePipelineOptions
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ResiliencePipelineOptions
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ResiliencePipelineOptions
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.CacheOptions
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.CacheOptions
+  parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
+  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.CacheOptions
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_CacheOptions
+  name: CacheOptions
+  nameWithType: ApizrManagerOptions<TWebApi>.CacheOptions
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.CacheOptions
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).CacheOptions
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).CacheOptions
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.Logger
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.Logger
   parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
@@ -534,16 +589,6 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.Logger
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Logger
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Logger
-- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ResiliencePipelineRegistryKeys
-  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.ResiliencePipelineRegistryKeys
-  parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
-  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
-  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_ResiliencePipelineRegistryKeys
-  name: ResiliencePipelineRegistryKeys
-  nameWithType: ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
-  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.RefitSettings
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.RefitSettings
   parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
@@ -554,6 +599,16 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.RefitSettings
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).RefitSettings
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).RefitSettings
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}.ApizrConfigurationSection
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions{`0}.ApizrConfigurationSection
+  parent: Apizr.Configuring.Manager.ApizrManagerOptions{{TWebApi}}
+  definition: Apizr.Configuring.Manager.ApizrManagerOptions`1.ApizrConfigurationSection
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_ApizrConfigurationSection
+  name: ApizrConfigurationSection
+  nameWithType: ApizrManagerOptions<TWebApi>.ApizrConfigurationSection
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ApizrConfigurationSection
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ApizrConfigurationSection
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ApizrConfigurationSection
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -1080,6 +1135,30 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.WebApiType
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).WebApiType
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).WebApiType
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.CrudModelType
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.CrudModelType
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_CrudModelType
+  name: CrudModelType
+  nameWithType: ApizrManagerOptions<TWebApi>.CrudModelType
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.CrudModelType
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).CrudModelType
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).CrudModelType
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.TypeInfo
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.TypeInfo
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_TypeInfo
+  name: TypeInfo
+  nameWithType: ApizrManagerOptions<TWebApi>.TypeInfo
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.TypeInfo
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).TypeInfo
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).TypeInfo
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.IsCrudApi
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.IsCrudApi
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_IsCrudApi
+  name: IsCrudApi
+  nameWithType: ApizrManagerOptions<TWebApi>.IsCrudApi
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.IsCrudApi
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).IsCrudApi
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).IsCrudApi
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseUri
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseUri
   href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_BaseUri
@@ -1200,6 +1279,22 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ShouldRedactHeaderValue
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).ShouldRedactHeaderValue
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineOptions
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: ApizrManagerOptions<TWebApi>.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ResiliencePipelineOptions
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ResiliencePipelineOptions
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ResiliencePipelineOptions
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.CacheOptions
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.CacheOptions
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_CacheOptions
+  name: CacheOptions
+  nameWithType: ApizrManagerOptions<TWebApi>.CacheOptions
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.CacheOptions
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).CacheOptions
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).CacheOptions
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger
   href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_Logger
@@ -1208,14 +1303,6 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.Logger
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).Logger
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).Logger
-- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
-  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys
-  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_ResiliencePipelineRegistryKeys
-  name: ResiliencePipelineRegistryKeys
-  nameWithType: ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ResiliencePipelineRegistryKeys
-  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
-  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ResiliencePipelineRegistryKeys
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings
   href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_RefitSettings
@@ -1224,6 +1311,14 @@ references:
   fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.RefitSettings
   nameWithType.vb: ApizrManagerOptions(Of TWebApi).RefitSettings
   fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).RefitSettings
+- uid: Apizr.Configuring.Manager.ApizrManagerOptions`1.ApizrConfigurationSection
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ApizrConfigurationSection
+  href: Apizr.Configuring.Manager.ApizrManagerOptions-1.html#Apizr_Configuring_Manager_ApizrManagerOptions_1_ApizrConfigurationSection
+  name: ApizrConfigurationSection
+  nameWithType: ApizrManagerOptions<TWebApi>.ApizrConfigurationSection
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptions<TWebApi>.ApizrConfigurationSection
+  nameWithType.vb: ApizrManagerOptions(Of TWebApi).ApizrConfigurationSection
+  fullName.vb: Apizr.Configuring.Manager.ApizrManagerOptions(Of TWebApi).ApizrConfigurationSection
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions`1.#ctor*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions`1.#ctor
   href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions-1.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_1__ctor_Apizr_Extending_Configuring_Manager_IApizrExtendedManagerOptionsBase_

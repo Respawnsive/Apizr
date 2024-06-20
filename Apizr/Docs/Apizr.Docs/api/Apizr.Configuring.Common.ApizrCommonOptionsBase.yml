@@ -6,6 +6,7 @@ items:
   parent: Apizr.Configuring.Common
   children:
   - Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor
+  - Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection
   - Apizr.Configuring.Common.ApizrCommonOptionsBase.RefitSettings
   langs:
   - csharp
@@ -17,11 +18,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrCommonOptionsBase
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
-    startLine: 6
+    startLine: 7
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -58,6 +59,8 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -79,11 +82,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
-    startLine: 9
+    startLine: 10
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -109,11 +112,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
-      branch: master
+      branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettings
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -128,6 +131,39 @@ items:
   overload: Apizr.Configuring.Common.ApizrCommonOptionsBase.RefitSettings*
   implements:
   - Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection
+  commentId: P:Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection
+  id: ApizrConfigurationSection
+  parent: Apizr.Configuring.Common.ApizrCommonOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: ApizrConfigurationSection
+  nameWithType: ApizrCommonOptionsBase.ApizrConfigurationSection
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ApizrConfigurationSection
+    path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
+    startLine: 18
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  summary: Configuration section for Apizr
+  example: []
+  syntax:
+    content: public IConfigurationSection ApizrConfigurationSection { get; }
+    parameters: []
+    return:
+      type: Microsoft.Extensions.Configuration.IConfigurationSection
+    content.vb: Public Property ApizrConfigurationSection As IConfigurationSection
+  overload: Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection*
+  implements:
+  - Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
 references:
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
@@ -317,6 +353,20 @@ references:
   name: ShouldRedactHeaderValue
   nameWithType: ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: ApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -608,3 +658,61 @@ references:
   name: Refit
   nameWithType: Refit
   fullName: Refit
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection
+  href: Apizr.Configuring.Common.ApizrCommonOptionsBase.html#Apizr_Configuring_Common_ApizrCommonOptionsBase_ApizrConfigurationSection
+  name: ApizrConfigurationSection
+  nameWithType: ApizrCommonOptionsBase.ApizrConfigurationSection
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection
+- uid: Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
+  commentId: P:Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
+  parent: Apizr.Configuring.Common.IApizrCommonOptionsBase
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html#Apizr_Configuring_Common_IApizrCommonOptionsBase_ApizrConfigurationSection
+  name: ApizrConfigurationSection
+  nameWithType: IApizrCommonOptionsBase.ApizrConfigurationSection
+  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
+- uid: Microsoft.Extensions.Configuration.IConfigurationSection
+  commentId: T:Microsoft.Extensions.Configuration.IConfigurationSection
+  parent: Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfigurationsection
+  name: IConfigurationSection
+  nameWithType: IConfigurationSection
+  fullName: Microsoft.Extensions.Configuration.IConfigurationSection
+- uid: Microsoft.Extensions.Configuration
+  commentId: N:Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Configuration
+  nameWithType: Microsoft.Extensions.Configuration
+  fullName: Microsoft.Extensions.Configuration
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration

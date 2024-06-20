@@ -390,7 +390,7 @@
         </member>
         <member name="P:Apizr.Caching.Attributes.CacheAttributeBase.LifeSpan">
             <summary>
-            This specific caching life time
+            This specific caching lifetime
             </summary>
         </member>
         <member name="P:Apizr.Caching.Attributes.CacheAttributeBase.Mode">
@@ -717,6 +717,12 @@
             Refresh values for each api request (dynamic values)
             </summary>
         </member>
+        <member name="M:Apizr.Configuring.ApizrRequestMethod.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.ApizrRequestMethod.GetHashCode">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Common.ApizrCommonOptions">
             <inheritdoc cref="T:Apizr.Configuring.Common.IApizrCommonOptions"/>
         </member>
@@ -788,6 +794,9 @@
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptionsBase.RefitSettings">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Common.ApizrCommonOptionsBuilder">
             <summary>
             Builder options available at common level for static registrations
@@ -799,6 +808,12 @@
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr#Configuring#Common#IApizrCommonOptionsBuilder#ApizrOptions">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithBaseAddress(System.String)">
@@ -969,6 +984,12 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
@@ -1015,6 +1036,11 @@
         <member name="P:Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings">
             <summary>
             Refit settings
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection">
+            <summary>
+            Configuration section for Apizr
             </summary>
         </member>
         <member name="T:Apizr.Configuring.Common.IApizrCommonOptionsBuilder`2">
@@ -1243,6 +1269,15 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.WebApiType">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.CrudModelType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.TypeInfo">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.IsCrudApi">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.BaseUri">
             <inheritdoc />
         </member>
@@ -1288,6 +1323,12 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ShouldRedactHeaderValue">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineOptions">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.CacheOptions">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Apizr#Configuring#Shared#IApizrGlobalSharedOptionsBase#ContextOptionsBuilder">
             <inheritdoc />
         </member>
@@ -1297,10 +1338,10 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ResiliencePipelineRegistryKeys">
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings">
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ApizrConfigurationSection">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Manager.ApizrManagerOptionsBase">
@@ -1316,13 +1357,22 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.WebApiType">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.ResiliencePipelineRegistryKeys">
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudModelType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.TypeInfo">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.IsCrudApi">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.Logger">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.RefitSettings">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.ApizrConfigurationSection">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder">
@@ -1336,6 +1386,12 @@
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.Apizr#Configuring#Manager#IApizrManagerOptionsBuilder#ApizrOptions">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBaseAddress(System.String)">
@@ -1506,6 +1562,12 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
@@ -1563,14 +1625,14 @@
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptions">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptions"/>
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.String[],System.String[],System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},System.Func{System.String,System.Boolean},Microsoft.Extensions.Logging.LogLevel[])">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptions.#ctor(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions,System.Type,System.Type,System.Reflection.TypeInfo,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean},Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
-            The common options constructor
+            The proper options constructor
             </summary>
             <param name="sharedOptions">The shared options</param>
             <param name="webApiType">The web api type</param>
-            <param name="assemblyResiliencePipelineRegistryKeys">Global resilience pipelines</param>
-            <param name="webApiResiliencePipelineRegistryKeys">Specific resilience pipeline</param>
+            <param name="crudModelType">The crud model type if any</param>
+            <param name="typeInfo">The type info</param>
             <param name="baseAddress">The web api base address</param>
             <param name="basePath">The web api base path</param>
             <param name="handlersParameters">Some handlers parameters</param>
@@ -1578,6 +1640,10 @@
             <param name="trafficVerbosity">The traffic verbosity</param>
             <param name="operationTimeout">The operation timeout</param>
             <param name="requestTimeout">The request timeout</param>
+            <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
+            <param name="properResiliencePipelineAttributes">Specific resilience pipeline</param>
+            <param name="commonCacheAttribute">Global caching options</param>
+            <param name="properCacheAttribute">Specific caching options</param>
             <param name="shouldRedactHeaderValue">Headers to redact value</param>
             <param name="logLevels">The log levels</param>
         </member>
@@ -1623,20 +1689,30 @@
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptionsBase" />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.String[],System.String[],System.Func{System.String,System.Boolean})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.Type,System.Reflection.TypeInfo,Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean})">
             <summary>
             The proper options constructor
             </summary>
             <param name="sharedOptions">The shared options</param>
             <param name="webApiType">The web api type</param>
-            <param name="assemblyResiliencePipelineRegistryKeys">Global resilience pipelines</param>
-            <param name="webApiResiliencePipelineRegistryKeys">Specific resilience pipelines</param>
+            <param name="crudModelType">The crud model type if any</param>
+            <param name="typeInfo">The type info</param>
+            <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
+            <param name="properResiliencePipelineAttributes">Specific resilience pipelines</param>
+            <param name="commonCacheAttribute">Global caching options</param>
+            <param name="properCacheAttribute">Specific caching options</param>
             <param name="shouldRedactHeaderValue">Headers to redact value</param>
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.ResiliencePipelineRegistryKeys">
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger">
@@ -1653,6 +1729,12 @@
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Apizr#Configuring#Proper#IApizrProperOptionsBuilder#ApizrOptions">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithBaseAddress(System.String)">
@@ -1784,6 +1866,12 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
@@ -1822,9 +1910,19 @@
             Web api interface type
             </summary>
         </member>
-        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.ResiliencePipelineRegistryKeys">
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType">
             <summary>
-            Resilience pipeline keys from the registry
+            Crud model type if any
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo">
+            <summary>
+            Web api interface or Crud model class type info
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi">
+            <summary>
+            True if it's a CRUD api
             </summary>
         </member>
         <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger">
@@ -2264,10 +2362,13 @@
         <member name="T:Apizr.Configuring.Request.ApizrRequestOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Request.IApizrRequestOptionsBase" />
         </member>
-        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])">
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase,Apizr.Caching.Attributes.CacheAttributeBase,Apizr.Configuring.ApizrRequestMethod,Microsoft.Extensions.Logging.LogLevel[])">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Request.ApizrRequestOptionsBuilder">
@@ -2315,6 +2416,12 @@
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr#Configuring#Request#IApizrRequestOptionsBuilder{Apizr#Configuring#Request#IApizrRequestOptions,Apizr#Configuring#Request#IApizrRequestOptionsBuilder}#WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
@@ -2325,6 +2432,9 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr#Configuring#Request#IApizrRequestOptionsBuilder{Apizr#Configuring#Request#IApizrRequestOptions,Apizr#Configuring#Request#IApizrRequestOptionsBuilder}#WithContext(Polly.ResilienceContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.Apizr#Configuring#Request#IApizrRequestOptionsBuilder{Apizr#Configuring#Request#IApizrRequestOptions,Apizr#Configuring#Request#IApizrRequestOptionsBuilder}#WithResiliencePipelineOptions(System.Collections.Generic.IDictionary{Apizr.Configuring.ApizrConfigurationSource,Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[]})">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Request.IApizrRequestOptions">
@@ -2360,6 +2470,11 @@
             The Polly resilience context to pass through it all
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod">
+            <summary>
+            The Apizr request method
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2">
             <summary>
             Builder options available at request level
@@ -2385,6 +2500,14 @@
             </summary>
             <param name="headers">Headers to add to the request</param>
             <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Request.IApizrRequestOptionsBuilder`2.WithResiliencePipelineKeys(System.String[],Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Apply some resilience strategies by getting pipelines from registry with key matching.
+            </summary>
+            <param name="resiliencePipelineKeys">Resilience pipeline keys from the registry.</param>
+            <param name="duplicateStrategy">The duplicate strategy if there's any other names already (default: Add)</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Request.IApizrRequestOptionsBuilder">
@@ -2435,6 +2558,12 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Apizr#Configuring#Shared#IApizrGlobalSharedOptionsBase#ContextOptionsBuilder">
@@ -2556,6 +2685,16 @@
             The <see cref="T:System.Func`2"/> which determines whether to redact the HTTP header value before logging.
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions">
+            <summary>
+            Resilience pipeline keys from the registry
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions">
+            <summary>
+            The caching options to apply
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ContextOptionsBuilder">
             <summary>
             The resilience context options builder
@@ -2649,6 +2788,15 @@
             <param name="strategy">The duplicate strategy if there's any other names already (default: Add)</param>
             <returns></returns>
         </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
+            <summary>
+            Cache data.
+            </summary>
+            <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
+            <param name="lifeSpan">This specific caching lifetime (Default: null = cache handler lifetime</param>
+            <param name="shouldInvalidateOnError">Should invalidate on error (Default: false)</param>
+            <returns></returns>
+        </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase">
             <summary>
             Options available at both common and proper level (not request) and for all (static and extended) registration types
@@ -2691,6 +2839,20 @@
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2">
             <inheritdoc cref="T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase" />
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Set options from configuration
+            </summary>
+            <param name="configuration">The configuration to set options from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
+            <summary>
+            Set options from a specific configuration section
+            </summary>
+            <param name="configurationSection">The configuration section to set options from</param>
+            <returns></returns>
         </member>
         <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)">
             <summary>
@@ -2749,6 +2911,15 @@
             <param name="headers">Headers to add to the request</param>
             <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
             <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Apply some resilience strategies by getting pipelines from registry with key matching.
+            </summary>
+            <param name="resiliencePipelineKeys">Resilience pipeline keys from the registry.</param>
+            <param name="methodScope">Http or Crud methods to apply pipelines on (default: null = All)</param>
+            <param name="duplicateStrategy">The duplicate strategy if there's any other names already (default: Add)</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions">
@@ -4935,9 +5106,19 @@
             Logs response body and headers only
             </summary>
         </member>
-        <member name="F:Apizr.Logging.HttpMessageParts.AllButBody">
+        <member name="F:Apizr.Logging.HttpMessageParts.AllButRequestBody">
             <summary>
-            Logs all parts but body
+            Logs all parts but request body
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.AllButResponseBody">
+            <summary>
+            Logs all parts but response body
+            </summary>
+        </member>
+        <member name="F:Apizr.Logging.HttpMessageParts.AllButBodies">
+            <summary>
+            Logs all parts but bodies
             </summary>
         </member>
         <member name="F:Apizr.Logging.HttpMessageParts.All">
@@ -5483,40 +5664,157 @@
             Gets the value indicating whether to return the context to the pool, when request completes.
             </summary>
         </member>
-        <member name="T:Apizr.Resiliencing.Attributes.CreateResiliencePipelineAttribute">
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.CreateResiliencePipelineAttribute">
             <summary>
             Tells Apizr to apply some policies to Create method
             You have to provide a strategy registry to Apizr to use this feature
             </summary>
         </member>
-        <member name="M:Apizr.Resiliencing.Attributes.CreateResiliencePipelineAttribute.#ctor(System.String[])">
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.CreateResiliencePipelineAttribute.#ctor(System.String[])">
             <inheritdoc />
         </member>
-        <member name="T:Apizr.Resiliencing.Attributes.DeleteResiliencePipelineAttribute">
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.DeleteResiliencePipelineAttribute">
             <summary>
             Tells Apizr to apply some resilience strategies to Delete method
             You have to provide a strategy registry to Apizr to use this feature
             </summary>
         </member>
-        <member name="M:Apizr.Resiliencing.Attributes.DeleteResiliencePipelineAttribute.#ctor(System.String[])">
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.DeleteResiliencePipelineAttribute.#ctor(System.String[])">
             <inheritdoc />
         </member>
-        <member name="T:Apizr.Resiliencing.Attributes.ReadAllResiliencePipelineAttribute">
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.ReadAllResiliencePipelineAttribute">
             <summary>
             Tells Apizr to apply some resilience strategies to ReadAll method
             You have to provide a strategy registry to Apizr to use this feature
             </summary>
         </member>
-        <member name="M:Apizr.Resiliencing.Attributes.ReadAllResiliencePipelineAttribute.#ctor(System.String[])">
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.ReadAllResiliencePipelineAttribute.#ctor(System.String[])">
             <inheritdoc />
         </member>
-        <member name="T:Apizr.Resiliencing.Attributes.ReadResiliencePipelineAttribute">
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.ReadResiliencePipelineAttribute">
             <summary>
             Tells Apizr to apply some resilience strategies to Read method
             You have to provide a strategy registry to Apizr to use this feature
             </summary>
         </member>
-        <member name="M:Apizr.Resiliencing.Attributes.ReadResiliencePipelineAttribute.#ctor(System.String[])">
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.ReadResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.SafeCreateResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Create method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.SafeCreateResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.SafeDeleteResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some resilience strategies to Delete method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.SafeDeleteResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.SafeReadAllResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some resilience strategies to ReadAll method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.SafeReadAllResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.SafeReadResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some resilience strategies to Read method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.SafeReadResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.SafeUpdateResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some resilience strategies to Update method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.SafeUpdateResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Crud.UpdateResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some resilience strategies to Update method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Crud.UpdateResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.DeleteResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Delete http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.DeleteResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.GetResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Get http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.GetResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.HeadResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Head http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.HeadResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.OptionsResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Options http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.OptionsResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.PatchResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Patch http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.PatchResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.PostResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Post http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.PostResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.PutResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Put http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.PutResiliencePipelineAttribute.#ctor(System.String[])">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Resiliencing.Attributes.ResilienceContextAttribute">
@@ -5551,15 +5849,6 @@
             <summary>
             Strategy registry keys
             </summary>
-        </member>
-        <member name="T:Apizr.Resiliencing.Attributes.UpdateResiliencePipelineAttribute">
-            <summary>
-            Tells Apizr to apply some resilience strategies to Update method
-            You have to provide a strategy registry to Apizr to use this feature
-            </summary>
-        </member>
-        <member name="M:Apizr.Resiliencing.Attributes.UpdateResiliencePipelineAttribute.#ctor(System.String[])">
-            <inheritdoc />
         </member>
         <member name="T:Apizr.Resiliencing.HttpRequestMessageApizrExtensions">
             <summary>

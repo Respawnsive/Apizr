@@ -1,11 +1,12 @@
 ﻿## Configuring base address
 
-You can configure base address either by attribute decoration or by fluent configuration.
+You can configure base address and base path either by attribute decoration or by fluent configuration.
+Fluent configuration allows you to load options automatically from settings (see Settings), or set options manually.
 You can mix the configuration providing a base path by attribute and a base address/URI fluently.
 
 ### [Attribute](#tab/tabid-attribute)
 
-Configuring the base address by attribute allows you to use assembly scanning auto registration feature.
+Configuring the base address or base path by attribute allows you to use assembly scanning auto registration feature.
 
 ### Classic api
 
@@ -48,7 +49,20 @@ Optional parameters:
 
 ### [Fluent](#tab/tabid-fluent)
 
-Configuring the base address fluently allows you to set it dynamically (e.g. based on settings)
+#### Automatically
+
+Base address and base path could both be set automatically by providing an `IConfiguration` instance to Apizr like so:
+```csharp
+options => options.WithConfiguration(context.Configuration)
+```
+
+We can set it at common level (shared by all apis) or specific level (dedicated to a named one).
+
+Please heads to the Settings doc article to see how to configure the base address or base path automatically from settings.
+
+#### Manually
+
+Configuring the base address or base path fluently with manual option allows you to set it dynamically.
 
 You can set the base address or a base path thanks to these options:
 
@@ -60,8 +74,7 @@ options => options.WithBaseAddress(YourSettings.YourBaseAddress))
 options => options.WithBasePath(YourSettings.YourBasePath))
 ```
 
-The extended world offers another option with a factory providing a service provider instance.
-It could help you to resolve the setting at runtime:
+The extended world offers another option with a factory providing a service provider instance:
 
 ```csharp
 // Address

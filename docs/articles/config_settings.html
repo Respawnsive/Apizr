@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
+    
+    
+      <link rel="shortcut icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="settings">Settings</h2>
+<p>Most of Apizr settings could be set by providing an <code>IConfiguration</code> instance.
+We can set them at common level (shared by all apis) or specific level (dedicated to named apis).
+The following doc acrticle will focus on appsettings.json configuration.</p>
+<h3 id="defining">Defining</h3>
+<p>Here is an example of an appsettings.json file with some of the settings that could be set:</p>
+<pre><code class="lang-json">{
+  &quot;Logging&quot;: {
+    &quot;LogLevel&quot;: { // No provider, LogLevel applies to all the enabled providers.
+      &quot;Default&quot;: &quot;Trace&quot;, // Default, application level if no other level applies
+      &quot;Microsoft&quot;: &quot;Warning&quot;, // Log level for log category which starts with text 'Microsoft' (i.e. 'Microsoft.*')
+      &quot;Microsoft.Extensions.Http.DefaultHttpClientFactory&quot;: &quot;Information&quot;
+    }
+  },
+  &quot;Apizr&quot;: {
+    &quot;Common&quot;: {
+      &quot;Logging&quot;: {
+        &quot;HttpTracerMode&quot;: &quot;Everything&quot;,
+        &quot;TrafficVerbosity&quot;: &quot;All&quot;,
+        &quot;LogLevels&quot;: [ &quot;Trace&quot;, &quot;Information&quot;, &quot;Critical&quot; ]
+      },
+      &quot;OperationTimeout&quot;: &quot;00:00:10&quot;,
+      &quot;LoggedHeadersRedactionNames&quot;: [ &quot;testSettingsKey1&quot; ],
+      &quot;ResilienceContext&quot;: {
+        &quot;ContinueOnCapturedContext&quot;: false,
+        &quot;ReturnContextToPoolOnComplete&quot;: true
+      },
+      &quot;Headers&quot;: [
+        &quot;testSettingsKey6: testSettingsValue6.1&quot;
+      ],
+      &quot;ResiliencePipelineOptions&quot;: {
+        &quot;HttpGet&quot;: [ &quot;TestPipeline3&quot; ]
+      },
+      &quot;Caching&quot;: {
+        &quot;Mode&quot;: &quot;GetAndFetch&quot;,
+        &quot;LifeSpan&quot;: &quot;00:15:00&quot;,
+        &quot;ShouldInvalidateOnError&quot;: false
+      }
+    },
+    &quot;IReqResSimpleService&quot;: {
+      &quot;BaseAddress&quot;: &quot;https://reqres.in/api&quot;,
+      &quot;RequestTimeout&quot;: &quot;00:00:03&quot;,
+      &quot;Headers&quot;: [
+        &quot;testSettingsKey2: testSettingsValue2.1&quot;,
+        &quot;testSettingsKey3: *testSettingsValue3.1*&quot;,
+        &quot;testSettingsKey4: {0}&quot;,
+        &quot;testSettingsKey5: *{0}*&quot;
+      ],
+      &quot;Caching&quot;: {
+        &quot;Mode&quot;: &quot;GetAndFetch&quot;,
+        &quot;LifeSpan&quot;: &quot;00:12:00&quot;,
+        &quot;ShouldInvalidateOnError&quot;: true
+      },
+      &quot;ResiliencePipelineKeys&quot;: [ &quot;TestPipeline3&quot; ]
+    },
+    &quot;User&quot;: {
+      &quot;BaseAddress&quot;: &quot;https://reqres.in/api/users&quot;,
+      &quot;RequestTimeout&quot;: &quot;00:00:05&quot;,
+      &quot;Headers&quot;: [
+        &quot;testSettingsKey8: testSettingsValue8.1&quot;
+      ]
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>You first have to start with the <code>Apizr</code> root section key.</li>
+<li>Then you can define settings at common level with the <code>Common</code> section key, or specific level with the name of apis as section keys (here <code>IReqResSimpleService</code> classic api and <code>User</code> CRUD api).</li>
+<li>Finally you can adjust following available settings:
+<ul>
+<li><code>BaseAddress</code> (string): specifies the base API address</li>
+<li><code>BasePath</code> (string): specifies the base API address path</li>
+<li><code>Logging</code> (section): contains settings related to logging
+<ul>
+<li><code>HttpTracerMode</code> (enum member name): specifies the mode for HTTP tracing</li>
+<li><code>TrafficVerbosity</code> (enum member name): specifies the verbosity level for traffic logging</li>
+<li><code>LogLevels</code> (enum member names array): specifies the log levels to use</li>
+</ul>
+</li>
+<li><code>OperationTimeout</code> (TimeSpan representation): specifies the timeout for an API operation of multiple requests</li>
+<li><code>RequestTimeout</code> (TimeSpan representation): specifies the timeout for an API request</li>
+<li><code>LoggedHeadersRedactionNames</code> (string array): specifies the header keys to be redacted in logs</li>
+<li><code>ResilienceContext</code> (section): contains settings related to the resilience context
+<ul>
+<li><code>ContinueOnCapturedContext</code> (bool): specifies whether to continue on the captured context</li>
+<li><code>ReturnContextToPoolOnComplete</code> (bool): specifies whether to return the context to the pool on completion</li>
+</ul>
+</li>
+<li><code>Headers</code> (string array): specifies custom headers to be added to requests</li>
+<li><code>ResiliencePipelineKeys</code> (string array): specifies the resilience pipeline keys to use</li>
+<li><code>ResiliencePipelineOptions</code> (dictionary): specifies the resilience pipeline keys to use but scoped to specific request method groups</li>
+<li><code>Caching</code> (section): contains settings related to caching
+<ul>
+<li><code>Mode</code> (enum member name): specifies the caching mode</li>
+<li><code>LifeSpan</code> (TimeSpan representation): specifies the lifespan of cached responses</li>
+<li><code>ShouldInvalidateOnError</code> (bool): specifies whether to invalidate the cache on error</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="registering">Registering</h3>
+<p>Once settings has been adjusted to your needs, you just have to provide an <code>IConfiguration</code> instance to Apizr with the dedicated fluent option at any registration level:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<ul>
+<li>Apizr will first load common settings, then specific settings, so specific settings will override the common ones. The same behavior as usual with fluent options registration actually.</li>
+<li>Order matters, meaning that you should first register the configuration from settings, then override it if needed with fluent options.</li>
+</ul>
+</div>
+<p>If you want to organize your settings in a more custom way, you can provide custom configuration section keys to Apizr at any registration level:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration.GetSection(&quot;My:Custom:Section&quot;))
+</code></pre>
+<p>But you still have to conform to the settings structure described above.</p>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_settings.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      Supported by Respawnsive
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

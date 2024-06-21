@@ -7,18 +7,18 @@ You can configure the way your api request will be managed by Apizr at 3 differe
 - Register time, by fluent options, when you actually register your api interfaces
 - Request time, by fluent options, when you finally send the request to the api
 
-At Design time, everything is set by attribute like we used to with Refit, decorating at different levels like assembly, interface or method.
+At Design time, everything is set by attribute like we used to with Refit, decorating at different levels like assembly, interface/class or method.
 
-At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not.
+At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not. You can set options automatically with settings configuration loading (see Settings) or manually with fluent options.
 
 At Request time, you'll get your last chance to adjust configuration before the request to be sent.
 
 As you can mix stages and levels while configuring, here is the configuration pipeline:
 
 - **1 (Design):** The **assembly attribute configuration** level set a configuration to **all api interfaces** contained into the assembly.
-- **2 (Register):** The **fluent common configuration** option takes over the previous one and set a configuration to **all registered api interfaces**.
+- **2 (Register):** The **fluent common configuration** option (automatic or manual) takes over the previous one and set a configuration to **all registered api interfaces**.
 - **3 (Design):** The **interface attribute configuration** level takes over all the previous ones and set a configuration to **a specific api interface**.
-- **4 (Register):** The **fluent proper or manager configuration** option takes over all the previous ones and set a configuration to **the registered api interface**.
+- **4 (Register):** The **fluent proper or manager configuration** option (automatic or manual) takes over all the previous ones and set a configuration to **the registered api interface**.
 - **5 (Design):** The **method attribute configuration** level takes over all the previous ones and set a configuration to **a specific api interface method**.
 - **6 (Request):** The **fluent request configuration** option takes over all the previous ones and set a configuration to **the called api interface method**.
 

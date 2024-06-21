@@ -121,100 +121,6 @@ Of course, you can implement your own integration, but here we'll talk about the
 <p><strong>Apizr.Extensions.Microsoft.Caching</strong></p>
 <p>This integration package offers you to work with any of MS Extension Caching compatible caching engines. It means that you still have to install the one of your choice right after Apizr.Extensions.Microsoft.Caching.</p>
 </div>
-<h3 id="defining">Defining</h3>
-<h4 id="cache-attribute">Cache attribute</h4>
-<p>Apizr comes with a <code>Cache</code> attribute which activate result data caching at any level (all Assembly apis, interface apis or specific api method).</p>
-<p>Here is classic api an example:</p>
-<pre><code class="lang-csharp">namespace Apizr.Sample
-{
-    [WebApi(&quot;https://reqres.in/api&quot;)]
-    public interface IReqResService
-    {
-        [Get(&quot;/users&quot;), Cache(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
-        Task&lt;UserList&gt; GetUsersAsync();
-
-        [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
-        Task&lt;UserDetails&gt; GetUserAsync(int userId);
-    }
-}
-</code></pre>
-<p>You’ll find also cache attributes dedicated to CRUD apis like <code>CacheRead</code> and <code>CacheReadAll</code>, so you could define cache settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>
-<p>Here is CRUD api an example:</p>
-<pre><code class="lang-csharp">namespace Apizr.Sample.Models
-{
-    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
-    [CacheReadAll(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
-    [CacheRead(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
-    public class User
-    {
-        [JsonProperty(&quot;id&quot;)]
-        public int Id { get; set; }
-
-        [JsonProperty(&quot;first_name&quot;)]
-        public string FirstName { get; set; }
-
-        [JsonProperty(&quot;last_name&quot;)]
-        public string LastName { get; set; }
-
-        [JsonProperty(&quot;avatar&quot;)]
-        public string Avatar { get; set; }
-
-        [JsonProperty(&quot;email&quot;)]
-        public string Email { get; set; }
-    }
-}
-</code></pre>
-<p>Both (classic and CRUD) define the same thing about cache life time and cache mode.</p>
-<p>Life time is actually a <code>TimeSpan</code> string representation which is parsed then. Its optional and if you don’t provide it, the default cache provider settings will be applyed.</p>
-<p>Cache mode could be set to:</p>
-<ul>
-<li><code>GetAndFetch</code> (default): the result is returned from request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.</li>
-<li><code>GetOrFetch</code>: the result is returned from cache if there’s some data already cached, otherwise from the request.</li>
-</ul>
-<p>In both cases, cached data is updated after each successful request call.</p>
-<p>You also can define global caching settings by decorating the assembly or interface, then manage specific scenarios at method level.
-Apizr will apply the lowest level settings it could find.</p>
-<p>Back to the example, we are saying:</p>
-<ul>
-<li>When getting all users, let’s admit we could have many new users registered each hour, so:
-<ul>
-<li>Try to fetch it from web first
-<ul>
-<li>if fetch failed, try to load it from previous cached result</li>
-<li>if fetch succeed, update cached data but make it expire after 1 hour</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>When getting a specific user, let’s admit its details won’t change so much each day, so:
-<ul>
-<li>Try to load it from cache first
-<ul>
-<li>if no previous cached data or cache expired after 1 day, fetch it and update cached data but make it expire after 1 day</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="cachekey-attribute">CacheKey attribute</h4>
-<p>By default, Apizr will use all the method parameters (name and value) to generate a cache key (excepting attribute decorated parameters, neither cancellation token parameters).
-But you may want to define your own cache key, choosing by yourself which parameter to include and which not.
-That's what the <code>CacheKey</code> attribute is made for.
-You can decorate one or more parameters with it, then it will be included in the cache key generation:</p>
-<pre><code class="lang-csharp">namespace Apizr.Sample
-{
-    [WebApi(&quot;https://reqres.in/api&quot;)]
-    public interface IReqResService
-    {
-        [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
-        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, int organizationId, [CacheKey] string serviceName);
-    }
-}
-</code></pre>
-<div class="TIP">
-<h5>Tip</h5>
-<p>Cache key generation supports complex type parameters so you can group your parameters into a single one to include them all.</p>
-</div>
 <h3 id="registering">Registering</h3>
 <p>Please register the one corresponding to the package you just installed</p>
 <h4 id="ms-extensions-caching">MS Extensions Caching</h4>
@@ -366,6 +272,119 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
 </div>
 </section>
 </div>
+<h3 id="activating">Activating</h3>
+<p>You can activate caching at:</p>
+<ul>
+<li>Design time by attribute decoration</li>
+<li>Register time by fluent configuration</li>
+<li>Request time by fluent configuration</li>
+</ul>
+<h4 id="cache-attribute">Cache attribute</h4>
+<p>Apizr comes with a <code>Cache</code> attribute which activate result data caching at any level (all Assembly apis, interface apis or specific api method).</p>
+<p>Here is classic api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users&quot;), Cache(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync();
+
+        [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync(int userId);
+    }
+}
+</code></pre>
+<p>You’ll find also cache attributes dedicated to CRUD apis like <code>CacheRead</code> and <code>CacheReadAll</code>, so you could define cache settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>
+<p>Here is CRUD api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample.Models
+{
+    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [CacheReadAll(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
+    [CacheRead(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
+    public class User
+    {
+        [JsonProperty(&quot;id&quot;)]
+        public int Id { get; set; }
+
+        [JsonProperty(&quot;first_name&quot;)]
+        public string FirstName { get; set; }
+
+        [JsonProperty(&quot;last_name&quot;)]
+        public string LastName { get; set; }
+
+        [JsonProperty(&quot;avatar&quot;)]
+        public string Avatar { get; set; }
+
+        [JsonProperty(&quot;email&quot;)]
+        public string Email { get; set; }
+    }
+}
+</code></pre>
+<p>Both (classic and CRUD) define the same thing about cache life time and cache mode.</p>
+<p>Life time is actually a <code>TimeSpan</code> string representation which is parsed then. Its optional and if you don’t provide it, the default cache provider settings will be applyed.</p>
+<p>Cache mode could be set to:</p>
+<ul>
+<li><code>GetAndFetch</code> (default): the result is returned from request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.</li>
+<li><code>GetOrFetch</code>: the result is returned from cache if there’s some data already cached, otherwise from the request.</li>
+</ul>
+<p>In both cases, cached data is updated after each successful request call.</p>
+<p>You also can define global caching settings by decorating the assembly or interface, then manage specific scenarios at method level.
+Apizr will apply the lowest level settings it could find.</p>
+<p>Back to the example, we are saying:</p>
+<ul>
+<li>When getting all users, let’s admit we could have many new users registered each hour, so:
+<ul>
+<li>Try to fetch it from web first
+<ul>
+<li>if fetch failed, try to load it from previous cached result</li>
+<li>if fetch succeed, update cached data but make it expire after 1 hour</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When getting a specific user, let’s admit its details won’t change so much each day, so:
+<ul>
+<li>Try to load it from cache first
+<ul>
+<li>if no previous cached data or cache expired after 1 day, fetch it and update cached data but make it expire after 1 day</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="cachekey-attribute">CacheKey attribute</h4>
+<p>By default, Apizr will use all the method parameters (name and value) to generate a cache key (excepting property parameters, neither cancellation token parameters).
+But you may want to define your own cache key, choosing by yourself which parameter to include and which not.
+That's what the <code>CacheKey</code> attribute is made for.
+You can decorate one or more parameters with it, then it will be included in the cache key generation:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, int organizationId, [CacheKey] string serviceName);
+    }
+}
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Cache key generation supports complex type parameters so you can group your parameters into a single one to include them all.</p>
+</div>
+<h4 id="fluent-configuration">Fluent configuration</h4>
+<h5 id="automatically">Automatically</h5>
+<p>Caching could be activated automatically by providing an <code>IConfiguration</code> instance containing cache settings to Apizr:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<p>We can activate it at common level (to all apis) or specific level (dedicated to a named one).</p>
+<p>Please heads to the Settings doc article to see how to configure caching automatically from settings.</p>
+<h5 id="manually">Manually</h5>
+<p>You can activate caching at any levels with the following manual fluent option:</p>
+<pre><code class="lang-csharp">// Address
+options =&gt; options.WithCaching(mode: CacheMode.GetAndFetch, lifeSpan: TimeSpan.FromHours(1),
+            shouldInvalidateOnError: false)
+</code></pre>
 <h3 id="using">Using</h3>
 <h4 id="reading">Reading</h4>
 <h5 id="from-thrown-apizrexceptiont">From thrown <code>ApizrException&lt;T&gt;</code></h5>

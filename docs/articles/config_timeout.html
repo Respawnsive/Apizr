@@ -172,8 +172,13 @@ Apizr will apply the closest timeout settings to the request it could find.</p>
 </ul>
 </section>
 <section id="tabpanel_1_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
-
-<p>Configuring a timeout fluently at register time allows you to set it dynamically (e.g. based on settings).</p>
+<h4 id="automatically">Automatically</h4>
+<p>Timeout could be set automatically by providing an <code>IConfiguration</code> instance containing the timeout settings:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<p>We can set it at common level (to all apis) or specific level (dedicated to a named one).</p>
+<p>Please heads to the Settings doc article to see how to configure timeouts automatically from loaded settings configuration.</p>
+<h4 id="manually">Manually</h4>
 <p>You can set a request timeout thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithRequestTimeout(YOUR_TIMESPAN)

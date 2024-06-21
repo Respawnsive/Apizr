@@ -41,6 +41,10 @@ namespace Apizr
         
         private static ApizrBuilder _instance;
         internal static ApizrBuilder Instance => _instance ??= new ApizrBuilder();
+
+        /// <summary>
+        /// Current Apizr builder instance
+        /// </summary>
         public static IApizrBuilder Current => Instance;
 
         #region Registry

@@ -86,15 +86,15 @@
 <li>Register time, by fluent options, when you actually register your api interfaces</li>
 <li>Request time, by fluent options, when you finally send the request to the api</li>
 </ul>
-<p>At Design time, everything is set by attribute like we used to with Refit, decorating at different levels like assembly, interface or method.</p>
-<p>At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not.</p>
+<p>At Design time, everything is set by attribute like we used to with Refit, decorating at different levels like assembly, interface/class or method.</p>
+<p>At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not. You can set options automatically with settings configuration loading (see Settings) or manually with fluent options.</p>
 <p>At Request time, you'll get your last chance to adjust configuration before the request to be sent.</p>
 <p>As you can mix stages and levels while configuring, here is the configuration pipeline:</p>
 <ul>
 <li><strong>1 (Design):</strong> The <strong>assembly attribute configuration</strong> level set a configuration to <strong>all api interfaces</strong> contained into the assembly.</li>
-<li><strong>2 (Register):</strong> The <strong>fluent common configuration</strong> option takes over the previous one and set a configuration to <strong>all registered api interfaces</strong>.</li>
+<li><strong>2 (Register):</strong> The <strong>fluent common configuration</strong> option (automatic or manual) takes over the previous one and set a configuration to <strong>all registered api interfaces</strong>.</li>
 <li><strong>3 (Design):</strong> The <strong>interface attribute configuration</strong> level takes over all the previous ones and set a configuration to <strong>a specific api interface</strong>.</li>
-<li><strong>4 (Register):</strong> The <strong>fluent proper or manager configuration</strong> option takes over all the previous ones and set a configuration to <strong>the registered api interface</strong>.</li>
+<li><strong>4 (Register):</strong> The <strong>fluent proper or manager configuration</strong> option (automatic or manual) takes over all the previous ones and set a configuration to <strong>the registered api interface</strong>.</li>
 <li><strong>5 (Design):</strong> The <strong>method attribute configuration</strong> level takes over all the previous ones and set a configuration to <strong>a specific api interface method</strong>.</li>
 <li><strong>6 (Request):</strong> The <strong>fluent request configuration</strong> option takes over all the previous ones and set a configuration to <strong>the called api interface method</strong>.</li>
 </ul>

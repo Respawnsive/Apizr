@@ -79,7 +79,8 @@
             <article class="content wrap" id="_content" data-uid="">
 
 <h2 id="configuring-base-address">Configuring base address</h2>
-<p>You can configure base address either by attribute decoration or by fluent configuration.
+<p>You can configure base address and base path either by attribute decoration or by fluent configuration.
+Fluent configuration allows you to load options automatically from settings (see Settings), or set options manually.
 You can mix the configuration providing a base path by attribute and a base address/URI fluently.</p>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
@@ -92,7 +93,7 @@ You can mix the configuration providing a base path by attribute and a base addr
 </ul>
 <section id="tabpanel_1_tabid-attribute" role="tabpanel" data-tab="tabid-attribute">
 
-<p>Configuring the base address by attribute allows you to use assembly scanning auto registration feature.</p>
+<p>Configuring the base address or base path by attribute allows you to use assembly scanning auto registration feature.</p>
 <h3 id="classic-api">Classic api</h3>
 <p>You can set api interface base address or path thanks to the WebApi attribute like so:</p>
 <pre><code class="lang-csharp">[WebApi(&quot;YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH/&quot;)]
@@ -125,8 +126,14 @@ public class YourCrudEntity
 </ul>
 </section>
 <section id="tabpanel_1_tabid-fluent" role="tabpanel" data-tab="tabid-fluent" aria-hidden="true" hidden="hidden">
-
-<p>Configuring the base address fluently allows you to set it dynamically (e.g. based on settings)</p>
+<h4 id="automatically">Automatically</h4>
+<p>Base address and base path could both be set automatically by providing an <code>IConfiguration</code> instance to Apizr like so:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<p>We can set it at common level (shared by all apis) or specific level (dedicated to a named one).</p>
+<p>Please heads to the Settings doc article to see how to configure the base address or base path automatically from settings.</p>
+<h4 id="manually">Manually</h4>
+<p>Configuring the base address or base path fluently with manual option allows you to set it dynamically.</p>
 <p>You can set the base address or a base path thanks to these options:</p>
 <pre><code class="lang-csharp">// Address
 options =&gt; options.WithBaseAddress(YourSettings.YourBaseAddress))
@@ -134,8 +141,7 @@ options =&gt; options.WithBaseAddress(YourSettings.YourBaseAddress))
 // Path
 options =&gt; options.WithBasePath(YourSettings.YourBasePath))
 </code></pre>
-<p>The extended world offers another option with a factory providing a service provider instance.
-It could help you to resolve the setting at runtime:</p>
+<p>The extended world offers another option with a factory providing a service provider instance:</p>
 <pre><code class="lang-csharp">// Address
 options =&gt; options.WithBaseAddress(serviceProvider =&gt; serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourBaseAddress))
 

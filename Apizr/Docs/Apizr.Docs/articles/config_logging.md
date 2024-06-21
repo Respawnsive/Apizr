@@ -16,7 +16,9 @@ You can adjust logging configuration with:
   - `ResponseHeaders`
   - `ResponseAll` = `ResponseBody | ResponseHeaders`
   - `HeadersOnly` = `ResponseHeaders | RequestHeaders`,
-  - `AllButBody` = `ResponseAll | RequestAllButBody`,
+  - `AllButRequestBody` = `RequestAllButBody` | `ResponseAll`,
+  - `AllButResponseBody` = `RequestAll` | `ResponseHeaders`,
+  - `AllButBodies` = `ResponseAll | RequestAllButBody`,
   - `All` = `ResponseAll | RequestAll`
 - `logLevels` (default: [Low] `Trace`, [Medium] `Information` and [High] `Critical`) Log levels to apply while writing logs (see Microsoft.Enxtension.Logging), with:
   - `Trace`

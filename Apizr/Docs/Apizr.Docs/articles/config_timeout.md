@@ -80,7 +80,18 @@ Back to previous examples, we are saying that:
 
 ### [Registering](#tab/tabid-registering)
 
-Configuring a timeout fluently at register time allows you to set it dynamically (e.g. based on settings).
+#### Automatically
+
+Timeout could be set automatically by providing an `IConfiguration` instance containing the timeout settings:
+```csharp
+options => options.WithConfiguration(context.Configuration)
+```
+
+We can set it at common level (to all apis) or specific level (dedicated to a named one).
+
+Please heads to the Settings doc article to see how to configure timeouts automatically from loaded settings configuration.
+
+#### Manually
 
 You can set a request timeout thanks to this option:
 

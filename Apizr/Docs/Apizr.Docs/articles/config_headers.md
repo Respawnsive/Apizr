@@ -1,6 +1,6 @@
 ﻿## Configuring Headers
 
-You can set headers with static or dynamic values, with clear or redacted logged values (if logging is enabled with headers included).
+You can set headers with static or dynamic values and with clear or redacted logged values (if logging is enabled with headers included).
 
 >[!TIP]
 > You should add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to get all the Apizr goodness.
@@ -27,10 +27,49 @@ public interface IYourApi
 > Note that decorating assembly to share headers between several api interfaces is not available with Refit's Headers attribute, 
 > but you can do it with fluent configuration at register time.
 
->[!TIP]
-> CRUD api headers could be set using provided dedicted method headers attributes (`ReadAllHeaders, ...`) 
+You’ll find some more header attributes but dedicated to CRUD apis (the ones starting with `Read`, `ReadAll`, `Create`, `Update` or `Delete` prefix), so you could define header settings at method/request level for CRUD apis too.
+
+Here is CRUD api an example:
+```csharp
+namespace Apizr.Sample.Models
+{
+    [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
+    [ReadHeaders("HeaderKey1: HeaderValue1", "HeaderKey2: HeaderValue2")]
+    [ReadAllHeaders("HeaderKey3: HeaderValue3")]
+    public class User
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; }
+
+        [JsonProperty("last_name")]
+        public string LastName { get; set; }
+
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; }
+
+        [JsonProperty("email")]
+        public string Email { get; set; }
+    }
+}
+```
 
 #### [Registering](#tab/tabid-register)
+
+#### Automatically
+
+Headers could be set automatically by providing an `IConfiguration` instance containing the headers settings:
+```csharp
+options => options.WithConfiguration(context.Configuration)
+```
+
+We can set it at common level (to all apis) or specific level (dedicated to a named one).
+
+Please heads to the Settings doc article to see how to configure headers automatically from loaded settings configuration.
+
+#### Manually
 
 You can set headers with static values at register time by configuring fluent options:
 
@@ -110,7 +149,7 @@ public interface IYourApi
 ```
 
 Here we are asking Apizr to set headers 1, 2 and 3 to `GetYourFirstDataAsync` and the same but 3 to `GetYourSecondDataAsync`.
-It's here to let you choose at design time which request needs which headers, but provide values later in one place.
+It's here to let you choose at design time which request needs which headers, but provide values later in another place.
 So we don't provide any value here but the `{0}` string placeholder and let Apizr set it at request time from its headers store if keys match.
 
 >[!TIP]

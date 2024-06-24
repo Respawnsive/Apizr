@@ -82,51 +82,6 @@
 <p>Apizr comes with a <code>ResiliencePipeline</code> attribute to apply some resilience strategies on apis, handled by <a href="https://github.com/App-vNext/Polly">Polly</a>.</p>
 <p>You’ll find also resilience pipeline attributes dedicated to each Http methods like <code>GetResiliencePipeline</code>, <code>PostResiliencePipeline</code> and so on, and some others to CRUD apis like <code>CreateResiliencePipeline</code>, <code>ReadResiliencePipeline</code> and so on…</p>
 <p>Polly will help you to manage some retry scenarios but can do more. Please refer to its <a href="https://github.com/App-vNext/Polly">official documentation</a> if you’d like to know more about it.</p>
-<p>We could set pipelines to requests at:</p>
-<ul>
-<li>Design time with attributes</li>
-<li>Register time with fluent options</li>
-<li>Request time with fluent options</li>
-</ul>
-<h3 id="designing">Designing</h3>
-<pre><code class="lang-csharp">[assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
-namespace Apizr.Sample
-{
-    [WebApi(&quot;https://reqres.in/api&quot;)]
-    public interface IReqResService
-    {
-        [Get(&quot;/users&quot;)]
-        Task&lt;UserList&gt; GetUsersAsync();
-    }
-}
-</code></pre>
-<p>Here we are using the <code>ResiliencePipeline</code> attribute at assembly level (all methods of all apis),
-but you can use it at interface/class level (all methods of one api) or method level (decorated api methods only).</p>
-<p>You may want to set pipelines to a group of methods instead, like all Get http methods or Post ones, or maybe all Create crud methods or Read ones.
-You can do it at assembly or interface/class levels thanks to one of the provided restricted attributes:</p>
-<ul>
-<li>Http methods grouping:
-<ul>
-<li><code>GetResiliencePipeline</code></li>
-<li><code>PostResiliencePipeline</code></li>
-<li><code>PutResiliencePipeline</code></li>
-<li><code>DeleteResiliencePipeline</code></li>
-<li><code>PatchResiliencePipeline</code></li>
-<li><code>OptionsResiliencePipeline</code></li>
-<li><code>HeadResiliencePipeline</code></li>
-</ul>
-</li>
-<li>Crud methods grouping:
-<ul>
-<li><code>CreateResiliencePipeline</code> / <code>SafeCreateResiliencePipeline</code></li>
-<li><code>ReadResiliencePipeline</code> / <code>SafeReadResiliencePipeline</code></li>
-<li><code>ReadAllResiliencePipeline</code> / <code>SafeReadAllResiliencePipeline</code></li>
-<li><code>UpdateResiliencePipeline</code> / <code>SafeUpdateResiliencePipeline</code></li>
-<li><code>DeleteResiliencePipeline</code> / <code>SafeDeleteResiliencePipeline</code></li>
-</ul>
-</li>
-</ul>
-<p>As usual, you can mix levels and pipelines as all will be wrapped in the end.</p>
 <h3 id="registering">Registering</h3>
 <p>Here is how to define a resilience pipeline with some strategies.</p>
 <pre><code class="lang-csharp">var resiliencePipelineBuilder = new ResiliencePipelineBuilder&lt;HttpResponseMessage&gt;()
@@ -185,8 +140,80 @@ services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;Transien
 <p>Note that <code>TransientHttpError</code> here is a key that will be used to identify the pipeline to apply to apis.</p>
 </section>
 </div>
+<h3 id="activating">Activating</h3>
+<p>You can activate resiliencing either at:</p>
+<ul>
+<li>Design time by attribute decoration</li>
+<li>Register time by fluent configuration</li>
+<li>Request time by fluent configuration</li>
+</ul>
+<h4 id="resiliencepipeline-attribute">ResiliencePipeline attribute</h4>
+<p>Apizr comes with a <code>ResiliencePipeline</code> attribute which activate resiliencing at any level (all Assembly apis, classic interface/crud class apis or specific classic interface api method).</p>
+<p>Here is classic api an example:</p>
+<pre><code class="lang-csharp">[assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
+namespace Apizr.Sample
+{
+    [WebApi(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users&quot;)]
+        Task&lt;UserList&gt; GetUsersAsync();
+    }
+}
+</code></pre>
+<p>Here we are using the <code>ResiliencePipeline</code> attribute at assembly level (all methods of all apis),
+but you can use it at interface/class level (all methods of one api) or method level (decorated api methods only).</p>
+<p>You may want to set pipelines scoped to a group of methods instead, like all Get http methods or Post ones.
+You can do it at assembly or interface/class levels thanks to one of the provided scoped attributes:</p>
+<ul>
+<li>Http methods grouping:
+<ul>
+<li><code>GetResiliencePipeline</code></li>
+<li><code>PostResiliencePipeline</code></li>
+<li><code>PutResiliencePipeline</code></li>
+<li><code>DeleteResiliencePipeline</code></li>
+<li><code>PatchResiliencePipeline</code></li>
+<li><code>OptionsResiliencePipeline</code></li>
+<li><code>HeadResiliencePipeline</code></li>
+</ul>
+</li>
+</ul>
+<p>You’ll find some more resilience pipeline attributes but dedicated to CRUD apis (the ones starting with <code>Read</code>, <code>ReadAll</code>, <code>Create</code>, <code>Update</code> or <code>Delete</code> prefix), so you could activate resiliencing at method/request level for CRUD apis too.</p>
+<p>Here is CRUD api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample.Models
+{
+    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [ReadAllResiliencePipeline(&quot;TransientHttpError&quot;)]
+    [ReadResiliencePipeline(&quot;AnotherHttpError&quot;)]
+    public class User
+    {
+        [JsonProperty(&quot;id&quot;)]
+        public int Id { get; set; }
 
-<p>Optionaly, you can set pipeline keys fluently here at register time, no matter of previous attribute decorations:</p>
+        [JsonProperty(&quot;first_name&quot;)]
+        public string FirstName { get; set; }
+
+        [JsonProperty(&quot;last_name&quot;)]
+        public string LastName { get; set; }
+
+        [JsonProperty(&quot;avatar&quot;)]
+        public string Avatar { get; set; }
+
+        [JsonProperty(&quot;email&quot;)]
+        public string Email { get; set; }
+    }
+}
+</code></pre>
+<p>As usual, you can mix levels and pipelines as all will be wrapped in the end.</p>
+<h4 id="fluent-configuration">Fluent configuration</h4>
+<h5 id="automatically">Automatically</h5>
+<p>Resiliencing could be activated automatically by providing an <code>IConfiguration</code> instance containing resilience pipeline settings to Apizr:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<p>We can activate it at common level (to all apis) or specific level (dedicated to a named one).</p>
+<p>Please heads to the Settings doc article to see how to configure resiliencing automatically from settings.</p>
+<h5 id="manually">Manually</h5>
+<p>You can activate resiliencing at any levels by providing pipeline keys with this fluent option :</p>
 <pre><code class="lang-csharp">// pipeline keys
 options =&gt; options.WithResiliencePipelineKeys([&quot;TransientHttpError&quot;])
 
@@ -195,11 +222,14 @@ options =&gt; options.WithResiliencePipelineKeys([&quot;TransientHttpError&quot;
 </code></pre>
 <h3 id="using">Using</h3>
 <p>Apizr will automatically tell Polly to handle request with pipelines that get a key matching the one provided by attributes or fluent options.</p>
-<p>Optionaly, you can set pipeline keys fluently here at request time, no matter of previous attribute decorations or fluent options registration:</p>
-<pre><code class="lang-csharp">// pipeline keys
-options =&gt; options.WithResiliencePipelineKeys([&quot;TransientHttpError&quot;])
+<h3 id="tunning-context">Tunning context</h3>
+<h4 id="automatically-1">Automatically</h4>
+<p>Context parameters could be set automatically by providing an <code>IConfiguration</code> instance containing the context settings:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
 </code></pre>
-<h3 id="tunning">Tunning</h3>
+<p>We can set it at common level (to all apis) or specific level (dedicated to a named one).</p>
+<p>Please heads to the Settings doc article to see how to configure context automatically from loaded settings configuration.</p>
+<h4 id="manually-1">Manually</h4>
 <p>Some advanced options are also available to configure Polly context itself at any level:</p>
 <pre><code class="lang-csharp">options =&gt; options.WithResilienceContextOptions(contextOptions =&gt;
     contextOptions.ReturnToPoolOnComplete(false) // true by default

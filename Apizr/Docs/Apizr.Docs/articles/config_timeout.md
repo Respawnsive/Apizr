@@ -35,7 +35,7 @@ namespace Apizr.Sample
 }
 ```
 
-You’ll find the same timeout attributes dedicated to CRUD apis (the ones starting with `Read`, `ReadAll`, `Create`, `Update` and `Delete` prefix), so you could define timeout settings at any level (all Assembly apis, interface apis or specific CRUD method).
+You’ll find the same timeout attributes dedicated to CRUD apis (the ones starting with `Read`, `ReadAll`, `Create`, `Update` and `Delete` prefix), so you could define timeout settings at any level for CRUD apis too.
 
 Here is CRUD api an example:
 ```csharp

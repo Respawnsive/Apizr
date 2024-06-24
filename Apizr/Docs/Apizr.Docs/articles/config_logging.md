@@ -86,12 +86,62 @@ namespace Apizr.Sample
 }
 ```
 
-In this example, we decided to apply the default logging configuration ([Low] `Trace`, [Medium] `Information` and [High] `Critical`) to all assembly api interfaces/entities. 
-But you can adjust logging configuration thanks to attribute parameters.
+In this classic api example, we decided to apply the default logging configuration ([Low] `Trace`, [Medium] `Information` and [High] `Critical`) to all assembly api interfaces/entities. 
+Then some custom log settings about this specific api.
+
+You’ll find some more log attributes but dedicated to CRUD apis (the ones ending with `Read`, `ReadAll`, `Create`, `Update` or `Delete` suffix), so you could define log settings at any level for CRUD apis too.
+
+Here is CRUD api an example:
+```csharp
+[assembly:Log]
+namespace Apizr.Sample.Models
+{
+    [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
+    [LogReadAll(HttpMessageParts.RequestAll, 
+        HttpTracerMode.ErrorsAndExceptionsOnly, 
+        LogLevel.Information)]
+    [LogRead(HttpMessageParts.AllButBodies, 
+        HttpTracerMode.ExceptionsOnly, 
+        LogLevel.Debug)]
+    public class User
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; }
+
+        [JsonProperty("last_name")]
+        public string LastName { get; set; }
+
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; }
+
+        [JsonProperty("email")]
+        public string Email { get; set; }
+    }
+}
+```
+
+Again, in this CRUD api example, we decided to apply the default logging configuration ([Low] `Trace`, [Medium] `Information` and [High] `Critical`) to all assembly api interfaces/entities. 
+Then some custom log settings about this specific api.
 
 ### [Registering](#tab/tabid-registering)
 
-Configuring the logging fluently at register time allows you to set it dynamically (e.g. based on settings)
+#### Automatically
+
+Logging parameters could be set automatically by providing an `IConfiguration` instance containing the logging settings:
+```csharp
+options => options.WithConfiguration(context.Configuration)
+```
+
+We can set it at common level (to all apis) or specific level (dedicated to a named one).
+
+Please heads to the Settings doc article to see how to configure logging automatically from loaded settings configuration.
+
+#### Manually
+
+Configuring the logging fluently at register time allows you to set it dynamically.
 
 You can set it thanks to this option:
 

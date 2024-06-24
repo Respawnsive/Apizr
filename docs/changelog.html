@@ -79,7 +79,7 @@
 <li>[New/Breaking][Polly] Now <strong>supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry</strong> instead of former Polly v7- Policies</li>
 <li>[New][Polly] Now <strong>we can set resilience pipelines to apply fluently to the request</strong> thanks to the brand new WithResiliencePipelineKeys fluent option</li>
 <li>[New][Polly] Now <strong>we can scope resilience pipelines executions to specific http method groups</strong> thanks to the brand new <code>WithResiliencePipelineKeys's ApizrRequestMethod[]</code> optional parameter</li>
-<li>[New][Polly] Now <strong>we can scope resilience pipelines executions to specific http method groups</strong> thanks to all brand new restricted <code>{RequestMethod}ResiliencePipeline</code> attributes like <code>GetResiliencePipeline</code></li>
+<li>[New][Polly] Now <strong>we can scope resilience pipelines executions to specific http method groups</strong> thanks to all brand new scoped <code>{RequestMethod}ResiliencePipeline</code> attributes like <code>GetResiliencePipeline</code></li>
 <li>[New][Cache] Now <strong>we can set caching options to apply fluently to the request</strong> thanks to the brand new <code>WithCaching</code> fluent option</li>
 <li>[New][HttpTracer] Now we can <strong>filter out unwanted http message parts</strong> with the brand new <code>IgnoreMessageParts</code> fluent option</li>
 <li>[New][HttpTracer] Now we can <strong>pick <code>RequestAllButBody</code>, <code>HeadersOnly</code>, <code>AllButRequestBody</code>, <code>AllButResponseBody</code> or <code>AllButBodies</code> http message parts</strong> when configuring logging options fluently or using attribute</li>
@@ -97,7 +97,7 @@
 <li>[Breaking][Removed] <strong>Previsoulsy deprecated extensions methods for backward compatibility have been removed</strong> as they were not suitable anymore</li>
 <li>[Breaking][DelegatingHandler] Now we can <strong>register DelegatingHandlers thanks to <code>WithDelegatingHandler</code> fluent option</strong> instead of the <code>AddDelegatingHandler</code> deleted one for consistency.</li>
 <li>[Fix][Cache] Now <strong>parameters decorated with <code>CacheKey</code> attribute are included no matter of position or index</strong></li>
-<li>[Fix][Cache] <strong>Parameter based cache keys are now allways computed</strong> to integrate value changes (skiping cachekey methodset) #20</li>
+<li>[Fix][Cache] <strong>Parameter based cache keys are now allways computed</strong> to integrate value changes (skiping cachekey methodset)</li>
 <li>[Fix][Attributes] Now Apizr finally can <strong>get attributes decorating parent api interfaces or crud classes</strong></li>
 <li>[Fix][Polly] Now Apizr <strong>wraps correctly resilience strategies, including typed result ones</strong></li>
 <li>[Fix][Manager] <strong>ApizrManager has been optimized and refactored</strong> to improve performances</li>
@@ -107,7 +107,7 @@
 <ul>
 <li>[New] <strong>WithDistributedCacheHandler &amp; WithInMemoryCacheHandler fluent shortcut options are now both available</strong> for single api registration too (no more limited to Registry)</li>
 <li>[Fix] <strong>Cache handlers now relies on content serializer</strong> to get xml serialization work too</li>
-<li>[Fix] <strong>Distributed cache handler serialization is now null protected</strong> to get it work without throwing exceptions #19</li>
+<li>[Fix] <strong>Distributed cache handler serialization is now null protected</strong> to get it work without throwing exceptions</li>
 </ul>
 <h3 id="apizrintegrationsmediatr">Apizr.Integrations.MediatR</h3>
 <ul>

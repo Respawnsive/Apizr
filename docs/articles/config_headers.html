@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 
 <h2 id="configuring-headers">Configuring Headers</h2>
-<p>You can set headers with static or dynamic values, with clear or redacted logged values (if logging is enabled with headers included).</p>
+<p>You can set headers with static or dynamic values and with clear or redacted logged values (if logging is enabled with headers included).</p>
 <div class="TIP">
 <h5>Tip</h5>
 <p>You should add the request options parameter <code>[RequestOptions] IApizrRequestOptions options</code> to your api methods to get all the Apizr goodness.</p>
@@ -114,13 +114,41 @@ public interface IYourApi
 Note that decorating assembly to share headers between several api interfaces is not available with Refit's Headers attribute,
 but you can do it with fluent configuration at register time.</p>
 </div>
-<div class="TIP">
-<h5>Tip</h5>
-<p>CRUD api headers could be set using provided dedicted method headers attributes (<code>ReadAllHeaders, ...</code>)</p>
-</div>
+<p>You’ll find some more header attributes but dedicated to CRUD apis (the ones starting with <code>Read</code>, <code>ReadAll</code>, <code>Create</code>, <code>Update</code> or <code>Delete</code> prefix), so you could define header settings at method/request level for CRUD apis too.</p>
+<p>Here is CRUD api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample.Models
+{
+    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [ReadHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)]
+    [ReadAllHeaders(&quot;HeaderKey3: HeaderValue3&quot;)]
+    public class User
+    {
+        [JsonProperty(&quot;id&quot;)]
+        public int Id { get; set; }
+
+        [JsonProperty(&quot;first_name&quot;)]
+        public string FirstName { get; set; }
+
+        [JsonProperty(&quot;last_name&quot;)]
+        public string LastName { get; set; }
+
+        [JsonProperty(&quot;avatar&quot;)]
+        public string Avatar { get; set; }
+
+        [JsonProperty(&quot;email&quot;)]
+        public string Email { get; set; }
+    }
+}
+</code></pre>
 </section>
 <section id="tabpanel_1_tabid-register" role="tabpanel" data-tab="tabid-register" aria-hidden="true" hidden="hidden">
-
+<h4 id="automatically">Automatically</h4>
+<p>Headers could be set automatically by providing an <code>IConfiguration</code> instance containing the headers settings:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<p>We can set it at common level (to all apis) or specific level (dedicated to a named one).</p>
+<p>Please heads to the Settings doc article to see how to configure headers automatically from loaded settings configuration.</p>
+<h4 id="manually">Manually</h4>
 <p>You can set headers with static values at register time by configuring fluent options:</p>
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithHeaders([&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
@@ -193,7 +221,7 @@ public interface IYourApi
 }
 </code></pre>
 <p>Here we are asking Apizr to set headers 1, 2 and 3 to <code>GetYourFirstDataAsync</code> and the same but 3 to <code>GetYourSecondDataAsync</code>.
-It's here to let you choose at design time which request needs which headers, but provide values later in one place.
+It's here to let you choose at design time which request needs which headers, but provide values later in another place.
 So we don't provide any value here but the <code>{0}</code> string placeholder and let Apizr set it at request time from its headers store if keys match.</p>
 <div class="TIP">
 <h5>Tip</h5>

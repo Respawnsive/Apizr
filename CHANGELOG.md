@@ -8,7 +8,7 @@
 - [New/Breaking][Polly] Now **supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies
 - [New][Polly] Now **we can set resilience pipelines to apply fluently to the request** thanks to the brand new WithResiliencePipelineKeys fluent option
 - [New][Polly] Now **we can scope resilience pipelines executions to specific http method groups** thanks to the brand new `WithResiliencePipelineKeys's ApizrRequestMethod[]` optional parameter
-- [New][Polly] Now **we can scope resilience pipelines executions to specific http method groups** thanks to all brand new restricted `{RequestMethod}ResiliencePipeline` attributes like `GetResiliencePipeline`
+- [New][Polly] Now **we can scope resilience pipelines executions to specific http method groups** thanks to all brand new scoped `{RequestMethod}ResiliencePipeline` attributes like `GetResiliencePipeline`
 - [New][Cache] Now **we can set caching options to apply fluently to the request** thanks to the brand new `WithCaching` fluent option
 - [New][HttpTracer] Now we can **filter out unwanted http message parts** with the brand new `IgnoreMessageParts` fluent option
 - [New][HttpTracer] Now we can **pick `RequestAllButBody`, `HeadersOnly`, `AllButRequestBody`, `AllButResponseBody` or `AllButBodies` http message parts** when configuring logging options fluently or using attribute
@@ -26,16 +26,16 @@
 - [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
 - [Breaking][DelegatingHandler] Now we can **register DelegatingHandlers thanks to `WithDelegatingHandler` fluent option** instead of the `AddDelegatingHandler` deleted one for consistency.
 - [Fix][Cache] Now **parameters decorated with `CacheKey` attribute are included no matter of position or index**
-- [Fix][Cache] **Parameter based cache keys are now allways computed** to integrate value changes (skiping cachekey methodset) #20
+- [Fix][Cache] **Parameter based cache keys are now allways computed** to integrate value changes (skiping cachekey methodset)
 - [Fix][Attributes] Now Apizr finally can **get attributes decorating parent api interfaces or crud classes**
 - [Fix][Polly] Now Apizr **wraps correctly resilience strategies, including typed result ones**
 - [Fix][Manager] **ApizrManager has been optimized and refactored** to improve performances
-
+- 
 ### Apizr.Extensions.Microsoft.Caching
 
 - [New] **WithDistributedCacheHandler & WithInMemoryCacheHandler fluent shortcut options are now both available** for single api registration too (no more limited to Registry)
 - [Fix] **Cache handlers now relies on content serializer** to get xml serialization work too
-- [Fix] **Distributed cache handler serialization is now null protected** to get it work without throwing exceptions #19
+- [Fix] **Distributed cache handler serialization is now null protected** to get it work without throwing exceptions
 
 ### Apizr.Integrations.MediatR
 

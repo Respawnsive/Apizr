@@ -273,14 +273,14 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
 </section>
 </div>
 <h3 id="activating">Activating</h3>
-<p>You can activate caching at:</p>
+<p>You can activate caching either at:</p>
 <ul>
 <li>Design time by attribute decoration</li>
 <li>Register time by fluent configuration</li>
 <li>Request time by fluent configuration</li>
 </ul>
 <h4 id="cache-attribute">Cache attribute</h4>
-<p>Apizr comes with a <code>Cache</code> attribute which activate result data caching at any level (all Assembly apis, interface apis or specific api method).</p>
+<p>Apizr comes with a <code>Cache</code> attribute which activate result data caching at any level (all Assembly apis, classic interface/crud class apis or specific classic interface api method).</p>
 <p>Here is classic api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample
 {
@@ -295,7 +295,7 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
     }
 }
 </code></pre>
-<p>You’ll find also cache attributes dedicated to CRUD apis like <code>CacheRead</code> and <code>CacheReadAll</code>, so you could define cache settings at any level (all Assembly apis, interface apis or specific CRUD method).</p>
+<p>You’ll find also cache attributes dedicated to CRUD apis like <code>CacheRead</code> and <code>CacheReadAll</code>, so you could define cache settings at any level for CRUD apis too.</p>
 <p>Here is CRUD api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample.Models
 {
@@ -380,7 +380,7 @@ You can decorate one or more parameters with it, then it will be included in the
 <p>We can activate it at common level (to all apis) or specific level (dedicated to a named one).</p>
 <p>Please heads to the Settings doc article to see how to configure caching automatically from settings.</p>
 <h5 id="manually">Manually</h5>
-<p>You can activate caching at any levels with the following manual fluent option:</p>
+<p>You can activate caching at any levels with this fluent option:</p>
 <pre><code class="lang-csharp">// Address
 options =&gt; options.WithCaching(mode: CacheMode.GetAndFetch, lifeSpan: TimeSpan.FromHours(1),
             shouldInvalidateOnError: false)

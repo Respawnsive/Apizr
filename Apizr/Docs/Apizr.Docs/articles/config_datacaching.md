@@ -170,14 +170,14 @@ options => options.WithCacheHandler(serviceProvider => new MonkeyCacheHandler(Ba
 
 ### Activating
 
-You can activate caching at:
+You can activate caching either at:
 - Design time by attribute decoration
 - Register time by fluent configuration
 - Request time by fluent configuration
 
 #### Cache attribute
 
-Apizr comes with a `Cache` attribute which activate result data caching at any level (all Assembly apis, interface apis or specific api method).
+Apizr comes with a `Cache` attribute which activate result data caching at any level (all Assembly apis, classic interface/crud class apis or specific classic interface api method).
 
 Here is classic api an example:
 ```csharp
@@ -195,7 +195,7 @@ namespace Apizr.Sample
 }
 ```
 
-You’ll find also cache attributes dedicated to CRUD apis like `CacheRead` and `CacheReadAll`, so you could define cache settings at any level (all Assembly apis, interface apis or specific CRUD method).
+You’ll find also cache attributes dedicated to CRUD apis like `CacheRead` and `CacheReadAll`, so you could define cache settings at any level for CRUD apis too.
 
 Here is CRUD api an example:
 ```csharp
@@ -285,7 +285,7 @@ Please heads to the Settings doc article to see how to configure caching automat
 
 ##### Manually
 
-You can activate caching at any levels with the following manual fluent option:
+You can activate caching at any levels with this fluent option:
 
 ```csharp
 // Address

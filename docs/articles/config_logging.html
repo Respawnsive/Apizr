@@ -186,12 +186,51 @@ namespace Apizr.Sample
     }
 }
 </code></pre>
-<p>In this example, we decided to apply the default logging configuration ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) to all assembly api interfaces/entities.
-But you can adjust logging configuration thanks to attribute parameters.</p>
+<p>In this classic api example, we decided to apply the default logging configuration ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) to all assembly api interfaces/entities.
+Then some custom log settings about this specific api.</p>
+<p>You’ll find some more log attributes but dedicated to CRUD apis (the ones ending with <code>Read</code>, <code>ReadAll</code>, <code>Create</code>, <code>Update</code> or <code>Delete</code> suffix), so you could define log settings at any level for CRUD apis too.</p>
+<p>Here is CRUD api an example:</p>
+<pre><code class="lang-csharp">[assembly:Log]
+namespace Apizr.Sample.Models
+{
+    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [LogReadAll(HttpMessageParts.RequestAll, 
+        HttpTracerMode.ErrorsAndExceptionsOnly, 
+        LogLevel.Information)]
+    [LogRead(HttpMessageParts.AllButBodies, 
+        HttpTracerMode.ExceptionsOnly, 
+        LogLevel.Debug)]
+    public class User
+    {
+        [JsonProperty(&quot;id&quot;)]
+        public int Id { get; set; }
+
+        [JsonProperty(&quot;first_name&quot;)]
+        public string FirstName { get; set; }
+
+        [JsonProperty(&quot;last_name&quot;)]
+        public string LastName { get; set; }
+
+        [JsonProperty(&quot;avatar&quot;)]
+        public string Avatar { get; set; }
+
+        [JsonProperty(&quot;email&quot;)]
+        public string Email { get; set; }
+    }
+}
+</code></pre>
+<p>Again, in this CRUD api example, we decided to apply the default logging configuration ([Low] <code>Trace</code>, [Medium] <code>Information</code> and [High] <code>Critical</code>) to all assembly api interfaces/entities.
+Then some custom log settings about this specific api.</p>
 </section>
 <section id="tabpanel_1_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
-
-<p>Configuring the logging fluently at register time allows you to set it dynamically (e.g. based on settings)</p>
+<h4 id="automatically">Automatically</h4>
+<p>Logging parameters could be set automatically by providing an <code>IConfiguration</code> instance containing the logging settings:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<p>We can set it at common level (to all apis) or specific level (dedicated to a named one).</p>
+<p>Please heads to the Settings doc article to see how to configure logging automatically from loaded settings configuration.</p>
+<h4 id="manually">Manually</h4>
+<p>Configuring the logging fluently at register time allows you to set it dynamically.</p>
 <p>You can set it thanks to this option:</p>
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)

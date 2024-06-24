@@ -41,6 +41,10 @@
 
 - [New][Exceptions] Now we can **send safe request returning an `IApizrResponse` response to handle (based on Refit's `IApiResponse`) instead of catching exceptions**
 
+### Apizr.Integrations.FileTransfer
+
+- [Fix] Now **file data is no more logged** by default while uploading or downloading
+
 ### Apizr.Tools.NSwag
 
 - [Update][Polly] Templates have been updated to **use the new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies

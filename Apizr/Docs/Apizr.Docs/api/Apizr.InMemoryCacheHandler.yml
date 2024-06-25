@@ -28,13 +28,11 @@ items:
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
-  summary: "\nInMemory cache handler implementation\n"
+  summary: InMemory cache handler implementation
   example: []
   syntax:
     content: 'public class InMemoryCacheHandler : ICacheHandler'
-    content.vb: >-
-      Public Class InMemoryCacheHandler
-          Implements ICacheHandler
+    content.vb: Public Class InMemoryCacheHandler Implements ICacheHandler
   inheritance:
   - System.Object
   implements:
@@ -47,12 +45,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
 - uid: Apizr.InMemoryCacheHandler.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)
   commentId: M:Apizr.InMemoryCacheHandler.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)
   id: '#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)'
@@ -82,10 +74,9 @@ items:
       type: Microsoft.Extensions.Caching.Memory.IMemoryCache
     content.vb: Public Sub New(memoryCache As IMemoryCache)
   overload: Apizr.InMemoryCacheHandler.#ctor*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
+  nameWithType.vb: InMemoryCacheHandler.New(IMemoryCache)
+  fullName.vb: Apizr.InMemoryCacheHandler.New(Microsoft.Extensions.Caching.Memory.IMemoryCache)
+  name.vb: New(IMemoryCache)
 - uid: Apizr.InMemoryCacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
   commentId: M:Apizr.InMemoryCacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
   id: SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
@@ -93,9 +84,9 @@ items:
   langs:
   - csharp
   - vb
-  name: SetAsync(String, Object, Nullable<TimeSpan>, CancellationToken)
-  nameWithType: InMemoryCacheHandler.SetAsync(String, Object, Nullable<TimeSpan>, CancellationToken)
-  fullName: Apizr.InMemoryCacheHandler.SetAsync(System.String, System.Object, System.Nullable<System.TimeSpan>, System.Threading.CancellationToken)
+  name: SetAsync(string, object, TimeSpan?, CancellationToken)
+  nameWithType: InMemoryCacheHandler.SetAsync(string, object, TimeSpan?, CancellationToken)
+  fullName: Apizr.InMemoryCacheHandler.SetAsync(string, object, System.TimeSpan?, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
@@ -108,10 +99,10 @@ items:
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
-  summary: "\nMap Apizr cache saving method to your cache handler method\n"
+  summary: Map Apizr cache saving method to your cache handler method
   example: []
   syntax:
-    content: public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default(CancellationToken))
+    content: public Task SetAsync(string key, object value, TimeSpan? lifeSpan = null, CancellationToken cancellationToken = default)
     parameters:
     - id: key
       type: System.String
@@ -132,13 +123,9 @@ items:
   overload: Apizr.InMemoryCacheHandler.SetAsync*
   implements:
   - Apizr.Caching.ICacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
-  nameWithType.vb: InMemoryCacheHandler.SetAsync(String, Object, Nullable(Of TimeSpan), CancellationToken)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.InMemoryCacheHandler.SetAsync(System.String, System.Object, System.Nullable(Of System.TimeSpan), System.Threading.CancellationToken)
-  name.vb: SetAsync(String, Object, Nullable(Of TimeSpan), CancellationToken)
+  nameWithType.vb: InMemoryCacheHandler.SetAsync(String, Object, TimeSpan?, CancellationToken)
+  fullName.vb: Apizr.InMemoryCacheHandler.SetAsync(String, Object, System.TimeSpan?, System.Threading.CancellationToken)
+  name.vb: SetAsync(String, Object, TimeSpan?, CancellationToken)
 - uid: Apizr.InMemoryCacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)
   commentId: M:Apizr.InMemoryCacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)
   id: GetAsync``1(System.String,System.Threading.CancellationToken)
@@ -146,9 +133,9 @@ items:
   langs:
   - csharp
   - vb
-  name: GetAsync<T>(String, CancellationToken)
-  nameWithType: InMemoryCacheHandler.GetAsync<T>(String, CancellationToken)
-  fullName: Apizr.InMemoryCacheHandler.GetAsync<T>(System.String, System.Threading.CancellationToken)
+  name: GetAsync<T>(string, CancellationToken)
+  nameWithType: InMemoryCacheHandler.GetAsync<T>(string, CancellationToken)
+  fullName: Apizr.InMemoryCacheHandler.GetAsync<T>(string, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
@@ -161,10 +148,10 @@ items:
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
-  summary: "\nMap Apizr cache getting method to your cache handler method\n"
+  summary: Map Apizr cache getting method to your cache handler method
   example: []
   syntax:
-    content: public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default(CancellationToken))
+    content: public Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
     parameters:
     - id: key
       type: System.String
@@ -183,11 +170,7 @@ items:
   implements:
   - Apizr.Caching.ICacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)
   nameWithType.vb: InMemoryCacheHandler.GetAsync(Of T)(String, CancellationToken)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.InMemoryCacheHandler.GetAsync(Of T)(System.String, System.Threading.CancellationToken)
+  fullName.vb: Apizr.InMemoryCacheHandler.GetAsync(Of T)(String, System.Threading.CancellationToken)
   name.vb: GetAsync(Of T)(String, CancellationToken)
 - uid: Apizr.InMemoryCacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)
   commentId: M:Apizr.InMemoryCacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)
@@ -196,9 +179,9 @@ items:
   langs:
   - csharp
   - vb
-  name: RemoveAsync(String, CancellationToken)
-  nameWithType: InMemoryCacheHandler.RemoveAsync(String, CancellationToken)
-  fullName: Apizr.InMemoryCacheHandler.RemoveAsync(System.String, System.Threading.CancellationToken)
+  name: RemoveAsync(string, CancellationToken)
+  nameWithType: InMemoryCacheHandler.RemoveAsync(string, CancellationToken)
+  fullName: Apizr.InMemoryCacheHandler.RemoveAsync(string, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
@@ -211,10 +194,10 @@ items:
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
-  summary: "\nMap Apizr cache removing method to your cache handler method\n"
+  summary: Map Apizr cache removing method to your cache handler method
   example: []
   syntax:
-    content: public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default(CancellationToken))
+    content: public Task<bool> RemoveAsync(string key, CancellationToken cancellationToken = default)
     parameters:
     - id: key
       type: System.String
@@ -229,10 +212,9 @@ items:
   overload: Apizr.InMemoryCacheHandler.RemoveAsync*
   implements:
   - Apizr.Caching.ICacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
+  nameWithType.vb: InMemoryCacheHandler.RemoveAsync(String, CancellationToken)
+  fullName.vb: Apizr.InMemoryCacheHandler.RemoveAsync(String, System.Threading.CancellationToken)
+  name.vb: RemoveAsync(String, CancellationToken)
 - uid: Apizr.InMemoryCacheHandler.ClearAsync(System.Threading.CancellationToken)
   commentId: M:Apizr.InMemoryCacheHandler.ClearAsync(System.Threading.CancellationToken)
   id: ClearAsync(System.Threading.CancellationToken)
@@ -255,10 +237,10 @@ items:
   assemblies:
   - Apizr.Extensions.Microsoft.Caching
   namespace: Apizr
-  summary: "\nMap Apizr cache clearing method to your cache handler method\n"
+  summary: Map Apizr cache clearing method to your cache handler method
   example: []
   syntax:
-    content: public Task ClearAsync(CancellationToken cancellationToken = default(CancellationToken))
+    content: public Task ClearAsync(CancellationToken cancellationToken = default)
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
@@ -270,13 +252,10 @@ items:
   overload: Apizr.InMemoryCacheHandler.ClearAsync*
   implements:
   - Apizr.Caching.ICacheHandler.ClearAsync(System.Threading.CancellationToken)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 references:
 - uid: Apizr
   commentId: N:Apizr
+  href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
@@ -284,12 +263,17 @@ references:
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Caching.ICacheHandler
   commentId: T:Apizr.Caching.ICacheHandler
   parent: Apizr.Caching
+  href: Apizr.Caching.ICacheHandler.html
   name: ICacheHandler
   nameWithType: ICacheHandler
   fullName: Apizr.Caching.ICacheHandler
@@ -297,312 +281,317 @@ references:
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Caching
   commentId: N:Apizr.Caching
+  href: Apizr.html
   name: Apizr.Caching
   nameWithType: Apizr.Caching
   fullName: Apizr.Caching
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Caching
+    name: Caching
+    href: Apizr.Caching.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Caching
+    name: Caching
+    href: Apizr.Caching.html
 - uid: Apizr.InMemoryCacheHandler.#ctor*
   commentId: Overload:Apizr.InMemoryCacheHandler.#ctor
+  href: Apizr.InMemoryCacheHandler.html#Apizr_InMemoryCacheHandler__ctor_Microsoft_Extensions_Caching_Memory_IMemoryCache_
   name: InMemoryCacheHandler
   nameWithType: InMemoryCacheHandler.InMemoryCacheHandler
   fullName: Apizr.InMemoryCacheHandler.InMemoryCacheHandler
+  nameWithType.vb: InMemoryCacheHandler.New
+  fullName.vb: Apizr.InMemoryCacheHandler.New
+  name.vb: New
 - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache
   commentId: T:Microsoft.Extensions.Caching.Memory.IMemoryCache
   parent: Microsoft.Extensions.Caching.Memory
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.memory.imemorycache
   name: IMemoryCache
   nameWithType: IMemoryCache
   fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache
 - uid: Microsoft.Extensions.Caching.Memory
   commentId: N:Microsoft.Extensions.Caching.Memory
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
   name: Microsoft.Extensions.Caching.Memory
   nameWithType: Microsoft.Extensions.Caching.Memory
   fullName: Microsoft.Extensions.Caching.Memory
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Caching
+    name: Caching
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching
+  - name: .
+  - uid: Microsoft.Extensions.Caching.Memory
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.memory
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Caching
+    name: Caching
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching
+  - name: .
+  - uid: Microsoft.Extensions.Caching.Memory
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.memory
 - uid: Apizr.InMemoryCacheHandler.SetAsync*
   commentId: Overload:Apizr.InMemoryCacheHandler.SetAsync
+  href: Apizr.InMemoryCacheHandler.html#Apizr_InMemoryCacheHandler_SetAsync_System_String_System_Object_System_Nullable_System_TimeSpan__System_Threading_CancellationToken_
   name: SetAsync
   nameWithType: InMemoryCacheHandler.SetAsync
   fullName: Apizr.InMemoryCacheHandler.SetAsync
@@ -610,169 +599,107 @@ references:
   commentId: M:Apizr.Caching.ICacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
   parent: Apizr.Caching.ICacheHandler
   isExternal: true
-  name: SetAsync(String, Object, Nullable<TimeSpan>, CancellationToken)
-  nameWithType: ICacheHandler.SetAsync(String, Object, Nullable<TimeSpan>, CancellationToken)
-  fullName: Apizr.Caching.ICacheHandler.SetAsync(System.String, System.Object, System.Nullable<System.TimeSpan>, System.Threading.CancellationToken)
-  nameWithType.vb: ICacheHandler.SetAsync(String, Object, Nullable(Of TimeSpan), CancellationToken)
-  fullName.vb: Apizr.Caching.ICacheHandler.SetAsync(System.String, System.Object, System.Nullable(Of System.TimeSpan), System.Threading.CancellationToken)
-  name.vb: SetAsync(String, Object, Nullable(Of TimeSpan), CancellationToken)
+  href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_SetAsync_System_String_System_Object_System_Nullable_System_TimeSpan__System_Threading_CancellationToken_
+  name: SetAsync(string, object, TimeSpan?, CancellationToken)
+  nameWithType: ICacheHandler.SetAsync(string, object, TimeSpan?, CancellationToken)
+  fullName: Apizr.Caching.ICacheHandler.SetAsync(string, object, System.TimeSpan?, System.Threading.CancellationToken)
+  nameWithType.vb: ICacheHandler.SetAsync(String, Object, TimeSpan?, CancellationToken)
+  fullName.vb: Apizr.Caching.ICacheHandler.SetAsync(String, Object, System.TimeSpan?, System.Threading.CancellationToken)
+  name.vb: SetAsync(String, Object, TimeSpan?, CancellationToken)
   spec.csharp:
   - uid: Apizr.Caching.ICacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
     name: SetAsync
-    nameWithType: ICacheHandler.SetAsync
-    fullName: Apizr.Caching.ICacheHandler.SetAsync
+    href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_SetAsync_System_String_System_Object_System_Nullable_System_TimeSpan__System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Caching.ICacheHandler.SetAsync(System.String,System.Object,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)
     name: SetAsync
-    nameWithType: ICacheHandler.SetAsync
-    fullName: Apizr.Caching.ICacheHandler.SetAsync
+    href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_SetAsync_System_String_System_Object_System_Nullable_System_TimeSpan__System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.String
   commentId: T:System.String
   parent: System
   isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
 - uid: System.Nullable{System.TimeSpan}
   commentId: T:System.Nullable{System.TimeSpan}
   parent: System
   definition: System.Nullable`1
-  name: Nullable<TimeSpan>
-  nameWithType: Nullable<TimeSpan>
-  fullName: System.Nullable<System.TimeSpan>
-  nameWithType.vb: Nullable(Of TimeSpan)
-  fullName.vb: System.Nullable(Of System.TimeSpan)
-  name.vb: Nullable(Of TimeSpan)
+  href: https://learn.microsoft.com/dotnet/api/system.timespan
+  name: TimeSpan?
+  nameWithType: TimeSpan?
+  fullName: System.TimeSpan?
   spec.csharp:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
   spec.vb:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
 - uid: System.Threading.CancellationToken
   commentId: T:System.Threading.CancellationToken
   parent: System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
@@ -780,12 +707,14 @@ references:
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
 - uid: System.Nullable`1
   commentId: T:System.Nullable`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
   name: Nullable<T>
   nameWithType: Nullable<T>
   fullName: System.Nullable<T>
@@ -795,47 +724,88 @@ references:
   spec.csharp:
   - uid: System.Nullable`1
     name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Nullable`1
     name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading
   commentId: N:System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Apizr.InMemoryCacheHandler.GetAsync*
   commentId: Overload:Apizr.InMemoryCacheHandler.GetAsync
+  href: Apizr.InMemoryCacheHandler.html#Apizr_InMemoryCacheHandler_GetAsync__1_System_String_System_Threading_CancellationToken_
   name: GetAsync
   nameWithType: InMemoryCacheHandler.GetAsync
   fullName: Apizr.InMemoryCacheHandler.GetAsync
@@ -843,64 +813,58 @@ references:
   commentId: M:Apizr.Caching.ICacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)
   parent: Apizr.Caching.ICacheHandler
   isExternal: true
-  name: GetAsync<T>(String, CancellationToken)
-  nameWithType: ICacheHandler.GetAsync<T>(String, CancellationToken)
-  fullName: Apizr.Caching.ICacheHandler.GetAsync<T>(System.String, System.Threading.CancellationToken)
+  href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_GetAsync__1_System_String_System_Threading_CancellationToken_
+  name: GetAsync<T>(string, CancellationToken)
+  nameWithType: ICacheHandler.GetAsync<T>(string, CancellationToken)
+  fullName: Apizr.Caching.ICacheHandler.GetAsync<T>(string, System.Threading.CancellationToken)
   nameWithType.vb: ICacheHandler.GetAsync(Of T)(String, CancellationToken)
-  fullName.vb: Apizr.Caching.ICacheHandler.GetAsync(Of T)(System.String, System.Threading.CancellationToken)
+  fullName.vb: Apizr.Caching.ICacheHandler.GetAsync(Of T)(String, System.Threading.CancellationToken)
   name.vb: GetAsync(Of T)(String, CancellationToken)
   spec.csharp:
   - uid: Apizr.Caching.ICacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)
-    name: GetAsync<T>
-    nameWithType: ICacheHandler.GetAsync<T>
-    fullName: Apizr.Caching.ICacheHandler.GetAsync<T>
+    name: GetAsync
+    href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_GetAsync__1_System_String_System_Threading_CancellationToken_
+  - name: <
+  - name: T
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Caching.ICacheHandler.GetAsync``1(System.String,System.Threading.CancellationToken)
-    name: GetAsync(Of T)
-    nameWithType: ICacheHandler.GetAsync(Of T)
-    fullName: Apizr.Caching.ICacheHandler.GetAsync(Of T)
+    name: GetAsync
+    href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_GetAsync__1_System_String_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{{T}}
   commentId: T:System.Threading.Tasks.Task{``0}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<T>
   nameWithType: Task<T>
   fullName: System.Threading.Tasks.Task<T>
@@ -910,36 +874,25 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -949,35 +902,24 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.InMemoryCacheHandler.RemoveAsync*
   commentId: Overload:Apizr.InMemoryCacheHandler.RemoveAsync
+  href: Apizr.InMemoryCacheHandler.html#Apizr_InMemoryCacheHandler_RemoveAsync_System_String_System_Threading_CancellationToken_
   name: RemoveAsync
   nameWithType: InMemoryCacheHandler.RemoveAsync
   fullName: Apizr.InMemoryCacheHandler.RemoveAsync
@@ -985,103 +927,83 @@ references:
   commentId: M:Apizr.Caching.ICacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)
   parent: Apizr.Caching.ICacheHandler
   isExternal: true
-  name: RemoveAsync(String, CancellationToken)
-  nameWithType: ICacheHandler.RemoveAsync(String, CancellationToken)
-  fullName: Apizr.Caching.ICacheHandler.RemoveAsync(System.String, System.Threading.CancellationToken)
+  href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_RemoveAsync_System_String_System_Threading_CancellationToken_
+  name: RemoveAsync(string, CancellationToken)
+  nameWithType: ICacheHandler.RemoveAsync(string, CancellationToken)
+  fullName: Apizr.Caching.ICacheHandler.RemoveAsync(string, System.Threading.CancellationToken)
+  nameWithType.vb: ICacheHandler.RemoveAsync(String, CancellationToken)
+  fullName.vb: Apizr.Caching.ICacheHandler.RemoveAsync(String, System.Threading.CancellationToken)
+  name.vb: RemoveAsync(String, CancellationToken)
   spec.csharp:
   - uid: Apizr.Caching.ICacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)
     name: RemoveAsync
-    nameWithType: ICacheHandler.RemoveAsync
-    fullName: Apizr.Caching.ICacheHandler.RemoveAsync
+    href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_RemoveAsync_System_String_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Caching.ICacheHandler.RemoveAsync(System.String,System.Threading.CancellationToken)
     name: RemoveAsync
-    nameWithType: ICacheHandler.RemoveAsync
-    fullName: Apizr.Caching.ICacheHandler.RemoveAsync
+    href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_RemoveAsync_System_String_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{System.Boolean}
   commentId: T:System.Threading.Tasks.Task{System.Boolean}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<Boolean>
-  nameWithType: Task<Boolean>
-  fullName: System.Threading.Tasks.Task<System.Boolean>
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<bool>
+  nameWithType: Task<bool>
+  fullName: System.Threading.Tasks.Task<bool>
   nameWithType.vb: Task(Of Boolean)
-  fullName.vb: System.Threading.Tasks.Task(Of System.Boolean)
+  fullName.vb: System.Threading.Tasks.Task(Of Boolean)
   name.vb: Task(Of Boolean)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
+    name: bool
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Boolean
     name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.InMemoryCacheHandler.ClearAsync*
   commentId: Overload:Apizr.InMemoryCacheHandler.ClearAsync
+  href: Apizr.InMemoryCacheHandler.html#Apizr_InMemoryCacheHandler_ClearAsync_System_Threading_CancellationToken_
   name: ClearAsync
   nameWithType: InMemoryCacheHandler.ClearAsync
   fullName: Apizr.InMemoryCacheHandler.ClearAsync
@@ -1089,38 +1011,27 @@ references:
   commentId: M:Apizr.Caching.ICacheHandler.ClearAsync(System.Threading.CancellationToken)
   parent: Apizr.Caching.ICacheHandler
   isExternal: true
+  href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_ClearAsync_System_Threading_CancellationToken_
   name: ClearAsync(CancellationToken)
   nameWithType: ICacheHandler.ClearAsync(CancellationToken)
   fullName: Apizr.Caching.ICacheHandler.ClearAsync(System.Threading.CancellationToken)
   spec.csharp:
   - uid: Apizr.Caching.ICacheHandler.ClearAsync(System.Threading.CancellationToken)
     name: ClearAsync
-    nameWithType: ICacheHandler.ClearAsync
-    fullName: Apizr.Caching.ICacheHandler.ClearAsync
+    href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_ClearAsync_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Caching.ICacheHandler.ClearAsync(System.Threading.CancellationToken)
     name: ClearAsync
-    nameWithType: ICacheHandler.ClearAsync
-    fullName: Apizr.Caching.ICacheHandler.ClearAsync
+    href: Apizr.Caching.ICacheHandler.html#Apizr_Caching_ICacheHandler_ClearAsync_System_Threading_CancellationToken_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )

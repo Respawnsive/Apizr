@@ -14,28 +14,33 @@ namespace Apizr.Logging
         /// Unspecified
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        Unspecified = 0,
+        Unspecified = 1,
 
         /// <summary>
         /// Logs no parts
         /// </summary>
-        None = 1,
+        None = 2,
 
         /// <summary>
         /// Logs request body only
         /// </summary>
-        RequestBody = 2,
+        RequestBody = 4,
 
         /// <summary>
         /// Logs request headers only
         /// </summary>
-        RequestHeaders = 4,
+        RequestHeaders = 8,
 
         /// <summary>
         /// Logs request cookies only
         /// </summary>
-        RequestCookies = 32,
-        
+        RequestCookies = 64,
+
+        /// <summary>
+        /// Logs request headers and cookies only
+        /// </summary>
+        RequestAllButBody = RequestHeaders | RequestCookies,
+
         /// <summary>
         /// Logs request body, headers and cookies only
         /// </summary>
@@ -44,21 +49,41 @@ namespace Apizr.Logging
         /// <summary>
         /// Logs response body only
         /// </summary>
-        ResponseBody = 8,
+        ResponseBody = 16,
 
         /// <summary>
         /// Logs response headers only
         /// </summary>
-        ResponseHeaders = 16,
+        ResponseHeaders = 32,
 
         /// <summary>
         /// Logs response body and headers only
         /// </summary>
         ResponseAll = ResponseBody | ResponseHeaders,
-        
+
+        /// <summary>
+        /// Logs response body and headers only
+        /// </summary>
+        HeadersOnly = RequestHeaders | ResponseHeaders,
+
+        /// <summary>
+        /// Logs all parts but request body
+        /// </summary>
+        AllButRequestBody = RequestAllButBody | ResponseAll,
+
+        /// <summary>
+        /// Logs all parts but response body
+        /// </summary>
+        AllButResponseBody = RequestAll | ResponseHeaders,
+
+        /// <summary>
+        /// Logs all parts but bodies
+        /// </summary>
+        AllButBodies = RequestAllButBody | ResponseHeaders,
+
         /// <summary>
         /// Logs all parts
         /// </summary>
-        All = ResponseAll | RequestAll
+        All = RequestAll | ResponseAll
     }
 }

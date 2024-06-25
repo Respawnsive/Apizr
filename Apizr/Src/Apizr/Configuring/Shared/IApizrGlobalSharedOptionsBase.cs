@@ -2,7 +2,10 @@
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System;
-using Polly;
+using Apizr.Caching.Attributes;
+using Apizr.Configuring.Shared.Context;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 
 namespace Apizr.Configuring.Shared
 {
@@ -42,13 +45,35 @@ namespace Apizr.Configuring.Shared
         IDictionary<string, object> HandlersParameters { get; }
 
         /// <summary>
-        /// Headers to add to the request
+        /// The operation timeout (overall request tries)
         /// </summary>
-        IList<string> Headers { get; }
+        TimeSpan? OperationTimeout { get; }
 
         /// <summary>
-        /// Request timeout
+        /// The request timeout (each request try)
         /// </summary>
-        TimeSpan? Timeout { get; }
+        TimeSpan? RequestTimeout { get; }
+
+        /// <summary>
+        /// The <see cref="Func{T, R}"/> which determines whether to redact the HTTP header value before logging.
+        /// </summary>
+        public Func<string, bool> ShouldRedactHeaderValue { get; }
+
+        /// <summary>
+        /// Resilience pipeline keys from the registry
+        /// </summary>
+        IDictionary<ApizrConfigurationSource, ResiliencePipelineAttributeBase[]> ResiliencePipelineOptions { get; }
+
+        /// <summary>
+        /// The caching options to apply
+        /// </summary>
+        IDictionary<ApizrConfigurationSource, CacheAttributeBase> CacheOptions { get; }
+
+        /// <summary>
+        /// The resilience context options builder
+        /// </summary>
+        internal Action<IApizrResilienceContextOptionsBuilder> ContextOptionsBuilder { get; set; }
+
+        internal IDictionary<string, Func<object>> ResiliencePropertiesFactories { get; }
     }
 }

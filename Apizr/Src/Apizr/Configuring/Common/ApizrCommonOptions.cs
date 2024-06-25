@@ -4,11 +4,11 @@ using System.Linq;
 using System.Net.Http;
 using Apizr.Caching;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Shared;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Microsoft.Extensions.Logging;
-using Polly;
 using Polly.Registry;
 using Refit;
 
@@ -26,10 +26,9 @@ namespace Apizr.Configuring.Common
             TrafficVerbosityFactory = () => HttpMessageParts.All;
             LogLevelsFactory = () => new []{Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel};
             LoggerFactoryFactory = () => new DebugLoggerFactory(Constants.LowLogLevel);
-            PolicyRegistryFactory = () => new PolicyRegistry();
+            ResiliencePipelineRegistryFactory = () => new ResiliencePipelineRegistry<string>();
             HttpClientHandlerFactory = () => new HttpClientHandler();
             HttpClientConfigurationBuilder = _ => { };
-            HttpClientFactory = (handler, uri) => new HttpClient(handler, false) {BaseAddress = uri};
             RefitSettingsFactory = () => new RefitSettings();
             ConnectivityHandlerFactory = () => new DefaultConnectivityHandler(() => true);
             CacheHandlerFactory = () => new VoidCacheHandler();
@@ -65,13 +64,10 @@ namespace Apizr.Configuring.Common
         public Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
 
         /// <inheritdoc />
-        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set; }
+        public Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; set; }
 
         /// <inheritdoc />
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
-
-        /// <inheritdoc />
-        public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
 
         /// <inheritdoc />
         public Action<HttpClient> HttpClientConfigurationBuilder { get; set; }
@@ -96,27 +92,25 @@ namespace Apizr.Configuring.Common
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
-        private Func<IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory
+        public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
+
+        private Func<TimeSpan> _operationTimeoutFactory;
+        /// <inheritdoc />
+        public Func<TimeSpan> OperationTimeoutFactory
         {
-            get => _headersFactory;
-            internal set => _headersFactory = value != null ? () =>
-                {
-                    value.Invoke().ToList().ForEach(header => Headers.Add(header));
-                    return Headers;
-                }
-                : null;
+            get => _operationTimeoutFactory;
+            set => _operationTimeoutFactory = value != null ? () => (TimeSpan)(OperationTimeout = value.Invoke()) : null;
         }
 
-        private Func<TimeSpan> _timeoutFactory;
+        private Func<TimeSpan> _requestTimeoutFactory;
         /// <inheritdoc />
-        public Func<TimeSpan> TimeoutFactory
+        public Func<TimeSpan> RequestTimeoutFactory
         {
-            get => _timeoutFactory;
-            set => _timeoutFactory = value != null ? () => (TimeSpan)(Timeout = value.Invoke()) : null;
+            get => _requestTimeoutFactory;
+            set => _requestTimeoutFactory = value != null ? () => (TimeSpan)(RequestTimeout = value.Invoke()) : null;
         }
-
+        
         private Func<HttpTracerMode> _httpTracerModeFactory;
         /// <inheritdoc />
         public Func<HttpTracerMode> HttpTracerModeFactory

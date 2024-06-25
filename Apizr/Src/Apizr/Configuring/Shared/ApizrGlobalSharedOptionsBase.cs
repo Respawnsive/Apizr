@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Apizr.Caching.Attributes;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
-using Polly;
 
 namespace Apizr.Configuring.Shared
 {
     /// <summary>
-    /// Options available at both common and proper level for both static and extended registrations
+    /// Options available at every level for both static and extended registrations
     /// </summary>
     public abstract class ApizrGlobalSharedOptionsBase : IApizrGlobalSharedOptionsBase
     {
@@ -19,8 +21,14 @@ namespace Apizr.Configuring.Shared
             LogLevels = sharedOptions?.LogLevels.ToArray();
             OnException = sharedOptions?.OnException;
             LetThrowOnExceptionWithEmptyCache = sharedOptions?.LetThrowOnExceptionWithEmptyCache ?? true;
-            HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
-                                 new Dictionary<string, object>();
+            HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            OperationTimeout = sharedOptions?.OperationTimeout;
+            RequestTimeout = sharedOptions?.RequestTimeout;
+            ShouldRedactHeaderValue = sharedOptions?.ShouldRedactHeaderValue;
+            ResiliencePipelineOptions = sharedOptions?.ResiliencePipelineOptions?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()) ?? [];
+            CacheOptions = sharedOptions?.CacheOptions?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            _contextOptionsBuilder = sharedOptions?.ContextOptionsBuilder;
+            _resiliencePropertiesFactories = sharedOptions?.ResiliencePropertiesFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? [];
         }
 
         /// <inheritdoc />
@@ -34,14 +42,14 @@ namespace Apizr.Configuring.Shared
         public LogLevel[] LogLevels
         {
             get => _logLevels;
-            internal set => _logLevels = value?.Any() == true
+            internal set => _logLevels = value?.Length > 0
                 ? value
-                : new[]
-                {
+                :
+                [
                     Constants.LowLogLevel, 
                     Constants.MediumLogLevel, 
                     Constants.HighLogLevel
-                };
+                ];
         }
 
         /// <inheritdoc />
@@ -54,9 +62,30 @@ namespace Apizr.Configuring.Shared
         public IDictionary<string, object> HandlersParameters { get; protected set; }
 
         /// <inheritdoc />
-        public IList<string> Headers { get; internal set; }
+        public TimeSpan? OperationTimeout { get; internal set; }
 
         /// <inheritdoc />
-        public TimeSpan? Timeout { get; internal set; }
+        public TimeSpan? RequestTimeout { get; internal set; }
+
+        /// <inheritdoc />
+        public Func<string, bool> ShouldRedactHeaderValue { get; internal set; }
+
+        /// <inheritdoc />
+        public IDictionary<ApizrConfigurationSource, ResiliencePipelineAttributeBase[]> ResiliencePipelineOptions { get; internal set; }
+
+        /// <inheritdoc />
+        public IDictionary<ApizrConfigurationSource, CacheAttributeBase> CacheOptions { get; internal set; }
+
+        private Action<IApizrResilienceContextOptionsBuilder> _contextOptionsBuilder;
+        /// <inheritdoc />
+        Action<IApizrResilienceContextOptionsBuilder> IApizrGlobalSharedOptionsBase.ContextOptionsBuilder
+        {
+            get => _contextOptionsBuilder;
+            set => _contextOptionsBuilder = value;
+        }
+
+        private readonly IDictionary<string, Func<object>> _resiliencePropertiesFactories;
+        /// <inheritdoc />
+        IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResiliencePropertiesFactories => _resiliencePropertiesFactories;
     }
 }

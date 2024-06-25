@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Apizr.Configuring.Manager;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
-using Polly;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Apizr.Configuring.Shared
 {
@@ -19,10 +19,9 @@ namespace Apizr.Configuring.Shared
             BaseUri = sharedOptions?.BaseUri;
             BaseAddress = sharedOptions?.BaseAddress;
             BasePath = sharedOptions?.BasePath;
-            ContextFactory = sharedOptions?.ContextFactory;
             PrimaryHandlerFactory = sharedOptions?.PrimaryHandlerFactory;
-            Timeout = sharedOptions?.Timeout; // The HttpClient one, not the request one
-            Headers = sharedOptions?.Headers ?? new List<string>(); // The HttpClient ones, not the request ones
+            HeadersFactories = sharedOptions?.HeadersFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            Headers = sharedOptions?.Headers?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToList() as IList<string>) ?? [];
         }
 
         /// <inheritdoc />
@@ -35,9 +34,12 @@ namespace Apizr.Configuring.Shared
         public string BasePath { get; protected set; }
 
         /// <inheritdoc />
-        public Func<Context> ContextFactory { get; internal set; }
+        public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; internal set; }
 
         /// <inheritdoc />
-        public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; internal set; }
+        public IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>> HeadersFactories { get; internal set; }
+
+        /// <inheritdoc />
+        public IDictionary<ApizrRegistrationMode, IList<string>> Headers { get; internal set; }
     }
 }

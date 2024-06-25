@@ -5,8 +5,10 @@ items:
   id: IApizrProperOptionsBase
   parent: Apizr.Configuring.Proper
   children:
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   langs:
   - csharp
@@ -22,37 +24,33 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrProperOptionsBase
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 9
+    startLine: 10
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: "\nOptions available at proper level for both static and extended registrations\n"
+  summary: Options available at proper level for both static and extended registrations
   example: []
   syntax:
     content: 'public interface IApizrProperOptionsBase : IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase'
-    content.vb: >-
-      Public Interface IApizrProperOptionsBase
-          Inherits IApizrSharedRegistrationOptionsBase
+    content.vb: Public Interface IApizrProperOptionsBase Inherits IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   id: WebApiType
@@ -71,11 +69,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApiType
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: "\nWeb api interface type\n"
+  summary: Web api interface type
   example: []
   syntax:
     content: Type WebApiType { get; }
@@ -84,45 +82,99 @@ items:
       type: System.Type
     content.vb: ReadOnly Property WebApiType As Type
   overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-  id: PolicyRegistryKeys
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  id: CrudModelType
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
   langs:
   - csharp
   - vb
-  name: PolicyRegistryKeys
-  nameWithType: IApizrProperOptionsBase.PolicyRegistryKeys
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+  name: CrudModelType
+  nameWithType: IApizrProperOptionsBase.CrudModelType
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: PolicyRegistryKeys
+    id: CrudModelType
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 19
+    startLine: 20
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: "\nPolicy keys from the registry\n"
+  summary: Crud model type if any
   example: []
   syntax:
-    content: string[] PolicyRegistryKeys { get; }
+    content: Type CrudModelType { get; }
     parameters: []
     return:
-      type: System.String[]
-    content.vb: ReadOnly Property PolicyRegistryKeys As String()
-  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
+      type: System.Type
+    content.vb: ReadOnly Property CrudModelType As Type
+  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType*
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  id: TypeInfo
+  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: TypeInfo
+  nameWithType: IApizrProperOptionsBase.TypeInfo
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: TypeInfo
+    path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
+    startLine: 25
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Web api interface or Crud model class type info
+  example: []
+  syntax:
+    content: TypeInfo TypeInfo { get; }
+    parameters: []
+    return:
+      type: System.Reflection.TypeInfo
+    content.vb: ReadOnly Property TypeInfo As TypeInfo
+  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo*
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+  id: IsCrudApi
+  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: IsCrudApi
+  nameWithType: IApizrProperOptionsBase.IsCrudApi
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: IsCrudApi
+    path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
+    startLine: 30
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: True if it's a CRUD api
+  example: []
+  syntax:
+    content: bool IsCrudApi { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property IsCrudApi As Boolean
+  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi*
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   id: Logger
@@ -141,11 +193,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Logger
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 24
+    startLine: 35
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: "\nThe logger instance\n"
+  summary: The logger instance
   example: []
   syntax:
     content: ILogger Logger { get; }
@@ -154,113 +206,203 @@ items:
       type: Microsoft.Extensions.Logging.ILogger
     content.vb: ReadOnly Property Logger As ILogger
   overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 references:
 - uid: Apizr.Configuring.Proper
   commentId: N:Apizr.Configuring.Proper
+  href: Apizr.html
   name: Apizr.Configuring.Proper
   nameWithType: Apizr.Configuring.Proper
   fullName: Apizr.Configuring.Proper
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Proper
+    name: Proper
+    href: Apizr.Configuring.Proper.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Proper
+    name: Proper
+    href: Apizr.Configuring.Proper.html
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseUri
   name: BaseUri
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseAddress
   name: BaseAddress
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BasePath
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
-  name: ContextFactory
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_PrimaryHandlerFactory
   name: PrimaryHandlerFactory
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_HeadersFactories
+  name: HeadersFactories
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_Headers
+  name: Headers
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.Headers
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HttpTracerMode
   name: HttpTracerMode
   nameWithType: IApizrGlobalSharedOptionsBase.HttpTracerMode
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_TrafficVerbosity
   name: TrafficVerbosity
   nameWithType: IApizrGlobalSharedOptionsBase.TrafficVerbosity
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LogLevels
   name: LogLevels
   nameWithType: IApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OnException
   name: OnException
   nameWithType: IApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LetThrowOnExceptionWithEmptyCache
   name: LetThrowOnExceptionWithEmptyCache
   nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HandlersParameters
   name: HandlersParameters
   nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  name: Headers
-  nameWithType: IApizrGlobalSharedOptionsBase.Headers
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OperationTimeout
+  name: OperationTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  name: Timeout
-  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_RequestTimeout
+  name: RequestTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ShouldRedactHeaderValue
+  name: ShouldRedactHeaderValue
+  nameWithType: IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html
   name: IApizrGlobalSharedRegistrationOptionsBase
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType*
   commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_WebApiType
   name: WebApiType
   nameWithType: IApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
@@ -268,48 +410,84 @@ references:
   commentId: T:System.Type
   parent: System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
   name: Type
   nameWithType: Type
   fullName: System.Type
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys*
-  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-  name: PolicyRegistryKeys
-  nameWithType: IApizrProperOptionsBase.PolicyRegistryKeys
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-- uid: System.String[]
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType*
+  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_CrudModelType
+  name: CrudModelType
+  nameWithType: IApizrProperOptionsBase.CrudModelType
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo*
+  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_TypeInfo
+  name: TypeInfo
+  nameWithType: IApizrProperOptionsBase.TypeInfo
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+- uid: System.Reflection.TypeInfo
+  commentId: T:System.Reflection.TypeInfo
+  parent: System.Reflection
   isExternal: true
-  name: String[]
-  nameWithType: String[]
-  fullName: System.String[]
-  nameWithType.vb: String()
-  fullName.vb: System.String()
-  name.vb: String()
+  href: https://learn.microsoft.com/dotnet/api/system.reflection.typeinfo
+  name: TypeInfo
+  nameWithType: TypeInfo
+  fullName: System.Reflection.TypeInfo
+- uid: System.Reflection
+  commentId: N:System.Reflection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Reflection
+  nameWithType: System.Reflection
+  fullName: System.Reflection
   spec.csharp:
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - uid: System
+    name: System
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Reflection
+    name: Reflection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.reflection
   spec.vb:
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - uid: System
+    name: System
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Reflection
+    name: Reflection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.reflection
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi*
+  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_IsCrudApi
+  name: IsCrudApi
+  nameWithType: IApizrProperOptionsBase.IsCrudApi
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger*
   commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_Logger
   name: Logger
   nameWithType: IApizrProperOptionsBase.Logger
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
@@ -317,12 +495,44 @@ references:
   commentId: T:Microsoft.Extensions.Logging.ILogger
   parent: Microsoft.Extensions.Logging
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
   name: ILogger
   nameWithType: ILogger
   fullName: Microsoft.Extensions.Logging.ILogger
 - uid: Microsoft.Extensions.Logging
   commentId: N:Microsoft.Extensions.Logging
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
   name: Microsoft.Extensions.Logging
   nameWithType: Microsoft.Extensions.Logging
   fullName: Microsoft.Extensions.Logging
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging

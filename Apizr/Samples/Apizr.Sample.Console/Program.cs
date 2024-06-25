@@ -23,16 +23,15 @@ using Apizr.Optional.Cruding.Sending;
 using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting;
 using Apizr.Optional.Requesting.Sending;
-using Apizr.Policing;
 using Apizr.Progressing;
 using Apizr.Requesting;
+using Apizr.Resiliencing;
 using Apizr.Sample.Console.Models;
 using Apizr.Sample.Console.Models.Uploads;
 using Apizr.Sample.Models;
 using Apizr.Transferring.Requesting;
 using AutoMapper;
 using Fusillade;
-using HttpTracer;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -46,8 +45,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Polly;
-using Polly.Extensions.Http;
 using Polly.Registry;
+using Polly.Retry;
 using Refit;
 using HttpMessageParts = Apizr.Logging.HttpMessageParts;
 
@@ -115,17 +114,30 @@ namespace Apizr.Sample.Console
 
             System.Console.WriteLine("");
             System.Console.WriteLine("Initializing...");
-            var policyRegistry = new PolicyRegistry
+
+            var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
             {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+                logging.AddConsole();
+                logging.AddDebug();
+                logging.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+            var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
+                .ConfigureTelemetry(lazyLoggerFactory.Value)
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
                     {
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(5),
-                        TimeSpan.FromSeconds(10)
-                    }, LoggedPolicies.OnLoggedRetry).WithPolicyKey("TransientHttpError")
-                }
-            };
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        Delay = TimeSpan.FromSeconds(1),
+                        MaxRetryAttempts = 5,
+                        UseJitter = true,
+                        BackoffType = DelayBackoffType.Exponential
+                    });
+
             if (configChoice == 0)
             {
                 var stopwatch = new Stopwatch();
@@ -142,13 +154,6 @@ namespace Apizr.Sample.Console
                     //_httpBinService = RestService.For<IHttpBinService>("https://httpbin.org");
                     //var result = await _httpBinService.UploadStreamPart(streamPart);
                     //var test = await result.Content.ReadAsStringAsync();
-
-                    var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
-                    {
-                        logging.AddConsole();
-                        logging.AddDebug();
-                        logging.SetMinimumLevel(LogLevel.Trace);
-                    }));
 
                     //_httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options.WithLoggerFactory(() => lazyLoggerFactory.Value));
 
@@ -172,7 +177,6 @@ namespace Apizr.Sample.Console
                     //    })
                     //    .ConfigureServices(services =>
                     //    {
-                    //        services.AddPolicyRegistry(policyRegistry);
                     //        services.AddApizr(registry => registry
                     //            .AddManagerFor<IReqResService>()
                     //            .AddManagerFor<IHttpBinService>()//);
@@ -212,14 +216,7 @@ namespace Apizr.Sample.Console
             {
                 Barrel.ApplicationId = nameof(Program);
 
-                var lazyLoggerFactory = new Lazy<ILoggerFactory>(() => LoggerFactory.Create(logging =>
-                {
-                    logging.AddConsole();
-                    logging.AddDebug();
-                    logging.SetMinimumLevel(LogLevel.Trace);
-                }));
-
-                //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithPolicyRegistry(policyRegistry)
+                //_reqResManager = Apizr.CreateFor<IReqResService>(optionsBuilder => optionsBuilder.WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                 //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                 //    .WithPriorityManagement()
                 //    .WithLoggerFactory(() => lazyLoggerFactory.Value)
@@ -231,6 +228,10 @@ namespace Apizr.Sample.Console
                 //    .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current)));
                 ////.WithLogging());
 
+                var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+                resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", 
+                    (builder, _) => builder.AddPipeline(resiliencePipelineBuilder.Build()));
+
                 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                     registry => registry
                         .AddManagerFor<IReqResService>()//options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseAll, LogLevel.Trace, LogLevel.Information, LogLevel.Critical))
@@ -238,7 +239,7 @@ namespace Apizr.Sample.Console
 
                     config => config//.WithConnectivityHandler(() => false)
                         .WithPriority()
-                        .WithPolicyRegistry(policyRegistry)
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
                         .WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
                         .WithLoggerFactory(() => lazyLoggerFactory.Value));
 
@@ -261,7 +262,8 @@ namespace Apizr.Sample.Console
                     })
                     .ConfigureServices(services =>
                     {
-                        services.AddPolicyRegistry(policyRegistry);
+                        services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                            builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
                         services.AddMemoryCache();
 
                         if (configChoice == 2)
@@ -394,15 +396,16 @@ namespace Apizr.Sample.Console
 
                         // This is just to let you know what's registered from/for Apizr and ready to use
                         foreach (var service in services.Where(d =>
-                            (d.ServiceType != null) ||
-                            (d.ImplementationType != null)))
+                                     d.ServiceKey == null &&
+                            ((d.ServiceType != null) ||
+                            (d.ImplementationType != null))))
                         {
                             System.Console.WriteLine(
                                 $"Registered {service.Lifetime} service: {service.ServiceType?.GetFriendlyName()} - {service.ImplementationType?.GetFriendlyName()}");
                         }
                     }).Build();
 
-                
+                //typeof(IRequestHandler<ExecuteSafeResultRequest<IReqResService, UserList>, IApizrResponse<UserList>>)
                 var scope = host.Services.CreateScope();
 
                 _reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResService>>();
@@ -463,8 +466,7 @@ namespace Apizr.Sample.Console
                     //var userList = await _mediator.Send(new ExecuteRequest<IReqResService, UserList>(api => api.GetUsersAsync()));
                     //var userList = await _reqResMediator.SendFor(api => api.GetUsersAsync());
                     //pagedUsers = await _mediator.Send(new ReadAllQuery<PagedResult<User>>(), CancellationToken.None);parameters1, priority, cancellationToken
-                    pagedUsers = await _userMediator.SendReadAllQuery(parameters1, priority);
-                    //pagedUsers = await _userMediator.SendReadAllQuery();
+                    pagedUsers = await _userMediator.SendReadAllQuery();
 
                     //var test = await _apizrMediator.SendFor<IReqResService, UserList>(api => api.GetUsersAsync(), onException: exception => {});
                 }
@@ -539,8 +541,7 @@ namespace Apizr.Sample.Console
                     {
                         var parameters = new Dictionary<string, object>{{ "param1", "1" } };
                         var userDetails = configChoice <= 2
-                            ? await _reqResManager.ExecuteAsync((ct, api) => api.GetUserAsync(userChoice, (int)Priority.UserInitiated, ct),
-                                CancellationToken.None)
+                            ? await _reqResManager.ExecuteAsync((opt, api) => api.GetUserAsync(userChoice, opt), options => options.WithPriority(Priority.UserInitiated))
                             : await _mediator.Send(new ReadQuery<UserDetails>(userChoice), CancellationToken.None);
                         
                         //var test = await _reqResManager.ExecuteAsync<MinUser, User>(
@@ -574,7 +575,7 @@ namespace Apizr.Sample.Console
                         //userInfos = await _mediator.Send(new ExecuteRequest<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, ct)), CancellationToken.None);
 
                         // Classic dedicated mediator with auto mapped result
-                        userInfos = await _reqResMediator.SendFor<IReqResService, UserInfos, UserDetails>((ct, api) => api.GetUserAsync(userChoice, 80, ct), CancellationToken.None);
+                        userInfos = await _reqResMediator.SendFor<UserInfos, UserDetails>((opt, api) => api.GetUserAsync(userChoice, opt), options => options.WithPriority(80));
 
                         // Auto mapped crud
                         //userInfos = await _mediator.Send(new ReadQuery<UserInfos>(userChoice), CancellationToken.None);

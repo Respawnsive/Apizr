@@ -1,7 +1,7 @@
 ﻿using Apizr.Configuring.Manager;
 using Microsoft.Extensions.Logging;
-using Polly;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 
 namespace Apizr.Configuring.Shared
@@ -27,13 +27,18 @@ namespace Apizr.Configuring.Shared
         string BasePath { get; }
 
         /// <summary>
-        /// The Polly Context to pass through it all
-        /// </summary>
-        Func<Context> ContextFactory { get; }
-
-        /// <summary>
         /// The primary Http message handler factory (set internally)
         /// </summary>
         Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory { get; }
+
+        /// <summary>
+        /// Headers factories
+        /// </summary>
+        IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>> HeadersFactories { get; }
+
+        /// <summary>
+        /// Headers to add to the request
+        /// </summary>
+        IDictionary<ApizrRegistrationMode, IList<string>> Headers { get; }
     }
 }

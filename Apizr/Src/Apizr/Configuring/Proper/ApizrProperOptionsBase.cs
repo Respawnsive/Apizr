@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
+using Apizr.Extending;
+using Apizr.Requesting;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Configuring.Proper
@@ -13,24 +18,61 @@ namespace Apizr.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="assemblyPolicyRegistryKeys">Global policies</param>
-        /// <param name="webApiPolicyRegistryKeys">Specific policies</param>
+        /// <param name="crudModelType">The crud model type if any</param>
+        /// <param name="typeInfo">The type info</param>
+        /// <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
+        /// <param name="properResiliencePipelineAttributes">Specific resilience pipelines</param>
+        /// <param name="commonCacheAttribute">Global caching options</param>
+        /// <param name="properCacheAttribute">Specific caching options</param>
+        /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
-            string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys) : base(sharedOptions)
+            Type crudModelType,
+            TypeInfo typeInfo,
+            ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes,
+            ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes,
+            CacheAttribute commonCacheAttribute,
+            CacheAttribute properCacheAttribute,
+            Func<string, bool> shouldRedactHeaderValue = null) : base(sharedOptions)
         {
             WebApiType = webApiType;
-            PolicyRegistryKeys =
-                assemblyPolicyRegistryKeys?.Union(webApiPolicyRegistryKeys ?? Array.Empty<string>()).ToArray() ??
-                webApiPolicyRegistryKeys ?? Array.Empty<string>();
+            CrudModelType = crudModelType;
+            TypeInfo = typeInfo;
+
+            if (commonResiliencePipelineAttributes?.Length > 0)
+                ResiliencePipelineOptions[ApizrConfigurationSource.CommonAttribute] = commonResiliencePipelineAttributes;
+
+            if(properResiliencePipelineAttributes?.Length > 0)
+                ResiliencePipelineOptions[ApizrConfigurationSource.ProperAttribute] = properResiliencePipelineAttributes;
+
+            if(commonCacheAttribute != null)
+                CacheOptions[ApizrConfigurationSource.CommonAttribute] = commonCacheAttribute;
+
+            if (properCacheAttribute != null)
+                CacheOptions[ApizrConfigurationSource.ProperAttribute] = properCacheAttribute;
+
+            if (ShouldRedactHeaderValue == null)
+            {
+                ShouldRedactHeaderValue = shouldRedactHeaderValue;
+            }
+            else if (shouldRedactHeaderValue != null)
+            {
+                var previous = ShouldRedactHeaderValue;
+                ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
+            }
         }
 
         /// <inheritdoc />
         public Type WebApiType { get; }
 
         /// <inheritdoc />
-        public string[] PolicyRegistryKeys { get; }
+        public Type CrudModelType { get; }
+
+        /// <inheritdoc />
+        public TypeInfo TypeInfo { get; }
+
+        /// <inheritdoc />
+        public bool IsCrudApi => CrudModelType != null;
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }

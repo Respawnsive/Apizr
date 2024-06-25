@@ -24,7 +24,7 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
-  summary: "\nThe mediation Delete optional command\n"
+  summary: The mediation Delete optional command
   example: []
   syntax:
     content: 'public class DeleteOptionalCommand<T, TKey> : DeleteCommandBase<T, TKey, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>, IMediationCommand<TKey, Option<Unit, ApizrException>>, IRequest<Option<Unit, ApizrException>>, IBaseRequest'
@@ -32,8 +32,8 @@ items:
     - id: T
       description: The api entity type
     - id: TKey
-      description: The entity&apos;s crud key type
-    content.vb: "Public Class DeleteOptionalCommand(Of T, TKey)\n    Inherits DeleteCommandBase(Of T, TKey,  Option(Of Unit, ApizrException) ,  IApizrRequestOptions, IApizrRequestOptionsBuilder) \n    Implements IMediationCommand(Of TKey,  Option(Of Unit, ApizrException) ), IRequest(Of  Option(Of Unit, ApizrException) ), IBaseRequest"
+      description: The entity's crud key type
+    content.vb: Public Class DeleteOptionalCommand(Of T, TKey) Inherits DeleteCommandBase(Of T, TKey, Option(Of Unit, ApizrException), IApizrRequestOptions, IApizrRequestOptionsBuilder) Implements IMediationCommand(Of TKey, Option(Of Unit, ApizrException)), IRequest(Of Option(Of Unit, ApizrException)), IBaseRequest
   inheritance:
   - System.Object
   - Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
@@ -54,12 +54,6 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   nameWithType.vb: DeleteOptionalCommand(Of T, TKey)
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
   fullName.vb: Apizr.Optional.Cruding.DeleteOptionalCommand(Of T, TKey)
   name.vb: DeleteOptionalCommand(Of T, TKey)
 - uid: Apizr.Optional.Cruding.DeleteOptionalCommand`2.#ctor(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -84,43 +78,69 @@ items:
   assemblies:
   - Apizr.Integrations.Optional
   namespace: Apizr.Optional.Cruding
-  summary: "\nThe mediation Delete optional command constructor\n"
+  summary: The mediation Delete optional command constructor
   example: []
   syntax:
     content: public DeleteOptionalCommand(TKey key, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
     parameters:
     - id: key
       type: '{TKey}'
-      description: The entity&apos;s crud key
+      description: The entity's crud key
     - id: optionsBuilder
       type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
       description: Options provided to the request
     content.vb: Public Sub New(key As TKey, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing)
   overload: Apizr.Optional.Cruding.DeleteOptionalCommand`2.#ctor*
-  nameWithType.vb: DeleteOptionalCommand(Of T, TKey).DeleteOptionalCommand(TKey, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Optional.Cruding.DeleteOptionalCommand(Of T, TKey).DeleteOptionalCommand(TKey, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
-  name.vb: DeleteOptionalCommand(TKey, Action(Of IApizrRequestOptionsBuilder))
+  nameWithType.vb: DeleteOptionalCommand(Of T, TKey).New(TKey, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: Apizr.Optional.Cruding.DeleteOptionalCommand(Of T, TKey).New(TKey, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: New(TKey, Action(Of IApizrRequestOptionsBuilder))
 references:
 - uid: Apizr.Optional.Cruding
   commentId: N:Apizr.Optional.Cruding
+  href: Apizr.html
   name: Apizr.Optional.Cruding
   nameWithType: Apizr.Optional.Cruding
   fullName: Apizr.Optional.Cruding
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Cruding
+    name: Cruding
+    href: Apizr.Optional.Cruding.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Optional
+    name: Optional
+    href: Apizr.Optional.html
+  - name: .
+  - uid: Apizr.Optional.Cruding
+    name: Cruding
+    href: Apizr.Optional.Cruding.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Requesting.Base
   definition: Apizr.Mediation.Requesting.Base.RequestBase`3
+  href: Apizr.Mediation.Requesting.Base.RequestBase-3.html
   name: RequestBase<Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: RequestBase<Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Base.RequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -130,103 +150,70 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
-    nameWithType: RequestBase
-    fullName: Apizr.Mediation.Requesting.Base.RequestBase
+    href: Apizr.Mediation.Requesting.Base.RequestBase-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
-    nameWithType: RequestBase
-    fullName: Apizr.Mediation.Requesting.Base.RequestBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Base.RequestBase-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Commanding.MediationCommandBase{{TKey},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Commanding.MediationCommandBase{`1,Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Commanding
   definition: Apizr.Mediation.Commanding.MediationCommandBase`4
+  href: Apizr.Mediation.Commanding.MediationCommandBase-4.html
   name: MediationCommandBase<TKey, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: MediationCommandBase<TKey, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Commanding.MediationCommandBase<TKey, Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -236,115 +223,76 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
-    nameWithType: MediationCommandBase
-    fullName: Apizr.Mediation.Commanding.MediationCommandBase
+    href: Apizr.Mediation.Commanding.MediationCommandBase-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
-    nameWithType: MediationCommandBase
-    fullName: Apizr.Mediation.Commanding.MediationCommandBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Commanding.MediationCommandBase-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},{TKey},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,`1,Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Cruding.Base
   definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
+  href: Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html
   name: DeleteCommandBase<T, TKey, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: DeleteCommandBase<T, TKey, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TKey, Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -354,127 +302,82 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
     name: DeleteCommandBase
-    nameWithType: DeleteCommandBase
-    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
+    href: Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
     name: DeleteCommandBase
-    nameWithType: DeleteCommandBase
-    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Commanding.IMediationCommand{{TKey},Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   commentId: T:Apizr.Mediation.Commanding.IMediationCommand{`1,Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   parent: Apizr.Mediation.Commanding
   definition: Apizr.Mediation.Commanding.IMediationCommand`2
+  href: Apizr.Mediation.Commanding.IMediationCommand-2.html
   name: IMediationCommand<TKey, Option<Unit, ApizrException>>
   nameWithType: IMediationCommand<TKey, Option<Unit, ApizrException>>
   fullName: Apizr.Mediation.Commanding.IMediationCommand<TKey, Optional.Option<MediatR.Unit, Apizr.ApizrException>>
@@ -484,87 +387,56 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Commanding.IMediationCommand`2
     name: IMediationCommand
-    nameWithType: IMediationCommand
-    fullName: Apizr.Mediation.Commanding.IMediationCommand
+    href: Apizr.Mediation.Commanding.IMediationCommand-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Commanding.IMediationCommand`2
     name: IMediationCommand
-    nameWithType: IMediationCommand
-    fullName: Apizr.Mediation.Commanding.IMediationCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Commanding.IMediationCommand-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequest{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   commentId: T:MediatR.IRequest{Optional.Option{MediatR.Unit,Apizr.ApizrException}}
   parent: MediatR
   definition: MediatR.IRequest`1
+  href: Apizr.ApizrException.html
   name: IRequest<Option<Unit, ApizrException>>
   nameWithType: IRequest<Option<Unit, ApizrException>>
   fullName: MediatR.IRequest<Optional.Option<MediatR.Unit, Apizr.ApizrException>>
@@ -574,73 +446,45 @@ references:
   spec.csharp:
   - uid: MediatR.IRequest`1
     name: IRequest
-    nameWithType: IRequest
-    fullName: MediatR.IRequest
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequest`1
     name: IRequest
-    nameWithType: IRequest
-    fullName: MediatR.IRequest
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Optional.Option`2
     name: Option
-    nameWithType: Option
-    fullName: Optional.Option
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: MediatR.Unit
     name: Unit
-    nameWithType: Unit
-    fullName: MediatR.Unit
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IBaseRequest
   commentId: T:MediatR.IBaseRequest
   parent: MediatR
@@ -652,6 +496,7 @@ references:
   commentId: P:Apizr.Mediation.Cruding.Base.DeleteCommandBase{`0,`1,Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.Key
   parent: Apizr.Mediation.Cruding.Base.DeleteCommandBase{{T},{TKey},Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   definition: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5.Key
+  href: Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html#Apizr_Mediation_Cruding_Base_DeleteCommandBase_5_Key
   name: Key
   nameWithType: DeleteCommandBase<T, TKey, Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>.Key
   fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TKey, Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.Key
@@ -661,6 +506,7 @@ references:
   commentId: P:Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}.OptionsBuilder
   parent: Apizr.Mediation.Requesting.Base.RequestBase{Optional.Option{MediatR.Unit,Apizr.ApizrException},Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   definition: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  href: Apizr.Mediation.Requesting.Base.RequestBase-3.html#Apizr_Mediation_Requesting_Base_RequestBase_3_OptionsBuilder
   name: OptionsBuilder
   nameWithType: RequestBase<Option<Unit, ApizrException>, IApizrRequestOptions, IApizrRequestOptionsBuilder>.OptionsBuilder
   fullName: Apizr.Mediation.Requesting.Base.RequestBase<Optional.Option<MediatR.Unit, Apizr.ApizrException>, Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>.OptionsBuilder
@@ -670,289 +516,231 @@ references:
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
   commentId: T:Apizr.Mediation.Requesting.Base.RequestBase`3
+  href: Apizr.Mediation.Requesting.Base.RequestBase-3.html
   name: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -962,62 +750,72 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
-    nameWithType: RequestBase
-    fullName: Apizr.Mediation.Requesting.Base.RequestBase
+    href: Apizr.Mediation.Requesting.Base.RequestBase-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TFormattedModelResultData
-    nameWithType: TFormattedModelResultData
-    fullName: TFormattedModelResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Base.RequestBase`3
     name: RequestBase
-    nameWithType: RequestBase
-    fullName: Apizr.Mediation.Requesting.Base.RequestBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Base.RequestBase-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TFormattedModelResultData
-    nameWithType: TFormattedModelResultData
-    fullName: TFormattedModelResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.Base
   commentId: N:Apizr.Mediation.Requesting.Base
+  href: Apizr.html
   name: Apizr.Mediation.Requesting.Base
   nameWithType: Apizr.Mediation.Requesting.Base
   fullName: Apizr.Mediation.Requesting.Base
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Base
+    name: Base
+    href: Apizr.Mediation.Requesting.Base.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Base
+    name: Base
+    href: Apizr.Mediation.Requesting.Base.html
 - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
   commentId: T:Apizr.Mediation.Commanding.MediationCommandBase`4
+  href: Apizr.Mediation.Commanding.MediationCommandBase-4.html
   name: MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Commanding.MediationCommandBase<TRequestData, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -1027,74 +825,70 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
-    nameWithType: MediationCommandBase
-    fullName: Apizr.Mediation.Commanding.MediationCommandBase
+    href: Apizr.Mediation.Commanding.MediationCommandBase-4.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Commanding.MediationCommandBase`4
     name: MediationCommandBase
-    nameWithType: MediationCommandBase
-    fullName: Apizr.Mediation.Commanding.MediationCommandBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Commanding.MediationCommandBase-4.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Commanding
   commentId: N:Apizr.Mediation.Commanding
+  href: Apizr.html
   name: Apizr.Mediation.Commanding
   nameWithType: Apizr.Mediation.Commanding
   fullName: Apizr.Mediation.Commanding
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html
 - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
   commentId: T:Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
+  href: Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html
   name: DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -1104,86 +898,84 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
     name: DeleteCommandBase
-    nameWithType: DeleteCommandBase
-    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
+    href: Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5
     name: DeleteCommandBase
-    nameWithType: DeleteCommandBase
-    fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TKey
-    nameWithType: TKey
-    fullName: TKey
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Cruding.Base
   commentId: N:Apizr.Mediation.Cruding.Base
+  href: Apizr.html
   name: Apizr.Mediation.Cruding.Base
   nameWithType: Apizr.Mediation.Cruding.Base
   fullName: Apizr.Mediation.Cruding.Base
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding
+    name: Cruding
+    href: Apizr.Mediation.Cruding.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Base
+    name: Base
+    href: Apizr.Mediation.Cruding.Base.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding
+    name: Cruding
+    href: Apizr.Mediation.Cruding.html
+  - name: .
+  - uid: Apizr.Mediation.Cruding.Base
+    name: Base
+    href: Apizr.Mediation.Cruding.Base.html
 - uid: Apizr.Mediation.Commanding.IMediationCommand`2
   commentId: T:Apizr.Mediation.Commanding.IMediationCommand`2
+  href: Apizr.Mediation.Commanding.IMediationCommand-2.html
   name: IMediationCommand<TRequestData, TResultData>
   nameWithType: IMediationCommand<TRequestData, TResultData>
   fullName: Apizr.Mediation.Commanding.IMediationCommand<TRequestData, TResultData>
@@ -1193,43 +985,25 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Commanding.IMediationCommand`2
     name: IMediationCommand
-    nameWithType: IMediationCommand
-    fullName: Apizr.Mediation.Commanding.IMediationCommand
+    href: Apizr.Mediation.Commanding.IMediationCommand-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Commanding.IMediationCommand`2
     name: IMediationCommand
-    nameWithType: IMediationCommand
-    fullName: Apizr.Mediation.Commanding.IMediationCommand
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Commanding.IMediationCommand-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TRequestData
-    nameWithType: TRequestData
-    fullName: TRequestData
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResultData
-    nameWithType: TResultData
-    fullName: TResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequest`1
   commentId: T:MediatR.IRequest`1
   isExternal: true
@@ -1242,33 +1016,19 @@ references:
   spec.csharp:
   - uid: MediatR.IRequest`1
     name: IRequest
-    nameWithType: IRequest
-    fullName: MediatR.IRequest
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequest`1
     name: IRequest
-    nameWithType: IRequest
-    fullName: MediatR.IRequest
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR
   commentId: N:MediatR
   isExternal: true
@@ -1277,6 +1037,7 @@ references:
   fullName: MediatR
 - uid: Apizr.Mediation.Cruding.Base.DeleteCommandBase`5.Key
   commentId: P:Apizr.Mediation.Cruding.Base.DeleteCommandBase`5.Key
+  href: Apizr.Mediation.Cruding.Base.DeleteCommandBase-5.html#Apizr_Mediation_Cruding_Base_DeleteCommandBase_5_Key
   name: Key
   nameWithType: DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Key
   fullName: Apizr.Mediation.Cruding.Base.DeleteCommandBase<T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.Key
@@ -1284,6 +1045,7 @@ references:
   fullName.vb: Apizr.Mediation.Cruding.Base.DeleteCommandBase(Of T, TKey, TResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).Key
 - uid: Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
   commentId: P:Apizr.Mediation.Requesting.Base.RequestBase`3.OptionsBuilder
+  href: Apizr.Mediation.Requesting.Base.RequestBase-3.html#Apizr_Mediation_Requesting_Base_RequestBase_3_OptionsBuilder
   name: OptionsBuilder
   nameWithType: RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
   fullName: Apizr.Mediation.Requesting.Base.RequestBase<TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder>.OptionsBuilder
@@ -1291,11 +1053,13 @@ references:
   fullName.vb: Apizr.Mediation.Requesting.Base.RequestBase(Of TFormattedModelResultData, TApizrRequestOptions, TApizrRequestOptionsBuilder).OptionsBuilder
 - uid: Apizr.Optional.Cruding.DeleteOptionalCommand`2.#ctor*
   commentId: Overload:Apizr.Optional.Cruding.DeleteOptionalCommand`2.#ctor
+  href: Apizr.Optional.Cruding.DeleteOptionalCommand-2.html#Apizr_Optional_Cruding_DeleteOptionalCommand_2__ctor__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DeleteOptionalCommand
   nameWithType: DeleteOptionalCommand<T, TKey>.DeleteOptionalCommand
   fullName: Apizr.Optional.Cruding.DeleteOptionalCommand<T, TKey>.DeleteOptionalCommand
-  nameWithType.vb: DeleteOptionalCommand(Of T, TKey).DeleteOptionalCommand
-  fullName.vb: Apizr.Optional.Cruding.DeleteOptionalCommand(Of T, TKey).DeleteOptionalCommand
+  nameWithType.vb: DeleteOptionalCommand(Of T, TKey).New
+  fullName.vb: Apizr.Optional.Cruding.DeleteOptionalCommand(Of T, TKey).New
+  name.vb: New
 - uid: '{TKey}'
   commentId: '!:TKey'
   definition: TKey
@@ -1306,6 +1070,7 @@ references:
   commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrRequestOptionsBuilder>
   nameWithType: Action<IApizrRequestOptionsBuilder>
   fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -1315,35 +1080,25 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TKey
   name: TKey
   nameWithType: TKey
@@ -1351,6 +1106,7 @@ references:
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -1360,30 +1116,18 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )

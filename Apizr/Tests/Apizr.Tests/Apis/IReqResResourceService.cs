@@ -7,7 +7,7 @@ using Refit;
 //[assembly:Log]
 namespace Apizr.Tests.Apis
 {
-    [WebApi, Log(HttpMessageParts.None)]
+    [WebApi("https://reqres.in/api"), Log(HttpMessageParts.None)]
     public interface IReqResResourceService
     {
         [Get("/unknown")]

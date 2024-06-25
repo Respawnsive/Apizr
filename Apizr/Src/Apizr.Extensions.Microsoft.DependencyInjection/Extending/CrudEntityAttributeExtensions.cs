@@ -1,6 +1,7 @@
 ﻿using Apizr.Requesting;
 using System;
 using Apizr.Mapping;
+using Apizr.Requesting.Attributes;
 
 namespace Apizr.Extending
 {

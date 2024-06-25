@@ -25,17 +25,14 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
-  summary: "\nThe mediation handler for <xref href=\"Apizr.Mediation.Requesting.DownloadQuery%602\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: The mediation handler for <xref href="Apizr.Mediation.Requesting.DownloadQuery%602" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
     content: 'public class DownloadWithQueryHandler<TDownloadParams> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>, IRequestHandler<DownloadWithQuery<TDownloadParams>, FileInfo>'
     typeParameters:
     - id: TDownloadParams
       description: The query parameters type
-    content.vb: >-
-      Public Class DownloadWithQueryHandler(Of TDownloadParams)
-          Inherits RequestHandlerBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder)
-          Implements IRequestHandler(Of DownloadWithQuery(Of TDownloadParams), FileInfo)
+    content.vb: Public Class DownloadWithQueryHandler(Of TDownloadParams) Inherits RequestHandlerBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder) Implements IRequestHandler(Of DownloadWithQuery(Of TDownloadParams), FileInfo)
   inheritance:
   - System.Object
   - Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
@@ -50,12 +47,6 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   nameWithType.vb: DownloadWithQueryHandler(Of TDownloadParams)
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
   fullName.vb: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler(Of TDownloadParams)
   name.vb: DownloadWithQueryHandler(Of TDownloadParams)
 - uid: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler`1.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{`0},`0})
@@ -87,13 +78,9 @@ items:
       type: Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{{TDownloadParams}},{TDownloadParams}}
     content.vb: Public Sub New(downloadManager As IApizrDownloadManager(Of IDownloadApi(Of TDownloadParams), TDownloadParams))
   overload: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler`1.#ctor*
-  nameWithType.vb: DownloadWithQueryHandler(Of TDownloadParams).DownloadWithQueryHandler(IApizrDownloadManager(Of IDownloadApi(Of TDownloadParams), TDownloadParams))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler(Of TDownloadParams).DownloadWithQueryHandler(Apizr.Transferring.Managing.IApizrDownloadManager(Of Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams), TDownloadParams))
-  name.vb: DownloadWithQueryHandler(IApizrDownloadManager(Of IDownloadApi(Of TDownloadParams), TDownloadParams))
+  nameWithType.vb: DownloadWithQueryHandler(Of TDownloadParams).New(IApizrDownloadManager(Of IDownloadApi(Of TDownloadParams), TDownloadParams))
+  fullName.vb: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler(Of TDownloadParams).New(Apizr.Transferring.Managing.IApizrDownloadManager(Of Apizr.Transferring.Requesting.IDownloadApi(Of TDownloadParams), TDownloadParams))
+  name.vb: New(IApizrDownloadManager(Of IDownloadApi(Of TDownloadParams), TDownloadParams))
 - uid: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler`1.Handle(Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.Threading.CancellationToken)
   commentId: M:Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler`1.Handle(Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.Threading.CancellationToken)
   id: Handle(Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.Threading.CancellationToken)
@@ -116,7 +103,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer.MediatR
   namespace: Apizr.Mediation.Requesting.Handling
-  summary: "\nHandling the download request\n"
+  summary: Handling the download request
   example: []
   syntax:
     content: public Task<FileInfo> Handle(DownloadWithQuery<TDownloadParams> request, CancellationToken cancellationToken)
@@ -135,15 +122,12 @@ items:
   implements:
   - MediatR.IRequestHandler{Apizr.Mediation.Requesting.DownloadWithQuery{{TDownloadParams}},System.IO.FileInfo}.Handle(Apizr.Mediation.Requesting.DownloadWithQuery{{TDownloadParams}},System.Threading.CancellationToken)
   nameWithType.vb: DownloadWithQueryHandler(Of TDownloadParams).Handle(DownloadWithQuery(Of TDownloadParams), CancellationToken)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler(Of TDownloadParams).Handle(Apizr.Mediation.Requesting.DownloadWithQuery(Of TDownloadParams), System.Threading.CancellationToken)
   name.vb: Handle(DownloadWithQuery(Of TDownloadParams), CancellationToken)
 references:
 - uid: Apizr.Mediation.Requesting.DownloadQuery`2
   commentId: T:Apizr.Mediation.Requesting.DownloadQuery`2
+  href: Apizr.Mediation.Requesting.DownloadQuery-2.html
   name: DownloadQuery<TDownloadApi, TDownloadParams>
   nameWithType: DownloadQuery<TDownloadApi, TDownloadParams>
   fullName: Apizr.Mediation.Requesting.DownloadQuery<TDownloadApi, TDownloadParams>
@@ -153,59 +137,79 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.DownloadQuery`2
     name: DownloadQuery
-    nameWithType: DownloadQuery
-    fullName: Apizr.Mediation.Requesting.DownloadQuery
+    href: Apizr.Mediation.Requesting.DownloadQuery-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.DownloadQuery`2
     name: DownloadQuery
-    nameWithType: DownloadQuery
-    fullName: Apizr.Mediation.Requesting.DownloadQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.DownloadQuery-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.Handling
   commentId: N:Apizr.Mediation.Requesting.Handling
+  href: Apizr.html
   name: Apizr.Mediation.Requesting.Handling
   nameWithType: Apizr.Mediation.Requesting.Handling
   fullName: Apizr.Mediation.Requesting.Handling
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling
+    name: Handling
+    href: Apizr.Mediation.Requesting.Handling.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling
+    name: Handling
+    href: Apizr.Mediation.Requesting.Handling.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   commentId: T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase{Apizr.Configuring.Request.IApizrRequestOptions,Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: Apizr.Mediation.Requesting.Handling.Base
   definition: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   name: RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>
   nameWithType: RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase<Apizr.Configuring.Request.IApizrRequestOptions, Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -215,51 +219,38 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptions
     name: IApizrRequestOptions
-    nameWithType: IApizrRequestOptions
-    fullName: Apizr.Configuring.Request.IApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Configuring.Request.IApizrRequestOptions.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.DownloadWithQuery{{TDownloadParams}},System.IO.FileInfo}
   commentId: T:MediatR.IRequestHandler{Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.IO.FileInfo}
   parent: MediatR
   definition: MediatR.IRequestHandler`2
+  href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
   name: IRequestHandler<DownloadWithQuery<TDownloadParams>, FileInfo>
   nameWithType: IRequestHandler<DownloadWithQuery<TDownloadParams>, FileInfo>
   fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.DownloadWithQuery<TDownloadParams>, System.IO.FileInfo>
@@ -269,356 +260,272 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
     name: DownloadWithQuery
-    nameWithType: DownloadWithQuery
-    fullName: Apizr.Mediation.Requesting.DownloadWithQuery
+    href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
     name: DownloadWithQuery
-    nameWithType: DownloadWithQuery
-    fullName: Apizr.Mediation.Requesting.DownloadWithQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
   commentId: T:Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
+  href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   name: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
   nameWithType: RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
   fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase<TApizrRequestOptions, TApizrRequestOptionsBuilder>
@@ -628,48 +535,71 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase`2
     name: RequestHandlerBase
-    nameWithType: RequestHandlerBase
-    fullName: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.Handling.Base.RequestHandlerBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApizrRequestOptions
-    nameWithType: TApizrRequestOptions
-    fullName: TApizrRequestOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrRequestOptionsBuilder
-    nameWithType: TApizrRequestOptionsBuilder
-    fullName: TApizrRequestOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.Handling.Base
   commentId: N:Apizr.Mediation.Requesting.Handling.Base
+  href: Apizr.html
   name: Apizr.Mediation.Requesting.Handling.Base
   nameWithType: Apizr.Mediation.Requesting.Handling.Base
   fullName: Apizr.Mediation.Requesting.Handling.Base
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling
+    name: Handling
+    href: Apizr.Mediation.Requesting.Handling.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling.Base
+    name: Base
+    href: Apizr.Mediation.Requesting.Handling.Base.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling
+    name: Handling
+    href: Apizr.Mediation.Requesting.Handling.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting.Handling.Base
+    name: Base
+    href: Apizr.Mediation.Requesting.Handling.Base.html
 - uid: MediatR.IRequestHandler`2
   commentId: T:MediatR.IRequestHandler`2
   isExternal: true
@@ -682,45 +612,25 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: MediatR.IRequestHandler`2
     name: IRequestHandler
-    nameWithType: IRequestHandler
-    fullName: MediatR.IRequestHandler
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+  - name: (
+  - name: Of
+  - name: " "
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResponse
-    nameWithType: TResponse
-    fullName: TResponse
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR
   commentId: N:MediatR
   isExternal: true
@@ -729,15 +639,18 @@ references:
   fullName: MediatR
 - uid: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler`1.#ctor*
   commentId: Overload:Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler`1.#ctor
+  href: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler-1.html#Apizr_Mediation_Requesting_Handling_DownloadWithQueryHandler_1__ctor_Apizr_Transferring_Managing_IApizrDownloadManager_Apizr_Transferring_Requesting_IDownloadApi__0___0__
   name: DownloadWithQueryHandler
   nameWithType: DownloadWithQueryHandler<TDownloadParams>.DownloadWithQueryHandler
   fullName: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler<TDownloadParams>.DownloadWithQueryHandler
-  nameWithType.vb: DownloadWithQueryHandler(Of TDownloadParams).DownloadWithQueryHandler
-  fullName.vb: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler(Of TDownloadParams).DownloadWithQueryHandler
+  nameWithType.vb: DownloadWithQueryHandler(Of TDownloadParams).New
+  fullName.vb: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler(Of TDownloadParams).New
+  name.vb: New
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{{TDownloadParams}},{TDownloadParams}}
   commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{``0},``0}
   parent: Apizr.Transferring.Managing
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   name: IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>
   nameWithType: IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<Apizr.Transferring.Requesting.IDownloadApi<TDownloadParams>, TDownloadParams>
@@ -747,65 +660,40 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Transferring.Requesting.IDownloadApi`1
     name: IDownloadApi
-    nameWithType: IDownloadApi
-    fullName: Apizr.Transferring.Requesting.IDownloadApi
+    href: Apizr.Transferring.Requesting.IDownloadApi-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Transferring.Requesting.IDownloadApi`1
     name: IDownloadApi
-    nameWithType: IDownloadApi
-    fullName: Apizr.Transferring.Requesting.IDownloadApi
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Requesting.IDownloadApi-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
   commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager`2
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   name: IApizrDownloadManager<TDownloadApi, TDownloadParams>
   nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>
@@ -815,50 +703,58 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing
   commentId: N:Apizr.Transferring.Managing
+  href: Apizr.html
   name: Apizr.Transferring.Managing
   nameWithType: Apizr.Transferring.Managing
   fullName: Apizr.Transferring.Managing
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Managing
+    name: Managing
+    href: Apizr.Transferring.Managing.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Managing
+    name: Managing
+    href: Apizr.Transferring.Managing.html
 - uid: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler`1.Handle*
   commentId: Overload:Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler`1.Handle
+  href: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler-1.html#Apizr_Mediation_Requesting_Handling_DownloadWithQueryHandler_1_Handle_Apizr_Mediation_Requesting_DownloadWithQuery__0__System_Threading_CancellationToken_
   name: Handle
   nameWithType: DownloadWithQueryHandler<TDownloadParams>.Handle
   fullName: Apizr.Mediation.Requesting.Handling.DownloadWithQueryHandler<TDownloadParams>.Handle
@@ -868,6 +764,7 @@ references:
   commentId: M:MediatR.IRequestHandler{Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.IO.FileInfo}.Handle(Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.Threading.CancellationToken)
   parent: MediatR.IRequestHandler{Apizr.Mediation.Requesting.DownloadWithQuery{{TDownloadParams}},System.IO.FileInfo}
   definition: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
+  href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
   name: Handle(DownloadWithQuery<TDownloadParams>, CancellationToken)
   nameWithType: IRequestHandler<DownloadWithQuery<TDownloadParams>, FileInfo>.Handle(DownloadWithQuery<TDownloadParams>, CancellationToken)
   fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.DownloadWithQuery<TDownloadParams>, System.IO.FileInfo>.Handle(Apizr.Mediation.Requesting.DownloadWithQuery<TDownloadParams>, System.Threading.CancellationToken)
@@ -875,75 +772,48 @@ references:
   fullName.vb: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.DownloadWithQuery(Of TDownloadParams), System.IO.FileInfo).Handle(Apizr.Mediation.Requesting.DownloadWithQuery(Of TDownloadParams), System.Threading.CancellationToken)
   name.vb: Handle(DownloadWithQuery(Of TDownloadParams), CancellationToken)
   spec.csharp:
-  - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
+  - uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.IO.FileInfo}.Handle(Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler<DownloadWithQuery<TDownloadParams>, FileInfo>.Handle
-    fullName: MediatR.IRequestHandler<Apizr.Mediation.Requesting.DownloadWithQuery<TDownloadParams>, System.IO.FileInfo>.Handle
     isExternal: true
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
     name: DownloadWithQuery
-    nameWithType: DownloadWithQuery
-    fullName: Apizr.Mediation.Requesting.DownloadWithQuery
+    href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
+  - uid: MediatR.IRequestHandler{Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.IO.FileInfo}.Handle(Apizr.Mediation.Requesting.DownloadWithQuery{`0},System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler(Of DownloadWithQuery(Of TDownloadParams), FileInfo).Handle
-    fullName: MediatR.IRequestHandler(Of Apizr.Mediation.Requesting.DownloadWithQuery(Of TDownloadParams), System.IO.FileInfo).Handle
     isExternal: true
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
     name: DownloadWithQuery
-    nameWithType: DownloadWithQuery
-    fullName: Apizr.Mediation.Requesting.DownloadWithQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.DownloadWithQuery{{TDownloadParams}}
   commentId: T:Apizr.Mediation.Requesting.DownloadWithQuery{`0}
   parent: Apizr.Mediation.Requesting
   definition: Apizr.Mediation.Requesting.DownloadWithQuery`1
+  href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
   name: DownloadWithQuery<TDownloadParams>
   nameWithType: DownloadWithQuery<TDownloadParams>
   fullName: Apizr.Mediation.Requesting.DownloadWithQuery<TDownloadParams>
@@ -953,35 +823,24 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
     name: DownloadWithQuery
-    nameWithType: DownloadWithQuery
-    fullName: Apizr.Mediation.Requesting.DownloadWithQuery
+    href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
     name: DownloadWithQuery
-    nameWithType: DownloadWithQuery
-    fullName: Apizr.Mediation.Requesting.DownloadWithQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.CancellationToken
   commentId: T:System.Threading.CancellationToken
   parent: System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
@@ -989,6 +848,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{System.IO.FileInfo}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<FileInfo>
   nameWithType: Task<FileInfo>
   fullName: System.Threading.Tasks.Task<System.IO.FileInfo>
@@ -998,40 +858,31 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
   commentId: M:MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   name: Handle(TRequest, CancellationToken)
   nameWithType: IRequestHandler<TRequest, TResponse>.Handle(TRequest, CancellationToken)
   fullName: MediatR.IRequestHandler<TRequest, TResponse>.Handle(TRequest, System.Threading.CancellationToken)
@@ -1040,51 +891,32 @@ references:
   spec.csharp:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler<TRequest, TResponse>.Handle
-    fullName: MediatR.IRequestHandler<TRequest, TResponse>.Handle
     isExternal: true
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: MediatR.IRequestHandler`2.Handle(`0,System.Threading.CancellationToken)
     name: Handle
-    nameWithType: IRequestHandler(Of TRequest, TResponse).Handle
-    fullName: MediatR.IRequestHandler(Of TRequest, TResponse).Handle
     isExternal: true
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TRequest
-    nameWithType: TRequest
-    fullName: TRequest
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Threading.CancellationToken
     name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
   commentId: T:Apizr.Mediation.Requesting.DownloadWithQuery`1
+  href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
   name: DownloadWithQuery<TDownloadParams>
   nameWithType: DownloadWithQuery<TDownloadParams>
   fullName: Apizr.Mediation.Requesting.DownloadWithQuery<TDownloadParams>
@@ -1094,45 +926,80 @@ references:
   spec.csharp:
   - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
     name: DownloadWithQuery
-    nameWithType: DownloadWithQuery
-    fullName: Apizr.Mediation.Requesting.DownloadWithQuery
+    href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Mediation.Requesting.DownloadWithQuery`1
     name: DownloadWithQuery
-    nameWithType: DownloadWithQuery
-    fullName: Apizr.Mediation.Requesting.DownloadWithQuery
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Mediation.Requesting.DownloadWithQuery-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Mediation.Requesting
   commentId: N:Apizr.Mediation.Requesting
+  href: Apizr.html
   name: Apizr.Mediation.Requesting
   nameWithType: Apizr.Mediation.Requesting
   fullName: Apizr.Mediation.Requesting
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Requesting
+    name: Requesting
+    href: Apizr.Mediation.Requesting.html
 - uid: System.Threading
   commentId: N:System.Threading
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -1142,36 +1009,55 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

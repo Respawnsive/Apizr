@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Apizr.Configuring;
+using Apizr.Configuring.Manager;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -48,18 +51,30 @@ namespace Apizr.Extending.Configuring.Shared
         Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; }
 
         /// <summary>
+        /// HttpMessageHandler factory
+        /// </summary>
+        Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; }
+
+        /// <summary>
         /// HttpClient builder
         /// </summary>
         Action<IHttpClientBuilder> HttpClientBuilder { get; }
 
         /// <summary>
-        /// Headers factory
+        /// The operation timeout factory (overall request tries)
         /// </summary>
-        Func<IServiceProvider, IList<string>> HeadersFactory { get; }
+        Func<IServiceProvider, TimeSpan> OperationTimeoutFactory { get; }
 
         /// <summary>
-        /// Timeout factory
+        /// The request timeout factory (each request try)
         /// </summary>
-        Func<IServiceProvider, TimeSpan> TimeoutFactory { get; }
+        Func<IServiceProvider, TimeSpan> RequestTimeoutFactory { get; }
+
+        /// <summary>
+        /// Headers factories
+        /// </summary>
+        IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
+
+        internal IDictionary<string, Func<IServiceProvider, object>> ResiliencePropertiesExtendedFactories { get; }
     }
 }

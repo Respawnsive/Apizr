@@ -26,6 +26,8 @@ namespace Apizr
 
         #region CacheHandler
 
+        #region Static
+
         private static Func<ICacheHandler> _cacheHandlerFactory;
 
         internal static void SetCacheHandlerFactory(this IApizrGlobalCommonOptionsBuilderBase builder,
@@ -36,6 +38,22 @@ namespace Apizr
 
         internal static Func<ICacheHandler> GetCacheHanderFactory(this IApizrCommonOptionsBase builder) =>
             _cacheHandlerFactory;
+
+        #endregion
+
+        #region Extended
+
+        private static Type _cacheHandlerType;
+
+        internal static void SetCacheHandlerType<TCacheHandler>(this IApizrExtendedCommonOptionsBuilderBase builder) where TCacheHandler : ICacheHandler
+        {
+            _cacheHandlerType = typeof(TCacheHandler);
+        }
+
+        internal static Type GetCacheHanderType(this IApizrCommonOptionsBase builder) =>
+            _cacheHandlerType;
+
+        #endregion
 
         #endregion
 

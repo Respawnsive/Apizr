@@ -8,9 +8,12 @@ using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Registry;
+using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -37,6 +40,8 @@ namespace Apizr.Extending.Configuring.Common
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
             PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
             PostRegistrationActions = new List<Action<Type, IServiceCollection>>();
+            HeadersExtendedFactories = new Dictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>();
+            _resiliencePropertiesExtendedFactories = new Dictionary<string, Func<IServiceProvider, object>>();
         }
 
         /// <inheritdoc />
@@ -119,29 +124,30 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public Action<IHttpClientBuilder> HttpClientBuilder { get; set; }
 
-        private Func<IServiceProvider, IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, IList<string>> HeadersFactory
+        public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
+
+        private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
+        /// <inheritdoc />
+        public Func<IServiceProvider, TimeSpan> OperationTimeoutFactory
         {
-            get => _headersFactory;
-            internal set => _headersFactory = value != null ? serviceProvider =>
-                {
-                    value.Invoke(serviceProvider).ToList().ForEach(header => Headers.Add(header));
-                    return Headers;
-                }
-                : null;
+            get => _operationTimeoutFactory;
+            set => _operationTimeoutFactory = value != null ? serviceProvider => (TimeSpan) (OperationTimeout = value.Invoke(serviceProvider)) : null;
         }
 
-        private Func<IServiceProvider, TimeSpan> _timeoutFactory;
+        private Func<IServiceProvider, TimeSpan> _requestTimeoutFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, TimeSpan> TimeoutFactory
+        public Func<IServiceProvider, TimeSpan> RequestTimeoutFactory
         {
-            get => _timeoutFactory;
-            set => _timeoutFactory = value != null ? serviceProvider => (TimeSpan) (Timeout = value.Invoke(serviceProvider)) : null;
+            get => _requestTimeoutFactory;
+            set => _requestTimeoutFactory = value != null ? serviceProvider => (TimeSpan)(RequestTimeout = value.Invoke(serviceProvider)) : null;
         }
 
         /// <inheritdoc />
         public IDictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersExtendedFactories { get; }
+
+        /// <inheritdoc />
+        public Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
 
         /// <inheritdoc />
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
@@ -157,5 +163,9 @@ namespace Apizr.Extending.Configuring.Common
 
         /// <inheritdoc />
         public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
+
+        private readonly IDictionary<string, Func<IServiceProvider, object>> _resiliencePropertiesExtendedFactories;
+        /// <inheritdoc />
+        IDictionary<string, Func<IServiceProvider, object>> IApizrExtendedSharedOptions.ResiliencePropertiesExtendedFactories => _resiliencePropertiesExtendedFactories;
     }
 }

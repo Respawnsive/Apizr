@@ -28,13 +28,11 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nVoid mapping should never be used and will just be ignored\n"
+  summary: Void mapping should never be used and will just be ignored
   example: []
   syntax:
     content: 'public class VoidMappingHandler : IMappingHandler'
-    content.vb: >-
-      Public Class VoidMappingHandler
-          Implements IMappingHandler
+    content.vb: Public Class VoidMappingHandler Implements IMappingHandler
   inheritance:
   - System.Object
   implements:
@@ -47,12 +45,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
 - uid: Apizr.Mapping.VoidMappingHandler.Map``1(System.Object)
   commentId: M:Apizr.Mapping.VoidMappingHandler.Map``1(System.Object)
   id: Map``1(System.Object)
@@ -60,9 +52,9 @@ items:
   langs:
   - csharp
   - vb
-  name: Map<TDestination>(Object)
-  nameWithType: VoidMappingHandler.Map<TDestination>(Object)
-  fullName: Apizr.Mapping.VoidMappingHandler.Map<TDestination>(System.Object)
+  name: Map<TDestination>(object)
+  nameWithType: VoidMappingHandler.Map<TDestination>(object)
+  fullName: Apizr.Mapping.VoidMappingHandler.Map<TDestination>(object)
   type: Method
   source:
     remote:
@@ -75,7 +67,10 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to a new destination object.\nThe source type is inferred from the source object.\n"
+  summary: >-
+    Execute a mapping from the source object to a new destination object.
+
+    The source type is inferred from the source object.
   example: []
   syntax:
     content: public TDestination Map<TDestination>(object source)
@@ -94,11 +89,7 @@ items:
   implements:
   - Apizr.Mapping.IMappingHandler.Map``1(System.Object)
   nameWithType.vb: VoidMappingHandler.Map(Of TDestination)(Object)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Mapping.VoidMappingHandler.Map(Of TDestination)(System.Object)
+  fullName.vb: Apizr.Mapping.VoidMappingHandler.Map(Of TDestination)(Object)
   name.vb: Map(Of TDestination)(Object)
 - uid: Apizr.Mapping.VoidMappingHandler.Map``2(``0)
   commentId: M:Apizr.Mapping.VoidMappingHandler.Map``2(``0)
@@ -122,7 +113,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to a new destination object.\n"
+  summary: Execute a mapping from the source object to a new destination object.
   example: []
   syntax:
     content: public TDestination Map<TSource, TDestination>(TSource source)
@@ -143,10 +134,6 @@ items:
   implements:
   - Apizr.Mapping.IMappingHandler.Map``2({TSource})
   nameWithType.vb: VoidMappingHandler.Map(Of TSource, TDestination)(TSource)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mapping.VoidMappingHandler.Map(Of TSource, TDestination)(TSource)
   name.vb: Map(Of TSource, TDestination)(TSource)
 - uid: Apizr.Mapping.VoidMappingHandler.Map``2(``0,``1)
@@ -171,7 +158,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to the existing destination object.\n"
+  summary: Execute a mapping from the source object to the existing destination object.
   example: []
   syntax:
     content: public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
@@ -189,16 +176,12 @@ items:
       description: Destination type
     return:
       type: '{TDestination}'
-      description: The mapped destination object, same instance as the <code data-dev-comment-type="paramref" class="paramref">destination</code> object
+      description: The mapped destination object, same instance as the <code class="paramref">destination</code> object
     content.vb: Public Function Map(Of TSource, TDestination)(source As TSource, destination As TDestination) As TDestination
   overload: Apizr.Mapping.VoidMappingHandler.Map*
   implements:
   - Apizr.Mapping.IMappingHandler.Map``2({TSource},{TDestination})
   nameWithType.vb: VoidMappingHandler.Map(Of TSource, TDestination)(TSource, TDestination)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Mapping.VoidMappingHandler.Map(Of TSource, TDestination)(TSource, TDestination)
   name.vb: Map(Of TSource, TDestination)(TSource, TDestination)
 - uid: Apizr.Mapping.VoidMappingHandler.Map(System.Object,System.Type,System.Type)
@@ -208,9 +191,9 @@ items:
   langs:
   - csharp
   - vb
-  name: Map(Object, Type, Type)
-  nameWithType: VoidMappingHandler.Map(Object, Type, Type)
-  fullName: Apizr.Mapping.VoidMappingHandler.Map(System.Object, System.Type, System.Type)
+  name: Map(object, Type, Type)
+  nameWithType: VoidMappingHandler.Map(object, Type, Type)
+  fullName: Apizr.Mapping.VoidMappingHandler.Map(object, System.Type, System.Type)
   type: Method
   source:
     remote:
@@ -223,7 +206,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to a new destination object with explicit <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> objects\n"
+  summary: Execute a mapping from the source object to a new destination object with explicit <xref href="System.Type" data-throw-if-not-resolved="false"></xref> objects
   example: []
   syntax:
     content: public object Map(object source, Type sourceType, Type destinationType)
@@ -244,10 +227,9 @@ items:
   overload: Apizr.Mapping.VoidMappingHandler.Map*
   implements:
   - Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
+  nameWithType.vb: VoidMappingHandler.Map(Object, Type, Type)
+  fullName.vb: Apizr.Mapping.VoidMappingHandler.Map(Object, System.Type, System.Type)
+  name.vb: Map(Object, Type, Type)
 - uid: Apizr.Mapping.VoidMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
   commentId: M:Apizr.Mapping.VoidMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
   id: Map(System.Object,System.Object,System.Type,System.Type)
@@ -255,9 +237,9 @@ items:
   langs:
   - csharp
   - vb
-  name: Map(Object, Object, Type, Type)
-  nameWithType: VoidMappingHandler.Map(Object, Object, Type, Type)
-  fullName: Apizr.Mapping.VoidMappingHandler.Map(System.Object, System.Object, System.Type, System.Type)
+  name: Map(object, object, Type, Type)
+  nameWithType: VoidMappingHandler.Map(object, object, Type, Type)
+  fullName: Apizr.Mapping.VoidMappingHandler.Map(object, object, System.Type, System.Type)
   type: Method
   source:
     remote:
@@ -270,7 +252,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
-  summary: "\nExecute a mapping from the source object to existing destination object with explicit <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> objects\n"
+  summary: Execute a mapping from the source object to existing destination object with explicit <xref href="System.Type" data-throw-if-not-resolved="false"></xref> objects
   example: []
   syntax:
     content: public object Map(object source, object destination, Type sourceType, Type destinationType)
@@ -289,31 +271,52 @@ items:
       description: Destination type to use
     return:
       type: System.Object
-      description: Mapped destination object, same instance as the <code data-dev-comment-type="paramref" class="paramref">destination</code> object
+      description: Mapped destination object, same instance as the <code class="paramref">destination</code> object
     content.vb: Public Function Map(source As Object, destination As Object, sourceType As Type, destinationType As Type) As Object
   overload: Apizr.Mapping.VoidMappingHandler.Map*
   implements:
   - Apizr.Mapping.IMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
+  nameWithType.vb: VoidMappingHandler.Map(Object, Object, Type, Type)
+  fullName.vb: Apizr.Mapping.VoidMappingHandler.Map(Object, Object, System.Type, System.Type)
+  name.vb: Map(Object, Object, Type, Type)
 references:
 - uid: Apizr.Mapping
   commentId: N:Apizr.Mapping
+  href: Apizr.html
   name: Apizr.Mapping
   nameWithType: Apizr.Mapping
   fullName: Apizr.Mapping
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mapping
+    name: Mapping
+    href: Apizr.Mapping.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mapping
+    name: Mapping
+    href: Apizr.Mapping.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Mapping.IMappingHandler
   commentId: T:Apizr.Mapping.IMappingHandler
   parent: Apizr.Mapping
+  href: Apizr.Mapping.IMappingHandler.html
   name: IMappingHandler
   nameWithType: IMappingHandler
   fullName: Apizr.Mapping.IMappingHandler
@@ -321,289 +324,231 @@ references:
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Mapping.VoidMappingHandler.Map*
   commentId: Overload:Apizr.Mapping.VoidMappingHandler.Map
+  href: Apizr.Mapping.VoidMappingHandler.html#Apizr_Mapping_VoidMappingHandler_Map__1_System_Object_
   name: Map
   nameWithType: VoidMappingHandler.Map
   fullName: Apizr.Mapping.VoidMappingHandler.Map
@@ -611,44 +556,41 @@ references:
   commentId: M:Apizr.Mapping.IMappingHandler.Map``1(System.Object)
   parent: Apizr.Mapping.IMappingHandler
   isExternal: true
-  name: Map<TDestination>(Object)
-  nameWithType: IMappingHandler.Map<TDestination>(Object)
-  fullName: Apizr.Mapping.IMappingHandler.Map<TDestination>(System.Object)
+  href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__1_System_Object_
+  name: Map<TDestination>(object)
+  nameWithType: IMappingHandler.Map<TDestination>(object)
+  fullName: Apizr.Mapping.IMappingHandler.Map<TDestination>(object)
   nameWithType.vb: IMappingHandler.Map(Of TDestination)(Object)
-  fullName.vb: Apizr.Mapping.IMappingHandler.Map(Of TDestination)(System.Object)
+  fullName.vb: Apizr.Mapping.IMappingHandler.Map(Of TDestination)(Object)
   name.vb: Map(Of TDestination)(Object)
   spec.csharp:
   - uid: Apizr.Mapping.IMappingHandler.Map``1(System.Object)
-    name: Map<TDestination>
-    nameWithType: IMappingHandler.Map<TDestination>
-    fullName: Apizr.Mapping.IMappingHandler.Map<TDestination>
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__1_System_Object_
+  - name: <
+  - name: TDestination
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mapping.IMappingHandler.Map``1(System.Object)
-    name: Map(Of TDestination)
-    nameWithType: IMappingHandler.Map(Of TDestination)
-    fullName: Apizr.Mapping.IMappingHandler.Map(Of TDestination)
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__1_System_Object_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TDestination
+  - name: )
+  - name: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TDestination}'
   commentId: '!:TDestination'
   definition: TDestination
@@ -663,6 +605,7 @@ references:
   commentId: M:Apizr.Mapping.IMappingHandler.Map``2(``0)
   parent: Apizr.Mapping.IMappingHandler
   definition: Apizr.Mapping.IMappingHandler.Map``2(``0)
+  href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0_
   name: Map<TSource, TDestination>(TSource)
   nameWithType: IMappingHandler.Map<TSource, TDestination>(TSource)
   fullName: Apizr.Mapping.IMappingHandler.Map<TSource, TDestination>(TSource)
@@ -671,32 +614,32 @@ references:
   name.vb: Map(Of TSource, TDestination)(TSource)
   spec.csharp:
   - uid: Apizr.Mapping.IMappingHandler.Map``2(``0)
-    name: Map<TSource, TDestination>
-    nameWithType: IMappingHandler.Map<TSource, TDestination>
-    fullName: Apizr.Mapping.IMappingHandler.Map<TSource, TDestination>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0_
+  - name: <
   - name: TSource
-    nameWithType: TSource
-    fullName: TSource
+  - name: ','
+  - name: " "
+  - name: TDestination
+  - name: '>'
+  - name: (
+  - name: TSource
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mapping.IMappingHandler.Map``2(``0)
-    name: Map(Of TSource, TDestination)
-    nameWithType: IMappingHandler.Map(Of TSource, TDestination)
-    fullName: Apizr.Mapping.IMappingHandler.Map(Of TSource, TDestination)
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TSource
-    nameWithType: TSource
-    fullName: TSource
+  - name: ','
+  - name: " "
+  - name: TDestination
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: TSource
+  - name: )
 - uid: '{TSource}'
   commentId: '!:TSource'
   definition: TSource
@@ -705,6 +648,7 @@ references:
   fullName: TSource
 - uid: Apizr.Mapping.IMappingHandler.Map``2(``0)
   commentId: M:Apizr.Mapping.IMappingHandler.Map``2(``0)
+  href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0_
   name: Map<TSource, TDestination>(TSource)
   nameWithType: IMappingHandler.Map<TSource, TDestination>(TSource)
   fullName: Apizr.Mapping.IMappingHandler.Map<TSource, TDestination>(TSource)
@@ -713,32 +657,32 @@ references:
   name.vb: Map(Of TSource, TDestination)(TSource)
   spec.csharp:
   - uid: Apizr.Mapping.IMappingHandler.Map``2(``0)
-    name: Map<TSource, TDestination>
-    nameWithType: IMappingHandler.Map<TSource, TDestination>
-    fullName: Apizr.Mapping.IMappingHandler.Map<TSource, TDestination>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0_
+  - name: <
   - name: TSource
-    nameWithType: TSource
-    fullName: TSource
+  - name: ','
+  - name: " "
+  - name: TDestination
+  - name: '>'
+  - name: (
+  - name: TSource
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mapping.IMappingHandler.Map``2(``0)
-    name: Map(Of TSource, TDestination)
-    nameWithType: IMappingHandler.Map(Of TSource, TDestination)
-    fullName: Apizr.Mapping.IMappingHandler.Map(Of TSource, TDestination)
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TSource
-    nameWithType: TSource
-    fullName: TSource
+  - name: ','
+  - name: " "
+  - name: TDestination
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: TSource
+  - name: )
 - uid: TSource
   name: TSource
   nameWithType: TSource
@@ -747,6 +691,7 @@ references:
   commentId: M:Apizr.Mapping.IMappingHandler.Map``2(``0,``1)
   parent: Apizr.Mapping.IMappingHandler
   definition: Apizr.Mapping.IMappingHandler.Map``2(``0,``1)
+  href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0___1_
   name: Map<TSource, TDestination>(TSource, TDestination)
   nameWithType: IMappingHandler.Map<TSource, TDestination>(TSource, TDestination)
   fullName: Apizr.Mapping.IMappingHandler.Map<TSource, TDestination>(TSource, TDestination)
@@ -755,46 +700,41 @@ references:
   name.vb: Map(Of TSource, TDestination)(TSource, TDestination)
   spec.csharp:
   - uid: Apizr.Mapping.IMappingHandler.Map``2(``0,``1)
-    name: Map<TSource, TDestination>
-    nameWithType: IMappingHandler.Map<TSource, TDestination>
-    fullName: Apizr.Mapping.IMappingHandler.Map<TSource, TDestination>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0___1_
+  - name: <
   - name: TSource
-    nameWithType: TSource
-    fullName: TSource
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDestination
-    nameWithType: TDestination
-    fullName: TDestination
+  - name: '>'
+  - name: (
+  - name: TSource
+  - name: ','
+  - name: " "
+  - name: TDestination
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mapping.IMappingHandler.Map``2(``0,``1)
-    name: Map(Of TSource, TDestination)
-    nameWithType: IMappingHandler.Map(Of TSource, TDestination)
-    fullName: Apizr.Mapping.IMappingHandler.Map(Of TSource, TDestination)
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0___1_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TSource
-    nameWithType: TSource
-    fullName: TSource
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDestination
-    nameWithType: TDestination
-    fullName: TDestination
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: (
+  - name: TSource
+  - name: ','
+  - name: " "
+  - name: TDestination
+  - name: )
 - uid: Apizr.Mapping.IMappingHandler.Map``2(``0,``1)
   commentId: M:Apizr.Mapping.IMappingHandler.Map``2(``0,``1)
+  href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0___1_
   name: Map<TSource, TDestination>(TSource, TDestination)
   nameWithType: IMappingHandler.Map<TSource, TDestination>(TSource, TDestination)
   fullName: Apizr.Mapping.IMappingHandler.Map<TSource, TDestination>(TSource, TDestination)
@@ -803,206 +743,165 @@ references:
   name.vb: Map(Of TSource, TDestination)(TSource, TDestination)
   spec.csharp:
   - uid: Apizr.Mapping.IMappingHandler.Map``2(``0,``1)
-    name: Map<TSource, TDestination>
-    nameWithType: IMappingHandler.Map<TSource, TDestination>
-    fullName: Apizr.Mapping.IMappingHandler.Map<TSource, TDestination>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0___1_
+  - name: <
   - name: TSource
-    nameWithType: TSource
-    fullName: TSource
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDestination
-    nameWithType: TDestination
-    fullName: TDestination
+  - name: '>'
+  - name: (
+  - name: TSource
+  - name: ','
+  - name: " "
+  - name: TDestination
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mapping.IMappingHandler.Map``2(``0,``1)
-    name: Map(Of TSource, TDestination)
-    nameWithType: IMappingHandler.Map(Of TSource, TDestination)
-    fullName: Apizr.Mapping.IMappingHandler.Map(Of TSource, TDestination)
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map__2___0___1_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TSource
-    nameWithType: TSource
-    fullName: TSource
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDestination
-    nameWithType: TDestination
-    fullName: TDestination
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
-  commentId: M:Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
-  parent: Apizr.Mapping.IMappingHandler
-  isExternal: true
-  name: Map(Object, Type, Type)
-  nameWithType: IMappingHandler.Map(Object, Type, Type)
-  fullName: Apizr.Mapping.IMappingHandler.Map(System.Object, System.Type, System.Type)
-  spec.csharp:
-  - uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
-    name: Map
-    nameWithType: IMappingHandler.Map
-    fullName: Apizr.Mapping.IMappingHandler.Map
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
+  - name: TSource
+  - name: ','
+  - name: " "
+  - name: TDestination
   - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
-    name: Map
-    nameWithType: IMappingHandler.Map
-    fullName: Apizr.Mapping.IMappingHandler.Map
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Type
   commentId: T:System.Type
   parent: System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
   name: Type
   nameWithType: Type
   fullName: System.Type
+- uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
+  commentId: M:Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
+  parent: Apizr.Mapping.IMappingHandler
+  isExternal: true
+  href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map_System_Object_System_Type_System_Type_
+  name: Map(object, Type, Type)
+  nameWithType: IMappingHandler.Map(object, Type, Type)
+  fullName: Apizr.Mapping.IMappingHandler.Map(object, System.Type, System.Type)
+  nameWithType.vb: IMappingHandler.Map(Object, Type, Type)
+  fullName.vb: Apizr.Mapping.IMappingHandler.Map(Object, System.Type, System.Type)
+  name.vb: Map(Object, Type, Type)
+  spec.csharp:
+  - uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map_System_Object_System_Type_System_Type_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: )
+  spec.vb:
+  - uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Type,System.Type)
+    name: Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map_System_Object_System_Type_System_Type_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: )
 - uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
   commentId: M:Apizr.Mapping.IMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
   parent: Apizr.Mapping.IMappingHandler
   isExternal: true
-  name: Map(Object, Object, Type, Type)
-  nameWithType: IMappingHandler.Map(Object, Object, Type, Type)
-  fullName: Apizr.Mapping.IMappingHandler.Map(System.Object, System.Object, System.Type, System.Type)
+  href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map_System_Object_System_Object_System_Type_System_Type_
+  name: Map(object, object, Type, Type)
+  nameWithType: IMappingHandler.Map(object, object, Type, Type)
+  fullName: Apizr.Mapping.IMappingHandler.Map(object, object, System.Type, System.Type)
+  nameWithType.vb: IMappingHandler.Map(Object, Object, Type, Type)
+  fullName.vb: Apizr.Mapping.IMappingHandler.Map(Object, Object, System.Type, System.Type)
+  name.vb: Map(Object, Object, Type, Type)
   spec.csharp:
   - uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
     name: Map
-    nameWithType: IMappingHandler.Map
-    fullName: Apizr.Mapping.IMappingHandler.Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map_System_Object_System_Object_System_Type_System_Type_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Mapping.IMappingHandler.Map(System.Object,System.Object,System.Type,System.Type)
     name: Map
-    nameWithType: IMappingHandler.Map
-    fullName: Apizr.Mapping.IMappingHandler.Map
+    href: Apizr.Mapping.IMappingHandler.html#Apizr_Mapping_IMappingHandler_Map_System_Object_System_Object_System_Type_System_Type_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
   - name: )
-    nameWithType: )
-    fullName: )

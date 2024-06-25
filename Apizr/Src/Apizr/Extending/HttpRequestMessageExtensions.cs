@@ -1,32 +1,121 @@
 ﻿using Apizr.Configuring.Manager;
-using Apizr.Helping;
-using Apizr.Policing;
-using Microsoft.Extensions.Logging;
-using Polly;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
+using Apizr.Logging;
+using Apizr.Resiliencing;
+using Microsoft.Extensions.Logging;
 
 namespace Apizr.Extending
 {
     internal static class HttpRequestMessageExtensions
     {
-        internal static CancellationTokenSource ProcessApizrOptions(this HttpRequestMessage request, CancellationToken cancellationToken, IApizrManagerOptionsBase apizrOptions, out CancellationToken optionsCancellationToken)
+        private static readonly Func<string, bool> ShouldRedactHeaderValue = (header) => false;
+
+        internal static CancellationTokenSource ProcessRequest(this HttpRequestMessage request, CancellationToken cancellationToken, IApizrManagerOptionsBase apizrOptions, out CancellationToken optionsCancellationToken)
         {
+            // Remove redact stars (*) if any
+            var headersToTrim = request.Headers.Where(header => header.Value.Any(value => value.StartsWith("*") && value.EndsWith("*"))).ToList();
+            foreach (var headerToTrim in headersToTrim)
+                request.Headers.TrySetHeader(headerToTrim.Key, headerToTrim.Value);
+
             CancellationTokenSource cts = null;
 
             var options = request.GetApizrRequestOptions();
             if (options != null)
             {
                 // Get a configured logger instance
-                var context = request.GetOrBuildApizrPolicyExecutionContext();
+                var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
                 if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
                 {
                     logger = apizrOptions.Logger;
                     logLevels = apizrOptions.LogLevels;
                 }
 
+                var headersSetCount = 0;
+
+                // Handling headers
+                if (options.Headers.Count > 0)
+                {
+                    // Cloned and adjusted from Refit
+                    // We could have content headers, so we need to make
+                    // sure we have an HttpContent object to add them to,
+                    // provided the HttpClient will allow it for the method
+                    if (request.Content == null && !Constants.BodylessMethods.Contains(request.Method))
+                        request.Content = new ByteArrayContent([]);
+
+                    foreach (var header in options.Headers)
+                    {
+                        if (string.IsNullOrWhiteSpace(header)) 
+                            continue;
+
+                        var headerSet = request.TrySetHeader(header, out var key, out _);
+                        if (!headerSet)
+                            logger.Log(logLevels.Low(), "{0}: Header {1} can't be set.", context.OperationKey, header);
+                        else
+                            headersSetCount++;
+                    }
+                }
+
+                // Handling header store
+                if (request.Headers.Any() && options.HeadersStore?.Count > 0)
+                {
+                    var matchingHeaders = options.HeadersStore.Where(storedHeader =>
+                        TryGetHeaderKeyValue(storedHeader, out var storedHeaderkey, out _) &&
+                        request.Headers.Any(requestHeader =>
+                            storedHeaderkey == requestHeader.Key && 
+                            requestHeader.Value.All(value => value is "{0}" or "*{0}*")))
+                        .ToList();
+
+                    foreach (var matchingHeader in matchingHeaders)
+                    {
+                        var headerSet = request.TrySetHeader(matchingHeader, out _, out _);
+                        if (!headerSet)
+                            logger.Log(logLevels.Low(), "{0}: Header {1} can't be set.", context.OperationKey, matchingHeader);
+                        else
+                            headersSetCount++;
+                    }
+                }
+
+                // Remove not key matching headers
+                var emptyHeaders = request.Headers.Where(requestHeader =>
+                        requestHeader.Value.Any(requestHeaderValue => requestHeaderValue is "{0}" or "*{0}*"))
+                    .Select(requestHeader => requestHeader.Key)
+                    .ToList();
+
+                foreach (var emptyHeader in emptyHeaders)
+                {
+                    logger.Log(logLevels.Medium(), "{0}: Header {1} has been removed because Apizr can't find any matching value.", context.OperationKey, emptyHeader);
+                    request.Headers.Remove(emptyHeader);
+                }
+
+                // Sort headers for readability
+                request.Headers
+                    .OrderBy(header => header.Key)
+                    .ToList()
+                    .ForEach(header => request.Headers
+                        .TrySetHeader(header.Key, header.Value));
+
+                // Log headers
+                if (headersSetCount > 0)
+                {
+                    logger.Log(logLevels.Low(),
+                        headersSetCount < options.Headers.Count
+                            ? "{0}: Some provided header values have been set."
+                            : "{0}: All provided header values have been set.", context.OperationKey);
+
+                    var shouldRedactHeaderValue = options.ShouldRedactHeaderValue ?? ShouldRedactHeaderValue;
+
+                    var headersLogValue = new ApizrHttpHeadersLogValue(ApizrHttpHeadersLogValue.Kind.Request,
+                        request.Headers, request.Content?.Headers, shouldRedactHeaderValue);
+
+                    logger.Log(logLevels.Low(), headersLogValue.ToString());
+                }
+
+                // Handling cancellation
                 if (!options.HandlersParameters.TryGetValue(Constants.ApizrOptionsProcessedKey,
                         out var optionsProcessedValue) || optionsProcessedValue is false)
                 {
@@ -38,53 +127,10 @@ namespace Apizr.Extending
 
                     // Merge cancellation tokens
                     cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, optionsCancellationToken);
-
-                    // Set a timeout if provided
-                    if (options.Timeout.HasValue)
-                    {
-                        if (options.Timeout.Value > TimeSpan.Zero)
-                        {
-                            cts.CancelAfter(options.Timeout.Value);
-                            logger.Log(logLevels.Low(), "{0}: Timeout has been set with your provided {1} value.", context.OperationKey, options.Timeout);
-                        }
-                        else
-                        {
-                            logger.Log(logLevels.Low(),
-                                "{0}: You provided a timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value will be applied.",
-                                context.OperationKey);
-                        }
-                    }
                 }
                 else
                 {
                     optionsCancellationToken = cancellationToken;
-                }
-
-                if (options.Headers?.Count > 0)
-                {
-                    // Cloned and adjusted from Refit
-                    // We could have content headers, so we need to make
-                    // sure we have an HttpContent object to add them to,
-                    // provided the HttpClient will allow it for the method
-                    if (request.Content == null && !Constants.BodylessMethods.Contains(request.Method))
-                        request.Content = new ByteArrayContent(Array.Empty<byte>());
-
-                    foreach (var header in options.Headers)
-                    {
-                        if (string.IsNullOrWhiteSpace(header)) continue;
-
-                        // NB: Silverlight doesn't have an overload for String.Split()
-                        // with a count parameter, but header values can contain
-                        // ':' so we have to re-join all but the first part to get the
-                        // value.
-                        var parts = header.Split(':');
-                        var headerKey = parts[0].Trim();
-                        var headerValue = parts.Length > 1 ?
-                            string.Join(":", parts.Skip(1)).Trim() : null;
-
-                        request.SetHeader(headerKey, headerValue);
-                        logger.Log(logLevels.Low(), "{0}: Header {1} has been set with your provided {2} value.", context.OperationKey, headerKey, headerValue);
-                    }
                 }
             }
             else
@@ -93,6 +139,92 @@ namespace Apizr.Extending
             }
 
             return cts;
+        }
+
+        internal static bool TrySetHeader(this HttpRequestMessage request, string header, out string key, out string value)
+        {
+            if (TryGetHeaderKeyValue(header, out key, out value))
+            {
+                var added = request.Headers.TrySetHeader(key, value);
+
+                if (request.Content != null) 
+                    added = request.Content.Headers.TrySetHeader(key, value, added);
+
+                return added;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Cloned from Refit repository
+        /// </summary>
+        internal static bool TrySetHeader(this HttpHeaders headers, string key, string value, bool removeOnly = false)
+        {
+            // Clear any existing version of this header that might be set, because
+            // we want to allow removal/redefinition of headers.
+            // We also don't want to double up content headers which may have been
+            // set for us automatically.
+
+            // NB: We have to enumerate the header names to check existence because
+            // Contains throws if it's the wrong header type for the collection.
+            if (headers.Any(x => x.Key == key))
+                headers.Remove(key);
+
+            // We don't even bother trying to add the header as a content header
+            // if we just added it to the other collection, neither if its value is null
+            if (value == null || removeOnly) 
+                return true;
+
+            // Remove redact stars (*) if any
+            var headerValue = value.StartsWith("*") && value.EndsWith("*") ? value.Trim('*') : value;
+
+            return headers.TryAddWithoutValidation(key, headerValue);
+        }
+
+        /// <summary>
+        /// Cloned from Refit repository
+        /// </summary>
+        internal static bool TrySetHeader(this HttpHeaders headers, string key, IEnumerable<string> values, bool removeOnly = false)
+        {
+            // Clear any existing version of this header that might be set, because
+            // we want to allow removal/redefinition of headers.
+            // We also don't want to double up content headers which may have been
+            // set for us automatically.
+
+            // NB: We have to enumerate the header names to check existence because
+            // Contains throws if it's the wrong header type for the collection.
+            if (headers.Any(x => x.Key == key))
+                headers.Remove(key);
+
+            // We don't even bother trying to add the header as a content header
+            // if we just added it to the other collection, neither if its value is null
+            if (values == null || removeOnly)
+                return true;
+
+            // Remove redact stars (*) if any
+            var headerValues = values.Select(headerValue =>
+                    headerValue.StartsWith("*") && headerValue.EndsWith("*") ? headerValue.Trim('*') : headerValue)
+                .ToList();
+
+            return headers.TryAddWithoutValidation(key, headerValues);
+        }
+
+        internal static bool TryGetHeaderKeyValue(string header, out string key, out string value)
+        {
+            if (string.IsNullOrWhiteSpace(header))
+            {
+                key = value = null;
+            }
+            else
+            {
+                var parts = header.Split(':');
+                key = parts[0].Trim();
+                value = parts.Length > 1 ?
+                    string.Join(":", parts.Skip(1)).Trim() : null; 
+            }
+
+            return !string.IsNullOrWhiteSpace(key);
         }
     }
 }

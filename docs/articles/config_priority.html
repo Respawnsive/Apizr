@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring Priority | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring Priority | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../resources/favicon.ico">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    
+      <link rel="shortcut icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
     
     <meta property="docfx:rel" content="../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../index.html">
                 <img id="logo" class="svg" src="../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,8 +77,8 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-priority">Configuring Priority</h2>
 
+<h2 id="configuring-priority">Configuring Priority</h2>
 <p>Apizr could use <a href="https://github.com/reactiveui/Fusillade">Fusillade</a> to offer some api priority management on calls.</p>
 <p>To be short, Fusillade is about:</p>
 <ul>
@@ -112,19 +112,20 @@
 <li>Register time by fluent configuration</li>
 <li>Request time by fluent configuration</li>
 </ul>
-<div class="tabGroup" id="tabgroup_c9tVA8-tLr">
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_c9tVA8-tLr_tabid-designing" role="tab" aria-controls="tabpanel_c9tVA8-tLr_tabid-designing" data-tab="tabid-designing" tabindex="0" aria-selected="true">Designing</a>
+<a href="#tabpanel_1_tabid-designing" role="tab" aria-controls="tabpanel_1_tabid-designing" data-tab="tabid-designing" tabindex="0" aria-selected="true">Designing</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c9tVA8-tLr_tabid-registering" role="tab" aria-controls="tabpanel_c9tVA8-tLr_tabid-registering" data-tab="tabid-registering" tabindex="-1">Registering</a>
+<a href="#tabpanel_1_tabid-registering" role="tab" aria-controls="tabpanel_1_tabid-registering" data-tab="tabid-registering" tabindex="-1">Registering</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_c9tVA8-tLr_tabid-requesting" role="tab" aria-controls="tabpanel_c9tVA8-tLr_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
+<a href="#tabpanel_1_tabid-requesting" role="tab" aria-controls="tabpanel_1_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
 </li>
 </ul>
-<section id="tabpanel_c9tVA8-tLr_tabid-designing" role="tabpanel" data-tab="tabid-designing">
+<section id="tabpanel_1_tabid-designing" role="tabpanel" data-tab="tabid-designing">
+
 <p>The first thing to do while designing your api interfaces using Apizr to send a request, is to add an <code>IApizrRequestOptions</code> param decorated with the provided <code>RequestOptions</code> attribute to your methods like:</p>
 <pre><code class="lang-csharp">[WebApi(&quot;https://reqres.in/api&quot;)]
 public interface IReqResService
@@ -135,7 +136,8 @@ public interface IReqResService
     [Get(&quot;/users/{userId}&quot;)]
     Task&lt;UserDetails&gt; GetUserAsync(int userId, [RequestOptions] IApizrRequestOptions options);
 }
-</code></pre><p>This way you&#39;ll make sure to pass your priority to the priority handler, defined thanks to request options builder at request time.</p>
+</code></pre>
+<p>This way you'll make sure to pass your priority to the priority handler, defined thanks to request options builder at request time.</p>
 <p>Another way to deal with priority at design time is to use the <code>PriorityAttribute</code>:</p>
 <pre><code class="lang-csharp">[assembly:Priority(Priority.UserInitiated)]
 namespace Your.Namespace
@@ -150,7 +152,8 @@ namespace Your.Namespace
         Task&lt;UserDetails&gt; GetUserAsync(int userId, [RequestOptions] IApizrRequestOptions options);
     }
 }
-</code></pre><p>Here I&#39;m saying:</p>
+</code></pre>
+<p>Here I'm saying:</p>
 <ul>
 <li>Send all requests of all apis with a default <code>UserInitiated</code> priority (the assembly one)</li>
 <li>Excepted for all the requests of the <code>IReqResService</code> with a <code>Background</code> priority instead (the interface one)</li>
@@ -158,9 +161,10 @@ namespace Your.Namespace
 </ul>
 <p>Of course, you could (should) mix it with the <code>RequestOptions</code> method parameter implementation, so you could change your mind at request time with the request options builder.</p>
 </section>
-<section id="tabpanel_c9tVA8-tLr_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
+
 <p>Designing your apis using PriorityAttribute or not, you still have to activate priority management at register time.
-By activating it, you&#39;re free to provide a priority or not.</p>
+By activating it, you're free to provide a priority or not.</p>
 <p>Here is how to activate it, thanks to the <code>WithPriority</code> extension method:</p>
 <pre><code class="lang-csharp">// activation configuration only
 options =&gt; options.WithPriority()
@@ -170,7 +174,8 @@ options =&gt; options.WithPriority(Priority.Background)
 
 // activation with default custom priority configuration
 options =&gt; options.WithPriority(70)
-</code></pre><p>All priority fluent options are available with and without using registry. 
+</code></pre>
+<p>All priority fluent options are available with and without using registry.
 It means that you can share priority configuration, setting it at registry level and/or set some specific one at api level, something like:</p>
 <pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
         .AddGroup(group =&gt; group
@@ -183,14 +188,18 @@ It means that you can share priority configuration, setting it at registry level
             .WithBaseAddress(&quot;https://reqres.in/api/users&quot;)
             .WithPriority(Priority.Speculative)),
     options =&gt; options.WithPriority());
-</code></pre><p>In this quite complexe example, we can see we defined some default priorities to apply at deferent levels.</p>
+</code></pre>
+<p>In this quite complexe example, we can see we defined some default priorities to apply at deferent levels.</p>
 </section>
-<section id="tabpanel_c9tVA8-tLr_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
+
 <p>Just call your api with your priority thanks to the request options builder (extension method):</p>
 <pre><code class="lang-csharp">var result = await _reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(opt), 
     options =&gt; options.WithPriority(Priority.Background));
-</code></pre></section>
+</code></pre>
+</section>
 </div>
+
 <p>Note that you can mix design, register and request time priority configurations.
 In case of mixed configurations, the internal duplicate strategy will be to take the closest one to the request.</p>
 <p>Priority configuration duplicate strategy order:</p>
@@ -202,27 +211,28 @@ In case of mixed configurations, the internal duplicate strategy will be to take
 <li>otherwise the fluent common resgistration one (registry common options)</li>
 <li>otherwise the global attribute decoration one (assembly)</li>
 </ul>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_priority.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_priority.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -230,14 +240,14 @@ In case of mixed configurations, the internal duplicate strategy will be to take
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

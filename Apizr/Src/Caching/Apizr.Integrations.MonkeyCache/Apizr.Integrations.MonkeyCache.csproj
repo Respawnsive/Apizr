@@ -1,26 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0;net8.0</TargetFrameworks>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <RootNamespace>Apizr</RootNamespace>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>Apizr.Integrations.MonkeyCache.xml</DocumentationFile>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="MonkeyCache" Version="1.6.3" />
+	  <PackageReference Include="MonkeyCache">
+		  <Version Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1'">1.6.3</Version>
+		  <Version Condition="'$(TargetFramework)' != 'netstandard2.0' and '$(TargetFramework)' != 'netstandard2.1'">2.0.1</Version>
+	  </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Apizr\Apizr.csproj" />
   </ItemGroup>
-
 </Project>

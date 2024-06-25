@@ -7,9 +7,13 @@ using Apizr.Authenticating;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Extending.Configuring.Common;
 using Apizr.Logging;
+using Apizr.Resiliencing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Polly;
 
 namespace Apizr.Extending.Configuring.Shared
 {
@@ -76,18 +80,41 @@ namespace Apizr.Extending.Configuring.Shared
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
 
         /// <summary>
-        /// Add a custom delegating handler
+        /// Add a custom delegating handler inheriting from <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler<THandler>(Func<IServiceProvider, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
+        TApizrExtendedSharedOptionsBuilder WithDelegatingHandler<THandler>(Func<IServiceProvider, THandler> delegatingHandlerFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler;
 
         /// <summary>
-        /// Add a custom delegating handler
+        /// Add a custom delegating handler inheriting from <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder AddDelegatingHandler<THandler>(Func<IServiceProvider, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler;
+        TApizrExtendedSharedOptionsBuilder WithDelegatingHandler<THandler>(
+            Func<IServiceProvider, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler;
+
+        /// <summary>
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call)
+        /// </summary>
+        /// <param name="httpMessageHandlerFactory">A http message handler factory</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithHttpMessageHandler<THandler>(
+            Func<IServiceProvider, THandler> httpMessageHandlerFactory)
+            where THandler : HttpMessageHandler;
+
+        /// <summary>
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call)
+        /// </summary>
+        /// <param name="httpMessageHandlerFactory">A http message handler factory</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithHttpMessageHandler<THandler>(
+            Func<IServiceProvider, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory)
+            where THandler : HttpMessageHandler;
 
         /// <summary>
         /// Provide your own <see cref="AuthenticationHandlerBase"/> implementation
@@ -128,14 +155,49 @@ namespace Apizr.Extending.Configuring.Shared
         /// Add some headers to the request
         /// </summary>
         /// <param name="headersFactory">Headers to add to the request</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory);
+        TApizrExtendedSharedOptionsBuilder WithHeaders(Func<IServiceProvider, IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
 
         /// <summary>
-        /// Set a timeout to the request
+        /// Add some headers to the request loaded from service properties
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
+        /// <param name="headerProperties">The header properties to get from</param>
+        /// <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+        /// <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithHeaders<TSettingsService>(Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
+
+        /// <summary>
+        /// Set a timeout to the operation (overall request tries)
+        /// </summary>
+        /// <param name="timeoutFactory">The operation timeout factory</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithOperationTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory);
+
+        /// <summary>
+        /// Set a timeout to the request (each request try)
         /// </summary>
         /// <param name="timeoutFactory">The request timeout factory</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory);
+        TApizrExtendedSharedOptionsBuilder WithRequestTimeout(Func<IServiceProvider, TimeSpan> timeoutFactory);
+
+        /// <summary>
+        /// Set some resilience properties to the resilience context
+        /// </summary>
+        /// <param name="key">The resilience property's key</param>
+        /// <param name="valueFactory">The resilience property's value factory</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<IServiceProvider, TValue> valueFactory);
     }
 }

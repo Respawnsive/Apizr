@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Refit;
@@ -10,42 +11,58 @@ namespace Apizr
 {
     internal static class SerializationExtensions
     {
-        internal static byte[] ToByteArray(this object obj)
+        internal static async Task<byte[]> ToSerializedByteArrayAsync(this object obj, IHttpContentSerializer contentSerializer)
         {
             if (obj == null)
-            {
                 return null;
-            }
-            var binaryFormatter = new BinaryFormatter();
-            using (var memoryStream = new MemoryStream())
+
+            try
             {
-                binaryFormatter.Serialize(memoryStream, obj);
+                var httpContent = contentSerializer.ToHttpContent(obj);
+                return await httpContent.ReadAsByteArrayAsync();
+            }
+            catch (System.Exception)
+            {
+                // only for retro-compatibility
+                using var memoryStream = new MemoryStream();
+                await JsonSerializer.SerializeAsync(memoryStream, obj);
                 return memoryStream.ToArray();
             }
         }
 
-        internal static T FromByteArray<T>(this byte[] byteArray)
+        internal static async Task<T> FromSerializedByteArrayAsync<T>(this byte[] byteArray, IHttpContentSerializer contentSerializer, CancellationToken cancellationToken = default)
         {
             if (byteArray == null)
-            {
                 return default;
-            }
-            var binaryFormatter = new BinaryFormatter();
-            using (var memoryStream = new MemoryStream(byteArray))
+
+            try
             {
-                return (T)binaryFormatter.Deserialize(memoryStream);
+                var content = new ByteArrayContent(byteArray);
+                return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken);
+            }
+            catch (System.Exception)
+            {
+                // only for retro-compatibility
+                using var memoryStream = new MemoryStream(byteArray);
+                return await JsonSerializer.DeserializeAsync<T>(memoryStream, cancellationToken: cancellationToken);
             }
         }
 
-        internal static async Task<string> ToJsonStringAsync(this object obj, IHttpContentSerializer contentSerializer)
+        internal static async Task<string> ToSerializedStringAsync(this object obj, IHttpContentSerializer contentSerializer)
         {
+            if (obj == null)
+                return null;
+
             var httpContent = contentSerializer.ToHttpContent(obj);
             return await httpContent.ReadAsStringAsync();
         }
 
-        internal static async Task<T> FromJsonStringAsync<T>(this string str, IHttpContentSerializer contentSerializer, CancellationToken cancellationToken = default)
+        internal static async Task<T> FromSerializedStringAsync<T>(this string str, IHttpContentSerializer contentSerializer, CancellationToken cancellationToken = default)
         {
-            var content = new StringContent(str, Encoding.UTF8, "application/json");
+            if (string.IsNullOrEmpty(str))
+                return default;
+
+            var content = new StringContent(str);
             return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken);
         }
     }

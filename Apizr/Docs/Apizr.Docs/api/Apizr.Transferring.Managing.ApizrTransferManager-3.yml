@@ -6,8 +6,8 @@ items:
   parent: Apizr.Transferring.Managing
   children:
   - Apizr.Transferring.Managing.ApizrTransferManager`3.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0,`2})
-  - Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -35,9 +35,7 @@ items:
     - id: TTransferApi
     - id: TDownloadParams
     - id: TUploadApiResultData
-    content.vb: >-
-      Public Class ApizrTransferManager(Of TTransferApi As ITransferApi(Of TDownloadParams, TUploadApiResultData), TDownloadParams, TUploadApiResultData)
-          Implements IApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData), IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi, TUploadApiResultData), IApizrTransferManagerBase(Of TTransferApi), IApizrManager
+    content.vb: Public Class ApizrTransferManager(Of TTransferApi As ITransferApi(Of TDownloadParams, TUploadApiResultData), TDownloadParams, TUploadApiResultData) Implements IApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData), IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi, TUploadApiResultData), IApizrTransferManagerBase(Of TTransferApi), IApizrManager
   inheritance:
   - System.Object
   derivedClasses:
@@ -57,12 +55,6 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData)
-  modifiers.csharp:
-  - public
-  - class
-  modifiers.vb:
-  - Public
-  - Class
   fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData)
   name.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData)
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1},Apizr.Transferring.Managing.IApizrUploadManager{`0,`2})
@@ -96,13 +88,9 @@ items:
       type: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}
     content.vb: Public Sub New(downloadManager As IApizrDownloadManager(Of TTransferApi, TDownloadParams), uploadManager As IApizrUploadManager(Of TTransferApi, TUploadApiResultData))
   overload: Apizr.Transferring.Managing.ApizrTransferManager`3.#ctor*
-  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).ApizrTransferManager(IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi, TUploadApiResultData))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).ApizrTransferManager(Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams), Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi, TUploadApiResultData))
-  name.vb: ApizrTransferManager(IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi, TUploadApiResultData))
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).New(IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi, TUploadApiResultData))
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).New(Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams), Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi, TUploadApiResultData))
+  name.vb: New(IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi, TUploadApiResultData))
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   id: DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -125,7 +113,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nDownload a file\n"
+  summary: Download a file
   example: []
   syntax:
     content: public Task<FileInfo> DownloadAsync(FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -144,10 +132,6 @@ items:
   implements:
   - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).DownloadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -172,7 +156,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nDownload a file with custom query parameters\n"
+  summary: Download a file with custom query parameters
   example: []
   syntax:
     content: public Task<FileInfo> DownloadAsync(FileInfo fileInfo, TDownloadParams downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -194,10 +178,6 @@ items:
   implements:
   - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -222,7 +202,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nUpload a file from its bytes data\n"
+  summary: Upload a file from its bytes data
   example: []
   syntax:
     content: public Task<TUploadApiResultData> UploadAsync(ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -241,10 +221,6 @@ items:
   implements:
   - Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).UploadAsync(Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -269,7 +245,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nUpload a file from its stream data\n"
+  summary: Upload a file from its stream data
   example: []
   syntax:
     content: public Task<TUploadApiResultData> UploadAsync(StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -288,10 +264,6 @@ items:
   implements:
   - Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).UploadAsync(Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
@@ -316,7 +288,7 @@ items:
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
-  summary: "\nUpload a file from its file info data\n"
+  summary: Upload a file from its file info data
   example: []
   syntax:
     content: public Task<TUploadApiResultData> UploadAsync(FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null)
@@ -335,29 +307,55 @@ items:
   implements:
   - Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
   fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).UploadAsync(Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
 references:
 - uid: Apizr.Transferring.Managing
   commentId: N:Apizr.Transferring.Managing
+  href: Apizr.html
   name: Apizr.Transferring.Managing
   nameWithType: Apizr.Transferring.Managing
   fullName: Apizr.Transferring.Managing
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Managing
+    name: Managing
+    href: Apizr.Transferring.Managing.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Transferring
+    name: Transferring
+    href: Apizr.Transferring.html
+  - name: .
+  - uid: Apizr.Transferring.Managing
+    name: Managing
+    href: Apizr.Transferring.Managing.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Transferring.Managing.IApizrTransferManager{{TTransferApi},{TDownloadParams},{TUploadApiResultData}}
   commentId: T:Apizr.Transferring.Managing.IApizrTransferManager{``0,``1,``2}
   parent: Apizr.Transferring.Managing
   definition: Apizr.Transferring.Managing.IApizrTransferManager`3
+  href: Apizr.Transferring.Managing.IApizrTransferManager-3.html
   name: IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>
   nameWithType: IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>
   fullName: Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>
@@ -367,59 +365,36 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrTransferManager`3
     name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+    href: Apizr.Transferring.Managing.IApizrTransferManager-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrTransferManager`3
     name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrTransferManager-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}
   commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}
   parent: Apizr.Transferring.Managing
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   name: IApizrDownloadManager<TTransferApi, TDownloadParams>
   nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>
@@ -429,47 +404,30 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}
   commentId: T:Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}
   parent: Apizr.Transferring.Managing
   definition: Apizr.Transferring.Managing.IApizrUploadManager`2
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html
   name: IApizrUploadManager<TTransferApi, TUploadApiResultData>
   nameWithType: IApizrUploadManager<TTransferApi, TUploadApiResultData>
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi, TUploadApiResultData>
@@ -479,47 +437,30 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
     name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
     name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase{{TTransferApi}}
   commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase{`0}
   parent: Apizr.Transferring.Managing
   definition: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  href: Apizr.Transferring.Managing.IApizrTransferManagerBase-1.html
   name: IApizrTransferManagerBase<TTransferApi>
   nameWithType: IApizrTransferManagerBase<TTransferApi>
   fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase<TTransferApi>
@@ -529,34 +470,23 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
     name: IApizrTransferManagerBase
-    nameWithType: IApizrTransferManagerBase
-    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
+    href: Apizr.Transferring.Managing.IApizrTransferManagerBase-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
     name: IApizrTransferManagerBase
-    nameWithType: IApizrTransferManagerBase
-    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrTransferManagerBase-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.IApizrManager
   commentId: T:Apizr.IApizrManager
   parent: Apizr
+  href: Apizr.IApizrManager.html
   name: IApizrManager
   nameWithType: IApizrManager
   fullName: Apizr.IApizrManager
@@ -564,289 +494,231 @@ references:
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Transferring.Managing.IApizrTransferManager`3
   commentId: T:Apizr.Transferring.Managing.IApizrTransferManager`3
+  href: Apizr.Transferring.Managing.IApizrTransferManager-3.html
   name: IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>
   nameWithType: IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>
   fullName: Apizr.Transferring.Managing.IApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>
@@ -856,57 +728,34 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrTransferManager`3
     name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
+    href: Apizr.Transferring.Managing.IApizrTransferManager-3.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrTransferManager`3
     name: IApizrTransferManager
-    nameWithType: IApizrTransferManager
-    fullName: Apizr.Transferring.Managing.IApizrTransferManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrTransferManager-3.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TTransferApi
-    nameWithType: TTransferApi
-    fullName: TTransferApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
   commentId: T:Apizr.Transferring.Managing.IApizrDownloadManager`2
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   name: IApizrDownloadManager<TDownloadApi, TDownloadParams>
   nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>
@@ -916,45 +765,28 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2
     name: IApizrDownloadManager
-    nameWithType: IApizrDownloadManager
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TDownloadApi
-    nameWithType: TDownloadApi
-    fullName: TDownloadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
   commentId: T:Apizr.Transferring.Managing.IApizrUploadManager`2
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html
   name: IApizrUploadManager<TUploadApi, TUploadApiResultData>
   nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>
@@ -964,45 +796,28 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
     name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TUploadApi
-    nameWithType: TUploadApi
-    fullName: TUploadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2
     name: IApizrUploadManager
-    nameWithType: IApizrUploadManager
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TUploadApi
-    nameWithType: TUploadApi
-    fullName: TUploadApi
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
   commentId: T:Apizr.Transferring.Managing.IApizrTransferManagerBase`1
+  href: Apizr.Transferring.Managing.IApizrTransferManagerBase-1.html
   name: IApizrTransferManagerBase<TTransferApiBase>
   nameWithType: IApizrTransferManagerBase<TTransferApiBase>
   fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase<TTransferApiBase>
@@ -1012,45 +827,37 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
     name: IApizrTransferManagerBase
-    nameWithType: IApizrTransferManagerBase
-    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
+    href: Apizr.Transferring.Managing.IApizrTransferManagerBase-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TTransferApiBase
-    nameWithType: TTransferApiBase
-    fullName: TTransferApiBase
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrTransferManagerBase`1
     name: IApizrTransferManagerBase
-    nameWithType: IApizrTransferManagerBase
-    fullName: Apizr.Transferring.Managing.IApizrTransferManagerBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Transferring.Managing.IApizrTransferManagerBase-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TTransferApiBase
-    nameWithType: TTransferApiBase
-    fullName: TTransferApiBase
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr
   commentId: N:Apizr
+  href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.#ctor*
   commentId: Overload:Apizr.Transferring.Managing.ApizrTransferManager`3.#ctor
+  href: Apizr.Transferring.Managing.ApizrTransferManager-3.html#Apizr_Transferring_Managing_ApizrTransferManager_3__ctor_Apizr_Transferring_Managing_IApizrDownloadManager__0__1__Apizr_Transferring_Managing_IApizrUploadManager__0__2__
   name: ApizrTransferManager
   nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>.ApizrTransferManager
   fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>.ApizrTransferManager
-  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).ApizrTransferManager
-  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).ApizrTransferManager
+  nameWithType.vb: ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).New
+  fullName.vb: Apizr.Transferring.Managing.ApizrTransferManager(Of TTransferApi, TDownloadParams, TUploadApiResultData).New
+  name.vb: New
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync*
   commentId: Overload:Apizr.Transferring.Managing.ApizrTransferManager`3.DownloadAsync
+  href: Apizr.Transferring.Managing.ApizrTransferManager-3.html#Apizr_Transferring_Managing_ApizrTransferManager_3_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DownloadAsync
   nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>.DownloadAsync
   fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>.DownloadAsync
@@ -1060,6 +867,7 @@ references:
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1067,77 +875,54 @@ references:
   fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.IO.FileInfo
   commentId: T:System.IO.FileInfo
   parent: System.IO
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   name: FileInfo
   nameWithType: FileInfo
   fullName: System.IO.FileInfo
@@ -1145,6 +930,7 @@ references:
   commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrRequestOptionsBuilder>
   nameWithType: Action<IApizrRequestOptionsBuilder>
   fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
@@ -1154,39 +940,30 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task{System.IO.FileInfo}
   commentId: T:System.Threading.Tasks.Task{System.IO.FileInfo}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<FileInfo>
   nameWithType: Task<FileInfo>
   fullName: System.Threading.Tasks.Task<System.IO.FileInfo>
@@ -1196,40 +973,31 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync(FileInfo, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1239,80 +1007,78 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.IO
   commentId: N:System.IO
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -1322,36 +1088,25 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -1361,43 +1116,63 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}
   definition: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1405,85 +1180,55 @@ references:
   fullName.vb: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: DownloadAsync(FileInfo, TDownloadParams, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TTransferApi, TDownloadParams>.DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1}.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TTransferApi, TDownloadParams).DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TDownloadParams}'
   commentId: '!:TDownloadParams'
   definition: TDownloadParams
@@ -1493,6 +1238,7 @@ references:
 - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync(FileInfo, TDownloadParams, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync(System.IO.FileInfo, TDownloadParams, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1502,89 +1248,60 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager<TDownloadApi, TDownloadParams>.DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrDownloadManager`2.DownloadAsync(System.IO.FileInfo,`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: DownloadAsync
-    nameWithType: IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync
-    fullName: Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi, TDownloadParams).DownloadAsync
+    href: Apizr.Transferring.Managing.IApizrDownloadManager-2.html#Apizr_Transferring_Managing_IApizrDownloadManager_2_DownloadAsync_System_IO_FileInfo__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.IO.FileInfo
     name: FileInfo
-    nameWithType: FileInfo
-    fullName: System.IO.FileInfo
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  - name: ','
+  - name: " "
   - name: TDownloadParams
-    nameWithType: TDownloadParams
-    fullName: TDownloadParams
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: TDownloadParams
   name: TDownloadParams
   nameWithType: TDownloadParams
   fullName: TDownloadParams
 - uid: Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync*
   commentId: Overload:Apizr.Transferring.Managing.ApizrTransferManager`3.UploadAsync
+  href: Apizr.Transferring.Managing.ApizrTransferManager-3.html#Apizr_Transferring_Managing_ApizrTransferManager_3_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: UploadAsync
   nameWithType: ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>.UploadAsync
   fullName: Apizr.Transferring.Managing.ApizrTransferManager<TTransferApi, TDownloadParams, TUploadApiResultData>.UploadAsync
@@ -1594,6 +1311,7 @@ references:
   commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}
   definition: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync(Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1601,73 +1319,47 @@ references:
   fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync(Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.ByteArrayPart
     name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.ByteArrayPart
     name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Refit.ByteArrayPart
   commentId: T:Refit.ByteArrayPart
   parent: Refit
@@ -1679,6 +1371,7 @@ references:
   commentId: T:System.Threading.Tasks.Task{``1}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TUploadApiResultData>
   nameWithType: Task<TUploadApiResultData>
   fullName: System.Threading.Tasks.Task<TUploadApiResultData>
@@ -1688,36 +1381,25 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TUploadApiResultData
-    nameWithType: TUploadApiResultData
-    fullName: TUploadApiResultData
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(ByteArrayPart, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(Refit.ByteArrayPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1727,71 +1409,45 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.ByteArrayPart
     name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_ByteArrayPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.ByteArrayPart
     name: ByteArrayPart
-    nameWithType: ByteArrayPart
-    fullName: Refit.ByteArrayPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Refit
   commentId: N:Refit
   isExternal: true
@@ -1802,6 +1458,7 @@ references:
   commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}
   definition: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync(Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1809,73 +1466,47 @@ references:
   fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync(Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(StreamPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.StreamPart
     name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.StreamPart
     name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Refit.StreamPart
   commentId: T:Refit.StreamPart
   parent: Refit
@@ -1886,6 +1517,7 @@ references:
 - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(StreamPart, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(Refit.StreamPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1895,75 +1527,50 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.StreamPart
     name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_StreamPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.StreamPart
     name: StreamPart
-    nameWithType: StreamPart
-    fullName: Refit.StreamPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   parent: Apizr.Transferring.Managing.IApizrUploadManager{{TTransferApi},{TUploadApiResultData}}
   definition: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync(Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -1971,73 +1578,47 @@ references:
   fullName.vb: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync(Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
   name.vb: UploadAsync(FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TTransferApi, TUploadApiResultData>.UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.FileInfoPart
     name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
+  - uid: Apizr.Transferring.Managing.IApizrUploadManager{`0,`2}.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TTransferApi, TUploadApiResultData).UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.FileInfoPart
     name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Refit.FileInfoPart
   commentId: T:Refit.FileInfoPart
   parent: Refit
@@ -2048,6 +1629,7 @@ references:
 - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   commentId: M:Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   isExternal: true
+  href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   name: UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
   nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(FileInfoPart, Action<IApizrRequestOptionsBuilder>)
   fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync(Refit.FileInfoPart, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>)
@@ -2057,68 +1639,42 @@ references:
   spec.csharp:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager<TUploadApi, TUploadApiResultData>.UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.FileInfoPart
     name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Transferring.Managing.IApizrUploadManager`2.UploadAsync(Refit.FileInfoPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
     name: UploadAsync
-    nameWithType: IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
-    fullName: Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi, TUploadApiResultData).UploadAsync
+    href: Apizr.Transferring.Managing.IApizrUploadManager-2.html#Apizr_Transferring_Managing_IApizrUploadManager_2_UploadAsync_Refit_FileInfoPart_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Refit.FileInfoPart
     name: FileInfoPart
-    nameWithType: FileInfoPart
-    fullName: Refit.FileInfoPart
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
     name: IApizrRequestOptionsBuilder
-    nameWithType: IApizrRequestOptionsBuilder
-    fullName: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )

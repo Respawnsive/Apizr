@@ -46,11 +46,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ServiceCollectionExtensions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 36
+    startLine: 40
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nApizr service collection extensions\n"
+  summary: Apizr service collection extensions
   example: []
   syntax:
     content: public static class ServiceCollectionExtensions
@@ -65,13 +65,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  modifiers.csharp:
-  - public
-  - static
-  - class
-  modifiers.vb:
-  - Public
-  - Module
 - uid: Apizr.ServiceCollectionExtensions.AddApizr(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder},System.Action{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder})
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizr(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder},System.Action{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder})
   id: AddApizr(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder},System.Action{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder})
@@ -91,11 +84,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizr
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 47
+    startLine: 51
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nCreate a registry with all managers built with both common and proper options\n"
+  summary: Create a registry with all managers built with both common and proper options
   example: []
   syntax:
     content: public static IServiceCollection AddApizr(this IServiceCollection services, Action<IApizrExtendedRegistryBuilder> registryBuilder, Action<IApizrExtendedCommonOptionsBuilder> optionsBuilder = null)
@@ -112,18 +105,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizr(services As IServiceCollection, registryBuilder As Action(Of IApizrExtendedRegistryBuilder), optionsBuilder As Action(Of IApizrExtendedCommonOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizr(services As IServiceCollection, registryBuilder As Action(Of IApizrExtendedRegistryBuilder), optionsBuilder As Action(Of IApizrExtendedCommonOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizr*
   nameWithType.vb: ServiceCollectionExtensions.AddApizr(IServiceCollection, Action(Of IApizrExtendedRegistryBuilder), Action(Of IApizrExtendedCommonOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizr(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder), System.Action(Of Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder))
   name.vb: AddApizr(IServiceCollection, Action(Of IApizrExtendedRegistryBuilder), Action(Of IApizrExtendedCommonOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -145,16 +129,19 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 76
+    startLine: 80
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class),\nwith key of type <xref href=\"System.Int32\" data-throw-if-not-resolved=\"false\"></xref> and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  summary: >-
+    Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="typeparamref">T</code> object type (class),
+
+    with key of type <xref href="System.Int32" data-throw-if-not-resolved="false"></xref> and "ReadAll" query result of type <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref>
+
+    and ReadAll query parameters of type IDictionary{string,object}
   example: []
   syntax:
-    content: >-
-      public static IServiceCollection AddApizrCrudManagerFor<T>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-          where T : class
+    content: 'public static IServiceCollection AddApizrCrudManagerFor<T>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where T : class'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -168,18 +155,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(Of T As Class)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(Of T As Class)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(Of T)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -201,16 +179,19 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 89
+    startLine: 93
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  summary: >-
+    Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="typeparamref">T</code> object type (class), 
+
+    with key of type <code class="typeparamref">TKey</code> (primitive) and "ReadAll" query result of type <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref>
+
+    and ReadAll query parameters of type IDictionary{string,object}
   example: []
   syntax:
-    content: >-
-      public static IServiceCollection AddApizrCrudManagerFor<T, TKey>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-          where T : class
+    content: 'public static IServiceCollection AddApizrCrudManagerFor<T, TKey>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where T : class'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -226,18 +207,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(Of T As Class, TKey)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(Of T As Class, TKey)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T, TKey)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T, TKey)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(Of T, TKey)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``3(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -259,16 +231,21 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 106
+    startLine: 110
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  summary: >-
+    Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="typeparamref">T</code> object type (class), 
+
+    with key of type <code class="typeparamref">TKey</code> (primitive) and "ReadAll" query result of type <code class="typeparamref">TReadAllResult</code>
+
+    (inheriting from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+
+    and ReadAll query parameters of type IDictionary{string,object}
   example: []
   syntax:
-    content: >-
-      public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-          where T : class
+    content: 'public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where T : class'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -282,25 +259,13 @@ items:
     - id: TKey
       description: The object key type (primitive)
     - id: TReadAllResult
-      description: >-
-        &quot;ReadAll&quot; query result type
-
-        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+      description: "\"ReadAll\" query result type\r\n    (should inherit from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)"
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(Of T As Class, TKey, TReadAllResult)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(Of T As Class, TKey, TReadAllResult)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T, TKey, TReadAllResult)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T, TKey, TReadAllResult)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(Of T, TKey, TReadAllResult)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``4(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -322,16 +287,21 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 125
+    startLine: 129
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type (class), \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  summary: >-
+    Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="typeparamref">T</code> object type (class), 
+
+    with key of type <code class="typeparamref">TKey</code> (primitive) and "ReadAll" query result of type <code class="typeparamref">TReadAllResult</code>
+
+    (inheriting from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+
+    and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
   example: []
   syntax:
-    content: >-
-      public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-          where T : class
+    content: 'public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where T : class'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -345,27 +315,15 @@ items:
     - id: TKey
       description: The object key type (primitive)
     - id: TReadAllResult
-      description: >-
-        &quot;ReadAll&quot; query result type
-
-        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+      description: "\"ReadAll\" query result type\r\n    (should inherit from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)"
     - id: TReadAllParams
       description: ReadAll query parameters
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``5(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -387,16 +345,21 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 145
+    startLine: 149
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">T</code> object type, \nwith key of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"typeparamref\" class=\"typeparamref\">TReadAllResult</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  summary: >-
+    Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="typeparamref">T</code> object type, 
+
+    with key of type <code class="typeparamref">TKey</code> (primitive) and "ReadAll" query result of type <code class="typeparamref">TReadAllResult</code>
+
+    (inheriting from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+
+    and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
   example: []
   syntax:
-    content: >-
-      public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-          where T : class where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
+    content: 'public static IServiceCollection AddApizrCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where T : class where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -410,10 +373,7 @@ items:
     - id: TKey
       description: The object key type (primitive)
     - id: TReadAllResult
-      description: >-
-        &quot;ReadAll&quot; query result type
-
-        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+      description: "\"ReadAll\" query result type\r\n    (should inherit from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)"
     - id: TReadAllParams
       description: ReadAll query parameters
     - id: TApizrManager
@@ -421,18 +381,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams, TApizrManager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(Of T As Class, TKey, TReadAllResult, TReadAllParams, TApizrManager As IApizrManager(Of ICrudApi(Of T, TKey, TReadAllResult, TReadAllParams)))(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(Of T, TKey, TReadAllResult, TReadAllParams, TApizrManager)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -454,11 +405,16 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 160
+    startLine: 164
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <xref href=\"System.Int32\" data-throw-if-not-resolved=\"false\"></xref> and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  summary: >-
+    Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="paramref">crudedType</code> object type (class), 
+
+    with key of type <xref href="System.Int32" data-throw-if-not-resolved="false"></xref> and "ReadAll" query result of type <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref>
+
+    and ReadAll query parameters of type IDictionary{string,object}
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
@@ -475,18 +431,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -508,11 +455,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 173
+    startLine: 177
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedKeyType</code> (primitive) and &quot;ReadAll&quot; query result of type <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: >-
+    Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="paramref">crudedType</code> object type (class), 
+
+    with key of type <code class="paramref">crudedKeyType</code> (primitive) and "ReadAll" query result of type <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType, Type crudedKeyType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
@@ -532,18 +482,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, crudedKeyType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, crudedKeyType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -565,11 +506,18 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 190
+    startLine: 194
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedKeyType</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedReadAllResultType</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters of type IDictionary{string,object}\n"
+  summary: >-
+    Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="paramref">crudedType</code> object type (class), 
+
+    with key of type <code class="paramref">crudedKeyType</code> (primitive) and "ReadAll" query result of type <code class="paramref">crudedReadAllResultType</code>
+
+    (inheriting from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+
+    and ReadAll query parameters of type IDictionary{string,object}
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType, Type crudedKeyType, Type crudedReadAllResultType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
@@ -585,28 +533,16 @@ items:
       description: The object key type (primitive)
     - id: crudedReadAllResultType
       type: System.Type
-      description: >-
-        &quot;ReadAll&quot; query result type
-
-        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+      description: "\"ReadAll\" query result type\r\n    (should inherit from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)"
     - id: optionsBuilder
       type: System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
       description: The builder defining specific Apizr options
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Type, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -628,11 +564,18 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 208
+    startLine: 212
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedKeyType</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedReadAllResultType</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  summary: >-
+    Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="paramref">crudedType</code> object type (class), 
+
+    with key of type <code class="paramref">crudedKeyType</code> (primitive) and "ReadAll" query result of type <code class="paramref">crudedReadAllResultType</code>
+
+    (inheriting from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+
+    and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType, Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
@@ -648,10 +591,7 @@ items:
       description: The object key type (primitive)
     - id: crudedReadAllResultType
       type: System.Type
-      description: >-
-        &quot;ReadAll&quot; query result type
-
-        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+      description: "\"ReadAll\" query result type\r\n    (should inherit from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)"
     - id: crudedReadAllParamsType
       type: System.Type
       description: ReadAll query parameters type
@@ -661,18 +601,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, crudedReadAllParamsType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, crudedReadAllParamsType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Type, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Type, System.Type, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Type, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -694,11 +625,18 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 228
+    startLine: 232
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedType</code> object type (class), \nwith key of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedKeyType</code> (primitive) and &quot;ReadAll&quot; query result of type <code data-dev-comment-type=\"paramref\" class=\"paramref\">crudedReadAllResultType</code>\n(inheriting from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)\nand ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)\n"
+  summary: >-
+    Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for <code class="paramref">crudedType</code> object type (class), 
+
+    with key of type <code class="paramref">crudedKeyType</code> (primitive) and "ReadAll" query result of type <code class="paramref">crudedReadAllResultType</code>
+
+    (inheriting from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+
+    and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type crudedType, Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType, Type apizrManagerType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
@@ -714,10 +652,7 @@ items:
       description: The object key type
     - id: crudedReadAllResultType
       type: System.Type
-      description: >-
-        &quot;ReadAll&quot; query result type
-
-        (should inherit from <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> or be of class type)
+      description: "\"ReadAll\" query result type\r\n    (should inherit from <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> or be of class type)"
     - id: crudedReadAllParamsType
       type: System.Type
       description: ReadAll query parameters type
@@ -730,18 +665,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, crudedReadAllParamsType As Type, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, crudedType As Type, crudedKeyType As Type, crudedReadAllResultType As Type, crudedReadAllParamsType As Type, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Type, Type, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Type, System.Type, System.Type, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Type, Type, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type[])
@@ -752,9 +678,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrCrudManagerFor(IServiceCollection, Type[])
-  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type[])
+  name: AddApizrCrudManagerFor(IServiceCollection, params Type[])
+  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, params Type[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, params System.Type[])
   type: Method
   source:
     remote:
@@ -763,11 +689,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 296
+    startLine: 300
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  summary: Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref> decorated classes
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, params Type[] assemblyMarkerTypes)
@@ -777,24 +703,15 @@ items:
       description: The service collection
     - id: assemblyMarkerTypes
       type: System.Type[]
-      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
+      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type())
-  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, ParamArray Type())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, ParamArray System.Type())
+  name.vb: AddApizrCrudManagerFor(IServiceCollection, ParamArray Type())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[])
   id: AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[])
@@ -803,9 +720,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrCrudManagerFor(IServiceCollection, Assembly[])
-  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Assembly[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Reflection.Assembly[])
+  name: AddApizrCrudManagerFor(IServiceCollection, params Assembly[])
+  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, params Assembly[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, params System.Reflection.Assembly[])
   type: Method
   source:
     remote:
@@ -814,11 +731,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 306
+    startLine: 310
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  summary: Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref> decorated classes
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, params Assembly[] assemblies)
@@ -828,24 +745,15 @@ items:
       description: The service collection
     - id: assemblies
       type: System.Reflection.Assembly[]
-      description: Any assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
+      description: Any assembly to scan for <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, ParamArray assemblies As Assembly()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, ParamArray assemblies As Assembly()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Assembly())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Reflection.Assembly())
-  name.vb: AddApizrCrudManagerFor(IServiceCollection, Assembly())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, ParamArray Assembly())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, ParamArray System.Reflection.Assembly())
+  name.vb: AddApizrCrudManagerFor(IServiceCollection, ParamArray Assembly())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
   id: AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
@@ -854,9 +762,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrCrudManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, Type[])
-  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, Type[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, System.Type[])
+  name: AddApizrCrudManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, params Type[])
+  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, params Type[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, params System.Type[])
   type: Method
   source:
     remote:
@@ -865,11 +773,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 317
+    startLine: 321
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  summary: Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref> decorated classes
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes)
@@ -882,24 +790,15 @@ items:
       description: The builder defining specific Apizr options
     - id: assemblyMarkerTypes
       type: System.Type[]
-      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
+      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), Type())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), System.Type())
-  name.vb: AddApizrCrudManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), Type())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Type())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), ParamArray System.Type())
+  name.vb: AddApizrCrudManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Type())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
   id: AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
@@ -908,9 +807,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrCrudManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, Assembly[])
-  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, Assembly[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, System.Reflection.Assembly[])
+  name: AddApizrCrudManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, params Assembly[])
+  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, params Assembly[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, params System.Reflection.Assembly[])
   type: Method
   source:
     remote:
@@ -919,11 +818,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 329
+    startLine: 333
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  summary: Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref> decorated classes
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
@@ -936,24 +835,15 @@ items:
       description: The builder defining specific Apizr options
     - id: assemblies
       type: System.Reflection.Assembly[]
-      description: Any assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
+      description: Any assembly to scan for <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), Assembly())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), System.Reflection.Assembly())
-  name.vb: AddApizrCrudManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), Assembly())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Assembly())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), ParamArray System.Reflection.Assembly())
+  name.vb: AddApizrCrudManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Assembly())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type[])
   id: AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type[])
@@ -962,9 +852,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrCrudManagerFor(IServiceCollection, Type, Type[])
-  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Type[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Type[])
+  name: AddApizrCrudManagerFor(IServiceCollection, Type, params Type[])
+  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, params Type[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, params System.Type[])
   type: Method
   source:
     remote:
@@ -973,11 +863,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 341
+    startLine: 345
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  summary: Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref> decorated classes
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type apizrManagerType, params Type[] assemblyMarkerTypes)
@@ -990,24 +880,15 @@ items:
       description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: assemblyMarkerTypes
       type: System.Type[]
-      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
+      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, apizrManagerType As Type, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, apizrManagerType As Type, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Type())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Type())
-  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Type())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, ParamArray Type())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, ParamArray System.Type())
+  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, ParamArray Type())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Reflection.Assembly[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Reflection.Assembly[])
   id: AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Reflection.Assembly[])
@@ -1016,9 +897,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrCrudManagerFor(IServiceCollection, Type, Assembly[])
-  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Assembly[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Reflection.Assembly[])
+  name: AddApizrCrudManagerFor(IServiceCollection, Type, params Assembly[])
+  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, params Assembly[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, params System.Reflection.Assembly[])
   type: Method
   source:
     remote:
@@ -1027,11 +908,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 352
+    startLine: 356
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  summary: Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref> decorated classes
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type apizrManagerType, params Assembly[] assemblies)
@@ -1044,24 +925,15 @@ items:
       description: A custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> implementation type
     - id: assemblies
       type: System.Reflection.Assembly[]
-      description: Any assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
+      description: Any assembly to scan for <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, apizrManagerType As Type, ParamArray assemblies As Assembly()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, apizrManagerType As Type, ParamArray assemblies As Assembly()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Assembly())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Reflection.Assembly())
-  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Assembly())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, ParamArray Assembly())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, ParamArray System.Reflection.Assembly())
+  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, ParamArray Assembly())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
   id: AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
@@ -1070,9 +942,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrCrudManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, Type[])
-  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, Type[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, System.Type[])
+  name: AddApizrCrudManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, params Type[])
+  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, params Type[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, params System.Type[])
   type: Method
   source:
     remote:
@@ -1081,11 +953,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 364
+    startLine: 368
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  summary: Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref> decorated classes
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes)
@@ -1101,24 +973,15 @@ items:
       description: The builder defining specific Apizr options
     - id: assemblyMarkerTypes
       type: System.Type[]
-      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
+      description: Any type contained in assembly to scan for <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), Type())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), System.Type())
-  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), Type())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Type())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), ParamArray System.Type())
+  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Type())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
   id: AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
@@ -1127,9 +990,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrCrudManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, Assembly[])
-  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, Assembly[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, System.Reflection.Assembly[])
+  name: AddApizrCrudManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, params Assembly[])
+  nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, params Assembly[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, params System.Reflection.Assembly[])
   type: Method
   source:
     remote:
@@ -1138,11 +1001,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrCrudManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 377
+    startLine: 381
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.Requesting.CrudEntityAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated classes\n"
+  summary: Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref> decorated classes
   example: []
   syntax:
     content: public static IServiceCollection AddApizrCrudManagerFor(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
@@ -1158,24 +1021,15 @@ items:
       description: The builder defining specific Apizr options
     - id: assemblies
       type: System.Reflection.Assembly[]
-      description: Any assembly to scan for <xref href="Apizr.Requesting.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
+      description: Any assembly to scan for <xref href="Apizr.Requesting.Attributes.CrudEntityAttribute" data-throw-if-not-resolved="false"></xref>
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrCrudManagerFor(services As IServiceCollection, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), Assembly())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), System.Reflection.Assembly())
-  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), Assembly())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Assembly())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), ParamArray System.Reflection.Assembly())
+  name.vb: AddApizrCrudManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Assembly())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
   id: AddApizrManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -1195,11 +1049,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 447
+    startLine: 451
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
     content: public static IServiceCollection AddApizrManagerFor<TWebApi>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
@@ -1216,18 +1070,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrManagerFor(Of TWebApi)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrManagerFor(Of TWebApi)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(Of TWebApi)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Of TWebApi)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrManagerFor(Of TWebApi)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -1249,16 +1094,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 460
+    startLine: 464
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
-    content: >-
-      public static IServiceCollection AddApizrManagerFor<TWebApi, TApizrManager>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
-          where TApizrManager : IApizrManager<TWebApi>
+    content: 'public static IServiceCollection AddApizrManagerFor<TWebApi, TApizrManager>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where TApizrManager : IApizrManager<TWebApi>'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -1274,18 +1117,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrManagerFor(Of TWebApi, TApizrManager As IApizrManager(Of TWebApi))(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrManagerFor(Of TWebApi, TApizrManager As IApizrManager(Of TWebApi))(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(Of TWebApi, TApizrManager)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Of TWebApi, TApizrManager)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrManagerFor(Of TWebApi, TApizrManager)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -1307,11 +1141,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 473
+    startLine: 477
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: Register <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
     content: public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Type webApiType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
@@ -1328,18 +1162,9 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrManagerFor(services As IServiceCollection, webApiType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrManagerFor(services As IServiceCollection, webApiType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
@@ -1350,9 +1175,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, Type[])
-  nameWithType: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, Type[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, System.Type[])
+  name: AddApizrManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, params Type[])
+  nameWithType: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, params Type[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, params System.Type[])
   type: Method
   source:
     remote:
@@ -1361,11 +1186,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 485
+    startLine: 489
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.WebApiAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated interfaces\n"
+  summary: Register a <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.WebApiAttribute" data-throw-if-not-resolved="false"></xref> decorated interfaces
   example: []
   syntax:
     content: public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes)
@@ -1382,20 +1207,11 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrManagerFor(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrManagerFor(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), Type())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), System.Type())
-  name.vb: AddApizrManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), Type())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Type())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), ParamArray System.Type())
+  name.vb: AddApizrManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Type())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
   id: AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
@@ -1404,9 +1220,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, Assembly[])
-  nameWithType: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, Assembly[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, System.Reflection.Assembly[])
+  name: AddApizrManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, params Assembly[])
+  nameWithType: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Action<IApizrExtendedManagerOptionsBuilder>, params Assembly[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, params System.Reflection.Assembly[])
   type: Method
   source:
     remote:
@@ -1415,11 +1231,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 497
+    startLine: 501
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.WebApiAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated interfaces\n"
+  summary: Register a <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.WebApiAttribute" data-throw-if-not-resolved="false"></xref> decorated interfaces
   example: []
   syntax:
     content: public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
@@ -1436,20 +1252,11 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrManagerFor(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrManagerFor(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), Assembly())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), System.Reflection.Assembly())
-  name.vb: AddApizrManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), Assembly())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Assembly())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), ParamArray System.Reflection.Assembly())
+  name.vb: AddApizrManagerFor(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Assembly())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
   id: AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])
@@ -1458,9 +1265,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, Type[])
-  nameWithType: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, Type[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, System.Type[])
+  name: AddApizrManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, params Type[])
+  nameWithType: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, params Type[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, params System.Type[])
   type: Method
   source:
     remote:
@@ -1469,11 +1276,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 510
+    startLine: 514
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.WebApiAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated interfaces\n"
+  summary: Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.WebApiAttribute" data-throw-if-not-resolved="false"></xref> decorated interfaces
   example: []
   syntax:
     content: public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes)
@@ -1493,20 +1300,11 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrManagerFor(services As IServiceCollection, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrManagerFor(services As IServiceCollection, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblyMarkerTypes As Type()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), Type())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), System.Type())
-  name.vb: AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), Type())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Type())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), ParamArray System.Type())
+  name.vb: AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Type())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
   id: AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])
@@ -1515,9 +1313,9 @@ items:
   langs:
   - csharp
   - vb
-  name: AddApizrManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, Assembly[])
-  nameWithType: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, Assembly[])
-  fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, System.Reflection.Assembly[])
+  name: AddApizrManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, params Assembly[])
+  nameWithType: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action<IApizrExtendedManagerOptionsBuilder>, params Assembly[])
+  fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>, params System.Reflection.Assembly[])
   type: Method
   source:
     remote:
@@ -1526,11 +1324,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 523
+    startLine: 527
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref> for each <xref href=\"Apizr.WebApiAttribute\" data-throw-if-not-resolved=\"false\"></xref> decorated interfaces\n"
+  summary: Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref> for each <xref href="Apizr.WebApiAttribute" data-throw-if-not-resolved="false"></xref> decorated interfaces
   example: []
   syntax:
     content: public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Type apizrManagerType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
@@ -1550,20 +1348,11 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrManagerFor(services As IServiceCollection, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IServiceCollection
+    content.vb: Public Shared Function AddApizrManagerFor(services As IServiceCollection, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing, ParamArray assemblies As Assembly()) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
-  nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), Assembly())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), System.Reflection.Assembly())
-  name.vb: AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), Assembly())
+  nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Assembly())
+  fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder), ParamArray System.Reflection.Assembly())
+  name.vb: AddApizrManagerFor(IServiceCollection, Type, Action(Of IApizrExtendedManagerOptionsBuilder), ParamArray Assembly())
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
   commentId: M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
   id: AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})
@@ -1583,11 +1372,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrManagerFor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/ServiceCollectionExtensions.cs
-    startLine: 564
+    startLine: 568
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr
-  summary: "\nRegister a custom <xref href=\"Apizr.IApizrManager%601\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: Register a custom <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
     content: public static IServiceCollection AddApizrManagerFor(this IServiceCollection services, Type webApiType, Type apizrManagerType, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null)
@@ -1607,23 +1396,15 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function AddApizrManagerFor(services As IServiceCollection, webApiType As Type, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrManagerFor(services As IServiceCollection, webApiType As Type, apizrManagerType As Type, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
   nameWithType.vb: ServiceCollectionExtensions.AddApizrManagerFor(IServiceCollection, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
   fullName.vb: Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Type, System.Type, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
   name.vb: AddApizrManagerFor(IServiceCollection, Type, Type, Action(Of IApizrExtendedManagerOptionsBuilder))
 references:
 - uid: Apizr
   commentId: N:Apizr
+  href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
@@ -1631,296 +1412,242 @@ references:
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.ServiceCollectionExtensions.AddApizr*
   commentId: Overload:Apizr.ServiceCollectionExtensions.AddApizr
+  href: Apizr.ServiceCollectionExtensions.html#Apizr_ServiceCollectionExtensions_AddApizr_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Apizr_Extending_Configuring_Registry_IApizrExtendedRegistryBuilder__System_Action_Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptionsBuilder__
   name: AddApizr
   nameWithType: ServiceCollectionExtensions.AddApizr
   fullName: Apizr.ServiceCollectionExtensions.AddApizr
@@ -1928,6 +1655,7 @@ references:
   commentId: T:Microsoft.Extensions.DependencyInjection.IServiceCollection
   parent: Microsoft.Extensions.DependencyInjection
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
   name: IServiceCollection
   nameWithType: IServiceCollection
   fullName: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -1935,6 +1663,7 @@ references:
   commentId: T:System.Action{Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrExtendedRegistryBuilder>
   nameWithType: Action<IApizrExtendedRegistryBuilder>
   fullName: System.Action<Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder>
@@ -1944,39 +1673,30 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
     name: IApizrExtendedRegistryBuilder
-    nameWithType: IApizrExtendedRegistryBuilder
-    fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+    href: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
     name: IApizrExtendedRegistryBuilder
-    nameWithType: IApizrExtendedRegistryBuilder
-    fullName: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
+    href: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Action{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
   commentId: T:System.Action{Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrExtendedCommonOptionsBuilder>
   nameWithType: Action<IApizrExtendedCommonOptionsBuilder>
   fullName: System.Action<Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder>
@@ -1986,44 +1706,66 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder
     name: IApizrExtendedCommonOptionsBuilder
-    nameWithType: IApizrExtendedCommonOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder
+    href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder
     name: IApizrExtendedCommonOptionsBuilder
-    nameWithType: IApizrExtendedCommonOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder
+    href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.DependencyInjection
   commentId: N:Microsoft.Extensions.DependencyInjection
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
   name: Microsoft.Extensions.DependencyInjection
   nameWithType: Microsoft.Extensions.DependencyInjection
   fullName: Microsoft.Extensions.DependencyInjection
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -2033,35 +1775,24 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.IApizrManager`1
   commentId: T:Apizr.IApizrManager`1
+  href: Apizr.IApizrManager-1.html
   name: IApizrManager<TWebApi>
   nameWithType: IApizrManager<TWebApi>
   fullName: Apizr.IApizrManager<TWebApi>
@@ -2071,41 +1802,34 @@ references:
   spec.csharp:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
+    href: Apizr.IApizrManager-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.IApizrManager`1
     name: IApizrManager
-    nameWithType: IApizrManager
-    fullName: Apizr.IApizrManager
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.IApizrManager-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TWebApi
-    nameWithType: TWebApi
-    fullName: TWebApi
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Int32
   commentId: T:System.Int32
   parent: System
   isExternal: true
-  name: Int32
-  nameWithType: Int32
-  fullName: System.Int32
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
 - uid: System.Collections.Generic.IEnumerable`1
   commentId: T:System.Collections.Generic.IEnumerable`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   name: IEnumerable<T>
   nameWithType: IEnumerable<T>
   fullName: System.Collections.Generic.IEnumerable<T>
@@ -2115,35 +1839,24 @@ references:
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Collections.Generic.IEnumerable`1
     name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor*
   commentId: Overload:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor
+  href: Apizr.ServiceCollectionExtensions.html#Apizr_ServiceCollectionExtensions_AddApizrCrudManagerFor__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Apizr_Extending_Configuring_Manager_IApizrExtendedManagerOptionsBuilder__
   name: AddApizrCrudManagerFor
   nameWithType: ServiceCollectionExtensions.AddApizrCrudManagerFor
   fullName: Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor
@@ -2151,6 +1864,7 @@ references:
   commentId: T:System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IApizrExtendedManagerOptionsBuilder>
   nameWithType: Action<IApizrExtendedManagerOptionsBuilder>
   fullName: System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>
@@ -2160,50 +1874,43 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
     name: IApizrExtendedManagerOptionsBuilder
-    nameWithType: IApizrExtendedManagerOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+    href: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
     name: IApizrExtendedManagerOptionsBuilder
-    nameWithType: IApizrExtendedManagerOptionsBuilder
-    fullName: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+    href: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Type
   commentId: T:System.Type
   parent: System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
   name: Type
   nameWithType: Type
   fullName: System.Type
-- uid: Apizr.Requesting.CrudEntityAttribute
-  commentId: T:Apizr.Requesting.CrudEntityAttribute
-  parent: Apizr.Requesting
+- uid: Apizr.Requesting.Attributes.CrudEntityAttribute
+  commentId: T:Apizr.Requesting.Attributes.CrudEntityAttribute
+  parent: Apizr.Requesting.Attributes
+  href: Apizr.Requesting.Attributes.CrudEntityAttribute.html
   name: CrudEntityAttribute
   nameWithType: CrudEntityAttribute
-  fullName: Apizr.Requesting.CrudEntityAttribute
+  fullName: Apizr.Requesting.Attributes.CrudEntityAttribute
 - uid: System.Type[]
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
   name: Type[]
   nameWithType: Type[]
   fullName: System.Type[]
@@ -2213,28 +1920,50 @@ references:
   spec.csharp:
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: '['
+  - name: ']'
   spec.vb:
   - uid: System.Type
     name: Type
-    nameWithType: Type
-    fullName: System.Type
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-- uid: Apizr.Requesting
-  commentId: N:Apizr.Requesting
-  name: Apizr.Requesting
-  nameWithType: Apizr.Requesting
-  fullName: Apizr.Requesting
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: (
+  - name: )
+- uid: Apizr.Requesting.Attributes
+  commentId: N:Apizr.Requesting.Attributes
+  href: Apizr.html
+  name: Apizr.Requesting.Attributes
+  nameWithType: Apizr.Requesting.Attributes
+  fullName: Apizr.Requesting.Attributes
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Requesting
+    name: Requesting
+    href: Apizr.Requesting.html
+  - name: .
+  - uid: Apizr.Requesting.Attributes
+    name: Attributes
+    href: Apizr.Requesting.Attributes.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Requesting
+    name: Requesting
+    href: Apizr.Requesting.html
+  - name: .
+  - uid: Apizr.Requesting.Attributes
+    name: Attributes
+    href: Apizr.Requesting.Attributes.html
 - uid: System.Reflection.Assembly[]
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.reflection.assembly
   name: Assembly[]
   nameWithType: Assembly[]
   fullName: System.Reflection.Assembly[]
@@ -2244,29 +1973,27 @@ references:
   spec.csharp:
   - uid: System.Reflection.Assembly
     name: Assembly
-    nameWithType: Assembly
-    fullName: System.Reflection.Assembly
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/system.reflection.assembly
+  - name: '['
+  - name: ']'
   spec.vb:
   - uid: System.Reflection.Assembly
     name: Assembly
-    nameWithType: Assembly
-    fullName: System.Reflection.Assembly
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
+    href: https://learn.microsoft.com/dotnet/api/system.reflection.assembly
+  - name: (
+  - name: )
 - uid: Apizr.ServiceCollectionExtensions.AddApizrManagerFor*
   commentId: Overload:Apizr.ServiceCollectionExtensions.AddApizrManagerFor
+  href: Apizr.ServiceCollectionExtensions.html#Apizr_ServiceCollectionExtensions_AddApizrManagerFor__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Apizr_Extending_Configuring_Manager_IApizrExtendedManagerOptionsBuilder__
   name: AddApizrManagerFor
   nameWithType: ServiceCollectionExtensions.AddApizrManagerFor
   fullName: Apizr.ServiceCollectionExtensions.AddApizrManagerFor
 - uid: Apizr.WebApiAttribute
   commentId: T:Apizr.WebApiAttribute
   parent: Apizr
+  href: Apizr.WebApiAttribute.html
   name: WebApiAttribute
   nameWithType: WebApiAttribute
   fullName: Apizr.WebApiAttribute

@@ -5,8 +5,9 @@ items:
   id: ApizrRequestOptionsBase
   parent: Apizr.Configuring.Request
   children:
-  - Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
-  - Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
+  - Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase,Apizr.Caching.Attributes.CacheAttributeBase,Apizr.Configuring.ApizrRequestMethod,Microsoft.Extensions.Logging.LogLevel[])
+  - Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod
+  - Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
   langs:
   - csharp
   - vb
@@ -21,18 +22,15 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrRequestOptionsBase
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-    startLine: 11
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
-  summary: "\nOptions available at request levels and for all (static and extended) registration types\n"
+  summary: Options available at request levels and for all (static and extended) registration types
   example: []
   syntax:
     content: 'public abstract class ApizrRequestOptionsBase : ApizrGlobalSharedOptionsBase, IApizrRequestOptionsBase, IApizrGlobalSharedOptionsBase'
-    content.vb: >-
-      Public MustInherit Class ApizrRequestOptionsBase
-          Inherits ApizrGlobalSharedOptionsBase
-          Implements IApizrRequestOptionsBase, IApizrGlobalSharedOptionsBase
+    content.vb: Public MustInherit Class ApizrRequestOptionsBase Inherits ApizrGlobalSharedOptionsBase Implements IApizrRequestOptionsBase, IApizrGlobalSharedOptionsBase
   inheritance:
   - System.Object
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -48,8 +46,11 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
-  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -57,24 +58,16 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  modifiers.csharp:
-  - public
-  - abstract
-  - class
-  modifiers.vb:
-  - Public
-  - MustInherit
-  - Class
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
-  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])
-  id: '#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.LogLevel[])'
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase,Apizr.Caching.Attributes.CacheAttributeBase,Apizr.Configuring.ApizrRequestMethod,Microsoft.Extensions.Logging.LogLevel[])
+  commentId: M:Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase,Apizr.Caching.Attributes.CacheAttributeBase,Apizr.Configuring.ApizrRequestMethod,Microsoft.Extensions.Logging.LogLevel[])
+  id: '#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase,Apizr.Caching.Attributes.CacheAttributeBase,Apizr.Configuring.ApizrRequestMethod,Microsoft.Extensions.Logging.LogLevel[])'
   parent: Apizr.Configuring.Request.ApizrRequestOptionsBase
   langs:
   - csharp
   - vb
-  name: ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, Nullable<TimeSpan>, LogLevel[])
-  nameWithType: ApizrRequestOptionsBase.ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Nullable<HttpTracerMode>, Nullable<HttpMessageParts>, Nullable<TimeSpan>, LogLevel[])
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.ApizrRequestOptionsBase(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Nullable<Apizr.Logging.HttpTracerMode>, System.Nullable<Apizr.Logging.HttpMessageParts>, System.Nullable<System.TimeSpan>, Microsoft.Extensions.Logging.LogLevel[])
+  name: ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, HttpTracerMode?, HttpMessageParts?, TimeSpan?, TimeSpan?, ResiliencePipelineAttributeBase, CacheAttributeBase, ApizrRequestMethod, params LogLevel[])
+  nameWithType: ApizrRequestOptionsBase.ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, HttpTracerMode?, HttpMessageParts?, TimeSpan?, TimeSpan?, ResiliencePipelineAttributeBase, CacheAttributeBase, ApizrRequestMethod, params LogLevel[])
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.ApizrRequestOptionsBase(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, Apizr.Logging.HttpTracerMode?, Apizr.Logging.HttpMessageParts?, System.TimeSpan?, System.TimeSpan?, Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase, Apizr.Caching.Attributes.CacheAttributeBase, Apizr.Configuring.ApizrRequestMethod, params Microsoft.Extensions.Logging.LogLevel[])
   type: Constructor
   source:
     remote:
@@ -83,13 +76,13 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-    startLine: 14
+    startLine: 16
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
   example: []
   syntax:
-    content: protected ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? timeout, params LogLevel[] logLevels)
+    content: protected ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? operationTimeout, TimeSpan? requestTimeout, ResiliencePipelineAttributeBase requestResiliencePipelineAttribute, CacheAttributeBase requestCacheAttribute, ApizrRequestMethod requestMethod, params LogLevel[] logLevels)
     parameters:
     - id: sharedOptions
       type: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
@@ -97,435 +90,498 @@ items:
       type: System.Nullable{Apizr.Logging.HttpTracerMode}
     - id: trafficVerbosity
       type: System.Nullable{Apizr.Logging.HttpMessageParts}
-    - id: timeout
+    - id: operationTimeout
       type: System.Nullable{System.TimeSpan}
+    - id: requestTimeout
+      type: System.Nullable{System.TimeSpan}
+    - id: requestResiliencePipelineAttribute
+      type: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase
+    - id: requestCacheAttribute
+      type: Apizr.Caching.Attributes.CacheAttributeBase
+    - id: requestMethod
+      type: Apizr.Configuring.ApizrRequestMethod
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
-    content.vb: Protected Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, timeout As TimeSpan?, ParamArray logLevels As LogLevel())
+    content.vb: Protected Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, operationTimeout As TimeSpan?, requestTimeout As TimeSpan?, requestResiliencePipelineAttribute As ResiliencePipelineAttributeBase, requestCacheAttribute As CacheAttributeBase, requestMethod As ApizrRequestMethod, ParamArray logLevels As LogLevel())
   overload: Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor*
-  nameWithType.vb: ApizrRequestOptionsBase.ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), LogLevel())
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBase.ApizrRequestOptionsBase(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Nullable(Of Apizr.Logging.HttpTracerMode), System.Nullable(Of Apizr.Logging.HttpMessageParts), System.Nullable(Of System.TimeSpan), Microsoft.Extensions.Logging.LogLevel())
-  name.vb: ApizrRequestOptionsBase(IApizrGlobalSharedRegistrationOptionsBase, Nullable(Of HttpTracerMode), Nullable(Of HttpMessageParts), Nullable(Of TimeSpan), LogLevel())
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-  commentId: P:Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-  id: Context
+  nameWithType.vb: ApizrRequestOptionsBase.New(IApizrGlobalSharedRegistrationOptionsBase, HttpTracerMode?, HttpMessageParts?, TimeSpan?, TimeSpan?, ResiliencePipelineAttributeBase, CacheAttributeBase, ApizrRequestMethod, ParamArray LogLevel())
+  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBase.New(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, Apizr.Logging.HttpTracerMode?, Apizr.Logging.HttpMessageParts?, System.TimeSpan?, System.TimeSpan?, Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase, Apizr.Caching.Attributes.CacheAttributeBase, Apizr.Configuring.ApizrRequestMethod, ParamArray Microsoft.Extensions.Logging.LogLevel())
+  name.vb: New(IApizrGlobalSharedRegistrationOptionsBase, HttpTracerMode?, HttpMessageParts?, TimeSpan?, TimeSpan?, ResiliencePipelineAttributeBase, CacheAttributeBase, ApizrRequestMethod, ParamArray LogLevel())
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+  commentId: P:Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+  id: ResilienceContext
   parent: Apizr.Configuring.Request.ApizrRequestOptionsBase
   langs:
   - csharp
   - vb
-  name: Context
-  nameWithType: ApizrRequestOptionsBase.Context
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
+  name: ResilienceContext
+  nameWithType: ApizrRequestOptionsBase.ResilienceContext
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: Context
+    id: ResilienceContext
     path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
-    startLine: 34
+    startLine: 45
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
-  summary: "\nThe Polly Context to pass through it all\n"
+  summary: The Polly resilience context to pass through it all
   example: []
   syntax:
-    content: public Context Context { get; }
+    content: public ResilienceContext ResilienceContext { get; }
     parameters: []
     return:
-      type: Polly.Context
-    content.vb: Public ReadOnly Property Context As Context
-  overload: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context*
+      type: Polly.ResilienceContext
+    content.vb: Public Property ResilienceContext As ResilienceContext
+  overload: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext*
   implements:
-  - Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
+  - Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod
+  commentId: P:Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod
+  id: RequestMethod
+  parent: Apizr.Configuring.Request.ApizrRequestOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: RequestMethod
+  nameWithType: ApizrRequestOptionsBase.RequestMethod
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestMethod
+    path: ../../Src/Apizr/Configuring/Request/ApizrRequestOptionsBase.cs
+    startLine: 48
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Request
+  summary: The Apizr request method
+  example: []
+  syntax:
+    content: public ApizrRequestMethod RequestMethod { get; }
+    parameters: []
+    return:
+      type: Apizr.Configuring.ApizrRequestMethod
+    content.vb: Public ReadOnly Property RequestMethod As ApizrRequestMethod
+  overload: Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod*
+  implements:
+  - Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
 references:
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase
-  commentId: T:Apizr.Configuring.Request.IApizrRequestOptionsBase
-  parent: Apizr.Configuring.Request
-  name: IApizrRequestOptionsBase
-  nameWithType: IApizrRequestOptionsBase
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
+  href: Apizr.html
   name: Apizr.Configuring.Request
   nameWithType: Apizr.Configuring.Request
   fullName: Apizr.Configuring.Request
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
   isExternal: true
-  name: Object
-  nameWithType: Object
-  fullName: System.Object
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html
   name: ApizrGlobalSharedOptionsBase
   nameWithType: ApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase
+  commentId: T:Apizr.Configuring.Request.IApizrRequestOptionsBase
+  parent: Apizr.Configuring.Request
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBase.html
+  name: IApizrRequestOptionsBase
+  nameWithType: IApizrRequestOptionsBase
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_HttpTracerMode
   name: HttpTracerMode
   nameWithType: ApizrGlobalSharedOptionsBase.HttpTracerMode
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_TrafficVerbosity
   name: TrafficVerbosity
   nameWithType: ApizrGlobalSharedOptionsBase.TrafficVerbosity
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_LogLevels
   name: LogLevels
   nameWithType: ApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_OnException
   name: OnException
   nameWithType: ApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_LetThrowOnExceptionWithEmptyCache
   name: LetThrowOnExceptionWithEmptyCache
   nameWithType: ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_HandlersParameters
   name: HandlersParameters
   nameWithType: ApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
-  name: Headers
-  nameWithType: ApizrGlobalSharedOptionsBase.Headers
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Headers
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
-  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_OperationTimeout
+  name: OperationTimeout
+  nameWithType: ApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
-  name: Timeout
-  nameWithType: ApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_RequestTimeout
+  name: RequestTimeout
+  nameWithType: ApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.RequestTimeout
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ShouldRedactHeaderValue
+  name: ShouldRedactHeaderValue
+  nameWithType: ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: ApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
   spec.csharp:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.Equals(System.Object,System.Object)
     name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
   spec.csharp:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetHashCode
     name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
   spec.csharp:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.GetType
     name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.MemberwiseClone
   commentId: M:System.Object.MemberwiseClone
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
   spec.csharp:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.MemberwiseClone
     name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ReferenceEquals(System.Object,System.Object)
   commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
   parent: System.Object
   isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
   spec.csharp:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ReferenceEquals(System.Object,System.Object)
     name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
   spec.csharp:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: System.Object.ToString
     name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
-    nameWithType: (
-    fullName: (
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor*
   commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBase.#ctor
+  href: Apizr.Configuring.Request.ApizrRequestOptionsBase.html#Apizr_Configuring_Request_ApizrRequestOptionsBase__ctor_Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_System_Nullable_Apizr_Logging_HttpTracerMode__System_Nullable_Apizr_Logging_HttpMessageParts__System_Nullable_System_TimeSpan__System_Nullable_System_TimeSpan__Apizr_Resiliencing_Attributes_ResiliencePipelineAttributeBase_Apizr_Caching_Attributes_CacheAttributeBase_Apizr_Configuring_ApizrRequestMethod_Microsoft_Extensions_Logging_LogLevel___
   name: ApizrRequestOptionsBase
   nameWithType: ApizrRequestOptionsBase.ApizrRequestOptionsBase
   fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.ApizrRequestOptionsBase
+  nameWithType.vb: ApizrRequestOptionsBase.New
+  fullName.vb: Apizr.Configuring.Request.ApizrRequestOptionsBase.New
+  name.vb: New
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html
   name: IApizrGlobalSharedRegistrationOptionsBase
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
@@ -533,132 +589,82 @@ references:
   commentId: T:System.Nullable{Apizr.Logging.HttpTracerMode}
   parent: System
   definition: System.Nullable`1
-  name: Nullable<HttpTracerMode>
-  nameWithType: Nullable<HttpTracerMode>
-  fullName: System.Nullable<Apizr.Logging.HttpTracerMode>
-  nameWithType.vb: Nullable(Of HttpTracerMode)
-  fullName.vb: System.Nullable(Of Apizr.Logging.HttpTracerMode)
-  name.vb: Nullable(Of HttpTracerMode)
+  href: Apizr.Logging.HttpTracerMode.html
+  name: HttpTracerMode?
+  nameWithType: HttpTracerMode?
+  fullName: Apizr.Logging.HttpTracerMode?
   spec.csharp:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Logging.HttpTracerMode
     name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
+    href: Apizr.Logging.HttpTracerMode.html
+  - name: '?'
   spec.vb:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
   - uid: Apizr.Logging.HttpTracerMode
     name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
-  - name: )
-    nameWithType: )
-    fullName: )
+    href: Apizr.Logging.HttpTracerMode.html
+  - name: '?'
 - uid: System.Nullable{Apizr.Logging.HttpMessageParts}
   commentId: T:System.Nullable{Apizr.Logging.HttpMessageParts}
   parent: System
   definition: System.Nullable`1
-  name: Nullable<HttpMessageParts>
-  nameWithType: Nullable<HttpMessageParts>
-  fullName: System.Nullable<Apizr.Logging.HttpMessageParts>
-  nameWithType.vb: Nullable(Of HttpMessageParts)
-  fullName.vb: System.Nullable(Of Apizr.Logging.HttpMessageParts)
-  name.vb: Nullable(Of HttpMessageParts)
+  href: Apizr.Logging.HttpMessageParts.html
+  name: HttpMessageParts?
+  nameWithType: HttpMessageParts?
+  fullName: Apizr.Logging.HttpMessageParts?
   spec.csharp:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Logging.HttpMessageParts
     name: HttpMessageParts
-    nameWithType: HttpMessageParts
-    fullName: Apizr.Logging.HttpMessageParts
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: '?'
   spec.vb:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
   - uid: Apizr.Logging.HttpMessageParts
     name: HttpMessageParts
-    nameWithType: HttpMessageParts
-    fullName: Apizr.Logging.HttpMessageParts
-  - name: )
-    nameWithType: )
-    fullName: )
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: '?'
 - uid: System.Nullable{System.TimeSpan}
   commentId: T:System.Nullable{System.TimeSpan}
   parent: System
   definition: System.Nullable`1
-  name: Nullable<TimeSpan>
-  nameWithType: Nullable<TimeSpan>
-  fullName: System.Nullable<System.TimeSpan>
-  nameWithType.vb: Nullable(Of TimeSpan)
-  fullName.vb: System.Nullable(Of System.TimeSpan)
-  name.vb: Nullable(Of TimeSpan)
+  href: https://learn.microsoft.com/dotnet/api/system.timespan
+  name: TimeSpan?
+  nameWithType: TimeSpan?
+  fullName: System.TimeSpan?
   spec.csharp:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
   spec.vb:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+- uid: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase
+  commentId: T:Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase
+  parent: Apizr.Resiliencing.Attributes
+  href: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase.html
+  name: ResiliencePipelineAttributeBase
+  nameWithType: ResiliencePipelineAttributeBase
+  fullName: Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase
+- uid: Apizr.Caching.Attributes.CacheAttributeBase
+  commentId: T:Apizr.Caching.Attributes.CacheAttributeBase
+  parent: Apizr.Caching.Attributes
+  href: Apizr.Caching.Attributes.CacheAttributeBase.html
+  name: CacheAttributeBase
+  nameWithType: CacheAttributeBase
+  fullName: Apizr.Caching.Attributes.CacheAttributeBase
+- uid: Apizr.Configuring.ApizrRequestMethod
+  commentId: T:Apizr.Configuring.ApizrRequestMethod
+  parent: Apizr.Configuring
+  href: Apizr.Configuring.ApizrRequestMethod.html
+  name: ApizrRequestMethod
+  nameWithType: ApizrRequestMethod
+  fullName: Apizr.Configuring.ApizrRequestMethod
 - uid: Microsoft.Extensions.Logging.LogLevel[]
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
   name: LogLevel[]
   nameWithType: LogLevel[]
   fullName: Microsoft.Extensions.Logging.LogLevel[]
@@ -668,24 +674,21 @@ references:
   spec.csharp:
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: '['
+  - name: ']'
   spec.vb:
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: (
+  - name: )
 - uid: System.Nullable`1
   commentId: T:System.Nullable`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
   name: Nullable<T>
   nameWithType: Nullable<T>
   fullName: System.Nullable<T>
@@ -695,54 +698,140 @@ references:
   spec.csharp:
   - uid: System.Nullable`1
     name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Nullable`1
     name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context*
-  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-  name: Context
-  nameWithType: ApizrRequestOptionsBase.Context
-  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.Context
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
-  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
+- uid: Apizr.Resiliencing.Attributes
+  commentId: N:Apizr.Resiliencing.Attributes
+  href: Apizr.html
+  name: Apizr.Resiliencing.Attributes
+  nameWithType: Apizr.Resiliencing.Attributes
+  fullName: Apizr.Resiliencing.Attributes
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Resiliencing
+    name: Resiliencing
+    href: Apizr.Resiliencing.html
+  - name: .
+  - uid: Apizr.Resiliencing.Attributes
+    name: Attributes
+    href: Apizr.Resiliencing.Attributes.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Resiliencing
+    name: Resiliencing
+    href: Apizr.Resiliencing.html
+  - name: .
+  - uid: Apizr.Resiliencing.Attributes
+    name: Attributes
+    href: Apizr.Resiliencing.Attributes.html
+- uid: Apizr.Caching.Attributes
+  commentId: N:Apizr.Caching.Attributes
+  href: Apizr.html
+  name: Apizr.Caching.Attributes
+  nameWithType: Apizr.Caching.Attributes
+  fullName: Apizr.Caching.Attributes
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Caching
+    name: Caching
+    href: Apizr.Caching.html
+  - name: .
+  - uid: Apizr.Caching.Attributes
+    name: Attributes
+    href: Apizr.Caching.Attributes.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Caching
+    name: Caching
+    href: Apizr.Caching.html
+  - name: .
+  - uid: Apizr.Caching.Attributes
+    name: Attributes
+    href: Apizr.Caching.Attributes.html
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  href: Apizr.html
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+  href: Apizr.Configuring.Request.ApizrRequestOptionsBase.html#Apizr_Configuring_Request_ApizrRequestOptionsBase_ResilienceContext
+  name: ResilienceContext
+  nameWithType: ApizrRequestOptionsBase.ResilienceContext
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.ResilienceContext
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
+  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
   parent: Apizr.Configuring.Request.IApizrRequestOptionsBase
-  name: Context
-  nameWithType: IApizrRequestOptionsBase.Context
-  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.Context
-- uid: Polly.Context
-  commentId: T:Polly.Context
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBase.html#Apizr_Configuring_Request_IApizrRequestOptionsBase_ResilienceContext
+  name: ResilienceContext
+  nameWithType: IApizrRequestOptionsBase.ResilienceContext
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.ResilienceContext
+- uid: Polly.ResilienceContext
+  commentId: T:Polly.ResilienceContext
   parent: Polly
   isExternal: true
-  name: Context
-  nameWithType: Context
-  fullName: Polly.Context
+  href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResilienceContext.cs
+  name: ResilienceContext
+  nameWithType: ResilienceContext
+  fullName: Polly.ResilienceContext
 - uid: Polly
   commentId: N:Polly
   isExternal: true
   name: Polly
   nameWithType: Polly
   fullName: Polly
+- uid: Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod*
+  commentId: Overload:Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod
+  href: Apizr.Configuring.Request.ApizrRequestOptionsBase.html#Apizr_Configuring_Request_ApizrRequestOptionsBase_RequestMethod
+  name: RequestMethod
+  nameWithType: ApizrRequestOptionsBase.RequestMethod
+  fullName: Apizr.Configuring.Request.ApizrRequestOptionsBase.RequestMethod
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
+  commentId: P:Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod
+  parent: Apizr.Configuring.Request.IApizrRequestOptionsBase
+  href: Apizr.Configuring.Request.IApizrRequestOptionsBase.html#Apizr_Configuring_Request_IApizrRequestOptionsBase_RequestMethod
+  name: RequestMethod
+  nameWithType: IApizrRequestOptionsBase.RequestMethod
+  fullName: Apizr.Configuring.Request.IApizrRequestOptionsBase.RequestMethod

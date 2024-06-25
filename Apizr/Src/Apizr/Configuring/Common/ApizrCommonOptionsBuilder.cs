@@ -6,11 +6,15 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing.Attributes;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -35,6 +39,102 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         IApizrCommonOptions IApizrCommonOptionsBuilder.ApizrOptions => Options;
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithConfiguration(IConfiguration configuration)
+            => WithConfiguration(configuration?.GetSection("Apizr"));
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithConfiguration(IConfigurationSection configurationSection)
+        {
+            if (configurationSection is not null)
+            {
+                var isApizrSection = configurationSection.Key == "Apizr";
+                if (isApizrSection)
+                    Options.ApizrConfigurationSection = configurationSection;
+
+                var configs = configurationSection.GetChildren().Where(config =>
+                    !isApizrSection || config.Key == "Common");
+                foreach (var config in configs)
+                {
+                    switch (config.Key)
+                    {
+                        case "BaseAddress":
+                            WithBaseAddress(config.Value);
+                            break;
+                        case "BasePath":
+                            WithBasePath(config.Value);
+                            break;
+                        case "OperationTimeout":
+                            WithOperationTimeout(TimeSpan.Parse(config.Value!));
+                            break;
+                        case "RequestTimeout":
+                            WithRequestTimeout(TimeSpan.Parse(config.Value!));
+                            break;
+                        case "HttpTracerMode":
+                            Options.HttpTracerModeFactory = () => (HttpTracerMode)Enum.Parse(typeof(HttpTracerMode), config.Value!);
+                            break;
+                        case "TrafficVerbosity":
+                            Options.TrafficVerbosityFactory = () => (HttpMessageParts)Enum.Parse(typeof(HttpMessageParts), config.Value!);
+                            break;
+                        case "LogLevels":
+                            Options.LogLevelsFactory = () => config.GetChildren().Select(c => (LogLevel)Enum.Parse(typeof(LogLevel), c.Value!)).ToArray();
+                            break;
+                        case "Headers":
+                            WithHeaders(config.GetChildren().Select(c => c.Value!).ToList());
+                            break;
+                        case "LoggedHeadersRedactionNames":
+                            WithLoggedHeadersRedactionNames(config.GetChildren().Select(c => c.Value!).ToList());
+                            break;
+                        case "ContinueOnCapturedContext":
+                            WithResilienceContextOptions(options => options.ContinueOnCapturedContext(bool.Parse(config.Value!)));
+                            break;
+                        case "ReturnContextToPoolOnComplete":
+                            WithResilienceContextOptions(options => options.ReturnToPoolOnComplete(bool.Parse(config.Value!)));
+                            break;
+                        case "ResiliencePipelineKeys":
+                            WithResiliencePipelineKeys(config.GetChildren().Select(c => c.Value!).ToArray());
+                            break;
+                        case "ResiliencePipelineOptions":
+                        {
+                            var resiliencePipelineOptions = config.GetChildren().ToList();
+                            foreach (var resiliencePipelineOption in resiliencePipelineOptions)
+                            {
+                                if (!ApizrRequestMethod.TryParse(resiliencePipelineOption.Key, out var requestMethod))
+                                    continue;
+
+                                var resiliencePipelineKeys = resiliencePipelineOption.GetChildren().Select(c => c.Value!).ToArray();
+                                WithResiliencePipelineKeys(resiliencePipelineKeys, [requestMethod]);
+                            }
+
+                            break;
+                        }
+                        case "Caching":
+                        {
+                            var cacheSection = config.GetChildren().ToList();
+                            var modeValue = cacheSection.FirstOrDefault(c => c.Key == "Mode")?.Value;
+                            var mode = !string.IsNullOrEmpty(modeValue) ? (CacheMode)Enum.Parse(typeof(CacheMode), modeValue) : CacheMode.GetAndFetch;
+                            var lifeSpanValue = cacheSection.FirstOrDefault(c => c.Key == "LifeSpan")?.Value;
+                            var lifeSpan = !string.IsNullOrEmpty(lifeSpanValue) ? TimeSpan.Parse(lifeSpanValue) : TimeSpan.Zero;
+                            var shouldInvalidateOnErrorValue = cacheSection.FirstOrDefault(c => c.Key == "ShouldInvalidateOnError")?.Value;
+                            var shouldInvalidateOnError = !string.IsNullOrEmpty(shouldInvalidateOnErrorValue) && bool.Parse(shouldInvalidateOnErrorValue);
+                            WithCaching(mode, lifeSpan, shouldInvalidateOnError);
+                            break;
+                        }
+                        default:
+                        {
+                            if (!config.GetChildren().Any())
+                                throw new ArgumentOutOfRangeException(config.Key, $"Apizr does not handle any {config.Key} option. Make sure that your key target an option that Apizr could configure.");
+
+                            WithConfiguration(config);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return this;
+        }
 
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithBaseAddress(string baseAddress)
@@ -133,24 +233,16 @@ namespace Apizr.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithHttpClient(Func<HttpMessageHandler, Uri, HttpClient> httpClientFactory)
-        {
-            Options.HttpClientFactory = httpClientFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler(
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
-            => AddDelegatingHandler((logger, options) =>
+            => WithDelegatingHandler((logger, options) =>
                 new AuthenticationHandler(logger, options, refreshTokenFactory));
 
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
             Func<ILogger, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
             where TAuthenticationHandler : AuthenticationHandlerBase
-            => AddDelegatingHandler(authenticationHandlerFactory);
+            => WithDelegatingHandler(authenticationHandlerFactory);
 
         /// <inheritdoc />
         public IApizrCommonOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(TSettingsService settingsService,
@@ -162,7 +254,7 @@ namespace Apizr.Configuring.Common
             Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> tokenProperty, Func<TTokenService> tokenServiceFactory,
             Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod)
-            => AddDelegatingHandler((logger, options) =>
+            => WithDelegatingHandler((logger, options) =>
                 new AuthenticationHandler<TSettingsService, TTokenService>(logger,
                     options,
                     settingsServiceFactory, tokenProperty,
@@ -191,34 +283,76 @@ namespace Apizr.Configuring.Common
             Func<TSettingsService> settingsServiceFactory,
             Expression<Func<TSettingsService, string>> tokenProperty,
             Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
-            => AddDelegatingHandler((logger, options) =>
+            => WithDelegatingHandler((logger, options) =>
                 new AuthenticationHandler<TSettingsService>(logger, options, settingsServiceFactory, tokenProperty,
                     refreshTokenFactory));
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler
-            => AddDelegatingHandler((_, _) => delegatingHandler);
+        public IApizrCommonOptionsBuilder WithDelegatingHandler<THandler>(THandler delegatingHandler,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler
+            => WithDelegatingHandler((_, _) => delegatingHandler, strategy);
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler
-            => AddDelegatingHandler((logger, _) => delegatingHandlerFactory(logger));
+        public IApizrCommonOptionsBuilder WithDelegatingHandler<THandler>(
+            Func<ILogger, THandler> delegatingHandlerFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler
+            => WithDelegatingHandler((logger, _) => delegatingHandlerFactory(logger), strategy);
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder AddDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory) where THandler : DelegatingHandler
+        public IApizrCommonOptionsBuilder WithDelegatingHandler<THandler>(
+            Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler
         {
-            Options.DelegatingHandlersFactories[typeof(THandler)] = delegatingHandlerFactory;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.DelegatingHandlersFactories[typeof(THandler)] ??= delegatingHandlerFactory;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    Options.DelegatingHandlersFactories[typeof(THandler)] = delegatingHandlerFactory;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                {
+                    Options.DelegatingHandlersFactories.Clear();
+                    Options.DelegatingHandlersFactories[typeof(THandler)] = delegatingHandlerFactory;
+                }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
 
             return this;
         }
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithPolicyRegistry(IReadOnlyPolicyRegistry<string> policyRegistry)
-            => WithPolicyRegistry(() => policyRegistry);
+        public IApizrCommonOptionsBuilder WithHttpMessageHandler<THandler>(THandler httpMessageHandler) where THandler : HttpMessageHandler
+            => WithHttpMessageHandler((_, _) => httpMessageHandler);
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithPolicyRegistry(Func<IReadOnlyPolicyRegistry<string>> policyRegistryFactory)
+        public IApizrCommonOptionsBuilder WithHttpMessageHandler<THandler>(Func<ILogger, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler
+            => WithHttpMessageHandler((logger, _) => httpMessageHandlerFactory(logger));
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler
         {
-            Options.PolicyRegistryFactory = policyRegistryFactory;
+            if (httpMessageHandlerFactory is DelegatingHandler delegatingHandler)
+                return WithDelegatingHandler(delegatingHandler);
+
+            Options.HttpMessageHandlerFactory = httpMessageHandlerFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResiliencePipelineRegistry(
+            ResiliencePipelineRegistry<string> resiliencePipelineRegistry)
+            => WithResiliencePipelineRegistry(() => resiliencePipelineRegistry);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResiliencePipelineRegistry(Func<ResiliencePipelineRegistry<string>> resiliencePipelineRegistryFactory)
+        {
+            Options.ResiliencePipelineRegistryFactory = resiliencePipelineRegistryFactory;
 
             return this;
         }
@@ -334,60 +468,152 @@ namespace Apizr.Configuring.Common
                 () => loggingConfigurationFactory.Invoke().Item3);
 
         /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithHeaders(params string[] headers)
-            => WithHeaders(() => headers?.ToList());
-
-        /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithHeaders(Func<IList<string>> headersFactory)
-        {
-            if(Options.HeadersFactory == null)
-                Options.HeadersFactory = headersFactory;
-            else
-                Options.HeadersFactory += headersFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithTimeout(TimeSpan timeout)
-            => WithTimeout(() => timeout);
-
-        /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithTimeout(Func<TimeSpan> timeoutFactory)
-        {
-            Options.TimeoutFactory = timeoutFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IApizrCommonOptionsBuilder WithContext(Func<Context> contextFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+        public IApizrCommonOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add, 
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
         {
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.ContextFactory ??= contextFactory;
-                    break;
-                case ApizrDuplicateStrategy.Replace:
-                    Options.ContextFactory = contextFactory;
+                    Options.Headers[mode] ??= headers;
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if (Options.ContextFactory == null)
+                    if (Options.Headers.TryGetValue(mode, out var value))
                     {
-                        Options.ContextFactory = contextFactory;
+                        headers?.ToList().ForEach(header => value.Add(header));
                     }
                     else
                     {
-                        Options.ContextFactory = () => new Context(null,
-                            Options.ContextFactory.Invoke().Concat(contextFactory.Invoke().ToList())
-                                .ToDictionary(x => x.Key, x => x.Value));
+                        Options.Headers[mode] = headers;
                     }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.Headers[mode] = headers;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
             }
+            
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHeaders(Func<IList<string>> headersFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersFactories[(mode, scope)] ??= headersFactory;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersFactories.TryGetValue((mode, scope), out var previous))
+                    {
+                        Options.HeadersFactories[(mode, scope)] = () => previous().Concat(headersFactory()).ToList();
+                    }
+                    else
+                    {
+                        Options.HeadersFactories[(mode, scope)] = headersFactory;
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersFactories[(mode, scope)] = headersFactory;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHeaders<TSettingsService>(TSettingsService settingsService,
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+            => WithHeaders(() => settingsService, headerProperties, strategy, scope, mode);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithHeaders<TSettingsService>(Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>>[] headerProperties,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrLifetimeScope scope = ApizrLifetimeScope.Api, 
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set)
+        {
+            var settingsService = settingsServiceFactory.Invoke();
+            var headersFactories = headerProperties.Select(exp => exp.Compile());
+
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.HeadersFactories[(mode, scope)] ??= () => headersFactories
+                        .Select(headerFactory => headerFactory.Invoke(settingsService))
+                        .ToList();
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.HeadersFactories.TryGetValue((mode, scope), out var previous))
+                    {
+                        Options.HeadersFactories[(mode, scope)] = () => previous()
+                            .Concat(headersFactories.Select(headerFactory => headerFactory.Invoke(settingsService)))
+                            .ToList();
+                    }
+                    else
+                    {
+                        Options.HeadersFactories[(mode, scope)] = () => headersFactories
+                            .Select(headerFactory => headerFactory.Invoke(settingsService))
+                            .ToList();
+                    }
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.HeadersFactories[(mode, scope)] = () => headersFactories
+                        .Select(headerFactory => headerFactory.Invoke(settingsService))
+                        .ToList();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithOperationTimeout(TimeSpan timeout)
+            => WithOperationTimeout(() => timeout);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithOperationTimeout(Func<TimeSpan> timeoutFactory)
+        {
+            Options.OperationTimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithRequestTimeout(TimeSpan timeout)
+            => WithRequestTimeout(() => timeout);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithRequestTimeout(Func<TimeSpan> timeoutFactory)
+        {
+            Options.RequestTimeoutFactory = timeoutFactory;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue value)
+            => WithResilienceProperty(key, () => value);
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<TValue> valueFactory)
+        {
+            ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory();
 
             return this;
         }
@@ -416,8 +642,128 @@ namespace Apizr.Configuring.Common
             return this;
         }
 
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+        {
+            var options = Options as IApizrGlobalSharedOptionsBase;
+            if (options.ContextOptionsBuilder == null)
+            {
+                options.ContextOptionsBuilder = contextOptionsBuilder;
+            }
+            else
+            {
+                options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithLoggedHeadersRedactionNames(IEnumerable<string> redactedLoggedHeaderNames, 
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            var sensitiveHeaders = new HashSet<string>(redactedLoggedHeaderNames, StringComparer.OrdinalIgnoreCase);
+
+            return WithLoggedHeadersRedactionRule(header => sensitiveHeaders.Contains(header), strategy);
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithLoggedHeadersRedactionRule(Func<string, bool> shouldRedactHeaderValue,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.ShouldRedactHeaderValue ??= shouldRedactHeaderValue;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.ShouldRedactHeaderValue == null)
+                    {
+                        Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    }
+                    else
+                    {
+                        var previous = Options.ShouldRedactHeaderValue;
+                        Options.ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
+                    }
+
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys,
+            IEnumerable<ApizrRequestMethod> methodScope = null,
+            ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+        {
+            methodScope ??= [ApizrRequestMethod.All];
+
+            switch (duplicateStrategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    if (Options.ResiliencePipelineOptions.Count == 0)
+                        Options.ResiliencePipelineOptions[ApizrConfigurationSource.CommonOption] = methodScope
+                            .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) {RequestMethod = method})
+                            .Cast<ResiliencePipelineAttributeBase>()
+                            .ToArray();
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.ResiliencePipelineOptions.TryGetValue(ApizrConfigurationSource.CommonOption, out var attributes))
+                    {
+                        foreach (var method in methodScope)
+                        {
+                            var attribute = attributes.FirstOrDefault(attribute => attribute.RequestMethod == method);
+                            if(attribute != null)
+                                attribute.RegistryKeys = attribute.RegistryKeys.Union(resiliencePipelineKeys).ToArray();
+                            else
+                                attributes = attributes.Concat([new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method }]).ToArray();
+                        }
+
+                        Options.ResiliencePipelineOptions[ApizrConfigurationSource.CommonOption] = attributes;
+                    }
+                    else
+                    {
+                        Options.ResiliencePipelineOptions[ApizrConfigurationSource.CommonOption] = methodScope
+                            .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method })
+                            .Cast<ResiliencePipelineAttributeBase>()
+                            .ToArray();
+                    }
+
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.ResiliencePipelineOptions.Clear();
+                    Options.ResiliencePipelineOptions[ApizrConfigurationSource.CommonOption] = methodScope
+                        .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method })
+                        .Cast<ResiliencePipelineAttributeBase>()
+                        .ToArray();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(duplicateStrategy), duplicateStrategy, null);
+            }
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrCommonOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null,
+            bool shouldInvalidateOnError = false)
+        {
+            Options.CacheOptions[ApizrConfigurationSource.CommonOption] = new CacheAttribute(mode, lifeSpan, shouldInvalidateOnError);
+
+            return this;
+        }
+
         #region Internal
-        
+
         void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
         
         void IApizrInternalRegistrationOptionsBuilder.SetPrimaryHttpMessageHandler(Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> primaryHandlerFactory)
@@ -427,7 +773,7 @@ namespace Apizr.Configuring.Common
 
         /// <inheritdoc />
         void IApizrInternalRegistrationOptionsBuilder.AddDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> handlerFactory) 
-            => AddDelegatingHandler((_, opt) => handlerFactory.Invoke(opt));
+            => WithDelegatingHandler((_, opt) => handlerFactory.Invoke(opt));
 
         #endregion
     }

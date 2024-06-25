@@ -18,6 +18,7 @@ namespace Apizr.Logging
     {
         private readonly IList<DelegatingHandler> _handlersList = new List<DelegatingHandler>();
         private readonly ExtendedHttpTracerHandler _rootHandler;
+        private HttpMessageHandler _lastHandler;
 
         /// <summary>
         /// Underlying instance of the <typeparamref name="T:HttpTracer.HttpHandlerBuilder"/> class.
@@ -51,14 +52,23 @@ namespace Apizr.Logging
         /// </summary>
         /// <param name="handler"></param>
         /// <returns></returns>
-        public ExtendedHttpHandlerBuilder AddHandler(DelegatingHandler handler)
+        public ExtendedHttpHandlerBuilder AddHandler(HttpMessageHandler handler)
         {
-            if (handler is ExtendedHttpTracerHandler) throw new ArgumentException($"Can't add handler of type {nameof(HttpTracerHandler)}.");
+            if (handler is ExtendedHttpTracerHandler) 
+                throw new ArgumentException($"Can't add handler of type {nameof(HttpTracerHandler)}.");
 
-            if (_handlersList.Any())
-                _handlersList.Last().InnerHandler = handler;
+            if (handler is DelegatingHandler delegatingHandler)
+            {
+                if (_handlersList.Any())
+                    _handlersList.Last().InnerHandler = delegatingHandler;
 
-            _handlersList.Add(handler);
+                _handlersList.Add(delegatingHandler); 
+            }
+            else
+            {
+                _lastHandler = handler;
+            }
+
             return this;
         }
 
@@ -68,6 +78,9 @@ namespace Apizr.Logging
         /// <returns></returns>
         public DelegatingHandler Build()
         {
+            if(_lastHandler != null)
+                _rootHandler.InnerHandler = _lastHandler;
+
             if (_handlersList.Any())
                 _handlersList.Last().InnerHandler = _rootHandler;
             else

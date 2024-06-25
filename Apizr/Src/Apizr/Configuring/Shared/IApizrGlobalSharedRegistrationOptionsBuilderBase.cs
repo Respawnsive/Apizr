@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Apizr.Logging;
-using Microsoft.Extensions.Logging;
-using Polly;
+using Microsoft.Extensions.Configuration;
 
 namespace Apizr.Configuring.Shared
 {
@@ -21,6 +20,20 @@ namespace Apizr.Configuring.Shared
         where TApizrOptions : IApizrGlobalSharedRegistrationOptionsBase
         where TApizrOptionsBuilder : IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
     {
+        /// <summary>
+        /// Set options from configuration
+        /// </summary>
+        /// <param name="configuration">The configuration to set options from</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithConfiguration(IConfiguration configuration);
+
+        /// <summary>
+        /// Set options from a specific configuration section
+        /// </summary>
+        /// <param name="configurationSection">The configuration section to set options from</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithConfiguration(IConfigurationSection configurationSection);
+
         /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>
@@ -59,18 +72,40 @@ namespace Apizr.Configuring.Shared
         TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
 
         /// <summary>
-        /// Add a custom delegating handler
+        /// Add a custom delegating handler inheriting from <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
         /// <param name="delegatingHandler">A delegating handler</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder AddDelegatingHandler<THandler>(THandler delegatingHandler) where THandler : DelegatingHandler;
+        TApizrOptionsBuilder WithDelegatingHandler<THandler>(THandler delegatingHandler,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler;
 
         /// <summary>
-        /// Set the Polly Context
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call)
         /// </summary>
-        /// <param name="contextFactory">The Polly Context to pass through it all</param>
-        /// <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
+        /// <param name="httpMessageHandler">A http message handler</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithContext(Func<Context> contextFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge);
+        TApizrOptionsBuilder WithHttpMessageHandler<THandler>(THandler httpMessageHandler) where THandler : HttpMessageHandler;
+
+        /// <summary>
+        /// Add some headers to the request
+        /// </summary>
+        /// <param name="headers">Headers to add to the request</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
+        /// <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithHeaders(IList<string> headers,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add,
+            ApizrRegistrationMode mode = ApizrRegistrationMode.Set);
+
+        /// <summary>
+        /// Apply some resilience strategies by getting pipelines from registry with key matching.
+        /// </summary>
+        /// <param name="resiliencePipelineKeys">Resilience pipeline keys from the registry.</param>
+        /// <param name="methodScope">Http or Crud methods to apply pipelines on (default: null = All)</param>
+        /// <param name="duplicateStrategy">The duplicate strategy if there's any other names already (default: Add)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys, IEnumerable<ApizrRequestMethod> methodScope = null, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add);
+
     }
 }

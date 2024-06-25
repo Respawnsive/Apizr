@@ -23,824 +23,1279 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Request
-  summary: "\nBuilder options available at request level\n"
+  summary: Builder options available at request level
   example: []
   syntax:
-    content: 'public interface IApizrRequestOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> : IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, IApizrRequestOptionsBuilderBase, IApizrGlobalSharedOptionsBuilderBase where TApizrOptions : IApizrRequestOptionsBase where TApizrOptionsBuilder : IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>'
+    content: 'public interface IApizrRequestOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder> : IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, IApizrRequestOptionsBuilderBase, IApizrGlobalSharedOptionsBuilderBase where TApizrOptions : IApizrRequestOptionsBase where TApizrOptionsBuilder : IApizrRequestOptionsBuilderBase<out TApizrOptions, out TApizrOptionsBuilder>'
     typeParameters:
     - id: TApizrOptions
     - id: TApizrOptionsBuilder
-    content.vb: >-
-      Public Interface IApizrRequestOptionsBuilderBase(Of Out TApizrOptions As IApizrRequestOptionsBase, Out TApizrOptionsBuilder As IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-          Inherits IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), IApizrRequestOptionsBuilderBase
+    content.vb: Public Interface IApizrRequestOptionsBuilderBase(Of Out TApizrOptions As IApizrRequestOptionsBase, Out TApizrOptionsBuilder As IApizrRequestOptionsBuilderBase(Of Out TApizrOptions, Out TApizrOptionsBuilder)) Inherits IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), IApizrRequestOptionsBuilderBase, IApizrGlobalSharedOptionsBuilderBase
   inheritedMembers:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithExCatching``1(System.Action{Apizr.ApizrException{{TResult}}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithHandlerParameter(System.String,System.Object)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},{TValue})
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithHeaders(System.String[])
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithTimeout(System.TimeSpan)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithOperationTimeout(System.TimeSpan)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithRequestTimeout(System.TimeSpan)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
   extensionMethods:
+  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(System.String)
+  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
+  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
+  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
   - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
   - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
-  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
-  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
-  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(System.String)
+  - Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Logging.HttpMessageParts)
   nameWithType.vb: IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder)
   name.vb: IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder)
 references:
 - uid: Apizr.Configuring.Request
   commentId: N:Apizr.Configuring.Request
+  href: Apizr.html
   name: Apizr.Configuring.Request
   nameWithType: Apizr.Configuring.Request
   fullName: Apizr.Configuring.Request
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Request
+    name: Request
+    href: Apizr.Configuring.Request.html
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
   definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
-  name: WithExCatching(Action<ApizrException>, Boolean, ApizrDuplicateStrategy)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(Action<ApizrException>, Boolean, ApizrDuplicateStrategy)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(System.Action<Apizr.ApizrException>, System.Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithExCatching(Action<ApizrException>, bool, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(Action<ApizrException>, bool, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(System.Action<Apizr.ApizrException>, bool, Apizr.Configuring.ApizrDuplicateStrategy)
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Action(Of ApizrException), Boolean, ApizrDuplicateStrategy)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(System.Action(Of Apizr.ApizrException), System.Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(System.Action(Of Apizr.ApizrException), Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: WithExCatching(Action(Of ApizrException), Boolean, ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithExCatching
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
+    name: bool
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithExCatching
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Boolean
     name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithExCatching``1(System.Action{Apizr.ApizrException{{TResult}}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
   definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
-  name: WithExCatching<TResult>(Action<ApizrException<TResult>>, Boolean, ApizrDuplicateStrategy)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(Action<ApizrException<TResult>>, Boolean, ApizrDuplicateStrategy)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(System.Action<Apizr.ApizrException<TResult>>, System.Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithExCatching<TResult>(Action<ApizrException<TResult>>, bool, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(Action<ApizrException<TResult>>, bool, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(System.Action<Apizr.ApizrException<TResult>>, bool, Apizr.Configuring.ApizrDuplicateStrategy)
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(Action(Of ApizrException(Of TResult)), Boolean, ApizrDuplicateStrategy)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(System.Action(Of Apizr.ApizrException(Of TResult)), System.Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(System.Action(Of Apizr.ApizrException(Of TResult)), Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: WithExCatching(Of TResult)(Action(Of ApizrException(Of TResult)), Boolean, ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithExCatching<TResult>
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithExCatching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: <
+  - name: TResult
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
+    name: bool
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithExCatching(Of TResult)
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithExCatching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+  - name: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Boolean
     name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithHandlerParameter(System.String,System.Object)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithHandlerParameter(System.String,System.Object)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
   definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
-  name: WithHandlerParameter(String, Object)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter(String, Object)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter(System.String, System.Object)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_
+  name: WithHandlerParameter(string, object)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter(string, object)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter(string, object)
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter(String, Object)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter(System.String, System.Object)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter(String, Object)
+  name.vb: WithHandlerParameter(String, Object)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithHandlerParameter(System.String,System.Object)
     name: WithHandlerParameter
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithHandlerParameter(System.String,System.Object)
     name: WithHandlerParameter
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{{TValue}},{TValue})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, TValue)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), TValue)
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePropertyKey.cs
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePropertyKey.cs
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
   definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
-  name: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[])
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())
-  name.vb: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___
+  name: WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, params Microsoft.Extensions.Logging.LogLevel[])
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging(HttpTracerMode, HttpMessageParts, ParamArray LogLevel())
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, ParamArray Microsoft.Extensions.Logging.LogLevel())
+  name.vb: WithLogging(HttpTracerMode, HttpMessageParts, ParamArray LogLevel())
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
     name: WithLogging
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Logging.HttpTracerMode
     name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Logging.HttpTracerMode.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Logging.HttpMessageParts
     name: HttpMessageParts
-    nameWithType: HttpMessageParts
-    fullName: Apizr.Logging.HttpMessageParts
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: ','
+  - name: " "
+  - name: params
+  - name: " "
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: '['
+  - name: ']'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
     name: WithLogging
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Logging.HttpTracerMode
     name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Logging.HttpTracerMode.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Logging.HttpMessageParts
     name: HttpMessageParts
-    nameWithType: HttpMessageParts
-    fullName: Apizr.Logging.HttpMessageParts
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: ','
+  - name: " "
+  - name: ParamArray
+  - name: " "
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: (
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithHeaders(System.String[])
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithHeaders(System.String[])
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithOperationTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithOperationTimeout(System.TimeSpan)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-  name: WithHeaders(String[])
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(String[])
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(System.String[])
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(String())
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(System.String())
-  name.vb: WithHeaders(String())
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithOperationTimeout_System_TimeSpan_
+  name: WithOperationTimeout(TimeSpan)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithOperationTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithOperationTimeout(System.TimeSpan)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithOperationTimeout(TimeSpan)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithOperationTimeout(System.TimeSpan)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-    name: WithHeaders
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithOperationTimeout(System.TimeSpan)
+    name: WithOperationTimeout
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithOperationTimeout_System_TimeSpan_
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-    name: WithHeaders
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithTimeout(System.TimeSpan)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithTimeout(System.TimeSpan)
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-  name: WithTimeout(TimeSpan)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout(TimeSpan)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout(System.TimeSpan)
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout(TimeSpan)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout(System.TimeSpan)
-  spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-    name: WithTimeout
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout
-  - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-    name: WithTimeout
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithOperationTimeout(System.TimeSpan)
+    name: WithOperationTimeout
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithOperationTimeout_System_TimeSpan_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-  parent: Apizr.FusilladeOptionsBuilderExtensions
-  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-  name: WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Priority)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Priority)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Fusillade.Priority)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Priority)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Fusillade.Priority)
-  name.vb: WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Priority)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithRequestTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithRequestTimeout(System.TimeSpan)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithRequestTimeout_System_TimeSpan_
+  name: WithRequestTimeout(TimeSpan)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithRequestTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithRequestTimeout(System.TimeSpan)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithRequestTimeout(TimeSpan)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithRequestTimeout(System.TimeSpan)
   spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
-    name: WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithRequestTimeout(System.TimeSpan)
+    name: WithRequestTimeout
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithRequestTimeout_System_TimeSpan_
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Fusillade.Priority
-    name: Priority
-    nameWithType: Priority
-    fullName: Fusillade.Priority
+  - uid: System.TimeSpan
+    name: TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
-    name: WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithRequestTimeout(System.TimeSpan)
+    name: WithRequestTimeout
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithRequestTimeout_System_TimeSpan_
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Fusillade.Priority
-    name: Priority
-    nameWithType: Priority
-    fullName: Fusillade.Priority
+  - uid: System.TimeSpan
+    name: TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-  parent: Apizr.FusilladeOptionsBuilderExtensions
-  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-  name: WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Int32)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Int32)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(System.Int32)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Int32)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(System.Int32)
-  name.vb: WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Int32)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__
+  name: WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions(System.Action<Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder>)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions(System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder))
+  name.vb: WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
   spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
-    name: WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
-    name: WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
-  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
-  parent: Apizr.FileTransferOptionsBuilderExtensions
-  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
-  name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>()
-  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>()
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>()
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))()
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))()
-  name.vb: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))()
-  spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
-    name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
-    name: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  parent: Apizr.FileTransferOptionsBuilderExtensions
-  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Action<ApizrProgressEventArgs>)
-  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Action<ApizrProgressEventArgs>)
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Action(Of ApizrProgressEventArgs))
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
-  name.vb: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Action(Of ApizrProgressEventArgs))
-  spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-    name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-  - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    href: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-    name: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    href: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder.html
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
-  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
-  parent: Apizr.FileTransferOptionsBuilderExtensions
-  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
-  name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrProgress)
-  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrProgress)
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Progressing.IApizrProgress)
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrProgress)
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Progressing.IApizrProgress)
-  name.vb: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrProgress)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable<string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable(Of String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
-    name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionNames
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Apizr.Progressing.IApizrProgress
-    name: IApizrProgress
-    nameWithType: IApizrProgress
-    fullName: Apizr.Progressing.IApizrProgress
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
-    name: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionNames
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Apizr.Progressing.IApizrProgress
-    name: IApizrProgress
-    nameWithType: IApizrProgress
-    fullName: Apizr.Progressing.IApizrProgress
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionRule(System.Func<string, bool>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionRule(System.Func(Of String, Boolean), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionRule
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionRule
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  name: WithCaching(CacheMode, TimeSpan?, bool)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(CacheMode, TimeSpan?, bool)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, bool)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(CacheMode, TimeSpan?, Boolean)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
+  name.vb: WithCaching(CacheMode, TimeSpan?, Boolean)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
 - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(System.String)
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
   parent: Apizr.FileTransferOptionsBuilderExtensions
   definition: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
-  name: WithDynamicPath<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(String)
-  nameWithType: FileTransferOptionsBuilderExtensions.WithDynamicPath<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(String)
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(System.String)
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithDynamicPath(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(String)
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(System.String)
-  name.vb: WithDynamicPath(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(String)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithDynamicPath__1___0_System_String_
+  name: WithDynamicPath<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, string)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithDynamicPath<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, string)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, string)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithDynamicPath(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), String)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), String)
+  name.vb: WithDynamicPath(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), String)
   spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(System.String)
-    name: WithDynamicPath<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithDynamicPath<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},System.String)
+    name: WithDynamicPath
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithDynamicPath__1___0_System_String_
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: ','
+  - name: " "
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(System.String)
-    name: WithDynamicPath(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    nameWithType: FileTransferOptionsBuilderExtensions.WithDynamicPath(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},System.String)
+    name: WithDynamicPath
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithDynamicPath__1___0_System_String_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: ','
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
+  name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
+  name.vb: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
+  name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, IApizrProgress)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, IApizrProgress)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, Apizr.Progressing.IApizrProgress)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), IApizrProgress)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Apizr.Progressing.IApizrProgress)
+  name.vb: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), IApizrProgress)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},Apizr.Progressing.IApizrProgress)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Progressing.IApizrProgress
+    name: IApizrProgress
+    href: Apizr.Progressing.IApizrProgress.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},Apizr.Progressing.IApizrProgress)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Progressing.IApizrProgress
+    name: IApizrProgress
+    href: Apizr.Progressing.IApizrProgress.html
+  - name: )
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  parent: Apizr.FileTransferOptionsBuilderExtensions
+  definition: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  name: WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, Action<ApizrProgressEventArgs>)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, Action<ApizrProgressEventArgs>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Action(Of ApizrProgressEventArgs))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
+  name.vb: WithProgress(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Action(Of ApizrProgressEventArgs))
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  name: WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Fusillade.Priority)
+  name.vb: WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Priority)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},Fusillade.Priority)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Fusillade.Priority
+    name: Priority
     isExternal: true
   - name: )
-    nameWithType: )
-    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},Fusillade.Priority)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Fusillade.Priority
+    name: Priority
+    isExternal: true
+  - name: )
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  parent: Apizr.FusilladeOptionsBuilderExtensions
+  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  name: WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, int)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, int)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, int)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Integer)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Integer)
+  name.vb: WithPriority(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Integer)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},System.Int32)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},System.Int32)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2.Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  parent: Apizr.Logging.HttpMessagePartsExtensions
+  definition: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  name: IgnoreMessageParts<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.IgnoreMessageParts<IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts<Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>>(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>, Apizr.Logging.HttpMessageParts)
+  nameWithType.vb: HttpMessagePartsExtensions.IgnoreMessageParts(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), HttpMessageParts)
+  fullName.vb: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), Apizr.Logging.HttpMessageParts)
+  name.vb: IgnoreMessageParts(Of IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder))(IApizrRequestOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder), HttpMessageParts)
+  spec.csharp:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: <
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase{`0,`1},Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase`2
+    name: IApizrRequestOptionsBuilderBase
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TApizrOptions
+  - name: ','
+  - name: " "
+  - name: TApizrOptionsBuilder
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  name: WithExCatching(Action<ApizrException>, Boolean, ApizrDuplicateStrategy)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(Action<ApizrException>, Boolean, ApizrDuplicateStrategy)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(System.Action<Apizr.ApizrException>, System.Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithExCatching(Action<ApizrException>, bool, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(Action<ApizrException>, bool, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(System.Action<Apizr.ApizrException>, bool, Apizr.Configuring.ApizrDuplicateStrategy)
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Action(Of ApizrException), Boolean, ApizrDuplicateStrategy)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(System.Action(Of Apizr.ApizrException), System.Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(System.Action(Of Apizr.ApizrException), Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: WithExCatching(Action(Of ApizrException), Boolean, ApizrDuplicateStrategy)
   spec.csharp:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithExCatching
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
+    name: bool
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithExCatching
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException.html
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Boolean
     name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{{TApizrOptions},{TApizrOptionsBuilder}}
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{`0,`1}
   parent: Apizr.Configuring.Shared
   definition: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html
   name: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
   nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
@@ -850,484 +1305,585 @@ references:
   spec.csharp:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
     name: IApizrGlobalSharedOptionsBuilderBase
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApizrOptions
-    nameWithType: TApizrOptions
-    fullName: TApizrOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrOptionsBuilder
-    nameWithType: TApizrOptionsBuilder
-    fullName: TApizrOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
     name: IApizrGlobalSharedOptionsBuilderBase
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApizrOptions
-    nameWithType: TApizrOptions
-    fullName: TApizrOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrOptionsBuilder
-    nameWithType: TApizrOptionsBuilder
-    fullName: TApizrOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  name: WithExCatching<TResult>(Action<ApizrException<TResult>>, Boolean, ApizrDuplicateStrategy)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(Action<ApizrException<TResult>>, Boolean, ApizrDuplicateStrategy)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(System.Action<Apizr.ApizrException<TResult>>, System.Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithExCatching<TResult>(Action<ApizrException<TResult>>, bool, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(Action<ApizrException<TResult>>, bool, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(System.Action<Apizr.ApizrException<TResult>>, bool, Apizr.Configuring.ApizrDuplicateStrategy)
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(Action(Of ApizrException(Of TResult)), Boolean, ApizrDuplicateStrategy)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(System.Action(Of Apizr.ApizrException(Of TResult)), System.Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(System.Action(Of Apizr.ApizrException(Of TResult)), Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: WithExCatching(Of TResult)(Action(Of ApizrException(Of TResult)), Boolean, ApizrDuplicateStrategy)
   spec.csharp:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithExCatching<TResult>
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>
+    name: WithExCatching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: <
+  - name: TResult
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
+    href: Apizr.ApizrException-1.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
+    name: bool
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
-    name: WithExCatching(Of TResult)
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)
+    name: WithExCatching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+  - name: (
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.ApizrException`1
     name: ApizrException
-    nameWithType: ApizrException
-    fullName: Apizr.ApizrException
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - uid: System.Boolean
     name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
   - uid: Apizr.Configuring.ApizrDuplicateStrategy
     name: ApizrDuplicateStrategy
-    nameWithType: ApizrDuplicateStrategy
-    fullName: Apizr.Configuring.ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
   isExternal: true
-  name: WithHandlerParameter(String, Object)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter(String, Object)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter(System.String, System.Object)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_
+  name: WithHandlerParameter(string, object)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter(string, object)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter(string, object)
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter(String, Object)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter(System.String, System.Object)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter(String, Object)
+  name.vb: WithHandlerParameter(String, Object)
   spec.csharp:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
     name: WithHandlerParameter
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHandlerParameter
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+    name: object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
     name: WithHandlerParameter
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHandlerParameter
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
   - uid: System.Object
     name: Object
-    nameWithType: Object
-    fullName: System.Object
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_
+  name: WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue>, TValue)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceProperty<TValue>(Polly.ResiliencePropertyKey<TValue>, TValue)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceProperty(Of TValue)(Polly.ResiliencePropertyKey(Of TValue), TValue)
+  name.vb: WithResilienceProperty(Of TValue)(ResiliencePropertyKey(Of TValue), TValue)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePropertyKey.cs
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)
+    name: WithResilienceProperty
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: (
+  - uid: Polly.ResiliencePropertyKey`1
+    name: ResiliencePropertyKey
+    isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/ResiliencePropertyKey.cs
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
   isExternal: true
-  name: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging(HttpTracerMode, HttpMessageParts, LogLevel[])
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel[])
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, Microsoft.Extensions.Logging.LogLevel())
-  name.vb: WithLogging(HttpTracerMode, HttpMessageParts, LogLevel())
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___
+  name: WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, params Microsoft.Extensions.Logging.LogLevel[])
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging(HttpTracerMode, HttpMessageParts, ParamArray LogLevel())
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging(Apizr.Logging.HttpTracerMode, Apizr.Logging.HttpMessageParts, ParamArray Microsoft.Extensions.Logging.LogLevel())
+  name.vb: WithLogging(HttpTracerMode, HttpMessageParts, ParamArray LogLevel())
   spec.csharp:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
     name: WithLogging
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLogging
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Logging.HttpTracerMode
     name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Logging.HttpTracerMode.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Logging.HttpMessageParts
     name: HttpMessageParts
-    nameWithType: HttpMessageParts
-    fullName: Apizr.Logging.HttpMessageParts
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: ','
+  - name: " "
+  - name: params
+  - name: " "
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: '['
+  - name: ']'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])
     name: WithLogging
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLogging
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: Apizr.Logging.HttpTracerMode
     name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Logging.HttpTracerMode.html
+  - name: ','
+  - name: " "
   - uid: Apizr.Logging.HttpMessageParts
     name: HttpMessageParts
-    nameWithType: HttpMessageParts
-    fullName: Apizr.Logging.HttpMessageParts
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: ','
+  - name: " "
+  - name: ParamArray
+  - name: " "
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: (
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
   isExternal: true
-  name: WithHeaders(String[])
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(String[])
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders(System.String[])
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(String())
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders(System.String())
-  name.vb: WithHeaders(String())
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithOperationTimeout_System_TimeSpan_
+  name: WithOperationTimeout(TimeSpan)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithOperationTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithOperationTimeout(System.TimeSpan)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithOperationTimeout(TimeSpan)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithOperationTimeout(System.TimeSpan)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-    name: WithHeaders
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithHeaders
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+    name: WithOperationTimeout
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithOperationTimeout_System_TimeSpan_
   - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHeaders(System.String[])
-    name: WithHeaders
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHeaders
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-  isExternal: true
-  name: WithTimeout(TimeSpan)
-  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout(TimeSpan)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout(System.TimeSpan)
-  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout(TimeSpan)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout(System.TimeSpan)
-  spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-    name: WithTimeout
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithTimeout
-  - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithTimeout(System.TimeSpan)
-    name: WithTimeout
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithTimeout
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)
+    name: WithOperationTimeout
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithOperationTimeout_System_TimeSpan_
   - name: (
-    nameWithType: (
-    fullName: (
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
   isExternal: true
-  name: WithPriority<T>(T, Priority)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
-  name.vb: WithPriority(Of T)(T, Priority)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithRequestTimeout_System_TimeSpan_
+  name: WithRequestTimeout(TimeSpan)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithRequestTimeout(TimeSpan)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithRequestTimeout(System.TimeSpan)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithRequestTimeout(TimeSpan)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithRequestTimeout(System.TimeSpan)
   spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-    name: WithPriority<T>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+    name: WithRequestTimeout
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithRequestTimeout_System_TimeSpan_
   - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Fusillade.Priority
-    name: Priority
-    nameWithType: Priority
-    fullName: Fusillade.Priority
+  - uid: System.TimeSpan
+    name: TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
-    name: WithPriority(Of T)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)
+    name: WithRequestTimeout
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithRequestTimeout_System_TimeSpan_
   - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Fusillade.Priority
-    name: Priority
-    nameWithType: Priority
-    fullName: Fusillade.Priority
+  - uid: System.TimeSpan
+    name: TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.FusilladeOptionsBuilderExtensions
-  commentId: T:Apizr.FusilladeOptionsBuilderExtensions
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__
+  name: WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithResilienceContextOptions(System.Action<Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder>)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithResilienceContextOptions(System.Action(Of Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder))
+  name.vb: WithResilienceContextOptions(Action(Of IApizrResilienceContextOptionsBuilder))
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__
+  - name: (
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    href: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
+    name: WithResilienceContextOptions
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__
+  - name: (
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder
+    name: IApizrResilienceContextOptionsBuilder
+    href: Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder.html
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionNames(IEnumerable<string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable<string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable(Of String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionNames(IEnumerable(Of String), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionNames
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionNames
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionRule(Func<string, bool>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithLoggedHeadersRedactionRule(System.Func<string, bool>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithLoggedHeadersRedactionRule(System.Func(Of String, Boolean), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithLoggedHeadersRedactionRule(Func(Of String, Boolean), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionRule
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithLoggedHeadersRedactionRule
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  name: WithCaching(CacheMode, TimeSpan?, bool)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(CacheMode, TimeSpan?, bool)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, bool)
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(CacheMode, TimeSpan?, Boolean)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
+  name.vb: WithCaching(CacheMode, TimeSpan?, Boolean)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
+    name: WithCaching
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_
+  - name: (
+  - uid: Apizr.Caching.CacheMode
+    name: CacheMode
+    href: Apizr.Caching.CacheMode.html
+  - name: ','
+  - name: " "
+  - uid: System.TimeSpan
+    name: TimeSpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
+  - name: '?'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
+  isExternal: true
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithDynamicPath__1___0_System_String_
+  name: WithDynamicPath<T>(T, string)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithDynamicPath<T>(T, string)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath<T>(T, string)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithDynamicPath(Of T)(T, String)
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath(Of T)(T, String)
+  name.vb: WithDynamicPath(Of T)(T, String)
+  spec.csharp:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
+    name: WithDynamicPath
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithDynamicPath__1___0_System_String_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
+    name: WithDynamicPath
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithDynamicPath__1___0_System_String_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Apizr.FileTransferOptionsBuilderExtensions
+  commentId: T:Apizr.FileTransferOptionsBuilderExtensions
   parent: Apizr
-  name: FusilladeOptionsBuilderExtensions
-  nameWithType: FusilladeOptionsBuilderExtensions
-  fullName: Apizr.FusilladeOptionsBuilderExtensions
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-  isExternal: true
-  name: WithPriority<T>(T, Int32)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Int32)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, System.Int32)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Int32)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, System.Int32)
-  name.vb: WithPriority(Of T)(T, Int32)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-    name: WithPriority<T>
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
-    name: WithPriority(Of T)
-    nameWithType: FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-    fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+  href: Apizr.FileTransferOptionsBuilderExtensions.html
+  name: FileTransferOptionsBuilderExtensions
+  nameWithType: FileTransferOptionsBuilderExtensions
+  fullName: Apizr.FileTransferOptionsBuilderExtensions
 - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
   name: WithProgress<TBuilder>(TBuilder)
   nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder)
   fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder)
@@ -1336,113 +1892,29 @@ references:
   name.vb: WithProgress(Of TBuilder)(TBuilder)
   spec.csharp:
   - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
-    name: WithProgress<TBuilder>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
+  - name: <
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
+  - name: '>'
+  - name: (
+  - name: TBuilder
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0)
-    name: WithProgress(Of TBuilder)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.FileTransferOptionsBuilderExtensions
-  commentId: T:Apizr.FileTransferOptionsBuilderExtensions
-  parent: Apizr
-  name: FileTransferOptionsBuilderExtensions
-  nameWithType: FileTransferOptionsBuilderExtensions
-  fullName: Apizr.FileTransferOptionsBuilderExtensions
-- uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  isExternal: true
-  name: WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
-  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
-  name.vb: WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
-  spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-    name: WithProgress<TBuilder>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
   - name: (
-    nameWithType: (
-    fullName: (
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-    name: WithProgress(Of TBuilder)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Apizr.Progressing.ApizrProgressEventArgs
-    name: ApizrProgressEventArgs
-    nameWithType: ApizrProgressEventArgs
-    fullName: Apizr.Progressing.ApizrProgressEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
   commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
   name: WithProgress<TBuilder>(TBuilder, IApizrProgress)
   nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, IApizrProgress)
   fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, Apizr.Progressing.IApizrProgress)
@@ -1451,101 +1923,236 @@ references:
   name.vb: WithProgress(Of TBuilder)(TBuilder, IApizrProgress)
   spec.csharp:
   - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
-    name: WithProgress<TBuilder>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>
-  - name: (
-    nameWithType: (
-    fullName: (
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
+  - name: <
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
   - uid: Apizr.Progressing.IApizrProgress
     name: IApizrProgress
-    nameWithType: IApizrProgress
-    fullName: Apizr.Progressing.IApizrProgress
+    href: Apizr.Progressing.IApizrProgress.html
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
   - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,Apizr.Progressing.IApizrProgress)
-    name: WithProgress(Of TBuilder)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_Apizr_Progressing_IApizrProgress_
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
   - name: TBuilder
-    nameWithType: TBuilder
-    fullName: TBuilder
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: )
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
   - uid: Apizr.Progressing.IApizrProgress
     name: IApizrProgress
-    nameWithType: IApizrProgress
-    fullName: Apizr.Progressing.IApizrProgress
+    href: Apizr.Progressing.IApizrProgress.html
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
-  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
+- uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+  commentId: M:Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
   isExternal: true
-  name: WithDynamicPath<T>(T, String)
-  nameWithType: FileTransferOptionsBuilderExtensions.WithDynamicPath<T>(T, String)
-  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath<T>(T, System.String)
-  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithDynamicPath(Of T)(T, String)
-  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath(Of T)(T, System.String)
-  name.vb: WithDynamicPath(Of T)(T, String)
+  href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  name: WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
+  nameWithType: FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, Action<ApizrProgressEventArgs>)
+  fullName: Apizr.FileTransferOptionsBuilderExtensions.WithProgress<TBuilder>(TBuilder, System.Action<Apizr.Progressing.ApizrProgressEventArgs>)
+  nameWithType.vb: FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
+  fullName.vb: Apizr.FileTransferOptionsBuilderExtensions.WithProgress(Of TBuilder)(TBuilder, System.Action(Of Apizr.Progressing.ApizrProgressEventArgs))
+  name.vb: WithProgress(Of TBuilder)(TBuilder, Action(Of ApizrProgressEventArgs))
   spec.csharp:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
-    name: WithDynamicPath<T>
-    nameWithType: FileTransferOptionsBuilderExtensions.WithDynamicPath<T>
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath<T>
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
+  - name: <
+  - name: TBuilder
+  - name: '>'
   - name: (
-    nameWithType: (
-    fullName: (
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - name: TBuilder
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
+  - name: '>'
   - name: )
-    nameWithType: )
-    fullName: )
   spec.vb:
-  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath``1(``0,System.String)
-    name: WithDynamicPath(Of T)
-    nameWithType: FileTransferOptionsBuilderExtensions.WithDynamicPath(Of T)
-    fullName: Apizr.FileTransferOptionsBuilderExtensions.WithDynamicPath(Of T)
+  - uid: Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(``0,System.Action{Apizr.Progressing.ApizrProgressEventArgs})
+    name: WithProgress
+    href: Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__
   - name: (
-    nameWithType: (
-    fullName: (
+  - name: Of
+  - name: " "
+  - name: TBuilder
+  - name: )
+  - name: (
+  - name: TBuilder
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Progressing.ApizrProgressEventArgs
+    name: ApizrProgressEventArgs
+    href: Apizr.Progressing.ApizrProgressEventArgs.html
+  - name: )
+  - name: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+  isExternal: true
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  name: WithPriority<T>(T, Priority)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Priority)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, Fusillade.Priority)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Priority)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Fusillade.Priority)
+  name.vb: WithPriority(Of T)(T, Priority)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  - name: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Fusillade.Priority
+    name: Priority
     isExternal: true
   - name: )
-    nameWithType: )
-    fullName: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Fusillade.Priority
+    name: Priority
+    isExternal: true
+  - name: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions
+  commentId: T:Apizr.FusilladeOptionsBuilderExtensions
+  parent: Apizr
+  href: Apizr.FusilladeOptionsBuilderExtensions.html
+  name: FusilladeOptionsBuilderExtensions
+  nameWithType: FusilladeOptionsBuilderExtensions
+  fullName: Apizr.FusilladeOptionsBuilderExtensions
+- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+  isExternal: true
+  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  name: WithPriority<T>(T, int)
+  nameWithType: FusilladeOptionsBuilderExtensions.WithPriority<T>(T, int)
+  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriority<T>(T, int)
+  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Integer)
+  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriority(Of T)(T, Integer)
+  name.vb: WithPriority(Of T)(T, Integer)
+  spec.csharp:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,System.Int32)
+    name: WithPriority
+    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  commentId: M:Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+  href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  name: IgnoreMessageParts<T>(T, HttpMessageParts)
+  nameWithType: HttpMessagePartsExtensions.IgnoreMessageParts<T>(T, HttpMessageParts)
+  fullName: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts<T>(T, Apizr.Logging.HttpMessageParts)
+  nameWithType.vb: HttpMessagePartsExtensions.IgnoreMessageParts(Of T)(T, HttpMessageParts)
+  fullName.vb: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts(Of T)(T, Apizr.Logging.HttpMessageParts)
+  name.vb: IgnoreMessageParts(Of T)(T, HttpMessageParts)
+  spec.csharp:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Logging.HttpMessagePartsExtensions.IgnoreMessageParts``1(``0,Apizr.Logging.HttpMessageParts)
+    name: IgnoreMessageParts
+    href: Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Apizr.Logging.HttpMessageParts
+    name: HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
+  - name: )
+- uid: Apizr.Logging.HttpMessagePartsExtensions
+  commentId: T:Apizr.Logging.HttpMessagePartsExtensions
+  parent: Apizr.Logging
+  href: Apizr.Logging.HttpMessagePartsExtensions.html
+  name: HttpMessagePartsExtensions
+  nameWithType: HttpMessagePartsExtensions
+  fullName: Apizr.Logging.HttpMessagePartsExtensions
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html
   name: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
   nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>
@@ -1555,50 +2162,80 @@ references:
   spec.csharp:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
     name: IApizrGlobalSharedOptionsBuilderBase
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TApizrOptions
-    nameWithType: TApizrOptions
-    fullName: TApizrOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrOptionsBuilder
-    nameWithType: TApizrOptionsBuilder
-    fullName: TApizrOptionsBuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
     name: IApizrGlobalSharedOptionsBuilderBase
-    nameWithType: IApizrGlobalSharedOptionsBuilderBase
-    fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html
+  - name: (
+  - name: Of
+  - name: " "
   - name: TApizrOptions
-    nameWithType: TApizrOptions
-    fullName: TApizrOptions
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TApizrOptionsBuilder
-    nameWithType: TApizrOptionsBuilder
-    fullName: TApizrOptionsBuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
 - uid: Apizr
   commentId: N:Apizr
+  href: Apizr.html
   name: Apizr
   nameWithType: Apizr
   fullName: Apizr
+- uid: Apizr.Logging
+  commentId: N:Apizr.Logging
+  href: Apizr.html
+  name: Apizr.Logging
+  nameWithType: Apizr.Logging
+  fullName: Apizr.Logging
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Logging
+    name: Logging
+    href: Apizr.Logging.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Logging
+    name: Logging
+    href: Apizr.Logging.html

@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System;
+using System.Net.Http;
 using Apizr.Configuring.Manager;
 using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Proper;

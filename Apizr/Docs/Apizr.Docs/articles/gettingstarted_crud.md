@@ -171,23 +171,6 @@ var t2Manager = apizrRegistry.GetCrudManagerFor<T2, T2Key, T2ReadAllResult, T2Re
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            "TransientHttpError", 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizr(
         registry => registry
@@ -285,23 +268,6 @@ Or, you could use the managers directly from the registry instead of registering
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            "TransientHttpError", 
-            HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
-
     // Apizr registration
     services.AddApizr(
         registry => registry

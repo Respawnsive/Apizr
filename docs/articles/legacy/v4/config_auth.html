@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring authentication | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring authentication | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../../../resources/favicon.ico">
-    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../../../styles/docfx.css">
-    <link rel="stylesheet" href="../../../styles/main.css">
-    <meta property="docfx:navrel" content="../../../toc.html">
-    <meta property="docfx:tocrel" content="../../toc.html">
+    
+      <link rel="shortcut icon" href="../../../resources/favicon.ico">
+      <link rel="stylesheet" href="../../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../../styles/docfx.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc.html">
+      <meta property="docfx:tocrel" content="../../toc.html">
     
     <meta property="docfx:rel" content="../../../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../../../index.html">
                 <img id="logo" class="svg" src="../../../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,8 +77,8 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-authentication">Configuring authentication</h2>
 
+<h2 id="configuring-authentication">Configuring authentication</h2>
 <p>Apizr provides its own AuthenticationHandler to manage the authentication workflow .</p>
 <h3 id="defining">Defining</h3>
 <p>As Apizr is based on Refit, you can decorate your authenticated apis like so (here with bearer authorization):</p>
@@ -92,37 +92,43 @@
         Task&lt;HttpResponseMessage&gt; AuthBearerAsync();
     }
 }
-</code></pre><h3 id="configuring">Configuring</h3>
+</code></pre>
+<h3 id="configuring">Configuring</h3>
 <p>To activate this feature, you have to configure it thanks to the options builder:</p>
-<div class="tabGroup" id="tabgroup_Z3hMY5XsRv">
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_Z3hMY5XsRv_tabid-static" role="tab" aria-controls="tabpanel_Z3hMY5XsRv_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_Z3hMY5XsRv_tabid-extended" role="tab" aria-controls="tabpanel_Z3hMY5XsRv_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_Z3hMY5XsRv_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourSettingsService, YourSignInService&gt;(
     YourSettingsServiceInstance, settingsService =&gt; settingsService.Token, 
     YourSignInServiceInstance, signInService =&gt; signInService.SignInAsync)
-</code></pre><ul>
+</code></pre>
+<ul>
 <li><code>YourSettingsServiceInstance</code> should be replaced by whatever settings manager instance of your choice</li>
 <li><code>YourSignInServiceInstance</code> should be replaced by your service managing your login flow.</li>
 </ul>
 </section>
-<section id="tabpanel_Z3hMY5XsRv_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService, ISignInService&gt;(
     settingsService =&gt; settingsService.Token, 
     signInService =&gt; signInService.SignInAsync)
-</code></pre><ul>
+</code></pre>
+<ul>
 <li><code>settingsService</code> is your service managing settings</li>
 <li><code>signInService</code> is your service managing your login flow.</li>
 </ul>
 <p>Both services should be container registered as it will be resolved.</p>
 </section>
 </div>
+
 <p>In details:</p>
 <ul>
 <li><code>settingsService.Token</code> should be a public string property, saved locally on device.</li>
@@ -131,86 +137,100 @@
 <h4 id="more">More</h4>
 <p>You may want to deal with authentication configuration in some other ways.
 Here are all other authentication options:</p>
-<div class="tabGroup" id="tabgroup_Z3hMY5XsRv-1">
+<div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_Z3hMY5XsRv-1_tabid-static" role="tab" aria-controls="tabpanel_Z3hMY5XsRv-1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_Z3hMY5XsRv-1_tabid-extended" role="tab" aria-controls="tabpanel_Z3hMY5XsRv-1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
 </li>
 </ul>
-<section id="tabpanel_Z3hMY5XsRv-1_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
+
 <ul>
-<li><p>When you don&#39;t want Apizr to save the token into settings and want to deal with the refresh token call with a method:</p>
+<li>When you don't want Apizr to save the token into settings and want to deal with the refresh token call with a method:</li>
+</ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler(OnRefreshToken)
 ...
 private string OnRefreshTokden(HttpRequestMessage message)
 {
-  // whatever returning a refreshed string token
+    // whatever returning a refreshed string token
 }
-</code></pre></li>
-<li><p>When you want to deal with the refresh token call with a method:</p>
+</code></pre>
+<ul>
+<li>When you want to deal with the refresh token call with a method:</li>
+</ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourSettingsService&gt;(
-  YourSettingsServiceInstance, settingsService =&gt; settingsService.Token,
-  OnRefreshToken)
+    YourSettingsServiceInstance, settingsService =&gt; settingsService.Token,
+    OnRefreshToken)
 ...
 private string OnRefreshTokden(HttpRequestMessage message)
 {
-  // whatever returning a refreshed string token
+    // whatever returning a refreshed string token
 }
-</code></pre></li>
-<li><p>When you want to provide the settings service by a factory and deal with the refresh token call with a method:</p>
+</code></pre>
+<ul>
+<li>When you want to provide the settings service by a factory and deal with the refresh token call with a method:</li>
+</ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourSettingsService&gt;(
-  () =&gt; YourSettingsServiceInstance, settingsService =&gt; settingsService.Token,
-  OnRefreshToken)
+    () =&gt; YourSettingsServiceInstance, settingsService =&gt; settingsService.Token,
+    OnRefreshToken)
 ...
 private string OnRefreshTokden(HttpRequestMessage message)
 {
-  // whatever returning a refreshed string token
+    // whatever returning a refreshed string token
 }
-</code></pre></li>
-<li><p>When you want to provide both settings service and sign in service by a factory:</p>
+</code></pre>
+<ul>
+<li>When you want to provide both settings service and sign in service by a factory:</li>
+</ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourSettingsService, YourSignInService&gt;(
-  () =&gt; YourSettingsServiceInstance, settingsService =&gt; settingsService.Token, 
-  () =&gt; YourSignInServiceInstance, signInService =&gt; signInService.SignInAsync)
-</code></pre></li>
-<li><p>When you want to provide your own AuthenticationHandlerBase implementation:</p>
-<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourAuthenticationHandler&gt;(
-  (logger, options) =&gt; new YourAuthenticationHandler(...))
-</code></pre></li>
-</ul>
-</section>
-<section id="tabpanel_Z3hMY5XsRv-1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+    () =&gt; YourSettingsServiceInstance, settingsService =&gt; settingsService.Token, 
+    () =&gt; YourSignInServiceInstance, signInService =&gt; signInService.SignInAsync)
+</code></pre>
 <ul>
-<li><p>When you don&#39;t want Apizr to save the token into settings and want to deal with the refresh token call with a method:</p>
+<li>When you want to provide your own AuthenticationHandlerBase implementation:</li>
+</ul>
+<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourAuthenticationHandler&gt;(
+    (logger, options) =&gt; new YourAuthenticationHandler(...))
+</code></pre>
+</section>
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+
+<ul>
+<li>When you don't want Apizr to save the token into settings and want to deal with the refresh token call with a method:</li>
+</ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler(OnRefreshToken)
 ...
 private string OnRefreshTokden(HttpRequestMessage message)
 {
-  // whatever returning a refreshed string token
+    // whatever returning a refreshed string token
 }
-</code></pre></li>
-<li><p>When you want to deal with the refresh token call with a method:</p>
+</code></pre>
+<ul>
+<li>When you want to deal with the refresh token call with a method:</li>
+</ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService&gt;(
-  settingsService =&gt; settingsService.Token, OnRefreshToken)
+    settingsService =&gt; settingsService.Token, OnRefreshToken)
 ...
 private string OnRefreshTokden(HttpRequestMessage message)
 {
-  // whatever returning a refreshed string token
+    // whatever returning a refreshed string token
 }
-</code></pre></li>
-<li><p>When you want to provide your own AuthenticationHandlerBase implementation:</p>
-<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourAuthenticationHandler&gt;(
-  (serviceProvider, options) =&gt; new YourAuthenticationHandler(...))
-</code></pre></li>
+</code></pre>
+<ul>
+<li>When you want to provide your own AuthenticationHandlerBase implementation:</li>
 </ul>
+<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourAuthenticationHandler&gt;(
+    (serviceProvider, options) =&gt; new YourAuthenticationHandler(...))
+</code></pre>
 </section>
 </div>
 <h3 id="processing">Processing</h3>
-<p>There&#39;s nothing more to deal with.
+<p>There's nothing more to deal with.
 Protected requests will be authenticated by Apizr, otherwise it will ask user to sign in.</p>
-<p>Anyway, here is the AuthenticationHandler&#39;s SendAsync method FYI:</p>
+<p>Anyway, here is the AuthenticationHandler's SendAsync method FYI:</p>
 <pre><code class="lang-csharp">protected override async Task&lt;HttpResponseMessage&gt; SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 {
     HttpRequestMessage clonedRequest = null;
@@ -283,17 +303,20 @@ Protected requests will be authenticated by Apizr, otherwise it will ask user to
 
     return response;
 }
-</code></pre><p>The workflow:</p>
+</code></pre>
+<p>The workflow:</p>
 <ul>
 <li>We check if the request needs to be authenticated</li>
-<li>If so, we try to load a previously saved token<ul>
+<li>If so, we try to load a previously saved token
+<ul>
 <li>If there’s one, we clone the request in case we need to re-issue it with a refreshed token (as token could be rejected server side)</li>
 <li>If there’s not, we ask for a refreshed one (launching your signin feature and waiting for the resulting token)</li>
 </ul>
 </li>
 <li>We set the authentication header with the token</li>
 <li>We finally send the request</li>
-<li>We check if we get an Unauthorized response<ul>
+<li>We check if we get an Unauthorized response
+<ul>
 <li>If so and if it was sent with a saved token, we ask for a refreshed one (launching your signin feature and waiting for the resulting token)</li>
 <li>We set the authentication header of the cloned request with the refreshed token</li>
 <li>We send the cloned request</li>
@@ -302,27 +325,28 @@ Protected requests will be authenticated by Apizr, otherwise it will ask user to
 <li>We save the token if succeed or clear it if not</li>
 <li>We return the response</li>
 </ul>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/legacy/v4/config_auth.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/legacy/v4/config_auth.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -330,14 +354,14 @@ Protected requests will be authenticated by Apizr, otherwise it will ask user to
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../../../styles/docfx.js"></script>
     <script type="text/javascript" src="../../../styles/main.js"></script>
   </body>

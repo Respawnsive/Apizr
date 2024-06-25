@@ -52,13 +52,19 @@
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HttpClientBuilder">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HeadersFactory">
+        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HeadersExtendedFactories">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.TimeoutFactory">
+        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.OperationTimeoutFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.RequestTimeoutFactory">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.DelegatingHandlersExtendedFactories">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HttpMessageHandlerFactory">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.CrudEntities">
@@ -76,12 +82,21 @@
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.PostRegistrationActions">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.Apizr#Extending#Configuring#Shared#IApizrExtendedSharedOptions#ResiliencePropertiesExtendedFactories">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder">
             <summary>
             Builder options available at common level for extended registration
             </summary>
         </member>
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.Apizr#Extending#Configuring#Common#IApizrExtendedCommonOptionsBuilder#ApizrOptions">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithBaseAddress(System.String)">
@@ -126,31 +141,46 @@
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.String[])">
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithTimeout(System.TimeSpan)">
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.AddDelegatingHandler``1(``0)">
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithOperationTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,``0})">
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRequestTimeout(System.TimeSpan)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRequestTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpMessageHandler``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -160,6 +190,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
@@ -217,6 +253,21 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithMappingHandler(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -401,9 +452,6 @@
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.MappingHandlerType">
             <inheritdoc />
         </member>
-        <member name="F:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions._baseUriFactory">
-            <inheritdoc />
-        </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.BaseUriFactory">
             <inheritdoc />
         </member>
@@ -428,6 +476,9 @@
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HttpClientHandlerFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HttpMessageHandlerFactory">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.RefitSettingsFactory">
             <inheritdoc />
         </member>
@@ -443,10 +494,13 @@
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HttpClientBuilder">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HeadersFactory">
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HeadersExtendedFactories">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.TimeoutFactory">
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.OperationTimeoutFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.RequestTimeoutFactory">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities">
@@ -462,6 +516,9 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.PostRegistrationActions">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.Apizr#Extending#Configuring#Shared#IApizrExtendedSharedOptions#ResiliencePropertiesExtendedFactories">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions`1">
@@ -496,6 +553,12 @@
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr#Configuring#Shared#IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr#Extending#Configuring#Manager#IApizrExtendedManagerOptions,Apizr#Extending#Configuring#Manager#IApizrExtendedManagerOptionsBuilder}#WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String})">
             <inheritdoc />
         </member>
@@ -520,6 +583,9 @@
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
@@ -535,28 +601,40 @@
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders(System.String[])">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithTimeout(System.TimeSpan)">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(``0)">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithOperationTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,``0})">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithRequestTimeout(System.TimeSpan)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithRequestTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -566,6 +644,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
@@ -580,10 +664,10 @@
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithRefitSettings(Refit.RefitSettings)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithRefitSettings(System.Func{System.IServiceProvider,Refit.RefitSettings})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithRefitSettings(System.Func{System.IServiceProvider,Refit.RefitSettings})">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler(System.Func{System.IServiceProvider,Apizr.Connecting.IConnectivityHandler})">
@@ -625,7 +709,22 @@
         <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithMappingHandler(System.Type)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr#Extending#Configuring#Manager#IApizrExtendedManagerOptionsBuilder#WithHeaders(System.Collections.Generic.IDictionary{System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope},System.Func{System.Collections.Generic.IList{System.String}}})">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions">
@@ -666,6 +765,29 @@
         <member name="T:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions">
             <inheritdoc cref="T:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions"/>
         </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.Reflection.TypeInfo,System.Type,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean},Microsoft.Extensions.Logging.LogLevel[])">
+            <summary>
+            The proper options constructor
+            </summary>
+            <param name="sharedOptions">The shared options</param>
+            <param name="webApiType">The web api type</param>
+            <param name="crudModelType">The crud model type if any</param>
+            <param name="typeInfo">The type info</param>
+            <param name="apizrManagerType">The manager type</param>
+            <param name="baseAddress">The web api base address</param>
+            <param name="basePath">The web api base path</param>
+            <param name="handlersParameters">Some handlers parameters</param>
+            <param name="httpTracerMode">The http tracer mode</param>
+            <param name="trafficVerbosity">The traffic verbosity</param>
+            <param name="operationTimeout">The operation timeout</param>
+            <param name="requestTimeout">The request timeout</param>
+            <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
+            <param name="properResiliencePipelineAttributes">Specific resilience pipeline</param>
+            <param name="commonCacheAttribute">Global caching options</param>
+            <param name="properCacheAttribute">Specific caching options</param>
+            <param name="shouldRedactHeaderValue">Headers to redact value</param>
+            <param name="logLevels">The log levels</param>
+        </member>
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerType">
             <inheritdoc />
         </member>
@@ -696,13 +818,22 @@
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HttpClientBuilder">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HeadersFactory">
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HeadersExtendedFactories">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.TimeoutFactory">
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.OperationTimeoutFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.RequestTimeoutFactory">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.DelegatingHandlersExtendedFactories">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.HttpMessageHandlerFactory">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.Apizr#Extending#Configuring#Shared#IApizrExtendedSharedOptions#ResiliencePropertiesExtendedFactories">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder">
@@ -720,6 +851,12 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithBaseAddress(System.Uri)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String})">
@@ -743,6 +880,9 @@
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
@@ -758,28 +898,40 @@
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHeaders(System.String[])">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithTimeout(System.TimeSpan)">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHeaders``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.AddDelegatingHandler``1(``0)">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithOperationTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,``0})">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithRequestTimeout(System.TimeSpan)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.AddDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithRequestTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithContext(System.Func{Polly.Context},Apizr.Configuring.ApizrDuplicateStrategy)">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHttpMessageHandler``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -791,6 +943,12 @@
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
             <inheritdoc />
         </member>
@@ -798,6 +956,21 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -1033,66 +1206,66 @@
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type[])">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Reflection.Assembly[])">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Action{`2},System.Type[])">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Action{`2},System.Reflection.Assembly[])">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Type[])">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Reflection.Assembly[])">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Action{`2},System.Type[])">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Action{`2},System.Reflection.Assembly[])">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor``2(System.Action{`2})">
@@ -1200,19 +1373,29 @@
             HttpClientHandler factory
             </summary>
         </member>
+        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory">
+            <summary>
+            HttpMessageHandler factory
+            </summary>
+        </member>
         <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder">
             <summary>
             HttpClient builder
             </summary>
         </member>
-        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory">
+        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory">
             <summary>
-            Headers factory
+            The operation timeout factory (overall request tries)
             </summary>
         </member>
-        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory">
+        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory">
             <summary>
-            Timeout factory
+            The request timeout factory (each request try)
+            </summary>
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories">
+            <summary>
+            Headers factories
             </summary>
         </member>
         <member name="T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase">
@@ -1282,18 +1465,34 @@
             <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.AddDelegatingHandler``1(System.Func{System.IServiceProvider,``0})">
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
             <summary>
-            Add a custom delegating handler
+            Add a custom delegating handler inheriting from <see cref="T:System.Net.Http.DelegatingHandler"/> (serial call)
             </summary>
             <param name="delegatingHandlerFactory">A delegating handler factory</param>
+            <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.AddDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
             <summary>
-            Add a custom delegating handler
+            Add a custom delegating handler inheriting from <see cref="T:System.Net.Http.DelegatingHandler"/> (serial call)
             </summary>
             <param name="delegatingHandlerFactory">A delegating handler factory</param>
+            <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Add a custom http message handler inheriting from <see cref="T:System.Net.Http.HttpMessageHandler"/> (last call)
+            </summary>
+            <param name="httpMessageHandlerFactory">A http message handler factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+            <summary>
+            Add a custom http message handler inheriting from <see cref="T:System.Net.Http.HttpMessageHandler"/> (last call)
+            </summary>
+            <param name="httpMessageHandlerFactory">A http message handler factory</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
@@ -1331,18 +1530,47 @@
             <param name="refreshTokenFactory">The method factory called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}})">
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <summary>
             Add some headers to the request
             </summary>
             <param name="headersFactory">Headers to add to the request</param>
+            <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+            <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+            <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHeaders``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
             <summary>
-            Set a timeout to the request
+            Add some headers to the request loaded from service properties
+            </summary>
+            <typeparam name="TSettingsService">Your settings management service (getting headers)</typeparam>
+            <param name="headerProperties">The header properties to get from</param>
+            <param name="strategy">The duplicate strategy if there's another one already (default: Add)</param>
+            <param name="scope">Tells Apizr if you want to refresh or not headers values at request time (default: Api = no refresh)</param>
+            <param name="mode">Set headers right the way or store it for further attribute key match use (default: Set)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithOperationTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+            <summary>
+            Set a timeout to the operation (overall request tries)
+            </summary>
+            <param name="timeoutFactory">The operation timeout factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithRequestTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
+            <summary>
+            Set a timeout to the request (each request try)
             </summary>
             <param name="timeoutFactory">The request timeout factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Set some resilience properties to the resilience context
+            </summary>
+            <param name="key">The resilience property's key</param>
+            <param name="valueFactory">The resilience property's value factory</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.ServiceCollectionExtensions">
@@ -1502,74 +1730,74 @@
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type[])">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[])">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type[])">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
             <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Reflection.Assembly[])">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
             <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
             <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
             <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">

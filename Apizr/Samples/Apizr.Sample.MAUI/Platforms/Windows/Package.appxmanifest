@@ -7,49 +7,31 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="A5C45E26-D526-4E5C-BB52-9E4B6FD16536"
-    Publisher="CN=User Name"
-    Version="1.0.0.0" />
+    Publisher="CN=User Name" />
 
   <Properties>
     <DisplayName>Apizr.Sample.MAUI</DisplayName>
     <PublisherDisplayName>Microsoft</PublisherDisplayName>
-    <Logo>Assets\appiconStoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+    <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.24217.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    <PackageDependency Name="Microsoft.VCLibs.140.00.UWPDesktop" MinVersion="14.0.24217.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
   </Dependencies>
 
   <Resources>
     <Resource Language="x-generate"/>
   </Resources>
 
-  <Applications>
-    <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="$targetentrypoint$">
-      <uap:VisualElements
-        DisplayName="Apizr.Sample.MAUI"
-        Description="Apizr.Sample.MAUI"
-        BackgroundColor="transparent"
-        Square150x150Logo="Assets\appiconMediumTile.png"
-        Square44x44Logo="Assets\appiconLogo.png">
-        <uap:DefaultTile
-          Wide310x150Logo="Assets\appiconWideTile.png"
-          Square71x71Logo="Assets\appiconSmallTile.png"
-          Square310x310Logo="Assets\appiconLargeTile.png"
-          ShortName="Apizr.Sample.MAUI">
-          <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo"/>
-            <uap:ShowOn Tile="wide310x150Logo"/>
-          </uap:ShowNameOnTiles>
-        </uap:DefaultTile >
-        <uap:SplashScreen Image="Assets\appiconfgSplashScreen.png" />
-      </uap:VisualElements>
-    </Application>
-  </Applications>
+	<Applications>
+		<Application Id="App"
+		             Executable="$targetnametoken$.exe"
+		             EntryPoint="$targetentrypoint$">
+			<uap:VisualElements />
+		</Application>
+	</Applications>
 
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />

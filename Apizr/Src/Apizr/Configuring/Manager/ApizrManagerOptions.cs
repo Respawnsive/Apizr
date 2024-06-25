@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
+using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
 using Apizr.Logging;
 using Apizr.Mapping;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
@@ -35,16 +42,15 @@ namespace Apizr.Configuring.Manager
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = properOptions.LoggerFactory.Invoke(loggerFactory, webApiFriendlyName);
             HttpClientHandlerFactory = properOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = properOptions.HttpClientConfigurationBuilder;
-            HttpClientFactory = properOptions.HttpClientFactory;
-            PolicyRegistryFactory = commonOptions.PolicyRegistryFactory;
+            ResiliencePipelineRegistryFactory = commonOptions.ResiliencePipelineRegistryFactory;
             RefitSettingsFactory = commonOptions.RefitSettingsFactory;
             ConnectivityHandlerFactory = commonOptions.ConnectivityHandlerFactory;
             CacheHandlerFactory = commonOptions.CacheHandlerFactory;
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
             DelegatingHandlersFactories = properOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            ContextFactory = properOptions.ContextFactory;
-            HeadersFactory = properOptions.HeadersFactory;
-            TimeoutFactory = properOptions.TimeoutFactory;
+            HttpMessageHandlerFactory = properOptions.HttpMessageHandlerFactory;
+            OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
+            RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -105,13 +111,10 @@ namespace Apizr.Configuring.Manager
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
-
-        /// <inheritdoc />
         public Action<HttpClient> HttpClientConfigurationBuilder { get; set; }
 
         /// <inheritdoc />
-        public Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; set;  }
+        public Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; set; }
 
         private Func<RefitSettings> _refitSettingsFactory;
         /// <inheritdoc />
@@ -133,25 +136,23 @@ namespace Apizr.Configuring.Manager
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
-        private Func<IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory
+        public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set;  }
+
+        private Func<TimeSpan> _operationTimeoutFactory;
+        /// <inheritdoc />
+        public Func<TimeSpan> OperationTimeoutFactory
         {
-            get => _headersFactory;
-            internal set => _headersFactory = value != null ? () =>
-                {
-                    value.Invoke().ToList().ForEach(header => Headers.Add(header));
-                    return Headers;
-                }
-                : null;
+            get => _operationTimeoutFactory;
+            set => _operationTimeoutFactory = value != null ? () => (TimeSpan)(OperationTimeout = value.Invoke()) : null;
         }
 
-        private Func<TimeSpan> _timeoutFactory;
+        private Func<TimeSpan> _requestTimeoutFactory;
         /// <inheritdoc />
-        public Func<TimeSpan> TimeoutFactory
+        public Func<TimeSpan> RequestTimeoutFactory
         {
-            get => _timeoutFactory;
-            set => _timeoutFactory = value != null ? () => (TimeSpan)(Timeout = value.Invoke()) : null;
+            get => _requestTimeoutFactory;
+            set => _requestTimeoutFactory = value != null ? () => (TimeSpan)(RequestTimeout = value.Invoke()) : null;
         }
     }
     
@@ -176,6 +177,15 @@ namespace Apizr.Configuring.Manager
         public Type WebApiType => Options.WebApiType;
 
         /// <inheritdoc />
+        public Type CrudModelType => Options.CrudModelType;
+
+        /// <inheritdoc />
+        public TypeInfo TypeInfo => Options.TypeInfo;
+
+        /// <inheritdoc />
+        public bool IsCrudApi => Options.IsCrudApi;
+
+        /// <inheritdoc />
         public Uri BaseUri => Options.BaseUri;
 
         /// <inheritdoc />
@@ -183,9 +193,6 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public string BasePath => Options.BasePath;
-
-        /// <inheritdoc />
-        public Func<Context> ContextFactory => Options.ContextFactory;
 
         /// <inheritdoc />
         public Func<DelegatingHandler, ILogger, IApizrManagerOptionsBase, HttpMessageHandler> PrimaryHandlerFactory
@@ -210,18 +217,43 @@ namespace Apizr.Configuring.Manager
         public IDictionary<string, object> HandlersParameters => Options.HandlersParameters;
 
         /// <inheritdoc />
-        public IList<string> Headers => Options.Headers;
+        public IDictionary<ApizrRegistrationMode, IList<string>> Headers => Options.Headers;
 
         /// <inheritdoc />
-        public TimeSpan? Timeout => Options.Timeout;
+        public IDictionary<(ApizrRegistrationMode Mode, ApizrLifetimeScope Scope), Func<IList<string>>> HeadersFactories => Options.HeadersFactories;
+
+        /// <inheritdoc />
+        public TimeSpan? OperationTimeout => Options.OperationTimeout;
+
+        /// <inheritdoc />
+        public TimeSpan? RequestTimeout => Options.RequestTimeout;
+
+        /// <inheritdoc />
+        public Func<string, bool> ShouldRedactHeaderValue => Options.ShouldRedactHeaderValue;
+
+        /// <inheritdoc />
+        public IDictionary<ApizrConfigurationSource, ResiliencePipelineAttributeBase[]> ResiliencePipelineOptions => Options.ResiliencePipelineOptions;
+
+        /// <inheritdoc />
+        public IDictionary<ApizrConfigurationSource, CacheAttributeBase> CacheOptions => Options.CacheOptions;
+
+        /// <inheritdoc />
+        Action<IApizrResilienceContextOptionsBuilder> IApizrGlobalSharedOptionsBase.ContextOptionsBuilder
+        {
+            get => Options.ContextOptionsBuilder;
+            set {}
+        }
+
+        /// <inheritdoc />
+        IDictionary<string, Func<object>> IApizrGlobalSharedOptionsBase.ResiliencePropertiesFactories => Options.ResiliencePropertiesFactories;
 
         /// <inheritdoc />
         public ILogger Logger => Options.Logger;
 
         /// <inheritdoc />
-        public string[] PolicyRegistryKeys => Options.PolicyRegistryKeys;
+        public RefitSettings RefitSettings => Options.RefitSettings;
 
         /// <inheritdoc />
-        public RefitSettings RefitSettings => Options.RefitSettings;
+        public IConfigurationSection ApizrConfigurationSection => Options.ApizrConfigurationSection;
     }
 }

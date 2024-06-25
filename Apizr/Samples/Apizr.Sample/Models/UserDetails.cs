@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 
 namespace Apizr.Sample.Models
 {

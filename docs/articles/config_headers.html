@@ -1,21 +1,21 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
-  
+
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Configuring Headers | Apizr </title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Configuring Headers | Apizr ">
-    <meta name="generator" content="docfx 2.59.4.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> | Apizr </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" | Apizr ">
     
-    <link rel="shortcut icon" href="../resources/favicon.ico">
-    <link rel="stylesheet" href="../styles/docfx.vendor.css">
-    <link rel="stylesheet" href="../styles/docfx.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    
+      <link rel="shortcut icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
     
     <meta property="docfx:rel" content="../">
     
@@ -23,7 +23,7 @@
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
-        
+
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
+
               <a class="navbar-brand" href="../index.html">
                 <img id="logo" class="svg" src="../resources/logo.png" alt="">
               </a>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
         </div>
       </header>
       <div class="container body-content">
-        
+
         <div id="search-results">
           <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
+
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
           <div class="sidetoggle collapse" id="sidetoggle">
@@ -77,79 +77,291 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="configuring-headers">Configuring Headers</h2>
 
-<p>You can configure headers at:</p>
-<ul>
-<li>Design time by attribute decoration</li>
-<li>Register time by fluent configuration</li>
-<li>Request time by fluent configuration</li>
-</ul>
-<div class="tabGroup" id="tabgroup_oHeVXnGDhc">
+<h2 id="configuring-headers">Configuring Headers</h2>
+<p>You can set headers with static or dynamic values and with clear or redacted logged values (if logging is enabled with headers included).</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>You should add the request options parameter <code>[RequestOptions] IApizrRequestOptions options</code> to your api methods to get all the Apizr goodness.</p>
+</div>
+<h3 id="static-headers">Static headers</h3>
+<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_oHeVXnGDhc_tabid-designing" role="tab" aria-controls="tabpanel_oHeVXnGDhc_tabid-designing" data-tab="tabid-designing" tabindex="0" aria-selected="true">Designing</a>
+<a href="#tabpanel_1_tabid-design" role="tab" aria-controls="tabpanel_1_tabid-design" data-tab="tabid-design" tabindex="0" aria-selected="true">Designing</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_oHeVXnGDhc_tabid-registering" role="tab" aria-controls="tabpanel_oHeVXnGDhc_tabid-registering" data-tab="tabid-registering" tabindex="-1">Registering</a>
+<a href="#tabpanel_1_tabid-register" role="tab" aria-controls="tabpanel_1_tabid-register" data-tab="tabid-register" tabindex="-1">Registering</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_oHeVXnGDhc_tabid-requesting" role="tab" aria-controls="tabpanel_oHeVXnGDhc_tabid-requesting" data-tab="tabid-requesting" tabindex="-1">Requesting</a>
+<a href="#tabpanel_1_tabid-request" role="tab" aria-controls="tabpanel_1_tabid-request" data-tab="tabid-request" tabindex="-1">Requesting</a>
 </li>
 </ul>
-<section id="tabpanel_oHeVXnGDhc_tabid-designing" role="tabpanel" data-tab="tabid-designing">
-<p>You can set headers at design time, decorating interfaces or methods with the <code>Headers</code> attribute provided by Refit.</p>
-<p>But for now, this attribute approach won&#39;t let you:</p>
-<ul>
-<li>set global/shared headers (other than repeating yourself decorating each interfaces or inheriting from a decorated one)</li>
-<li>set computed/calculated headers (other than intercepting it on the handler side and changing its value before sending or providing it as a request parameter)</li>
-</ul>
-</section>
-<section id="tabpanel_oHeVXnGDhc_tabid-registering" role="tabpanel" data-tab="tabid-registering" aria-hidden="true" hidden="hidden">
-<p>Configuring the headers fluently at register time allows you to set it dynamically (e.g. based on settings).</p>
-<p>Note that setting headers at register time actually set the headers to the HttpClient itslef, where setting it at request time it will be added on sending.</p>
-<p>You can set headers thanks to this option:</p>
-<pre><code class="lang-csharp">// direct configuration
-options =&gt; options.AddHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)
+<section id="tabpanel_1_tabid-design" role="tabpanel" data-tab="tabid-design">
 
-// OR factory configuration
-options =&gt; options.AddHeaders(() =&gt; $&quot;HeaderKey3: {YourHeaderValue3}&quot;)
+<p>You can set headers with static values at design time by decorating interfaces or methods with the <code>Headers</code> attribute provided by Refit.</p>
+<pre><code class="lang-csharp">[Headers(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)]
+public interface IYourApi
+{
+    [Headers(&quot;HeaderKey3: HeaderValue3&quot;)]
+    [Get(&quot;/your-endpoint&quot;)]
+    Task&lt;YourData&gt; GetYourDataAsync([RequestOptions] IApizrRequestOptions options);
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Please refer to Refit official documentation about Headers attribute with static values.
+Note that decorating assembly to share headers between several api interfaces is not available with Refit's Headers attribute,
+but you can do it with fluent configuration at register time.</p>
+</div>
+<p>You’ll find some more header attributes but dedicated to CRUD apis (the ones starting with <code>Read</code>, <code>ReadAll</code>, <code>Create</code>, <code>Update</code> or <code>Delete</code> prefix), so you could define header settings at method/request level for CRUD apis too.</p>
+<p>Here is CRUD api an example:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample.Models
+{
+    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [ReadHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)]
+    [ReadAllHeaders(&quot;HeaderKey3: HeaderValue3&quot;)]
+    public class User
+    {
+        [JsonProperty(&quot;id&quot;)]
+        public int Id { get; set; }
 
-// OR extended factory configuration with the service provider instance
-options =&gt; options.AddHeaders(serviceProvider =&gt; $&quot;HeaderKey3: {serviceProvider.GetRequiredService&lt;IYourSettingsService&gt;().YourHeaderValue3}&quot;)
-</code></pre><p>All headers fluent options are available with or without using registry. 
-It means that you can share headers configuration, setting it at registry level and/or set some specific one at api level.</p>
+        [JsonProperty(&quot;first_name&quot;)]
+        public string FirstName { get; set; }
+
+        [JsonProperty(&quot;last_name&quot;)]
+        public string LastName { get; set; }
+
+        [JsonProperty(&quot;avatar&quot;)]
+        public string Avatar { get; set; }
+
+        [JsonProperty(&quot;email&quot;)]
+        public string Email { get; set; }
+    }
+}
+</code></pre>
 </section>
-<section id="tabpanel_oHeVXnGDhc_tabid-requesting" role="tabpanel" data-tab="tabid-requesting" aria-hidden="true" hidden="hidden">
-<p>Configuring the headers fluently at request time allows you to set it at the very end, just before sending the request.</p>
-<p>First, please add the request options parameter to your api methods: <code>[RequestOptions] IApizrRequestOptions options</code></p>
-<p>You can now set headers thanks to this option:</p>
+<section id="tabpanel_1_tabid-register" role="tabpanel" data-tab="tabid-register" aria-hidden="true" hidden="hidden">
+<h4 id="automatically">Automatically</h4>
+<p>Headers could be set automatically by providing an <code>IConfiguration</code> instance containing the headers settings:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<p>We can set it at common level (to all apis) or specific level (dedicated to a named one).</p>
+<p>Please heads to the Settings doc article to see how to configure headers automatically from loaded settings configuration.</p>
+<h4 id="manually">Manually</h4>
+<p>You can set headers with static values at register time by configuring fluent options:</p>
 <pre><code class="lang-csharp">// direct configuration
-options =&gt; options.AddHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;)
-</code></pre><p>You can do the same thing with the Refit&#39;s Header parameter attribute, but you&#39;ll have to design your api with this special parameter.</p>
+options =&gt; options.WithHeaders([&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
+
+// OR static factory configuration
+options =&gt; options.WithHeaders(() =&gt; [&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
+
+// OR extended factory configuration
+options =&gt; options.WithHeaders(_ =&gt; [&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>You can share headers between several api interfaces by configuring fluent options at registry common level.</p>
+</div>
+</section>
+<section id="tabpanel_1_tabid-request" role="tabpanel" data-tab="tabid-request" aria-hidden="true" hidden="hidden">
+
+<p>You can set headers with static values at request time by configuring fluent options:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithHeaders([&quot;HeaderKey1: HeaderValue1&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
+</code></pre>
 </section>
 </div>
+
+<p>You definitly can mix it all as Apiz will merge your headers at the very end while sending the request.</p>
+<h3 id="dynamic-headers">Dynamic headers</h3>
+<h4 id="setting-dynamic-headers">Setting dynamic headers</h4>
+<div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_tabid-design" role="tab" aria-controls="tabpanel_2_tabid-design" data-tab="tabid-design" tabindex="0" aria-selected="true">Designing</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_tabid-register" role="tab" aria-controls="tabpanel_2_tabid-register" data-tab="tabid-register" tabindex="-1">Registering</a>
+</li>
+</ul>
+<section id="tabpanel_2_tabid-design" role="tabpanel" data-tab="tabid-design">
+
+<p>You can set headers with dynamic values at design time by:</p>
+<ul>
+<li>Decorating an api method parameter with the <code>Header</code> or <code>HeaderCollection</code> attribute</li>
+<li>Decorating interfaces or methods with the <code>Headers</code> attribute using key matching</li>
+</ul>
+<h5 id="parameter-header">Parameter header</h5>
+<p>You can set headers with dynamic values at design time by decorating an api method parameter with the <code>Header</code> attribute:</p>
+<pre><code class="lang-csharp">public interface IYourApi
+{
+    [Get(&quot;/your-endpoint&quot;)]
+    Task&lt;YourData&gt; GetYourDataAsync([Header(&quot;HeaderKey1&quot;)] string headerValue1, [RequestOptions] IApizrRequestOptions options);
+}
+</code></pre>
+<p>or <code>HeaderCollection</code> attribute:</p>
+<pre><code class="lang-csharp">public interface IYourApi
+{
+    [Get(&quot;/your-endpoint&quot;)]
+    Task&lt;YourData&gt; GetYourDataAsync([HeaderCollection] IDictionary&lt;string, string&gt; headers, [RequestOptions] IApizrRequestOptions options);
+}
+</code></pre>
+<p>Please refer to Refit official documentation about <code>Header</code> and <code>HeaderCollection</code> attributes with dynamic values.</p>
+<h5 id="key-matching-header">Key matching header</h5>
+<p>You can set headers with dynamic values at design time by decorating interfaces or methods with the <code>Headers</code> attribute and using key matching:</p>
+<pre><code class="lang-csharp">[Headers(&quot;HeaderKey1: {0}&quot;, &quot;HeaderKey2: {0}&quot;)]
+public interface IYourApi
+{
+    [Headers(&quot;HeaderKey3: {0}&quot;)]
+    [Get(&quot;/your-endpoint&quot;)]
+    Task&lt;YourData&gt; GetYourFirstDataAsync([RequestOptions] IApizrRequestOptions options);
+
+    [Get(&quot;/your-endpoint&quot;)]
+    Task&lt;YourData&gt; GetYourSecondDataAsync([RequestOptions] IApizrRequestOptions options);
+}
+</code></pre>
+<p>Here we are asking Apizr to set headers 1, 2 and 3 to <code>GetYourFirstDataAsync</code> and the same but 3 to <code>GetYourSecondDataAsync</code>.
+It's here to let you choose at design time which request needs which headers, but provide values later in another place.
+So we don't provide any value here but the <code>{0}</code> string placeholder and let Apizr set it at request time from its headers store if keys match.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>CRUD api headers could be set using provided dedicted method headers attributes (<code>ReadAllHeaders, ...</code>)</p>
+</div>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Key matching headers need you to provide values fluently at register time with <code>Store</code> registration mode (see Registering tab).</p>
+</div>
+</section>
+<section id="tabpanel_2_tabid-register" role="tabpanel" data-tab="tabid-register" aria-hidden="true" hidden="hidden">
+<h5 id="setting-headers">Setting headers</h5>
+<p>You can set headers with dynamic values at register time by configuring fluent options:</p>
+<pre><code class="lang-csharp">// expression factory configuration
+options =&gt; options.WithHeaders(settingsService, [settings =&gt; settings.Header1, settings =&gt; settings.Header2])
+
+// OR extended expression factory configuration
+options =&gt; options.WithHeaders&lt;IOptions&lt;TestSettings&gt;&gt;([settings =&gt; settings.Value.Header1, settings =&gt; settings.Value.Header2])
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>You can share headers between several api interfaces by configuring fluent options at registry common level.</p>
+</div>
+<h5 id="storing-headers">Storing headers</h5>
+<p>By storing headers, Apizr will set it at request time only if keys match from Headers attribute decoration. It lets you provide values once fluently at register time, but apply it only where you actually decided to put the Headers attribute with the same key.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Don't forget to design your api interfaces with key matching headers (see Designing tab).</p>
+</div>
+<p>To store values for further headers attribute key match use, you have to tell it to Apizr by registering it with the <code>Store</code> registration mode:</p>
+<pre><code class="lang-csharp">// expression factory configuration
+options =&gt; options.WithHeaders(settingsService, [settings =&gt; settings.Header1, 
+    settings =&gt; settings.Header2], 
+    mode: ApizrRegistrationMode.Store)
+
+// OR extended expression factory configuration
+options =&gt; options.WithHeaders&lt;IOptions&lt;TestSettings&gt;&gt;([settings =&gt; settings.Value.Header1, 
+    settings =&gt; settings.Value.Header2], 
+    mode: ApizrRegistrationMode.Store)
+</code></pre>
+</section>
+</div>
+
+<p>You definitly can mix it all as Apiz will merge your headers at the very end while sending the request.</p>
+<h4 id="refreshing-dynamic-header-values">Refreshing dynamic header values</h4>
+<p>You may want to refresh your dynamic header values on each request.</p>
+<p>If so, you can set your header values at register time with the <code>Request</code> lifetime scope (instead of the <code>Api</code> default one):</p>
+<pre><code class="lang-csharp">// expression factory configuration
+options =&gt; options.WithHeaders(settingsService, [settings =&gt; settings.Header1, 
+    settings =&gt; settings.Header2], 
+    scope: ApizrLifetimeScope.Request)
+
+// OR extended expression factory configuration
+options =&gt; options.WithHeaders&lt;IOptions&lt;TestSettings&gt;&gt;([settings =&gt; settings.Value.Header1, 
+    settings =&gt; settings.Value.Header2], 
+    scope: ApizrLifetimeScope.Request)
+</code></pre>
+<h3 id="redacting-logged-header-values">Redacting logged header values</h3>
+<p>You may want to log http traces, including headers, but be concerned about its values sensitivity.</p>
+<p>In such ssenario, you should redact header values so that logs would never contain any header sensitive value but a <code>*</code> replacement.</p>
+<div class="tabGroup" id="tabgroup_3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_3_tabid-design" role="tab" aria-controls="tabpanel_3_tabid-design" data-tab="tabid-design" tabindex="0" aria-selected="true">Designing</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_tabid-register" role="tab" aria-controls="tabpanel_3_tabid-register" data-tab="tabid-register" tabindex="-1">Registering</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_tabid-request" role="tab" aria-controls="tabpanel_3_tabid-request" data-tab="tabid-request" tabindex="-1">Requesting</a>
+</li>
+</ul>
+<section id="tabpanel_3_tabid-design" role="tabpanel" data-tab="tabid-design">
+
+<p>You can tell Apizr to do so by surrounding values with a <code>*</code> and <code>*</code> star symbol into the <code>Headers</code> attribute:</p>
+<pre><code class="lang-csharp">[Headers(&quot;HeaderKey1: *HeaderValue1*&quot;, &quot;HeaderKey2: HeaderValue2&quot;)]
+public interface IYourApi
+{
+    [Headers(&quot;HeaderKey3: *HeaderValue3*&quot;, &quot;HeaderKey4: *{0}*)]
+    [Get(&quot;/your-endpoint&quot;)]
+    Task&lt;YourData&gt; GetYourDataAsync([RequestOptions] IApizrRequestOptions options);
+}
+</code></pre>
+<p>Here we are asking Apizr to redact both headers 1 and 3 values, but also key matching header 4 value.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>CRUD api headers could be set using provided dedicted method headers attributes (<code>ReadAllHeaders, ...</code>)</p>
+</div>
+</section>
+<section id="tabpanel_3_tabid-register" role="tabpanel" data-tab="tabid-register" aria-hidden="true" hidden="hidden">
+
+<p>You can tell Apizr to do so by surrounding values with a <code>*</code> and <code>*</code> star symbol while adding headers fluently:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithHeaders([&quot;HeaderKey1: *HeaderValue1*&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
+</code></pre>
+<p>Here we are asking Apizr to redact header 1 value, but leave the 2 clear in logs.</p>
+<p>Or you can tell the same with dedicated fluent options:</p>
+<pre><code class="lang-csharp">// By header names
+options =&gt; options.WithLoggedHeadersRedactionNames([&quot;testKey2&quot;])
+
+// OR by any rules
+options =&gt; options.WithLoggedHeadersRedactionRule(header =&gt; header == &quot;testKey3&quot;)
+</code></pre>
+</section>
+<section id="tabpanel_3_tabid-request" role="tabpanel" data-tab="tabid-request" aria-hidden="true" hidden="hidden">
+
+<p>You can tell Apizr to do so by surrounding values with <code>*</code> and <code>*</code> star symbol while adding headers fluently:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithHeaders([&quot;HeaderKey1: *HeaderValue1*&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
+</code></pre>
+<p>Here we are asking Apizr to redact header 1 value, but leave the 2 clear in logs.</p>
+<p>Or you can tell the same with dedicated fluent options:</p>
+<pre><code class="lang-csharp">// By header names
+options =&gt; options.WithLoggedHeadersRedactionNames([&quot;testKey2&quot;])
+
+// OR by any rules
+options =&gt; options.WithLoggedHeadersRedactionRule(header =&gt; header == &quot;testKey3&quot;)
+</code></pre>
+</section>
+</div>
+
 </article>
           </div>
-          
+
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_headers.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_headers.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In This Article</h5>
+                <h5>In this article</h5>
                 <div></div>
               </nav>
             </div>
           </div>
         </div>
       </div>
-      
+
       <footer>
         <div class="grad-bottom"></div>
         <div class="footer">
@@ -157,14 +369,14 @@ options =&gt; options.AddHeaders(&quot;HeaderKey1: HeaderValue1&quot;, &quot;Hea
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            Supported by Respawnsive
-            
+      Supported by Respawnsive
+      
           </div>
         </div>
       </footer>
     </div>
-    
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
+using Apizr.Caching;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared;
+using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
 using Polly;
 
@@ -34,51 +40,46 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithHeaders(params string[] headers)
-    {
-        headers?.ToList().ForEach(header => Options.Headers.Add(header));
-
-        return this;
-    }
-
-    /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithTimeout(TimeSpan timeout)
-    {
-        Options.Timeout = timeout;
-
-        return this;
-    }
-
-    /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithContext(Context context, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Merge)
+    public IApizrRequestOptionsBuilder WithHeaders(IList<string> headers, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
     {
         switch (strategy)
         {
             case ApizrDuplicateStrategy.Ignore:
-                Options.Context ??= context;
-                break;
-            case ApizrDuplicateStrategy.Replace:
-                Options.Context = context;
+                Options.Headers ??= headers;
                 break;
             case ApizrDuplicateStrategy.Add:
             case ApizrDuplicateStrategy.Merge:
-                if (Options.Context == null)
+                if (Options.Headers.Count > 0)
                 {
-                    Options.Context = context;
+                    headers?.ToList().ForEach(header => Options.Headers.Add(header));
                 }
                 else
                 {
-                    var operationKey = !string.IsNullOrWhiteSpace(context.OperationKey)
-                        ? context.OperationKey
-                        : Options.Context.OperationKey;
-
-                    Options.Context = new Context(operationKey,
-                        Options.Context.Concat(context.ToList()).ToDictionary(x => x.Key, x => x.Value));
+                    Options.Headers = headers;
                 }
+                break;
+            case ApizrDuplicateStrategy.Replace:
+                Options.Headers = headers;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
         }
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithOperationTimeout(TimeSpan timeout)
+    {
+        Options.OperationTimeout = timeout;
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithRequestTimeout(TimeSpan timeout)
+    {
+        Options.RequestTimeout = timeout;
 
         return this;
     }
@@ -149,10 +150,190 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     void IApizrInternalOptionsBuilder.SetHandlerParameter(string key, object value) => WithHandlerParameter(key, value);
 
     /// <inheritdoc />
-    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOriginalExpression(Expression originalExpression)
+    public IApizrRequestOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, TValue valueFactory)
     {
-        ((IApizrRequestOptions) Options).OriginalExpression = originalExpression;
+        ((IApizrGlobalSharedOptionsBase)Options).ResiliencePropertiesFactories[key.Key] = () => valueFactory;
 
         return this;
     }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithResilienceContextOptions(Action<IApizrResilienceContextOptionsBuilder> contextOptionsBuilder)
+    {
+        var options = Options as IApizrGlobalSharedOptionsBase;
+        if (options.ContextOptionsBuilder == null)
+        {
+            options.ContextOptionsBuilder = contextOptionsBuilder;
+        }
+        else
+        {
+            options.ContextOptionsBuilder += contextOptionsBuilder.Invoke;
+        }
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithLoggedHeadersRedactionNames(IEnumerable<string> redactedLoggedHeaderNames,
+        ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+    {
+        var sensitiveHeaders = new HashSet<string>(redactedLoggedHeaderNames, StringComparer.OrdinalIgnoreCase);
+
+        return WithLoggedHeadersRedactionRule(header => sensitiveHeaders.Contains(header), strategy);
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithLoggedHeadersRedactionRule(Func<string, bool> shouldRedactHeaderValue,
+        ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add)
+    {
+        switch (strategy)
+        {
+            case ApizrDuplicateStrategy.Ignore:
+                Options.ShouldRedactHeaderValue ??= shouldRedactHeaderValue;
+                break;
+            case ApizrDuplicateStrategy.Add:
+            case ApizrDuplicateStrategy.Merge:
+                if (Options.ShouldRedactHeaderValue == null)
+                {
+                    Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                }
+                else
+                {
+                    var previous = Options.ShouldRedactHeaderValue;
+                    Options.ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
+                }
+
+                break;
+            case ApizrDuplicateStrategy.Replace:
+                Options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+        }
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithResiliencePipelineKeys(string[] resiliencePipelineKeys,
+        ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+    {
+        var methodScope = new[]{Options.RequestMethod};
+
+        switch (duplicateStrategy)
+        {
+            case ApizrDuplicateStrategy.Ignore:
+                if (Options.ResiliencePipelineOptions.Count == 0)
+                    Options.ResiliencePipelineOptions[ApizrConfigurationSource.RequestOption] = methodScope
+                        .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method })
+                        .Cast<ResiliencePipelineAttributeBase>()
+                        .ToArray();
+                break;
+            case ApizrDuplicateStrategy.Add:
+            case ApizrDuplicateStrategy.Merge:
+                if (Options.ResiliencePipelineOptions.TryGetValue(ApizrConfigurationSource.RequestOption, out var attributes))
+                {
+                    foreach (var method in methodScope)
+                    {
+                        var attribute = attributes.FirstOrDefault(attribute => attribute.RequestMethod == method);
+                        if (attribute != null)
+                            attribute.RegistryKeys = attribute.RegistryKeys.Union(resiliencePipelineKeys).ToArray();
+                        else
+                            attributes = attributes.Concat([new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method }]).ToArray();
+                    }
+
+                    Options.ResiliencePipelineOptions[ApizrConfigurationSource.RequestOption] = attributes;
+                }
+                else
+                {
+                    Options.ResiliencePipelineOptions[ApizrConfigurationSource.RequestOption] = methodScope
+                        .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method })
+                        .Cast<ResiliencePipelineAttributeBase>()
+                        .ToArray();
+                }
+
+                break;
+            case ApizrDuplicateStrategy.Replace:
+                Options.ResiliencePipelineOptions.Clear();
+                Options.ResiliencePipelineOptions[ApizrConfigurationSource.RequestOption] = methodScope
+                    .Select(method => new ResiliencePipelineAttribute(resiliencePipelineKeys) { RequestMethod = method })
+                    .Cast<ResiliencePipelineAttributeBase>()
+                    .ToArray();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(duplicateStrategy), duplicateStrategy, null);
+        }
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IApizrRequestOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null,
+        bool shouldInvalidateOnError = false)
+    {
+        Options.CacheOptions[ApizrConfigurationSource.RequestOption] = new CacheAttribute(mode, lifeSpan, shouldInvalidateOnError);
+
+        return this;
+    }
+
+    #region Internals
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithHeaders(IList<string> headers, ApizrRegistrationMode mode)
+    {
+        if (mode == ApizrRegistrationMode.Set)
+        {
+            // Set headers right the way
+            if (Options.Headers.Count > 0)
+            {
+                headers?.ToList().ForEach(header => Options.Headers.Add(header));
+            }
+            else
+            {
+                Options.Headers = headers;
+            } 
+        }
+        else
+        {
+            // Store headers for further attribute key match use
+            var headersStore = ((IApizrRequestOptions) Options).HeadersStore;
+            headers?.ToList().ForEach(header => headersStore.Add(header));
+        }
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithOriginalExpression(Expression originalExpression)
+    {
+        ((IApizrRequestOptions)Options).OriginalExpression = originalExpression;
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithResilienceContextOptions(IApizrResilienceContextOptions options)
+    {
+        Options.ResilienceContextOptions = options;
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithContext(ResilienceContext context)
+    {
+        Options.ResilienceContext = context;
+
+        return this;
+    }
+
+    /// <inheritdoc />
+    IApizrRequestOptionsBuilder IApizrRequestOptionsBuilder<IApizrRequestOptions, IApizrRequestOptionsBuilder>.WithResiliencePipelineOptions(IDictionary<ApizrConfigurationSource, ResiliencePipelineAttributeBase[]> resiliencePipelineOptions)
+    {
+        Options.ResiliencePipelineOptions = resiliencePipelineOptions;
+
+        return this;
+    }
+
+    #endregion
 }

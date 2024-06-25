@@ -23,13 +23,11 @@ items:
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
-  summary: "\nOptions available for extended registrations\n"
+  summary: Options available for extended registrations
   example: []
   syntax:
     content: 'public interface IApizrExtendedManagerOptions : IApizrExtendedManagerOptionsBase, IApizrManagerOptionsBase, IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBase, IApizrCommonOptionsBase, IApizrExtendedProperOptions, IApizrExtendedProperOptionsBase, IApizrProperOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase'
-    content.vb: >-
-      Public Interface IApizrExtendedManagerOptions
-          Inherits IApizrExtendedManagerOptionsBase, IApizrExtendedCommonOptions, IApizrExtendedProperOptions
+    content.vb: Public Interface IApizrExtendedManagerOptions Inherits IApizrExtendedManagerOptionsBase, IApizrManagerOptionsBase, IApizrExtendedCommonOptions, IApizrExtendedCommonOptionsBase, IApizrCommonOptionsBase, IApizrExtendedProperOptions, IApizrExtendedProperOptionsBase, IApizrProperOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase.HttpClientHandler
   - Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ConnectivityHandlerType
@@ -45,10 +43,13 @@ items:
   - Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistries
   - Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistrationActions
   - Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
+  - Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
   - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
   - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
@@ -57,374 +58,696 @@ items:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 references:
 - uid: Apizr.Extending.Configuring.Manager
   commentId: N:Apizr.Extending.Configuring.Manager
+  href: Apizr.html
   name: Apizr.Extending.Configuring.Manager
   nameWithType: Apizr.Extending.Configuring.Manager
   fullName: Apizr.Extending.Configuring.Manager
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Manager
+    name: Manager
+    href: Apizr.Extending.Configuring.Manager.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Manager
+    name: Manager
+    href: Apizr.Extending.Configuring.Manager.html
 - uid: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase.HttpClientHandler
   commentId: P:Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase.HttpClientHandler
   parent: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase
+  href: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase.html#Apizr_Extending_Configuring_Manager_IApizrExtendedManagerOptionsBase_HttpClientHandler
   name: HttpClientHandler
   nameWithType: IApizrExtendedManagerOptionsBase.HttpClientHandler
   fullName: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase.HttpClientHandler
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ConnectivityHandlerType
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ConnectivityHandlerType
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_ConnectivityHandlerType
   name: ConnectivityHandlerType
   nameWithType: IApizrExtendedCommonOptions.ConnectivityHandlerType
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ConnectivityHandlerType
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CacheHandlerType
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CacheHandlerType
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_CacheHandlerType
   name: CacheHandlerType
   nameWithType: IApizrExtendedCommonOptions.CacheHandlerType
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CacheHandlerType
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.MappingHandlerType
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.MappingHandlerType
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_MappingHandlerType
   name: MappingHandlerType
   nameWithType: IApizrExtendedCommonOptions.MappingHandlerType
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.MappingHandlerType
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.RefitSettingsFactory
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.RefitSettingsFactory
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_RefitSettingsFactory
   name: RefitSettingsFactory
   nameWithType: IApizrExtendedCommonOptions.RefitSettingsFactory
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.RefitSettingsFactory
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ConnectivityHandlerFactory
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ConnectivityHandlerFactory
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_ConnectivityHandlerFactory
   name: ConnectivityHandlerFactory
   nameWithType: IApizrExtendedCommonOptions.ConnectivityHandlerFactory
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ConnectivityHandlerFactory
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CacheHandlerFactory
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CacheHandlerFactory
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_CacheHandlerFactory
   name: CacheHandlerFactory
   nameWithType: IApizrExtendedCommonOptions.CacheHandlerFactory
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CacheHandlerFactory
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.MappingHandlerFactory
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.MappingHandlerFactory
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_MappingHandlerFactory
   name: MappingHandlerFactory
   nameWithType: IApizrExtendedCommonOptions.MappingHandlerFactory
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.MappingHandlerFactory
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CrudEntities
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CrudEntities
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_CrudEntities
   name: CrudEntities
   nameWithType: IApizrExtendedCommonOptions.CrudEntities
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CrudEntities
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.WebApis
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.WebApis
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_WebApis
   name: WebApis
   nameWithType: IApizrExtendedCommonOptions.WebApis
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.WebApis
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ObjectMappings
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ObjectMappings
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_ObjectMappings
   name: ObjectMappings
   nameWithType: IApizrExtendedCommonOptions.ObjectMappings
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ObjectMappings
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistries
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistries
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_PostRegistries
   name: PostRegistries
   nameWithType: IApizrExtendedCommonOptions.PostRegistries
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistries
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistrationActions
   commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistrationActions
   parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_PostRegistrationActions
   name: PostRegistrationActions
   nameWithType: IApizrExtendedCommonOptions.PostRegistrationActions
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistrationActions
 - uid: Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
   parent: Apizr.Configuring.Common.IApizrCommonOptionsBase
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html#Apizr_Configuring_Common_IApizrCommonOptionsBase_RefitSettings
   name: RefitSettings
   nameWithType: IApizrCommonOptionsBase.RefitSettings
   fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
+- uid: Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
+  commentId: P:Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
+  parent: Apizr.Configuring.Common.IApizrCommonOptionsBase
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html#Apizr_Configuring_Common_IApizrCommonOptionsBase_ApizrConfigurationSection
+  name: ApizrConfigurationSection
+  nameWithType: IApizrCommonOptionsBase.ApizrConfigurationSection
+  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
 - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
   commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
   parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_ApizrManagerType
   name: ApizrManagerType
   nameWithType: IApizrExtendedProperOptions.ApizrManagerType
   fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
 - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_LoggerFactory
   name: LoggerFactory
   nameWithType: IApizrExtendedProperOptions.LoggerFactory
   fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_WebApiType
   name: WebApiType
   nameWithType: IApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
-  name: PolicyRegistryKeys
-  nameWithType: IApizrProperOptionsBase.PolicyRegistryKeys
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.PolicyRegistryKeys
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_CrudModelType
+  name: CrudModelType
+  nameWithType: IApizrProperOptionsBase.CrudModelType
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_TypeInfo
+  name: TypeInfo
+  nameWithType: IApizrProperOptionsBase.TypeInfo
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
+  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_IsCrudApi
+  name: IsCrudApi
+  nameWithType: IApizrProperOptionsBase.IsCrudApi
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_Logger
   name: Logger
   nameWithType: IApizrProperOptionsBase.Logger
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_BaseUriFactory
   name: BaseUriFactory
   nameWithType: IApizrExtendedSharedOptions.BaseUriFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_BaseAddressFactory
   name: BaseAddressFactory
   nameWithType: IApizrExtendedSharedOptions.BaseAddressFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_BasePathFactory
   name: BasePathFactory
   nameWithType: IApizrExtendedSharedOptions.BasePathFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpTracerModeFactory
   name: HttpTracerModeFactory
   nameWithType: IApizrExtendedSharedOptions.HttpTracerModeFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_TrafficVerbosityFactory
   name: TrafficVerbosityFactory
   nameWithType: IApizrExtendedSharedOptions.TrafficVerbosityFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_LogLevelsFactory
   name: LogLevelsFactory
   nameWithType: IApizrExtendedSharedOptions.LogLevelsFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpClientHandlerFactory
   name: HttpClientHandlerFactory
   nameWithType: IApizrExtendedSharedOptions.HttpClientHandlerFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpMessageHandlerFactory
+  name: HttpMessageHandlerFactory
+  nameWithType: IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpClientBuilder
   name: HttpClientBuilder
   nameWithType: IApizrExtendedSharedOptions.HttpClientBuilder
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
-  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
-  name: HeadersFactory
-  nameWithType: IApizrExtendedSharedOptions.HeadersFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
-  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_OperationTimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: IApizrExtendedSharedOptions.OperationTimeoutFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
-  name: TimeoutFactory
-  nameWithType: IApizrExtendedSharedOptions.TimeoutFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_RequestTimeoutFactory
+  name: RequestTimeoutFactory
+  nameWithType: IApizrExtendedSharedOptions.RequestTimeoutFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HeadersExtendedFactories
+  name: HeadersExtendedFactories
+  nameWithType: IApizrExtendedSharedOptions.HeadersExtendedFactories
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBase_DelegatingHandlersExtendedFactories
   name: DelegatingHandlersExtendedFactories
   nameWithType: IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseUri
   name: BaseUri
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseAddress
   name: BaseAddress
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BasePath
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
-  name: ContextFactory
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_PrimaryHandlerFactory
   name: PrimaryHandlerFactory
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_HeadersFactories
+  name: HeadersFactories
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_Headers
+  name: Headers
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.Headers
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HttpTracerMode
   name: HttpTracerMode
   nameWithType: IApizrGlobalSharedOptionsBase.HttpTracerMode
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_TrafficVerbosity
   name: TrafficVerbosity
   nameWithType: IApizrGlobalSharedOptionsBase.TrafficVerbosity
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LogLevels
   name: LogLevels
   nameWithType: IApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OnException
   name: OnException
   nameWithType: IApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LetThrowOnExceptionWithEmptyCache
   name: LetThrowOnExceptionWithEmptyCache
   nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HandlersParameters
   name: HandlersParameters
   nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  name: Headers
-  nameWithType: IApizrGlobalSharedOptionsBase.Headers
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OperationTimeout
+  name: OperationTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  name: Timeout
-  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_RequestTimeout
+  name: RequestTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ShouldRedactHeaderValue
+  name: ShouldRedactHeaderValue
+  nameWithType: IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase
   commentId: T:Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase
   parent: Apizr.Extending.Configuring.Manager
+  href: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase.html
   name: IApizrExtendedManagerOptionsBase
   nameWithType: IApizrExtendedManagerOptionsBase
   fullName: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBase
 - uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
   commentId: T:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
   parent: Apizr.Extending.Configuring.Common
+  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html
   name: IApizrExtendedCommonOptions
   nameWithType: IApizrExtendedCommonOptions
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
 - uid: Apizr.Configuring.Common.IApizrCommonOptionsBase
   commentId: T:Apizr.Configuring.Common.IApizrCommonOptionsBase
   parent: Apizr.Configuring.Common
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html
   name: IApizrCommonOptionsBase
   nameWithType: IApizrCommonOptionsBase
   fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase
 - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
   commentId: T:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
   parent: Apizr.Extending.Configuring.Proper
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html
   name: IApizrExtendedProperOptions
   nameWithType: IApizrExtendedProperOptions
   fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase
   commentId: T:Apizr.Configuring.Proper.IApizrProperOptionsBase
   parent: Apizr.Configuring.Proper
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html
   name: IApizrProperOptionsBase
   nameWithType: IApizrProperOptionsBase
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
   commentId: T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
   parent: Apizr.Extending.Configuring.Shared
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html
   name: IApizrExtendedSharedOptions
   nameWithType: IApizrExtendedSharedOptions
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
   commentId: T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
   parent: Apizr.Extending.Configuring.Shared
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.html
   name: IApizrExtendedSharedOptionsBase
   nameWithType: IApizrExtendedSharedOptionsBase
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html
   name: IApizrGlobalSharedRegistrationOptionsBase
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
 - uid: Apizr.Extending.Configuring.Common
   commentId: N:Apizr.Extending.Configuring.Common
+  href: Apizr.html
   name: Apizr.Extending.Configuring.Common
   nameWithType: Apizr.Extending.Configuring.Common
   fullName: Apizr.Extending.Configuring.Common
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Common
+    name: Common
+    href: Apizr.Extending.Configuring.Common.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Common
+    name: Common
+    href: Apizr.Extending.Configuring.Common.html
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
+  href: Apizr.html
   name: Apizr.Configuring.Common
   nameWithType: Apizr.Configuring.Common
   fullName: Apizr.Configuring.Common
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Common
+    name: Common
+    href: Apizr.Configuring.Common.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Common
+    name: Common
+    href: Apizr.Configuring.Common.html
 - uid: Apizr.Extending.Configuring.Proper
   commentId: N:Apizr.Extending.Configuring.Proper
+  href: Apizr.html
   name: Apizr.Extending.Configuring.Proper
   nameWithType: Apizr.Extending.Configuring.Proper
   fullName: Apizr.Extending.Configuring.Proper
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Proper
+    name: Proper
+    href: Apizr.Extending.Configuring.Proper.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Proper
+    name: Proper
+    href: Apizr.Extending.Configuring.Proper.html
 - uid: Apizr.Configuring.Proper
   commentId: N:Apizr.Configuring.Proper
+  href: Apizr.html
   name: Apizr.Configuring.Proper
   nameWithType: Apizr.Configuring.Proper
   fullName: Apizr.Configuring.Proper
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Proper
+    name: Proper
+    href: Apizr.Configuring.Proper.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Proper
+    name: Proper
+    href: Apizr.Configuring.Proper.html
 - uid: Apizr.Extending.Configuring.Shared
   commentId: N:Apizr.Extending.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Extending.Configuring.Shared
   nameWithType: Apizr.Extending.Configuring.Shared
   fullName: Apizr.Extending.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Shared
+    name: Shared
+    href: Apizr.Extending.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Shared
+    name: Shared
+    href: Apizr.Extending.Configuring.Shared.html
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html

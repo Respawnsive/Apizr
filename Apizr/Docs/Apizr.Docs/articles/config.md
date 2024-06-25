@@ -7,18 +7,18 @@ You can configure the way your api request will be managed by Apizr at 3 differe
 - Register time, by fluent options, when you actually register your api interfaces
 - Request time, by fluent options, when you finally send the request to the api
 
-At Design time, everything is set by attribute like we used to with Refit, decorating at different levels like assembly, interface or method.
+At Design time, everything is set by attribute like we used to with Refit, decorating at different levels like assembly, interface/class or method.
 
-At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not.
+At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not. You can set options automatically with settings configuration loading (see Settings) or manually with fluent options.
 
 At Request time, you'll get your last chance to adjust configuration before the request to be sent.
 
 As you can mix stages and levels while configuring, here is the configuration pipeline:
 
 - **1 (Design):** The **assembly attribute configuration** level set a configuration to **all api interfaces** contained into the assembly.
-- **2 (Register):** The **fluent common configuration** option takes over the previous one and set a configuration to **all registered api interfaces**.
+- **2 (Register):** The **fluent common configuration** option (automatic or manual) takes over the previous one and set a configuration to **all registered api interfaces**.
 - **3 (Design):** The **interface attribute configuration** level takes over all the previous ones and set a configuration to **a specific api interface**.
-- **4 (Register):** The **fluent proper or manager configuration** option takes over all the previous ones and set a configuration to **the registered api interface**.
+- **4 (Register):** The **fluent proper or manager configuration** option (automatic or manual) takes over all the previous ones and set a configuration to **the registered api interface**.
 - **5 (Design):** The **method attribute configuration** level takes over all the previous ones and set a configuration to **a specific api interface method**.
 - **6 (Request):** The **fluent request configuration** option takes over all the previous ones and set a configuration to **the called api interface method**.
 
@@ -27,21 +27,21 @@ Let's take a quite complexe and dummy but exhaustive timeout configuration examp
 
 First, the design:
 ```csharp
-[assembly:Timeout("00:02:00")]
+[assembly:OperationTimeout("00:02:00")]
 namespace Apizr.Sample
 {
     [WebApi("https://reqres.in/api")]
-    [Timeout("00:01:30")]
+    [OperationTimeout("00:01:30")]
     public interface IReqResService
     {
         [Get("/users")]
-        [Timeout("00:01:00")]
+        [RequestTimeout("00:01:00")]
         Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
     }
 }
 ```
 
-Then, the registration:
+Then, the registration, the extended way:
 
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
@@ -50,11 +50,11 @@ public override void ConfigureServices(IServiceCollection services)
     services.AddApizr(
         registry => registry
             .AddManagerFor<IReqResService>(properOptions => 
-                properOptions.WithTimeout(new TimeSpan(0,1,15)))
+                properOptions.WithOperationTimeout(new TimeSpan(0,1,15)))
             .AddManagerFor<IHttpBinService>()),
     
         commonOptions => commonOptions
-            .WithTimeout(new TimeSpan(0,1,45))
+            .WithOperationTimeout(new TimeSpan(0,1,45))
     );
 }
 ```
@@ -63,20 +63,22 @@ Finally, the request:
 ```csharp
 // reqResManager here is a resolved instance of IApizrManager<IReqResService>>
 var users = await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => 
-	options.WithTimeout(new TimeSpan(0,0,45)));
+	options.WithRequestTimeout(new TimeSpan(0,0,45)));
 ```
 
 Now, guess when the request will time out?
 
 Here is how Apizr will take its decision about that:
-- It first detects we set a global timeout of 00:02:00 (assembly attribute decoration)
-- Then it detects we registered another global timeout of 00:01:45 (fluent common options)
-- Then it detects we set an api timeout of 00:01:30 (interface attribute decoration)
-- Then it detects we registered another api timeout of 00:01:15 (fluent proper options)
+- It first detects we set a global operation timeout of 00:02:00 (assembly attribute decoration)
+- Then it detects we registered another global operation timeout of 00:01:45 (fluent common options)
+- Then it detects we set an api operation timeout of 00:01:30 (interface attribute decoration)
+- Then it detects we registered another api operation timeout of 00:01:15 (fluent proper options)
 - Then it detects we set a request timeout of 00:01:00 (method attribute decoration)
 - Then it detects we registered another request timeout of 00:00:45 (fluent request options)
 
 And the winner is allways the closest one to the request call, so here 00:00:45.
+
+If we had defined some Polly strategies handling request timeouts, it would have waited further for another try, but timed out definitly at 00:01:15 right before the retry, due to our operation timeout.
 
 Now you get the picture about the configuration pipeline, let's take a more meanful example.
 
@@ -85,19 +87,21 @@ Here is what configuring with a registry, the extended way, could look like:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
-    // Some policies
-    var registry = new PolicyRegistry
-    {
-        {
-            "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(new[]
+    // Some Polly strategies to handle transient http errors
+    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+        builder => builder.AddRetry(
+            new RetryStrategyOptions<HttpResponseMessage>
             {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            })
-        }
-    };
-    services.AddPolicyRegistry(registry);
+                ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                    .Handle<HttpRequestException>()
+                    .HandleResult(response =>
+                        response.StatusCode is >= HttpStatusCode.InternalServerError
+                            or HttpStatusCode.RequestTimeout),
+                Delay = TimeSpan.FromSeconds(1),
+                MaxRetryAttempts = 3,
+                UseJitter = true,
+                BackoffType = DelayBackoffType.Exponential
+            }));
 
     // Apizr registration
     services.AddApizr(
@@ -114,7 +118,6 @@ public override void ConfigureServices(IServiceCollection services)
                     .WithBaseAddress("https://reqres.in/api/users"))),
     
         config => config
-            .WithPolicyRegistry(registry)
             .WithAkavacheCacheHandler()
             .WithLogging(
                 HttpTracerMode.ExceptionsOnly, 
@@ -131,7 +134,6 @@ And here is what we're saying in this example:
 - Add a manager for User entity with CRUD api interface and custom types into the registry, to register it into the container
   - Apply proper address option dedicated to User's manager
 - Apply common options to all managers by:
-  - Providing a policy registry
   - Providing a cache handler
   - Providing some logging settings (won't apply to IHttpBinService's manager as we set some specific ones)
 

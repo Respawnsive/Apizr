@@ -1,5 +1,7 @@
 ﻿using Apizr.Configuring.Shared;
 using Polly;
+using System;
+using System.Collections.Generic;
 
 namespace Apizr.Configuring.Request
 {
@@ -9,8 +11,13 @@ namespace Apizr.Configuring.Request
     public interface IApizrRequestOptionsBase : IApizrGlobalSharedOptionsBase
     {
         /// <summary>
-        /// The Polly Context to pass through it all
+        /// The Polly resilience context to pass through it all
         /// </summary>
-        Context Context { get; }
+        ResilienceContext ResilienceContext { get; }
+
+        /// <summary>
+        /// The Apizr request method
+        /// </summary>
+        ApizrRequestMethod RequestMethod { get; }
     }
 }

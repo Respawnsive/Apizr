@@ -8,12 +8,14 @@ items:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
   langs:
   - csharp
@@ -29,38 +31,34 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrExtendedSharedOptions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nOptions available at both common and proper level for extended registrations\n"
+  summary: Options available at both common and proper level for extended registrations
   example: []
   syntax:
     content: 'public interface IApizrExtendedSharedOptions : IApizrExtendedSharedOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase'
-    content.vb: >-
-      Public Interface IApizrExtendedSharedOptions
-          Inherits IApizrExtendedSharedOptionsBase
+    content.vb: Public Interface IApizrExtendedSharedOptions Inherits IApizrExtendedSharedOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
   id: BaseUriFactory
@@ -79,11 +77,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 17
+    startLine: 20
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nBase Uri factory\n"
+  summary: Base Uri factory
   example: []
   syntax:
     content: Func<IServiceProvider, Uri> BaseUriFactory { get; }
@@ -92,10 +90,6 @@ items:
       type: System.Func{System.IServiceProvider,System.Uri}
     content.vb: ReadOnly Property BaseUriFactory As Func(Of IServiceProvider, Uri)
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
   id: BaseAddressFactory
@@ -114,11 +108,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 22
+    startLine: 25
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nBase address factory\n"
+  summary: Base address factory
   example: []
   syntax:
     content: Func<IServiceProvider, string> BaseAddressFactory { get; }
@@ -127,10 +121,6 @@ items:
       type: System.Func{System.IServiceProvider,System.String}
     content.vb: ReadOnly Property BaseAddressFactory As Func(Of IServiceProvider, String)
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
   id: BasePathFactory
@@ -149,11 +139,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 27
+    startLine: 30
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nBase path factory\n"
+  summary: Base path factory
   example: []
   syntax:
     content: Func<IServiceProvider, string> BasePathFactory { get; }
@@ -162,10 +152,6 @@ items:
       type: System.Func{System.IServiceProvider,System.String}
     content.vb: ReadOnly Property BasePathFactory As Func(Of IServiceProvider, String)
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
   id: HttpTracerModeFactory
@@ -184,11 +170,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 32
+    startLine: 35
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nHttp traffic tracing mode factory\n"
+  summary: Http traffic tracing mode factory
   example: []
   syntax:
     content: Func<IServiceProvider, HttpTracerMode> HttpTracerModeFactory { get; }
@@ -197,10 +183,6 @@ items:
       type: System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode}
     content.vb: ReadOnly Property HttpTracerModeFactory As Func(Of IServiceProvider, HttpTracerMode)
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
   id: TrafficVerbosityFactory
@@ -219,11 +201,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 37
+    startLine: 40
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nHttp traffic tracing verbosity factory\n"
+  summary: Http traffic tracing verbosity factory
   example: []
   syntax:
     content: Func<IServiceProvider, HttpMessageParts> TrafficVerbosityFactory { get; }
@@ -232,10 +214,6 @@ items:
       type: System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts}
     content.vb: ReadOnly Property TrafficVerbosityFactory As Func(Of IServiceProvider, HttpMessageParts)
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
   id: LogLevelsFactory
@@ -254,11 +232,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 42
+    startLine: 45
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nLog levels factory\n"
+  summary: Log levels factory
   example: []
   syntax:
     content: Func<IServiceProvider, LogLevel[]> LogLevelsFactory { get; }
@@ -267,10 +245,6 @@ items:
       type: System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]}
     content.vb: ReadOnly Property LogLevelsFactory As Func(Of IServiceProvider, LogLevel())
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
   id: HttpClientHandlerFactory
@@ -289,11 +263,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 47
+    startLine: 50
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nHttpClientHandler factory\n"
+  summary: HttpClientHandler factory
   example: []
   syntax:
     content: Func<IServiceProvider, HttpClientHandler> HttpClientHandlerFactory { get; }
@@ -302,10 +276,37 @@ items:
       type: System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler}
     content.vb: ReadOnly Property HttpClientHandlerFactory As Func(Of IServiceProvider, HttpClientHandler)
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  id: HttpMessageHandlerFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  langs:
+  - csharp
+  - vb
+  name: HttpMessageHandlerFactory
+  nameWithType: IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HttpMessageHandlerFactory
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
+    startLine: 55
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Shared
+  summary: HttpMessageHandler factory
+  example: []
+  syntax:
+    content: Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+    content.vb: ReadOnly Property HttpMessageHandlerFactory As Func(Of IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler)
+  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory*
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
   id: HttpClientBuilder
@@ -324,11 +325,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 52
+    startLine: 60
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nHttpClient builder\n"
+  summary: HttpClient builder
   example: []
   syntax:
     content: Action<IHttpClientBuilder> HttpClientBuilder { get; }
@@ -337,195 +338,318 @@ items:
       type: System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder}
     content.vb: ReadOnly Property HttpClientBuilder As Action(Of IHttpClientBuilder)
   overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
-  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
-  id: HeadersFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
+  id: OperationTimeoutFactory
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
   langs:
   - csharp
   - vb
-  name: HeadersFactory
-  nameWithType: IApizrExtendedSharedOptions.HeadersFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
+  name: OperationTimeoutFactory
+  nameWithType: IApizrExtendedSharedOptions.OperationTimeoutFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: HeadersFactory
+    id: OperationTimeoutFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 57
+    startLine: 65
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nHeaders factory\n"
+  summary: The operation timeout factory (overall request tries)
   example: []
   syntax:
-    content: Func<IServiceProvider, IList<string>> HeadersFactory { get; }
-    parameters: []
-    return:
-      type: System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}}
-    content.vb: ReadOnly Property HeadersFactory As Func(Of IServiceProvider, IList(Of String))
-  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
-  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
-  id: TimeoutFactory
-  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
-  langs:
-  - csharp
-  - vb
-  name: TimeoutFactory
-  nameWithType: IApizrExtendedSharedOptions.TimeoutFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
-  type: Property
-  source:
-    remote:
-      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-      branch: dev
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: TimeoutFactory
-    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
-    startLine: 62
-  assemblies:
-  - Apizr.Extensions.Microsoft.DependencyInjection
-  namespace: Apizr.Extending.Configuring.Shared
-  summary: "\nTimeout factory\n"
-  example: []
-  syntax:
-    content: Func<IServiceProvider, TimeSpan> TimeoutFactory { get; }
+    content: Func<IServiceProvider, TimeSpan> OperationTimeoutFactory { get; }
     parameters: []
     return:
       type: System.Func{System.IServiceProvider,System.TimeSpan}
-    content.vb: ReadOnly Property TimeoutFactory As Func(Of IServiceProvider, TimeSpan)
-  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
+    content.vb: ReadOnly Property OperationTimeoutFactory As Func(Of IServiceProvider, TimeSpan)
+  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory*
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
+  id: RequestTimeoutFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  langs:
+  - csharp
+  - vb
+  name: RequestTimeoutFactory
+  nameWithType: IApizrExtendedSharedOptions.RequestTimeoutFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestTimeoutFactory
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
+    startLine: 70
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Shared
+  summary: The request timeout factory (each request try)
+  example: []
+  syntax:
+    content: Func<IServiceProvider, TimeSpan> RequestTimeoutFactory { get; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,System.TimeSpan}
+    content.vb: ReadOnly Property RequestTimeoutFactory As Func(Of IServiceProvider, TimeSpan)
+  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory*
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
+  id: HeadersExtendedFactories
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  langs:
+  - csharp
+  - vb
+  name: HeadersExtendedFactories
+  nameWithType: IApizrExtendedSharedOptions.HeadersExtendedFactories
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: HeadersExtendedFactories
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptions.cs
+    startLine: 75
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Shared
+  summary: Headers factories
+  example: []
+  syntax:
+    content: IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IDictionary{System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope},System.Func{System.IServiceProvider,System.Func{System.Collections.Generic.IList{System.String}}}}
+    content.vb: ReadOnly Property HeadersExtendedFactories As IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IServiceProvider, Func(Of IList(Of String))))
+  overload: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories*
 references:
 - uid: Apizr.Extending.Configuring.Shared
   commentId: N:Apizr.Extending.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Extending.Configuring.Shared
   nameWithType: Apizr.Extending.Configuring.Shared
   fullName: Apizr.Extending.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Shared
+    name: Shared
+    href: Apizr.Extending.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Extending
+    name: Extending
+    href: Apizr.Extending.html
+  - name: .
+  - uid: Apizr.Extending.Configuring
+    name: Configuring
+    href: Apizr.Extending.Configuring.html
+  - name: .
+  - uid: Apizr.Extending.Configuring.Shared
+    name: Shared
+    href: Apizr.Extending.Configuring.Shared.html
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBase_DelegatingHandlersExtendedFactories
   name: DelegatingHandlersExtendedFactories
   nameWithType: IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.DelegatingHandlersExtendedFactories
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseUri
   name: BaseUri
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseAddress
   name: BaseAddress
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BasePath
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
-  name: ContextFactory
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_PrimaryHandlerFactory
   name: PrimaryHandlerFactory
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_HeadersFactories
+  name: HeadersFactories
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_Headers
+  name: Headers
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.Headers
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HttpTracerMode
   name: HttpTracerMode
   nameWithType: IApizrGlobalSharedOptionsBase.HttpTracerMode
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_TrafficVerbosity
   name: TrafficVerbosity
   nameWithType: IApizrGlobalSharedOptionsBase.TrafficVerbosity
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LogLevels
   name: LogLevels
   nameWithType: IApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OnException
   name: OnException
   nameWithType: IApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LetThrowOnExceptionWithEmptyCache
   name: LetThrowOnExceptionWithEmptyCache
   nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HandlersParameters
   name: HandlersParameters
   nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  name: Headers
-  nameWithType: IApizrGlobalSharedOptionsBase.Headers
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OperationTimeout
+  name: OperationTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  name: Timeout
-  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_RequestTimeout
+  name: RequestTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ShouldRedactHeaderValue
+  name: ShouldRedactHeaderValue
+  nameWithType: IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
   commentId: T:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
   parent: Apizr.Extending.Configuring.Shared
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase.html
   name: IApizrExtendedSharedOptionsBase
   nameWithType: IApizrExtendedSharedOptionsBase
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html
   name: IApizrGlobalSharedRegistrationOptionsBase
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_BaseUriFactory
   name: BaseUriFactory
   nameWithType: IApizrExtendedSharedOptions.BaseUriFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseUriFactory
@@ -533,6 +657,7 @@ references:
   commentId: T:System.Func{System.IServiceProvider,System.Uri}
   parent: System
   definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
   name: Func<IServiceProvider, Uri>
   nameWithType: Func<IServiceProvider, Uri>
   fullName: System.Func<System.IServiceProvider, System.Uri>
@@ -542,56 +667,43 @@ references:
   spec.csharp:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: System.Uri
     name: Uri
-    nameWithType: Uri
-    fullName: System.Uri
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: System.Uri
     name: Uri
-    nameWithType: Uri
-    fullName: System.Uri
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Func`2
   commentId: T:System.Func`2
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
   name: Func<T, TResult>
   nameWithType: Func<T, TResult>
   fullName: System.Func<T, TResult>
@@ -601,53 +713,37 @@ references:
   spec.csharp:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: ','
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_BaseAddressFactory
   name: BaseAddressFactory
   nameWithType: IApizrExtendedSharedOptions.BaseAddressFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BaseAddressFactory
@@ -655,69 +751,58 @@ references:
   commentId: T:System.Func{System.IServiceProvider,System.String}
   parent: System
   definition: System.Func`2
-  name: Func<IServiceProvider, String>
-  nameWithType: Func<IServiceProvider, String>
-  fullName: System.Func<System.IServiceProvider, System.String>
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<IServiceProvider, string>
+  nameWithType: Func<IServiceProvider, string>
+  fullName: System.Func<System.IServiceProvider, string>
   nameWithType.vb: Func(Of IServiceProvider, String)
-  fullName.vb: System.Func(Of System.IServiceProvider, System.String)
+  fullName.vb: System.Func(Of System.IServiceProvider, String)
   name.vb: Func(Of IServiceProvider, String)
   spec.csharp:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_BasePathFactory
   name: BasePathFactory
   nameWithType: IApizrExtendedSharedOptions.BasePathFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.BasePathFactory
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpTracerModeFactory
   name: HttpTracerModeFactory
   nameWithType: IApizrExtendedSharedOptions.HttpTracerModeFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpTracerModeFactory
@@ -725,6 +810,7 @@ references:
   commentId: T:System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode}
   parent: System
   definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
   name: Func<IServiceProvider, HttpTracerMode>
   nameWithType: Func<IServiceProvider, HttpTracerMode>
   fullName: System.Func<System.IServiceProvider, Apizr.Logging.HttpTracerMode>
@@ -734,53 +820,40 @@ references:
   spec.csharp:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: Apizr.Logging.HttpTracerMode
     name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
+    href: Apizr.Logging.HttpTracerMode.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: Apizr.Logging.HttpTracerMode
     name: HttpTracerMode
-    nameWithType: HttpTracerMode
-    fullName: Apizr.Logging.HttpTracerMode
+    href: Apizr.Logging.HttpTracerMode.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_TrafficVerbosityFactory
   name: TrafficVerbosityFactory
   nameWithType: IApizrExtendedSharedOptions.TrafficVerbosityFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TrafficVerbosityFactory
@@ -788,6 +861,7 @@ references:
   commentId: T:System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts}
   parent: System
   definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
   name: Func<IServiceProvider, HttpMessageParts>
   nameWithType: Func<IServiceProvider, HttpMessageParts>
   fullName: System.Func<System.IServiceProvider, Apizr.Logging.HttpMessageParts>
@@ -797,53 +871,40 @@ references:
   spec.csharp:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: Apizr.Logging.HttpMessageParts
     name: HttpMessageParts
-    nameWithType: HttpMessageParts
-    fullName: Apizr.Logging.HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: Apizr.Logging.HttpMessageParts
     name: HttpMessageParts
-    nameWithType: HttpMessageParts
-    fullName: Apizr.Logging.HttpMessageParts
+    href: Apizr.Logging.HttpMessageParts.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_LogLevelsFactory
   name: LogLevelsFactory
   nameWithType: IApizrExtendedSharedOptions.LogLevelsFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.LogLevelsFactory
@@ -851,6 +912,7 @@ references:
   commentId: T:System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]}
   parent: System
   definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
   name: Func<IServiceProvider, LogLevel[]>
   nameWithType: Func<IServiceProvider, LogLevel[]>
   fullName: System.Func<System.IServiceProvider, Microsoft.Extensions.Logging.LogLevel[]>
@@ -860,61 +922,46 @@ references:
   spec.csharp:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: '['
+  - name: ']'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: Microsoft.Extensions.Logging.LogLevel
     name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
     isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
+  - name: (
   - name: )
-    nameWithType: )
-    fullName: )
+  - name: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpClientHandlerFactory
   name: HttpClientHandlerFactory
   nameWithType: IApizrExtendedSharedOptions.HttpClientHandlerFactory
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientHandlerFactory
@@ -922,6 +969,7 @@ references:
   commentId: T:System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler}
   parent: System
   definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
   name: Func<IServiceProvider, HttpClientHandler>
   nameWithType: Func<IServiceProvider, HttpClientHandler>
   fullName: System.Func<System.IServiceProvider, System.Net.Http.HttpClientHandler>
@@ -931,55 +979,145 @@ references:
   spec.csharp:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: System.Net.Http.HttpClientHandler
     name: HttpClientHandler
-    nameWithType: HttpClientHandler
-    fullName: System.Net.Http.HttpClientHandler
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclienthandler
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: System.Net.Http.HttpClientHandler
     name: HttpClientHandler
-    nameWithType: HttpClientHandler
-    fullName: System.Net.Http.HttpClientHandler
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclienthandler
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpMessageHandlerFactory
+  name: HttpMessageHandlerFactory
+  nameWithType: IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpMessageHandlerFactory
+- uid: System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  commentId: T:System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>
+  nameWithType: Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler>
+  fullName: System.Func<System.IServiceProvider, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
+  nameWithType.vb: Func(Of IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler)
+  fullName.vb: System.Func(Of System.IServiceProvider, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
+  name.vb: Func(Of IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+    name: IApizrManagerOptionsBase
+    href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpMessageHandler
+    name: HttpMessageHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  - name: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder*
   commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HttpClientBuilder
   name: HttpClientBuilder
   nameWithType: IApizrExtendedSharedOptions.HttpClientBuilder
   fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HttpClientBuilder
@@ -987,6 +1125,7 @@ references:
   commentId: T:System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder}
   parent: System
   definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<IHttpClientBuilder>
   nameWithType: Action<IHttpClientBuilder>
   fullName: System.Action<Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>
@@ -996,40 +1135,31 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Microsoft.Extensions.DependencyInjection.IHttpClientBuilder
     name: IHttpClientBuilder
-    nameWithType: IHttpClientBuilder
-    fullName: Microsoft.Extensions.DependencyInjection.IHttpClientBuilder
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.ihttpclientbuilder
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Microsoft.Extensions.DependencyInjection.IHttpClientBuilder
     name: IHttpClientBuilder
-    nameWithType: IHttpClientBuilder
-    fullName: Microsoft.Extensions.DependencyInjection.IHttpClientBuilder
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.ihttpclientbuilder
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
   name: Action<T>
   nameWithType: Action<T>
   fullName: System.Action<T>
@@ -1039,129 +1169,32 @@ references:
   spec.csharp:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: T
-    nameWithType: T
-    fullName: T
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Action`1
     name: Action
-    nameWithType: Action
-    fullName: System.Action
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
-    nameWithType: T
-    fullName: T
   - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory*
-  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
-  name: HeadersFactory
-  nameWithType: IApizrExtendedSharedOptions.HeadersFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersFactory
-- uid: System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}}
-  commentId: T:System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}}
-  parent: System
-  definition: System.Func`2
-  name: Func<IServiceProvider, IList<String>>
-  nameWithType: Func<IServiceProvider, IList<String>>
-  fullName: System.Func<System.IServiceProvider, System.Collections.Generic.IList<System.String>>
-  nameWithType.vb: Func(Of IServiceProvider, IList(Of String))
-  fullName.vb: System.Func(Of System.IServiceProvider, System.Collections.Generic.IList(Of System.String))
-  name.vb: Func(Of IServiceProvider, IList(Of String))
-  spec.csharp:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.IServiceProvider
-    name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Collections.Generic.IList`1
-    name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.IServiceProvider
-    name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Collections.Generic.IList`1
-    name: IList
-    nameWithType: IList
-    fullName: System.Collections.Generic.IList
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory*
-  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
-  name: TimeoutFactory
-  nameWithType: IApizrExtendedSharedOptions.TimeoutFactory
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.TimeoutFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_OperationTimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: IApizrExtendedSharedOptions.OperationTimeoutFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.OperationTimeoutFactory
 - uid: System.Func{System.IServiceProvider,System.TimeSpan}
   commentId: T:System.Func{System.IServiceProvider,System.TimeSpan}
   parent: System
   definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
   name: Func<IServiceProvider, TimeSpan>
   nameWithType: Func<IServiceProvider, TimeSpan>
   fullName: System.Func<System.IServiceProvider, System.TimeSpan>
@@ -1171,50 +1204,232 @@ references:
   spec.csharp:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`2
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.IServiceProvider
     name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
   - uid: System.TimeSpan
     name: TimeSpan
-    nameWithType: TimeSpan
-    fullName: System.TimeSpan
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.timespan
   - name: )
-    nameWithType: )
-    fullName: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_RequestTimeoutFactory
+  name: RequestTimeoutFactory
+  nameWithType: IApizrExtendedSharedOptions.RequestTimeoutFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories*
+  commentId: Overload:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_HeadersExtendedFactories
+  name: HeadersExtendedFactories
+  nameWithType: IApizrExtendedSharedOptions.HeadersExtendedFactories
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
+- uid: System.Collections.Generic.IDictionary{System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope},System.Func{System.IServiceProvider,System.Func{System.Collections.Generic.IList{System.String}}}}
+  commentId: T:System.Collections.Generic.IDictionary{System.ValueTuple{Apizr.Configuring.ApizrRegistrationMode,Apizr.Configuring.ApizrLifetimeScope},System.Func{System.IServiceProvider,System.Func{System.Collections.Generic.IList{System.String}}}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>
+  nameWithType: IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>
+  fullName: System.Collections.Generic.IDictionary<(Apizr.Configuring.ApizrRegistrationMode, Apizr.Configuring.ApizrLifetimeScope), System.Func<System.IServiceProvider, System.Func<System.Collections.Generic.IList<string>>>>
+  nameWithType.vb: IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IServiceProvider, Func(Of IList(Of String))))
+  fullName.vb: System.Collections.Generic.IDictionary(Of (Apizr.Configuring.ApizrRegistrationMode, Apizr.Configuring.ApizrLifetimeScope), System.Func(Of System.IServiceProvider, System.Func(Of System.Collections.Generic.IList(Of String))))
+  name.vb: IDictionary(Of (ApizrRegistrationMode, ApizrLifetimeScope), Func(Of IServiceProvider, Func(Of IList(Of String))))
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - name: (
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: (
+  - uid: Apizr.Configuring.ApizrRegistrationMode
+    name: ApizrRegistrationMode
+    href: Apizr.Configuring.ApizrRegistrationMode.html
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrLifetimeScope
+    name: ApizrLifetimeScope
+    href: Apizr.Configuring.ApizrLifetimeScope.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

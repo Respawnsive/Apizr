@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Apizr.Configuring.Shared;
 using Microsoft.Extensions.Logging;
 
@@ -15,9 +16,19 @@ namespace Apizr.Configuring.Proper
         Type WebApiType { get; }
 
         /// <summary>
-        /// Policy keys from the registry
+        /// Crud model type if any
         /// </summary>
-        string[] PolicyRegistryKeys { get; }
+        Type CrudModelType { get; }
+
+        /// <summary>
+        /// Web api interface or Crud model class type info
+        /// </summary>
+        TypeInfo TypeInfo { get; }
+
+        /// <summary>
+        /// True if it's a CRUD api
+        /// </summary>
+        bool IsCrudApi { get; }
 
         /// <summary>
         /// The logger instance

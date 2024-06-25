@@ -23,7 +23,7 @@ items:
   assemblies:
   - Apizr.Integrations.MediatR
   namespace: Apizr.Mediation.Commanding
-  summary: "\nA mediation command sending a request and returning a result\n"
+  summary: A mediation command sending a request and returning a result
   example: []
   syntax:
     content: 'public interface IMediationCommand<out TRequestData, out TResultData> : IRequest<TResultData>, IBaseRequest'
@@ -32,21 +32,38 @@ items:
       description: The api request type
     - id: TResultData
       description: The api result type
-    content.vb: >-
-      Public Interface IMediationCommand(Of Out TRequestData, Out TResultData)
-          Inherits IRequest(Of TResultData)
+    content.vb: Public Interface IMediationCommand(Of Out TRequestData, Out TResultData) Inherits IRequest(Of TResultData), IBaseRequest
   nameWithType.vb: IMediationCommand(Of TRequestData, TResultData)
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
   fullName.vb: Apizr.Mediation.Commanding.IMediationCommand(Of TRequestData, TResultData)
   name.vb: IMediationCommand(Of TRequestData, TResultData)
 references:
 - uid: Apizr.Mediation.Commanding
   commentId: N:Apizr.Mediation.Commanding
+  href: Apizr.html
   name: Apizr.Mediation.Commanding
   nameWithType: Apizr.Mediation.Commanding
   fullName: Apizr.Mediation.Commanding
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Mediation
+    name: Mediation
+    href: Apizr.Mediation.html
+  - name: .
+  - uid: Apizr.Mediation.Commanding
+    name: Commanding
+    href: Apizr.Mediation.Commanding.html

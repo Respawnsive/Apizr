@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
+using Apizr.Caching.Attributes;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Logging;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
-using Polly;
+using Microsoft.Extensions.Options;
 
 namespace Apizr.Configuring.Proper
 {
@@ -14,31 +18,43 @@ namespace Apizr.Configuring.Proper
     public class ApizrProperOptions : ApizrProperOptionsBase, IApizrProperOptions
     {
         /// <summary>
-        /// The common options constructor
+        /// The proper options constructor
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="assemblyPolicyRegistryKeys">Global policies</param>
-        /// <param name="webApiPolicyRegistryKeys">Specific policies</param>
+        /// <param name="crudModelType">The crud model type if any</param>
+        /// <param name="typeInfo">The type info</param>
         /// <param name="baseAddress">The web api base address</param>
         /// <param name="basePath">The web api base path</param>
         /// <param name="handlersParameters">Some handlers parameters</param>
         /// <param name="httpTracerMode">The http tracer mode</param>
         /// <param name="trafficVerbosity">The traffic verbosity</param>
-        /// <param name="timeout">The request timeout</param>
+        /// <param name="operationTimeout">The operation timeout</param>
+        /// <param name="requestTimeout">The request timeout</param>
+        /// <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
+        /// <param name="properResiliencePipelineAttributes">Specific resilience pipeline</param>
+        /// <param name="commonCacheAttribute">Global caching options</param>
+        /// <param name="properCacheAttribute">Specific caching options</param>
+        /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         /// <param name="logLevels">The log levels</param>
         public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions,
             Type webApiType,
-            string[] assemblyPolicyRegistryKeys,
-            string[] webApiPolicyRegistryKeys, 
+            Type crudModelType,
+            TypeInfo typeInfo,
             string baseAddress,
             string basePath,
             IDictionary<string, object> handlersParameters,
             HttpTracerMode? httpTracerMode,
             HttpMessageParts? trafficVerbosity,
-            TimeSpan? timeout,
-            params LogLevel[] logLevels) : base(sharedOptions, webApiType, assemblyPolicyRegistryKeys,
-            webApiPolicyRegistryKeys)
+            TimeSpan? operationTimeout,
+            TimeSpan? requestTimeout,
+            ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes,
+            ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes,
+            CacheAttribute commonCacheAttribute,
+            CacheAttribute properCacheAttribute,
+            Func<string, bool> shouldRedactHeaderValue = null,
+            params LogLevel[] logLevels) : base(sharedOptions, webApiType, crudModelType, typeInfo, commonResiliencePipelineAttributes, 
+            properResiliencePipelineAttributes, commonCacheAttribute, properCacheAttribute, shouldRedactHeaderValue)
         {
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
             BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? () => baseAddress : sharedOptions.BaseAddressFactory;
@@ -50,11 +66,10 @@ namespace Apizr.Configuring.Proper
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = sharedOptions.HttpClientConfigurationBuilder;
-            HttpClientFactory = sharedOptions.HttpClientFactory;
             DelegatingHandlersFactories = sharedOptions.DelegatingHandlersFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            ContextFactory = sharedOptions.ContextFactory;
-            HeadersFactory = sharedOptions.HeadersFactory;
-            TimeoutFactory = timeout.HasValue ? () => timeout!.Value : sharedOptions.TimeoutFactory;
+            HttpMessageHandlerFactory = sharedOptions.HttpMessageHandlerFactory;
+            OperationTimeoutFactory = operationTimeout.HasValue ? () => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
+            RequestTimeoutFactory = requestTimeout.HasValue ? () => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -112,33 +127,28 @@ namespace Apizr.Configuring.Proper
         public Func<HttpClientHandler> HttpClientHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; set; }
-
-        /// <inheritdoc />
         public Action<HttpClient> HttpClientConfigurationBuilder { get; set;  }
 
         /// <inheritdoc />
         public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
-        private Func<IList<string>> _headersFactory;
         /// <inheritdoc />
-        public Func<IList<string>> HeadersFactory
+        public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
+
+        private Func<TimeSpan> _operationTimeoutFactory;
+        /// <inheritdoc />
+        public Func<TimeSpan> OperationTimeoutFactory
         {
-            get => _headersFactory;
-            internal set => _headersFactory = value != null ? () =>
-                {
-                    value.Invoke().ToList().ForEach(header => Headers.Add(header));
-                    return Headers;
-                }
-                : null;
+            get => _operationTimeoutFactory;
+            set => _operationTimeoutFactory = value != null ? () => (TimeSpan) (OperationTimeout = value.Invoke()) : null;
         }
 
-        private Func<TimeSpan> _timeoutFactory;
+        private Func<TimeSpan> _requestTimeoutFactory;
         /// <inheritdoc />
-        public Func<TimeSpan> TimeoutFactory
+        public Func<TimeSpan> RequestTimeoutFactory
         {
-            get => _timeoutFactory;
-            set => _timeoutFactory = value != null ? () => (TimeSpan) (Timeout = value.Invoke()) : null;
+            get => _requestTimeoutFactory;
+            set => _requestTimeoutFactory = value != null ? () => (TimeSpan)(RequestTimeout = value.Invoke()) : null;
         }
     }
 }

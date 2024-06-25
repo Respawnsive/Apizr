@@ -26,17 +26,11 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe authentication handler definition\n"
+  summary: The authentication handler definition
   example: []
   syntax:
     content: public interface IAuthenticationHandler
     content.vb: Public Interface IAuthenticationHandler
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
 - uid: Apizr.Authenticating.IAuthenticationHandler.GetToken
   commentId: M:Apizr.Authenticating.IAuthenticationHandler.GetToken
   id: GetToken
@@ -59,14 +53,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe method called to get token from settings\n"
+  summary: The method called to get token from settings
   example: []
   syntax:
     content: string GetToken()
     return:
       type: System.String
       description: ''
-    content.vb: Function GetToken As String
+    content.vb: Function GetToken() As String
   overload: Apizr.Authenticating.IAuthenticationHandler.GetToken*
 - uid: Apizr.Authenticating.IAuthenticationHandler.SetToken(System.String)
   commentId: M:Apizr.Authenticating.IAuthenticationHandler.SetToken(System.String)
@@ -75,9 +69,9 @@ items:
   langs:
   - csharp
   - vb
-  name: SetToken(String)
-  nameWithType: IAuthenticationHandler.SetToken(String)
-  fullName: Apizr.Authenticating.IAuthenticationHandler.SetToken(System.String)
+  name: SetToken(string)
+  nameWithType: IAuthenticationHandler.SetToken(string)
+  fullName: Apizr.Authenticating.IAuthenticationHandler.SetToken(string)
   type: Method
   source:
     remote:
@@ -90,7 +84,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe method called to save token into settings\n"
+  summary: The method called to save token into settings
   example: []
   syntax:
     content: void SetToken(string token)
@@ -100,6 +94,9 @@ items:
       description: The token to save
     content.vb: Sub SetToken(token As String)
   overload: Apizr.Authenticating.IAuthenticationHandler.SetToken*
+  nameWithType.vb: IAuthenticationHandler.SetToken(String)
+  fullName.vb: Apizr.Authenticating.IAuthenticationHandler.SetToken(String)
+  name.vb: SetToken(String)
 - uid: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   commentId: M:Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   id: RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
@@ -122,7 +119,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: "\nThe method called to refresh token when rejected or empty\n"
+  summary: The method called to refresh token when rejected or empty
   example: []
   syntax:
     content: Task<string> RefreshTokenAsync(HttpRequestMessage request)
@@ -138,11 +135,29 @@ items:
 references:
 - uid: Apizr.Authenticating
   commentId: N:Apizr.Authenticating
+  href: Apizr.html
   name: Apizr.Authenticating
   nameWithType: Apizr.Authenticating
   fullName: Apizr.Authenticating
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Authenticating
+    name: Authenticating
+    href: Apizr.Authenticating.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Authenticating
+    name: Authenticating
+    href: Apizr.Authenticating.html
 - uid: Apizr.Authenticating.IAuthenticationHandler.GetToken*
   commentId: Overload:Apizr.Authenticating.IAuthenticationHandler.GetToken
+  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_GetToken
   name: GetToken
   nameWithType: IAuthenticationHandler.GetToken
   fullName: Apizr.Authenticating.IAuthenticationHandler.GetToken
@@ -150,22 +165,29 @@ references:
   commentId: T:System.String
   parent: System
   isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
 - uid: Apizr.Authenticating.IAuthenticationHandler.SetToken*
   commentId: Overload:Apizr.Authenticating.IAuthenticationHandler.SetToken
+  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_SetToken_System_String_
   name: SetToken
   nameWithType: IAuthenticationHandler.SetToken
   fullName: Apizr.Authenticating.IAuthenticationHandler.SetToken
 - uid: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync*
   commentId: Overload:Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync
+  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
   name: RefreshTokenAsync
   nameWithType: IAuthenticationHandler.RefreshTokenAsync
   fullName: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync
@@ -173,6 +195,7 @@ references:
   commentId: T:System.Net.Http.HttpRequestMessage
   parent: System.Net.Http
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
   name: HttpRequestMessage
   nameWithType: HttpRequestMessage
   fullName: System.Net.Http.HttpRequestMessage
@@ -180,55 +203,78 @@ references:
   commentId: T:System.Threading.Tasks.Task{System.String}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<String>
-  nameWithType: Task<String>
-  fullName: System.Threading.Tasks.Task<System.String>
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<string>
+  nameWithType: Task<string>
+  fullName: System.Threading.Tasks.Task<string>
   nameWithType.vb: Task(Of String)
-  fullName.vb: System.Threading.Tasks.Task(Of System.String)
+  fullName.vb: System.Threading.Tasks.Task(Of String)
   name.vb: Task(Of String)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Net.Http
   commentId: N:System.Net.Http
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   name: Task<TResult>
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
@@ -238,36 +284,55 @@ references:
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Threading.Tasks.Task`1
     name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

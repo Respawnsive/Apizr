@@ -6,6 +6,7 @@ using Apizr.Extending.Configuring.Registry;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Mapping;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 

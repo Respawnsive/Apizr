@@ -27,7 +27,7 @@ using Apizr;
 using Apizr.Configuring.Request;
 {% if WithRetry -%}
 using Polly;
-using Apizr.Policing;
+using Apizr.Resiliencing.Attributes;
 {% endif -%}
 {% if WithLogs -%}
 using Apizr.Logging.Attributes;
@@ -38,7 +38,7 @@ using Apizr.Caching.Attributes;
 
 {% if RegistrationType == 'None' -%}
 {%  if WithRetry -%}
-[assembly:Policy("TransientHttpError")]
+[assembly:ResiliencePipeline("TransientHttpError")]
 {%  endif -%}
 {%  if WithLogs -%}
 [assembly:Log]

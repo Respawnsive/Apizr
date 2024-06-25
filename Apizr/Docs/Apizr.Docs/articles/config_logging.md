@@ -10,10 +10,15 @@ You can adjust logging configuration with:
   - `RequestBody`
   - `RequestHeaders`
   - `RequestCookies`
+  - `RequestAllButBody` = `RequestHeaders | RequestCookies`,
   - `RequestAll` = `RequestBody | RequestHeaders | RequestCookies`
   - `ResponseBody`
   - `ResponseHeaders`
   - `ResponseAll` = `ResponseBody | ResponseHeaders`
+  - `HeadersOnly` = `ResponseHeaders | RequestHeaders`,
+  - `AllButRequestBody` = `RequestAllButBody` | `ResponseAll`,
+  - `AllButResponseBody` = `RequestAll` | `ResponseHeaders`,
+  - `AllButBodies` = `ResponseAll | RequestAllButBody`,
   - `All` = `ResponseAll | RequestAll`
 - `logLevels` (default: [Low] `Trace`, [Medium] `Information` and [High] `Critical`) Log levels to apply while writing logs (see Microsoft.Enxtension.Logging), with:
   - `Trace`
@@ -29,7 +34,7 @@ Note that parameter logLevels is an array. It lets you provide from 0 to 3 diffe
 - Medium: logs all missconfigured things, like asking for cache without providing any cache provider
 - High: logs errors and exceptions
 
-Obviously, providing more than 3 log levels would be pointlees.
+Obviously, providing more than 3 log levels would be pointless.
 
 It means that:
 - if you don't provide any log level at all, default levels will be applied ([Low] `Trace`, [Medium] `Information` and [High] `Critical`)
@@ -81,12 +86,62 @@ namespace Apizr.Sample
 }
 ```
 
-In this example, we decided to apply the default logging configuration ([Low] `Trace`, [Medium] `Information` and [High] `Critical`) to all assembly api interfaces/entities. 
-But you can adjust logging configuration thanks to attribute parameters.
+In this classic api example, we decided to apply the default logging configuration ([Low] `Trace`, [Medium] `Information` and [High] `Critical`) to all assembly api interfaces/entities. 
+Then some custom log settings about this specific api.
+
+You’ll find some more log attributes but dedicated to CRUD apis (the ones ending with `Read`, `ReadAll`, `Create`, `Update` or `Delete` suffix), so you could define log settings at any level for CRUD apis too.
+
+Here is CRUD api an example:
+```csharp
+[assembly:Log]
+namespace Apizr.Sample.Models
+{
+    [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
+    [LogReadAll(HttpMessageParts.RequestAll, 
+        HttpTracerMode.ErrorsAndExceptionsOnly, 
+        LogLevel.Information)]
+    [LogRead(HttpMessageParts.AllButBodies, 
+        HttpTracerMode.ExceptionsOnly, 
+        LogLevel.Debug)]
+    public class User
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; }
+
+        [JsonProperty("last_name")]
+        public string LastName { get; set; }
+
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; }
+
+        [JsonProperty("email")]
+        public string Email { get; set; }
+    }
+}
+```
+
+Again, in this CRUD api example, we decided to apply the default logging configuration ([Low] `Trace`, [Medium] `Information` and [High] `Critical`) to all assembly api interfaces/entities. 
+Then some custom log settings about this specific api.
 
 ### [Registering](#tab/tabid-registering)
 
-Configuring the logging fluently at register time allows you to set it dynamically (e.g. based on settings)
+#### Automatically
+
+Logging parameters could be set automatically by providing an `IConfiguration` instance containing the logging settings:
+```csharp
+options => options.WithConfiguration(context.Configuration)
+```
+
+We can set it at common level (to all apis) or specific level (dedicated to a named one).
+
+Please heads to the Settings doc article to see how to configure logging automatically from loaded settings configuration.
+
+#### Manually
+
+Configuring the logging fluently at register time allows you to set it dynamically.
 
 You can set it thanks to this option:
 
@@ -140,3 +195,28 @@ Logging configuration duplicate strategy order:
 - otherwise the api attribute decoration one (interface)
 - otherwise the fluent common resgistration one (registry common options)
 - otherwise the global attribute decoration one (assembly)
+
+### Redacting
+
+You may want to hide some header sensitive data from logs.
+
+You can set which header values should be redacted before logging with this option:
+
+```csharp
+// direct configuration
+options => options.WithLoggedHeadersRedactionNames(new[]{ "MyHeaderKey" })
+
+// factory configuration
+options => options.WithLoggedHeadersRedactionRule(header => header == "MyHeaderKey")
+```
+
+From there, you should see your logs redacted like so:
+```csharp
+ ==================== HTTP REQUEST: [GET] ==================== 
+GET https://reqres.in/api/users
+Request Headers:
+MyHeaderKey: *
+```
+
+Note that you can mix register and request time redaction configurations. 
+Also, the ApizrDuplicateStrategy optional parameter let you tell Apizr whether to override or not any parent redaction rules.

@@ -29,12 +29,12 @@ namespace Apizr
 
             if (typeof(TCache) == typeof(byte[]))
             {
-                var data = value.ToByteArray();
+                var data = await value.ToSerializedByteArrayAsync(_contentSerializer);
                 await _distributedCache.SetAsync(key, data, options, cancellationToken);
             }
             else if (typeof(TCache) == typeof(string))
             {
-                var data = await value.ToJsonStringAsync(_contentSerializer);
+                var data = await value.ToSerializedStringAsync(_contentSerializer);
                 await _distributedCache.SetStringAsync(key, data, options, cancellationToken);
             }
             else
@@ -49,12 +49,12 @@ namespace Apizr
             if (typeof(TCache) == typeof(byte[]))
             {
                 var result = await _distributedCache.GetAsync(key, cancellationToken);
-                return result.FromByteArray<TData>();
+                return await result.FromSerializedByteArrayAsync<TData>(_contentSerializer, cancellationToken);
             }
             else if (typeof(TCache) == typeof(string))
             {
                 var result = await _distributedCache.GetStringAsync(key, cancellationToken);
-                return await result.FromJsonStringAsync<TData>(_contentSerializer, cancellationToken);
+                return await result.FromSerializedStringAsync<TData>(_contentSerializer, cancellationToken);
             }
             else
             {

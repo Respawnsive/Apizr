@@ -9,8 +9,8 @@ items:
   - Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory
-  - Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
   - Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
+  - Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
   langs:
   - csharp
   - vb
@@ -29,15 +29,14 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nOptions available at common level for static registrations\n"
+  summary: Options available at common level for static registrations
   example: []
   syntax:
-    content: 'public interface IApizrCommonOptions : IApizrCommonOptionsBase, IApizrSharedRegistrationOptions, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase'
-    content.vb: >-
-      Public Interface IApizrCommonOptions
-          Inherits IApizrCommonOptionsBase, IApizrSharedRegistrationOptions
+    content: 'public interface IApizrCommonOptions : IApizrCommonOptionsBase, IApizrSharedRegistrationOptions, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptions, IApizrGlobalSharedOptionsBase'
+    content.vb: Public Interface IApizrCommonOptions Inherits IApizrCommonOptionsBase, IApizrSharedRegistrationOptions, IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptions, IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
+  - Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseUriFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseAddressFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BasePathFactory
@@ -45,30 +44,28 @@ items:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TrafficVerbosityFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.LogLevelsFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientHandlerFactory
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientFactory
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
-  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  modifiers.csharp:
-  - public
-  - interface
-  modifiers.vb:
-  - Public
-  - Interface
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory
   id: LoggerFactoryFactory
@@ -91,7 +88,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nThe LoggerFactory factory (I know, I know...)\n"
+  summary: The LoggerFactory factory (I know, I know...)
   example: []
   syntax:
     content: Func<ILoggerFactory> LoggerFactoryFactory { get; set; }
@@ -100,44 +97,37 @@ items:
       type: System.Func{Microsoft.Extensions.Logging.ILoggerFactory}
     content.vb: Property LoggerFactoryFactory As Func(Of ILoggerFactory)
   overload: Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory*
-  modifiers.csharp:
-  - get
-  - set
-- uid: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-  commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-  id: PolicyRegistryFactory
+- uid: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  id: ResiliencePipelineRegistryFactory
   parent: Apizr.Configuring.Common.IApizrCommonOptions
   langs:
   - csharp
   - vb
-  name: PolicyRegistryFactory
-  nameWithType: IApizrCommonOptions.PolicyRegistryFactory
-  fullName: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
+  name: ResiliencePipelineRegistryFactory
+  nameWithType: IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  fullName: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: PolicyRegistryFactory
+    id: ResiliencePipelineRegistryFactory
     path: ../../Src/Apizr/Configuring/Common/IApizrCommonOptions.cs
     startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nPolicy registry factory\n"
+  summary: Resilience pipeline registry factory
   example: []
   syntax:
-    content: Func<IReadOnlyPolicyRegistry<string>> PolicyRegistryFactory { get; }
+    content: Func<ResiliencePipelineRegistry<string>> ResiliencePipelineRegistryFactory { get; }
     parameters: []
     return:
-      type: System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
-    content.vb: ReadOnly Property PolicyRegistryFactory As Func(Of IReadOnlyPolicyRegistry(Of String))
-  overload: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
+      type: System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}}
+    content.vb: ReadOnly Property ResiliencePipelineRegistryFactory As Func(Of ResiliencePipelineRegistry(Of String))
+  overload: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory*
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
   id: RefitSettingsFactory
@@ -160,7 +150,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nRefit settings factory\n"
+  summary: Refit settings factory
   example: []
   syntax:
     content: Func<RefitSettings> RefitSettingsFactory { get; }
@@ -169,10 +159,6 @@ items:
       type: System.Func{Refit.RefitSettings}
     content.vb: ReadOnly Property RefitSettingsFactory As Func(Of RefitSettings)
   overload: Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory
   id: ConnectivityHandlerFactory
@@ -195,7 +181,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nConnectivity handler factory\n"
+  summary: Connectivity handler factory
   example: []
   syntax:
     content: Func<IConnectivityHandler> ConnectivityHandlerFactory { get; }
@@ -204,10 +190,6 @@ items:
       type: System.Func{Apizr.Connecting.IConnectivityHandler}
     content.vb: ReadOnly Property ConnectivityHandlerFactory As Func(Of IConnectivityHandler)
   overload: Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.CacheHandlerFactory
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.CacheHandlerFactory
   id: CacheHandlerFactory
@@ -230,7 +212,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nCache handler factory\n"
+  summary: Cache handler factory
   example: []
   syntax:
     content: Func<ICacheHandler> CacheHandlerFactory { get; }
@@ -239,10 +221,6 @@ items:
       type: System.Func{Apizr.Caching.ICacheHandler}
     content.vb: ReadOnly Property CacheHandlerFactory As Func(Of ICacheHandler)
   overload: Apizr.Configuring.Common.IApizrCommonOptions.CacheHandlerFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory
   id: MappingHandlerFactory
@@ -265,7 +243,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
-  summary: "\nMapping handler factory\n"
+  summary: Mapping handler factory
   example: []
   syntax:
     content: Func<IMappingHandler> MappingHandlerFactory { get; }
@@ -274,203 +252,315 @@ items:
       type: System.Func{Apizr.Mapping.IMappingHandler}
     content.vb: ReadOnly Property MappingHandlerFactory As Func(Of IMappingHandler)
   overload: Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory*
-  modifiers.csharp:
-  - get
-  modifiers.vb:
-  - ReadOnly
 references:
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
+  href: Apizr.html
   name: Apizr.Configuring.Common
   nameWithType: Apizr.Configuring.Common
   fullName: Apizr.Configuring.Common
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Common
+    name: Common
+    href: Apizr.Configuring.Common.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Common
+    name: Common
+    href: Apizr.Configuring.Common.html
 - uid: Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
   commentId: P:Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
   parent: Apizr.Configuring.Common.IApizrCommonOptionsBase
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html#Apizr_Configuring_Common_IApizrCommonOptionsBase_RefitSettings
   name: RefitSettings
   nameWithType: IApizrCommonOptionsBase.RefitSettings
   fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase.RefitSettings
+- uid: Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
+  commentId: P:Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
+  parent: Apizr.Configuring.Common.IApizrCommonOptionsBase
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html#Apizr_Configuring_Common_IApizrCommonOptionsBase_ApizrConfigurationSection
+  name: ApizrConfigurationSection
+  nameWithType: IApizrCommonOptionsBase.ApizrConfigurationSection
+  fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase.ApizrConfigurationSection
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseUriFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseUriFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_BaseUriFactory
   name: BaseUriFactory
   nameWithType: IApizrSharedRegistrationOptions.BaseUriFactory
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseUriFactory
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseAddressFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseAddressFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_BaseAddressFactory
   name: BaseAddressFactory
   nameWithType: IApizrSharedRegistrationOptions.BaseAddressFactory
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BaseAddressFactory
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BasePathFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BasePathFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_BasePathFactory
   name: BasePathFactory
   nameWithType: IApizrSharedRegistrationOptions.BasePathFactory
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.BasePathFactory
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpTracerModeFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpTracerModeFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_HttpTracerModeFactory
   name: HttpTracerModeFactory
   nameWithType: IApizrSharedRegistrationOptions.HttpTracerModeFactory
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpTracerModeFactory
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TrafficVerbosityFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TrafficVerbosityFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_TrafficVerbosityFactory
   name: TrafficVerbosityFactory
   nameWithType: IApizrSharedRegistrationOptions.TrafficVerbosityFactory
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TrafficVerbosityFactory
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.LogLevelsFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.LogLevelsFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_LogLevelsFactory
   name: LogLevelsFactory
   nameWithType: IApizrSharedRegistrationOptions.LogLevelsFactory
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.LogLevelsFactory
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_HttpClientHandlerFactory
   name: HttpClientHandlerFactory
   nameWithType: IApizrSharedRegistrationOptions.HttpClientHandlerFactory
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientHandlerFactory
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientFactory
-  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
-  name: HttpClientFactory
-  nameWithType: IApizrSharedRegistrationOptions.HttpClientFactory
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientFactory
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_HttpClientConfigurationBuilder
   name: HttpClientConfigurationBuilder
   nameWithType: IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpClientConfigurationBuilder
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
   commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_DelegatingHandlersFactories
   name: DelegatingHandlersFactories
   nameWithType: IApizrSharedRegistrationOptions.DelegatingHandlersFactories
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
-  name: HeadersFactory
-  nameWithType: IApizrSharedRegistrationOptions.HeadersFactory
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HeadersFactory
-- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_HttpMessageHandlerFactory
+  name: HttpMessageHandlerFactory
+  nameWithType: IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
   parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
-  name: TimeoutFactory
-  nameWithType: IApizrSharedRegistrationOptions.TimeoutFactory
-  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.TimeoutFactory
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_OperationTimeoutFactory
+  name: OperationTimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.OperationTimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.OperationTimeoutFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_RequestTimeoutFactory
+  name: RequestTimeoutFactory
+  nameWithType: IApizrSharedRegistrationOptions.RequestTimeoutFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.RequestTimeoutFactory
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseUri
   name: BaseUri
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseUri
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseUri
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BaseAddress
   name: BaseAddress
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BaseAddress
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_BasePath
   name: BasePath
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.BasePath
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.BasePath
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
-  name: ContextFactory
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.ContextFactory
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_PrimaryHandlerFactory
   name: PrimaryHandlerFactory
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.PrimaryHandlerFactory
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_HeadersFactories
+  name: HeadersFactories
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.HeadersFactories
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBase_Headers
+  name: Headers
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBase.Headers
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.Headers
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HttpTracerMode
   name: HttpTracerMode
   nameWithType: IApizrGlobalSharedOptionsBase.HttpTracerMode
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_TrafficVerbosity
   name: TrafficVerbosity
   nameWithType: IApizrGlobalSharedOptionsBase.TrafficVerbosity
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.TrafficVerbosity
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LogLevels
   name: LogLevels
   nameWithType: IApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OnException
   name: OnException
   nameWithType: IApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LetThrowOnExceptionWithEmptyCache
   name: LetThrowOnExceptionWithEmptyCache
   nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_HandlersParameters
   name: HandlersParameters
   nameWithType: IApizrGlobalSharedOptionsBase.HandlersParameters
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  name: Headers
-  nameWithType: IApizrGlobalSharedOptionsBase.Headers
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Headers
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OperationTimeout
+  name: OperationTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.OperationTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  name: Timeout
-  nameWithType: IApizrGlobalSharedOptionsBase.Timeout
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.Timeout
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_RequestTimeout
+  name: RequestTimeout
+  nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ShouldRedactHeaderValue
+  name: ShouldRedactHeaderValue
+  nameWithType: IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ResiliencePipelineOptions
+  name: ResiliencePipelineOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_CacheOptions
+  name: CacheOptions
+  nameWithType: IApizrGlobalSharedOptionsBase.CacheOptions
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
 - uid: Apizr.Configuring.Common.IApizrCommonOptionsBase
   commentId: T:Apizr.Configuring.Common.IApizrCommonOptionsBase
   parent: Apizr.Configuring.Common
+  href: Apizr.Configuring.Common.IApizrCommonOptionsBase.html
   name: IApizrCommonOptionsBase
   nameWithType: IApizrCommonOptionsBase
   fullName: Apizr.Configuring.Common.IApizrCommonOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
   commentId: T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html
   name: IApizrSharedRegistrationOptions
   nameWithType: IApizrSharedRegistrationOptions
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase.html
   name: IApizrGlobalSharedRegistrationOptionsBase
   nameWithType: IApizrGlobalSharedRegistrationOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   commentId: T:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   parent: Apizr.Configuring.Shared
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html
   name: IApizrGlobalSharedOptionsBase
   nameWithType: IApizrGlobalSharedOptionsBase
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
 - uid: Apizr.Configuring.Shared
   commentId: N:Apizr.Configuring.Shared
+  href: Apizr.html
   name: Apizr.Configuring.Shared
   nameWithType: Apizr.Configuring.Shared
   fullName: Apizr.Configuring.Shared
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  - name: .
+  - uid: Apizr.Configuring.Shared
+    name: Shared
+    href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory*
   commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory
+  href: Apizr.Configuring.Common.IApizrCommonOptions.html#Apizr_Configuring_Common_IApizrCommonOptions_LoggerFactoryFactory
   name: LoggerFactoryFactory
   nameWithType: IApizrCommonOptions.LoggerFactoryFactory
   fullName: Apizr.Configuring.Common.IApizrCommonOptions.LoggerFactoryFactory
@@ -478,6 +568,7 @@ references:
   commentId: T:System.Func{Microsoft.Extensions.Logging.ILoggerFactory}
   parent: System
   definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<ILoggerFactory>
   nameWithType: Func<ILoggerFactory>
   fullName: System.Func<Microsoft.Extensions.Logging.ILoggerFactory>
@@ -487,40 +578,31 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Microsoft.Extensions.Logging.ILoggerFactory
     name: ILoggerFactory
-    nameWithType: ILoggerFactory
-    fullName: Microsoft.Extensions.Logging.ILoggerFactory
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.iloggerfactory
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Microsoft.Extensions.Logging.ILoggerFactory
     name: ILoggerFactory
-    nameWithType: ILoggerFactory
-    fullName: Microsoft.Extensions.Logging.ILoggerFactory
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.iloggerfactory
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Func`1
   commentId: T:System.Func`1
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<TResult>
   nameWithType: Func<TResult>
   fullName: System.Func<TResult>
@@ -530,112 +612,86 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: TResult
-    nameWithType: TResult
-    fullName: TResult
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory*
-  commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-  name: PolicyRegistryFactory
-  nameWithType: IApizrCommonOptions.PolicyRegistryFactory
-  fullName: Apizr.Configuring.Common.IApizrCommonOptions.PolicyRegistryFactory
-- uid: System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
-  commentId: T:System.Func{Polly.Registry.IReadOnlyPolicyRegistry{System.String}}
+- uid: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory*
+  commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  href: Apizr.Configuring.Common.IApizrCommonOptions.html#Apizr_Configuring_Common_IApizrCommonOptions_ResiliencePipelineRegistryFactory
+  name: ResiliencePipelineRegistryFactory
+  nameWithType: IApizrCommonOptions.ResiliencePipelineRegistryFactory
+  fullName: Apizr.Configuring.Common.IApizrCommonOptions.ResiliencePipelineRegistryFactory
+- uid: System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}}
+  commentId: T:System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}}
   parent: System
   definition: System.Func`1
-  name: Func<IReadOnlyPolicyRegistry<String>>
-  nameWithType: Func<IReadOnlyPolicyRegistry<String>>
-  fullName: System.Func<Polly.Registry.IReadOnlyPolicyRegistry<System.String>>
-  nameWithType.vb: Func(Of IReadOnlyPolicyRegistry(Of String))
-  fullName.vb: System.Func(Of Polly.Registry.IReadOnlyPolicyRegistry(Of System.String))
-  name.vb: Func(Of IReadOnlyPolicyRegistry(Of String))
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
+  name: Func<ResiliencePipelineRegistry<string>>
+  nameWithType: Func<ResiliencePipelineRegistry<string>>
+  fullName: System.Func<Polly.Registry.ResiliencePipelineRegistry<string>>
+  nameWithType.vb: Func(Of ResiliencePipelineRegistry(Of String))
+  fullName.vb: System.Func(Of Polly.Registry.ResiliencePipelineRegistry(Of String))
+  name.vb: Func(Of ResiliencePipelineRegistry(Of String))
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
     isExternal: true
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
+    name: string
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Polly.Registry.IReadOnlyPolicyRegistry`1
-    name: IReadOnlyPolicyRegistry
-    nameWithType: IReadOnlyPolicyRegistry
-    fullName: Polly.Registry.IReadOnlyPolicyRegistry
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Polly.Registry.ResiliencePipelineRegistry`1
+    name: ResiliencePipelineRegistry
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://github.com/App-vNext/Polly/blob/ede127ff7f3a7a4e44e34efeb8685e4491438816/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
-    nameWithType: String
-    fullName: System.String
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-    nameWithType: )
-    fullName: )
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory*
   commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
+  href: Apizr.Configuring.Common.IApizrCommonOptions.html#Apizr_Configuring_Common_IApizrCommonOptions_RefitSettingsFactory
   name: RefitSettingsFactory
   nameWithType: IApizrCommonOptions.RefitSettingsFactory
   fullName: Apizr.Configuring.Common.IApizrCommonOptions.RefitSettingsFactory
@@ -643,6 +699,7 @@ references:
   commentId: T:System.Func{Refit.RefitSettings}
   parent: System
   definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<RefitSettings>
   nameWithType: Func<RefitSettings>
   fullName: System.Func<Refit.RefitSettings>
@@ -652,39 +709,28 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Refit.RefitSettings
     name: RefitSettings
-    nameWithType: RefitSettings
-    fullName: Refit.RefitSettings
     isExternal: true
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Refit.RefitSettings
     name: RefitSettings
-    nameWithType: RefitSettings
-    fullName: Refit.RefitSettings
     isExternal: true
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory*
   commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory
+  href: Apizr.Configuring.Common.IApizrCommonOptions.html#Apizr_Configuring_Common_IApizrCommonOptions_ConnectivityHandlerFactory
   name: ConnectivityHandlerFactory
   nameWithType: IApizrCommonOptions.ConnectivityHandlerFactory
   fullName: Apizr.Configuring.Common.IApizrCommonOptions.ConnectivityHandlerFactory
@@ -692,6 +738,7 @@ references:
   commentId: T:System.Func{Apizr.Connecting.IConnectivityHandler}
   parent: System
   definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<IConnectivityHandler>
   nameWithType: Func<IConnectivityHandler>
   fullName: System.Func<Apizr.Connecting.IConnectivityHandler>
@@ -701,37 +748,28 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Connecting.IConnectivityHandler
     name: IConnectivityHandler
-    nameWithType: IConnectivityHandler
-    fullName: Apizr.Connecting.IConnectivityHandler
+    href: Apizr.Connecting.IConnectivityHandler.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Connecting.IConnectivityHandler
     name: IConnectivityHandler
-    nameWithType: IConnectivityHandler
-    fullName: Apizr.Connecting.IConnectivityHandler
+    href: Apizr.Connecting.IConnectivityHandler.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.CacheHandlerFactory*
   commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.CacheHandlerFactory
+  href: Apizr.Configuring.Common.IApizrCommonOptions.html#Apizr_Configuring_Common_IApizrCommonOptions_CacheHandlerFactory
   name: CacheHandlerFactory
   nameWithType: IApizrCommonOptions.CacheHandlerFactory
   fullName: Apizr.Configuring.Common.IApizrCommonOptions.CacheHandlerFactory
@@ -739,6 +777,7 @@ references:
   commentId: T:System.Func{Apizr.Caching.ICacheHandler}
   parent: System
   definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<ICacheHandler>
   nameWithType: Func<ICacheHandler>
   fullName: System.Func<Apizr.Caching.ICacheHandler>
@@ -748,37 +787,28 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Caching.ICacheHandler
     name: ICacheHandler
-    nameWithType: ICacheHandler
-    fullName: Apizr.Caching.ICacheHandler
+    href: Apizr.Caching.ICacheHandler.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Caching.ICacheHandler
     name: ICacheHandler
-    nameWithType: ICacheHandler
-    fullName: Apizr.Caching.ICacheHandler
+    href: Apizr.Caching.ICacheHandler.html
   - name: )
-    nameWithType: )
-    fullName: )
 - uid: Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory*
   commentId: Overload:Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory
+  href: Apizr.Configuring.Common.IApizrCommonOptions.html#Apizr_Configuring_Common_IApizrCommonOptions_MappingHandlerFactory
   name: MappingHandlerFactory
   nameWithType: IApizrCommonOptions.MappingHandlerFactory
   fullName: Apizr.Configuring.Common.IApizrCommonOptions.MappingHandlerFactory
@@ -786,6 +816,7 @@ references:
   commentId: T:System.Func{Apizr.Mapping.IMappingHandler}
   parent: System
   definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
   name: Func<IMappingHandler>
   nameWithType: Func<IMappingHandler>
   fullName: System.Func<Apizr.Mapping.IMappingHandler>
@@ -795,32 +826,22 @@ references:
   spec.csharp:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-    nameWithType: <
-    fullName: <
   - uid: Apizr.Mapping.IMappingHandler
     name: IMappingHandler
-    nameWithType: IMappingHandler
-    fullName: Apizr.Mapping.IMappingHandler
+    href: Apizr.Mapping.IMappingHandler.html
   - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   spec.vb:
   - uid: System.Func`1
     name: Func
-    nameWithType: Func
-    fullName: System.Func
     isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: Apizr.Mapping.IMappingHandler
     name: IMappingHandler
-    nameWithType: IMappingHandler
-    fullName: Apizr.Mapping.IMappingHandler
+    href: Apizr.Mapping.IMappingHandler.html
   - name: )
-    nameWithType: )
-    fullName: )

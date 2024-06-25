@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Threading;
 using Apizr.Configuring.Manager;
 using Apizr.Logging;
+using Apizr.Resiliencing;
 using Microsoft.Extensions.Logging;
-using Polly;
 
 namespace Apizr.Configuring.Shared
 {
     /// <summary>
     /// Options available at both common and proper level for static registrations
     /// </summary>
-    public interface IApizrSharedRegistrationOptions : IApizrSharedRegistrationOptionsBase
+    public interface IApizrSharedRegistrationOptions : IApizrSharedRegistrationOptionsBase, IApizrGlobalSharedOptions
     {
         /// <summary>
         /// Base uri factory
@@ -50,28 +49,28 @@ namespace Apizr.Configuring.Shared
         Func<HttpClientHandler> HttpClientHandlerFactory { get; }
 
         /// <summary>
-        /// HttpClient factory
-        /// </summary>
-        Func<HttpMessageHandler, Uri, HttpClient> HttpClientFactory { get; }
-
-        /// <summary>
         /// HttpClient configuration builder
         /// </summary>
         Action<HttpClient> HttpClientConfigurationBuilder { get; }
 
         /// <summary>
-        /// Delegating handlers factories
+        /// DelegatingHandler factories
         /// </summary>
         IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
         /// <summary>
-        /// Headers factory
+        /// HttpMessageHandler factory
         /// </summary>
-        Func<IList<string>> HeadersFactory { get; }
+        Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; }
 
         /// <summary>
-        /// Request timeout factory
+        /// The operation timeout factory (overall request tries)
         /// </summary>
-        Func<TimeSpan> TimeoutFactory { get; }
+        Func<TimeSpan> OperationTimeoutFactory { get; }
+
+        /// <summary>
+        /// The request timeout factory (each request try)
+        /// </summary>
+        Func<TimeSpan> RequestTimeoutFactory { get; }
     }
 }

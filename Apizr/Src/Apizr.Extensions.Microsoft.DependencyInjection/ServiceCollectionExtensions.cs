@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using Apizr.Caching;
-using Apizr.Cancelling.Attributes;
+using Apizr.Caching.Attributes;
+using Apizr.Cancelling.Attributes.Operation;
+using Apizr.Cancelling.Attributes.Request;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
-using Apizr.Configuring.Request;
 using Apizr.Connecting;
 using Apizr.Extending;
 using Apizr.Extending.Configuring.Common;
@@ -18,15 +20,17 @@ using Apizr.Helping;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
-using Apizr.Policing;
 using Apizr.Requesting;
+using Apizr.Requesting.Attributes;
+using Apizr.Resiliencing;
+using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Registry;
 using Refit;
-using PolicyHttpMessageHandler = Apizr.Policing.PolicyHttpMessageHandler;
 
 [assembly: Apizr.Preserve]
 namespace Apizr
@@ -603,58 +607,13 @@ namespace Apizr
                 {
                     var options = (IApizrExtendedManagerOptionsBase)serviceProvider.GetRequiredService(apizrOptionsRegistrationType);
                     var handlerBuilder = new ExtendedHttpHandlerBuilder(options.HttpClientHandler, options);
-
-                    if (options.PolicyRegistryKeys != null && options.PolicyRegistryKeys.Any())
-                    {
-                        var policyRegistry = serviceProvider.GetService<IReadOnlyPolicyRegistry<string>>();
-                        if(policyRegistry == null)
-                        {
-                            options.Logger.Log(options.LogLevels.Low(),
-                                $"Global policies: You defined some global policies but didn't register a {nameof(PolicyRegistry)} instance. Global policies will be ignored for {webApiFriendlyName} instance");
-                        }
-                        else
-                        {
-                            foreach (var policyRegistryKey in options.PolicyRegistryKeys)
-                            {
-                                if (policyRegistry.TryGet<IsPolicy>(policyRegistryKey, out var registeredPolicy) && 
-                                    registeredPolicy is IAsyncPolicy<HttpResponseMessage> registeredPolicyForHttpResponseMessage)
-                                {
-                                    var policySelector = new Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>>(
-                                            request =>
-                                            {
-                                                var context = request.GetOrBuildApizrPolicyExecutionContext();
-                                                if (!context.TryGetLogger(out var contextLogger, out var logLevels, out var verbosity, out var tracerMode))
-                                                {
-                                                    if (request.Properties.TryGetValue(Constants.ApizrRequestOptionsKey, out var optionsObject) && optionsObject is IApizrRequestOptions requestOptions)
-                                                    {
-                                                        logLevels = requestOptions.LogLevels;
-                                                        verbosity = requestOptions.TrafficVerbosity;
-                                                        tracerMode = requestOptions.HttpTracerMode;
-                                                    }
-                                                    else
-                                                    {
-                                                        logLevels = options.LogLevels;
-                                                        verbosity = options.TrafficVerbosity;
-                                                        tracerMode = options.HttpTracerMode;
-                                                    }
-                                                    contextLogger = options.Logger;
-
-                                                    context.WithLogger(contextLogger, logLevels, verbosity, tracerMode);
-                                                    HttpRequestMessageApizrExtensions.SetApizrPolicyExecutionContext(request, context);
-                                                }
-
-                                                contextLogger.Log(logLevels.Low(), $"{context.OperationKey}: Policy with key {policyRegistryKey} will be applied");
-
-                                                return registeredPolicyForHttpResponseMessage;
-                                            });
-                                    handlerBuilder.AddHandler(new PolicyHttpMessageHandler(policySelector));
-                                }
-                            }
-                        }
-                    }
+                    handlerBuilder.AddHandler(new ResilienceHttpMessageHandler(serviceProvider.GetService<ResiliencePipelineRegistry<string>>(), apizrOptions));
 
                     foreach (var delegatingHandlerExtendedFactory in options.DelegatingHandlersExtendedFactories.Values)
                         handlerBuilder.AddHandler(delegatingHandlerExtendedFactory.Invoke(serviceProvider, options));
+
+                    if (apizrOptions.HttpMessageHandlerFactory != null)
+                        handlerBuilder.AddHandler(apizrOptions.HttpMessageHandlerFactory.Invoke(serviceProvider, options));
 
                     var innerHandler = handlerBuilder.Build();
                     var primaryHandler = apizrOptions.PrimaryHandlerFactory?.Invoke(innerHandler, apizrOptions.Logger, apizrOptions) ?? innerHandler;
@@ -671,41 +630,6 @@ namespace Apizr
                         if (httpClient.BaseAddress == null) 
                             httpClient.BaseAddress = options.BaseUri;
 
-                        // Global timeout
-                        if (options.Timeout.HasValue)
-                        {
-                            if (options.Timeout.Value > TimeSpan.Zero)
-                            {
-                                httpClient.Timeout = options.Timeout.Value;
-                                options.Logger?.Log(options.LogLevels?.Low() ?? LogLevel.Trace,
-                                    "{0}: HttpClient's Timeout has been set with your provided {1} value.",
-                                    options.WebApiType.GetFriendlyName(), httpClient.Timeout);
-                            }
-                            else
-                            {
-                                options.Logger?.Log(options.LogLevels?.Low() ?? LogLevel.Trace,
-                                    "{0}: You provided a timeout value which is not a positive TimeSpan (or Timeout.InfiniteTimeSpan to indicate no timeout). Default value {1} will be applied.",
-                                    options.WebApiType.GetFriendlyName(), httpClient.Timeout);
-                            }
-                        }
-
-                        // Global headers
-                        if (options.Headers?.Count > 0)
-                        {
-                            foreach (var header in options.Headers)
-                            {
-                                if (string.IsNullOrWhiteSpace(header)) continue;
-
-                                var parts = header.Split(':');
-                                var headerKey = parts[0].Trim();
-                                var headerValue = parts.Length > 1 ?
-                                    string.Join(":", parts.Skip(1)).Trim() : null;
-
-                                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(headerKey, headerValue);
-                                options.Logger?.Log(options.LogLevels?.Low() ?? LogLevel.Trace, "{0}: Header {1} has been set with your provided {2} value.", options.WebApiType.GetFriendlyName(), headerKey, headerValue);
-                            }
-                        }
-
                         // Refit rest service
                         return typeof(LazyFactory<>).MakeGenericType(options.WebApiType)
                             .GetConstructor(new[] { typeof(Func<object>) })
@@ -719,9 +643,12 @@ namespace Apizr
             // Custom client config
             apizrOptions.HttpClientBuilder?.Invoke(builder);
 
-            services.TryAddSingleton(typeof(ILazyFactory<IReadOnlyPolicyRegistry<string>>), serviceProvider =>
-                new LazyFactory<IReadOnlyPolicyRegistry<string>>(
-                    () => serviceProvider.GetService<IReadOnlyPolicyRegistry<string>>() ?? new PolicyRegistry()));
+            if(apizrOptions.ShouldRedactHeaderValue != null)
+                builder.RedactLoggedHeaders(apizrOptions.ShouldRedactHeaderValue);
+
+            services.TryAddSingleton(typeof(ILazyFactory<ResiliencePipelineRegistry<string>>), serviceProvider =>
+                new LazyFactory<ResiliencePipelineRegistry<string>>(
+                    () => serviceProvider.GetService<ResiliencePipelineRegistry<string>>() ?? new ResiliencePipelineRegistry<string>()));
 
             if (apizrOptions.ConnectivityHandlerFactory != null)
                 services.AddOrReplaceSingleton(typeof(IConnectivityHandler), apizrOptions.ConnectivityHandlerFactory);
@@ -734,13 +661,27 @@ namespace Apizr
             if (cacheHandlerFactory != null)
                 services.AddOrReplaceSingleton(typeof(ICacheHandler), _ => cacheHandlerFactory.Invoke());
             else
-                services.TryAddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
+            {
+                var cacheHandlerType = apizrOptions.GetCacheHanderType();
+                if (cacheHandlerType != null)
+                    services.AddOrReplaceSingleton(typeof(ICacheHandler), cacheHandlerType);
+                else
+                    services.TryAddSingleton(typeof(ICacheHandler), apizrOptions.CacheHandlerType);
+            }
 
-            var mappingHandlerType = apizrOptions.GetMappingHanderType();
-            if (mappingHandlerType != null)
-                services.AddOrReplaceSingleton(typeof(IMappingHandler), mappingHandlerType);
-            else 
-                services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
+            var mappingHandlerFactory = apizrOptions.GetMappingHanderFactory();
+            if (mappingHandlerFactory != null)
+                services.AddOrReplaceSingleton(typeof(IMappingHandler), _ => mappingHandlerFactory.Invoke());
+            else
+            {
+                var mappingHandlerType = apizrOptions.GetMappingHanderType();
+                if (mappingHandlerType != null)
+                    services.AddOrReplaceSingleton(typeof(IMappingHandler), mappingHandlerType);
+                else
+                {
+                    services.TryAddSingleton(typeof(IMappingHandler), apizrOptions.MappingHandlerType);
+                }
+            }
 
             services.TryAddSingleton(apizrOptionsRegistrationType, serviceProvider =>
             {
@@ -766,9 +707,32 @@ namespace Apizr
                 apizrOptions.RefitSettingsFactory.Invoke(serviceProvider);
                 apizrOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                 apizrOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
-                apizrOptions.HeadersFactory?.Invoke(serviceProvider);
-                apizrOptions.TimeoutFactory?.Invoke(serviceProvider);
-                apizrOptions.HeadersFactory?.Invoke(serviceProvider);
+                apizrOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
+                apizrOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
+
+                var headersFactories = apizrOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key,
+                    kvp => kvp.Value.Invoke(serviceProvider));
+                if (headersFactories?.Count > 0)
+                    apizrOptionsBuilder.WithHeaders(headersFactories);
+
+                if (headersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Api), out var setFactory) == true)
+                {
+                    // Set api scoped headers right the way
+                    var setHeaders = setFactory.Invoke()?.ToArray();
+                    if (setHeaders?.Length > 0)
+                        apizrOptionsBuilder.WithHeaders(setHeaders, mode: ApizrRegistrationMode.Set);
+                }
+                if (headersFactories?.TryGetValue((ApizrRegistrationMode.Store, ApizrLifetimeScope.Api), out var storeFactory) == true)
+                {
+                    // Store api scoped headers for further attribute key match use
+                    var storeHeaders = storeFactory.Invoke()?.ToArray();
+                    if (storeHeaders?.Length > 0)
+                        apizrOptionsBuilder.WithHeaders(storeHeaders, mode: ApizrRegistrationMode.Store);
+                }
+
+                foreach (var resiliencePropertiesExtendedFactory in apizrOptions.ResiliencePropertiesExtendedFactories)
+                    apizrOptions.ResiliencePropertiesFactories[resiliencePropertiesExtendedFactory.Key] = () =>
+                        resiliencePropertiesExtendedFactory.Value.Invoke(serviceProvider);
 
                 return Activator.CreateInstance(typeof(ApizrExtendedManagerOptions<>).MakeGenericType(apizrOptions.WebApiType), apizrOptions);
             });
@@ -852,36 +816,50 @@ namespace Apizr
                 commonOptions.WebApis.Add(webApiType, webApiAttribute);
             }
 
-            IList<HandlerParameterAttribute> properParameterAttributes, commonParameterAttributes;
-            LogAttribute properLogAttribute, commonLogAttribute;
-            TimeoutAttribute properTimeoutAttribute, commonTimeoutAttribute;
-            PolicyAttribute webApiPolicyAttribute;
-            if (typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType))
-            {
-                var modelType = webApiType.GetGenericArguments().First();
-                var modelTypeInfo = modelType.GetTypeInfo();
-                properParameterAttributes = modelTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
-                commonParameterAttributes = modelType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
-                properLogAttribute = modelTypeInfo.GetCustomAttribute<LogAttribute>(true);
-                commonLogAttribute = modelType.Assembly.GetCustomAttribute<LogAttribute>();
-                properTimeoutAttribute = modelTypeInfo.GetCustomAttribute<TimeoutAttribute>(true);
-                commonTimeoutAttribute = modelType.Assembly.GetCustomAttribute<TimeoutAttribute>();
-                webApiPolicyAttribute = modelTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
-            }
-            else
-            {
-                var webApiTypeInfo = webApiType.GetTypeInfo();
-                properParameterAttributes = webApiTypeInfo.GetCustomAttributes<HandlerParameterAttribute>(true).ToList();
-                commonParameterAttributes = webApiType.Assembly.GetCustomAttributes<HandlerParameterAttribute>().ToList();
-                properLogAttribute = webApiTypeInfo.GetCustomAttribute<LogAttribute>(true);
-                commonLogAttribute = webApiType.Assembly.GetCustomAttribute<LogAttribute>();
-                properTimeoutAttribute = webApiTypeInfo.GetCustomAttribute<TimeoutAttribute>(true);
-                commonTimeoutAttribute = webApiType.Assembly.GetCustomAttribute<TimeoutAttribute>();
-                webApiPolicyAttribute = webApiTypeInfo.GetCustomAttribute<PolicyAttribute>(true);
-            }
+            var isCrudApi = typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType);
+            var crudModelType = isCrudApi ? webApiType.GetGenericArguments().First() : null;
+            var typeInfo = isCrudApi ? crudModelType.GetTypeInfo() : webApiType.GetTypeInfo();
 
-            var assemblyPolicyAttribute = webApiType.Assembly.GetCustomAttribute<PolicyAttribute>();
+            var properDeclaringTypeAttributes = typeInfo.DeclaringType != null
+                ? typeInfo.DeclaringType.GetTypeInfo().GetCustomAttributes(true)
+                : typeInfo.GetTypeInfo().GetCustomAttributes(true);
 
+            var properInheritedAttributes = typeInfo.DeclaringType != null
+                ? typeInfo.DeclaringType.GetInterfaces().SelectMany(i => i.GetTypeInfo().GetCustomAttributes(true)).ToArray()
+                : typeInfo.GetInterfaces().SelectMany(i => i.GetTypeInfo().GetCustomAttributes(true)).ToArray();
+
+            var properAttributesAsc = properDeclaringTypeAttributes.Concat(properInheritedAttributes).ToList();
+            var properAttributesDesc = properInheritedAttributes.Reverse().Concat(properDeclaringTypeAttributes).ToList();
+            var commonAttributes = typeInfo.Assembly.GetCustomAttributes().ToList();
+
+            var properParameterAttributes = isCrudApi
+                ? properAttributesDesc.OfType<HandlerParameterAttribute>().Where(att => att is not CrudHandlerParameterAttribute).ToList()
+                : properAttributesDesc.OfType<HandlerParameterAttribute>().ToList();
+            var commonParameterAttributes = commonAttributes.OfType<HandlerParameterAttribute>().ToList();
+            var properHeadersAttribute = properAttributesAsc.OfType<HeadersAttribute>().FirstOrDefault();
+            var commonHeadersAttribute = commonAttributes.OfType<HeadersAttribute>().FirstOrDefault();
+            var properLogAttribute = properAttributesAsc.OfType<LogAttribute>().FirstOrDefault();
+            var commonLogAttribute = commonAttributes.OfType<LogAttribute>().FirstOrDefault();
+            var properOperationTimeoutAttribute = properAttributesAsc.OfType<OperationTimeoutAttribute>().FirstOrDefault();
+            var commonOperationTimeoutAttribute = commonAttributes.OfType<OperationTimeoutAttribute>().FirstOrDefault();
+            var properRequestTimeoutAttribute = properAttributesAsc.OfType<RequestTimeoutAttribute>().FirstOrDefault();
+            var commonRequestTimeoutAttribute = commonAttributes.OfType<RequestTimeoutAttribute>().FirstOrDefault();
+            var properCacheAttribute = properAttributesAsc.OfType<CacheAttribute>().FirstOrDefault();
+            var commonCacheAttribute = commonAttributes.OfType<CacheAttribute>().FirstOrDefault();
+            var properResiliencePipelineAttributes = properAttributesDesc.OfType<ResiliencePipelineAttributeBase>().ToArray();
+            var commonResiliencePipelineAttributes = commonAttributes.OfType<ResiliencePipelineAttributeBase>().ToArray();
+
+            // Headers redaction
+            var headers = (properHeadersAttribute?.Headers ?? [])
+                .Concat(commonHeadersAttribute?.Headers ?? [])
+                .ToList();
+            var redactHeaders = new List<string>();
+            if (headers.Count > 0)
+                foreach (var header in headers)
+                    if (HttpRequestMessageExtensions.TryGetHeaderKeyValue(header, out var key, out var value) && value.StartsWith("*") && value.EndsWith("*"))
+                        redactHeaders.Add(key);
+
+            // Handlers parameters
             var handlersParameters = new Dictionary<string, object>();
             foreach (var commonParameterAttribute in commonParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
                 handlersParameters[commonParameterAttribute.Key!] = commonParameterAttribute.Value;
@@ -890,15 +868,33 @@ namespace Apizr
             foreach (var properParameterAttribute in properParameterAttributes.Where(att => !string.IsNullOrWhiteSpace(att.Key)))
                 handlersParameters[properParameterAttribute.Key!] = properParameterAttribute.Value;
 
-            var builder = new ApizrExtendedProperOptionsBuilder(new ApizrExtendedProperOptions(commonOptions, webApiType, apizrManagerType,
-                assemblyPolicyAttribute?.RegistryKeys, webApiPolicyAttribute?.RegistryKeys, 
+            // Resilience pipelines
+            foreach (var commonResiliencePipelineAttribute in commonResiliencePipelineAttributes.Where(attribute => attribute is ResiliencePipelineAttribute))
+                commonResiliencePipelineAttribute.RequestMethod = isCrudApi ? ApizrRequestMethod.AllCrud : ApizrRequestMethod.AllHttp;
+            foreach (var properResiliencePipelineAttribute in properResiliencePipelineAttributes.Where(attribute => attribute is ResiliencePipelineAttribute))
+                properResiliencePipelineAttribute.RequestMethod = isCrudApi ? ApizrRequestMethod.AllCrud : ApizrRequestMethod.AllHttp;
+
+            var builder = new ApizrExtendedProperOptionsBuilder(new ApizrExtendedProperOptions(commonOptions, 
+                webApiType,
+                crudModelType,
+                typeInfo,
+                apizrManagerType,
                 baseAddress,
                 basePath,
                 handlersParameters,
                 properLogAttribute?.HttpTracerMode ?? (commonOptions.HttpTracerMode != HttpTracerMode.Unspecified ? commonOptions.HttpTracerMode : commonLogAttribute?.HttpTracerMode),
                 properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity),
-                properTimeoutAttribute?.Timeout ?? commonTimeoutAttribute?.Timeout,
+                properOperationTimeoutAttribute?.Timeout ?? commonOperationTimeoutAttribute?.Timeout,
+                properRequestTimeoutAttribute?.Timeout ?? commonRequestTimeoutAttribute?.Timeout,
+                commonResiliencePipelineAttributes,
+                properResiliencePipelineAttributes,
+                commonCacheAttribute,
+                properCacheAttribute,
+                redactHeaders.Count > 0 ? header => redactHeaders.Contains(header) : null,
                 properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrExtendedProperOptionsBuilder;
+
+            if(commonOptions.ApizrConfigurationSection != null)
+                builder.WithConfiguration(commonOptions.ApizrConfigurationSection);
 
             properOptionsBuilder?.Invoke(builder);
 

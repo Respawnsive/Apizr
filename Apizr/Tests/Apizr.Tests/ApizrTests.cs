@@ -1,43 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Apizr.Logging;
-using Apizr.Policing;
 using Apizr.Progressing;
+using Apizr.Resiliencing;
 using Apizr.Tests.Apis;
 using Apizr.Tests.Helpers;
 using Apizr.Tests.Models;
 using Apizr.Tests.Models.Mappings;
 using Apizr.Tests.Settings;
-using Apizr.Transferring.Requesting;
 using AutoMapper;
 using FluentAssertions;
 using Mapster;
-using MapsterMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
 using Polly;
-using Polly.Extensions.Http;
 using Polly.Registry;
+using Polly.Retry;
+using Polly.Timeout;
 using Refit;
+using RichardSzalay.MockHttp;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Apizr.Tests
 {
     public class ApizrTests
     {
         private readonly RefitSettings _refitSettings;
+        private readonly ITestOutputHelper _outputHelper;
 
-        public ApizrTests()
+        public ApizrTests(ITestOutputHelper outputHelper)
         {
+            _outputHelper = outputHelper;
+
             var opts = new JsonSerializerOptions
             {
                 NumberHandling = JsonNumberHandling.AllowReadingFromString
@@ -116,12 +124,46 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Calling_AddHttpMessageHandler_Should_Add_The_Handler()
+        {
+            var mockHttp = new MockHttpMessageHandler();
+            var watcher = new WatchingRequestHandler();
+
+            var json =
+                "{ \"page\": 1, \"per_page\": 6, \"total\": 12, \"total_pages\": 2, \"data\": [ { \"id\": 1, \"email\": \"george.bluth@reqres.in\", \"first_name\": \"George\", \"last_name\": \"Bluth\", \"avatar\": \"https://reqres.in/img/faces/1-image.jpg\" } ] }";
+
+            // Setup a respond for the user api (including a wildcard in the URL)
+            mockHttp.When("https://reqres.in/api/*")
+                .Respond("application/json", json); // Respond with JSON
+
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                    .WithDelegatingHandler(watcher)
+                    .WithHttpMessageHandler(mockHttp));
+
+            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+
+            result.Should().NotBeNull();
+            result.Data.Should().NotBeNullOrEmpty();
+            result.Data.First().FirstName.Should().Be("George");
+            watcher.Attempts.Should().Be(1);
+        }
+
+        [Fact]
         public async Task Calling_WithAuthenticationHandler_Should_Authenticate_Request()
         {
             string token = null;
+            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "token");
 
             var httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options =>
-                        options.WithAuthenticationHandler(_ => Task.FromResult(token = "token")));
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithHttpMessageHandler(new WatchingRequestHandler())
+                    .WithAuthenticationHandler(OnRefreshToken));
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
 
@@ -135,7 +177,11 @@ namespace Apizr.Tests
             var testSettings = new TestSettings("token");
 
             var httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options =>
-                options.WithAuthenticationHandler(testSettings, settings => settings.TestJsonString));
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAuthenticationHandler(testSettings, settings => settings.TestJsonString));
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
 
@@ -146,8 +192,8 @@ namespace Apizr.Tests
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
-                options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly,
-                    (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning));
+                options => options.WithLogging(HttpTracerMode.ExceptionsOnly,
+                    HttpMessageParts.RequestCookies, LogLevel.Warning));
 
             reqResManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
             reqResManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
@@ -157,7 +203,10 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Without_Configuring_Logging_Should_Log_With_Default_Values()
         {
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>();
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options => 
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))));
 
             var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
 
@@ -167,54 +216,190 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_Result()
         {
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
-                    .WithAkavacheCacheHandler()
-                    .AddDelegatingHandler(new TestRequestHandler()));
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => 
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace)))
+                .WithLogging()
+                .WithAkavacheCacheHandler()
+                .WithDelegatingHandler(new TestRequestHandler()));
 
             // Clearing cache
             await reqResManager.ClearCacheAsync();
 
             // Defining a throwing request
-            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.BadRequest));
+            Func<Task> act1 = () => reqResManager.ExecuteAsync(api => api.GetUserAsync(1, HttpStatusCode.BadRequest));
 
             // Calling it at first execution should throw as expected without any cached result
-            var ex = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
+            var ex = await act1.Should().ThrowAsync<ApizrException<UserDetails>>();
             ex.And.CachedResult.Should().BeNull();
 
             // This one should succeed
-            var result = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+            var result = await reqResManager.ExecuteAsync(api => api.GetUserAsync(1));
 
             // and cache result in-memory
             result.Should().NotBeNull();
-            result.Data.Should().NotBeNullOrEmpty();
 
             // This one should fail but with cached result
-            var ex2 = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
+            var ex2 = await act1.Should().ThrowAsync<ApizrException<UserDetails>>();
             ex2.And.CachedResult.Should().NotBeNull();
+
+            // Defining another throwing request
+            Func<Task> act2 = () => reqResManager.ExecuteAsync(api => api.GetUserAsync(2, HttpStatusCode.BadRequest));
+
+            // Calling it again with another cache key value should throw as expected but without any cached result
+            var ex3 = await act2.Should().ThrowAsync<ApizrException<UserDetails>>();
+            ex3.And.CachedResult.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_Should_Cache_ApizrResponse()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .WithDelegatingHandler(new TestRequestHandler()));
+
+            // Clearing all cache
+            var cleared = await reqResManager.ClearCacheAsync();
+
+            cleared.Should().BeTrue();
+
+            // This one should fail with no cached result
+            var response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().BeNull();
+            response.DataSource.Should().Be(ApizrResponseDataSource.None);
+
+            // This one should succeed with request result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync());
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNull();
+            response.Result!.Data.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            // This one should fail but with cached result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().NotBeNull();
+            response.Result!.Data.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            // Clearing specific cache
+            cleared = await reqResManager.ClearCacheAsync(api => api.SafeGetUsersAsync());
+
+            cleared.Should().BeTrue();
+
+            // This one should fail with no cached result
+            response = await reqResManager.ExecuteAsync(api => api.SafeGetUsersAsync(HttpStatusCode.BadRequest));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.Result.Should().BeNull();
+            response.DataSource.Should().Be(ApizrResponseDataSource.None);
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_With_Multiple_CacheKey_Should_Cache_Result()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .WithDelegatingHandler(new TestRequestHandler()));
+
+            // Clearing cache
+            await reqResManager.ClearCacheAsync();
+
+            var testDictionary = new Dictionary<string, object>
+            {
+                { "test1", "test1" },
+                { "test2", 2 }
+            };
+
+            var customTypeParam = new ReadAllUsersParams("test1", 2);
+
+            // Defining a throwing request
+            Func<Task> act1 = () => reqResManager.ExecuteAsync(api => api.GetUserAsync(1, testDictionary, customTypeParam, HttpStatusCode.BadRequest));
+
+            // Calling it at first execution should throw as expected without any cached result
+            var ex = await act1.Should().ThrowAsync<ApizrException<UserDetails>>();
+            ex.And.CachedResult.Should().BeNull();
+
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync(api => api.GetUserAsync(1, testDictionary, customTypeParam, HttpStatusCode.OK));
+
+            // and cache result in-memory
+            result.Should().NotBeNull();
+
+            // This one should fail but with cached result
+            var ex2 = await act1.Should().ThrowAsync<ApizrException<UserDetails>>();
+            ex2.And.CachedResult.Should().NotBeNull();
+
+            // Defining another throwing request
+            Func<Task> act2 = () => reqResManager.ExecuteAsync(api => api.GetUserAsync(2, testDictionary, customTypeParam, HttpStatusCode.BadRequest));
+
+            // Calling it again with another cache key value should throw as expected but without any cached result
+            var ex3 = await act2.Should().ThrowAsync<ApizrException<UserDetails>>();
+            ex3.And.CachedResult.Should().BeNull();
         }
 
         [Fact]
         public async Task RequestTimeout_Should_Be_Handled_By_Polly()
         {
-            var attempts = 0;
-            var sleepDurations = new[]
-            {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(5),
-                TimeSpan.FromSeconds(10)
-            };
-            var policyRegistry = new PolicyRegistry
-            {
-                {
-                    "TransientHttpError", HttpPolicyExtensions.HandleTransientHttpError().WaitAndRetryAsync(
-                        sleepDurations,
-                        (_, _, retry, _) => attempts = retry).WithPolicyKey("TransientHttpError")
-                }
-            };
+            var maxRetryAttempts = 3;
+            var retryCount = 0;
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .AddRetry(
+                        new RetryStrategyOptions<HttpResponseMessage>
+                        {
+                            ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                                .Handle<HttpRequestException>()
+                                .HandleResult(response =>
+                                    response.StatusCode is >= HttpStatusCode.InternalServerError
+                                        or HttpStatusCode.RequestTimeout),
+                            Delay = TimeSpan.FromSeconds(1),
+                            MaxRetryAttempts = maxRetryAttempts,
+                            UseJitter = true,
+                            BackoffType = DelayBackoffType.Exponential,
+                            OnRetry = args =>
+                            {
+                                retryCount = args.AttemptNumber + 1;
+                                return default;
+                            }
+                        }));
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
-                    .WithPolicyRegistry(policyRegistry)
-                    .AddDelegatingHandler(new TestRequestHandler()));
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+                    .WithDelegatingHandler(new TestRequestHandler()));
 
             // Defining a transient throwing request
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout));
@@ -223,7 +408,7 @@ namespace Apizr.Tests
             await act.Should().ThrowAsync<ApizrException>();
 
             // attempts should be equal to total retry count
-            attempts.Should().Be(sleepDurations.Length);
+            retryCount.Should().Be(maxRetryAttempts);
         }
 
         [Fact]
@@ -231,7 +416,11 @@ namespace Apizr.Tests
         {
             var isConnected = false;
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithConnectivityHandler(() => isConnected));
 
             // Defining a request
@@ -251,8 +440,8 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithRefitSettings_Should_Set_Settings()
         {
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
-                    .WithRefitSettings(_refitSettings));
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => 
+                options.WithRefitSettings(_refitSettings));
 
             reqResManager.Options.RefitSettings.Should().Be(_refitSettings);
         }
@@ -266,7 +455,11 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithRefitSettings(_refitSettings)
                     .WithAutoMapperMappingHandler(mapperConfig));
 
@@ -291,9 +484,15 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(options => options
-                .WithRefitSettings(_refitSettings)
-                .WithAutoMapperMappingHandler(mapperConfig));
+            var userManager =
+                ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(
+                    options =>
+                        options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                                builder.AddXUnit(_outputHelper)
+                                    .SetMinimumLevel(LogLevel.Trace)))
+                            .WithLogging()
+                            .WithRefitSettings(_refitSettings)
+                            .WithAutoMapperMappingHandler(mapperConfig));
 
             var minUser = new MinUser { Name = "John" };
 
@@ -316,7 +515,11 @@ namespace Apizr.Tests
                 config.AddProfile<UserMinUserProfile>();
             });
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper())));
 
@@ -335,14 +538,19 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Classic_WithMapsterMappingHandler_Should_Map_Data()
         {
-            TypeAdapterConfig<User, MinUser>
-                .NewConfig()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
-                .WithRefitSettings(_refitSettings)
-                .WithMapsterMappingHandler(new MapsterMapper.Mapper()));
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithRefitSettings(_refitSettings)
+                    .WithMapsterMappingHandler(new MapsterMapper.Mapper()));
 
             var minUser = new MinUser { Name = "John" };
 
@@ -359,14 +567,21 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Crud_WithMapsterMappingHandler_Should_Map_Data()
         {
-            TypeAdapterConfig<User, MinUser>
-                .NewConfig()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
-            var userManager = ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(options => options
-                .WithRefitSettings(_refitSettings)
-                .WithMapsterMappingHandler(new MapsterMapper.Mapper()));
+            var userManager =
+                ApizrBuilder.Current.CreateCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(
+                    options =>
+                        options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                                builder.AddXUnit(_outputHelper)
+                                    .SetMinimumLevel(LogLevel.Trace)))
+                            .WithLogging()
+                            .WithRefitSettings(_refitSettings)
+                            .WithMapsterMappingHandler(new MapsterMapper.Mapper()));
 
             var minUser = new MinUser { Name = "John" };
 
@@ -383,12 +598,17 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMappingHandler_With_Mapster_Should_Map_Data()
         {
-            TypeAdapterConfig<User, MinUser>
-                .NewConfig()
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            typeAdapterConfig.RuleMap.Clear();
+            typeAdapterConfig.ForType<User, MinUser>()
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
                     .WithRefitSettings(_refitSettings)
                     .WithMappingHandler(new MapsterMappingHandler(new MapsterMapper.Mapper())));
 
@@ -405,50 +625,59 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Requesting_With_Context_into_Options_Should_Set_Context()
+        public async Task Requesting_With_A_ResilienceProperty_into_Options_Should_Set_It_Into_Context()
         {
             var watcher = new WatchingRequestHandler();
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher));
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithResilienceContextOptions(opt => 
+                        opt.ReturnToPoolOnComplete(false))
+                    .WithDelegatingHandler(watcher));
 
-            var testKey = "TestKey1";
+            ResiliencePropertyKey<int> testKey = new("TestKey1");
             var testValue = 1;
-            // Defining Context
-            var context = new Context {{ testKey, testValue } };
 
-            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithContext(context));
+            await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options.WithResilienceProperty(testKey, testValue));
             watcher.Context.Should().NotBeNull();
-            watcher.Context.Keys.Should().Contain(testKey);
-            watcher.Context.TryGetValue(testKey, out var value).Should().BeTrue();
+            watcher.Context.Properties.TryGetValue(testKey, out var value).Should().BeTrue();
             value.Should().Be(testValue);
         }
 
         [Fact]
-        public async Task Requesting_With_Context_At_Multiple_Levels_Should_Merge_It_All_At_The_End()
+        public async Task Requesting_With_ResilienceProperties_At_Multiple_Levels_Should_Merge_It_All_At_The_End()
         {
             var watcher = new WatchingRequestHandler();
-            var testKey1 = "TestKey1";
-            var testValue1 = 1;
+
+            ResiliencePropertyKey<string> testKey1 = new(nameof(testKey1));
+            ResiliencePropertyKey<string> testKey2 = new(nameof(testKey2));
+            ResiliencePropertyKey<string> testKey3 = new(nameof(testKey3));
 
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithContext(() => new Context { { testKey1, testValue1 } })
-                    .AddDelegatingHandler(watcher));
-
-            var testKey2 = "TestKey2";
-            var testValue2 = 2;
-            // Defining Context 2
-            var context2 = new Context { { testKey2, testValue2 } };
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
+                    .WithResilienceProperty(testKey1, () => "testValue1")
+                    .WithResilienceProperty(testKey2, () => "testValue2.1")
+                    .WithDelegatingHandler(watcher));
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithContext(context2));
+                options => options.WithResilienceProperty(testKey2, "testValue2.2")
+                    .WithResilienceProperty(testKey3, "testValue3"));
 
             watcher.Context.Should().NotBeNull();
-            watcher.Context.Keys.Should().Contain(testKey1);
-            watcher.Context.TryGetValue(testKey1, out var value1).Should().BeTrue();
-            value1.Should().Be(testValue1);
-            watcher.Context.Keys.Should().Contain(testKey2);
-            watcher.Context.TryGetValue(testKey2, out var value2).Should().BeTrue();
-            value2.Should().Be(testValue2);
+            watcher.Context.Properties.TryGetValue(testKey1, out var valueKey1).Should().BeTrue(); // Set by manager option
+            valueKey1.Should().Be("testValue1");
+            watcher.Context.Properties.TryGetValue(testKey2, out var valueKey2).Should().BeTrue(); // Set by manager option then updated by the request one
+            valueKey2.Should().Be("testValue2.2");
+            watcher.Context.Properties.TryGetValue(testKey3, out var valueKey3).Should().BeTrue(); // Set by request option
+            valueKey3.Should().Be("testValue3");
         }
 
         [Fact]
@@ -456,8 +685,14 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options => options.AddDelegatingHandler(watcher)
-                .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseBody, LogLevel.Debug));
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithResilienceContextOptions(opt =>
+                        opt.ReturnToPoolOnComplete(false))
+                    .WithDelegatingHandler(watcher)
+                    .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.ResponseBody, LogLevel.Debug));
             
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options
                 .WithLogging(HttpTracerMode.Everything, HttpMessageParts.RequestCookies, LogLevel.Error));
@@ -478,8 +713,11 @@ namespace Apizr.Tests
         [Fact]
         public async Task Downloading_File_Should_Succeed()
         {
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
 
             apizrTransferManager.Should().NotBeNull(); // Built-in
             
@@ -497,7 +735,10 @@ namespace Apizr.Tests
             {
                 percentage = args.ProgressPercentage;
             };
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => 
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
                     .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
                     .WithProgress());
             
@@ -518,7 +759,10 @@ namespace Apizr.Tests
             {
                 percentage = args.ProgressPercentage;
             };
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => 
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
                     .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
                     .WithProgress(progress));
             
@@ -530,24 +774,30 @@ namespace Apizr.Tests
             fileInfo.Length.Should().BePositive();
         }
 
-        [Fact]
-        public async Task Uploading_File_Locally_Should_Succeed()
-        {
-            var apizrUploadManager = ApizrBuilder.Current.CreateUploadManagerWith<string>(options => options
-                .WithBaseAddress("https://localhost:7015/upload"));
+        //[Fact]
+        //public async Task Uploading_File_Locally_Should_Succeed()
+        //{
+        //    var apizrUploadManager = ApizrBuilder.Current.CreateUploadManagerWith<string>(options =>
+        //        options.WithLoggerFactory(LoggerFactory.Create(builder =>
+        //                builder.AddXUnit(_outputHelper)
+        //                    .SetMinimumLevel(LogLevel.Trace)))
+        //            .WithBaseAddress("https://localhost:7015/upload"));
 
-            apizrUploadManager.Should().NotBeNull(); // Built-in
+        //    apizrUploadManager.Should().NotBeNull(); // Built-in
 
-            // Shortcut
-            var result = await apizrUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
-            result.Should().NotBeNullOrWhiteSpace();
-        }
+        //    // Shortcut
+        //    var result = await apizrUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
+        //    result.Should().NotBeNullOrWhiteSpace();
+        //}
 
         [Fact]
         public async Task Uploading_File_Should_Succeed()
         {
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
-                        .WithBaseAddress("https://httpbin.org/post"));
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithBaseAddress("https://httpbin.org/post"));
 
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
@@ -566,7 +816,10 @@ namespace Apizr.Tests
             {
                 percentage = args.ProgressPercentage;
             };
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => 
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
                     .WithBaseAddress("https://httpbin.org/post")
                     .WithProgress());
             
@@ -588,9 +841,12 @@ namespace Apizr.Tests
             {
                 percentage = args.ProgressPercentage;
             };
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options => options
-                        .WithBaseAddress("https://httpbin.org/post")
-                        .WithProgress(progress));
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManager(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithBaseAddress("https://httpbin.org/post")
+                    .WithProgress(progress));
             
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
@@ -602,14 +858,17 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Requesting_With_Headers_Should_Set_Headers()
+        public async Task Requesting_With_Inherited_Headers_Should_Set_Headers()
         {
             var watcher = new WatchingRequestHandler();
-
-            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferUndefinedApi>(options => options
-                .WithBaseAddress("https://httpbin.org/post")
-                .WithHeaders("testKey2: testValue2")
-                .AddDelegatingHandler(watcher));
+            var apizrTransferManager = ApizrBuilder.Current.CreateTransferManagerFor<ITransferUndefinedApi>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithBaseAddress("https://httpbin.org/post")
+                    .WithHeaders(["testKey2: testValue2"])
+                    .WithDelegatingHandler(watcher));
 
             // Shortcut
             await apizrTransferManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
@@ -618,16 +877,138 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Requesting_With_Headers_Should_Set_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+
+            var apizrTransferManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithBaseAddress("https://reqres.in/api")
+                    .WithHeaders(["testKey2: testValue2.2", "testKey3: testValue3.1"])
+                    .WithLoggedHeadersRedactionNames(["testKey2"])
+                    .WithDelegatingHandler(watcher));
+
+            // Shortcut
+            await apizrTransferManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => 
+                options.WithHeaders(["testKey3: testValue3.2", "testKey4: testValue4"])
+                    .WithLoggedHeadersRedactionRule(header => header == "testKey3"));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
+            watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Set by common option then updated by request option
+            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4"); // Set by request option
+        }
+
+        [Fact]
+        public async Task Requesting_With_Headers_Factory_Should_Set_And_Keep_Updated_Headers()
+        {
+            var watcher = new WatchingRequestHandler();
+            var apiHeaders = new List<string> { "testKey2: testValue2.2" };
+            var requestHeaders = new List<string> { "testKey3: testValue3.1", "testKey4: testValue4.1" };
+            var testSettings = new TestSettings("testSettingsKey1: testSettingsValue1.1");
+            var testStore = new TestSettings("testStoreKey2: testStoreValue2.1");
+
+            // Json settings (loaded from embedded json settings files and bound to properties)
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{typeof(ApizrTests).Namespace}.appsettings.json");
+            var configuration = new ConfigurationBuilder()
+                .AddJsonStream(stream!)
+                .Build();
+            await stream.DisposeAsync();
+
+            var apizrManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithConfiguration(configuration) // Whole configuration (auto mapped config)
+                    //.WithConfiguration(configuration.GetSection("Apizr")) // Root section (auto mapped config)
+                    //.WithConfiguration(configuration.GetSection("Apizr:Common")) // Specific section (manual mapped config)
+                    //.WithConfiguration(configuration.GetSection("Apizr:IReqResSimpleService")) // Specific section (manual mapped config)
+                    //.WithLogging()
+                    //.WithBaseAddress("https://reqres.in/api")
+                    .WithHeaders(() => apiHeaders, scope: ApizrLifetimeScope.Api)
+                    .WithHeaders(() => requestHeaders, scope: ApizrLifetimeScope.Request)
+                    .WithHeaders(testSettings, [settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request)
+                    .WithHeaders(["testKey5: testValue5.1", "testKey6: testValue6.1"])
+                    .WithHeaders(["testStoreKey1: testStoreValue1.1", "testStoreKey3: testStoreValue3.1", "testSettingsKey4: testSettingsValue4.1", "testSettingsKey5: testSettingsValue5.1"], mode: ApizrRegistrationMode.Store)
+                    .WithHeaders(testStore, [settings => settings.TestJsonString], scope: ApizrLifetimeScope.Request, mode: ApizrRegistrationMode.Store)
+                    .WithDelegatingHandler(watcher));
+
+            // Merge all
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithHeaders(["testKey4: testValue4.2",
+                    "testKey5: testValue5.2"]));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6",
+                    "testSettingsKey1", "testSettingsKey2", "testSettingsKey3", "testSettingsKey4", "testSettingsKey5",
+                    "testSettingsKey6", "testStoreKey1", "testStoreKey2")
+                .And.NotContainKey("testStoreKey3");
+            watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Set by attribute
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Set by attribute then updated by common option within api scope factory
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.1"); // Set by common option within request scope factory
+            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4.2"); // Set by common option within request scope factory then updated by request option
+            watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5.2"); // Set by common option then updated by request option
+            watcher.Headers.GetValues("testKey6").Should().HaveCount(1).And.Contain("testValue6.1"); // Set by common option
+            watcher.Headers.GetValues("testSettingsKey1").Should().HaveCount(1).And.Contain("testSettingsValue1.1"); // Set by common option expression
+            watcher.Headers.GetValues("testSettingsKey2").Should().HaveCount(1).And.Contain("testSettingsValue2.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey3").Should().HaveCount(1).And.Contain("testSettingsValue3.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey4").Should().HaveCount(1).And.Contain("testSettingsValue4.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey5").Should().HaveCount(1).And.Contain("testSettingsValue5.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey6").Should().HaveCount(1).And.Contain("testSettingsValue6.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testStoreKey1").Should().HaveCount(1).And.Contain("testStoreValue1.1"); // Set by common option from Store
+            watcher.Headers.GetValues("testStoreKey2").Should().HaveCount(1).And.Contain("testStoreValue2.1"); // Set by common option from Store
+
+            // Keep updated
+            apiHeaders[0] = "testKey2: testValue2.3"; // will not be updated (scope: Api)
+            requestHeaders[0] = "testKey3: testValue3.2"; // will be updated (scope: Request)
+            requestHeaders[1] = "testKey4: testValue4.3"; // should be updated (scope: Request) but updated then by request option
+            testSettings.TestJsonString = "testSettingsKey1: testSettingsValue1.2";
+            testStore.TestJsonString = "testStoreKey2: testStoreValue2.2";
+
+            await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
+                options => options.WithHeaders(["testKey4: testValue4.4", 
+                    "testKey5: testValue5.3",
+                    "testStoreKey1: *testStoreValue1.2*",
+                    "testStoreKey3: *{0}*"]));
+            watcher.Headers.Should().NotBeNull();
+            watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4", "testKey5", "testKey6",
+                "testSettingsKey1", "testSettingsKey2", "testSettingsKey3", "testSettingsKey4", "testSettingsKey5",
+                "testSettingsKey6", "testStoreKey1", "testStoreKey2", "testStoreKey3");
+            watcher.Headers.GetValues("testKey1").Should().HaveCount(1).And.Contain("testValue1"); // Same as previous value
+            watcher.Headers.GetValues("testKey2").Should().HaveCount(1).And.Contain("testValue2.2"); // Same as previous value
+            watcher.Headers.GetValues("testKey3").Should().HaveCount(1).And.Contain("testValue3.2"); // Updated at request time (scope: Request)
+            watcher.Headers.GetValues("testKey4").Should().HaveCount(1).And.Contain("testValue4.4"); // Updated at request time (scope: Request) then by request option
+            watcher.Headers.GetValues("testKey5").Should().HaveCount(1).And.Contain("testValue5.3"); // Updated by request option
+            watcher.Headers.GetValues("testKey6").Should().HaveCount(1).And.Contain("testValue6.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey1").Should().HaveCount(1).And.Contain("testSettingsValue1.2"); // Updated at request time (scope: Request)
+            watcher.Headers.GetValues("testSettingsKey2").Should().HaveCount(1).And.Contain("testSettingsValue2.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey3").Should().HaveCount(1).And.Contain("testSettingsValue3.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey4").Should().HaveCount(1).And.Contain("testSettingsValue4.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey5").Should().HaveCount(1).And.Contain("testSettingsValue5.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey6").Should().HaveCount(1).And.Contain("testSettingsValue6.1"); // Same as previous value
+            watcher.Headers.GetValues("testStoreKey1").Should().HaveCount(1).And.Contain("testStoreValue1.2"); // Updated by request option
+            watcher.Headers.GetValues("testStoreKey2").Should().HaveCount(1).And.Contain("testStoreValue2.2"); // Updated at request time (scope: Request)
+            watcher.Headers.GetValues("testStoreKey3").Should().HaveCount(1).And.Contain("testStoreValue3.1"); // Set by request option from Store
+        }
+
+        [Fact]
         public async Task Sending_A_Get_Request_With_Both_Attribute_And_Fluent_Headers_Should_Set_Merged_Headers()
         {
             var watcher = new WatchingRequestHandler();
 
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options => options
-                .WithHeaders("testKey2: testValue2")
-                .AddDelegatingHandler(watcher));
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithHeaders(["testKey2: testValue2"])
+                    .WithDelegatingHandler(watcher));
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
-                options => options.WithHeaders("testKey3: testValue3", "testKey4: testValue4"));
+                options => options.WithHeaders(["testKey3: testValue3", "testKey4: testValue4"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
         }
@@ -637,14 +1018,18 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options => options
-                .WithHeaders("testKey2: testValue2")
-                .AddDelegatingHandler(watcher));
+            var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithHeaders(["testKey2: testValue2"])
+                    .WithDelegatingHandler(watcher));
 
             var streamPart = FileHelper.GetTestFileStreamPart("medium");
 
             await manager.ExecuteAsync((opt, api) => api.UploadAsync(streamPart, opt),
-                options => options.WithHeaders("testKey3: testValue3", "testKey4: testValue4"));
+                options => options.WithHeaders(["testKey3: testValue3", "testKey4: testValue4"]));
             watcher.Headers.Should().NotBeNull();
             watcher.Headers.Should().ContainKeys("testKey1", "testKey2", "testKey3", "testKey4");
         }
@@ -652,7 +1037,11 @@ namespace Apizr.Tests
         [Fact]
         public async Task Concurrent_Requests_Should_Not_Throw()
         {
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>();
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             var tasks = new List<Task>();
             for (var i = 0; i < 10; ++i)
@@ -669,10 +1058,14 @@ namespace Apizr.Tests
         [Fact]
         public async Task Cancelling_A_Get_Request_Should_Throw_An_OperationCanceledException()
         {
-            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>();
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             var cts = new CancellationTokenSource();
-            cts.CancelAfter(TimeSpan.FromSeconds(2));
+            cts.CancelAfter(TimeSpan.FromSeconds(3));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(5, opt),
@@ -685,11 +1078,15 @@ namespace Apizr.Tests
         [Fact]
         public async Task Cancelling_A_Post_Request_Should_Throw_An_OperationCanceledException()
         {
-            var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>();
+            var manager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging());
 
             var streamPart = FileHelper.GetTestFileStreamPart("medium");
             var ct = new CancellationTokenSource();
-            ct.CancelAfter(TimeSpan.FromSeconds(2));
+            ct.CancelAfter(TimeSpan.FromSeconds(1));
 
             Func<Task> act = () => manager.ExecuteAsync((opt, api) => api.UploadAsync(streamPart, opt),
                 options => options.WithCancellation(ct.Token));
@@ -704,8 +1101,13 @@ namespace Apizr.Tests
             var watcher = new WatchingRequestHandler();
 
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResSimpleService>(options =>
-                options.ConfigureHttpClient(client => client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue"))
-                    .AddDelegatingHandler(watcher));
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .ConfigureHttpClient(client =>
+                        client.DefaultRequestHeaders.Add("HttpClientHeaderKey", "HttpClientHeaderValue"))
+                    .WithDelegatingHandler(watcher));
 
             await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
             watcher.Headers.Should().NotBeNull();
@@ -713,87 +1115,469 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithTimeout_Should_Throw_A_Request_TimeoutException()
+        public async Task When_Calling_BA_WithOperationTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4)));
+                    options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(2)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TimeoutException>();
+            ex.WithInnerException<TimeoutRejectedException>();
         }
 
         [Fact]
-        public async Task Calling_WithTimeout_Should_Throw_A_Client_TimeoutException()
+        public async Task When_Calling_AB_WithOperationTimeout_Then_Client_Should_Throw_A_TimeoutException()
         {
             var reqResManager =
                 ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                    options.WithTimeout(TimeSpan.FromSeconds(2)));
+                    options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4)));
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TimeoutException>();
+            ex.WithInnerException<TimeoutRejectedException>();
         }
 
         [Fact]
-        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Request_TimeoutException()
+        public async Task When_Calling_BA_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                    options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging());
+                    //options => options.WithRequestTimeout(TimeSpan.FromSeconds(4)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(2)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_AB_WithRequestTimeout_Then_Client_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                    options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithRequestTimeout(TimeSpan.FromSeconds(2)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(4)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_DCBA_WithOperationTimeout_And_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithOperationTimeout(TimeSpan.FromSeconds(8))
+                        .WithRequestTimeout(TimeSpan.FromSeconds(6)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))
+                        .WithRequestTimeout(TimeSpan.FromSeconds(2)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_ABCD_WithOperationTimeout_And_WithRequestTimeout_Then_Client_Should_Throw_A_TimeoutException()
+        {
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
+                    options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithOperationTimeout(TimeSpan.FromSeconds(2))
+                        .WithRequestTimeout(TimeSpan.FromSeconds(4)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(6))
+                        .WithRequestTimeout(TimeSpan.FromSeconds(8)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+        }
+
+        [Fact]
+        public async Task Calling_BCA_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Request_TimeoutRejectedException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(4)));
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(6));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(2))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(2))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TimeoutException>();
+            ex.WithInnerException<TimeoutRejectedException>();
         }
 
         [Fact]
-        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Client_TimeoutException()
+        public async Task Calling_ACB_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Client_TimeoutRejectedException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(2)));
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithOperationTimeout(TimeSpan.FromSeconds(2)));
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(6));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(4))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(4))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
-            ex.WithInnerException<TimeoutException>();
+            ex.WithInnerException<TimeoutRejectedException>();
         }
 
         [Fact]
-        public async Task Calling_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
+        public async Task Calling_BAC_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(options =>
-                options.WithTimeout(TimeSpan.FromSeconds(4)));
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithOperationTimeout(TimeSpan.FromSeconds(4)));
 
             var cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromSeconds(2));
 
             Func<Task> act = () =>
                 reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(8, opt),
-                    options => options.WithTimeout(TimeSpan.FromSeconds(6))
+                    options => options.WithOperationTimeout(TimeSpan.FromSeconds(6))
                         .WithCancellation(cts.Token));
 
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.WithInnerException<OperationCanceledException>();
+        }
+
+        [Fact]
+        public async Task When_Calling_WithRequestTimeout_With_TimeoutRejected_Resilience_Strategy_Then_It_Should_Retry_3_On_3_Times()
+        {
+            var maxRetryCount = 3;
+            var retryCount = 0;
+
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .Handle<TimeoutRejectedException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        MaxRetryAttempts = maxRetryCount,
+                        DelayGenerator = static args =>
+                        {
+                            var delay = args.AttemptNumber switch
+                            {
+                                0 => TimeSpan.FromSeconds(1),
+                                1 => TimeSpan.FromSeconds(2),
+                                _ => TimeSpan.FromSeconds(3)
+                            };
+
+                            // This example uses a synchronous delay generator,
+                            // but the API also supports asynchronous implementations.
+                            return new ValueTask<TimeSpan?>(delay);
+                        },
+                        OnRetry = args =>
+                        {
+                            retryCount = args.AttemptNumber + 1;
+                            return default;
+                        }
+                    }));
+
+            var watcher = new WatchingRequestHandler();
+
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithResilienceContextOptions(opt =>
+                            opt.ReturnToPoolOnComplete(false))
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+                        .WithRequestTimeout(TimeSpan.FromSeconds(3))
+                        .WithDelegatingHandler(watcher));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt));//,
+            //options => options.WithTimeout(TimeSpan.FromSeconds(3)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+
+            retryCount.Should().Be(3);
+            watcher.Attempts.Should().Be(4);
+        }
+
+        [Fact]
+        public async Task When_Calling_WithOperationTimeout_With_TimeoutRejected_Resilience_Strategy_Then_It_Should_Retry_2_On_3_Times()
+        {
+            var maxRetryCount = 3;
+            var retryCount = 0;
+
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .Handle<TimeoutRejectedException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        MaxRetryAttempts = maxRetryCount,
+                        DelayGenerator = static args =>
+                        {
+                            var delay = args.AttemptNumber switch
+                            {
+                                0 => TimeSpan.FromSeconds(1),
+                                1 => TimeSpan.FromSeconds(2),
+                                _ => TimeSpan.FromSeconds(3)
+                            };
+
+                            // This example uses a synchronous delay generator,
+                            // but the API also supports asynchronous implementations.
+                            return new ValueTask<TimeSpan?>(delay);
+                        },
+                        OnRetry = args =>
+                        {
+                            retryCount = args.AttemptNumber + 1;
+                            return default;
+                        }
+                    }));
+
+            var watcher = new WatchingRequestHandler();
+
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithResilienceContextOptions(opt =>
+                            opt.ReturnToPoolOnComplete(false))
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+                        .WithOperationTimeout(TimeSpan.FromSeconds(10))
+                        .WithDelegatingHandler(watcher));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(3)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+
+            // retry attempts should be equal to 2 as request timed out before the 3rd retry
+            retryCount.Should().Be(2);
+            watcher.Attempts.Should().Be(3);
+        }
+
+        [Fact]
+        public async Task When_Calling_WithRequestTimeout_WithOperationTimeout_WithCancellation_And_With_TimeoutRejected_Resilience_Strategy_Then_It_Should_Retry_1_On_3_Times()
+        {
+            var maxRetryCount = 3;
+            var retryCount = 0;
+
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .Handle<TimeoutRejectedException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        MaxRetryAttempts = maxRetryCount,
+                        DelayGenerator = static args =>
+                        {
+                            var delay = args.AttemptNumber switch
+                            {
+                                0 => TimeSpan.FromSeconds(1),
+                                1 => TimeSpan.FromSeconds(2),
+                                _ => TimeSpan.FromSeconds(3)
+                            };
+
+                            // This example uses a synchronous delay generator,
+                            // but the API also supports asynchronous implementations.
+                            return new ValueTask<TimeSpan?>(delay);
+                        },
+                        OnRetry = args =>
+                        {
+                            retryCount = args.AttemptNumber+1;
+                            return default;
+                        }
+                    }));
+
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(TimeSpan.FromSeconds(5));
+
+            var watcher = new WatchingRequestHandler();
+
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithResilienceContextOptions(opt =>
+                            opt.ReturnToPoolOnComplete(false))
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+                        .WithOperationTimeout(TimeSpan.FromSeconds(10))
+                        .WithDelegatingHandler(watcher));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetDelayedUsersAsync(6, opt),
+                    options => options.WithRequestTimeout(TimeSpan.FromSeconds(3))
+                        .WithCancellation(cts.Token));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<OperationCanceledException>();
+
+            // attempts should be equal to 1 as request timed out before other retries
+            retryCount.Should().Be(1);
+            watcher.Attempts.Should().Be(2);
+        }
+
+        [Fact]
+        public async Task Request_Returning_Timeout_Should_Time_Out_Before_Polly_Could_Complete_All_Retries()
+        {
+            var maxRetryCount = 3;
+            var retryCount = 0;
+            var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+            resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", (builder, _) =>
+                builder.ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+                        loggingBuilder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                .AddRetry(
+                    new RetryStrategyOptions<HttpResponseMessage>
+                    {
+                        ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                            .Handle<HttpRequestException>()
+                            .HandleResult(response =>
+                                response.StatusCode is >= HttpStatusCode.InternalServerError
+                                    or HttpStatusCode.RequestTimeout),
+                        MaxRetryAttempts = maxRetryCount,
+                        DelayGenerator = static args =>
+                        {
+                            var delay = args.AttemptNumber switch
+                            {
+                                0 => TimeSpan.FromSeconds(1),
+                                1 => TimeSpan.FromSeconds(2),
+                                _ => TimeSpan.FromSeconds(3)
+                            };
+
+                            // This example uses a synchronous delay generator,
+                            // but the API also supports asynchronous implementations.
+                            return new ValueTask<TimeSpan?>(delay);
+                        },
+                        OnRetry = args =>
+                        {
+                            retryCount = args.AttemptNumber+1;
+                            return default;
+                        }
+                    }));
+
+            var testHandler = new TestRequestHandler();
+
+            var reqResManager =
+                ApizrBuilder.Current.CreateManagerFor<IReqResUserService>(
+                    options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                            builder.AddXUnit(_outputHelper)
+                                .SetMinimumLevel(LogLevel.Trace)))
+                        .WithLogging()
+                        .WithResilienceContextOptions(opt =>
+                            opt.ReturnToPoolOnComplete(false))
+                        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+                        .WithDelegatingHandler(testHandler)
+                        .WithOperationTimeout(TimeSpan.FromSeconds(3)));
+
+            Func<Task> act = () =>
+                reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(HttpStatusCode.RequestTimeout, opt));//,
+                    //options => options.WithTimeout(TimeSpan.FromSeconds(3)));
+
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.WithInnerException<TimeoutRejectedException>();
+
+            // attempts should be equal to 2 as request timed out before the 3rd retry
+            retryCount.Should().Be(2);
+            testHandler.Attempts.Should().Be(2);
+        }
+
+        [Fact]
+        public async Task Inherited_Apis_Should_Merge_Attributes()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResChildApi>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))));
+
+            var result = await reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
+
+            result.Should().NotBeNull();
         }
     }
 }

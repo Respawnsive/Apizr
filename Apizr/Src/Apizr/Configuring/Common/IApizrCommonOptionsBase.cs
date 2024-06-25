@@ -1,4 +1,5 @@
 ﻿using Apizr.Configuring.Shared;
+using Microsoft.Extensions.Configuration;
 using Refit;
 
 namespace Apizr.Configuring.Common
@@ -12,5 +13,10 @@ namespace Apizr.Configuring.Common
         /// Refit settings
         /// </summary>
         RefitSettings RefitSettings { get; }
+
+        /// <summary>
+        /// Configuration section for Apizr
+        /// </summary>
+        IConfigurationSection ApizrConfigurationSection { get; }
     }
 }

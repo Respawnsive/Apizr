@@ -43,12 +43,15 @@ Also, we built this lib to make it work with any .Net Standard 2.0 compliant pla
 
 An api definition with some attributes:
 ```csharp
-[assembly:Policy("TransientHttpError")]
+// (Polly) Define a resilience pipeline key
+[assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
+    // (Apizr) Define your web api base url and ask for cache and logs
     [WebApi("https://reqres.in/"), Cache, Log]
     public interface IReqResService
     {
+        // (Refit) Define your web api interface methods
         [Get("/api/users")]
         Task<UserList> GetUsersAsync();
 
@@ -61,37 +64,83 @@ namespace Apizr.Sample
 }
 ```
 
-An instance of this managed api:
+Some resilience strategies:
 ```csharp
-// Define some policies
-var registry = new PolicyRegistry
-{
-    {
-        "TransientHttpError", 
-        HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(new[]
+// (Polly) Create a resilience pipeline with some strategies
+var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
+    // Configure telemetry to get some logs from Polly process
+    .ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
+        loggingBuilder.Debug()))
+    // Add a retry strategy with some options
+    .AddRetry(
+        new RetryStrategyOptions<HttpResponseMessage>
         {
-            TimeSpan.FromSeconds(1),
-            TimeSpan.FromSeconds(5),
-            TimeSpan.FromSeconds(10)
-        })
-    }
-};
+            ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                .Handle<HttpRequestException>()
+                .HandleResult(response =>
+                    response.StatusCode is >= HttpStatusCode.InternalServerError
+                        or HttpStatusCode.RequestTimeout),
+            Delay = TimeSpan.FromSeconds(1),
+            MaxRetryAttempts = 3,
+            UseJitter = true,
+            BackoffType = DelayBackoffType.Exponential
+        }));
+```
 
-// Get your manager instance
+An instance of this managed api:
+
+### [Static](#tab/tabid-static)
+
+Relies on static builder instantiation approach.
+
+```csharp
+// (Polly) Add the resilience pipeline with its key to a registry
+var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", 
+    (builder, _) => builder.AddPipeline(resiliencePipelineBuilder.Build()));
+
+// (Apizr) Get your manager instance
 var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResService>(
     options => options
-        .WithPolicyRegistry(registry)
+        // With a logger
+        .WithLoggerFactory(LoggerFactory.Create(loggingBuilder =>
+            loggingBuilder.Debug()))
+        // With the defined resilience pipeline registry
+        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+        // And with a cache handler
         .WithAkavacheCacheHandler());
 ```
+
+### [Extended](#tab/tabid-extended)
+
+Relies on `IServiceCollection` extension methods approach.
+
+```csharp
+// (Logger) Configure logging the way you want, like
+services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
+
+// (Apizr) Add an Apizr manager for the defined api to your container
+services.AddApizrManagerFor<IReqResService>(options => 
+    // With a cache handler
+    options.WithAkavacheCacheHandler());
+
+// (Polly) Add the resilience pipeline with its key to your container
+services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+    builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
+...
+
+// (Apizr) Get your manager instance the way you want, like
+var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+```
+
+***
 
 And then you're good to go:
 ```csharp
 var userList = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
 ```
 
-This request will be managed with the defined policies, data cached, http traces logged.
+This request will be managed with the defined resilience strategies, data cached and all logged.
 
 Apizr has a lot more to offer, just [read the doc](articles/index.md)!
 

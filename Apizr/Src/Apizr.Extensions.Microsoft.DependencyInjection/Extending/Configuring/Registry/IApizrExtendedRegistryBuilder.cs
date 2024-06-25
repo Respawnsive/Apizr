@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Apizr.Configuring;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
 using Apizr.Configuring.Registry;
@@ -207,39 +208,39 @@ namespace Apizr.Extending.Configuring.Registry
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="BaseAddressAttribute"/> decorated interfaces
         /// </summary>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
-        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="BaseAddressAttribute"/></param>
         /// <returns></returns>
         TApizrExtendedRegistryBuilder AddManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
             params Type[] assemblyMarkerTypes);
 
         /// <summary>
-        /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="BaseAddressAttribute"/> decorated interfaces
         /// </summary>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
-        /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="BaseAddressAttribute"/></param>
         /// <returns></returns>
         TApizrExtendedRegistryBuilder AddManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
             params Assembly[] assemblies);
 
         /// <summary>
-        /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="BaseAddressAttribute"/> decorated interfaces
         /// </summary>
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
-        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="BaseAddressAttribute"/></param>
         /// <returns></returns>
         TApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes);
 
         /// <summary>
-        /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="WebApiAttribute"/> decorated interfaces
+        /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="BaseAddressAttribute"/> decorated interfaces
         /// </summary>
         /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
-        /// <param name="assemblies">Any assembly to scan for <see cref="WebApiAttribute"/></param>
+        /// <param name="assemblies">Any assembly to scan for <see cref="BaseAddressAttribute"/></param>
         /// <returns></returns>
         TApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies);

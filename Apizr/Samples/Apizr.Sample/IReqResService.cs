@@ -15,7 +15,7 @@ using Refit;
 [assembly:Log]
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/api")]//, Log(HttpMessageParts.None, LogLevel.None)]
+    [BaseAddress("https://reqres.in/api")]//, Log(HttpMessageParts.None, LogLevel.None)]
     public interface IReqResService
     {
         [Get("/users")]

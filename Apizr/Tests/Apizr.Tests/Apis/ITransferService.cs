@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
@@ -9,7 +10,7 @@ using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi("http://speedtest.ftp.otenet.gr/files"), Log(HttpMessageParts.None, LogLevel.None)]
+    [BaseAddress("http://speedtest.ftp.otenet.gr/files"), Log(HttpMessageParts.None, LogLevel.None)]
     public interface ITransferService
     {
         [Get("/{fileName}")]

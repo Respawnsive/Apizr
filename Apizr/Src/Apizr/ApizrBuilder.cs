@@ -115,13 +115,13 @@ namespace Apizr
         {
             var crudedType = typeof(T);
 
-            var crudAttribute = crudedType.GetCustomAttribute<CrudEntityAttribute>();
-            if (crudAttribute != null)
+            var baseAddressAttribute = GetBaseAddressAttribute(crudedType);
+            if (baseAddressAttribute != null)
             {
                 if (optionsBuilder == null)
-                    optionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                    optionsBuilder = builder => builder.WithBaseAddress(baseAddressAttribute.BaseAddressOrPath);
                 else
-                    optionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri, ApizrDuplicateStrategy.Ignore);
+                    optionsBuilder += builder => builder.WithBaseAddress(baseAddressAttribute.BaseAddressOrPath, ApizrDuplicateStrategy.Ignore);
             }
 
             return CreateManagerFor(apizrManagerFactory, CreateCommonOptions(), optionsBuilder);
@@ -241,7 +241,7 @@ namespace Apizr
 
             string baseAddress = null;
             string basePath = null;
-            var webApiAttribute = GetWebApiAttribute(webApiType);
+            var webApiAttribute = GetBaseAddressAttribute(webApiType);
             if (!string.IsNullOrWhiteSpace(webApiAttribute?.BaseAddressOrPath))
             {
                 if(Uri.IsWellFormedUriString(webApiAttribute.BaseAddressOrPath, UriKind.Absolute))
@@ -424,17 +424,17 @@ namespace Apizr
 
         #region Internal
         
-        internal static WebApiAttribute GetWebApiAttribute(Type webApiType)
+        internal static BaseAddressAttribute GetBaseAddressAttribute(Type type)
         {
-            var webApiAttribute = webApiType.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
-            if (webApiAttribute != null)
-                return webApiAttribute;
+            var baseAddressAttribute = type.GetTypeInfo().GetCustomAttribute<BaseAddressAttribute>(true);
+            if (baseAddressAttribute != null || type.IsClass)
+                return baseAddressAttribute;
 
-            foreach (var parentInterface in webApiType.GetInterfaces())
+            foreach (var parentInterface in type.GetInterfaces())
             {
-                webApiAttribute = parentInterface.GetTypeInfo().GetCustomAttribute<WebApiAttribute>(true);
-                if (webApiAttribute != null)
-                    return webApiAttribute;
+                baseAddressAttribute = parentInterface.GetTypeInfo().GetCustomAttribute<BaseAddressAttribute>(true);
+                if (baseAddressAttribute != null)
+                    return baseAddressAttribute;
             }
 
             return null;

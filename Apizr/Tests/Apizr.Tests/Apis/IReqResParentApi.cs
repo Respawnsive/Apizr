@@ -7,6 +7,7 @@ using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Cancelling.Attributes.Operation;
 using Apizr.Cancelling.Attributes.Request;
+using Apizr.Configuring;
 using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
@@ -22,7 +23,7 @@ using Refit;
 //[assembly: Log(HttpMessageParts.All, HttpTracerMode.Everything, LogLevel.Trace)]
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://reqres.in/api"), 
+    [BaseAddress("https://reqres.in/api"), 
      Headers("testKey1: testValue1"), 
      PostResiliencePipeline("TransientHttpError2"),
      Cache(CacheMode.GetAndFetch, "00:04:00"),

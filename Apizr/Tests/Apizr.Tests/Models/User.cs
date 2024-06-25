@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
+using Apizr.Configuring;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Requesting;
@@ -9,8 +10,9 @@ using Fusillade;
 
 namespace Apizr.Tests.Models
 {
-    [ //CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>)),
-        CrudEntity<int, PagedResult<User>>("https://reqres.in/api/users"),
+    [ //CrudEntity(typeof(int), typeof(PagedResult<>)),
+        CrudEntity<int, PagedResult<User>>,
+        BaseAddress("https://reqres.in/api/users"),
         CacheReadAll(CacheMode.GetAndFetch),
         CacheRead(CacheMode.GetOrFetch),
         ReadAllHeaders("testKey1: testValue1", "testKey2: *testValue2*", "testKey3: {0}", "testKey4: *{0}*"),

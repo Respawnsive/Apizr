@@ -149,6 +149,27 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public void ServiceCollection_Should_Contain_Registry_And_Scanned_Managers()
+        {
+            var services = new ServiceCollection();
+            services.AddApizr(registry => registry.AddManagerFor(null, _assembly)
+                .AddCrudManagerFor(_assembly));
+
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IReqResUserService>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrManager<IHttpBinService>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>));
+
+
+            var serviceProvider = services.BuildServiceProvider();
+            var registry = serviceProvider.GetService<IApizrExtendedRegistry>();
+            registry.Should().NotBeNull();
+
+            registry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();
+            registry.ContainsManagerFor<IHttpBinService>().Should().BeTrue();
+            registry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should().BeTrue();
+        }
+
+        [Fact]
         public void ServiceProvider_Should_Resolve_Registry_And_Managers()
         {
             var services = new ServiceCollection();

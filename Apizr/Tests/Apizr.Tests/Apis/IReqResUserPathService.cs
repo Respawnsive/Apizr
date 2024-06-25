@@ -2,10 +2,11 @@
 using Refit;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi("users")]
+    [BaseAddress("users")]
     public interface IReqResUserPathService
     {
         [Get("")]

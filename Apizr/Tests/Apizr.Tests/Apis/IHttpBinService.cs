@@ -1,20 +1,20 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
+using Apizr.Configuring;
 using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Resiliencing.Attributes;
-using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [WebApi("https://httpbin.org", false), Log(HttpMessageParts.None), Headers("testKey1: testValue1"), ResiliencePipeline("TransientHttpError")]
+    [BaseAddress("https://httpbin.org"), 
+     Log(HttpMessageParts.None), 
+     Headers("testKey1: testValue1"), 
+     ResiliencePipeline("TransientHttpError")]
     public interface IHttpBinService
     {
         [Get("/bearer")]

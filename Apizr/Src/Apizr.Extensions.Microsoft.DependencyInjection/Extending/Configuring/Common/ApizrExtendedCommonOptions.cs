@@ -36,7 +36,7 @@ namespace Apizr.Extending.Configuring.Common
             MappingHandlerType = typeof(VoidMappingHandler);
             DelegatingHandlersExtendedFactories = new Dictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
-            WebApis = new Dictionary<Type, WebApiAttribute>();
+            WebApis = new Dictionary<Type, BaseAddressAttribute>();
             ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
             PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
             PostRegistrationActions = new List<Action<Type, IServiceCollection>>();
@@ -153,7 +153,7 @@ namespace Apizr.Extending.Configuring.Common
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
 
         /// <inheritdoc />
-        public IDictionary<Type, WebApiAttribute> WebApis { get; }
+        public IDictionary<Type, BaseAddressAttribute> WebApis { get; }
 
         /// <inheritdoc />
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }

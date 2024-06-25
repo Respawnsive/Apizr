@@ -728,6 +728,22 @@
         <member name="M:Apizr.Configuring.ApizrRequestMethod.GetHashCode">
             <inheritdoc />
         </member>
+        <member name="T:Apizr.Configuring.BaseAddressAttribute">
+            <summary>
+            Set a base absolute address or relative path (could be defined with options builder)
+            </summary>
+        </member>
+        <member name="M:Apizr.Configuring.BaseAddressAttribute.#ctor(System.String)">
+            <summary>
+            Set a base absolute address or relative path (if path, base address has to be defined fluently)
+            </summary>
+            <param name="baseAddressOrPath">The web api base absolute address or relative path</param>
+        </member>
+        <member name="P:Apizr.Configuring.BaseAddressAttribute.BaseAddressOrPath">
+            <summary>
+            The web api base absolute address or relative path
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.Common.ApizrCommonOptions">
             <inheritdoc cref="T:Apizr.Configuring.Common.IApizrCommonOptions"/>
         </member>
@@ -5335,20 +5351,14 @@
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
         </member>
-        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute.#ctor(System.String,System.Type,System.Type,System.Type,System.Type)">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute.#ctor(System.Type,System.Type,System.Type,System.Type)">
             <summary>
             Define some crud api settings from this api entity
             </summary>
-            <param name="baseUri">This specific api entity's base crud uri</param>
             <param name="keyType">This specific api entity's crud key type (default: null = typeof(int))</param>
             <param name="readAllResultType">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</param>
             <param name="readAllParamsType">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</param>
             <param name="modelEntityType">Model entity type mapped with this api entity type (default: null = decorated api entity type)</param>
-        </member>
-        <member name="P:Apizr.Requesting.Attributes.CrudEntityAttribute.BaseUri">
-            <summary>
-            This specific entity's base crud uri
-            </summary>
         </member>
         <member name="P:Apizr.Requesting.Attributes.CrudEntityAttribute.KeyType">
             <summary>
@@ -5375,14 +5385,12 @@
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`1.#ctor(System.String)">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`1.#ctor">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
         <member name="T:Apizr.Requesting.Attributes.CrudEntityAttribute`2">
             <summary>
@@ -5390,15 +5398,13 @@
             </summary>
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
             <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`2.#ctor(System.String)">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`2.#ctor">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
             <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
         <member name="T:Apizr.Requesting.Attributes.CrudEntityAttribute`3">
             <summary>
@@ -5407,16 +5413,14 @@
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
             <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`3.#ctor(System.String)">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`3.#ctor">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
             <typeparam name="TKey">This specific api entity's crud key type (default: null = typeof(int))</typeparam>
             <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
         <member name="T:Apizr.Requesting.Attributes.CrudEntityAttribute`4">
             <summary>
@@ -5426,9 +5430,8 @@
             <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
             <typeparam name="TModelEntity">Model entity type mapped with this api entity type (default: null = decorated api entity type)</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
-        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`4.#ctor(System.String)">
+        <member name="M:Apizr.Requesting.Attributes.CrudEntityAttribute`4.#ctor">
             <summary>
             Tells Apizr to auto register an <see cref="T:Apizr.IApizrManager`1"/> for this decorated entity (works only with IServiceCollection extensions registration)
             </summary>
@@ -5436,7 +5439,6 @@
             <typeparam name="TReadAllResult">The "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</typeparam>
             <typeparam name="TModelEntity">Model entity type mapped with this api entity type (default: null = decorated api entity type)</typeparam>
-            <param name="baseUri">This specific api entity's base crud uri</param>
         </member>
         <member name="T:Apizr.Requesting.Attributes.DeleteHeadersAttribute">
             <summary>
@@ -5968,45 +5970,6 @@
             <param name="cancellationToken">A cancellation token to cancel operation.</param>
             <returns>The task object representing the asynchronous operation.</returns>
             <exception cref="T:System.ArgumentNullException">If <paramref name="request"/> is <see langword="null"/>.</exception>
-        </member>
-        <member name="T:Apizr.WebApiAttribute">
-            <summary>
-            Define general web api settings (could be defined with options builder)
-            </summary>
-        </member>
-        <member name="M:Apizr.WebApiAttribute.#ctor">
-            <summary>
-            Define a web api without any base absolute address or relative path (has to be defined fluently) but discoverable for auto registration
-            </summary>
-        </member>
-        <member name="M:Apizr.WebApiAttribute.#ctor(System.String)">
-            <summary>
-            Define a web api with a base absolute address or relative path (if path, base address has to be defined fluently) and discoverable for auto registration
-            </summary>
-            <param name="baseAddressOrPath">The web api base absolute address or relative path</param>
-        </member>
-        <member name="M:Apizr.WebApiAttribute.#ctor(System.Boolean)">
-            <summary>
-            Define a web api without any base absolute address or relative path (has to be defined fluently) and make it discoverable for auto registration or not
-            </summary>
-            <param name="isAutoRegistrable">Makes decorated interface registrable by assembly scanning</param>
-        </member>
-        <member name="M:Apizr.WebApiAttribute.#ctor(System.String,System.Boolean)">
-            <summary>
-            Define a web api with a base absolute address or relative path (if path, base address has to be defined fluently) and make it discoverable for auto registration or not
-            </summary>
-            <param name="baseAddressOrPath">The web api base absolute address or relative path</param>
-            <param name="isAutoRegistrable">Makes decorated interface registrable by assembly scanning</param>
-        </member>
-        <member name="P:Apizr.WebApiAttribute.BaseAddressOrPath">
-            <summary>
-            The web api base absolute address or relative path
-            </summary>
-        </member>
-        <member name="P:Apizr.WebApiAttribute.IsAutoRegistrable">
-            <summary>
-            Makes decorated interface registrable by assembly scanning
-            </summary>
         </member>
         <member name="T:Refit.Implementation.Generated">
             <inheritdoc />

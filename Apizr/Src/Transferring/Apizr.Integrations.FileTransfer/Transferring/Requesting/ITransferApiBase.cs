@@ -3,7 +3,7 @@ using Apizr.Caching;
 
 namespace Apizr.Transferring.Requesting;
 
-[WebApi, Cache(CacheMode.None)]
+[Cache(CacheMode.None)]
 public interface ITransferApiBase
 {
 }

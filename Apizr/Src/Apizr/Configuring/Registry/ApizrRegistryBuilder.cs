@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
 using Apizr.Connecting;
+using Apizr.Extending;
 using Apizr.Mapping;
 using Apizr.Requesting;
 using Apizr.Requesting.Attributes;
+using Microsoft.Extensions.Options;
 using Polly.Registry;
 
 namespace Apizr.Configuring.Registry
@@ -108,13 +111,13 @@ namespace Apizr.Configuring.Registry
         {
             var crudedType = typeof(T);
 
-            var crudAttribute = crudedType.GetCustomAttribute<CrudEntityAttribute>();
-            if (crudAttribute != null)
+            var baseAddressAttribute = ApizrBuilder.GetBaseAddressAttribute(crudedType);
+            if (baseAddressAttribute != null)
             {
                 if (properOptionsBuilder == null)
-                    properOptionsBuilder = builder => builder.WithBaseAddress(crudAttribute.BaseUri);
+                    properOptionsBuilder = builder => builder.WithBaseAddress(baseAddressAttribute.BaseAddressOrPath);
                 else
-                    properOptionsBuilder += builder => builder.WithBaseAddress(crudAttribute.BaseUri, ApizrDuplicateStrategy.Ignore);
+                    properOptionsBuilder += builder => builder.WithBaseAddress(baseAddressAttribute.BaseAddressOrPath, ApizrDuplicateStrategy.Ignore);
             }
 
             return AddManagerFor(apizrManagerFactory, properOptionsBuilder);
@@ -124,7 +127,7 @@ namespace Apizr.Configuring.Registry
 
         #region General
 
-        /// <inheritdoc />
+            /// <inheritdoc />
         public IApizrRegistryBuilder AddManagerFor<TWebApi>(
             Action<IApizrProperOptionsBuilder> properOptionsBuilder = null) =>
             AddManagerFor<TWebApi, ApizrManager<TWebApi>>(

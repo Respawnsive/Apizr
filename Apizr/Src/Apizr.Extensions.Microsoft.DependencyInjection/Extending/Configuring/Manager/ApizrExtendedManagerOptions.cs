@@ -184,7 +184,7 @@ namespace Apizr.Extending.Configuring.Manager
         public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
 
         /// <inheritdoc />
-        public IDictionary<Type, WebApiAttribute> WebApis { get; }
+        public IDictionary<Type, BaseAddressAttribute> WebApis { get; }
 
         /// <inheritdoc />
         public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }

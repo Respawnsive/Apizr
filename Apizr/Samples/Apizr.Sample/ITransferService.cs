@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Apizr.Sample
 {
-    [WebApi("http://speedtest.ftp.otenet.gr/files"), Log(HttpMessageParts.None, LogLevel.None)]
+    [BaseAddress("http://speedtest.ftp.otenet.gr/files"), Log(HttpMessageParts.None, LogLevel.None)]
     public interface ITransferService
     {
         [Get("/{fileName}")]

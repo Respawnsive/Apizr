@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Apizr.Caching;
+using Apizr.Configuring;
 using Apizr.Connecting;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Extending.Configuring.Shared;
@@ -60,7 +61,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <summary>
         /// Web apis auto registered with <see cref="IApizrManager{TWebApi}"/>
         /// </summary>
-        IDictionary<Type, WebApiAttribute> WebApis { get; }
+        IDictionary<Type, BaseAddressAttribute> WebApis { get; }
 
         /// <summary>
         /// Mappings between api request object and model object used for classic auto registration

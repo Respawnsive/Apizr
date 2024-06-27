@@ -428,6 +428,10 @@ namespace Apizr
                 if (crudEntityDefinition.Value.MappedEntityType == null)
                     crudEntityDefinition.Value.MappedEntityType = crudEntityDefinition.Key;
 
+                var baseAddressAttribute = ApizrBuilder.GetBaseAddressAttribute(crudEntityDefinition.Key);
+                if (baseAddressAttribute != null) 
+                    crudEntityDefinition.Value.BaseAddressOrPath = baseAddressAttribute.BaseAddressOrPath;
+
                 cruds.Add(crudEntityDefinition.Key, crudEntityDefinition.Value);
 
                 if (optionsBuilder == null)

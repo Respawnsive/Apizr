@@ -14,12 +14,11 @@ namespace Apizr.Mapping
         /// <summary>
         /// Define some crud api settings from this mapped model entity
         /// </summary>
-        /// <param name="apiEntityBaseUri">The mapped api entity's base crud uri</param>
         /// <param name="apiEntityType">The mapped api entity type</param>
         /// <param name="apiEntityKeyType">The mapped api entity's crud key type (default: null = typeof(int))</param>
         /// <param name="apiEntityReadAllResultType">The mapped api entity "ReadAll" query result type  (default: null = typeof(IEnumerable{}))</param>
         /// <param name="apiEntityReadAllParamsType">The mapped api entity ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</param>
-        public MappedCrudEntityAttribute(string apiEntityBaseUri, Type apiEntityType, Type apiEntityKeyType = null, Type apiEntityReadAllResultType = null, Type apiEntityReadAllParamsType = null) : base(apiEntityBaseUri, apiEntityKeyType, apiEntityReadAllResultType, apiEntityReadAllParamsType, apiEntityType)
+        public MappedCrudEntityAttribute(Type apiEntityType, Type apiEntityKeyType = null, Type apiEntityReadAllResultType = null, Type apiEntityReadAllParamsType = null) : base(apiEntityKeyType, apiEntityReadAllResultType, apiEntityReadAllParamsType, apiEntityType)
         {
         }
     }
@@ -33,7 +32,7 @@ namespace Apizr.Mapping
     public class MappedCrudEntityAttribute<TApiEntity> : MappedCrudEntityAttribute
     {
         /// <inheritdoc />
-        public MappedCrudEntityAttribute(string apiEntityBaseUri) : base(apiEntityBaseUri, typeof(TApiEntity))
+        public MappedCrudEntityAttribute() : base(typeof(TApiEntity))
         {
         }
     }
@@ -48,7 +47,7 @@ namespace Apizr.Mapping
     public class MappedCrudEntityAttribute<TApiEntity, TApiEntityKey> : MappedCrudEntityAttribute
     {
         /// <inheritdoc />
-        public MappedCrudEntityAttribute(string apiEntityBaseUri) : base(apiEntityBaseUri, typeof(TApiEntity), typeof(TApiEntityKey))
+        public MappedCrudEntityAttribute() : base(typeof(TApiEntity), typeof(TApiEntityKey))
         {
         }
     }
@@ -64,7 +63,7 @@ namespace Apizr.Mapping
     public class MappedCrudEntityAttribute<TApiEntity, TApiEntityKey, TApiEntityReadAllResult> : MappedCrudEntityAttribute
     {
         /// <inheritdoc />
-        public MappedCrudEntityAttribute(string apiEntityBaseUri) : base(apiEntityBaseUri, typeof(TApiEntity), typeof(TApiEntityKey), typeof(TApiEntityReadAllResult))
+        public MappedCrudEntityAttribute() : base(typeof(TApiEntity), typeof(TApiEntityKey), typeof(TApiEntityReadAllResult))
         {
         }
     }
@@ -81,7 +80,7 @@ namespace Apizr.Mapping
     public class MappedCrudEntityAttribute<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TApiEntityReadAllParams> : MappedCrudEntityAttribute
     {
         /// <inheritdoc />
-        public MappedCrudEntityAttribute(string apiEntityBaseUri) : base(apiEntityBaseUri, typeof(TApiEntity), typeof(TApiEntityKey), typeof(TApiEntityReadAllResult), typeof(TApiEntityReadAllParams))
+        public MappedCrudEntityAttribute() : base(typeof(TApiEntity), typeof(TApiEntityKey), typeof(TApiEntityReadAllResult), typeof(TApiEntityReadAllParams))
         {
         }
     }

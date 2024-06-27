@@ -41,7 +41,7 @@ namespace Apizr.Requesting.Attributes
         {
         }
 
-        internal string BaseAddressOrPath { get; }
+        internal string BaseAddressOrPath { get; set; }
 
         /// <summary>
         /// This specific object's crud key type

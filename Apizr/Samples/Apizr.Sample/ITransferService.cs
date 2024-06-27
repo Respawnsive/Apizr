@@ -4,6 +4,7 @@ using Apizr.Logging;
 using Refit;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Apizr.Configuring;
 using Microsoft.Extensions.Logging;
 
 namespace Apizr.Sample

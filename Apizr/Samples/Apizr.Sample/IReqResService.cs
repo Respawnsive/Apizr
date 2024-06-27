@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
+using Apizr.Configuring;
 using Apizr.Configuring.Request;
 using Apizr.Logging.Attributes;
 using Apizr.Resiliencing.Attributes;

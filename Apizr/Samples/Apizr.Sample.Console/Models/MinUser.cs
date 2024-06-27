@@ -6,7 +6,7 @@ using Apizr.Sample.Models;
 
 namespace Apizr.Sample.Console.Models
 {
-    [MappedWith(typeof(User))]
+    [MappedWith<User>]
     public class MinUser
     {
         public int Id { get; set; }

@@ -1,4 +1,5 @@
-﻿using Apizr.Logging;
+﻿using Apizr.Configuring;
+using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Transferring.Requesting;
 using Microsoft.Extensions.Logging;

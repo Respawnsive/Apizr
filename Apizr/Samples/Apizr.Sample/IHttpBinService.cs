@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
+using Apizr.Configuring;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Refit;
 
 namespace Apizr.Sample
 {
-    [BaseAddress("https://httpbin.org", false), Log(HttpMessageParts.RequestHeaders)]
+    [BaseAddress("https://httpbin.org"), Log(HttpMessageParts.RequestHeaders)]
     public interface IHttpBinService
     {
         [Get("/bearer")]

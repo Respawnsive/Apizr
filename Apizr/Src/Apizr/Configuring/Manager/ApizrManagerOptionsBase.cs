@@ -20,7 +20,7 @@ namespace Apizr.Configuring.Manager
         protected ApizrManagerOptionsBase(IApizrCommonOptionsBase commonOptions, IApizrProperOptionsBase properOptions) : base(properOptions)
         {
             WebApiType = properOptions.WebApiType;
-            CrudModelType = properOptions.CrudModelType;
+            CrudApiEntityType = properOptions.CrudApiEntityType;
             TypeInfo = properOptions.TypeInfo;
             IsCrudApi = properOptions.IsCrudApi;
             Logger = properOptions.Logger;
@@ -32,7 +32,7 @@ namespace Apizr.Configuring.Manager
         public Type WebApiType { get; }
 
         /// <inheritdoc />
-        public Type CrudModelType { get; }
+        public Type CrudApiEntityType { get; }
 
         /// <inheritdoc />
         public TypeInfo TypeInfo { get; }

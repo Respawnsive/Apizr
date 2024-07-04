@@ -18,7 +18,7 @@ namespace Apizr.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="crudModelType">The crud model type if any</param>
+        /// <param name="crudApiEntityType">The crud api entity type if any</param>
         /// <param name="typeInfo">The type info</param>
         /// <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
         /// <param name="properResiliencePipelineAttributes">Specific resilience pipelines</param>
@@ -27,7 +27,7 @@ namespace Apizr.Configuring.Proper
         /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
         protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
-            Type crudModelType,
+            Type crudApiEntityType,
             TypeInfo typeInfo,
             ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes,
             ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes,
@@ -36,7 +36,7 @@ namespace Apizr.Configuring.Proper
             Func<string, bool> shouldRedactHeaderValue = null) : base(sharedOptions)
         {
             WebApiType = webApiType;
-            CrudModelType = crudModelType;
+            CrudApiEntityType = crudApiEntityType;
             TypeInfo = typeInfo;
 
             if (commonResiliencePipelineAttributes?.Length > 0)
@@ -66,13 +66,13 @@ namespace Apizr.Configuring.Proper
         public Type WebApiType { get; }
 
         /// <inheritdoc />
-        public Type CrudModelType { get; }
+        public Type CrudApiEntityType { get; }
 
         /// <inheritdoc />
         public TypeInfo TypeInfo { get; }
 
         /// <inheritdoc />
-        public bool IsCrudApi => CrudModelType != null;
+        public bool IsCrudApi => CrudApiEntityType != null;
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }

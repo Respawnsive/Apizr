@@ -13,6 +13,7 @@ using Apizr.Configuring.Registry;
 using Apizr.Extending;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
+using Apizr.Mapping;
 using Apizr.Mediation.Cruding;
 using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Extending;
@@ -366,7 +367,7 @@ namespace Apizr.Sample.Console
                                 {
                                     // Manual registration
                                     //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
-                                    //services.AddApizrCrudFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithCrudOptionalMediation().WithMappingHandler<AutoMapperMappingHandler>().WithHttpTracing(HttpTracer.HttpMessageParts.All));
+                                    services.AddApizrCrudManagerFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithAkavacheCacheHandler().WithMediation().WithOptionalMediation().WithAutoMapperMappingHandler());
 
                                     // Classic auto assembly detection and registration and handling with both mediation and optional mediation
                                     services.AddApizrManagerFor(

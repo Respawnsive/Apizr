@@ -17,7 +17,7 @@ namespace Apizr.Helping
         public static string Combine(string baseUrl, string relativePath)
         {
             if (string.IsNullOrWhiteSpace(baseUrl))
-                throw new ArgumentNullException(nameof(baseUrl));
+                return null;
 
             if (string.IsNullOrWhiteSpace(relativePath))
                 return baseUrl;
@@ -37,7 +37,7 @@ namespace Apizr.Helping
         public static string Combine(string baseUrl, params string[] relativePaths)
         {
             if (string.IsNullOrWhiteSpace(baseUrl))
-                throw new ArgumentNullException(nameof(baseUrl));
+                return null;
 
             if (relativePaths.Length == 0)
                 return baseUrl;

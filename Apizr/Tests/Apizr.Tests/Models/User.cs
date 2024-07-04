@@ -4,14 +4,12 @@ using Apizr.Caching.Attributes;
 using Apizr.Configuring;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
-using Apizr.Requesting;
 using Apizr.Requesting.Attributes;
 using Fusillade;
 
 namespace Apizr.Tests.Models
 {
-    [ //CrudEntity(typeof(int), typeof(PagedResult<>)),
-        CrudEntity<int, PagedResult<User>>,
+    [ CrudEntity<int, PagedResult<User>>,
         BaseAddress("https://reqres.in/api/users"),
         CacheReadAll(CacheMode.GetAndFetch),
         CacheRead(CacheMode.GetOrFetch),

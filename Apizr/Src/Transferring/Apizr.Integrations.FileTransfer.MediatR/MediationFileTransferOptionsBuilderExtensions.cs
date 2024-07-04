@@ -39,47 +39,47 @@ namespace Apizr
             return optionsBuilder;
         }
 
-        private static void WithFileTransferMediation(IApizrExtendedCommonOptions apizrOptions)
+        private static void WithFileTransferMediation(IApizrExtendedCommonOptions commonOptions)
         {
-            apizrOptions.PostRegistrationActions.Add((webApiType, services) =>
+            commonOptions.PostRegistrationActions.Add((managerOptions, services) =>
             {
-                if (typeof(ITransferApiBase).IsAssignableFrom(webApiType))
+                if (typeof(ITransferApiBase).IsAssignableFrom(managerOptions.WebApiType))
                 {
                     // Register mediator
                     services.TryAddSingleton<IApizrMediator, ApizrMediator>();
 
                     // Typed mediator
-                    var typedMediatorServiceType = typeof(IApizrMediator<>).MakeGenericType(webApiType);
-                    var typedMediatorImplementationType = typeof(ApizrMediator<>).MakeGenericType(webApiType);
+                    var typedMediatorServiceType = typeof(IApizrMediator<>).MakeGenericType(managerOptions.WebApiType);
+                    var typedMediatorImplementationType = typeof(ApizrMediator<>).MakeGenericType(managerOptions.WebApiType);
 
                     // Register typed mediator
                     services.TryAddSingleton(typedMediatorServiceType, typedMediatorImplementationType);
 
                     // Upload
-                    if (typeof(IUploadApi).IsAssignableFrom(webApiType))
+                    if (typeof(IUploadApi).IsAssignableFrom(managerOptions.WebApiType))
                     {
-                        var requestType = typeof(UploadCommand<>).MakeGenericType(webApiType);
+                        var requestType = typeof(UploadCommand<>).MakeGenericType(managerOptions.WebApiType);
                         var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(HttpResponseMessage));
-                        var requestHandlerImplementationType = typeof(UploadCommandHandler<>).MakeGenericType(webApiType);
+                        var requestHandlerImplementationType = typeof(UploadCommandHandler<>).MakeGenericType(managerOptions.WebApiType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
 
                         // Short
-                        if (typeof(IUploadApi) == webApiType || typeof(ITransferApi) == webApiType)
+                        if (typeof(IUploadApi) == managerOptions || typeof(ITransferApi) == managerOptions)
                         {
                             var shortRequestType = typeof(UploadCommand);
                             var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(HttpResponseMessage));
-                            var shortRequestHandlerImplementationType = typeof(UploadCommandHandler<>).MakeGenericType(webApiType);
+                            var shortRequestHandlerImplementationType = typeof(UploadCommandHandler<>).MakeGenericType(managerOptions.WebApiType);
 
                             services.TryAddSingleton(shortRequestHandlerServiceType, shortRequestHandlerImplementationType);
                         }
                     }
-                    else if (typeof(IUploadApi<>).IsAssignableFromGenericType(webApiType))
+                    else if (typeof(IUploadApi<>).IsAssignableFromGenericType(managerOptions.WebApiType))
                     {
-                        var uploadReturnType = webApiType.GetInterfaces().FirstOrDefault(type => type.IsGenericType)?.GetGenericArguments().First();
-                        var requestType = typeof(UploadCommand<,>).MakeGenericType(webApiType, uploadReturnType);
+                        var uploadReturnType = managerOptions.WebApiType.GetInterfaces().FirstOrDefault(type => type.IsGenericType)?.GetGenericArguments().First();
+                        var requestType = typeof(UploadCommand<,>).MakeGenericType(managerOptions.WebApiType, uploadReturnType);
                         var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, uploadReturnType);
-                        var requestHandlerImplementationType = typeof(UploadCommandHandler<,>).MakeGenericType(webApiType, uploadReturnType);
+                        var requestHandlerImplementationType = typeof(UploadCommandHandler<,>).MakeGenericType(managerOptions.WebApiType, uploadReturnType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
                         
@@ -91,30 +91,30 @@ namespace Apizr
                     }
 
                     // Download
-                    if (typeof(IDownloadApi).IsAssignableFrom(webApiType))
+                    if (typeof(IDownloadApi).IsAssignableFrom(managerOptions.WebApiType))
                     {
-                        var requestType = typeof(DownloadQuery<>).MakeGenericType(webApiType);
+                        var requestType = typeof(DownloadQuery<>).MakeGenericType(managerOptions.WebApiType);
                         var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(FileInfo));
-                        var requestHandlerImplementationType = typeof(DownloadQueryHandler<>).MakeGenericType(webApiType);
+                        var requestHandlerImplementationType = typeof(DownloadQueryHandler<>).MakeGenericType(managerOptions.WebApiType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
 
                         // Short
-                        if (typeof(IDownloadApi) == webApiType || typeof(ITransferApi) == webApiType)
+                        if (typeof(IDownloadApi) == managerOptions || typeof(ITransferApi) == managerOptions)
                         {
                             var shortRequestType = typeof(DownloadQuery);
                             var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(FileInfo));
-                            var shortRequestHandlerImplementationType = typeof(DownloadQueryHandler<>).MakeGenericType(webApiType);
+                            var shortRequestHandlerImplementationType = typeof(DownloadQueryHandler<>).MakeGenericType(managerOptions.WebApiType);
 
                             services.TryAddSingleton(shortRequestHandlerServiceType, shortRequestHandlerImplementationType);
                         }
                     }
-                    else if (typeof(IDownloadApi<>).IsAssignableFromGenericType(webApiType))
+                    else if (typeof(IDownloadApi<>).IsAssignableFromGenericType(managerOptions.WebApiType))
                     {
-                        var downloadParamsType = webApiType.GetInterfaces().FirstOrDefault(type => type.IsGenericType)?.GetGenericArguments().First();
-                        var requestType = typeof(DownloadQuery<,>).MakeGenericType(webApiType, downloadParamsType);
+                        var downloadParamsType = managerOptions.WebApiType.GetInterfaces().FirstOrDefault(type => type.IsGenericType)?.GetGenericArguments().First();
+                        var requestType = typeof(DownloadQuery<,>).MakeGenericType(managerOptions.WebApiType, downloadParamsType);
                         var requestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(requestType, typeof(FileInfo));
-                        var requestHandlerImplementationType = typeof(DownloadQueryHandler<,>).MakeGenericType(webApiType, downloadParamsType);
+                        var requestHandlerImplementationType = typeof(DownloadQueryHandler<,>).MakeGenericType(managerOptions.WebApiType, downloadParamsType);
 
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
                         

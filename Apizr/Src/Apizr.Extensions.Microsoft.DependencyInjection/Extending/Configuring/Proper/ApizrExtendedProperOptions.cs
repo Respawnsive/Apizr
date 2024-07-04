@@ -24,7 +24,10 @@ namespace Apizr.Extending.Configuring.Proper
         /// </summary>
         /// <param name="sharedOptions">The shared options</param>
         /// <param name="webApiType">The web api type</param>
-        /// <param name="crudModelType">The crud model type if any</param>
+        /// <param name="crudApiEntityType">The crud api entity type if any</param>
+        /// <param name="crudApiEntityKeyType">The crud api entity key type if any</param>
+        /// <param name="crudApiReadAllResultType">The crud api read all result type if any</param>
+        /// <param name="crudApiReadAllParamsType">The crud api read all params type if any</param>
         /// <param name="typeInfo">The type info</param>
         /// <param name="apizrManagerType">The manager type</param>
         /// <param name="baseAddress">The web api base address</param>
@@ -42,7 +45,10 @@ namespace Apizr.Extending.Configuring.Proper
         /// <param name="logLevels">The log levels</param>
         public ApizrExtendedProperOptions(IApizrExtendedSharedOptions sharedOptions,
             Type webApiType,
-            Type crudModelType,
+            Type crudApiEntityType,
+            Type crudApiEntityKeyType,
+            Type crudApiReadAllResultType,
+            Type crudApiReadAllParamsType,
             TypeInfo typeInfo,
             Type apizrManagerType,
             string baseAddress,
@@ -59,7 +65,7 @@ namespace Apizr.Extending.Configuring.Proper
             Func<string, bool> shouldRedactHeaderValue = null,
             params LogLevel[] logLevels) : base(sharedOptions, 
             webApiType, 
-            crudModelType, 
+            crudApiEntityType, 
             typeInfo,
             commonResiliencePipelineAttributes,
             properResiliencePipelineAttributes,
@@ -67,6 +73,9 @@ namespace Apizr.Extending.Configuring.Proper
             properCacheAttribute, 
             shouldRedactHeaderValue)
         {
+            CrudApiEntityKeyType = crudApiEntityKeyType;
+            CrudApiReadAllResultType = crudApiReadAllResultType;
+            CrudApiReadAllParamsType = crudApiReadAllParamsType;
             ApizrManagerType = apizrManagerType;
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
             BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? _ => baseAddress : sharedOptions.BaseAddressFactory;
@@ -87,7 +96,17 @@ namespace Apizr.Extending.Configuring.Proper
         }
 
         /// <inheritdoc />
+        public Type CrudApiEntityKeyType { get; }
+
+        /// <inheritdoc />
+        public Type CrudApiReadAllResultType { get; }
+
+        /// <inheritdoc />
+        public Type CrudApiReadAllParamsType { get; }
+
+        /// <inheritdoc />
         public Type ApizrManagerType { get; }
+
 
         private Func<IServiceProvider, Uri> _baseUriFactory;
         /// <inheritdoc />

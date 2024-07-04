@@ -73,7 +73,7 @@ namespace Apizr.Extending.Configuring.Proper
             if (configurationSection is not null)
             {
                 var isApizrSection = configurationSection.Key == "Apizr";
-                var apiName = Options.CrudModelType?.Name ?? Options.WebApiType.Name;
+                var apiName = Options.CrudApiEntityType?.Name ?? Options.WebApiType.Name;
                 var configs = configurationSection.GetChildren().Where(config =>
                     !isApizrSection || config.Key == apiName);
                 foreach (var config in configs)

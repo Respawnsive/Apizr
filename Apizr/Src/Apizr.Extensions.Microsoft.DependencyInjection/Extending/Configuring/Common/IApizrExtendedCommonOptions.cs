@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Connecting;
+using Apizr.Extending.Configuring.Manager;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Mapping;
@@ -66,7 +68,7 @@ namespace Apizr.Extending.Configuring.Common
         /// <summary>
         /// Mappings between api request object and model object used for classic auto registration
         /// </summary>
-        IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
+        IDictionary<Assembly, MappedWithAttribute[]> ObjectMappings { get; }
 
         /// <summary>
         /// Other registries plugged during post registration actions
@@ -76,6 +78,6 @@ namespace Apizr.Extending.Configuring.Common
         /// <summary>
         /// Post registration actions
         /// </summary>
-        IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
+        IList<Action<IApizrExtendedManagerOptions, IServiceCollection>> PostRegistrationActions { get; }
     }
 }

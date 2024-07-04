@@ -16,12 +16,12 @@ namespace Apizr.Configuring.Proper
         Type WebApiType { get; }
 
         /// <summary>
-        /// Crud model type if any
+        /// Crud api entity type if any
         /// </summary>
-        Type CrudModelType { get; }
+        Type CrudApiEntityType { get; }
 
         /// <summary>
-        /// Web api interface or Crud model class type info
+        /// Web api interface or Crud api entity class type info
         /// </summary>
         TypeInfo TypeInfo { get; }
 

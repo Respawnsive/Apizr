@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Connecting;
+using Apizr.Extending.Configuring.Manager;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
@@ -37,9 +39,9 @@ namespace Apizr.Extending.Configuring.Common
             DelegatingHandlersExtendedFactories = new Dictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>();
             CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             WebApis = new Dictionary<Type, BaseAddressAttribute>();
-            ObjectMappings = new Dictionary<Type, MappedWithAttribute>();
+            ObjectMappings = new Dictionary<Assembly, MappedWithAttribute[]>();
             PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
-            PostRegistrationActions = new List<Action<Type, IServiceCollection>>();
+            PostRegistrationActions = new List<Action<IApizrExtendedManagerOptions, IServiceCollection>>();
             HeadersExtendedFactories = new Dictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>();
             _resiliencePropertiesExtendedFactories = new Dictionary<string, Func<IServiceProvider, object>>();
         }
@@ -156,13 +158,13 @@ namespace Apizr.Extending.Configuring.Common
         public IDictionary<Type, BaseAddressAttribute> WebApis { get; }
 
         /// <inheritdoc />
-        public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
+        public IDictionary<Assembly, MappedWithAttribute[]> ObjectMappings { get; }
 
         /// <inheritdoc />
         public IDictionary<Type, IApizrExtendedConcurrentRegistryBase> PostRegistries { get; }
 
         /// <inheritdoc />
-        public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
+        public IList<Action<IApizrExtendedManagerOptions, IServiceCollection>> PostRegistrationActions { get; }
 
         private readonly IDictionary<string, Func<IServiceProvider, object>> _resiliencePropertiesExtendedFactories;
         /// <inheritdoc />

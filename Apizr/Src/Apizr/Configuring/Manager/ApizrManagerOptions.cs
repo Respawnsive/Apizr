@@ -177,7 +177,7 @@ namespace Apizr.Configuring.Manager
         public Type WebApiType => Options.WebApiType;
 
         /// <inheritdoc />
-        public Type CrudModelType => Options.CrudModelType;
+        public Type CrudApiEntityType => Options.CrudApiEntityType;
 
         /// <inheritdoc />
         public TypeInfo TypeInfo => Options.TypeInfo;

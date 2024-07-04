@@ -107,25 +107,13 @@ namespace Apizr
         /// <inheritdoc/>
         public TApizrManager CreateCrudManagerFor<T, TKey, TReadAllResult, TReadAllParams, TApizrManager>(
             Func<ILazyFactory<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>, IConnectivityHandler, ICacheHandler,
-                IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<string>>, IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
+                IMappingHandler, ILazyFactory<ResiliencePipelineRegistry<string>>,
+                IApizrManagerOptions<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>,
                 TApizrManager> apizrManagerFactory,
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
             where T : class
-            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>
-        {
-            var crudedType = typeof(T);
-
-            var baseAddressAttribute = GetBaseAddressAttribute(crudedType);
-            if (baseAddressAttribute != null)
-            {
-                if (optionsBuilder == null)
-                    optionsBuilder = builder => builder.WithBaseAddress(baseAddressAttribute.BaseAddressOrPath);
-                else
-                    optionsBuilder += builder => builder.WithBaseAddress(baseAddressAttribute.BaseAddressOrPath, ApizrDuplicateStrategy.Ignore);
-            }
-
-            return CreateManagerFor(apizrManagerFactory, CreateCommonOptions(), optionsBuilder);
-        }
+            where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>> =>
+            CreateManagerFor(apizrManagerFactory, CreateCommonOptions(), optionsBuilder);
 
         #endregion
 
@@ -241,18 +229,18 @@ namespace Apizr
 
             string baseAddress = null;
             string basePath = null;
-            var webApiAttribute = GetBaseAddressAttribute(webApiType);
-            if (!string.IsNullOrWhiteSpace(webApiAttribute?.BaseAddressOrPath))
-            {
-                if(Uri.IsWellFormedUriString(webApiAttribute.BaseAddressOrPath, UriKind.Absolute))
-                    baseAddress = webApiAttribute.BaseAddressOrPath;
-                else
-                    basePath = webApiAttribute.BaseAddressOrPath;
-            }
-
             var isCrudApi = typeof(ICrudApi<,,,>).IsAssignableFromGenericType(webApiType);
-            var crudModelType = isCrudApi ? webApiType.GetGenericArguments().First() : null;
-            var typeInfo = isCrudApi ? crudModelType.GetTypeInfo() : webApiType.GetTypeInfo();
+            var crudApiEntityType = isCrudApi ? webApiType.GetGenericArguments().First() : null;
+            var typeInfo = isCrudApi ? crudApiEntityType.GetTypeInfo() : webApiType.GetTypeInfo();
+
+            var baseAddressAttribute = isCrudApi ? GetBaseAddressAttribute(crudApiEntityType) : GetBaseAddressAttribute(webApiType);
+            if (!string.IsNullOrWhiteSpace(baseAddressAttribute?.BaseAddressOrPath))
+            {
+                if(Uri.IsWellFormedUriString(baseAddressAttribute.BaseAddressOrPath, UriKind.Absolute))
+                    baseAddress = baseAddressAttribute.BaseAddressOrPath;
+                else
+                    basePath = baseAddressAttribute.BaseAddressOrPath;
+            }
 
             var properDeclaringTypeAttributes = typeInfo.DeclaringType != null
                 ? typeInfo.DeclaringType.GetTypeInfo().GetCustomAttributes(true)
@@ -310,7 +298,7 @@ namespace Apizr
 
             var builder = new ApizrProperOptionsBuilder(new ApizrProperOptions(commonOptions, 
                 webApiType,
-                crudModelType,
+                crudApiEntityType,
                 typeInfo,
                 baseAddress,
                 basePath,
@@ -426,13 +414,13 @@ namespace Apizr
         
         internal static BaseAddressAttribute GetBaseAddressAttribute(Type type)
         {
-            var baseAddressAttribute = type.GetTypeInfo().GetCustomAttribute<BaseAddressAttribute>(true);
+            var baseAddressAttribute = type.GetTypeInfo().GetCustomAttributes<BaseAddressAttribute>(true).FirstOrDefault();
             if (baseAddressAttribute != null || type.IsClass)
                 return baseAddressAttribute;
 
             foreach (var parentInterface in type.GetInterfaces())
             {
-                baseAddressAttribute = parentInterface.GetTypeInfo().GetCustomAttribute<BaseAddressAttribute>(true);
+                baseAddressAttribute = parentInterface.GetTypeInfo().GetCustomAttributes<BaseAddressAttribute>(true).FirstOrDefault();
                 if (baseAddressAttribute != null)
                     return baseAddressAttribute;
             }

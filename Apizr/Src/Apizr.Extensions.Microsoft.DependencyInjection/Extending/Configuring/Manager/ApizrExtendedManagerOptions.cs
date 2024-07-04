@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
@@ -31,6 +32,9 @@ namespace Apizr.Extending.Configuring.Manager
         /// <param name="properOptions">The proper options</param>
         public ApizrExtendedManagerOptions(IApizrExtendedCommonOptions commonOptions, IApizrExtendedProperOptions properOptions) : base(commonOptions, properOptions)
         {
+            CrudApiEntityKeyType = properOptions.CrudApiEntityKeyType;
+            CrudApiReadAllResultType = properOptions.CrudApiReadAllResultType;
+            CrudApiReadAllParamsType = properOptions.CrudApiReadAllParamsType;
             ApizrManagerType = properOptions.ApizrManagerType;
             BaseUriFactory = properOptions.BaseUriFactory;
             BaseAddressFactory = properOptions.BaseAddressFactory;
@@ -52,7 +56,7 @@ namespace Apizr.Extending.Configuring.Manager
             HttpMessageHandlerFactory = properOptions.HttpMessageHandlerFactory;
             CrudEntities = commonOptions.CrudEntities.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             WebApis = commonOptions.WebApis.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray());
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             PostRegistrationActions = commonOptions.PostRegistrationActions.ToList();
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
@@ -61,6 +65,15 @@ namespace Apizr.Extending.Configuring.Manager
             _resiliencePropertiesExtendedFactories = properOptions.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
                                                      new Dictionary<string, Func<IServiceProvider, object>>();
         }
+
+        /// <inheritdoc />
+        public Type CrudApiEntityKeyType { get; }
+
+        /// <inheritdoc />
+        public Type CrudApiReadAllResultType { get; }
+
+        /// <inheritdoc />
+        public Type CrudApiReadAllParamsType { get; }
 
         /// <inheritdoc />
         public Type ApizrManagerType { get; }
@@ -187,13 +200,13 @@ namespace Apizr.Extending.Configuring.Manager
         public IDictionary<Type, BaseAddressAttribute> WebApis { get; }
 
         /// <inheritdoc />
-        public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
+        public IDictionary<Assembly, MappedWithAttribute[]> ObjectMappings { get; }
 
         /// <inheritdoc />
         public IDictionary<Type, IApizrExtendedConcurrentRegistryBase> PostRegistries { get; }
 
         /// <inheritdoc />
-        public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
+        public IList<Action<IApizrExtendedManagerOptions, IServiceCollection>> PostRegistrationActions { get; }
 
         private readonly IDictionary<string, Func<IServiceProvider, object>> _resiliencePropertiesExtendedFactories;
         /// <inheritdoc />

@@ -326,33 +326,33 @@ namespace Apizr.Extending.Configuring.Registry
                 throw new ArgumentException(
                     $"No assemblies found to scan. Supply at least one assembly to scan for {nameof(BaseAddressAttribute)}.", nameof(assemblies));
 
-            var allTypes = assemblies
-                .Distinct()
-                .SelectMany(assembly => assembly
-                    .GetTypes())
-                .ToList();
+            //var allTypes = assemblies
+            //    .Distinct()
+            //    .SelectMany(assembly => assembly
+            //        .GetTypes())
+            //    .ToList();
 
-            var objectMappingDefinitions = allTypes
-                .Where(type => type.IsClass)
-                .Select(type => new
-                {
-                    Type = type,
-                    Attribute = type.GetCustomAttribute<MappedWithAttribute>()
-                })
-                .Where(item => item.Attribute != null)
-                .ToDictionary(item => item.Type, item => item.Attribute);
+            //var objectMappingDefinitions = allTypes
+            //    .Where(type => type.IsClass)
+            //    .Select(type => new
+            //    {
+            //        Type = type,
+            //        Attribute = type.GetCustomAttribute<MappedWithAttribute>()
+            //    })
+            //    .Where(item => item.Attribute != null)
+            //    .ToDictionary(item => item.Type, item => item.Attribute);
 
-            foreach (var objectMappingDefinition in objectMappingDefinitions)
-            {
-                CommonOptions.ObjectMappings.Add(objectMappingDefinition.Key, objectMappingDefinition.Value);
-            }
+            //foreach (var objectMappingDefinition in objectMappingDefinitions)
+            //{
+            //    CommonOptions.ObjectMappings.Add(objectMappingDefinition.Key, objectMappingDefinition.Value);
+            //}
 
-            var webApiTypes = allTypes.Where(type =>
-                    !type.IsClass && type.GetMethods().Any(method => method.GetCustomAttribute<HttpMethodAttribute>(true) != null))
-                .ToList();
+            //var webApiTypes = allTypes.Where(type =>
+            //        !type.IsClass && type.GetMethods().Any(method => method.GetCustomAttribute<HttpMethodAttribute>(true) != null))
+            //    .ToList();
 
-            foreach (var webApiType in webApiTypes)
-                AddManagerFor(webApiType, apizrManagerType.MakeGenericType(webApiType), optionsBuilder);
+            //foreach (var webApiType in webApiTypes)
+            //    AddManagerFor(webApiType, apizrManagerType.MakeGenericType(webApiType), optionsBuilder);
 
             return this;
         }

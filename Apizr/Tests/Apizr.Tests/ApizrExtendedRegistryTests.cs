@@ -14,8 +14,10 @@ using Apizr.Configuring.Manager;
 using Apizr.Extending;
 using Apizr.Extending.Configuring.Registry;
 using Apizr.Logging;
+using Apizr.Mediation.Cruding.Sending;
 using Apizr.Mediation.Extending;
 using Apizr.Mediation.Requesting.Sending;
+using Apizr.Optional.Cruding.Sending;
 using Apizr.Optional.Extending;
 using Apizr.Optional.Requesting.Sending;
 using Apizr.Progressing;
@@ -152,8 +154,8 @@ namespace Apizr.Tests
         public void ServiceCollection_Should_Contain_Registry_And_Scanned_Managers()
         {
             var services = new ServiceCollection();
-            services.AddApizr(registry => registry.AddManagerFor(null, _assembly)
-                .AddCrudManagerFor(_assembly));
+            services.AddApizr(registry => registry.AddManagerFor([_assembly], null)
+                .AddCrudManagerFor([_assembly]));
 
             services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IReqResUserService>))
                 .And.Contain(x => x.ServiceType == typeof(IApizrManager<IHttpBinService>))
@@ -219,7 +221,7 @@ namespace Apizr.Tests
         {
             var services = new ServiceCollection();
             services.AddApizr(registry => registry
-                .AddCrudManagerFor(_assembly));
+                .AddCrudManagerFor([_assembly]));
 
             var serviceProvider = services.BuildServiceProvider();
             var registry = serviceProvider.GetService<IApizrExtendedRegistry>();
@@ -1197,6 +1199,7 @@ namespace Apizr.Tests
             valueKey5.Should().Be("testValue5");
         }
 
+
         [Fact]
         public async Task Calling_WithMediation_Should_Handle_Requests()
         {
@@ -1206,12 +1209,10 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace))
                 .ConfigureServices((_, services) =>
                 {
-                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
 
                     services.AddApizr(
                         registry => registry
-                            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                            .AddCrudManagerFor<UserInfos, int, PagedResult<UserInfos>, IDictionary<string, object>>()
                             .AddManagerFor<IReqResUserService>()
                             .AddManagerFor<IReqResResourceService>(),
                         config => config
@@ -1232,6 +1233,282 @@ namespace Apizr.Tests
             result.Should().NotBeNull();
             result.Data.Should().NotBeNull();
             result.Data.Count.Should().BeGreaterOrEqualTo(1);
+
+            var response = await reqResMediator.SendFor(api => api.SafeGetUsersAsync());
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.Exception.Should().BeNull();
+            response.Result.Should().NotBeNull();
+            response.Result.Data.Should().NotBeNull();
+            response.Result.Data.Count.Should().BeGreaterOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithMediation_With_Crud_Should_Handle_Requests()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                            .AddCrudManagerFor<UserInfos, int, PagedResult<UserInfos>, IDictionary<string, object>>(),
+                        config => config
+                        .WithLogging()
+                        .WithRefitSettings(_refitSettings)
+                        .WithMediation());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+
+            userMediator.Should().NotBeNull();
+
+            var user = new User { FirstName = "Test" };
+
+            var result = await userMediator.SendCreateCommand(user);
+            result.Should().NotBeNull();
+            result.FirstName.Should().Be(user.FirstName);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithMediation_With_Scanning_Should_Handle_Requests()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddManagerFor([_assembly]),
+                        config => config
+                        .WithLogging()
+                        .WithMediation());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator<IReqResUserService>>();
+
+            reqResMediator.Should().NotBeNull();
+            var result = await reqResMediator.SendFor(api => api.GetUsersAsync());
+            result.Should().NotBeNull();
+            result.Data.Should().NotBeNull();
+            result.Data.Count.Should().BeGreaterOrEqualTo(1);
+
+            var response = await reqResMediator.SendFor(api => api.SafeGetUsersAsync());
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.Exception.Should().BeNull();
+            response.Result.Should().NotBeNull();
+            response.Result.Data.Should().NotBeNull();
+            response.Result.Data.Count.Should().BeGreaterOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_WithMediation_With_Crud_Scanning_Should_Handle_Requests()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddCrudManagerFor([_assembly]),
+                        config => config
+                            .WithLogging()
+                            .WithRefitSettings(_refitSettings)
+                            .WithMediation());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+
+            userMediator.Should().NotBeNull();
+
+            var user = new User { FirstName = "Test" };
+
+            var result = await userMediator.SendCreateCommand(user);
+            result.Should().NotBeNull();
+            result.FirstName.Should().Be(user.FirstName);
+            result.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithMediation_And_WithAutoMapperMappingHandler_Should_Handle_Requests()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+                    services.AddAutoMapper(_assembly);
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddManagerFor<IReqResUserService>()
+                            .AddManagerFor<IReqResResourceService>(),
+                        config => config
+                            .WithLogging()
+                            .WithRefitSettings(_refitSettings)
+                            .WithMediation()
+                            .WithAutoMapperMappingHandler());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator<IReqResUserService>>();
+
+            reqResMediator.Should().NotBeNull();
+
+            // Unmapped
+            var user1 = new User { FirstName = "John" };
+
+            var result1 = await reqResMediator.SendFor(api => api.CreateUser(user1, CancellationToken.None));
+            result1.Should().NotBeNull();
+            result1.FirstName.Should().Be(user1.FirstName);
+            result1.Id.Should().BeGreaterThanOrEqualTo(1);
+
+            // Mapped
+            var user2 = new MinUser { Name = "John" };
+
+            var result2 = await reqResMediator.SendFor<MinUser, User>((api, user) => api.CreateUser(user, CancellationToken.None), user2);
+            result2.Should().NotBeNull();
+            result2.Name.Should().Be(user2.Name);
+            result2.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithMediation_And_WithAutoMapperMappingHandler_With_Crud_Should_Handle_Requests()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+                    services.AddAutoMapper(_assembly);
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                            .AddCrudManagerFor<UserInfos, int, PagedResult<UserInfos>, IDictionary<string, object>>(),
+                        config => config
+                            .WithLogging()
+                            .WithRefitSettings(_refitSettings)
+                            .WithMediation()
+                            .WithAutoMapperMappingHandler());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+
+            userMediator.Should().NotBeNull();
+
+            // Unmapped
+            var user1 = new User { FirstName = "John" };
+
+            var result1 = await userMediator.SendCreateCommand(user1);
+            result1.Should().NotBeNull();
+            result1.FirstName.Should().Be(user1.FirstName);
+            result1.Id.Should().BeGreaterThanOrEqualTo(1);
+
+            // Mapped
+            var user2 = new MinUser { Name = "John" };
+
+            var result2 = await userMediator.SendCreateCommand(user2);
+            result2.Should().NotBeNull();
+            result2.Name.Should().Be(user2.Name);
+            result2.Id.Should().BeGreaterThanOrEqualTo(1);
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithMediation_And_WithAutoMapperMappingHandler_With_Scanning_Should_Handle_Requests()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+                    services.AddAutoMapper(_assembly);
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddManagerFor([_assembly]),
+                        config => config
+                        .WithLogging()
+                        .WithRefitSettings(_refitSettings)
+                        .WithMediation()
+                        .WithAutoMapperMappingHandler());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator<IReqResUserService>>();
+
+            reqResMediator.Should().NotBeNull();
+
+            // Unmapped
+            var user1 = new User { FirstName = "John" };
+
+            var result1 = await reqResMediator.SendFor(api => api.CreateUser(user1, CancellationToken.None));
+            result1.Should().NotBeNull();
+            result1.FirstName.Should().Be(user1.FirstName);
+            result1.Id.Should().BeGreaterThanOrEqualTo(1);
+
+            // Mapped
+            var user2 = new MinUser { Name = "John" };
+
+            var result2 = await reqResMediator.SendFor<MinUser, User>((api, user) => api.CreateUser(user, CancellationToken.None), user2);
+            result2.Should().NotBeNull();
+            result2.Name.Should().Be(user2.Name);
+            result2.Id.Should().BeGreaterThanOrEqualTo(1);
         }
 
         [Fact]
@@ -1243,17 +1520,15 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace))
                 .ConfigureServices((_, services) =>
                 {
-                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
 
                     services.AddApizr(
                         registry => registry
-                            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
-                            .AddCrudManagerFor<UserInfos, int, PagedResult<UserInfos>, IDictionary<string, object>>()
                             .AddManagerFor<IReqResUserService>()
                             .AddManagerFor<IReqResResourceService>(),
                         config => config
-                            .WithLogging()
-                            .WithOptionalMediation());
+                        .WithLogging()
+                        .WithOptionalMediation());
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1268,16 +1543,349 @@ namespace Apizr.Tests
             var result = await reqResMediator.SendFor(api => api.GetUsersAsync());
             result.Should().NotBeNull();
             result.Match(userList =>
+            {
+                userList.Should().NotBeNull();
+                userList.Data.Should().NotBeNull();
+                userList.Data.Count.Should().BeGreaterOrEqualTo(1);
+            },
+                e =>
                 {
-                    userList.Should().NotBeNull();
-                    userList.Data.Should().NotBeNull();
-                    userList.Data.Count.Should().BeGreaterOrEqualTo(1);
-                },
-                e => { 
                     // ignore error
                 });
         }
-        
+
+        [Fact]
+        public async Task Calling_WithOptionalMediation_With_Crud_Should_Handle_Requests_With_Optional_Result()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                            .AddCrudManagerFor<UserInfos, int, PagedResult<UserInfos>, IDictionary<string, object>>(),
+                        config => config
+                            .WithLogging()
+                            .WithRefitSettings(_refitSettings)
+                            .WithOptionalMediation());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+
+            userMediator.Should().NotBeNull();
+
+            var user = new User { FirstName = "Test" };
+
+            var result = await userMediator.SendCreateOptionalCommand(user);
+            result.Should().NotBeNull();
+            result.Match(userResult =>
+            {
+                userResult.Should().NotBeNull();
+                userResult.FirstName.Should().Be(user.FirstName);
+                userResult.Id.Should().BeGreaterThanOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+        }
+
+        [Fact]
+        public async Task Calling_WithOptionalMediation_With_Scanning_Should_Handle_Requests_With_Optional_Result()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddManagerFor([_assembly]),
+                        config => config
+                        .WithLogging()
+                        .WithOptionalMediation());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrOptionalMediator<IReqResUserService>>();
+
+            reqResMediator.Should().NotBeNull();
+            var result = await reqResMediator.SendFor(api => api.GetUsersAsync());
+            result.Should().NotBeNull();
+            result.Match(userList =>
+            {
+                userList.Should().NotBeNull();
+                userList.Data.Should().NotBeNull();
+                userList.Data.Count.Should().BeGreaterOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+        }
+
+        [Fact]
+        public async Task Calling_WithOptionalMediation_With_Crud_Scanning_Should_Handle_Requests_With_Optional_Result()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddCrudManagerFor([_assembly]),
+                        config => config
+                        .WithLogging()
+                        .WithRefitSettings(_refitSettings)
+                        .WithOptionalMediation());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+
+            userMediator.Should().NotBeNull();
+
+            var user = new User { FirstName = "Test" };
+
+            var result = await userMediator.SendCreateOptionalCommand(user);
+            result.Should().NotBeNull();
+            result.Match(userResult =>
+            {
+                userResult.Should().NotBeNull();
+                userResult.FirstName.Should().Be(user.FirstName);
+                userResult.Id.Should().BeGreaterThanOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithOptionalMediation_And_WithAutoMapperMappingHandler_Should_Handle_Requests_With_Optional_Result()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+                    services.AddAutoMapper(_assembly);
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddManagerFor<IReqResUserService>()
+                            .AddManagerFor<IReqResResourceService>(),
+                        config => config
+                            .WithLogging()
+                            .WithRefitSettings(_refitSettings)
+                            .WithOptionalMediation()
+                            .WithAutoMapperMappingHandler());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrOptionalMediator<IReqResUserService>>();
+
+            reqResMediator.Should().NotBeNull();
+
+            // Unmapped
+            var user1 = new User { FirstName = "John" };
+
+            var result1 = await reqResMediator.SendFor(api => api.CreateUser(user1, CancellationToken.None));
+            result1.Should().NotBeNull();
+            result1.Match(userResult =>
+            {
+                userResult.Should().NotBeNull();
+                userResult.FirstName.Should().Be(user1.FirstName);
+                userResult.Id.Should().BeGreaterThanOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+
+            // Mapped
+            var user2 = new MinUser { Name = "John" };
+
+            var result2 = await reqResMediator.SendFor<MinUser, User>((api, user) => api.CreateUser(user, CancellationToken.None), user2);
+            result2.Should().NotBeNull();
+            result2.Match(userResult =>
+            {
+                userResult.Should().NotBeNull();
+                userResult.Name.Should().Be(user2.Name);
+                userResult.Id.Should().BeGreaterThanOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithOptionalMediation_And_WithAutoMapperMappingHandler_With_Crud_Should_Handle_Requests_With_Optional_Result()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+                    services.AddAutoMapper(_assembly);
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                            .AddCrudManagerFor<UserInfos, int, PagedResult<UserInfos>, IDictionary<string, object>>(),
+                        config => config
+                            .WithLogging()
+                            .WithRefitSettings(_refitSettings)
+                            .WithOptionalMediation()
+                            .WithAutoMapperMappingHandler());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var userMediator = scope.ServiceProvider.GetRequiredService<IApizrCrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>>>();
+
+            userMediator.Should().NotBeNull();
+
+            // Unmapped
+            var user1 = new User { FirstName = "John" };
+
+            var result1 = await userMediator.SendCreateOptionalCommand(user1);
+            result1.Should().NotBeNull();
+            result1.Match(userResult =>
+            {
+                userResult.Should().NotBeNull();
+                userResult.FirstName.Should().Be(user1.FirstName);
+                userResult.Id.Should().BeGreaterThanOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+
+            // Mapped
+            var user2 = new MinUser { Name = "John" };
+
+            var result2 = await userMediator.SendCreateOptionalCommand(user2);
+            result2.Should().NotBeNull();
+            result2.Match(userResult =>
+            {
+                userResult.Should().NotBeNull();
+                userResult.Name.Should().Be(user2.Name);
+                userResult.Id.Should().BeGreaterThanOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+        }
+
+        [Fact]
+        public async Task Calling_Both_WithOptionalMediation_And_WithAutoMapperMappingHandler_With_Scanning_Should_Handle_Requests_With_Optional_Result()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(_assembly));
+                    services.AddAutoMapper(_assembly);
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddManagerFor([_assembly]),
+                        config => config
+                        .WithLogging()
+                        .WithRefitSettings(_refitSettings)
+                        .WithOptionalMediation()
+                        .WithAutoMapperMappingHandler());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResMediator = scope.ServiceProvider.GetRequiredService<IApizrOptionalMediator<IReqResUserService>>();
+
+            reqResMediator.Should().NotBeNull();
+
+            // Unmapped
+            var user1 = new User { FirstName = "John" };
+
+            var result1 = await reqResMediator.SendFor(api => api.CreateUser(user1, CancellationToken.None));
+            result1.Should().NotBeNull();
+            result1.Match(userResult =>
+            {
+                userResult.Should().NotBeNull();
+                userResult.FirstName.Should().Be(user1.FirstName);
+                userResult.Id.Should().BeGreaterThanOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+
+            // Mapped
+            var user2 = new MinUser { Name = "John" };
+
+            var result2 = await reqResMediator.SendFor<MinUser, User>((api, user) => api.CreateUser(user, CancellationToken.None), user2);
+            result2.Should().NotBeNull();
+            result2.Match(userResult =>
+            {
+                userResult.Should().NotBeNull();
+                userResult.Name.Should().Be(user2.Name);
+                userResult.Id.Should().BeGreaterThanOrEqualTo(1);
+            },
+                e =>
+                {
+                    // ignore error
+                });
+        }
+
         [Fact]
         public void ServiceCollection_Should_Contain_Grouped_Registry_And_Managers()
         {

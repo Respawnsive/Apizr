@@ -65,7 +65,7 @@ namespace Apizr
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
 
                         // Short
-                        if (typeof(IUploadApi) == managerOptions || typeof(ITransferApi) == managerOptions)
+                        if (typeof(IUploadApi) == managerOptions.WebApiType || typeof(ITransferApi) == managerOptions.WebApiType)
                         {
                             var shortRequestType = typeof(UploadCommand);
                             var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(HttpResponseMessage));
@@ -100,7 +100,7 @@ namespace Apizr
                         services.TryAddSingleton(requestHandlerServiceType, requestHandlerImplementationType);
 
                         // Short
-                        if (typeof(IDownloadApi) == managerOptions || typeof(ITransferApi) == managerOptions)
+                        if (typeof(IDownloadApi) == managerOptions.WebApiType || typeof(ITransferApi) == managerOptions.WebApiType)
                         {
                             var shortRequestType = typeof(DownloadQuery);
                             var shortRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(shortRequestType, typeof(FileInfo));

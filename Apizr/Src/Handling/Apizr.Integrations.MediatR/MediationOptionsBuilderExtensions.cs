@@ -56,6 +56,10 @@ namespace Apizr
         {
             commonOptions.PostRegistrationActions.Add((managerOptions, services) =>
             {
+                var mappedTypes = commonOptions.ObjectMappings.SelectMany(item => item.Value).ToList();
+                var isMappingHandlerRegistered = commonOptions.MappingHandlerType != typeof(VoidMappingHandler) &&
+                                       commonOptions.MappingHandlerFactory?.Method.ReturnType != typeof(VoidMappingHandler);
+
                 #region Crud
 
                 // Crud interfaces auto registration
@@ -63,25 +67,21 @@ namespace Apizr
                 {
                     // Register crud mediator
                     services.TryAddSingleton<IApizrCrudMediator, ApizrCrudMediator>();
-
+                    
                     var crudApiEntityType = managerOptions.CrudApiEntityType;
-                    var objectMapping = commonOptions.ObjectMappings.SelectMany(item => item.Value)
-                        .FirstOrDefault(mapping =>
-                            mapping.SourceEntityType == crudApiEntityType ||
-                            mapping.TargetEntityType == crudApiEntityType);
-                    var crudModelEntityType = objectMapping?.SourceEntityType == crudApiEntityType ? objectMapping!.TargetEntityType :
-                        objectMapping?.TargetEntityType == crudApiEntityType ? objectMapping!.SourceEntityType :
+                    var objectMapping = mappedTypes.FirstOrDefault(mapping =>
+                            mapping.FirstEntityType == crudApiEntityType ||
+                            mapping.SecondEntityType == crudApiEntityType);
+                    var crudModelEntityType = objectMapping?.FirstEntityType == crudApiEntityType ? objectMapping!.SecondEntityType :
+                        objectMapping?.SecondEntityType == crudApiEntityType ? objectMapping!.FirstEntityType :
                         crudApiEntityType;
                     var crudApiEntityKeyType = managerOptions.CrudApiEntityKeyType;
                     var crudApiEntityReadAllResultType = managerOptions.CrudApiReadAllResultType.MakeGenericTypeIfNeeded(crudApiEntityType);
                     var crudModelEntityReadAllResultType = managerOptions.CrudApiReadAllResultType.IsGenericTypeDefinition
                         ? managerOptions.CrudApiReadAllResultType.MakeGenericTypeIfNeeded(crudModelEntityType)
-                        : managerOptions.CrudApiReadAllResultType.GetGenericTypeDefinition()
-                            .MakeGenericTypeIfNeeded(crudModelEntityType);
+                        : managerOptions.CrudApiReadAllResultType.GetGenericTypeDefinition().MakeGenericTypeIfNeeded(crudModelEntityType);
                     var crudApiEntityReadAllParamsType = managerOptions.CrudApiReadAllParamsType;
-                    var isMapped = crudApiEntityType != crudModelEntityType &&
-                                   commonOptions.MappingHandlerType != typeof(VoidMappingHandler) &&
-                                   commonOptions.MappingHandlerFactory?.Method.ReturnType != typeof(VoidMappingHandler);
+                    var handleMapping = isMappingHandlerRegistered && crudApiEntityType != crudModelEntityType;
 
                     #region ShortRead
 
@@ -124,7 +124,7 @@ namespace Apizr
 
                         #region Mapped
 
-                        if (isMapped)
+                        if (handleMapping)
                         {
                             // ServiceType
                             var shortReadMappedQueryType = typeof(ReadQuery<>).MakeGenericType(crudModelEntityType);
@@ -202,7 +202,7 @@ namespace Apizr
 
                     #region Mapped
 
-                    if (isMapped)
+                    if (handleMapping)
                     {
                         // ServiceType
                         var readMappedQueryType = typeof(ReadQuery<,>).MakeGenericType(crudModelEntityType, crudApiEntityKeyType);
@@ -282,7 +282,7 @@ namespace Apizr
 
                         #region Mapped
 
-                        if (isMapped)
+                        if (handleMapping)
                         {
                             // ServiceType
                             var shortReadAllMappedQueryType = typeof(ReadAllQuery<>).MakeGenericType(crudModelEntityReadAllResultType);
@@ -360,7 +360,7 @@ namespace Apizr
 
                     #region Mapped
 
-                    if (isMapped)
+                    if (handleMapping)
                     {
                         // ServiceType
                         var readAllMappedQueryType = typeof(ReadAllQuery<,>).MakeGenericType(crudApiEntityReadAllParamsType, crudModelEntityReadAllResultType);
@@ -439,7 +439,7 @@ namespace Apizr
 
                     #region Mapped
 
-                    if (isMapped)
+                    if (handleMapping)
                     {
                         // ServiceType
                         var createMappedCommandType = typeof(CreateCommand<>).MakeGenericType(crudModelEntityType);
@@ -520,7 +520,7 @@ namespace Apizr
 
                         #region Mapped
 
-                        if (isMapped)
+                        if (handleMapping)
                         {
                             // ServiceType
                             var shortUpdateMappedCommandType = typeof(UpdateCommand<>).MakeGenericType(crudModelEntityType);
@@ -679,7 +679,7 @@ namespace Apizr
 
                         #region Mapped
 
-                        if (isMapped)
+                        if (handleMapping)
                         {
                             // ServiceType
                             var shortDeleteMappedCommandType = typeof(DeleteCommand<>).MakeGenericType(crudModelEntityType);
@@ -759,7 +759,7 @@ namespace Apizr
 
                     #region Mapped
 
-                    if (isMapped)
+                    if (handleMapping)
                     {
                         // ServiceType
                         var deleteMappedCommandType = typeof(DeleteCommand<,>).MakeGenericType(crudModelEntityType, crudApiEntityKeyType);
@@ -849,20 +849,17 @@ namespace Apizr
                         (returnType.GetGenericTypeDefinition() == typeof(Task<>)
                          || returnType.GetGenericTypeDefinition() == typeof(IObservable<>)))
                     {
+                        var apiResponseType = returnType.GetGenericArguments()[0];
+
                         #region Unmapped
 
                         // ExecuteResultRequest<TWebApi, TApiData>
-                        var apiResponseType = returnType.GetGenericArguments()[0];
                         if (apiResponseType.IsGenericType &&
                             (apiResponseType.GetGenericTypeDefinition() == typeof(ApiResponse<>)
                              || apiResponseType.GetGenericTypeDefinition() == typeof(IApiResponse<>)))
                         {
                             apiResponseType = apiResponseType.GetGenericArguments()[0];
                         }
-                        //else if (apiResponseType == typeof(IApiResponse))
-                        //{
-                        //    apiResponseType = typeof(HttpContent);
-                        //}
 
                         // ServiceType
                         var executeRequestType = typeof(ExecuteResultRequest<,>).MakeGenericType(managerOptions.WebApiType, apiResponseType);
@@ -890,71 +887,75 @@ namespace Apizr
 
                         #region Mapped
 
-                        // Mapped object
-                        var mappedTypes = commonOptions.ObjectMappings.SelectMany(item => item.Value).ToList();
-                        var modelResponseType =
-                            methodInfo.GetCustomAttribute<MappedWithAttribute>()?.TargetEntityType ??
-                            mappedTypes
-                                .FirstOrDefault(attribute => attribute.SourceEntityType == apiResponseType)?.TargetEntityType ??
-                            mappedTypes
-                                .FirstOrDefault(attribute => attribute.TargetEntityType == apiResponseType)?.SourceEntityType;
-                        if (modelResponseType != null)
+                        if (isMappingHandlerRegistered)
                         {
-                            // Mapped object
-                            var mappedParameterInfo = methodInfo.GetParameters().FirstOrDefault(p =>
-                                p.ParameterType is {IsClass: true, IsAbstract: false} &&
-                                p.ParameterType.GetCustomAttribute<MappedWithAttribute>() != null);
-                            if (mappedParameterInfo == null) // ExecuteResultRequest<TWebApi, TModelData, TApiData>
+                            // Mapped response
+                            var modelResponseType = methodInfo.GetCustomAttribute<MappedWithAttribute>()?.SecondEntityType ??
+                                mappedTypes.FirstOrDefault(attribute => attribute.FirstEntityType == apiResponseType)?.SecondEntityType ??
+                                mappedTypes.FirstOrDefault(attribute => attribute.SecondEntityType == apiResponseType)?.FirstEntityType;
+                            if (modelResponseType != null)
                             {
+                                // ExecuteResultRequest<TWebApi, TModelData, TApiData>
                                 // ServiceType
-                                var executeMappedRequestType = typeof(ExecuteResultRequest<,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType);
-                                var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, modelResponseType);
+                                var executeMappedResultRequestType = typeof(ExecuteResultRequest<,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType);
+                                var executeMappedResultRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedResultRequestType, modelResponseType);
 
                                 // ImplementationType
-                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteResultRequestHandler<,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType);
+                                var executeMappedResultRequestHandlerImplementationType = typeof(ExecuteResultRequestHandler<,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType);
 
                                 // Registration
-                                services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+                                services.TryAddTransient(executeMappedResultRequestHandlerServiceType, executeMappedResultRequestHandlerImplementationType);
 
                                 // -- Safe --
                                 // ServiceType
-                                var safeExecuteMappedRequestType = typeof(ExecuteSafeResultRequest<,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType);
-                                var safeExecuteMappedResponseType = typeof(IApizrResponse<>).MakeGenericType(modelResponseType);
-                                var safeExecuteMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedRequestType, safeExecuteMappedResponseType);
+                                var safeExecuteMappedResultRequestType = typeof(ExecuteSafeResultRequest<,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType);
+                                var safeExecuteMappedResultResponseType = typeof(IApizrResponse<>).MakeGenericType(modelResponseType);
+                                var safeExecuteMappedResultRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedResultRequestType, safeExecuteMappedResultResponseType);
 
                                 // ImplementationType
-                                var safeExecuteMappedRequestHandlerImplementationType = typeof(ExecuteSafeResultRequestHandler<,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType);
+                                var safeExecuteMappedResultRequestHandlerImplementationType = typeof(ExecuteSafeResultRequestHandler<,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType);
 
                                 // Registration
-                                services.TryAddTransient(safeExecuteMappedRequestHandlerServiceType, safeExecuteMappedRequestHandlerImplementationType);
-                            }
-                            else // ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
-                            {
+                                services.TryAddTransient(safeExecuteMappedResultRequestHandlerServiceType, safeExecuteMappedResultRequestHandlerImplementationType);
+
                                 // Mapped request
-                                var modelRequestType = mappedParameterInfo.ParameterType.GetCustomAttribute<MappedWithAttribute>().TargetEntityType;
-                                var apiRequestType = mappedParameterInfo.ParameterType;
+                                var requestMappedWithAttribute = methodInfo.GetParameters()
+                                    .Where(parameterInfo => parameterInfo.ParameterType is
+                                        { IsClass: true, IsAbstract: false })
+                                    .Select(parameterInfo => new MappedWithAttribute(parameterInfo.ParameterType,
+                                        parameterInfo.GetCustomAttribute<MappedWithAttribute>()?.SecondEntityType ??
+                                        mappedTypes.FirstOrDefault(attribute => attribute.FirstEntityType == parameterInfo.ParameterType)?.SecondEntityType ??
+                                        mappedTypes.FirstOrDefault(attribute => attribute.SecondEntityType == parameterInfo.ParameterType)?.FirstEntityType))
+                                    .FirstOrDefault(item => item.SecondEntityType != null);
 
-                                // ServiceType
-                                var executeMappedRequestType = typeof(ExecuteResultRequest<,,,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
-                                var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, modelResponseType);
+                                if (requestMappedWithAttribute != null) // ExecuteResultRequest<TWebApi, TModelResultData, TApiResultData, TApiRequestData, TModelRequestData>
+                                {
+                                    // Mapped request
+                                    var apiRequestType = requestMappedWithAttribute.FirstEntityType;
+                                    var modelRequestType = requestMappedWithAttribute.SecondEntityType;
 
-                                // ImplementationType
-                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteResultRequestHandler<,,,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+                                    // ServiceType
+                                    var executeMappedRequestType = typeof(ExecuteResultRequest<,,,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+                                    var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, modelResponseType);
 
-                                // Registration
-                                services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+                                    // ImplementationType
+                                    var executeMappedRequestHandlerImplementationType = typeof(ExecuteResultRequestHandler<,,,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
 
-                                // -- Safe --
-                                // ServiceType
-                                var safeExecuteMappedRequestType = typeof(ExecuteSafeResultRequest<,,,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
-                                var safeExecuteMappedResponseType = typeof(IApizrResponse<>).MakeGenericType(modelResponseType);
-                                var safeExecuteMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedRequestType, safeExecuteMappedResponseType);
+                                    // Registration
+                                    services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
 
-                                // ImplementationType
-                                var safeExecuteMappedRequestHandlerImplementationType = typeof(ExecuteSafeResultRequestHandler<,,,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+                                    // -- Safe --
+                                    // ServiceType
+                                    var safeExecuteMappedRequestType = typeof(ExecuteSafeResultRequest<,,,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+                                    var safeExecuteMappedResponseType = typeof(IApizrResponse<>).MakeGenericType(modelResponseType);
+                                    var safeExecuteMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedRequestType, safeExecuteMappedResponseType);
 
-                                // Registration
-                                services.TryAddTransient(safeExecuteMappedRequestHandlerServiceType, safeExecuteMappedRequestHandlerImplementationType);
+                                    // ImplementationType
+                                    var safeExecuteMappedRequestHandlerImplementationType = typeof(ExecuteSafeResultRequestHandler<,,,,>).MakeGenericType(managerOptions.WebApiType, modelResponseType, apiResponseType, apiRequestType, modelRequestType);
+
+                                    // Registration
+                                    services.TryAddTransient(safeExecuteMappedRequestHandlerServiceType, safeExecuteMappedRequestHandlerImplementationType);
+                                }
                             }
                         }
 
@@ -986,25 +987,34 @@ namespace Apizr
 
                         #region Mapped
 
-                        // Mapped object
-                        var mappedParameterInfo = methodInfo.GetParameters().FirstOrDefault(p =>
-                            p.ParameterType is { IsClass: true, IsAbstract: false } &&
-                            p.ParameterType.GetCustomAttribute<MappedWithAttribute>() != null);
-                        if (mappedParameterInfo != null)
+                        if (isMappingHandlerRegistered)
                         {
-                            var modelEntityType = mappedParameterInfo.ParameterType.GetCustomAttribute<MappedWithAttribute>().TargetEntityType;
-                            var apiEntityType = mappedParameterInfo.ParameterType;
+                            // Mapped request
+                            var requestMappedWithAttribute = methodInfo.GetParameters()
+                                .Where(parameterInfo => parameterInfo.ParameterType is
+                                    { IsClass: true, IsAbstract: false })
+                                .Select(parameterInfo => new MappedWithAttribute(parameterInfo.ParameterType,
+                                    parameterInfo.GetCustomAttribute<MappedWithAttribute>()?.SecondEntityType ??
+                                    mappedTypes.FirstOrDefault(attribute => attribute.FirstEntityType == parameterInfo.ParameterType)?.SecondEntityType ??
+                                    mappedTypes.FirstOrDefault(attribute => attribute.SecondEntityType == parameterInfo.ParameterType)?.FirstEntityType))
+                                .FirstOrDefault(item => item.SecondEntityType != null);
 
-                            // ServiceType
-                            var safeExecuteMappedRequestType = typeof(ExecuteSafeUnitRequest<,,>).MakeGenericType(managerOptions.WebApiType, modelEntityType, apiEntityType);
-                            var safeExecuteMappedRequestResponseType = typeof(IApizrResponse);
-                            var safeExecuteMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedRequestType, safeExecuteMappedRequestResponseType);
+                            if (requestMappedWithAttribute != null)
+                            {
+                                var apiRequestType = requestMappedWithAttribute.FirstEntityType;
+                                var modelRequestType = requestMappedWithAttribute.SecondEntityType;
 
-                            // ImplementationType
-                            var safeExecuteMappedRequestHandlerImplementationType = typeof(ExecuteSafeUnitRequestHandler<,,>).MakeGenericType(managerOptions.WebApiType, modelEntityType, apiEntityType);
+                                // ServiceType
+                                var safeExecuteMappedRequestType = typeof(ExecuteSafeUnitRequest<,,>).MakeGenericType(managerOptions.WebApiType, modelRequestType, apiRequestType);
+                                var safeExecuteMappedRequestResponseType = typeof(IApizrResponse);
+                                var safeExecuteMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(safeExecuteMappedRequestType, safeExecuteMappedRequestResponseType);
 
-                            // Registration
-                            services.TryAddTransient(safeExecuteMappedRequestHandlerServiceType, safeExecuteMappedRequestHandlerImplementationType);
+                                // ImplementationType
+                                var safeExecuteMappedRequestHandlerImplementationType = typeof(ExecuteSafeUnitRequestHandler<,,>).MakeGenericType(managerOptions.WebApiType, modelRequestType, apiRequestType);
+
+                                // Registration
+                                services.TryAddTransient(safeExecuteMappedRequestHandlerServiceType, safeExecuteMappedRequestHandlerImplementationType);
+                            }
                         }
 
                         #endregion
@@ -1029,24 +1039,33 @@ namespace Apizr
 
                         #region Mapped
 
-                        // Mapped object
-                        var mappedParameterInfo = methodInfo.GetParameters().FirstOrDefault(p =>
-                            p.ParameterType is {IsClass: true, IsAbstract: false} &&
-                            p.ParameterType.GetCustomAttribute<MappedWithAttribute>() != null);
-                        if (mappedParameterInfo != null)
+                        if (isMappingHandlerRegistered)
                         {
-                            var modelEntityType = mappedParameterInfo.ParameterType.GetCustomAttribute<MappedWithAttribute>().TargetEntityType;
-                            var apiEntityType = mappedParameterInfo.ParameterType;
+                            // Mapped request
+                            var requestMappedWithAttribute = methodInfo.GetParameters()
+                                .Where(parameterInfo => parameterInfo.ParameterType is
+                                    { IsClass: true, IsAbstract: false })
+                                .Select(parameterInfo => new MappedWithAttribute(parameterInfo.ParameterType,
+                                    parameterInfo.GetCustomAttribute<MappedWithAttribute>()?.SecondEntityType ??
+                                    mappedTypes.FirstOrDefault(attribute => attribute.FirstEntityType == parameterInfo.ParameterType)?.SecondEntityType ??
+                                    mappedTypes.FirstOrDefault(attribute => attribute.SecondEntityType == parameterInfo.ParameterType)?.FirstEntityType))
+                                .FirstOrDefault(item => item.SecondEntityType != null);
 
-                            // ServiceType
-                            var executeMappedRequestType = typeof(ExecuteUnitRequest<,,>).MakeGenericType(managerOptions.WebApiType, modelEntityType, apiEntityType);
-                            var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, modelEntityType);
+                            if (requestMappedWithAttribute != null)
+                            {
+                                var apiRequestType = requestMappedWithAttribute.FirstEntityType;
+                                var modelRequestType = requestMappedWithAttribute.SecondEntityType;
 
-                            // ImplementationType
-                            var executeMappedRequestHandlerImplementationType = typeof(ExecuteUnitRequestHandler<,,>).MakeGenericType(managerOptions.WebApiType, modelEntityType, apiEntityType);
+                                // ServiceType
+                                var executeMappedRequestType = typeof(ExecuteUnitRequest<,,>).MakeGenericType(managerOptions.WebApiType, modelRequestType, apiRequestType);
+                                var executeMappedRequestHandlerServiceType = typeof(IRequestHandler<,>).MakeGenericType(executeMappedRequestType, typeof(Unit));
 
-                            // Registration
-                            services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+                                // ImplementationType
+                                var executeMappedRequestHandlerImplementationType = typeof(ExecuteUnitRequestHandler<,,>).MakeGenericType(managerOptions.WebApiType, modelRequestType, apiRequestType);
+
+                                // Registration
+                                services.TryAddTransient(executeMappedRequestHandlerServiceType, executeMappedRequestHandlerImplementationType);
+                            }
                         }
 
                         #endregion

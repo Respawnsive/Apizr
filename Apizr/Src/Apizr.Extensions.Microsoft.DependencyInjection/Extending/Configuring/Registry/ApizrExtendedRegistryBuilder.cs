@@ -80,202 +80,87 @@ namespace Apizr.Extending.Configuring.Registry
                 optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType,
             Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) =>
-            AddCrudManagerFor(crudedType, typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>),
+            AddCrudManagerFor(apiEntityType, typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>),
                 typeof(ApizrManager<>), optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Type crudedKeyType,
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType, Type apiEntityKeyType,
             Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) =>
-            AddCrudManagerFor(crudedType, crudedKeyType, typeof(IEnumerable<>), typeof(IDictionary<string, object>),
+            AddCrudManagerFor(apiEntityType, apiEntityKeyType, typeof(IEnumerable<>), typeof(IDictionary<string, object>),
                 typeof(ApizrManager<>), optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Type crudedKeyType,
-            Type crudedReadAllResultType,
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType, Type apiEntityKeyType,
+            Type apiEntityReadAllResultType,
             Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) =>
-            AddCrudManagerFor(crudedType, crudedType, crudedReadAllResultType, typeof(IDictionary<string, object>),
+            AddCrudManagerFor(apiEntityType, apiEntityType, apiEntityReadAllResultType, typeof(IDictionary<string, object>),
                 typeof(ApizrManager<>), optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Type crudedKeyType,
-            Type crudedReadAllResultType,
-            Type crudedReadAllParamsType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) =>
-            AddCrudManagerFor(crudedType, crudedType, crudedReadAllResultType, crudedReadAllParamsType, typeof(ApizrManager<>),
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType, Type apiEntityKeyType,
+            Type apiEntityReadAllResultType,
+            Type apiEntityReadAllParamsType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) =>
+            AddCrudManagerFor(apiEntityType, apiEntityType, apiEntityReadAllResultType, apiEntityReadAllParamsType, typeof(ApizrManager<>),
                 optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType, Type crudedKeyType, Type crudedReadAllResultType,
-            Type crudedReadAllParamsType, Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType, Type apiEntityKeyType, Type apiEntityReadAllResultType,
+            Type apiEntityReadAllParamsType, Type apizrManagerImplementationType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
         {
-            var crudedTypeInfos = crudedType.GetTypeInfo();
-            if (!crudedTypeInfos.IsClass)
-                throw new ArgumentException($"{crudedType.Name} is not a class", nameof(crudedType));
-            if (crudedTypeInfos.IsAbstract)
-                throw new ArgumentException($"{crudedType.Name} is an abstract class", nameof(crudedType));
+            var readAllResultFullType = apiEntityReadAllResultType.MakeGenericTypeIfNeeded(apiEntityType);
+            var crudApiType = typeof(ICrudApi<,,,>).MakeGenericType(apiEntityType, apiEntityKeyType, readAllResultFullType, apiEntityReadAllParamsType);
 
-            var baseAddressAttribute = ApizrBuilder.GetBaseAddressAttribute(crudedType);
-            if (baseAddressAttribute != null)
-            {
-                if (optionsBuilder == null)
-                    optionsBuilder = builder => builder.WithBaseAddress(baseAddressAttribute.BaseAddressOrPath);
-                else
-                    optionsBuilder += builder => builder.WithBaseAddress(baseAddressAttribute.BaseAddressOrPath, ApizrDuplicateStrategy.Ignore);
-            }
-
-            Type modelEntityType;
-            if (typeof(MappedEntity<,>).IsAssignableFromGenericType(crudedType))
-            {
-                var entityTypes = crudedType.GetGenericArguments();
-
-                modelEntityType = entityTypes[0];
-                crudedType = entityTypes[1];
-            }
-            else
-            {
-                modelEntityType = crudedType;
-            }
-
-            if (!crudedKeyType.GetTypeInfo().IsPrimitive)
-                throw new ArgumentException($"{crudedKeyType.Name} is not primitive", nameof(crudedKeyType));
-
-            if ((!typeof(IEnumerable<>).IsAssignableFromGenericType(crudedReadAllResultType) &&
-                 !crudedReadAllResultType.IsClass) || !crudedReadAllResultType.IsGenericType)
-                throw new ArgumentException(
-                    $"{crudedReadAllResultType.Name} must inherit from {typeof(IEnumerable<>)} or be a generic class",
-                    nameof(crudedReadAllResultType));
-
-            if (!typeof(IDictionary<string, object>).IsAssignableFrom(crudedReadAllParamsType) &&
-                !crudedReadAllParamsType!.IsClass)
-                throw new ArgumentException(
-                    $"{crudedReadAllParamsType.Name} must inherit from {typeof(IDictionary<string, object>)} or be a class",
-                    nameof(crudedReadAllParamsType));
-
-            if (!typeof(IApizrManager<>).IsAssignableFromGenericType(apizrManagerType))
-                throw new ArgumentException(
-                    $"{apizrManagerType} must inherit from {typeof(IApizrManager<>)}", nameof(apizrManagerType));
-
-            var crudAttribute = new CrudEntityAttribute(baseAddressAttribute?.BaseAddressOrPath, crudedKeyType, crudedReadAllResultType, crudedReadAllParamsType, modelEntityType);
-            
-            CommonOptions.CrudEntities.Add(crudedType, crudAttribute);
-
-            var readAllResultType = crudedReadAllResultType.MakeGenericTypeIfNeeded(crudedType);
-            var crudApiType = typeof(ICrudApi<,,,>).MakeGenericType(crudedType, crudedKeyType, readAllResultType, crudedReadAllParamsType);
-
-            return AddManagerFor(crudApiType, apizrManagerType.MakeGenericTypeIfNeeded(crudApiType), optionsBuilder);
+            return AddManagerFor(crudApiType, apizrManagerImplementationType, optionsBuilder);
         }
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(params Type[] assemblyMarkerTypes) =>
-            AddCrudManagerFor(typeof(ApizrManager<>), null,
-                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type[] assemblyMarkerTypes,
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder) =>
+            AddCrudManagerFor(typeof(ApizrManager<>),
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray(), optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(params Assembly[] assemblies) =>
-            AddCrudManagerFor(typeof(ApizrManager<>), null,
-                assemblies);
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Assembly[] assemblies,
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder) =>
+            AddCrudManagerFor(typeof(ApizrManager<>),
+                assemblies, optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder, params Type[] assemblyMarkerTypes) =>
-            AddCrudManagerFor(typeof(ApizrManager<>), optionsBuilder,
-                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerImplementationType,
+            Type[] assemblyMarkerTypes, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder) =>
+            AddCrudManagerFor(apizrManagerImplementationType,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray(), optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder, params Assembly[] assemblies) =>
-            AddCrudManagerFor(typeof(ApizrManager<>), optionsBuilder,
-                assemblies);
-
-        /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType,
-            params Type[] assemblyMarkerTypes) =>
-            AddCrudManagerFor(apizrManagerType, null,
-                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
-
-        /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType,
-            params Assembly[] assemblies) =>
-            AddCrudManagerFor(apizrManagerType, null,
-                assemblies);
-
-        /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder,
-            params Type[] assemblyMarkerTypes) =>
-            AddCrudManagerFor(apizrManagerType, optionsBuilder,
-                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
-
-        /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType,
-            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder,
-            params Assembly[] assemblies)
+        public IApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerImplementationType,
+            Assembly[] assemblies,
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder)
         {
-            if (assemblies?.Length is null or 0)
+            if (assemblies?.Length is not > 0)
                 throw new ArgumentException(
-                    $"No assemblies found to scan. Supply at least one assembly to scan for {nameof(CrudEntityAttribute)}.", nameof(assemblies));
+                    $"No assemblies found to scan.", nameof(assemblies));
 
-            var crudTypes = assemblies
+            var apiOrEntityTypes = assemblies
                 .Distinct()
-                .SelectMany(assembly => assembly
-                    .GetTypes()
-                    .Where(t => t.IsClass && !t.IsAbstract))
+                .SelectMany(assembly => assembly.GetTypes()) // All assembly types
                 .Select(type => new
                 {
                     Type = type,
-                    Attributes = type.GetCustomAttributes<CrudEntityAttribute>(true)
+                    Attribute = type.GetCustomAttributes<AutoRegisterAttribute>(true).FirstOrDefault()
                 })
-                .Where(item => item.Attributes != null)
-                .ToDictionary(item => item.Type, item => item.Attributes);
+                .Where(item => item.Attribute != null) // Those actually decorated
+                .Select(item => item.Attribute.WebApiType ?? item.Type) // Get the parameter type first, otherwise the decorated one
+                .Where(type => type.IsInterface || (type.IsClass && !type.IsAbstract)) // Keep only api interfaces and entity classes
+                .ToList();
 
-            var modelEntityTypes = crudTypes
-                .Select(item => new
-                {
-                    Type = item.Key,
-                    Attribute = item.Value.FirstOrDefault(attribute => attribute is MappedCrudEntityAttribute) as MappedCrudEntityAttribute
-                })
-                .Where(item => item.Attribute != null)
-                .ToDictionary(item => item.Attribute.MappedEntityType, item => item.Attribute.ToCrudEntityAttribute(item.Type));
-
-            var apiEntityTypes = crudTypes
-                .Select(item => new
-                {
-                    Type = item.Key,
-                    Attribute = item.Value.FirstOrDefault(attribute => attribute is not MappedCrudEntityAttribute)
-                })
-                .Where(item => item.Attribute != null && !modelEntityTypes.ContainsKey(item.Type))
-                .ToDictionary(item => item.Type, item => item.Attribute);
-
-            var crudEntityDefinitions = modelEntityTypes
-                .Concat(apiEntityTypes)
-                .ToLookup(x => x.Key, x => x.Value)
-                .ToDictionary(x => x.Key, x => x.FirstOrDefault(y => y.MappedEntityType != null) ?? x.First());
-
-            var cruds = new Dictionary<Type, CrudEntityAttribute>();
-
-            foreach (var crudEntityDefinition in crudEntityDefinitions)
+            foreach (var apiOrEntityType in apiOrEntityTypes)
             {
-                if (crudEntityDefinition.Value.MappedEntityType == null)
-                    crudEntityDefinition.Value.MappedEntityType = crudEntityDefinition.Key;
-
-                var baseAddressAttribute = ApizrBuilder.GetBaseAddressAttribute(crudEntityDefinition.Key);
-                if (baseAddressAttribute != null)
-                    crudEntityDefinition.Value.BaseAddressOrPath = baseAddressAttribute.BaseAddressOrPath;
-
-                cruds.Add(crudEntityDefinition.Key, crudEntityDefinition.Value);
-
-                CommonOptions.CrudEntities.Add(crudEntityDefinition.Key, crudEntityDefinition.Value);
-            }
-
-            foreach (var crud in cruds)
-            {
-                if (optionsBuilder == null)
-                    optionsBuilder = builder => builder.WithBaseAddress(crud.Value.BaseAddressOrPath);
+                if (apiOrEntityType.IsInterface)
+                    AddManagerFor(apiOrEntityType, apizrManagerImplementationType, optionsBuilder);
                 else
-                    optionsBuilder += builder => builder.WithBaseAddress(crud.Value.BaseAddressOrPath, ApizrDuplicateStrategy.Ignore);
-
-                var readAllResultType = crud.Value.ReadAllResultType.MakeGenericTypeIfNeeded(crud.Key);
-                var crudApiType = typeof(ICrudApi<,,,>).MakeGenericType(crud.Key, crud.Value.KeyType, readAllResultType, crud.Value.ReadAllParamsType);
-
-                AddManagerFor(crudApiType, apizrManagerType.MakeGenericType(crudApiType), optionsBuilder);
+                    AddCrudManagerFor(apiOrEntityType, typeof(int), typeof(IEnumerable<>), typeof(IDictionary<string, object>), apizrManagerImplementationType, optionsBuilder);
             }
 
             return this;
@@ -301,69 +186,58 @@ namespace Apizr.Extending.Configuring.Registry
             AddManagerFor(webApiType, typeof(ApizrManager<>).MakeGenericType(webApiType), optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null,
-            params Type[] assemblyMarkerTypes) =>
-            AddManagerFor(typeof(ApizrManager<>), optionsBuilder,
-                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+        public IApizrExtendedRegistryBuilder AddManagerFor(Type[] assemblyMarkerTypes,
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) =>
+            AddManagerFor(typeof(ApizrManager<>),
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray(), optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddManagerFor(Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null,
-            params Assembly[] assemblies) =>
-            AddManagerFor(typeof(ApizrManager<>), optionsBuilder,
-                assemblies);
+        public IApizrExtendedRegistryBuilder AddManagerFor(Assembly[] assemblies,
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) =>
+            AddManagerFor(typeof(ApizrManager<>),
+                assemblies, optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType,
-            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null,
-            params Type[] assemblyMarkerTypes) =>
-            AddManagerFor(apizrManagerType, optionsBuilder,
-                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray());
+        public IApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerImplementationType,
+            Type[] assemblyMarkerTypes,
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) =>
+            AddManagerFor(apizrManagerImplementationType,
+                assemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray(), optionsBuilder);
 
         /// <inheritdoc />
-        public IApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies)
+        public IApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerImplementationType, Assembly[] assemblies,
+            Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null)
         {
-            if (assemblies?.Length is null or 0)
+            if (assemblies?.Length is not > 0)
                 throw new ArgumentException(
-                    $"No assemblies found to scan. Supply at least one assembly to scan for {nameof(BaseAddressAttribute)}.", nameof(assemblies));
+                    $"No assemblies found to scan.", nameof(assemblies));
 
-            //var allTypes = assemblies
-            //    .Distinct()
-            //    .SelectMany(assembly => assembly
-            //        .GetTypes())
-            //    .ToList();
+            var webApiTypes = assemblies
+                .Distinct()
+                .SelectMany(assembly => assembly.GetTypes()) // All assembly types
+                .Select(type => new
+                {
+                    Type = type,
+                    Attribute = type.GetCustomAttributes<AutoRegisterAttribute>(true).FirstOrDefault()
+                })
+                .Where(item => item.Attribute != null) // Those actually decorated
+                .Select(item => item.Attribute.WebApiType ?? item.Type) // Get the parameter type first, otherwise the decorated one
+                .Where(type => type.IsInterface) // Keep only interfaces
+                .ToList();
 
-            //var objectMappingDefinitions = allTypes
-            //    .Where(type => type.IsClass)
-            //    .Select(type => new
-            //    {
-            //        Type = type,
-            //        Attribute = type.GetCustomAttribute<MappedWithAttribute>()
-            //    })
-            //    .Where(item => item.Attribute != null)
-            //    .ToDictionary(item => item.Type, item => item.Attribute);
-
-            //foreach (var objectMappingDefinition in objectMappingDefinitions)
-            //{
-            //    CommonOptions.ObjectMappings.Add(objectMappingDefinition.Key, objectMappingDefinition.Value);
-            //}
-
-            //var webApiTypes = allTypes.Where(type =>
-            //        !type.IsClass && type.GetMethods().Any(method => method.GetCustomAttribute<HttpMethodAttribute>(true) != null))
-            //    .ToList();
-
-            //foreach (var webApiType in webApiTypes)
-            //    AddManagerFor(webApiType, apizrManagerType.MakeGenericType(webApiType), optionsBuilder);
+            foreach (var webApiType in webApiTypes)
+                AddManagerFor(webApiType, apizrManagerImplementationType, optionsBuilder);
 
             return this;
         }
 
         /// <inheritdoc />
         public IApizrExtendedRegistryBuilder AddManagerFor(
-            Type webApiType, Type apizrManagerType,
+            Type webApiType, Type apizrManagerImplementationType,
             Action<IApizrExtendedProperOptionsBuilder> properOptionsBuilder = null)
         {
-            var properOptions = ServiceCollectionExtensions.CreateProperOptions(CommonOptions, webApiType, apizrManagerType, properOptionsBuilder);
-            var apizrManagerServiceType = Services.AddApizrManagerFor(CommonOptions, properOptions);
+            var properOptions = ServiceCollectionExtensions.CreateProperOptions(CommonOptions, webApiType, apizrManagerImplementationType, properOptionsBuilder);
+            var apizrManagerServiceType = Services.AddApizrManagerFor(CommonOptions, properOptions, ServiceCollectionExtensions.CreateManagerOptions(CommonOptions, properOptions));
 
             Registry.AddOrUpdateManager(apizrManagerServiceType);
 

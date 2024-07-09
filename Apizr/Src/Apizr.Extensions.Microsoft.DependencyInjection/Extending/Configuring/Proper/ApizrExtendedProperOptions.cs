@@ -76,7 +76,7 @@ namespace Apizr.Extending.Configuring.Proper
             CrudApiEntityKeyType = crudApiEntityKeyType;
             CrudApiReadAllResultType = crudApiReadAllResultType;
             CrudApiReadAllParamsType = crudApiReadAllParamsType;
-            ApizrManagerType = apizrManagerType;
+            ApizrManagerImplementationType = apizrManagerType;
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
             BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? _ => baseAddress : sharedOptions.BaseAddressFactory;
             BasePathFactory = !string.IsNullOrWhiteSpace(basePath) ? _ => basePath : sharedOptions.BasePathFactory;
@@ -105,7 +105,7 @@ namespace Apizr.Extending.Configuring.Proper
         public Type CrudApiReadAllParamsType { get; }
 
         /// <inheritdoc />
-        public Type ApizrManagerType { get; }
+        public Type ApizrManagerImplementationType { get; }
 
 
         private Func<IServiceProvider, Uri> _baseUriFactory;

@@ -11,7 +11,7 @@ using Refit;
 
 namespace Apizr.Tests.Apis
 {
-    [BaseAddress("https://httpbin.org"), 
+    [AutoRegister("https://httpbin.org"), 
      Log(HttpMessageParts.None), 
      Headers("testKey1: testValue1"), 
      ResiliencePipeline("TransientHttpError")]

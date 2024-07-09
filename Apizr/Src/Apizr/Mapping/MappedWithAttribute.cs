@@ -5,39 +5,39 @@ namespace Apizr.Mapping
     /// <summary>
     /// Tells Apizr to map api request object with model object
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Parameter)]
     public class MappedWithAttribute : Attribute
     {
-        internal MappedWithAttribute(Type sourceEntityType, Type targetEntityType)
+        internal MappedWithAttribute(Type firstEntityType, Type secondEntityType)
         {
-            SourceEntityType = sourceEntityType;
-            TargetEntityType = targetEntityType;
+            FirstEntityType = firstEntityType;
+            SecondEntityType = secondEntityType;
         }
 
         /// <summary>
         /// Tells Apizr to map api response to a model response
         /// </summary>
-        /// <param name="targetEntityType"></param>
-        public MappedWithAttribute(Type targetEntityType)
+        /// <param name="secondEntityType"></param>
+        public MappedWithAttribute(Type secondEntityType)
         {
-            TargetEntityType = targetEntityType;
+            SecondEntityType = secondEntityType;
         }
         
-        internal Type SourceEntityType { get; }
+        internal Type FirstEntityType { get; }
 
         /// <summary>
         /// The model object to map with
         /// </summary>
-        public Type TargetEntityType { get; }
+        public Type SecondEntityType { get; }
     }
 
     /// <summary>
     /// Tells Apizr to map api request object with model object
     /// </summary>
-    public class MappedWithAttribute<TTargetEntityType> : MappedWithAttribute
+    public class MappedWithAttribute<TSecondEntityType> : MappedWithAttribute
     {
         /// <inheritdoc />
-        public MappedWithAttribute() : base(typeof(TTargetEntityType))
+        public MappedWithAttribute() : base(typeof(TSecondEntityType))
         {
         }
     }

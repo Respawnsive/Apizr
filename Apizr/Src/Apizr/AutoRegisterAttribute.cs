@@ -14,13 +14,22 @@ namespace Apizr
     public class AutoRegisterAttribute : BaseAddressAttribute
     {
         /// <summary>
+        /// Auto register a manager for the decorated api or crud entity
+        /// </summary>
+        /// <param name="baseAddressOrPath">The web api base absolute address or relative path</param>
+        public AutoRegisterAttribute(string baseAddressOrPath) : base(baseAddressOrPath)
+        {
+            
+        }
+
+        /// <summary>
         /// Auto register a manager for the provided api
         /// </summary>
         /// <param name="webApiType">The web api interface type to manage</param>
         /// <param name="baseAddressOrPath">The web api base absolute address or relative path</param>
         public AutoRegisterAttribute(Type webApiType, string baseAddressOrPath) : base(baseAddressOrPath)
         {
-            if (webApiType == null || !webApiType.GetTypeInfo().IsInterface)
+            if (webApiType?.GetTypeInfo().IsInterface == false)
                 throw new ArgumentException("WebApi type must be an interface", nameof(webApiType));
 
             WebApiType = webApiType;

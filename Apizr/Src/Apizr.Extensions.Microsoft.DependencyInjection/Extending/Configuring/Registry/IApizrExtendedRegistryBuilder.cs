@@ -44,145 +44,113 @@ namespace Apizr.Extending.Configuring.Registry
             where TApizrManager : IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>;
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="apiEntityType"/> object type (class), 
         /// with key of type <see cref="int"/> and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
-        /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
+        /// <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
-        /// with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="apiEntityType"/> object type (class), 
+        /// with key of type <paramref name="apiEntityKeyType"/> (primitive) and "ReadAll" query result of type <see cref="IEnumerable{T}"/>
         /// </summary>
-        /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
-        /// <param name="crudedKeyType">The object key type (primitive)</param>
+        /// <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+        /// <param name="apiEntityKeyType">The object key type (primitive)</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
-            Type crudedKeyType, Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType,
+            Type apiEntityKeyType, Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
-        /// with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="apiEntityType"/> object type (class), 
+        /// with key of type <paramref name="apiEntityKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters of type IDictionary{string,object}
         /// </summary>
-        /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
-        /// <param name="crudedKeyType">The object key type (primitive)</param>
-        /// <param name="crudedReadAllResultType">"ReadAll" query result type
+        /// <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+        /// <param name="apiEntityKeyType">The object key type (primitive)</param>
+        /// <param name="apiEntityReadAllResultType">"ReadAll" query result type
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
-            Type crudedKeyType, Type crudedReadAllResultType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType,
+            Type apiEntityKeyType, Type apiEntityReadAllResultType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
-        /// with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+        /// Register <see cref="IApizrManager{ICrudApi}"/> for <paramref name="apiEntityType"/> object type (class), 
+        /// with key of type <paramref name="apiEntityKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
-        /// <param name="crudedType">The object type to manage with crud api calls (class)</param>
-        /// <param name="crudedKeyType">The object key type (primitive)</param>
-        /// <param name="crudedReadAllResultType">"ReadAll" query result type
+        /// <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+        /// <param name="apiEntityKeyType">The object key type (primitive)</param>
+        /// <param name="apiEntityReadAllResultType">"ReadAll" query result type
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</param>
-        /// <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
+        /// <param name="apiEntityReadAllParamsType">ReadAll query parameters type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
-            Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType,
+            Type apiEntityKeyType, Type apiEntityReadAllResultType, Type apiEntityReadAllParamsType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <paramref name="crudedType"/> object type (class), 
-        /// with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for <paramref name="apiEntityType"/> object type (class), 
+        /// with key of type <paramref name="apiEntityKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
         /// (inheriting from <see cref="IEnumerable{T}"/> or be of class type)
         /// and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
         /// </summary>
-        /// <param name="crudedType">The object type to manage with crud api calls</param>
-        /// <param name="crudedKeyType">The object key type</param>
-        /// <param name="crudedReadAllResultType">"ReadAll" query result type
+        /// <param name="apiEntityType">The object type to manage with crud api calls</param>
+        /// <param name="apiEntityKeyType">The object key type</param>
+        /// <param name="apiEntityReadAllResultType">"ReadAll" query result type
         /// (should inherit from <see cref="IEnumerable{T}"/> or be of class type)</param>
-        /// <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
+        /// <param name="apiEntityReadAllParamsType">ReadAll query parameters type</param>
+        /// <param name="apizrManagerImplementationType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type crudedType,
-            Type crudedKeyType, Type crudedReadAllResultType, Type crudedReadAllParamsType, Type apizrManagerType,
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apiEntityType,
+            Type apiEntityKeyType, Type apiEntityReadAllResultType, Type apiEntityReadAllParamsType, Type apizrManagerImplementationType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
         /// </summary>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(params Type[] assemblyMarkerTypes);
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type[] assemblyMarkerTypes, Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
         /// </summary>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
+        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(params Assembly[] assemblies);
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Assembly[] assemblies, Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
         /// </summary>
-        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
+        /// <param name="apizrManagerImplementationType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
-        /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder,
-            params Type[] assemblyMarkerTypes);
-
-        /// <summary>
-        /// Register <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
-        /// </summary>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
+        /// <returns></returns>
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerImplementationType, Type[] assemblyMarkerTypes,
+            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
+
+        /// <summary>
+        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
+        /// </summary>
+        /// <param name="apizrManagerImplementationType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
-        /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder,
-            params Assembly[] assemblies);
-
-        /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
-        /// </summary>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
-        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
-        /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, params Type[] assemblyMarkerTypes);
-
-        /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
-        /// </summary>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
-        /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
-        /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType, params Assembly[] assemblies);
-
-        /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
-        /// </summary>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
-        /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="CrudEntityAttribute"/></param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType,
-            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder, params Type[] assemblyMarkerTypes);
-
-        /// <summary>
-        /// Register a custom <see cref="IApizrManager{ICrudApi}"/> for each <see cref="CrudEntityAttribute"/> decorated classes
-        /// </summary>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{ICrudApi}"/> implementation type</param>
-        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
-        /// <param name="assemblies">Any assembly to scan for <see cref="CrudEntityAttribute"/></param>
-        /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerType,
-            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder, params Assembly[] assemblies);
+        TApizrExtendedRegistryBuilder AddCrudManagerFor(Type apizrManagerImplementationType, Assembly[] assemblies,
+            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         #endregion
 
@@ -210,50 +178,48 @@ namespace Apizr.Extending.Configuring.Registry
         /// <summary>
         /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="BaseAddressAttribute"/> decorated interfaces
         /// </summary>
-        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="BaseAddressAttribute"/></param>
+        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
-            params Type[] assemblyMarkerTypes);
+        TApizrExtendedRegistryBuilder AddManagerFor(Type[] assemblyMarkerTypes, Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Register a <see cref="IApizrManager{webApiType}"/> for each <see cref="BaseAddressAttribute"/> decorated interfaces
         /// </summary>
-        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="BaseAddressAttribute"/></param>
+        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddManagerFor(Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null,
-            params Assembly[] assemblies);
+        TApizrExtendedRegistryBuilder AddManagerFor(Assembly[] assemblies, Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="BaseAddressAttribute"/> decorated interfaces
         /// </summary>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
-        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
+        /// <param name="apizrManagerImplementationType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
         /// <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="BaseAddressAttribute"/></param>
+        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType,
-            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Type[] assemblyMarkerTypes);
+        TApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerImplementationType, Type[] assemblyMarkerTypes,
+            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{webApiType}"/> for each <see cref="BaseAddressAttribute"/> decorated interfaces
         /// </summary>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
-        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
+        /// <param name="apizrManagerImplementationType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
         /// <param name="assemblies">Any assembly to scan for <see cref="BaseAddressAttribute"/></param>
+        /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
-        TApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerType,
-            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null, params Assembly[] assemblies);
+        TApizrExtendedRegistryBuilder AddManagerFor(Type apizrManagerImplementationType, Assembly[] assemblies,
+            Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         /// <summary>
         /// Register a custom <see cref="IApizrManager{webApiType}"/>
         /// </summary>
         /// <param name="webApiType">The web api interface type to manage</param>
-        /// <param name="apizrManagerType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
+        /// <param name="apizrManagerImplementationType">A custom <see cref="IApizrManager{webApiType}"/> implementation type</param>
         /// <param name="optionsBuilder">The builder defining specific Apizr options</param>
         /// <returns></returns>
         TApizrExtendedRegistryBuilder AddManagerFor(
-            Type webApiType, Type apizrManagerType,
+            Type webApiType, Type apizrManagerImplementationType,
             Action<TApizrExtendedProperOptionsBuilder> optionsBuilder = null);
 
         #endregion

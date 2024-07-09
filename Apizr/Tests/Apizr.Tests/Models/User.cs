@@ -1,21 +1,22 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
+using Apizr.Requesting;
 using Apizr.Requesting.Attributes;
 using Fusillade;
 
 namespace Apizr.Tests.Models
 {
-    [ CrudEntity<int, PagedResult<User>>,
-        BaseAddress("https://reqres.in/api/users"),
-        CacheReadAll(CacheMode.GetAndFetch),
-        CacheRead(CacheMode.GetOrFetch),
-        ReadAllHeaders("testKey1: testValue1", "testKey2: *testValue2*", "testKey3: {0}", "testKey4: *{0}*"),
-        Log(HttpMessageParts.All),
-        ReadAllPriority(Priority.Background)]
+    [AutoRegister<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>("https://reqres.in/api/users"),
+    CacheReadAll(CacheMode.GetAndFetch),
+    CacheRead(CacheMode.GetOrFetch),
+    ReadAllHeaders("testKey1: testValue1", "testKey2: *testValue2*", "testKey3: {0}", "testKey4: *{0}*"),
+    Log(HttpMessageParts.All),
+    ReadAllPriority(Priority.Background)]
     public class User
     {
         [JsonPropertyName("id")] public int Id { get; set; }

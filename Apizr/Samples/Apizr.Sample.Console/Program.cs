@@ -276,9 +276,8 @@ namespace Apizr.Sample.Console
                                         {
                                             AutomaticDecompression = DecompressionMethods.All,
                                             CookieContainer = CookieContainer
-                                        }))
-                                    .AddCrudManagerFor(optionsBuilder => optionsBuilder
-                                        .WithLogging(), typeof(User)),
+                                        })).AddCrudManagerFor((Type[]) typeof(User), optionsBuilder => optionsBuilder
+                                        .WithLogging()),
 
                                 config => config
                                     .WithPriority()

@@ -35,7 +35,7 @@ namespace Apizr.Extending.Configuring.Manager
             CrudApiEntityKeyType = properOptions.CrudApiEntityKeyType;
             CrudApiReadAllResultType = properOptions.CrudApiReadAllResultType;
             CrudApiReadAllParamsType = properOptions.CrudApiReadAllParamsType;
-            ApizrManagerType = properOptions.ApizrManagerType;
+            ApizrManagerImplementationType = properOptions.ApizrManagerImplementationType;
             BaseUriFactory = properOptions.BaseUriFactory;
             BaseAddressFactory = properOptions.BaseAddressFactory;
             BasePathFactory = properOptions.BasePathFactory;
@@ -76,7 +76,7 @@ namespace Apizr.Extending.Configuring.Manager
         public Type CrudApiReadAllParamsType { get; }
 
         /// <inheritdoc />
-        public Type ApizrManagerType { get; }
+        public Type ApizrManagerImplementationType { get; }
 
         /// <inheritdoc />
         public Type ConnectivityHandlerType { get; set; }

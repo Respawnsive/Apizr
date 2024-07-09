@@ -26,9 +26,9 @@ namespace Apizr.Extending.Configuring.Proper
         Type CrudApiReadAllParamsType { get; }
 
         /// <summary>
-        /// Type of the manager
+        /// Type of the implemented manager
         /// </summary>
-        Type ApizrManagerType { get; }
+        Type ApizrManagerImplementationType { get; }
 
         /// <summary>
         /// The Logger factory

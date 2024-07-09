@@ -2,7 +2,7 @@
 
 namespace Apizr.Tests.Models
 {
-    [MappedWith(typeof(User))]
+    [MappedWith<User>]
     public class MinUser
     {
         public int Id { get; set; }

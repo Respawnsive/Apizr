@@ -276,7 +276,8 @@ namespace Apizr.Sample.Console
                                         {
                                             AutomaticDecompression = DecompressionMethods.All,
                                             CookieContainer = CookieContainer
-                                        })).AddCrudManagerFor((Type[]) typeof(User), optionsBuilder => optionsBuilder
+                                        }))
+                                    .AddCrudManagerFor([typeof(User)], optionsBuilder => optionsBuilder
                                         .WithLogging()),
 
                                 config => config
@@ -326,41 +327,39 @@ namespace Apizr.Sample.Console
                             if (configChoice == 3)
                             {
                                 // Classic auto assembly detection and registration and handling with mediation
-                                services.AddApizrManagerFor(
+                                services.AddApizrManagerFor([typeof(User)],
                                     optionsBuilder => optionsBuilder
                                         .WithCacheHandler<AkavacheCacheHandler>()
                                         .WithMediation()
-                                        .WithLogging(),
-                                    typeof(User));
+                                        .WithLogging());
 
                                 // Crud manual registration and handling with mediation
                                 //services.AddApizrCrudFor<User, int, PagedResult<User>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithCacheHandler<AkavacheCacheHandler>().WithCrudMediation().WithHttpTracing(HttpTracer.HttpMessageParts.All));
 
                                 // Crud auto assembly detection, registration and handling with mediation
-                                services.AddApizrCrudManagerFor(
+                                services.AddApizrCrudManagerFor([typeof(User)],
                                     optionsBuilder => optionsBuilder
                                         .WithCacheHandler<AkavacheCacheHandler>()
                                         .WithMediation()
-                                        .WithLogging(),
-                                    typeof(User));
+                                        .WithLogging());
                             }
                             else
                             {
                                 if (configChoice == 4)
                                 {
                                     // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                                    services.AddApizrManagerFor(
+                                    services.AddApizrManagerFor([typeof(User)], 
                                         optionsBuilder =>
                                             optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation()
                                                 .WithOptionalMediation()
-                                                .WithLogging(), typeof(User));
+                                                .WithLogging());
 
                                     // Auto assembly detection, registration and handling with both mediation and optional mediation
-                                    services.AddApizrCrudManagerFor(
+                                    services.AddApizrCrudManagerFor([typeof(User)], 
                                         optionsBuilder =>
                                             optionsBuilder.WithCacheHandler<AkavacheCacheHandler>().WithMediation()
                                                 .WithOptionalMediation()
-                                                .WithLogging(), typeof(User));
+                                                .WithLogging());
                                 }
                                 else
                                 {
@@ -369,22 +368,20 @@ namespace Apizr.Sample.Console
                                     services.AddApizrCrudManagerFor<MappedEntity<UserInfos, UserDetails>>(optionsBuilder => optionsBuilder.WithBaseAddress("https://reqres.in/api/users").WithAkavacheCacheHandler().WithMediation().WithOptionalMediation().WithAutoMapperMappingHandler());
 
                                     // Classic auto assembly detection and registration and handling with both mediation and optional mediation
-                                    services.AddApizrManagerFor(
+                                    services.AddApizrManagerFor([typeof(User), typeof(Program)],
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
                                             .WithMediation()
                                             .WithOptionalMediation()
                                             .WithMappingHandler<AutoMapperMappingHandler>()
-                                            .WithLogging(), typeof(User),
-                                        typeof(Program));
+                                            .WithLogging());
 
                                     // Auto assembly detection, registration and handling with mediation, optional mediation and mapping
-                                    services.AddApizrCrudManagerFor(
+                                    services.AddApizrCrudManagerFor([typeof(User), typeof(Program)],
                                         optionsBuilder => optionsBuilder.WithCacheHandler<AkavacheCacheHandler>()
                                             .WithMediation()
                                             .WithOptionalMediation()
                                             .WithAutoMapperMappingHandler()
-                                            .WithLogging(), typeof(User),
-                                        typeof(Program));
+                                            .WithLogging());
 
                                 }
                             }

@@ -13,6 +13,9 @@ using Refit;
 
 namespace Apizr.Optional.Extending
 {
+    /// <summary>
+    /// Extensions for file transfer requests with optional result
+    /// </summary>
     public static class ApizrOptionalMediatorFileTransferExtensions
     {
         #region Download

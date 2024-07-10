@@ -67,9 +67,6 @@
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HttpMessageHandlerFactory">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.CrudEntities">
-            <inheritdoc />
-        </member>
         <member name="P:Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.WebApis">
             <inheritdoc />
         </member>
@@ -313,11 +310,6 @@
             Mapping handler factory
             </summary>
         </member>
-        <member name="P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CrudEntities">
-            <summary>
-            Entities auto registered with <see cref="T:Apizr.IApizrManager`1"/>
-            </summary>
-        </member>
         <member name="P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.WebApis">
             <summary>
             Web apis auto registered with <see cref="T:Apizr.IApizrManager`1"/>
@@ -440,7 +432,16 @@
             <param name="commonOptions">The common options</param>
             <param name="properOptions">The proper options</param>
         </member>
-        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType">
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ConnectivityHandlerType">
@@ -501,9 +502,6 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.RequestTimeoutFactory">
-            <inheritdoc />
-        </member>
-        <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.WebApis">
@@ -765,13 +763,16 @@
         <member name="T:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions">
             <inheritdoc cref="T:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions"/>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.Reflection.TypeInfo,System.Type,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean},Microsoft.Extensions.Logging.LogLevel[])">
+        <member name="M:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.#ctor(Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions,System.Type,System.Type,System.Type,System.Type,System.Type,System.Reflection.TypeInfo,System.Type,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean},Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
             The proper options constructor
             </summary>
             <param name="sharedOptions">The shared options</param>
             <param name="webApiType">The web api type</param>
-            <param name="crudModelType">The crud model type if any</param>
+            <param name="crudApiEntityType">The crud api entity type if any</param>
+            <param name="crudApiEntityKeyType">The crud api entity key type if any</param>
+            <param name="crudApiReadAllResultType">The crud api read all result type if any</param>
+            <param name="crudApiReadAllParamsType">The crud api read all params type if any</param>
             <param name="typeInfo">The type info</param>
             <param name="apizrManagerType">The manager type</param>
             <param name="baseAddress">The web api base address</param>
@@ -788,7 +789,16 @@
             <param name="shouldRedactHeaderValue">Headers to redact value</param>
             <param name="logLevels">The log levels</param>
         </member>
-        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerType">
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.CrudApiEntityKeyType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.CrudApiReadAllResultType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.CrudApiReadAllParamsType">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.ApizrManagerImplementationType">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Extending.Configuring.Proper.ApizrExtendedProperOptions.BaseUriFactory">
@@ -981,9 +991,24 @@
             Options available at proper level for extended registrations
             </summary>
         </member>
-        <member name="P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType">
+        <member name="P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType">
             <summary>
-            Type of the manager
+            Type of the crud api entity key if any
+            </summary>
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType">
+            <summary>
+            Type of the crud api read all result if any
+            </summary>
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType">
+            <summary>
+            Type of the crud api read all parameters if any
+            </summary>
+        </member>
+        <member name="P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType">
+            <summary>
+            Type of the implemented manager
             </summary>
         </member>
         <member name="P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory">
@@ -1055,28 +1080,16 @@
         <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type,System.Type,System.Type,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type[],System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Reflection.Assembly[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Reflection.Assembly[],System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder},System.Type[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type,System.Type[],System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder},System.Reflection.Assembly[])">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type,System.Type[])">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type,System.Reflection.Assembly[])">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder},System.Type[])">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder},System.Reflection.Assembly[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddCrudManagerFor(System.Type,System.Reflection.Assembly[],System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor``1(System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
@@ -1088,16 +1101,16 @@
         <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Type,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder},System.Type[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Type[],System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder},System.Reflection.Assembly[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Reflection.Assembly[],System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Type,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder},System.Type[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Type,System.Type[],System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Type,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder},System.Reflection.Assembly[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Type,System.Reflection.Assembly[],System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.ApizrExtendedRegistryBuilder.AddManagerFor(System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder})">
@@ -1141,131 +1154,101 @@
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Action{`2})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
             with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
-            <param name="crudedType">The object type to manage with crud api calls (class)</param>
+            <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Type,System.Action{`2})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
-            with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
+            with key of type <paramref name="apiEntityKeyType"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
             </summary>
-            <param name="crudedType">The object type to manage with crud api calls (class)</param>
-            <param name="crudedKeyType">The object key type (primitive)</param>
+            <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+            <param name="apiEntityKeyType">The object key type (primitive)</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Type,System.Type,System.Action{`2})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
-            with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
+            with key of type <paramref name="apiEntityKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
-            <param name="crudedType">The object type to manage with crud api calls (class)</param>
-            <param name="crudedKeyType">The object key type (primitive)</param>
-            <param name="crudedReadAllResultType">"ReadAll" query result type
+            <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+            <param name="apiEntityKeyType">The object key type (primitive)</param>
+            <param name="apiEntityReadAllResultType">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Type,System.Type,System.Type,System.Action{`2})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
-            with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
+            with key of type <paramref name="apiEntityKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
             </summary>
-            <param name="crudedType">The object type to manage with crud api calls (class)</param>
-            <param name="crudedKeyType">The object key type (primitive)</param>
-            <param name="crudedReadAllResultType">"ReadAll" query result type
+            <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+            <param name="apiEntityKeyType">The object key type (primitive)</param>
+            <param name="apiEntityReadAllResultType">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
-            <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
+            <param name="apiEntityReadAllParamsType">ReadAll query parameters type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Type,System.Type,System.Type,System.Type,System.Action{`2})">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
-            with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
+            with key of type <paramref name="apiEntityKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
             </summary>
-            <param name="crudedType">The object type to manage with crud api calls</param>
-            <param name="crudedKeyType">The object key type</param>
-            <param name="crudedReadAllResultType">"ReadAll" query result type
+            <param name="apiEntityType">The object type to manage with crud api calls</param>
+            <param name="apiEntityKeyType">The object key type</param>
+            <param name="apiEntityReadAllResultType">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
-            <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apiEntityReadAllParamsType">ReadAll query parameters type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type[],System.Action{`2})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="!:CrudEntityAttribute"/> decorated classes
             </summary>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Reflection.Assembly[])">
-            <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
-            </summary>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Action{`2},System.Type[])">
-            <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
-            </summary>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="!:CrudEntityAttribute"/></param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Action{`2},System.Reflection.Assembly[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Reflection.Assembly[],System.Action{`2})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="!:CrudEntityAttribute"/> decorated classes
             </summary>
+            <param name="assemblies">Any assembly to scan for <see cref="!:CrudEntityAttribute"/></param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Type[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Type[],System.Action{`2})">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="!:CrudEntityAttribute"/> decorated classes
             </summary>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Reflection.Assembly[])">
-            <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
-            </summary>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Action{`2},System.Type[])">
-            <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
-            </summary>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="!:CrudEntityAttribute"/></param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Action{`2},System.Reflection.Assembly[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddCrudManagerFor(System.Type,System.Reflection.Assembly[],System.Action{`2})">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="!:CrudEntityAttribute"/> decorated classes
             </summary>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="assemblies">Any assembly to scan for <see cref="!:CrudEntityAttribute"/></param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor``2(System.Action{`2})">
@@ -1285,38 +1268,38 @@
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Action{`2},System.Type[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Type[],System.Action{`2})">
             <summary>
             Register a <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Configuring.BaseAddressAttribute"/> decorated interfaces
             </summary>
-            <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Configuring.BaseAddressAttribute"/></param>
+            <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Action{`2},System.Reflection.Assembly[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Reflection.Assembly[],System.Action{`2})">
             <summary>
             Register a <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Configuring.BaseAddressAttribute"/> decorated interfaces
             </summary>
-            <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Configuring.BaseAddressAttribute"/></param>
+            <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Type,System.Action{`2},System.Type[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Type,System.Type[],System.Action{`2})">
             <summary>
             Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Configuring.BaseAddressAttribute"/> decorated interfaces
             </summary>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="optionsBuilder">The builder defining specific Apizr options</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Configuring.BaseAddressAttribute"/></param>
+            <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Type,System.Action{`2},System.Reflection.Assembly[])">
+        <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Type,System.Reflection.Assembly[],System.Action{`2})">
             <summary>
             Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Configuring.BaseAddressAttribute"/> decorated interfaces
             </summary>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="optionsBuilder">The builder defining specific Apizr options</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Configuring.BaseAddressAttribute"/></param>
+            <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder`4.AddManagerFor(System.Type,System.Type,System.Action{`2})">
@@ -1324,7 +1307,7 @@
             Register a custom <see cref="T:Apizr.IApizrManager`1"/>
             </summary>
             <param name="webApiType">The web api interface type to manage</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
@@ -1601,11 +1584,11 @@
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
             Register <see cref="T:Apizr.IApizrManager`1"/> for <typeparamref name="T"/> object type (class), 
-            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            with key of type <typeparamref name="TKey"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
             <typeparam name="T">The object type to manage with crud api calls</typeparam>
-            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TKey">The object key type</typeparam>
             <param name="services">The service collection</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
@@ -1613,12 +1596,12 @@
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``3(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
             Register <see cref="T:Apizr.IApizrManager`1"/> for <typeparamref name="T"/> object type (class), 
-            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            with key of type <typeparamref name="TKey"/> and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
             <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
-            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TKey">The object key type</typeparam>
             <typeparam name="TReadAllResult">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
             <param name="services">The service collection</param>
@@ -1628,12 +1611,12 @@
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``4(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
             Register <see cref="T:Apizr.IApizrManager`1"/> for <typeparamref name="T"/> object type (class), 
-            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            with key of type <typeparamref name="TKey"/> and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
             </summary>
             <typeparam name="T">The object type to manage with crud api calls (class)</typeparam>
-            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TKey">The object key type</typeparam>
             <typeparam name="TReadAllResult">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
@@ -1644,12 +1627,12 @@
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor``5(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
             Register a custom <see cref="T:Apizr.IApizrManager`1"/> for <typeparamref name="T"/> object type, 
-            with key of type <typeparamref name="TKey"/> (primitive) and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
+            with key of type <typeparamref name="TKey"/> and "ReadAll" query result of type <typeparamref name="TReadAllResult"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
             </summary>
             <typeparam name="T">The object type to manage with crud api calls</typeparam>
-            <typeparam name="TKey">The object key type (primitive)</typeparam>
+            <typeparam name="TKey">The object key type</typeparam>
             <typeparam name="TReadAllResult">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</typeparam>
             <typeparam name="TReadAllParams">ReadAll query parameters</typeparam>
@@ -1660,144 +1643,110 @@
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
             with key of type <see cref="T:System.Int32"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
             <param name="services">The service collection</param>
-            <param name="crudedType">The object type to manage with crud api calls (class)</param>
+            <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
-            with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
+            with key of type <paramref name="apiEntityKeyType"/> and "ReadAll" query result of type <see cref="T:System.Collections.Generic.IEnumerable`1"/>
             </summary>
             <param name="services">The service collection</param>
-            <param name="crudedType">The object type to manage with crud api calls (class)</param>
-            <param name="crudedKeyType">The object key type (primitive)</param>
+            <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+            <param name="apiEntityKeyType">The object key type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
-            with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
+            with key of type <paramref name="apiEntityKeyType"/> and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters of type IDictionary{string,object}
             </summary>
             <param name="services">The service collection</param>
-            <param name="crudedType">The object type to manage with crud api calls (class)</param>
-            <param name="crudedKeyType">The object key type (primitive)</param>
-            <param name="crudedReadAllResultType">"ReadAll" query result type
+            <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+            <param name="apiEntityKeyType">The object key type</param>
+            <param name="apiEntityReadAllResultType">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
-            with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+            Register <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
+            with key of type <paramref name="apiEntityKeyType"/> and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
             </summary>
             <param name="services">The service collection</param>
-            <param name="crudedType">The object type to manage with crud api calls (class)</param>
-            <param name="crudedKeyType">The object key type (primitive)</param>
-            <param name="crudedReadAllResultType">"ReadAll" query result type
+            <param name="apiEntityType">The object type to manage with crud api calls (class)</param>
+            <param name="apiEntityKeyType">The object key type</param>
+            <param name="apiEntityReadAllResultType">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
-            <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
+            <param name="apiEntityReadAllParamsType">ReadAll query parameters type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type,System.Type,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="crudedType"/> object type (class), 
-            with key of type <paramref name="crudedKeyType"/> (primitive) and "ReadAll" query result of type <paramref name="crudedReadAllResultType"/>
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for <paramref name="apiEntityType"/> object type (class), 
+            with key of type <paramref name="apiEntityKeyType"/> and "ReadAll" query result of type <paramref name="apiEntityReadAllResultType"/>
             (inheriting from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)
             and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)
             </summary>
             <param name="services">The service collection</param>
-            <param name="crudedType">The object type to manage with crud api calls</param>
-            <param name="crudedKeyType">The object key type</param>
-            <param name="crudedReadAllResultType">"ReadAll" query result type
+            <param name="apiEntityType">The object type to manage with crud api calls</param>
+            <param name="apiEntityKeyType">The object key type</param>
+            <param name="apiEntityReadAllResultType">"ReadAll" query result type
             (should inherit from <see cref="T:System.Collections.Generic.IEnumerable`1"/> or be of class type)</param>
-            <param name="crudedReadAllParamsType">ReadAll query parameters type</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apiEntityReadAllParamsType">ReadAll query parameters type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type[])">
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type[],System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
-            </summary>
-            <param name="services">The service collection</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[])">
-            <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
-            </summary>
-            <param name="services">The service collection</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])">
-            <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="!:CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="!:CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])">
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[],System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
+            Register <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="!:CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="!:CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type[])">
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type[],System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="!:CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Reflection.Assembly[])">
-            <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
-            </summary>
-            <param name="services">The service collection</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])">
-            <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
-            </summary>
-            <param name="services">The service collection</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
+            <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="!:CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])">
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrCrudManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Reflection.Assembly[],System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
-            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/> decorated classes
+            Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="!:CrudEntityAttribute"/> decorated classes
             </summary>
             <param name="services">The service collection</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
-            <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Requesting.Attributes.CrudEntityAttribute"/></param>
+            <param name="assemblies">Any assembly to scan for <see cref="!:CrudEntityAttribute"/></param>
             <returns></returns>
         </member>
         <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
@@ -1828,7 +1777,7 @@
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])">
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type[],System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
             Register a <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Configuring.BaseAddressAttribute"/> decorated interfaces
             </summary>
@@ -1837,7 +1786,7 @@
             <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Configuring.BaseAddressAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])">
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[],System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
             Register a <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Configuring.BaseAddressAttribute"/> decorated interfaces
             </summary>
@@ -1846,22 +1795,22 @@
             <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Configuring.BaseAddressAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Type[])">
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type[],System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
             Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Configuring.BaseAddressAttribute"/> decorated interfaces
             </summary>
             <param name="services">The service collection</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <param name="assemblyMarkerTypes">Any type contained in assembly to scan for <see cref="T:Apizr.Configuring.BaseAddressAttribute"/></param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder},System.Reflection.Assembly[])">
+        <member name="M:Apizr.ServiceCollectionExtensions.AddApizrManagerFor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Reflection.Assembly[],System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder})">
             <summary>
             Register a custom <see cref="T:Apizr.IApizrManager`1"/> for each <see cref="T:Apizr.Configuring.BaseAddressAttribute"/> decorated interfaces
             </summary>
             <param name="services">The service collection</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <param name="assemblies">Any assembly to scan for <see cref="T:Apizr.Configuring.BaseAddressAttribute"/></param>
             <returns></returns>
@@ -1872,7 +1821,7 @@
             </summary>
             <param name="services">The service collection</param>
             <param name="webApiType">The web api interface type to manage</param>
-            <param name="apizrManagerType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
+            <param name="apizrManagerImplementationType">A custom <see cref="T:Apizr.IApizrManager`1"/> implementation type</param>
             <param name="optionsBuilder">The builder defining specific Apizr options</param>
             <returns></returns>
         </member>

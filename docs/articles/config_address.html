@@ -92,38 +92,41 @@ You can mix the configuration providing a base path by attribute and a base addr
 </li>
 </ul>
 <section id="tabpanel_1_tabid-attribute" role="tabpanel" data-tab="tabid-attribute">
-
-<p>Configuring the base address or base path by attribute allows you to use assembly scanning auto registration feature.</p>
-<h3 id="classic-api">Classic api</h3>
-<p>You can set api interface base address or path thanks to the WebApi attribute like so:</p>
-<pre><code class="lang-csharp">[WebApi(&quot;YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH/&quot;)]
+<h3 id="baseaddress-attribute"><code>BaseAddress</code> attribute</h3>
+<p>You can set api interface or CRUD entity base address or path thanks to the <code>BaseAddress</code> attribute. It let you set the base address at design time and then register your api fluently without having to set it.
+You can do it like so:</p>
+<pre><code class="lang-csharp">[BaseAddress(&quot;YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH&quot;)]
 public interface IYourApiInterface
 {
     // Your api interface methods
 }
-</code></pre>
-<p>If you provided only a path, you must set the base address/URI fluently so that Apizr could merge it all together.</p>
-<p>Optional parameters:</p>
-<ul>
-<li><code>isAutoRegistrable</code> (default: true) tells Apizr to include or not this specific interface while scanning assemblies for auto registration.
-It could be usefull when you ask for auto registration but want to do it fluently some specific interfaces.</li>
-</ul>
-<h3 id="crud-api">CRUD api</h3>
-<p>You can set CRUD entity api base address thanks to the CrudEntity attribute like so:</p>
-<pre><code class="lang-csharp">[CrudEntity(&quot;YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH_&quot;)]
+
+// OR the same for CRUD api
+[BaseAddress(&quot;YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH&quot;)]
 public class YourCrudEntity
 {
     // Your CRUD entity properties
 }
 </code></pre>
-<p>If you provided only a path, you must set the base address/URI fluently so that Apizr could merge it all together.</p>
-<p>Optional parameters:</p>
-<ul>
-<li><code>keyType</code>: entity key type (default: null = typeof(int))</li>
-<li><code>readAllResultType</code>: ReadAll query result type  (default: null = typeof(IEnumerable{}))</li>
-<li><code>readAllParamsType</code>: ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))</li>
-<li><code>modelEntityType</code>: Model entity type mapped with this api entity type (default: null = decorated api entity type)</li>
-</ul>
+<p>Note that if you provided only a path, you still have to set the base address/URI fluently at registration time so that Apizr could merge it all together.</p>
+<h3 id="autoregister-attribute"><code>AutoRegister</code> attribute</h3>
+<p>You can set api interface or CRUD entity base address or path thanks to the <code>AutoRegister</code> attribute. It let you set the base address at design time and then register apis by assembly scanning at register time.
+You can do it like so:</p>
+<pre><code class="lang-csharp">[AutoRegister(&quot;YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH&quot;)]
+public interface IYourApiInterface
+{
+    // Your api interface methods
+}
+
+// OR the same for CRUD api
+[AutoRegister(&quot;YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH&quot;)]
+public class YourCrudEntity
+{
+    // Your CRUD entity properties
+}
+</code></pre>
+<p>Note that if you provided only a path, you still have to set the base address/URI fluently at registration time so that Apizr could merge it all together.</p>
+<p><code>AutoRegister</code> attribute comes with more options so you should read more about it from the Getting Started doc articles.</p>
 </section>
 <section id="tabpanel_1_tabid-fluent" role="tabpanel" data-tab="tabid-fluent" aria-hidden="true" hidden="hidden">
 <h4 id="automatically">Automatically</h4>
@@ -161,7 +164,7 @@ options =&gt; options.WithBasePath(serviceProvider =&gt; serviceProvider.GetRequ
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_address.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/config_address.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

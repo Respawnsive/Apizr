@@ -67,7 +67,7 @@ and/or a specific to an api interface method.
 [assembly:Log]
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/"), Log(HttpMessageParts.RequestAll, 
+    [BaseAddress("https://reqres.in/"), Log(HttpMessageParts.RequestAll, 
         HttpTracerMode.ErrorsAndExceptionsOnly, 
         LogLevel.Information)]
     public interface IReqResService

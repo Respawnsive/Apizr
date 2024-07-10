@@ -22,6 +22,9 @@
 - [New][HttpMessageHandler] Now we can **register an HttpMessageHandler thanks to `WithHttpMessageHandler` fluent option**
 - [New][Cache] Now **CacheKey attribute allows composite cache key generation** from multiple decorated parameters
 - [New][Target] Now **targeting multiple frameworks based on Refit targets**: `netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0`
+- [New/Breaking][BaseAddress] Now we can **set base address with the brand new `BaseAddress` attribure** instead of the `WebApi`, `CrudEntity` or `MappedCrudEntity` ones, and only if you need to set it at design time
+- [New/Breaking][AutoRegister] Now we can **tell Apizr to auto register apis with the brand new `AutoRegister` attribure** instead of the `WebApi`, `CrudEntity` or `MappedCrudEntity` ones
+- [New/Breaking][MappedWith] Now we can **tell Apizr to map data while using MediatR/Optional thanks to the yet known `MappedWith` attribure** instead of the `CrudEntity` or `MappedCrudEntity` ones
 - [Breaking][Headers] Now **WithHeaders options take an enumerable parameter instead of a parameter array** so that we could provide some more optional parameters
 - [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
 - [Breaking][DelegatingHandler] Now we can **register DelegatingHandlers thanks to `WithDelegatingHandler` fluent option** instead of the `AddDelegatingHandler` deleted one for consistency.
@@ -30,7 +33,7 @@
 - [Fix][Attributes] Now Apizr finally can **get attributes decorating parent api interfaces or crud classes**
 - [Fix][Polly] Now Apizr **wraps correctly resilience strategies, including typed result ones**
 - [Fix][Manager] **ApizrManager has been optimized and refactored** to improve performances
-- 
+
 ### Apizr.Extensions.Microsoft.Caching
 
 - [New] **WithDistributedCacheHandler & WithInMemoryCacheHandler fluent shortcut options are now both available** for single api registration too (no more limited to Registry)

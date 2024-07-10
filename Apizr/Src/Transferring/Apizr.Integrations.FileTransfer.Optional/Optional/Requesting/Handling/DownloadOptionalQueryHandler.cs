@@ -25,6 +25,10 @@ namespace Apizr.Optional.Requesting.Handling
     {
         private readonly IApizrDownloadManager<TDownloadApi, TDownloadParams> _downloadManager;
 
+        /// <summary>
+        /// The mediation handler for <see cref="DownloadOptionalQuery{TDownloadApi, TDownloadParams}"/>
+        /// </summary>
+        /// <param name="downloadManager">The download manager</param>
         public DownloadOptionalQueryHandler(IApizrDownloadManager<TDownloadApi, TDownloadParams> downloadManager)
         {
             _downloadManager = downloadManager;
@@ -67,6 +71,10 @@ namespace Apizr.Optional.Requesting.Handling
     {
         private readonly IApizrDownloadManager<TDownloadApi> _downloadManager;
 
+        /// <summary>
+        /// The mediation handler for <see cref="DownloadOptionalQuery{TDownloadApi}"/>
+        /// </summary>
+        /// <param name="downloadManager">The download manager</param>
         public DownloadOptionalQueryHandler(IApizrDownloadManager<TDownloadApi> downloadManager)
         {
             _downloadManager = downloadManager;
@@ -130,6 +138,10 @@ namespace Apizr.Optional.Requesting.Handling
     {
         private readonly IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> _downloadManager;
 
+        /// <summary>
+        /// The mediation handler for <see cref="DownloadWithOptionalQuery{TDownloadParams}"/>
+        /// </summary>
+        /// <param name="downloadManager">The download manager</param>
         public DownloadWithOptionalQueryHandler(IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams> downloadManager)
         {
             _downloadManager = downloadManager;

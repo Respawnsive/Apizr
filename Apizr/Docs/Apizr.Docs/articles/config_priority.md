@@ -29,7 +29,7 @@ You can configure priority at:
 The first thing to do while designing your api interfaces using Apizr to send a request, is to add an `IApizrRequestOptions` param decorated with the provided `RequestOptions` attribute to your methods like:
 
 ```csharp
-[WebApi("https://reqres.in/api")]
+[BaseAddress("https://reqres.in/api")]
 public interface IReqResService
 {
     [Get("/users")]
@@ -47,7 +47,7 @@ Another way to deal with priority at design time is to use the `PriorityAttribut
 [assembly:Priority(Priority.UserInitiated)]
 namespace Your.Namespace
 {
-    [WebApi("https://reqres.in/api"), Priority(Priority.Background)]
+    [BaseAddress("https://reqres.in/api"), Priority(Priority.Background)]
     public interface IReqResService
     {
         [Get("/users"), Priority(Priority.Speculative)]

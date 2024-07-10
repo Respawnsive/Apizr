@@ -23,7 +23,7 @@ Here is classic api an example:
 ```csharp
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/api"), OperationTimeout("00:03:00")]
+    [BaseAddress("https://reqres.in/api"), OperationTimeout("00:03:00")]
     public interface IReqResService
     {
         [Get("/users"), RequestTimeout("00:01:00")]

@@ -48,7 +48,9 @@ An api definition with some attributes:
 namespace Apizr.Sample
 {
     // (Apizr) Define your web api base url and ask for cache and logs
-    [WebApi("https://reqres.in/"), Cache, Log]
+    [BaseAddress("https://reqres.in/"), 
+    Cache(CacheMode.GetAndFetch, "01:00:00"), 
+    Log(HttpMessageParts.AllButBodies)]
     public interface IReqResService
     {
         // (Refit) Define your web api interface methods

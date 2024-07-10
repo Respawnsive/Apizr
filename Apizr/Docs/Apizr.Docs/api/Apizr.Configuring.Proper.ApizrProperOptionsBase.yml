@@ -6,7 +6,7 @@ items:
   parent: Apizr.Configuring.Proper
   children:
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.Type,System.Reflection.TypeInfo,Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean})
-  - Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+  - Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
@@ -21,7 +21,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrProperOptionsBase
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
@@ -85,7 +85,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
@@ -96,7 +96,7 @@ items:
   summary: The proper options constructor
   example: []
   syntax:
-    content: protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, Type webApiType, Type crudModelType, TypeInfo typeInfo, ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes, ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes, CacheAttribute commonCacheAttribute, CacheAttribute properCacheAttribute, Func<string, bool> shouldRedactHeaderValue = null)
+    content: protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, Type webApiType, Type crudApiEntityType, TypeInfo typeInfo, ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes, ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes, CacheAttribute commonCacheAttribute, CacheAttribute properCacheAttribute, Func<string, bool> shouldRedactHeaderValue = null)
     parameters:
     - id: sharedOptions
       type: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase
@@ -104,9 +104,9 @@ items:
     - id: webApiType
       type: System.Type
       description: The web api type
-    - id: crudModelType
+    - id: crudApiEntityType
       type: System.Type
-      description: The crud model type if any
+      description: The crud api entity type if any
     - id: typeInfo
       type: System.Reflection.TypeInfo
       description: The type info
@@ -125,7 +125,7 @@ items:
     - id: shouldRedactHeaderValue
       type: System.Func{System.String,System.Boolean}
       description: Headers to redact value
-    content.vb: Protected Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, webApiType As Type, crudModelType As Type, typeInfo As TypeInfo, commonResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), properResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), commonCacheAttribute As CacheAttribute, properCacheAttribute As CacheAttribute, shouldRedactHeaderValue As Func(Of String, Boolean) = Nothing)
+    content.vb: Protected Sub New(sharedOptions As IApizrGlobalSharedRegistrationOptionsBase, webApiType As Type, crudApiEntityType As Type, typeInfo As TypeInfo, commonResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), properResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), commonCacheAttribute As CacheAttribute, properCacheAttribute As CacheAttribute, shouldRedactHeaderValue As Func(Of String, Boolean) = Nothing)
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor*
   nameWithType.vb: ApizrProperOptionsBase.New(IApizrGlobalSharedRegistrationOptionsBase, Type, Type, TypeInfo, ResiliencePipelineAttributeBase(), ResiliencePipelineAttributeBase(), CacheAttribute, CacheAttribute, Func(Of String, Boolean))
   fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBase.New(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase, System.Type, System.Type, System.Reflection.TypeInfo, Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase(), Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase(), Apizr.Caching.Attributes.CacheAttribute, Apizr.Caching.Attributes.CacheAttribute, System.Func(Of String, Boolean))
@@ -144,7 +144,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApiType
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
@@ -163,39 +163,39 @@ items:
   overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType*
   implements:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
-  commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
-  id: CrudModelType
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
+  commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
+  id: CrudApiEntityType
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBase
   langs:
   - csharp
   - vb
-  name: CrudModelType
-  nameWithType: ApizrProperOptionsBase.CrudModelType
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+  name: CrudApiEntityType
+  nameWithType: ApizrProperOptionsBase.CrudApiEntityType
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
-    id: CrudModelType
+    id: CrudApiEntityType
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
     startLine: 68
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: Crud model type if any
+  summary: Crud api entity type if any
   example: []
   syntax:
-    content: public Type CrudModelType { get; }
+    content: public Type CrudApiEntityType { get; }
     parameters: []
     return:
       type: System.Type
-    content.vb: Public ReadOnly Property CrudModelType As Type
-  overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType*
+    content.vb: Public ReadOnly Property CrudApiEntityType As Type
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType*
   implements:
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
   commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
   id: TypeInfo
@@ -210,7 +210,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: TypeInfo
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
@@ -218,7 +218,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
-  summary: Web api interface or Crud model class type info
+  summary: Web api interface or Crud api entity class type info
   example: []
   syntax:
     content: public TypeInfo TypeInfo { get; }
@@ -243,7 +243,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: IsCrudApi
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
@@ -276,7 +276,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: Logger
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBase.cs
@@ -958,19 +958,19 @@ references:
   name: WebApiType
   nameWithType: IApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType*
-  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
-  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_CrudModelType
-  name: CrudModelType
-  nameWithType: ApizrProperOptionsBase.CrudModelType
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_CrudApiEntityType
+  name: CrudApiEntityType
+  nameWithType: ApizrProperOptionsBase.CrudApiEntityType
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
-  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_CrudModelType
-  name: CrudModelType
-  nameWithType: IApizrProperOptionsBase.CrudModelType
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_CrudApiEntityType
+  name: CrudApiEntityType
+  nameWithType: IApizrProperOptionsBase.CrudApiEntityType
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo*
   commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
   href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_TypeInfo

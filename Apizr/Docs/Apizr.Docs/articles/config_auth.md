@@ -9,7 +9,7 @@ As Apizr is based on Refit, you can decorate your authenticated apis like so (he
 ```csharp
 namespace Apizr.Sample
 {
-    [WebApi("https://httpbin.org/")]
+    [BaseAddress("https://httpbin.org/")]
     public interface IHttpBinService
     {
         [Get("/bearer")]

@@ -1,14 +1,14 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Requesting;
-using Apizr.Requesting.Attributes;
 
 namespace Apizr.Sample.Models
 {
-    [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
+    [AutoRegister<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>("https://reqres.in/api/users")]
     [CacheReadAll(CacheMode.GetAndFetch)]
     [CacheRead(CacheMode.GetOrFetch)]
     [Log(HttpMessageParts.All)]

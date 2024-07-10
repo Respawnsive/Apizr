@@ -15,6 +15,9 @@ using System.Net.Http;
 [assembly: Apizr.Preserve]
 namespace Apizr
 {
+    /// <summary>
+    /// Extensions for file transfer registration with optional result
+    /// </summary>
     public static class OptionalFileTransferOptionsBuilderExtensions
     {
         /// <summary>

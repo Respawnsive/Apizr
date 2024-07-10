@@ -87,7 +87,7 @@ Here is classic api an example:
 [assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/api")]
+    [BaseAddress("https://reqres.in/api")]
     public interface IReqResService
     {
         [Get("/users")]

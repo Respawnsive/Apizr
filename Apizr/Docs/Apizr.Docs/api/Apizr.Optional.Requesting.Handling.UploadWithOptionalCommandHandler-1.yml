@@ -17,18 +17,21 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.Optional/Optional/Requesting/Handling/UploadOptionalCommandHandler.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadWithOptionalCommandHandler
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.Optional/Optional/Requesting/Handling/UploadOptionalCommandHandler.cs
-    startLine: 161
+    startLine: 182
   assemblies:
   - Apizr.Integrations.FileTransfer.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: The mediation handler for <xref href="Apizr.Optional.Requesting.UploadWithOptionalCommand%601" data-throw-if-not-resolved="false"></xref>
+  example: []
   syntax:
     content: 'public class UploadWithOptionalCommandHandler<TUploadApiResultData> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>, IRequestHandler<UploadWithOptionalCommand<TUploadApiResultData>, Option<TUploadApiResultData, ApizrException>>'
     typeParameters:
     - id: TUploadApiResultData
+      description: The upload result type
     content.vb: Public Class UploadWithOptionalCommandHandler(Of TUploadApiResultData) Inherits RequestHandlerBase(Of IApizrRequestOptions, IApizrRequestOptionsBuilder) Implements IRequestHandler(Of UploadWithOptionalCommand(Of TUploadApiResultData), Option(Of TUploadApiResultData, ApizrException))
   inheritance:
   - System.Object
@@ -60,19 +63,22 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.Optional/Optional/Requesting/Handling/UploadOptionalCommandHandler.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.Optional/Optional/Requesting/Handling/UploadOptionalCommandHandler.cs
-    startLine: 166
+    startLine: 191
   assemblies:
   - Apizr.Integrations.FileTransfer.Optional
   namespace: Apizr.Optional.Requesting.Handling
+  summary: The mediation handler for <xref href="Apizr.Optional.Requesting.UploadWithOptionalCommand%601" data-throw-if-not-resolved="false"></xref>
+  example: []
   syntax:
     content: public UploadWithOptionalCommandHandler(IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData> uploadManager)
     parameters:
     - id: uploadManager
       type: Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi{{TUploadApiResultData}},{TUploadApiResultData}}
+      description: The upload manager
     content.vb: Public Sub New(uploadManager As IApizrUploadManager(Of IUploadApi(Of TUploadApiResultData), TUploadApiResultData))
   overload: Apizr.Optional.Requesting.Handling.UploadWithOptionalCommandHandler`1.#ctor*
   nameWithType.vb: UploadWithOptionalCommandHandler(Of TUploadApiResultData).New(IApizrUploadManager(Of IUploadApi(Of TUploadApiResultData), TUploadApiResultData))
@@ -92,11 +98,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Transferring/Apizr.Integrations.FileTransfer.Optional/Optional/Requesting/Handling/UploadOptionalCommandHandler.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: Handle
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer.Optional/Optional/Requesting/Handling/UploadOptionalCommandHandler.cs
-    startLine: 177
+    startLine: 202
   assemblies:
   - Apizr.Integrations.FileTransfer.Optional
   namespace: Apizr.Optional.Requesting.Handling
@@ -122,6 +128,31 @@ items:
   fullName.vb: Apizr.Optional.Requesting.Handling.UploadWithOptionalCommandHandler(Of TUploadApiResultData).Handle(Apizr.Optional.Requesting.UploadWithOptionalCommand(Of TUploadApiResultData), System.Threading.CancellationToken)
   name.vb: Handle(UploadWithOptionalCommand(Of TUploadApiResultData), CancellationToken)
 references:
+- uid: Apizr.Optional.Requesting.UploadWithOptionalCommand`1
+  commentId: T:Apizr.Optional.Requesting.UploadWithOptionalCommand`1
+  href: Apizr.Optional.Requesting.UploadWithOptionalCommand-1.html
+  name: UploadWithOptionalCommand<TUploadApiResultData>
+  nameWithType: UploadWithOptionalCommand<TUploadApiResultData>
+  fullName: Apizr.Optional.Requesting.UploadWithOptionalCommand<TUploadApiResultData>
+  nameWithType.vb: UploadWithOptionalCommand(Of TUploadApiResultData)
+  fullName.vb: Apizr.Optional.Requesting.UploadWithOptionalCommand(Of TUploadApiResultData)
+  name.vb: UploadWithOptionalCommand(Of TUploadApiResultData)
+  spec.csharp:
+  - uid: Apizr.Optional.Requesting.UploadWithOptionalCommand`1
+    name: UploadWithOptionalCommand
+    href: Apizr.Optional.Requesting.UploadWithOptionalCommand-1.html
+  - name: <
+  - name: TUploadApiResultData
+  - name: '>'
+  spec.vb:
+  - uid: Apizr.Optional.Requesting.UploadWithOptionalCommand`1
+    name: UploadWithOptionalCommand
+    href: Apizr.Optional.Requesting.UploadWithOptionalCommand-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TUploadApiResultData
+  - name: )
 - uid: Apizr.Optional.Requesting.Handling
   commentId: N:Apizr.Optional.Requesting.Handling
   href: Apizr.html
@@ -911,31 +942,6 @@ references:
     name: CancellationToken
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-- uid: Apizr.Optional.Requesting.UploadWithOptionalCommand`1
-  commentId: T:Apizr.Optional.Requesting.UploadWithOptionalCommand`1
-  href: Apizr.Optional.Requesting.UploadWithOptionalCommand-1.html
-  name: UploadWithOptionalCommand<TUploadApiResultData>
-  nameWithType: UploadWithOptionalCommand<TUploadApiResultData>
-  fullName: Apizr.Optional.Requesting.UploadWithOptionalCommand<TUploadApiResultData>
-  nameWithType.vb: UploadWithOptionalCommand(Of TUploadApiResultData)
-  fullName.vb: Apizr.Optional.Requesting.UploadWithOptionalCommand(Of TUploadApiResultData)
-  name.vb: UploadWithOptionalCommand(Of TUploadApiResultData)
-  spec.csharp:
-  - uid: Apizr.Optional.Requesting.UploadWithOptionalCommand`1
-    name: UploadWithOptionalCommand
-    href: Apizr.Optional.Requesting.UploadWithOptionalCommand-1.html
-  - name: <
-  - name: TUploadApiResultData
-  - name: '>'
-  spec.vb:
-  - uid: Apizr.Optional.Requesting.UploadWithOptionalCommand`1
-    name: UploadWithOptionalCommand
-    href: Apizr.Optional.Requesting.UploadWithOptionalCommand-1.html
-  - name: (
-  - name: Of
-  - name: " "
-  - name: TUploadApiResultData
   - name: )
 - uid: Apizr.Optional.Requesting
   commentId: N:Apizr.Optional.Requesting

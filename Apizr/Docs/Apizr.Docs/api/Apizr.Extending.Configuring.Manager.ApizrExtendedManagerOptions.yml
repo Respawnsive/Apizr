@@ -6,7 +6,7 @@ items:
   parent: Apizr.Extending.Configuring.Manager
   children:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.#ctor(Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions,Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions)
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.BaseAddressFactory
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.BasePathFactory
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.BaseUriFactory
@@ -14,7 +14,9 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CacheHandlerType
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ConnectivityHandlerFactory
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ConnectivityHandlerType
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HeadersExtendedFactories
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HttpClientHandlerFactory
@@ -42,11 +44,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrExtendedManagerOptions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 24
+    startLine: 25
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -80,7 +82,7 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBase.HttpClientHandler
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBase.DelegatingHandlersExtendedFactories
   - Apizr.Configuring.Manager.ApizrManagerOptionsBase.WebApiType
-  - Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudModelType
+  - Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudApiEntityType
   - Apizr.Configuring.Manager.ApizrManagerOptionsBase.TypeInfo
   - Apizr.Configuring.Manager.ApizrManagerOptionsBase.IsCrudApi
   - Apizr.Configuring.Manager.ApizrManagerOptionsBase.Logger
@@ -124,11 +126,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 31
+    startLine: 32
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -148,39 +150,138 @@ items:
   nameWithType.vb: ApizrExtendedManagerOptions.New(IApizrExtendedCommonOptions, IApizrExtendedProperOptions)
   fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.New(Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions, Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions)
   name.vb: New(IApizrExtendedCommonOptions, IApizrExtendedProperOptions)
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType
-  commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType
-  id: ApizrManagerType
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType
+  commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType
+  id: CrudApiEntityKeyType
   parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions
   langs:
   - csharp
   - vb
-  name: ApizrManagerType
-  nameWithType: ApizrExtendedManagerOptions.ApizrManagerType
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType
+  name: CrudApiEntityKeyType
+  nameWithType: ApizrExtendedManagerOptions.CrudApiEntityKeyType
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
-    id: ApizrManagerType
+    id: CrudApiEntityKeyType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 65
+    startLine: 68
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
-  summary: Type of the manager
+  summary: Type of the crud api entity key if any
   example: []
   syntax:
-    content: public Type ApizrManagerType { get; }
+    content: public Type CrudApiEntityKeyType { get; }
     parameters: []
     return:
       type: System.Type
-    content.vb: Public ReadOnly Property ApizrManagerType As Type
-  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType*
+    content.vb: Public ReadOnly Property CrudApiEntityKeyType As Type
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType*
   implements:
-  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
+  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType
+  commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType
+  id: CrudApiReadAllResultType
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions
+  langs:
+  - csharp
+  - vb
+  name: CrudApiReadAllResultType
+  nameWithType: ApizrExtendedManagerOptions.CrudApiReadAllResultType
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: CrudApiReadAllResultType
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
+    startLine: 71
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: Type of the crud api read all result if any
+  example: []
+  syntax:
+    content: public Type CrudApiReadAllResultType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: Public ReadOnly Property CrudApiReadAllResultType As Type
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType*
+  implements:
+  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType
+  commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType
+  id: CrudApiReadAllParamsType
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions
+  langs:
+  - csharp
+  - vb
+  name: CrudApiReadAllParamsType
+  nameWithType: ApizrExtendedManagerOptions.CrudApiReadAllParamsType
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: CrudApiReadAllParamsType
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
+    startLine: 74
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: Type of the crud api read all parameters if any
+  example: []
+  syntax:
+    content: public Type CrudApiReadAllParamsType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: Public ReadOnly Property CrudApiReadAllParamsType As Type
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType*
+  implements:
+  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType
+  commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType
+  id: ApizrManagerImplementationType
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions
+  langs:
+  - csharp
+  - vb
+  name: ApizrManagerImplementationType
+  nameWithType: ApizrExtendedManagerOptions.ApizrManagerImplementationType
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ApizrManagerImplementationType
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
+    startLine: 77
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: Type of the implemented manager
+  example: []
+  syntax:
+    content: public Type ApizrManagerImplementationType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: Public ReadOnly Property ApizrManagerImplementationType As Type
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType*
+  implements:
+  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ConnectivityHandlerType
   commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ConnectivityHandlerType
   id: ConnectivityHandlerType
@@ -195,11 +296,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 68
+    startLine: 80
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -228,11 +329,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 71
+    startLine: 83
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -261,11 +362,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 74
+    startLine: 86
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -294,11 +395,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 78
+    startLine: 90
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -327,11 +428,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 86
+    startLine: 98
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -360,11 +461,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 94
+    startLine: 106
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -393,11 +494,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 102
+    startLine: 114
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -426,11 +527,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 110
+    startLine: 122
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -459,11 +560,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 118
+    startLine: 130
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -492,11 +593,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 126
+    startLine: 138
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -525,11 +626,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 134
+    startLine: 146
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -558,11 +659,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpMessageHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 141
+    startLine: 153
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -591,11 +692,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettingsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 145
+    startLine: 157
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -624,11 +725,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 152
+    startLine: 164
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -657,11 +758,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 155
+    startLine: 167
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -690,11 +791,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 158
+    startLine: 170
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -723,11 +824,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 161
+    startLine: 173
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -756,11 +857,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersExtendedFactories
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 164
+    startLine: 176
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -789,11 +890,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeoutFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 168
+    startLine: 180
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -822,11 +923,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeoutFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 176
+    startLine: 188
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -841,39 +942,6 @@ items:
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.RequestTimeoutFactory*
   implements:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.RequestTimeoutFactory
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities
-  commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities
-  id: CrudEntities
-  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions
-  langs:
-  - csharp
-  - vb
-  name: CrudEntities
-  nameWithType: ApizrExtendedManagerOptions.CrudEntities
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities
-  type: Property
-  source:
-    remote:
-      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: CrudEntities
-    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 183
-  assemblies:
-  - Apizr.Extensions.Microsoft.DependencyInjection
-  namespace: Apizr.Extending.Configuring.Manager
-  summary: Entities auto registered with <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref>
-  example: []
-  syntax:
-    content: public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
-    parameters: []
-    return:
-      type: System.Collections.Generic.IDictionary{System.Type,Apizr.Requesting.Attributes.CrudEntityAttribute}
-    content.vb: Public ReadOnly Property CrudEntities As IDictionary(Of Type, CrudEntityAttribute)
-  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities*
-  implements:
-  - Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CrudEntities
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.WebApis
   commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.WebApis
   id: WebApis
@@ -888,22 +956,22 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApis
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 186
+    startLine: 195
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
   summary: Web apis auto registered with <xref href="Apizr.IApizrManager%601" data-throw-if-not-resolved="false"></xref>
   example: []
   syntax:
-    content: public IDictionary<Type, WebApiAttribute> WebApis { get; }
+    content: public IDictionary<Type, BaseAddressAttribute> WebApis { get; }
     parameters: []
     return:
-      type: System.Collections.Generic.IDictionary{System.Type,Apizr.WebApiAttribute}
-    content.vb: Public ReadOnly Property WebApis As IDictionary(Of Type, WebApiAttribute)
+      type: System.Collections.Generic.IDictionary{System.Type,Apizr.Configuring.BaseAddressAttribute}
+    content.vb: Public ReadOnly Property WebApis As IDictionary(Of Type, BaseAddressAttribute)
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.WebApis*
   implements:
   - Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.WebApis
@@ -921,22 +989,22 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: ObjectMappings
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 189
+    startLine: 198
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
   summary: Mappings between api request object and model object used for classic auto registration
   example: []
   syntax:
-    content: public IDictionary<Type, MappedWithAttribute> ObjectMappings { get; }
+    content: public IDictionary<Assembly, MappedWithAttribute[]> ObjectMappings { get; }
     parameters: []
     return:
-      type: System.Collections.Generic.IDictionary{System.Type,Apizr.Mapping.MappedWithAttribute}
-    content.vb: Public ReadOnly Property ObjectMappings As IDictionary(Of Type, MappedWithAttribute)
+      type: System.Collections.Generic.IDictionary{System.Reflection.Assembly,Apizr.Mapping.MappedWithAttribute[]}
+    content.vb: Public ReadOnly Property ObjectMappings As IDictionary(Of Assembly, MappedWithAttribute())
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ObjectMappings*
   implements:
   - Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ObjectMappings
@@ -954,11 +1022,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: PostRegistries
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 192
+    startLine: 201
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -987,22 +1055,22 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: PostRegistrationActions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 195
+    startLine: 204
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
   summary: Post registration actions
   example: []
   syntax:
-    content: public IList<Action<Type, IServiceCollection>> PostRegistrationActions { get; }
+    content: public IList<Action<IApizrExtendedManagerOptions, IServiceCollection>> PostRegistrationActions { get; }
     parameters: []
     return:
-      type: System.Collections.Generic.IList{System.Action{System.Type,Microsoft.Extensions.DependencyInjection.IServiceCollection}}
-    content.vb: Public ReadOnly Property PostRegistrationActions As IList(Of Action(Of Type, IServiceCollection))
+      type: System.Collections.Generic.IList{System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Microsoft.Extensions.DependencyInjection.IServiceCollection}}
+    content.vb: Public ReadOnly Property PostRegistrationActions As IList(Of Action(Of IApizrExtendedManagerOptions, IServiceCollection))
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.PostRegistrationActions*
   implements:
   - Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistrationActions
@@ -1203,13 +1271,13 @@ references:
   name: WebApiType
   nameWithType: ApizrManagerOptionsBase.WebApiType
   fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBase.WebApiType
-- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudModelType
-  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudApiEntityType
+  commentId: P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudApiEntityType
   parent: Apizr.Configuring.Manager.ApizrManagerOptionsBase
-  href: Apizr.Configuring.Manager.ApizrManagerOptionsBase.html#Apizr_Configuring_Manager_ApizrManagerOptionsBase_CrudModelType
-  name: CrudModelType
-  nameWithType: ApizrManagerOptionsBase.CrudModelType
-  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudModelType
+  href: Apizr.Configuring.Manager.ApizrManagerOptionsBase.html#Apizr_Configuring_Manager_ApizrManagerOptionsBase_CrudApiEntityType
+  name: CrudApiEntityType
+  nameWithType: ApizrManagerOptionsBase.CrudApiEntityType
+  fullName: Apizr.Configuring.Manager.ApizrManagerOptionsBase.CrudApiEntityType
 - uid: Apizr.Configuring.Manager.ApizrManagerOptionsBase.TypeInfo
   commentId: P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.TypeInfo
   parent: Apizr.Configuring.Manager.ApizrManagerOptionsBase
@@ -1833,19 +1901,19 @@ references:
   nameWithType.vb: ApizrExtendedManagerOptions.New
   fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.New
   name.vb: New
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType*
-  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType
-  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_ApizrManagerType
-  name: ApizrManagerType
-  nameWithType: ApizrExtendedManagerOptions.ApizrManagerType
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerType
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
-  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType*
+  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_CrudApiEntityKeyType
+  name: CrudApiEntityKeyType
+  nameWithType: ApizrExtendedManagerOptions.CrudApiEntityKeyType
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
+  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
   parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
-  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_ApizrManagerType
-  name: ApizrManagerType
-  nameWithType: IApizrExtendedProperOptions.ApizrManagerType
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_CrudApiEntityKeyType
+  name: CrudApiEntityKeyType
+  nameWithType: IApizrExtendedProperOptions.CrudApiEntityKeyType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
 - uid: System.Type
   commentId: T:System.Type
   parent: System
@@ -1854,6 +1922,45 @@ references:
   name: Type
   nameWithType: Type
   fullName: System.Type
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType*
+  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_CrudApiReadAllResultType
+  name: CrudApiReadAllResultType
+  nameWithType: ApizrExtendedManagerOptions.CrudApiReadAllResultType
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_CrudApiReadAllResultType
+  name: CrudApiReadAllResultType
+  nameWithType: IApizrExtendedProperOptions.CrudApiReadAllResultType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType*
+  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_CrudApiReadAllParamsType
+  name: CrudApiReadAllParamsType
+  nameWithType: ApizrExtendedManagerOptions.CrudApiReadAllParamsType
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_CrudApiReadAllParamsType
+  name: CrudApiReadAllParamsType
+  nameWithType: IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType*
+  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_ApizrManagerImplementationType
+  name: ApizrManagerImplementationType
+  nameWithType: ApizrExtendedManagerOptions.ApizrManagerImplementationType
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ApizrManagerImplementationType
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
+  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
+  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_ApizrManagerImplementationType
+  name: ApizrManagerImplementationType
+  nameWithType: IApizrExtendedProperOptions.ApizrManagerImplementationType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ConnectivityHandlerType*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ConnectivityHandlerType
   href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_ConnectivityHandlerType
@@ -3085,64 +3192,6 @@ references:
   - name: " "
   - name: TWebApi
   - name: )
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities*
-  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities
-  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_CrudEntities
-  name: CrudEntities
-  nameWithType: ApizrExtendedManagerOptions.CrudEntities
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudEntities
-- uid: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CrudEntities
-  commentId: P:Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CrudEntities
-  parent: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions
-  href: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.html#Apizr_Extending_Configuring_Common_IApizrExtendedCommonOptions_CrudEntities
-  name: CrudEntities
-  nameWithType: IApizrExtendedCommonOptions.CrudEntities
-  fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.CrudEntities
-- uid: System.Collections.Generic.IDictionary{System.Type,Apizr.Requesting.Attributes.CrudEntityAttribute}
-  commentId: T:System.Collections.Generic.IDictionary{System.Type,Apizr.Requesting.Attributes.CrudEntityAttribute}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IDictionary`2
-  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
-  name: IDictionary<Type, CrudEntityAttribute>
-  nameWithType: IDictionary<Type, CrudEntityAttribute>
-  fullName: System.Collections.Generic.IDictionary<System.Type, Apizr.Requesting.Attributes.CrudEntityAttribute>
-  nameWithType.vb: IDictionary(Of Type, CrudEntityAttribute)
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.Type, Apizr.Requesting.Attributes.CrudEntityAttribute)
-  name.vb: IDictionary(Of Type, CrudEntityAttribute)
-  spec.csharp:
-  - uid: System.Collections.Generic.IDictionary`2
-    name: IDictionary
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
-  - name: <
-  - uid: System.Type
-    name: Type
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.type
-  - name: ','
-  - name: " "
-  - uid: Apizr.Requesting.Attributes.CrudEntityAttribute
-    name: CrudEntityAttribute
-    href: Apizr.Requesting.Attributes.CrudEntityAttribute.html
-  - name: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.IDictionary`2
-    name: IDictionary
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
-  - name: (
-  - name: Of
-  - name: " "
-  - uid: System.Type
-    name: Type
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.type
-  - name: ','
-  - name: " "
-  - uid: Apizr.Requesting.Attributes.CrudEntityAttribute
-    name: CrudEntityAttribute
-    href: Apizr.Requesting.Attributes.CrudEntityAttribute.html
-  - name: )
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.WebApis*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.WebApis
   href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_WebApis
@@ -3156,17 +3205,17 @@ references:
   name: WebApis
   nameWithType: IApizrExtendedCommonOptions.WebApis
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.WebApis
-- uid: System.Collections.Generic.IDictionary{System.Type,Apizr.WebApiAttribute}
-  commentId: T:System.Collections.Generic.IDictionary{System.Type,Apizr.WebApiAttribute}
+- uid: System.Collections.Generic.IDictionary{System.Type,Apizr.Configuring.BaseAddressAttribute}
+  commentId: T:System.Collections.Generic.IDictionary{System.Type,Apizr.Configuring.BaseAddressAttribute}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IDictionary`2
   href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
-  name: IDictionary<Type, WebApiAttribute>
-  nameWithType: IDictionary<Type, WebApiAttribute>
-  fullName: System.Collections.Generic.IDictionary<System.Type, Apizr.WebApiAttribute>
-  nameWithType.vb: IDictionary(Of Type, WebApiAttribute)
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.Type, Apizr.WebApiAttribute)
-  name.vb: IDictionary(Of Type, WebApiAttribute)
+  name: IDictionary<Type, BaseAddressAttribute>
+  nameWithType: IDictionary<Type, BaseAddressAttribute>
+  fullName: System.Collections.Generic.IDictionary<System.Type, Apizr.Configuring.BaseAddressAttribute>
+  nameWithType.vb: IDictionary(Of Type, BaseAddressAttribute)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Type, Apizr.Configuring.BaseAddressAttribute)
+  name.vb: IDictionary(Of Type, BaseAddressAttribute)
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
@@ -3179,9 +3228,9 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.type
   - name: ','
   - name: " "
-  - uid: Apizr.WebApiAttribute
-    name: WebApiAttribute
-    href: Apizr.WebApiAttribute.html
+  - uid: Apizr.Configuring.BaseAddressAttribute
+    name: BaseAddressAttribute
+    href: Apizr.Configuring.BaseAddressAttribute.html
   - name: '>'
   spec.vb:
   - uid: System.Collections.Generic.IDictionary`2
@@ -3197,9 +3246,9 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.type
   - name: ','
   - name: " "
-  - uid: Apizr.WebApiAttribute
-    name: WebApiAttribute
-    href: Apizr.WebApiAttribute.html
+  - uid: Apizr.Configuring.BaseAddressAttribute
+    name: BaseAddressAttribute
+    href: Apizr.Configuring.BaseAddressAttribute.html
   - name: )
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ObjectMappings*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ObjectMappings
@@ -3214,32 +3263,34 @@ references:
   name: ObjectMappings
   nameWithType: IApizrExtendedCommonOptions.ObjectMappings
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.ObjectMappings
-- uid: System.Collections.Generic.IDictionary{System.Type,Apizr.Mapping.MappedWithAttribute}
-  commentId: T:System.Collections.Generic.IDictionary{System.Type,Apizr.Mapping.MappedWithAttribute}
+- uid: System.Collections.Generic.IDictionary{System.Reflection.Assembly,Apizr.Mapping.MappedWithAttribute[]}
+  commentId: T:System.Collections.Generic.IDictionary{System.Reflection.Assembly,Apizr.Mapping.MappedWithAttribute[]}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IDictionary`2
   href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
-  name: IDictionary<Type, MappedWithAttribute>
-  nameWithType: IDictionary<Type, MappedWithAttribute>
-  fullName: System.Collections.Generic.IDictionary<System.Type, Apizr.Mapping.MappedWithAttribute>
-  nameWithType.vb: IDictionary(Of Type, MappedWithAttribute)
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.Type, Apizr.Mapping.MappedWithAttribute)
-  name.vb: IDictionary(Of Type, MappedWithAttribute)
+  name: IDictionary<Assembly, MappedWithAttribute[]>
+  nameWithType: IDictionary<Assembly, MappedWithAttribute[]>
+  fullName: System.Collections.Generic.IDictionary<System.Reflection.Assembly, Apizr.Mapping.MappedWithAttribute[]>
+  nameWithType.vb: IDictionary(Of Assembly, MappedWithAttribute())
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Reflection.Assembly, Apizr.Mapping.MappedWithAttribute())
+  name.vb: IDictionary(Of Assembly, MappedWithAttribute())
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
   - name: <
-  - uid: System.Type
-    name: Type
+  - uid: System.Reflection.Assembly
+    name: Assembly
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.type
+    href: https://learn.microsoft.com/dotnet/api/system.reflection.assembly
   - name: ','
   - name: " "
   - uid: Apizr.Mapping.MappedWithAttribute
     name: MappedWithAttribute
     href: Apizr.Mapping.MappedWithAttribute.html
+  - name: '['
+  - name: ']'
   - name: '>'
   spec.vb:
   - uid: System.Collections.Generic.IDictionary`2
@@ -3249,15 +3300,17 @@ references:
   - name: (
   - name: Of
   - name: " "
-  - uid: System.Type
-    name: Type
+  - uid: System.Reflection.Assembly
+    name: Assembly
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.type
+    href: https://learn.microsoft.com/dotnet/api/system.reflection.assembly
   - name: ','
   - name: " "
   - uid: Apizr.Mapping.MappedWithAttribute
     name: MappedWithAttribute
     href: Apizr.Mapping.MappedWithAttribute.html
+  - name: (
+  - name: )
   - name: )
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.PostRegistries*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.PostRegistries
@@ -3330,17 +3383,17 @@ references:
   name: PostRegistrationActions
   nameWithType: IApizrExtendedCommonOptions.PostRegistrationActions
   fullName: Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptions.PostRegistrationActions
-- uid: System.Collections.Generic.IList{System.Action{System.Type,Microsoft.Extensions.DependencyInjection.IServiceCollection}}
-  commentId: T:System.Collections.Generic.IList{System.Action{System.Type,Microsoft.Extensions.DependencyInjection.IServiceCollection}}
+- uid: System.Collections.Generic.IList{System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Microsoft.Extensions.DependencyInjection.IServiceCollection}}
+  commentId: T:System.Collections.Generic.IList{System.Action{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Microsoft.Extensions.DependencyInjection.IServiceCollection}}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IList`1
   href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
-  name: IList<Action<Type, IServiceCollection>>
-  nameWithType: IList<Action<Type, IServiceCollection>>
-  fullName: System.Collections.Generic.IList<System.Action<System.Type, Microsoft.Extensions.DependencyInjection.IServiceCollection>>
-  nameWithType.vb: IList(Of Action(Of Type, IServiceCollection))
-  fullName.vb: System.Collections.Generic.IList(Of System.Action(Of System.Type, Microsoft.Extensions.DependencyInjection.IServiceCollection))
-  name.vb: IList(Of Action(Of Type, IServiceCollection))
+  name: IList<Action<IApizrExtendedManagerOptions, IServiceCollection>>
+  nameWithType: IList<Action<IApizrExtendedManagerOptions, IServiceCollection>>
+  fullName: System.Collections.Generic.IList<System.Action<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Microsoft.Extensions.DependencyInjection.IServiceCollection>>
+  nameWithType.vb: IList(Of Action(Of IApizrExtendedManagerOptions, IServiceCollection))
+  fullName.vb: System.Collections.Generic.IList(Of System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Microsoft.Extensions.DependencyInjection.IServiceCollection))
+  name.vb: IList(Of Action(Of IApizrExtendedManagerOptions, IServiceCollection))
   spec.csharp:
   - uid: System.Collections.Generic.IList`1
     name: IList
@@ -3352,10 +3405,9 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.action-2
   - name: <
-  - uid: System.Type
-    name: Type
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.type
+  - uid: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions
+    name: IApizrExtendedManagerOptions
+    href: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions.html
   - name: ','
   - name: " "
   - uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -3379,10 +3431,9 @@ references:
   - name: (
   - name: Of
   - name: " "
-  - uid: System.Type
-    name: Type
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.type
+  - uid: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions
+    name: IApizrExtendedManagerOptions
+    href: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions.html
   - name: ','
   - name: " "
   - uid: Microsoft.Extensions.DependencyInjection.IServiceCollection

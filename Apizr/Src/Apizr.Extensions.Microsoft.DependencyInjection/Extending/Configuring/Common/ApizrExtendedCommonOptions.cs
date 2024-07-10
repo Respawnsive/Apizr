@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
@@ -13,9 +12,6 @@ using Apizr.Extending.Configuring.Registry;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
-using Apizr.Requesting;
-using Apizr.Requesting.Attributes;
-using Apizr.Resiliencing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -37,7 +33,6 @@ namespace Apizr.Extending.Configuring.Common
             CacheHandlerType = typeof(VoidCacheHandler);
             MappingHandlerType = typeof(VoidMappingHandler);
             DelegatingHandlersExtendedFactories = new Dictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>();
-            CrudEntities = new Dictionary<Type, CrudEntityAttribute>();
             WebApis = new Dictionary<Type, BaseAddressAttribute>();
             ObjectMappings = new Dictionary<Assembly, MappedWithAttribute[]>();
             PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
@@ -150,9 +145,6 @@ namespace Apizr.Extending.Configuring.Common
 
         /// <inheritdoc />
         public Func<IServiceProvider, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
-
-        /// <inheritdoc />
-        public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
 
         /// <inheritdoc />
         public IDictionary<Type, BaseAddressAttribute> WebApis { get; }

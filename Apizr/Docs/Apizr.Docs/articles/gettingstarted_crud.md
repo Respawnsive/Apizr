@@ -6,45 +6,87 @@ Here is what the provided interface looks like then:
 ```csharp
 public interface ICrudApi<T, in TKey, TReadAllResult, in TReadAllParams> where T : class
 {
+    // ==== Create ==== //
     [Post("")]
     Task<T> Create([Body] T payload);
 
     [Post("")]
+    Task<IApiResponse<T>> SafeCreate([Body] T payload);
+
+    [Post("")]
     Task<T> Create([Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
+    [Post("")]
+    Task<IApiResponse<T>> SafeCreate([Body] T payload, [RequestOptions] IApizrRequestOptions options);
+
+    // ==== ReadAll ==== //
     [Get("")]
     Task<TReadAllResult> ReadAll();
+
+    [Get("")]
+    Task<IApiResponse<TReadAllResult>> SafeReadAll();
 
     [Get("")]
     Task<TReadAllResult> ReadAll([RequestOptions] IApizrRequestOptions options);
 
     [Get("")]
+    Task<IApiResponse<TReadAllResult>> SafeReadAll([RequestOptions] IApizrRequestOptions options);
+
+    [Get("")]
     Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams);
+
+    [Get("")]
+    Task<IApiResponse<TReadAllResult>> SafeReadAll([CacheKey] TReadAllParams readAllParams);
 
     [Get("")]
     Task<TReadAllResult> ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options);
 
+    [Get("")]
+    Task<IApiResponse<TReadAllResult>> SafeReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options);
+
+    // ==== Read ==== //
     [Get("/{key}")]
     Task<T> Read([CacheKey] TKey key);
 
     [Get("/{key}")]
+    Task<IApiResponse<T>> SafeRead([CacheKey] TKey key);
+
+    [Get("/{key}")]
     Task<T> Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options);
 
+    [Get("/{key}")]
+    Task<IApiResponse<T>> SafeRead([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options);
+
+    // ==== Update ==== //
     [Put("/{key}")]
     Task Update(TKey key, [Body] T payload);
 
     [Put("/{key}")]
+    Task<IApiResponse> SafeUpdate(TKey key, [Body] T payload);
+
+    [Put("/{key}")]
     Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
+    [Put("/{key}")]
+    Task<IApiResponse> SafeUpdate(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options);
+
+    // ==== Delete ==== //
     [Delete("/{key}")]
     Task Delete(TKey key);
 
     [Delete("/{key}")]
+    Task<IApiResponse> SafeDelete(TKey key);
+
+    [Delete("/{key}")]
     Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options);
+
+    [Delete("/{key}")]
+    Task<IApiResponse> SafeDelete(TKey key, [RequestOptions] IApizrRequestOptions options);
 }
 ```
 
 We can see that it comes with or without request options, allowing some option adjustments later at request time.
+It comes with or whithout an ApiResponse too, allowing to handle errors or throw exceptions.
 
 About generic types:
 - T and TKey (optional - default: ```int```) meanings are obvious
@@ -52,6 +94,7 @@ About generic types:
 - TReadAllParams (optional - default: ```IDictionary<string, object>```) is there to handle cases where you don't want to provide an ```IDictionary<string, object>``` for a ReadAll reaquest, but a custom class
 
 But again, nothing to do around here.
+You still can read the api documentation about it [here](/api/Apizr.Requesting.ICrudApi-4.html).
 
 ## Registering
 
@@ -330,11 +373,19 @@ Not available.
 
 #### [Extended](#tab/tabid-extended)
 
-You need to have access to your entity model classes for this option.
-
-Decorate your crud entities like so (but with your own settings):
+First you have to tell Apizr which entity to auto register a crud api for by assembly scanning thanks to the `AutoRegister` attribute:
 ```csharp
-[CrudEntity("https://mybaseuri.com/api/myentity", typeof(int), typeof(PagedResult<>), typeof(ReadAllUsersParams))]
+[AutoRegister("https://mybaseuri.com/api/myentity")]
+public class MyEntity
+{
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
+
+    ...
+}
+
+ // OR with custom arguments
+[AutoRegister<ICrudApi<MyEntity, string, MyPagedResult<MyEntity>, MyReadAllParamsType>>("https://mybaseuri.com/api/myentity")]
 public class MyEntity
 {
     [JsonPropertyName("id")]
@@ -345,17 +396,15 @@ public class MyEntity
 ```
 
 Thanks to this attribute:
+- (Optional) We can specify the crud api with custom arguments if needed (otherwise default arguments will be `int`, `IEnumerable<T>` and `IDictionary<string, object>`)
 - (Mandatory) We have to provide the specific entity crud base uri (no more fluent declaration)
-- (Optional) We can set TKey type to any primitive type (default to int)
-- (Optional) We can set TReadAllResult to any class or must inherit from ```IEnumerable<>``` (default to ```IEnumerable<T>```)
-- (Optional) We can set TReadAllParams to any class (default to ```IDictionary<string, object>```)
 
-Then, here is a registration example:
+Then fluently just write:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudManagerFor(options => options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_ENTITIES);
+    services.AddApizrCrudManagerFor([ASSEMBLIES_CONTAINING_ENTITIES]);
 }
 ```
 

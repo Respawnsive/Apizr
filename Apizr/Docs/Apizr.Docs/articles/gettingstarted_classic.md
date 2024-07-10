@@ -5,7 +5,7 @@ We could define our web api service just like:
 [assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/"), Cache, Log]
+    [BaseAddress("https://reqres.in/"), Cache, Log]
     public interface IReqResService
     {
         [Get("/api/users")]
@@ -29,7 +29,7 @@ Actually, you should consider to add a special parameter called RequestOptions t
 [assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/"), Cache, Log]
+    [BaseAddress("https://reqres.in/"), Cache, Log]
     public interface IReqResService
     {
         [Get("/api/users")]
@@ -347,18 +347,25 @@ Not available.
 
 #### [Extended](#tab/tabid-extended)
 
-Here is an example of how to auto register all scanned interfaces:
+First you have to tell Apizr which api to auto register by assembly scanning thanks to the `AutoRegister` attribute:
+```csharp
+[AutoRegister("YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH")]
+public interface IYourApiInterface
+{
+    // Your api interface methods
+}
+```
+
+Then fluently just write:
 ```csharp
 public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrManagerFor(options => options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_INTERFACES);
+    services.AddApizrManagerFor([ASSEMBLIES_CONTAINING_INTERFACES]);
 }
 ```
 
 Apizr will scan assemblies to auto register managers for decorated api interfaces.
-
-We registered provided a cache handler here as we asked for it with cache attributes while designing the api interface.
 
 ***
 

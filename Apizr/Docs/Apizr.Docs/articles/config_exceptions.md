@@ -39,7 +39,7 @@ You can then decide what to do like so:
 
 ```csharp
 // Here we wrap the response into an IApiResponse<T> provided by Refit
-[WebApi("https://reqres.in/api")]
+[BaseAddress("https://reqres.in/api")]
 public interface IReqResService
 {
     [Get("/users")]

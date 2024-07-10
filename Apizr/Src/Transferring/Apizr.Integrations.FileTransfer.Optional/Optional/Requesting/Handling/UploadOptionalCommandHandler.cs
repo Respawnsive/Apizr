@@ -13,12 +13,21 @@ using Optional.Async.Extensions;
 
 namespace Apizr.Optional.Requesting.Handling
 {
+    /// <summary>
+    /// The mediation handler for <see cref="UploadOptionalCommand{TUploadApi, TUploadApiResultData}"/>
+    /// </summary>
+    /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+    /// <typeparam name="TUploadApiResultData">The upload result type</typeparam>
     public class UploadOptionalCommandHandler<TUploadApi, TUploadApiResultData> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
         IRequestHandler<UploadOptionalCommand<TUploadApi, TUploadApiResultData>, Option<TUploadApiResultData, ApizrException>>
         where TUploadApi : IUploadApi<TUploadApiResultData>
     {
         private readonly IApizrUploadManager<TUploadApi, TUploadApiResultData> _uploadManager;
 
+        /// <summary>
+        /// The mediation handler for <see cref="UploadOptionalCommand{TUploadApi, TUploadApiResultData}"/>
+        /// </summary>
+        /// <param name="uploadManager">The upload manager</param>
         public UploadOptionalCommandHandler(IApizrUploadManager<TUploadApi, TUploadApiResultData> uploadManager)
         {
             _uploadManager = uploadManager;
@@ -65,6 +74,10 @@ namespace Apizr.Optional.Requesting.Handling
         }
     }
 
+    /// <summary>
+    /// The mediation handler for <see cref="UploadOptionalCommand{TUploadApi}"/>
+    /// </summary>
+    /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
     public class UploadOptionalCommandHandler<TUploadApi> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
         IRequestHandler<UploadOptionalCommand<TUploadApi>, Option<HttpResponseMessage, ApizrException>>,
         IRequestHandler<UploadOptionalCommand, Option<HttpResponseMessage, ApizrException>> 
@@ -72,6 +85,10 @@ namespace Apizr.Optional.Requesting.Handling
     {
         private readonly IApizrUploadManager<TUploadApi> _uploadManager;
 
+        /// <summary>
+        /// The mediation handler for <see cref="UploadOptionalCommand{TUploadApi}"/>
+        /// </summary>
+        /// <param name="uploadManager">The upload manager</param>
         public UploadOptionalCommandHandler(IApizrUploadManager<TUploadApi> uploadManager)
         {
             _uploadManager = uploadManager;
@@ -159,11 +176,19 @@ namespace Apizr.Optional.Requesting.Handling
         }
     }
 
+    /// <summary>
+    /// The mediation handler for <see cref="UploadWithOptionalCommand{TUploadApiResultData}"/>
+    /// </summary>
+    /// <typeparam name="TUploadApiResultData">The upload result type</typeparam>
     public class UploadWithOptionalCommandHandler<TUploadApiResultData> : RequestHandlerBase<IApizrRequestOptions, IApizrRequestOptionsBuilder>,
         IRequestHandler<UploadWithOptionalCommand<TUploadApiResultData>, Option<TUploadApiResultData, ApizrException>>
     {
         private readonly IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData> _uploadManager;
 
+        /// <summary>
+        /// The mediation handler for <see cref="UploadWithOptionalCommand{TUploadApiResultData}"/>
+        /// </summary>
+        /// <param name="uploadManager">The upload manager</param>
         public UploadWithOptionalCommandHandler(IApizrUploadManager<IUploadApi<TUploadApiResultData>, TUploadApiResultData> uploadManager)
         {
             _uploadManager = uploadManager;

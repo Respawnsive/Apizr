@@ -127,7 +127,7 @@
 <section id="tabpanel_1_tabid-designing" role="tabpanel" data-tab="tabid-designing">
 
 <p>The first thing to do while designing your api interfaces using Apizr to send a request, is to add an <code>IApizrRequestOptions</code> param decorated with the provided <code>RequestOptions</code> attribute to your methods like:</p>
-<pre><code class="lang-csharp">[WebApi(&quot;https://reqres.in/api&quot;)]
+<pre><code class="lang-csharp">[BaseAddress(&quot;https://reqres.in/api&quot;)]
 public interface IReqResService
 {
     [Get(&quot;/users&quot;)]
@@ -142,7 +142,7 @@ public interface IReqResService
 <pre><code class="lang-csharp">[assembly:Priority(Priority.UserInitiated)]
 namespace Your.Namespace
 {
-    [WebApi(&quot;https://reqres.in/api&quot;), Priority(Priority.Background)]
+    [BaseAddress(&quot;https://reqres.in/api&quot;), Priority(Priority.Background)]
     public interface IReqResService
     {
         [Get(&quot;/users&quot;), Priority(Priority.Speculative)]
@@ -220,7 +220,7 @@ In case of mixed configurations, the internal duplicate strategy will be to take
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_priority.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/config_priority.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

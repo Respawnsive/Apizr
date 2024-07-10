@@ -54,7 +54,6 @@ namespace Apizr.Extending.Configuring.Manager
             MappingHandlerFactory = commonOptions.MappingHandlerFactory;
             DelegatingHandlersExtendedFactories = properOptions.DelegatingHandlersExtendedFactories.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             HttpMessageHandlerFactory = properOptions.HttpMessageHandlerFactory;
-            CrudEntities = commonOptions.CrudEntities.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             WebApis = commonOptions.WebApis.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             ObjectMappings = commonOptions.ObjectMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray());
             PostRegistries = commonOptions.PostRegistries.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
@@ -192,9 +191,6 @@ namespace Apizr.Extending.Configuring.Manager
             get => _requestTimeoutFactory;
             set => _requestTimeoutFactory = value != null ? serviceProvider => (TimeSpan)(RequestTimeout = value.Invoke(serviceProvider)) : null;
         }
-
-        /// <inheritdoc />
-        public IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
 
         /// <inheritdoc />
         public IDictionary<Type, BaseAddressAttribute> WebApis { get; }

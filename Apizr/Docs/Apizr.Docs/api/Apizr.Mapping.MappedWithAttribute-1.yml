@@ -9,40 +9,34 @@ items:
   langs:
   - csharp
   - vb
-  name: MappedWithAttribute<TMappedWith>
-  nameWithType: MappedWithAttribute<TMappedWith>
-  fullName: Apizr.Mapping.MappedWithAttribute<TMappedWith>
+  name: MappedWithAttribute<TSecondEntityType>
+  nameWithType: MappedWithAttribute<TSecondEntityType>
+  fullName: Apizr.Mapping.MappedWithAttribute<TSecondEntityType>
   type: Class
   source:
     remote:
       path: Apizr/Src/Apizr/Mapping/MappedWithAttribute.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappedWithAttribute
     path: ../../Src/Apizr/Mapping/MappedWithAttribute.cs
-    startLine: 28
+    startLine: 36
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
   summary: Tells Apizr to map api request object with model object
   example: []
   syntax:
-    content: >-
-      [AttributeUsage(AttributeTargets.Class|AttributeTargets.Method|AttributeTargets.Parameter)]
-
-      public class MappedWithAttribute<TMappedWith> : MappedWithAttribute
+    content: 'public class MappedWithAttribute<TSecondEntityType> : MappedWithAttribute'
     typeParameters:
-    - id: TMappedWith
-    content.vb: >-
-      <AttributeUsage(AttributeTargets.ClassOrAttributeTargets.MethodOrAttributeTargets.Parameter)>
-
-      Public Class MappedWithAttribute(Of TMappedWith) Inherits MappedWithAttribute
+    - id: TSecondEntityType
+    content.vb: Public Class MappedWithAttribute(Of TSecondEntityType) Inherits MappedWithAttribute
   inheritance:
   - System.Object
   - System.Attribute
   - Apizr.Mapping.MappedWithAttribute
   inheritedMembers:
-  - Apizr.Mapping.MappedWithAttribute.MappedWithType
+  - Apizr.Mapping.MappedWithAttribute.SecondEntityType
   - System.Attribute.Equals(System.Object)
   - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type)
   - System.Attribute.GetCustomAttribute(System.Reflection.Assembly,System.Type,System.Boolean)
@@ -85,15 +79,9 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  attributes:
-  - type: System.AttributeUsageAttribute
-    ctor: System.AttributeUsageAttribute.#ctor(System.AttributeTargets)
-    arguments:
-    - type: System.AttributeTargets
-      value: 2116
-  nameWithType.vb: MappedWithAttribute(Of TMappedWith)
-  fullName.vb: Apizr.Mapping.MappedWithAttribute(Of TMappedWith)
-  name.vb: MappedWithAttribute(Of TMappedWith)
+  nameWithType.vb: MappedWithAttribute(Of TSecondEntityType)
+  fullName.vb: Apizr.Mapping.MappedWithAttribute(Of TSecondEntityType)
+  name.vb: MappedWithAttribute(Of TSecondEntityType)
 - uid: Apizr.Mapping.MappedWithAttribute`1.#ctor
   commentId: M:Apizr.Mapping.MappedWithAttribute`1.#ctor
   id: '#ctor'
@@ -102,17 +90,17 @@ items:
   - csharp
   - vb
   name: MappedWithAttribute()
-  nameWithType: MappedWithAttribute<TMappedWith>.MappedWithAttribute()
-  fullName: Apizr.Mapping.MappedWithAttribute<TMappedWith>.MappedWithAttribute()
+  nameWithType: MappedWithAttribute<TSecondEntityType>.MappedWithAttribute()
+  fullName: Apizr.Mapping.MappedWithAttribute<TSecondEntityType>.MappedWithAttribute()
   type: Constructor
   source:
     remote:
       path: Apizr/Src/Apizr/Mapping/MappedWithAttribute.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Mapping/MappedWithAttribute.cs
-    startLine: 32
+    startLine: 39
   assemblies:
   - Apizr
   namespace: Apizr.Mapping
@@ -121,8 +109,8 @@ items:
     content: public MappedWithAttribute()
     content.vb: Public Sub New()
   overload: Apizr.Mapping.MappedWithAttribute`1.#ctor*
-  nameWithType.vb: MappedWithAttribute(Of TMappedWith).New()
-  fullName.vb: Apizr.Mapping.MappedWithAttribute(Of TMappedWith).New()
+  nameWithType.vb: MappedWithAttribute(Of TSecondEntityType).New()
+  fullName.vb: Apizr.Mapping.MappedWithAttribute(Of TSecondEntityType).New()
   name.vb: New()
 references:
 - uid: Apizr.Mapping
@@ -173,13 +161,13 @@ references:
   name: MappedWithAttribute
   nameWithType: MappedWithAttribute
   fullName: Apizr.Mapping.MappedWithAttribute
-- uid: Apizr.Mapping.MappedWithAttribute.MappedWithType
-  commentId: P:Apizr.Mapping.MappedWithAttribute.MappedWithType
+- uid: Apizr.Mapping.MappedWithAttribute.SecondEntityType
+  commentId: P:Apizr.Mapping.MappedWithAttribute.SecondEntityType
   parent: Apizr.Mapping.MappedWithAttribute
-  href: Apizr.Mapping.MappedWithAttribute.html#Apizr_Mapping_MappedWithAttribute_MappedWithType
-  name: MappedWithType
-  nameWithType: MappedWithAttribute.MappedWithType
-  fullName: Apizr.Mapping.MappedWithAttribute.MappedWithType
+  href: Apizr.Mapping.MappedWithAttribute.html#Apizr_Mapping_MappedWithAttribute_SecondEntityType
+  name: SecondEntityType
+  nameWithType: MappedWithAttribute.SecondEntityType
+  fullName: Apizr.Mapping.MappedWithAttribute.SecondEntityType
 - uid: System.Attribute.Equals(System.Object)
   commentId: M:System.Attribute.Equals(System.Object)
   parent: System.Attribute
@@ -1959,8 +1947,8 @@ references:
   commentId: Overload:Apizr.Mapping.MappedWithAttribute`1.#ctor
   href: Apizr.Mapping.MappedWithAttribute-1.html#Apizr_Mapping_MappedWithAttribute_1__ctor
   name: MappedWithAttribute
-  nameWithType: MappedWithAttribute<TMappedWith>.MappedWithAttribute
-  fullName: Apizr.Mapping.MappedWithAttribute<TMappedWith>.MappedWithAttribute
-  nameWithType.vb: MappedWithAttribute(Of TMappedWith).New
-  fullName.vb: Apizr.Mapping.MappedWithAttribute(Of TMappedWith).New
+  nameWithType: MappedWithAttribute<TSecondEntityType>.MappedWithAttribute
+  fullName: Apizr.Mapping.MappedWithAttribute<TSecondEntityType>.MappedWithAttribute
+  nameWithType.vb: MappedWithAttribute(Of TSecondEntityType).New
+  fullName.vb: Apizr.Mapping.MappedWithAttribute(Of TSecondEntityType).New
   name.vb: New

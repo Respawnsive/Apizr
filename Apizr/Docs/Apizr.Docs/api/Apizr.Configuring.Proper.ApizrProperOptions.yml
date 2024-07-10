@@ -29,7 +29,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrProperOptions
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -57,7 +57,7 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
-  - Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+  - Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi
   - Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger
@@ -99,7 +99,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -110,7 +110,7 @@ items:
   summary: The proper options constructor
   example: []
   syntax:
-    content: public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions, Type webApiType, Type crudModelType, TypeInfo typeInfo, string baseAddress, string basePath, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? operationTimeout, TimeSpan? requestTimeout, ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes, ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes, CacheAttribute commonCacheAttribute, CacheAttribute properCacheAttribute, Func<string, bool> shouldRedactHeaderValue = null, params LogLevel[] logLevels)
+    content: public ApizrProperOptions(IApizrSharedRegistrationOptions sharedOptions, Type webApiType, Type crudApiEntityType, TypeInfo typeInfo, string baseAddress, string basePath, IDictionary<string, object> handlersParameters, HttpTracerMode? httpTracerMode, HttpMessageParts? trafficVerbosity, TimeSpan? operationTimeout, TimeSpan? requestTimeout, ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes, ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes, CacheAttribute commonCacheAttribute, CacheAttribute properCacheAttribute, Func<string, bool> shouldRedactHeaderValue = null, params LogLevel[] logLevels)
     parameters:
     - id: sharedOptions
       type: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
@@ -118,9 +118,9 @@ items:
     - id: webApiType
       type: System.Type
       description: The web api type
-    - id: crudModelType
+    - id: crudApiEntityType
       type: System.Type
-      description: The crud model type if any
+      description: The crud api entity type if any
     - id: typeInfo
       type: System.Reflection.TypeInfo
       description: The type info
@@ -163,7 +163,7 @@ items:
     - id: logLevels
       type: Microsoft.Extensions.Logging.LogLevel[]
       description: The log levels
-    content.vb: Public Sub New(sharedOptions As IApizrSharedRegistrationOptions, webApiType As Type, crudModelType As Type, typeInfo As TypeInfo, baseAddress As String, basePath As String, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, operationTimeout As TimeSpan?, requestTimeout As TimeSpan?, commonResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), properResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), commonCacheAttribute As CacheAttribute, properCacheAttribute As CacheAttribute, shouldRedactHeaderValue As Func(Of String, Boolean) = Nothing, ParamArray logLevels As LogLevel())
+    content.vb: Public Sub New(sharedOptions As IApizrSharedRegistrationOptions, webApiType As Type, crudApiEntityType As Type, typeInfo As TypeInfo, baseAddress As String, basePath As String, handlersParameters As IDictionary(Of String, Object), httpTracerMode As HttpTracerMode?, trafficVerbosity As HttpMessageParts?, operationTimeout As TimeSpan?, requestTimeout As TimeSpan?, commonResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), properResiliencePipelineAttributes As ResiliencePipelineAttributeBase(), commonCacheAttribute As CacheAttribute, properCacheAttribute As CacheAttribute, shouldRedactHeaderValue As Func(Of String, Boolean) = Nothing, ParamArray logLevels As LogLevel())
   overload: Apizr.Configuring.Proper.ApizrProperOptions.#ctor*
   nameWithType.vb: ApizrProperOptions.New(IApizrSharedRegistrationOptions, Type, Type, TypeInfo, String, String, IDictionary(Of String, Object), HttpTracerMode?, HttpMessageParts?, TimeSpan?, TimeSpan?, ResiliencePipelineAttributeBase(), ResiliencePipelineAttributeBase(), CacheAttribute, CacheAttribute, Func(Of String, Boolean), ParamArray LogLevel())
   fullName.vb: Apizr.Configuring.Proper.ApizrProperOptions.New(Apizr.Configuring.Shared.IApizrSharedRegistrationOptions, System.Type, System.Type, System.Reflection.TypeInfo, String, String, System.Collections.Generic.IDictionary(Of String, Object), Apizr.Logging.HttpTracerMode?, Apizr.Logging.HttpMessageParts?, System.TimeSpan?, System.TimeSpan?, Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase(), Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase(), Apizr.Caching.Attributes.CacheAttribute, Apizr.Caching.Attributes.CacheAttribute, System.Func(Of String, Boolean), ParamArray Microsoft.Extensions.Logging.LogLevel())
@@ -182,7 +182,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -215,7 +215,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -248,7 +248,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -281,7 +281,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -314,7 +314,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -347,7 +347,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -380,7 +380,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -413,7 +413,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -446,7 +446,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientConfigurationBuilder
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -479,7 +479,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersFactories
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -512,7 +512,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpMessageHandlerFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -545,7 +545,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeoutFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -578,7 +578,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeoutFactory
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptions.cs
@@ -716,13 +716,13 @@ references:
   name: WebApiType
   nameWithType: ApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
-  commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
+  commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBase
-  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_CrudModelType
-  name: CrudModelType
-  nameWithType: ApizrProperOptionsBase.CrudModelType
-  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudModelType
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBase.html#Apizr_Configuring_Proper_ApizrProperOptionsBase_CrudApiEntityType
+  name: CrudApiEntityType
+  nameWithType: ApizrProperOptionsBase.CrudApiEntityType
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBase.CrudApiEntityType
 - uid: Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
   commentId: P:Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo
   parent: Apizr.Configuring.Proper.ApizrProperOptionsBase

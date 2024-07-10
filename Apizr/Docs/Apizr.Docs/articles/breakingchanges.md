@@ -186,7 +186,137 @@ Please find here some breaking changes while upgrading from previous versions
     // OR factory configuration with the service provider and options instances
     options => options.WithDelegatingHandler((serviceProvider, options) => YourDelegatingHandler)
     ```
+
+- [BaseAddress] Now we can **set base address with the brand new `BaseAddress` attribure** instead of the `WebApi`, `CrudEntity` or `MappedCrudEntity` ones, and only if you need to set it at design time
+
+>[!WARNING]
+> Former `WebApi`, `CrudEntity` and `MappedCrudEntity` attributes have been dropped out to keep things simple and consistent.
+
+   ### [Classic](#tab/tabid-classic)
+
+    Don't write anymore:
+    ```csharp
+    [WebApi("https://reqres.in/api")]
+    public interface IReqResService
+    {
+        [Get("/users")]
+        Task<UserList> GetUsersAsync();
+    }
+    ```
+
+    Now write:
+    ```csharp
+    [BaseAddress("https://reqres.in/api")]
+    public interface IReqResService
+    {
+        [Get("/users")]
+        Task<UserList> GetUsersAsync();
+    }
+    ```
     
+   ### [CRUD](#tab/tabid-crud)
+
+    Don't write anymore:
+    ```csharp
+    [CrudEntity("https://reqres.in/api/users")]
+    public class User
+    {
+        //[...]
+    }
+    ```
+
+    Now write:
+    ```csharp
+    [BaseAddress("https://reqres.in/api/users")]
+    public class User
+    {
+        //[...]
+    }
+    ```
+    ***
+
+- [AutoRegister] Now we can **tell Apizr to auto register apis with the brand new `AutoRegister` attribure** instead of the `WebApi`, `CrudEntity` or `MappedCrudEntity` ones
+
+>[!WARNING]
+> Former `WebApi`, `CrudEntity` and `MappedCrudEntity` attributes have been dropped out to keep things simple and consistent.
+ 
+   ### [Classic](#tab/tabid-classic)
+
+    Don't write anymore:
+    ```csharp
+    [WebApi("https://reqres.in/api")]
+    public interface IReqResService
+    {
+        [Get("/users")]
+        Task<UserList> GetUsersAsync();
+    }
+    ```
+
+    Now write:
+    ```csharp
+    [AutoRegister("https://reqres.in/api")]
+    public interface IReqResService
+    {
+        [Get("/users")]
+        Task<UserList> GetUsersAsync();
+    }
+    ```
+    
+   ### [CRUD](#tab/tabid-crud)
+
+    Don't write anymore:
+    ```csharp
+    [CrudEntity("https://reqres.in/api/users")] 
+    // OR [MappedCrudEntity("https://reqres.in/api/users")]
+    public class User
+    {
+        //[...]
+    }
+    ```
+
+    Now write:
+    ```csharp
+    [AutoRegister("https://reqres.in/api/users")]
+    public class User
+    {
+        //[...]
+    }
+    ```
+
+    Note that `AutoRegister` attribute could take the api type as parameter or generic argument so that you could provide your own crud definition types if needed:
+    ```csharp
+    [AutoRegister<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>("https://reqres.in/api/users")]
+    public class User
+    {
+        //[...]
+    }
+    ```
+    ***
+
+- [MappedWith] Now we can **tell Apizr to map data while using MediatR/Optional thanks to the yet known `MappedWith` attribure** instead of the `CrudEntity` or `MappedCrudEntity` ones
+ 
+>[!WARNING]
+> Former `CrudEntity` and `MappedCrudEntity` attributes have been dropped out to keep things simple and consistent.
+ 
+    Don't write anymore:
+    ```csharp
+    [CrudEntity<MinUser>("https://reqres.in/api/users")] 
+    // OR [MappedCrudEntity<MinUser>("https://reqres.in/api/users")]
+    public class User
+    {
+        //[...]
+    }
+    ```
+
+    Now write:
+    ```csharp
+    [MappedWith<MinUser>]
+    public class User
+    {
+        //[...]
+    }
+    ```
+
 ### 5.3
 
 #### Apizr

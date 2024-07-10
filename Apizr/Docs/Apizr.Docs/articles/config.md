@@ -30,7 +30,7 @@ First, the design:
 [assembly:OperationTimeout("00:02:00")]
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/api")]
+    [BaseAddress("https://reqres.in/api")]
     [OperationTimeout("00:01:30")]
     public interface IReqResService
     {

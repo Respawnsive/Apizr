@@ -56,11 +56,6 @@ namespace Apizr.Extending.Configuring.Common
         Func<IServiceProvider, IMappingHandler> MappingHandlerFactory { get; }
 
         /// <summary>
-        /// Entities auto registered with <see cref="IApizrManager{ICrudApi}"/>
-        /// </summary>
-        IDictionary<Type, CrudEntityAttribute> CrudEntities { get; }
-
-        /// <summary>
         /// Web apis auto registered with <see cref="IApizrManager{TWebApi}"/>
         /// </summary>
         IDictionary<Type, BaseAddressAttribute> WebApis { get; }

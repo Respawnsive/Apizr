@@ -284,7 +284,7 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
 <p>Here is classic api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample
 {
-    [WebApi(&quot;https://reqres.in/api&quot;)]
+    [BaseAddress(&quot;https://reqres.in/api&quot;)]
     public interface IReqResService
     {
         [Get(&quot;/users&quot;), Cache(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
@@ -360,7 +360,7 @@ That's what the <code>CacheKey</code> attribute is made for.
 You can decorate one or more parameters with it, then it will be included in the cache key generation:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample
 {
-    [WebApi(&quot;https://reqres.in/api&quot;)]
+    [BaseAddress(&quot;https://reqres.in/api&quot;)]
     public interface IReqResService
     {
         [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
@@ -409,7 +409,7 @@ finally
 <h5 id="from-returned-iapizrresponset">From returned <code>IApizrResponse&lt;T&gt;</code></h5>
 <p>If your api methods return an <code>IApiResponse&lt;T&gt;</code> provided by Refit, you can handle the <code>IApizrResponse&lt;T&gt;</code> returned by Apizr to get your data from the cache, the safe way without throwing any exception.</p>
 <pre><code class="lang-csharp">// Here we wrap the response into an IApiResponse&lt;T&gt; provided by Refit
-[WebApi(&quot;https://reqres.in/api&quot;)]
+[BaseAddress(&quot;https://reqres.in/api&quot;)]
 public interface IReqResService
 {
     [Get(&quot;/users&quot;)]
@@ -463,7 +463,7 @@ var succeed = await _reqResManager.ClearCacheAsync();
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_datacaching.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/config_datacaching.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

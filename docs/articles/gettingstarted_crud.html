@@ -83,51 +83,94 @@
 <p>Here is what the provided interface looks like then:</p>
 <pre><code class="lang-csharp">public interface ICrudApi&lt;T, in TKey, TReadAllResult, in TReadAllParams&gt; where T : class
 {
+    // ==== Create ==== //
     [Post(&quot;&quot;)]
     Task&lt;T&gt; Create([Body] T payload);
 
     [Post(&quot;&quot;)]
+    Task&lt;IApiResponse&lt;T&gt;&gt; SafeCreate([Body] T payload);
+
+    [Post(&quot;&quot;)]
     Task&lt;T&gt; Create([Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
+    [Post(&quot;&quot;)]
+    Task&lt;IApiResponse&lt;T&gt;&gt; SafeCreate([Body] T payload, [RequestOptions] IApizrRequestOptions options);
+
+    // ==== ReadAll ==== //
     [Get(&quot;&quot;)]
     Task&lt;TReadAllResult&gt; ReadAll();
+
+    [Get(&quot;&quot;)]
+    Task&lt;IApiResponse&lt;TReadAllResult&gt;&gt; SafeReadAll();
 
     [Get(&quot;&quot;)]
     Task&lt;TReadAllResult&gt; ReadAll([RequestOptions] IApizrRequestOptions options);
 
     [Get(&quot;&quot;)]
+    Task&lt;IApiResponse&lt;TReadAllResult&gt;&gt; SafeReadAll([RequestOptions] IApizrRequestOptions options);
+
+    [Get(&quot;&quot;)]
     Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams);
+
+    [Get(&quot;&quot;)]
+    Task&lt;IApiResponse&lt;TReadAllResult&gt;&gt; SafeReadAll([CacheKey] TReadAllParams readAllParams);
 
     [Get(&quot;&quot;)]
     Task&lt;TReadAllResult&gt; ReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options);
 
+    [Get(&quot;&quot;)]
+    Task&lt;IApiResponse&lt;TReadAllResult&gt;&gt; SafeReadAll([CacheKey] TReadAllParams readAllParams, [RequestOptions] IApizrRequestOptions options);
+
+    // ==== Read ==== //
     [Get(&quot;/{key}&quot;)]
     Task&lt;T&gt; Read([CacheKey] TKey key);
 
     [Get(&quot;/{key}&quot;)]
+    Task&lt;IApiResponse&lt;T&gt;&gt; SafeRead([CacheKey] TKey key);
+
+    [Get(&quot;/{key}&quot;)]
     Task&lt;T&gt; Read([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options);
 
+    [Get(&quot;/{key}&quot;)]
+    Task&lt;IApiResponse&lt;T&gt;&gt; SafeRead([CacheKey] TKey key, [RequestOptions] IApizrRequestOptions options);
+
+    // ==== Update ==== //
     [Put(&quot;/{key}&quot;)]
     Task Update(TKey key, [Body] T payload);
 
     [Put(&quot;/{key}&quot;)]
+    Task&lt;IApiResponse&gt; SafeUpdate(TKey key, [Body] T payload);
+
+    [Put(&quot;/{key}&quot;)]
     Task Update(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options);
 
+    [Put(&quot;/{key}&quot;)]
+    Task&lt;IApiResponse&gt; SafeUpdate(TKey key, [Body] T payload, [RequestOptions] IApizrRequestOptions options);
+
+    // ==== Delete ==== //
     [Delete(&quot;/{key}&quot;)]
     Task Delete(TKey key);
 
     [Delete(&quot;/{key}&quot;)]
+    Task&lt;IApiResponse&gt; SafeDelete(TKey key);
+
+    [Delete(&quot;/{key}&quot;)]
     Task Delete(TKey key, [RequestOptions] IApizrRequestOptions options);
+
+    [Delete(&quot;/{key}&quot;)]
+    Task&lt;IApiResponse&gt; SafeDelete(TKey key, [RequestOptions] IApizrRequestOptions options);
 }
 </code></pre>
-<p>We can see that it comes with or without request options, allowing some option adjustments later at request time.</p>
+<p>We can see that it comes with or without request options, allowing some option adjustments later at request time.
+It comes with or whithout an ApiResponse too, allowing to handle errors or throw exceptions.</p>
 <p>About generic types:</p>
 <ul>
 <li>T and TKey (optional - default: <code>int</code>) meanings are obvious</li>
 <li>TReadAllResult (optional - default: <code>IEnumerable&lt;T&gt;</code>) is there to handle cases where ReadAll doesn't return an <code>IEnumerable&lt;T&gt;</code> or derived, but a paged result with some statistics</li>
 <li>TReadAllParams (optional - default: <code>IDictionary&lt;string, object&gt;</code>) is there to handle cases where you don't want to provide an <code>IDictionary&lt;string, object&gt;</code> for a ReadAll reaquest, but a custom class</li>
 </ul>
-<p>But again, nothing to do around here.</p>
+<p>But again, nothing to do around here.
+You still can read the api documentation about it <a href="/api/Apizr.Requesting.ICrudApi-4.html">here</a>.</p>
 <h2 id="registering">Registering</h2>
 <p>It's not mandatory to register anything in a container for DI purpose (you can use the returned static instance directly), but we'll describe here how to use it with DI anyway.</p>
 <h3 id="registering-a-single-interface">Registering a single interface</h3>
@@ -438,9 +481,18 @@ var t3Manager = apizrRegistry.GetCrudManagerFor&lt;T3&gt;();
 </section>
 <section id="tabpanel_4_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
 
-<p>You need to have access to your entity model classes for this option.</p>
-<p>Decorate your crud entities like so (but with your own settings):</p>
-<pre><code class="lang-csharp">[CrudEntity(&quot;https://mybaseuri.com/api/myentity&quot;, typeof(int), typeof(PagedResult&lt;&gt;), typeof(ReadAllUsersParams))]
+<p>First you have to tell Apizr which entity to auto register a crud api for by assembly scanning thanks to the <code>AutoRegister</code> attribute:</p>
+<pre><code class="lang-csharp">[AutoRegister(&quot;https://mybaseuri.com/api/myentity&quot;)]
+public class MyEntity
+{
+    [JsonPropertyName(&quot;id&quot;)]
+    public int Id { get; set; }
+
+    ...
+}
+
+ // OR with custom arguments
+[AutoRegister&lt;ICrudApi&lt;MyEntity, string, MyPagedResult&lt;MyEntity&gt;, MyReadAllParamsType&gt;&gt;(&quot;https://mybaseuri.com/api/myentity&quot;)]
 public class MyEntity
 {
     [JsonPropertyName(&quot;id&quot;)]
@@ -451,16 +503,14 @@ public class MyEntity
 </code></pre>
 <p>Thanks to this attribute:</p>
 <ul>
+<li>(Optional) We can specify the crud api with custom arguments if needed (otherwise default arguments will be <code>int</code>, <code>IEnumerable&lt;T&gt;</code> and <code>IDictionary&lt;string, object&gt;</code>)</li>
 <li>(Mandatory) We have to provide the specific entity crud base uri (no more fluent declaration)</li>
-<li>(Optional) We can set TKey type to any primitive type (default to int)</li>
-<li>(Optional) We can set TReadAllResult to any class or must inherit from <code>IEnumerable&lt;&gt;</code> (default to <code>IEnumerable&lt;T&gt;</code>)</li>
-<li>(Optional) We can set TReadAllParams to any class (default to <code>IDictionary&lt;string, object&gt;</code>)</li>
 </ul>
-<p>Then, here is a registration example:</p>
+<p>Then fluently just write:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrCrudManagerFor(options =&gt; options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_ENTITIES);
+    services.AddApizrCrudManagerFor([ASSEMBLIES_CONTAINING_ENTITIES]);
 }
 </code></pre>
 <p>Apizr will scan assemblies to auto register managers for decorated entities.</p>
@@ -522,7 +572,7 @@ If you provided an IConnectivityHandler implementation and there's no network co
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/gettingstarted_crud.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/gettingstarted_crud.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

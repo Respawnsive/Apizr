@@ -5,7 +5,10 @@ items:
   id: IApizrExtendedProperOptions
   parent: Apizr.Extending.Configuring.Proper
   children:
-  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
+  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
+  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
+  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
   - Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   langs:
   - csharp
@@ -17,7 +20,7 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrExtendedProperOptions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
@@ -32,7 +35,7 @@ items:
     content.vb: Public Interface IApizrExtendedProperOptions Inherits IApizrExtendedProperOptionsBase, IApizrProperOptionsBase, IApizrSharedRegistrationOptionsBase, IApizrExtendedSharedOptions, IApizrExtendedSharedOptionsBase, IApizrGlobalSharedRegistrationOptionsBase, IApizrGlobalSharedOptionsBase
   inheritedMembers:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-  - Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
@@ -66,37 +69,130 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
-  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
-  id: ApizrManagerType
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
+  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
+  id: CrudApiEntityKeyType
   parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
   langs:
   - csharp
   - vb
-  name: ApizrManagerType
-  nameWithType: IApizrExtendedProperOptions.ApizrManagerType
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
+  name: CrudApiEntityKeyType
+  nameWithType: IApizrExtendedProperOptions.CrudApiEntityKeyType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
-    id: ApizrManagerType
+    id: CrudApiEntityKeyType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
-  summary: Type of the manager
+  summary: Type of the crud api entity key if any
   example: []
   syntax:
-    content: Type ApizrManagerType { get; }
+    content: Type CrudApiEntityKeyType { get; }
     parameters: []
     return:
       type: System.Type
-    content.vb: ReadOnly Property ApizrManagerType As Type
-  overload: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType*
+    content.vb: ReadOnly Property CrudApiEntityKeyType As Type
+  overload: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType*
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+  id: CrudApiReadAllResultType
+  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+  langs:
+  - csharp
+  - vb
+  name: CrudApiReadAllResultType
+  nameWithType: IApizrExtendedProperOptions.CrudApiReadAllResultType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: CrudApiReadAllResultType
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
+    startLine: 20
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Proper
+  summary: Type of the crud api read all result if any
+  example: []
+  syntax:
+    content: Type CrudApiReadAllResultType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: ReadOnly Property CrudApiReadAllResultType As Type
+  overload: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType*
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  id: CrudApiReadAllParamsType
+  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+  langs:
+  - csharp
+  - vb
+  name: CrudApiReadAllParamsType
+  nameWithType: IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: CrudApiReadAllParamsType
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
+    startLine: 25
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Proper
+  summary: Type of the crud api read all parameters if any
+  example: []
+  syntax:
+    content: Type CrudApiReadAllParamsType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: ReadOnly Property CrudApiReadAllParamsType As Type
+  overload: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType*
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
+  commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
+  id: ApizrManagerImplementationType
+  parent: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions
+  langs:
+  - csharp
+  - vb
+  name: ApizrManagerImplementationType
+  nameWithType: IApizrExtendedProperOptions.ApizrManagerImplementationType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
+      branch: lab
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ApizrManagerImplementationType
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
+    startLine: 30
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Proper
+  summary: Type of the implemented manager
+  example: []
+  syntax:
+    content: Type ApizrManagerImplementationType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: ReadOnly Property ApizrManagerImplementationType As Type
+  overload: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType*
 - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   commentId: P:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   id: LoggerFactory
@@ -111,11 +207,11 @@ items:
   source:
     remote:
       path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
-      branch: dev
+      branch: lab
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Proper/IApizrExtendedProperOptions.cs
-    startLine: 19
+    startLine: 35
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Proper
@@ -174,13 +270,13 @@ references:
   name: WebApiType
   nameWithType: IApizrProperOptionsBase.WebApiType
   fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
-- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
-  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
-  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_CrudModelType
-  name: CrudModelType
-  nameWithType: IApizrProperOptionsBase.CrudModelType
-  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudModelType
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_CrudApiEntityType
+  name: CrudApiEntityType
+  nameWithType: IApizrProperOptionsBase.CrudApiEntityType
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
   parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
@@ -545,12 +641,12 @@ references:
   - uid: Apizr.Configuring.Shared
     name: Shared
     href: Apizr.Configuring.Shared.html
-- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType*
-  commentId: Overload:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
-  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_ApizrManagerType
-  name: ApizrManagerType
-  nameWithType: IApizrExtendedProperOptions.ApizrManagerType
-  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerType
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType*
+  commentId: Overload:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_CrudApiEntityKeyType
+  name: CrudApiEntityKeyType
+  nameWithType: IApizrExtendedProperOptions.CrudApiEntityKeyType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiEntityKeyType
 - uid: System.Type
   commentId: T:System.Type
   parent: System
@@ -566,6 +662,24 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType*
+  commentId: Overload:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_CrudApiReadAllResultType
+  name: CrudApiReadAllResultType
+  nameWithType: IApizrExtendedProperOptions.CrudApiReadAllResultType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllResultType
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType*
+  commentId: Overload:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_CrudApiReadAllParamsType
+  name: CrudApiReadAllParamsType
+  nameWithType: IApizrExtendedProperOptions.CrudApiReadAllParamsType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.CrudApiReadAllParamsType
+- uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType*
+  commentId: Overload:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
+  href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_ApizrManagerImplementationType
+  name: ApizrManagerImplementationType
+  nameWithType: IApizrExtendedProperOptions.ApizrManagerImplementationType
+  fullName: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.ApizrManagerImplementationType
 - uid: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory*
   commentId: Overload:Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.LoggerFactory
   href: Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptions.html#Apizr_Extending_Configuring_Proper_IApizrExtendedProperOptions_LoggerFactory

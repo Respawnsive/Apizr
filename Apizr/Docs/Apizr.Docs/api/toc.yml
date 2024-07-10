@@ -31,6 +31,10 @@ items:
     name: AutoMapperMappingHandler
   - uid: Apizr.AutoMapperOptionsBuilderExtensions
     name: AutoMapperOptionsBuilderExtensions
+  - uid: Apizr.AutoRegisterAttribute
+    name: AutoRegisterAttribute
+  - uid: Apizr.AutoRegisterAttribute`1
+    name: AutoRegisterAttribute<TWebApi>
   - uid: Apizr.DistributedCacheHandler`1
     name: DistributedCacheHandler<TCache>
   - uid: Apizr.FileTransferExtendedOptionsBuilderExtensions
@@ -81,8 +85,6 @@ items:
     name: ReadPriorityAttribute
   - uid: Apizr.ServiceCollectionExtensions
     name: ServiceCollectionExtensions
-  - uid: Apizr.WebApiAttribute
-    name: WebApiAttribute
 - uid: Apizr.Authenticating
   name: Apizr.Authenticating
   items:
@@ -166,6 +168,8 @@ items:
     name: ApizrRegistrationMode
   - uid: Apizr.Configuring.ApizrRequestMethod
     name: ApizrRequestMethod
+  - uid: Apizr.Configuring.BaseAddressAttribute
+    name: BaseAddressAttribute
   - uid: Apizr.Configuring.CreateHandlerParameterAttribute
     name: CreateHandlerParameterAttribute
   - uid: Apizr.Configuring.CrudHandlerParameterAttribute
@@ -496,22 +500,10 @@ items:
   items:
   - uid: Apizr.Mapping.IMappingHandler
     name: IMappingHandler
-  - uid: Apizr.Mapping.MappedCrudEntityAttribute
-    name: MappedCrudEntityAttribute
-  - uid: Apizr.Mapping.MappedCrudEntityAttribute`1
-    name: MappedCrudEntityAttribute<TApiEntity>
-  - uid: Apizr.Mapping.MappedCrudEntityAttribute`2
-    name: MappedCrudEntityAttribute<TApiEntity, TApiEntityKey>
-  - uid: Apizr.Mapping.MappedCrudEntityAttribute`3
-    name: MappedCrudEntityAttribute<TApiEntity, TApiEntityKey, TApiEntityReadAllResult>
-  - uid: Apizr.Mapping.MappedCrudEntityAttribute`4
-    name: MappedCrudEntityAttribute<TApiEntity, TApiEntityKey, TApiEntityReadAllResult, TApiEntityReadAllParams>
-  - uid: Apizr.Mapping.MappedEntity`2
-    name: MappedEntity<TModelEntity, TApiEntity>
   - uid: Apizr.Mapping.MappedWithAttribute
     name: MappedWithAttribute
   - uid: Apizr.Mapping.MappedWithAttribute`1
-    name: MappedWithAttribute<TMappedWith>
+    name: MappedWithAttribute<TSecondEntityType>
   - uid: Apizr.Mapping.VoidMappingHandler
     name: VoidMappingHandler
 - uid: Apizr.Mediation.Commanding
@@ -1044,16 +1036,6 @@ items:
   items:
   - uid: Apizr.Requesting.Attributes.CreateHeadersAttribute
     name: CreateHeadersAttribute
-  - uid: Apizr.Requesting.Attributes.CrudEntityAttribute
-    name: CrudEntityAttribute
-  - uid: Apizr.Requesting.Attributes.CrudEntityAttribute`1
-    name: CrudEntityAttribute<TKey>
-  - uid: Apizr.Requesting.Attributes.CrudEntityAttribute`2
-    name: CrudEntityAttribute<TKey, TReadAllResult>
-  - uid: Apizr.Requesting.Attributes.CrudEntityAttribute`3
-    name: CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams>
-  - uid: Apizr.Requesting.Attributes.CrudEntityAttribute`4
-    name: CrudEntityAttribute<TKey, TReadAllResult, TReadAllParams, TModelEntity>
   - uid: Apizr.Requesting.Attributes.DeleteHeadersAttribute
     name: DeleteHeadersAttribute
   - uid: Apizr.Requesting.Attributes.ReadAllHeadersAttribute

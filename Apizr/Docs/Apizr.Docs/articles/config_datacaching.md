@@ -183,7 +183,7 @@ Here is classic api an example:
 ```csharp
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/api")]
+    [BaseAddress("https://reqres.in/api")]
     public interface IReqResService
     {
         [Get("/users"), Cache(CacheMode.GetAndFetch, "01:00:00")]
@@ -257,7 +257,7 @@ You can decorate one or more parameters with it, then it will be included in the
 ```csharp
 namespace Apizr.Sample
 {
-    [WebApi("https://reqres.in/api")]
+    [BaseAddress("https://reqres.in/api")]
     public interface IReqResService
     {
         [Get("/users/{userId}"), Cache(CacheMode.GetOrFetch, "1.00:00:00")]
@@ -326,7 +326,7 @@ If your api methods return an `IApiResponse<T>` provided by Refit, you can handl
 
 ```csharp
 // Here we wrap the response into an IApiResponse<T> provided by Refit
-[WebApi("https://reqres.in/api")]
+[BaseAddress("https://reqres.in/api")]
 public interface IReqResService
 {
     [Get("/users")]

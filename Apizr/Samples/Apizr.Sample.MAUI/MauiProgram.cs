@@ -124,7 +124,7 @@ namespace Apizr.Sample.MAUI
                     .AddManagerFor<IReqResService>()
                     .AddManagerFor<IHttpBinService>(options => options
                         .WithAuthenticationHandler(OnRefreshToken))
-                    .AddCrudManagerFor(typeof(User).Assembly),
+                    .AddCrudManagerFor([typeof(User)]),
 
                 config => config
                     .WithDelegatingHandler(serviceProvider => new TestRequestHandler(serviceProvider.GetRequiredService<ISecureStorage>()))

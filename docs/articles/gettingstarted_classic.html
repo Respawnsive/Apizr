@@ -83,7 +83,7 @@
 <pre><code class="lang-csharp">[assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
 namespace Apizr.Sample
 {
-    [WebApi(&quot;https://reqres.in/&quot;), Cache, Log]
+    [BaseAddress(&quot;https://reqres.in/&quot;), Cache, Log]
     public interface IReqResService
     {
         [Get(&quot;/api/users&quot;)]
@@ -103,7 +103,7 @@ namespace Apizr.Sample
 <pre><code class="lang-csharp">[assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
 namespace Apizr.Sample
 {
-    [WebApi(&quot;https://reqres.in/&quot;), Cache, Log]
+    [BaseAddress(&quot;https://reqres.in/&quot;), Cache, Log]
     public interface IReqResService
     {
         [Get(&quot;/api/users&quot;)]
@@ -441,15 +441,21 @@ var httpBinManager = apizrRegistry.GetManagerFor&lt;IHttpBinService&gt;();
 </section>
 <section id="tabpanel_4_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
 
-<p>Here is an example of how to auto register all scanned interfaces:</p>
+<p>First you have to tell Apizr which api to auto register by assembly scanning thanks to the <code>AutoRegister</code> attribute:</p>
+<pre><code class="lang-csharp">[AutoRegister(&quot;YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH&quot;)]
+public interface IYourApiInterface
+{
+    // Your api interface methods
+}
+</code></pre>
+<p>Then fluently just write:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
     // Apizr registration
-    services.AddApizrManagerFor(options =&gt; options.WithAkavacheCacheHandler(), ASSEMBLIES_CONTAINING_INTERFACES);
+    services.AddApizrManagerFor([ASSEMBLIES_CONTAINING_INTERFACES]);
 }
 </code></pre>
 <p>Apizr will scan assemblies to auto register managers for decorated api interfaces.</p>
-<p>We registered provided a cache handler here as we asked for it with cache attributes while designing the api interface.</p>
 </section>
 </div>
 <h2 id="using">Using</h2>
@@ -515,7 +521,7 @@ If you provided an IConnectivityHandler implementation and there's no network co
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/gettingstarted_classic.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/gettingstarted_classic.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

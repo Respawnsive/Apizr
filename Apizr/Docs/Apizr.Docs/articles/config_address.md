@@ -6,46 +6,51 @@ You can mix the configuration providing a base path by attribute and a base addr
 
 ### [Attribute](#tab/tabid-attribute)
 
-Configuring the base address or base path by attribute allows you to use assembly scanning auto registration feature.
+### `BaseAddress` attribute
 
-### Classic api
-
-You can set api interface base address or path thanks to the WebApi attribute like so:
+You can set api interface or CRUD entity base address or path thanks to the `BaseAddress` attribute. It let you set the base address at design time and then register your api fluently without having to set it.
+You can do it like so:
 
 ```csharp
-[WebApi("YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH/")]
+[BaseAddress("YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH")]
 public interface IYourApiInterface
 {
     // Your api interface methods
 }
-```
 
-If you provided only a path, you must set the base address/URI fluently so that Apizr could merge it all together.
-
-Optional parameters:
-- ```isAutoRegistrable``` (default: true) tells Apizr to include or not this specific interface while scanning assemblies for auto registration. 
-It could be usefull when you ask for auto registration but want to do it fluently some specific interfaces.
-
-### CRUD api
-
-You can set CRUD entity api base address thanks to the CrudEntity attribute like so:
-
-```csharp
-[CrudEntity("YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH_")]
+// OR the same for CRUD api
+[BaseAddress("YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH")]
 public class YourCrudEntity
 {
     // Your CRUD entity properties
 }
 ```
 
-If you provided only a path, you must set the base address/URI fluently so that Apizr could merge it all together.
+Note that if you provided only a path, you still have to set the base address/URI fluently at registration time so that Apizr could merge it all together.
 
-Optional parameters:
-- ```keyType```: entity key type (default: null = typeof(int))
-- ```readAllResultType```: ReadAll query result type  (default: null = typeof(IEnumerable{}))
-- ```readAllParamsType```: ReadAll query parameters type  (default: null = typeof(IDictionary{string, object}))
-- ```modelEntityType```: Model entity type mapped with this api entity type (default: null = decorated api entity type)
+### `AutoRegister` attribute
 
+You can set api interface or CRUD entity base address or path thanks to the `AutoRegister` attribute. It let you set the base address at design time and then register apis by assembly scanning at register time.
+You can do it like so:
+
+```csharp
+[AutoRegister("YOUR_API_INTERFACE_BASE_ADDRESS_OR_PATH")]
+public interface IYourApiInterface
+{
+    // Your api interface methods
+}
+
+// OR the same for CRUD api
+[AutoRegister("YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH")]
+public class YourCrudEntity
+{
+    // Your CRUD entity properties
+}
+```
+
+Note that if you provided only a path, you still have to set the base address/URI fluently at registration time so that Apizr could merge it all together.
+
+`AutoRegister` attribute comes with more options so you should read more about it from the Getting Started doc articles.
 
 ### [Fluent](#tab/tabid-fluent)
 

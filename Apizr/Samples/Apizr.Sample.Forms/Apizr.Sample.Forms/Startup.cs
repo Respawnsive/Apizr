@@ -69,7 +69,7 @@ namespace Apizr.Sample.Forms
                     .AddManagerFor<IReqResService>()
                     .AddManagerFor<IHttpBinService>(options => options
                         .WithAuthenticationHandler(OnRefreshToken))
-                    .AddCrudManagerFor(typeof(User).Assembly),
+                    .AddCrudManagerFor([typeof(User)]),
                 
                 config => config
                     .WithAkavacheCacheHandler()

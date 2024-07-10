@@ -1,12 +1,12 @@
 ﻿using System;
 using Apizr.Configuring;
 using Apizr.Mapping;
+using Apizr.Requesting;
 
 namespace Apizr.Tests.Models
 {
-    [MappedCrudEntity<UserDetails>] // this one is for crud auto registration with mapping example
+    [AutoRegister("https://reqres.in/api/users")] // this one is for crud auto registration with mapping example
     [MappedWith<UserDetails>] // this one is for classic auto registration with mapping example
-    [BaseAddress("https://reqres.in/api/users")]
     public class UserInfos
     {
         public int Id { get; set; }

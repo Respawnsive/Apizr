@@ -4,7 +4,7 @@ using Apizr.Requesting.Attributes;
 
 namespace Apizr.Tests.Models
 {
-    [CrudEntity("https://reqres.in/api/users")]
+    [AutoRegister("https://reqres.in/api/users")]
     public class UserDetails
     {
         [JsonPropertyName("data")]

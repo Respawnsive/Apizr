@@ -4,6 +4,11 @@
         <name>Apizr.Integrations.FileTransfer.Optional</name>
     </assembly>
     <members>
+        <member name="T:Apizr.OptionalFileTransferOptionsBuilderExtensions">
+            <summary>
+            Extensions for file transfer registration with optional result
+            </summary>
+        </member>
         <member name="M:Apizr.OptionalFileTransferOptionsBuilderExtensions.WithFileTransferOptionalMediation(Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder)">
             <summary>
             Let Apizr handle file transfer requests management with some mediation and optional result
@@ -17,6 +22,11 @@
             </summary>
             <param name="optionsBuilder"></param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions">
+            <summary>
+            Extensions for file transfer requests with optional result
+            </summary>
         </member>
         <member name="M:Apizr.Optional.Extending.ApizrOptionalMediatorFileTransferExtensions.SendDownloadOptionalQueryFor``2(Apizr.Optional.Requesting.Sending.IApizrOptionalMediator,System.IO.FileInfo,``1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
             <summary>
@@ -316,6 +326,12 @@
             <typeparam name="TDownloadApi">The download api type to manage</typeparam>
             <typeparam name="TDownloadParams">The query parameters type</typeparam>
         </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.DownloadOptionalQueryHandler`2.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0,`1})">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.DownloadOptionalQuery`2"/>
+            </summary>
+            <param name="downloadManager">The download manager</param>
+        </member>
         <member name="M:Apizr.Optional.Requesting.Handling.DownloadOptionalQueryHandler`2.Handle(Apizr.Optional.Requesting.DownloadOptionalQuery{`0,`1},System.Threading.CancellationToken)">
             <summary>
             Handling the download optional request
@@ -329,6 +345,12 @@
             The mediation handler for <see cref="T:Apizr.Optional.Requesting.DownloadOptionalQuery`1"/>
             </summary>
             <typeparam name="TDownloadApi">The download api type to manage</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.DownloadOptionalQueryHandler`1.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{`0})">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.DownloadOptionalQuery`1"/>
+            </summary>
+            <param name="downloadManager">The download manager</param>
         </member>
         <member name="M:Apizr.Optional.Requesting.Handling.DownloadOptionalQueryHandler`1.Handle(Apizr.Optional.Requesting.DownloadOptionalQuery{`0},System.Threading.CancellationToken)">
             <summary>
@@ -352,6 +374,12 @@
             </summary>
             <typeparam name="TDownloadParams">The query parameters type</typeparam>
         </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.DownloadWithOptionalQueryHandler`1.#ctor(Apizr.Transferring.Managing.IApizrDownloadManager{Apizr.Transferring.Requesting.IDownloadApi{`0},`0})">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.DownloadWithOptionalQuery`1"/>
+            </summary>
+            <param name="downloadManager">The download manager</param>
+        </member>
         <member name="M:Apizr.Optional.Requesting.Handling.DownloadWithOptionalQueryHandler`1.Handle(Apizr.Optional.Requesting.DownloadWithOptionalQuery{`0},System.Threading.CancellationToken)">
             <summary>
             Handling the download optional request
@@ -360,6 +388,19 @@
             <param name="cancellationToken">A cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler`2">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.UploadOptionalCommand`2"/>
+            </summary>
+            <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+            <typeparam name="TUploadApiResultData">The upload result type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler`2.#ctor(Apizr.Transferring.Managing.IApizrUploadManager{`0,`1})">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.UploadOptionalCommand`2"/>
+            </summary>
+            <param name="uploadManager">The upload manager</param>
+        </member>
         <member name="M:Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler`2.Handle(Apizr.Optional.Requesting.UploadOptionalCommand{`0,`1},System.Threading.CancellationToken)">
             <summary>
             Handling the upload optional request
@@ -367,6 +408,18 @@
             <param name="request">The upload optional request</param>
             <param name="cancellationToken">A cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler`1">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.UploadOptionalCommand`1"/>
+            </summary>
+            <typeparam name="TUploadApi">The upload api type to manage</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler`1.#ctor(Apizr.Transferring.Managing.IApizrUploadManager{`0})">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.UploadOptionalCommand`1"/>
+            </summary>
+            <param name="uploadManager">The upload manager</param>
         </member>
         <member name="M:Apizr.Optional.Requesting.Handling.UploadOptionalCommandHandler`1.Handle(Apizr.Optional.Requesting.UploadOptionalCommand{`0},System.Threading.CancellationToken)">
             <summary>
@@ -383,6 +436,18 @@
             <param name="request">The upload optional request</param>
             <param name="cancellationToken">A cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="T:Apizr.Optional.Requesting.Handling.UploadWithOptionalCommandHandler`1">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.UploadWithOptionalCommand`1"/>
+            </summary>
+            <typeparam name="TUploadApiResultData">The upload result type</typeparam>
+        </member>
+        <member name="M:Apizr.Optional.Requesting.Handling.UploadWithOptionalCommandHandler`1.#ctor(Apizr.Transferring.Managing.IApizrUploadManager{Apizr.Transferring.Requesting.IUploadApi{`0},`0})">
+            <summary>
+            The mediation handler for <see cref="T:Apizr.Optional.Requesting.UploadWithOptionalCommand`1"/>
+            </summary>
+            <param name="uploadManager">The upload manager</param>
         </member>
         <member name="M:Apizr.Optional.Requesting.Handling.UploadWithOptionalCommandHandler`1.Handle(Apizr.Optional.Requesting.UploadWithOptionalCommand{`0},System.Threading.CancellationToken)">
             <summary>

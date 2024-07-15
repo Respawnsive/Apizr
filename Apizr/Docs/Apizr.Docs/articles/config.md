@@ -41,6 +41,11 @@ namespace Apizr.Sample
 }
 ```
 
+>[!TIP]
+> You should add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to get all the Apizr goodness. 
+>
+>If not, request time configuration won't be applied (such as Polly, Cancellation, Timeout, Priority, etc...).
+
 Then, the registration, the extended way:
 
 ```csharp

@@ -33,6 +33,7 @@ using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Http.Resilience;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MonkeyCache.FileStore;
@@ -608,6 +609,47 @@ namespace Apizr.Tests
                                     return default;
                                 }
                             }));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            // Defining a transient throwing request
+            Func<Task> act = () => reqResManager.ExecuteAsync((opt, api) => api.GetUsersAsync(HttpStatusCode.RequestTimeout, opt));
+
+            // Calling it should throw but handled by Polly
+            await act.Should().ThrowAsync<ApizrException>();
+
+            // attempts should be equal to total retry count
+            retryCount.Should().Be(maxRetryAttempts);
+        }
+
+        [Fact]
+        public async Task RequestTimeout_Should_Be_Handled_By_Microsoft_Resilience()
+        {
+            var maxRetryAttempts = 3;
+            var retryCount = 0;
+
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddMemoryCache();
+
+                    services.AddApizrManagerFor<IReqResUserService>(config => config
+                        .WithLogging()
+                        .WithDelegatingHandler(new TestRequestHandler())
+                        .ConfigureHttpClientBuilder(builder => builder
+                            .AddStandardResilienceHandler()
+                            .Configure(options => options.Retry.OnRetry = args =>
+                            {
+                                retryCount = args.AttemptNumber + 1;
+                                return default;
+                            })));
                 })
                 .Build();
 

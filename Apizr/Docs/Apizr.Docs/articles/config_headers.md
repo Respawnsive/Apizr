@@ -2,8 +2,7 @@
 
 You can set headers with static or dynamic values and with clear or redacted logged values (if logging is enabled with headers included).
 
->[!TIP]
-> You should add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to get all the Apizr goodness.
+First, add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to ensure your headers will be applied and don't forget to pass the options to your api methods at request time.
 
 ### Static headers
 

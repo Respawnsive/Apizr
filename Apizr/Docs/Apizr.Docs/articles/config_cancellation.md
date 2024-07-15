@@ -1,6 +1,10 @@
 ﻿## Configuring Cancellation
 
 You may want to provide a CancellationToken, thanks to `WithCancellation` builder option, available at request time.
+
+First, add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to provide your cancellation token. 
+
+Then, you can set it thanks to this option:
 ```csharp
 try
 {

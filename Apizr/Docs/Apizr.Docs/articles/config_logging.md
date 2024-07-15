@@ -176,8 +176,9 @@ It means that you can share logging configuration, setting it at registry level 
 
 Configuring the logging fluently at request time allows you to set it at the very end, just before sending the request.
 
-You can set it thanks to this option:
+First, add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to provide your logging configuration at request time. 
 
+Then, you can set it thanks to this option:
 ```csharp
 // direct configuration
 options => options.WithLogging(HttpTracerMode.Everything, HttpMessageParts.All, LogLevel.Information)

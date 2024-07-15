@@ -82,6 +82,11 @@
 <p>Most of Apizr settings could be set by providing an <code>IConfiguration</code> instance.
 We can set them at common level (shared by all apis) or specific level (dedicated to named apis).
 The following doc acrticle will focus on appsettings.json configuration.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>You should add the request options parameter <code>[RequestOptions] IApizrRequestOptions options</code> to your api methods to get all the Apizr goodness.</p>
+<p>If not, some configurations may not be applied (such as Polly, Cancellation, Timeout, Priority, etc...).</p>
+</div>
 <h3 id="defining">Defining</h3>
 <p>Here is an example of an appsettings.json file with some of the settings that could be set:</p>
 <pre><code class="lang-json">{
@@ -152,9 +157,9 @@ The following doc acrticle will focus on appsettings.json configuration.</p>
 <li><code>BasePath</code> (string): specifies the base API address path</li>
 <li><code>Logging</code> (section): contains settings related to logging
 <ul>
-<li><code>HttpTracerMode</code> (enum member name): specifies the mode for HTTP tracing</li>
-<li><code>TrafficVerbosity</code> (enum member name): specifies the verbosity level for traffic logging</li>
-<li><code>LogLevels</code> (enum member names array): specifies the log levels to use</li>
+<li><code>HttpTracerMode</code> (enum member name): specifies the <a href="/api/Apizr.Logging.HttpTracerMode.html">mode</a> for HTTP tracing</li>
+<li><code>TrafficVerbosity</code> (enum member name): specifies the <a href="/api/Apizr.Logging.HttpMessageParts.html">verbosity</a> level for traffic logging</li>
+<li><code>LogLevels</code> (enum member names array): specifies the <a href="https://learn.microsoft.com/fr-fr/dotnet/api/microsoft.extensions.logging.loglevel">log levels</a> to use</li>
 </ul>
 </li>
 <li><code>OperationTimeout</code> (TimeSpan representation): specifies the timeout for an API operation of multiple requests</li>
@@ -168,10 +173,10 @@ The following doc acrticle will focus on appsettings.json configuration.</p>
 </li>
 <li><code>Headers</code> (string array): specifies custom headers to be added to requests</li>
 <li><code>ResiliencePipelineKeys</code> (string array): specifies the resilience pipeline keys to use</li>
-<li><code>ResiliencePipelineOptions</code> (dictionary): specifies the resilience pipeline keys to use but scoped to specific request method groups</li>
+<li><code>ResiliencePipelineOptions</code> (dictionary): specifies the resilience pipeline keys to use but scoped to specific request <a href="/api/Apizr.Configuring.ApizrRequestMethod.html">method groups</a></li>
 <li><code>Caching</code> (section): contains settings related to caching
 <ul>
-<li><code>Mode</code> (enum member name): specifies the caching mode</li>
+<li><code>Mode</code> (enum member name): specifies the <a href="/api/Apizr.Caching.CacheMode.html">caching mode</a></li>
 <li><code>LifeSpan</code> (TimeSpan representation): specifies the lifespan of cached responses</li>
 <li><code>ShouldInvalidateOnError</code> (bool): specifies whether to invalidate the cache on error</li>
 </ul>
@@ -203,7 +208,7 @@ The following doc acrticle will focus on appsettings.json configuration.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/config_settings.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_settings.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

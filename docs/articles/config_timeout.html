@@ -115,6 +115,7 @@
 <section id="tabpanel_1_tabid-designing" role="tabpanel" data-tab="tabid-designing">
 
 <p>Apizr comes with a <code>RequestTimeout</code> and an <code>OperationTimeout</code> attribute which set a timeout at any level (all Assembly apis, interface apis or specific api method).</p>
+<p>Also, please add the request options parameter <code>[RequestOptions] IApizrRequestOptions options</code> to your api methods to ensure your timeouts will be applied and don't forget to pass the options to your api methods at request time.</p>
 <p>Here is classic api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample
 {
@@ -122,10 +123,10 @@
     public interface IReqResService
     {
         [Get(&quot;/users&quot;), RequestTimeout(&quot;00:01:00&quot;)]
-        Task&lt;UserList&gt; GetUsersAsync();
+        Task&lt;UserList&gt; GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get(&quot;/users/{userId}&quot;), RequestTimeout(&quot;00:00:30&quot;)]
-        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, [RequestOptions] IApizrRequestOptions options);
     }
 }
 </code></pre>
@@ -225,7 +226,7 @@ options =&gt; options.WithOperationTimeout(YOUR_TIMESPAN)
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/config_timeout.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config_timeout.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

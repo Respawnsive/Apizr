@@ -113,6 +113,11 @@ namespace Apizr.Sample
     }
 }
 </code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>You should add the request options parameter <code>[RequestOptions] IApizrRequestOptions options</code> to your api methods to get all the Apizr goodness.</p>
+<p>If not, request time configuration won't be applied (such as Polly, Cancellation, Timeout, Priority, etc...).</p>
+</div>
 <p>Then, the registration, the extended way:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
 {
@@ -218,7 +223,7 @@ var users = await reqResManager.ExecuteAsync((opt, api) =&gt; api.GetUsersAsync(
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/lab/Apizr/Docs/Apizr.Docs/articles/config.md/#L1" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Docs/Apizr.Docs/articles/config.md/#L1" class="contribution-link">Edit this page</a>
                   </li>
                 </ul>
               </div>

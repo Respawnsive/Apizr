@@ -19,6 +19,8 @@ You can configure a timeout at:
 
 Apizr comes with a `RequestTimeout` and an `OperationTimeout` attribute which set a timeout at any level (all Assembly apis, interface apis or specific api method).
 
+Also, please add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to ensure your timeouts will be applied and don't forget to pass the options to your api methods at request time.
+
 Here is classic api an example:
 ```csharp
 namespace Apizr.Sample
@@ -27,10 +29,10 @@ namespace Apizr.Sample
     public interface IReqResService
     {
         [Get("/users"), RequestTimeout("00:01:00")]
-        Task<UserList> GetUsersAsync();
+        Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get("/users/{userId}"), RequestTimeout("00:00:30")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId);
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, [RequestOptions] IApizrRequestOptions options);
     }
 }
 ```

@@ -121,10 +121,8 @@ namespace Apizr.Configuring.Manager
                             break;
                         }
                         default:
-                            if (!config.GetChildren().Any())
-                                throw new ArgumentOutOfRangeException(config.Key, $"Apizr does not handle any {config.Key} option. Make sure that your key target an option that Apizr could configure.");
-
-                            WithConfiguration(config);
+                            if (config.GetChildren().Any())
+                                WithConfiguration(config);
                             break;
                     }
                 }

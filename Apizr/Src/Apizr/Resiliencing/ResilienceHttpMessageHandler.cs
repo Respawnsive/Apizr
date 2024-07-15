@@ -158,9 +158,15 @@ namespace Apizr.Resiliencing
                     {
                         foreach (var keyToInclude in keysToInclude)
                         {
-                            if (_registry.TryGetPipeline<HttpResponseMessage>(keyToInclude, out var registeredResiliencePipeline))
+                            if (_registry.TryGetPipeline(keyToInclude, out var registeredGenericResiliencePipeline))
                             {
-                                pipelineBuilder.AddPipeline(registeredResiliencePipeline);
+                                pipelineBuilder.AddPipeline(registeredGenericResiliencePipeline);
+                                includedKeys.Add(keyToInclude);
+                                logger.Log(logLevels.Low(), "{0}: Resilience pipeline named '{1}' will be applied", context.OperationKey, keyToInclude);
+                            }
+                            else if (_registry.TryGetPipeline<HttpResponseMessage>(keyToInclude, out var registeredTypedResiliencePipeline))
+                            {
+                                pipelineBuilder.AddPipeline(registeredTypedResiliencePipeline);
                                 includedKeys.Add(keyToInclude);
                                 logger.Log(logLevels.Low(), "{0}: Resilience pipeline named '{1}' will be applied", context.OperationKey, keyToInclude);
                             }

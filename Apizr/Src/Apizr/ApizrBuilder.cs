@@ -152,7 +152,8 @@ namespace Apizr
             Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         where TApizrManager : IApizrManager<TWebApi>
         {
-            var apizrOptions = CreateOptions(commonOptions, properOptions, optionsBuilder);
+            var apizrOptions = CreateManagerOptions(commonOptions, properOptions, optionsBuilder);
+            var webApiFriendlyName = properOptions.WebApiType.GetFriendlyName();
 
             var httpHandlerFactory = new Func<HttpMessageHandler>(() =>
             {
@@ -179,6 +180,10 @@ namespace Apizr
 
                 // Custom client config
                 apizrOptions.HttpClientConfigurationBuilder.Invoke(httpClient);
+
+                // Api URI check
+                if (httpClient.BaseAddress == null)
+                    throw new ArgumentNullException(nameof(httpClient.BaseAddress), $"No base address found for {webApiFriendlyName}");
 
                 // Refit rest service
                 return RestService.For<TWebApi>(httpClient, apizrOptions.RefitSettings);
@@ -360,7 +365,7 @@ namespace Apizr
             return builder.ApizrRegistry;
         }
 
-        private static IApizrManagerOptions CreateOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
+        private static IApizrManagerOptions CreateManagerOptions(IApizrCommonOptions commonOptions, IApizrProperOptions properOptions, Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
         {
             var builder = new ApizrManagerOptionsBuilder(new ApizrManagerOptions(commonOptions, properOptions)) as IApizrManagerOptionsBuilder;
 
@@ -377,7 +382,7 @@ namespace Apizr
             {
                 builder.ApizrOptions.BaseUriFactory?.Invoke();
                 builder.ApizrOptions.BasePathFactory?.Invoke();
-                if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseUri.ToString(), builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
+                if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseUri?.ToString(), builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
                     builder.WithBaseAddress(baseUri);
             }
 

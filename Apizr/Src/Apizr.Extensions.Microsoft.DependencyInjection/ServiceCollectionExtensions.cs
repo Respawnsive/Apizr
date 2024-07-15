@@ -501,8 +501,11 @@ namespace Apizr
                         var options = (IApizrExtendedManagerOptionsBase)serviceProvider.GetRequiredService(managerOptionsServiceType);
 
                         // HttpClient
-                        if (httpClient.BaseAddress == null) 
-                            httpClient.BaseAddress = options.BaseUri;
+                        httpClient.BaseAddress ??= options.BaseUri;
+
+                        // Api URI check
+                        if (httpClient.BaseAddress == null)
+                            throw new ArgumentNullException(nameof(httpClient.BaseAddress), $"No base address found for {webApiFriendlyName}");
 
                         // Refit rest service
                         return typeof(LazyFactory<>).MakeGenericType(options.WebApiType)
@@ -533,7 +536,7 @@ namespace Apizr
                 {
                     managerOptions.BaseUriFactory?.Invoke(serviceProvider);
                     managerOptions.BasePathFactory?.Invoke(serviceProvider);
-                    if (Uri.TryCreate(UrlHelper.Combine(managerOptions.BaseUri.ToString(), managerOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
+                    if (Uri.TryCreate(UrlHelper.Combine(managerOptions.BaseUri?.ToString(), managerOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
                         managerOptionsBuilder.WithBaseAddress(baseUri);
                 }
 

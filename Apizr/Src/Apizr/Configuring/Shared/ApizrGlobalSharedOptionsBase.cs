@@ -25,8 +25,8 @@ namespace Apizr.Configuring.Shared
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
             ShouldRedactHeaderValue = sharedOptions?.ShouldRedactHeaderValue;
-            ResiliencePipelineOptions = sharedOptions?.ResiliencePipelineOptions?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()) ?? [];
-            CacheOptions = sharedOptions?.CacheOptions?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            ResiliencePipelineOptions = sharedOptions?.ResiliencePipelineOptions?.Where(kpv => kpv.Key != ApizrConfigurationSource.FinalConfiguration).ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()) ?? [];
+            CacheOptions = sharedOptions?.CacheOptions?.Where(kpv => kpv.Key != ApizrConfigurationSource.FinalConfiguration).ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
             _contextOptionsBuilder = sharedOptions?.ContextOptionsBuilder;
             _resiliencePropertiesFactories = sharedOptions?.ResiliencePropertiesFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? [];
         }

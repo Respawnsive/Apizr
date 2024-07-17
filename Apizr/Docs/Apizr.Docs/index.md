@@ -37,8 +37,6 @@ The list is not exhaustive, there’s more, but what we wanted was playing with 
 
 Inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack), we wanted to make it simple to use, mixing attribute decorations and fluent configuration.
 
-Also, we built this lib to make it work with any .Net Standard 2.0 compliant platform, so we could use it seamlessly from any kind of app, with or without DI goodness.
-
 ## How
 
 An api definition with some attributes:
@@ -146,9 +144,10 @@ This request will be managed with the defined resilience strategies, data cached
 
 Apizr has a lot more to offer, just [read the doc](articles/index.md)!
 
-## Where
+- Please read the [Change Log](changelog.md) to get a picture of what's in.
+- Please read the [Breaking changes](articles/breakingchanges.md) to get a picture of what's changed.
 
-[Change Log](changelog.md)
+## Where
 
 ### Managing (Core)
 

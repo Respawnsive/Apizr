@@ -1,7 +1,7 @@
 ﻿## Configuring base address
 
 You can configure base address and base path either by attribute decoration or by fluent configuration.
-Fluent configuration allows you to load options automatically from settings (see Settings), or set options manually.
+Fluent configuration allows you to load options automatically from settings (see [Settings](config_settings.md)), or set options manually.
 You can mix the configuration providing a base path by attribute and a base address/URI fluently.
 
 ### [Attribute](#tab/tabid-attribute)
@@ -20,7 +20,7 @@ public interface IYourApiInterface
 
 // OR the same for CRUD api
 [BaseAddress("YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH")]
-public class YourCrudEntity
+public record YourCrudEntity
 {
     // Your CRUD entity properties
 }
@@ -42,7 +42,7 @@ public interface IYourApiInterface
 
 // OR the same for CRUD api
 [AutoRegister("YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH")]
-public class YourCrudEntity
+public record YourCrudEntity
 {
     // Your CRUD entity properties
 }
@@ -63,7 +63,7 @@ options => options.WithConfiguration(context.Configuration)
 
 We can set it at common level (shared by all apis) or specific level (dedicated to a named one).
 
-Please heads to the Settings doc article to see how to configure the base address or base path automatically from settings.
+Please heads to the [Settings](config_settings.md))  doc article to see how to configure the base address or base path automatically from settings.
 
 #### Manually
 

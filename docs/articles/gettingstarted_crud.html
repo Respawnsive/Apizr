@@ -483,20 +483,20 @@ var t3Manager = apizrRegistry.GetCrudManagerFor&lt;T3&gt;();
 
 <p>First you have to tell Apizr which entity to auto register a crud api for by assembly scanning thanks to the <code>AutoRegister</code> attribute:</p>
 <pre><code class="lang-csharp">[AutoRegister(&quot;https://mybaseuri.com/api/myentity&quot;)]
-public class MyEntity
+public record MyEntity
 {
     [JsonPropertyName(&quot;id&quot;)]
-    public int Id { get; set; }
+    public int Id { get; init; }
 
     ...
 }
 
  // OR with custom arguments
 [AutoRegister&lt;ICrudApi&lt;MyEntity, string, MyPagedResult&lt;MyEntity&gt;, MyReadAllParamsType&gt;&gt;(&quot;https://mybaseuri.com/api/myentity&quot;)]
-public class MyEntity
+public record MyEntity
 {
     [JsonPropertyName(&quot;id&quot;)]
-    public int Id { get; set; }
+    public int Id { get; init; }
 
     ...
 }
@@ -517,7 +517,7 @@ public class MyEntity
 </section>
 </div>
 <h2 id="using">Using</h2>
-<p>Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.</p>
+<p>Here is an example of how to send a web request from an app - e.g. using Apizr in a MAUI mobile app.</p>
 <p>Inject <code>IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;</code> where you need it - e.g. into your ViewModel constructor</p>
 <pre><code class="lang-csharp">public class YourViewModel
 {

@@ -3,15 +3,15 @@ using System.Text.Json.Serialization;
 
 namespace Apizr.Tests.Models
 {
-    public class UserAd
+    public record UserAd
     {
         [JsonPropertyName("company")]
-        public string Company { get; set; }
+        public string Company { get; init; }
 
         [JsonPropertyName("url")]
-        public Uri Url { get; set; }
+        public Uri Url { get; init; }
 
         [JsonPropertyName("text")]
-        public string Text { get; set; }
+        public string Text { get; init; }
     }
 }

@@ -17,16 +17,16 @@ namespace Apizr.Tests.Models
     ReadAllHeaders("testKey1: testValue1", "testKey2: *testValue2*", "testKey3: {0}", "testKey4: *{0}*"),
     Log(HttpMessageParts.All),
     ReadAllPriority(Priority.Background)]
-    public class User
+    public record User
     {
-        [JsonPropertyName("id")] public int Id { get; set; }
+        [JsonPropertyName("id")] public int Id { get; init; }
 
-        [JsonPropertyName("first_name")] public string FirstName { get; set; }
+        [JsonPropertyName("first_name")] public string FirstName { get; init; }
 
-        [JsonPropertyName("last_name")] public string LastName { get; set; }
+        [JsonPropertyName("last_name")] public string LastName { get; init; }
 
-        [JsonPropertyName("avatar")] public string Avatar { get; set; }
+        [JsonPropertyName("avatar")] public string Avatar { get; init; }
 
-        [JsonPropertyName("email")] public string Email { get; set; }
+        [JsonPropertyName("email")] public string Email { get; init; }
     }
 }

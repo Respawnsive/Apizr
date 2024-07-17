@@ -193,29 +193,29 @@ Then some custom log settings about this specific api.</p>
 <pre><code class="lang-csharp">[assembly:Log]
 namespace Apizr.Sample.Models
 {
-    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [BaseAddress(&quot;https://reqres.in/api/users&quot;)]
     [LogReadAll(HttpMessageParts.RequestAll, 
         HttpTracerMode.ErrorsAndExceptionsOnly, 
         LogLevel.Information)]
     [LogRead(HttpMessageParts.AllButBodies, 
         HttpTracerMode.ExceptionsOnly, 
         LogLevel.Debug)]
-    public class User
+    public record User
     {
-        [JsonProperty(&quot;id&quot;)]
-        public int Id { get; set; }
+        [JsonPropertyName(&quot;id&quot;)]
+        public int Id { get; init; }
 
-        [JsonProperty(&quot;first_name&quot;)]
-        public string FirstName { get; set; }
+        [JsonPropertyName(&quot;first_name&quot;)]
+        public string FirstName { get; init; }
 
-        [JsonProperty(&quot;last_name&quot;)]
-        public string LastName { get; set; }
+        [JsonPropertyName(&quot;last_name&quot;)]
+        public string LastName { get; init; }
 
-        [JsonProperty(&quot;avatar&quot;)]
-        public string Avatar { get; set; }
+        [JsonPropertyName(&quot;avatar&quot;)]
+        public string Avatar { get; init; }
 
-        [JsonProperty(&quot;email&quot;)]
-        public string Email { get; set; }
+        [JsonPropertyName(&quot;email&quot;)]
+        public string Email { get; init; }
     }
 }
 </code></pre>
@@ -228,7 +228,7 @@ Then some custom log settings about this specific api.</p>
 <pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
 </code></pre>
 <p>We can set it at common level (to all apis) or specific level (dedicated to a named one).</p>
-<p>Please heads to the Settings doc article to see how to configure logging automatically from loaded settings configuration.</p>
+<p>Please heads to the <a href="config_settings.html">Settings</a>)  doc article to see how to configure logging automatically from loaded settings configuration.</p>
 <h4 id="manually">Manually</h4>
 <p>Configuring the logging fluently at register time allows you to set it dynamically.</p>
 <p>You can set it thanks to this option:</p>

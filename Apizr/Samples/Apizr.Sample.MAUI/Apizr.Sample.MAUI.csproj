@@ -53,17 +53,42 @@
   <ItemGroup>
     <AndroidResource Include="Resources\Raw\AboutAssets.txt" />
   </ItemGroup>
+
+    <!--AppSettings-->
+	<ItemGroup>
+		<EmbeddedResource Include="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<Content Update="appsettings.Debug.json">
+			<DependentUpon>appsettings.json</DependentUpon>
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+		<Content Update="appsettings.Release.json">
+			<DependentUpon>appsettings.json</DependentUpon>
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+	<Target Name="CopyConfigFiles" AfterTargets="PrepareForBuild">
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\appsettings.Debug.json" DestinationFiles="$(MSBuildProjectDirectory)\appsettings.json" Condition="'$(Configuration)'=='Debug'" />
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\appsettings.Release.json" DestinationFiles="$(MSBuildProjectDirectory)\appsettings.json" Condition="'$(Configuration)'=='Release'" />
+		<Message Text="appsetting.json updated ($(Configuration))" />
+	</Target>
+
+    <!--NuGet-->
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Maui" Version="9.0.0" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="8.0.0-preview-02" />
     <PackageReference Include="MetroLog.Maui" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
     <PackageReference Include="Prism.DryIoc.Maui" Version="9.0.401-pre" />
     <PackageReference Include="Prism.Maui.Rx" Version="9.0.401-pre" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
-    <PackageReference Include="Refit.Newtonsoft.Json" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
+    <PackageReference Include="Refit.Newtonsoft.Json" Version="7.1.2" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Apizr.Extensions.Microsoft.DependencyInjection\Apizr.Extensions.Microsoft.DependencyInjection.csproj" />

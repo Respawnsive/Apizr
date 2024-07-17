@@ -4,6 +4,7 @@ using Apizr.Sample.MAUI.ViewModels;
 using Apizr.Sample.Models;
 using CommunityToolkit.Maui;
 using System.Reflection;
+using Apizr.Extending.Configuring.Common;
 using Apizr.Sample.MAUI.Infrastructure;
 using MetroLog.Maui;
 using MetroLog.MicrosoftExtensions;
@@ -13,6 +14,8 @@ using Polly;
 using Polly.Retry;
 using Microsoft.Extensions.Logging;
 using ReactiveUI;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Maui.Controls;
 
 namespace Apizr.Sample.MAUI
 {
@@ -54,7 +57,17 @@ namespace Apizr.Sample.MAUI
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            
+
+            #region Configuration
+
+            // Json settings (loaded from embedded appsettings.json)
+            var assembly = Assembly.GetExecutingAssembly();
+            using var stream = assembly!.GetManifestResourceStream($"{assembly.GetName().Name}.appsettings.json")!;
+            var jsonConfig = new ConfigurationBuilder().AddJsonStream(stream!).Build();
+            builder.Configuration.AddConfiguration(jsonConfig);
+
+            #endregion
+
             #region Logging
 
             builder.Logging
@@ -127,9 +140,10 @@ namespace Apizr.Sample.MAUI
                     .AddCrudManagerFor([typeof(User)]),
 
                 config => config
+                    .WithConfiguration(builder.Configuration)
                     .WithDelegatingHandler(serviceProvider => new TestRequestHandler(serviceProvider.GetRequiredService<ISecureStorage>()))
                     .WithAkavacheCacheHandler()
-                    .WithLogging()
+                    //.WithLogging()
                     //.WithConnectivityHandler<IConnectivity>(connectivity => connectivity.NetworkAccess == NetworkAccess.Internet)
                     .WithMediation()
                     .WithOptionalMediation());

@@ -43,26 +43,26 @@ Here is CRUD api an example:
 ```csharp
 namespace Apizr.Sample.Models
 {
-    [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
+    [BaseAddress("https://reqres.in/api/users")]
     [OperationTimeout("00:03:00")]
     [ReadAllRequestTimeout("00:01:00")]
     [ReadRequestTimeout("00:00:30")]
-    public class User
+    public record User
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; init; }
 
-        [JsonProperty("first_name")]
-        public string FirstName { get; set; }
+        [JsonPropertyName("first_name")]
+        public string FirstName { get; init; }
 
-        [JsonProperty("last_name")]
-        public string LastName { get; set; }
+        [JsonPropertyName("last_name")]
+        public string LastName { get; init; }
 
-        [JsonProperty("avatar")]
-        public string Avatar { get; set; }
+        [JsonPropertyName("avatar")]
+        public string Avatar { get; init; }
 
-        [JsonProperty("email")]
-        public string Email { get; set; }
+        [JsonPropertyName("email")]
+        public string Email { get; init; }
     }
 }
 ```
@@ -91,7 +91,7 @@ options => options.WithConfiguration(context.Configuration)
 
 We can set it at common level (to all apis) or specific level (dedicated to a named one).
 
-Please heads to the Settings doc article to see how to configure timeouts automatically from loaded settings configuration.
+Please heads to the [Settings](config_settings.md))  doc article to see how to configure timeouts automatically from loaded settings configuration.
 
 #### Manually
 

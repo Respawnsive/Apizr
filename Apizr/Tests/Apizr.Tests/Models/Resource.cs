@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Apizr.Tests.Models
 {
-    public class Resource
+    public record Resource
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
         [JsonPropertyName("year")]
-        public string Year { get; set; }
+        public string Year { get; init; }
 
         [JsonPropertyName("color")]
-        public string Color { get; set; }
+        public string Color { get; init; }
 
         [JsonPropertyName("pantone_value")]
-        public string PantoneValue { get; set; }
+        public string PantoneValue { get; init; }
     }
 }

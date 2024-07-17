@@ -96,29 +96,29 @@ Here is CRUD api an example:
 [assembly:Log]
 namespace Apizr.Sample.Models
 {
-    [CrudEntity("https://reqres.in/api/users", typeof(int), typeof(PagedResult<>))]
+    [BaseAddress("https://reqres.in/api/users")]
     [LogReadAll(HttpMessageParts.RequestAll, 
         HttpTracerMode.ErrorsAndExceptionsOnly, 
         LogLevel.Information)]
     [LogRead(HttpMessageParts.AllButBodies, 
         HttpTracerMode.ExceptionsOnly, 
         LogLevel.Debug)]
-    public class User
+    public record User
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; init; }
 
-        [JsonProperty("first_name")]
-        public string FirstName { get; set; }
+        [JsonPropertyName("first_name")]
+        public string FirstName { get; init; }
 
-        [JsonProperty("last_name")]
-        public string LastName { get; set; }
+        [JsonPropertyName("last_name")]
+        public string LastName { get; init; }
 
-        [JsonProperty("avatar")]
-        public string Avatar { get; set; }
+        [JsonPropertyName("avatar")]
+        public string Avatar { get; init; }
 
-        [JsonProperty("email")]
-        public string Email { get; set; }
+        [JsonPropertyName("email")]
+        public string Email { get; init; }
     }
 }
 ```
@@ -137,7 +137,7 @@ options => options.WithConfiguration(context.Configuration)
 
 We can set it at common level (to all apis) or specific level (dedicated to a named one).
 
-Please heads to the Settings doc article to see how to configure logging automatically from loaded settings configuration.
+Please heads to the [Settings](config_settings.md))  doc article to see how to configure logging automatically from loaded settings configuration.
 
 #### Manually
 

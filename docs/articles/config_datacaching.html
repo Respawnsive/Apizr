@@ -299,25 +299,25 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
 <p>Here is CRUD api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample.Models
 {
-    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [BaseAddress(&quot;https://reqres.in/api/users&quot;)]
     [CacheReadAll(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
     [CacheRead(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
-    public class User
+    public record User
     {
-        [JsonProperty(&quot;id&quot;)]
-        public int Id { get; set; }
+        [JsonPropertyName(&quot;id&quot;)]
+        public int Id { get; init; }
 
-        [JsonProperty(&quot;first_name&quot;)]
-        public string FirstName { get; set; }
+        [JsonPropertyName(&quot;first_name&quot;)]
+        public string FirstName { get; init; }
 
-        [JsonProperty(&quot;last_name&quot;)]
-        public string LastName { get; set; }
+        [JsonPropertyName(&quot;last_name&quot;)]
+        public string LastName { get; init; }
 
-        [JsonProperty(&quot;avatar&quot;)]
-        public string Avatar { get; set; }
+        [JsonPropertyName(&quot;avatar&quot;)]
+        public string Avatar { get; init; }
 
-        [JsonProperty(&quot;email&quot;)]
-        public string Email { get; set; }
+        [JsonPropertyName(&quot;email&quot;)]
+        public string Email { get; init; }
     }
 }
 </code></pre>
@@ -378,7 +378,7 @@ You can decorate one or more parameters with it, then it will be included in the
 <pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
 </code></pre>
 <p>We can activate it at common level (to all apis) or specific level (dedicated to a named one).</p>
-<p>Please heads to the Settings doc article to see how to configure caching automatically from settings.</p>
+<p>Please heads to the <a href="config_settings.html">Settings</a>)  doc article to see how to configure caching automatically from settings.</p>
 <h5 id="manually">Manually</h5>
 <p>You can activate caching at any levels with this fluent option:</p>
 <pre><code class="lang-csharp">// Address

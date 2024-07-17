@@ -5,9 +5,11 @@ We can set them at common level (shared by all apis) or specific level (dedicate
 The following doc acrticle will focus on appsettings.json configuration.
 
 >[!TIP]
-> You should add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to get all the Apizr goodness. 
->
+> - You must add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to get all the Apizr goodness. 
 >If not, some configurations may not be applied (such as Polly, Cancellation, Timeout, Priority, etc...).
+>
+>- Non hosted environments (like MAUI) could definitly use appsettings.json goodness too, but by using both embedded resource file loading and compile time conditional file copying. 
+>Look at both csproj and MauiProgram files from the [MAUI Sample](https://github.com/Respawnsive/Apizr/tree/master/Apizr/Samples/Apizr.Sample.MAUI) to get a picture of the workaround and note that appsettings files won't be merged in that case but replaced.
 
 ### Defining
 
@@ -22,52 +24,52 @@ Here is an example of an appsettings.json file with some of the settings that co
       "Microsoft.Extensions.Http.DefaultHttpClientFactory": "Information"
     }
   },
-  "Apizr": {
-    "Common": {
-      "Logging": {
+  "Apizr": { // Root section key
+    "Common": { // Common settings shared by all apis
+      "Logging": { // Common logging settings
         "HttpTracerMode": "Everything",
         "TrafficVerbosity": "All",
         "LogLevels": [ "Trace", "Information", "Critical" ]
       },
-      "OperationTimeout": "00:00:10",
-      "LoggedHeadersRedactionNames": [ "testSettingsKey1" ],
-      "ResilienceContext": {
+      "OperationTimeout": "00:00:10", // Common operation timeout
+      "LoggedHeadersRedactionNames": [ "testSettingsKey1" ], // Headers to common redact in logs
+      "ResilienceContext": { // Common resilience context settings
         "ContinueOnCapturedContext": false,
         "ReturnContextToPoolOnComplete": true
       },
-      "Headers": [
+      "Headers": [ // Common headers applied to all apis
         "testSettingsKey6: testSettingsValue6.1"
       ],
-      "ResiliencePipelineOptions": {
-        "HttpGet": [ "TestPipeline3" ]
+      "ResiliencePipelineOptions": { // Common resilience pipeline applied to all apis
+        "HttpGet": [ "TestPipeline3" ] // Resilience pipelines scoped to specific request method group
       },
-      "Caching": {
+      "Caching": { // Common caching settings
         "Mode": "GetAndFetch",
         "LifeSpan": "00:15:00",
         "ShouldInvalidateOnError": false
       }
     },
-    "IReqResSimpleService": {
-      "BaseAddress": "https://reqres.in/api",
-      "RequestTimeout": "00:00:03",
-      "Headers": [
-        "testSettingsKey2: testSettingsValue2.1",
-        "testSettingsKey3: *testSettingsValue3.1*",
-        "testSettingsKey4: {0}",
-        "testSettingsKey5: *{0}*"
+    "IReqResSimpleService": { // Specific settings applied to the IReqResSimpleService api
+      "BaseAddress": "https://reqres.in/api", // Specific base address
+      "RequestTimeout": "00:00:03", // Specific request timeout
+      "Headers": [ // Specific headers applied to the IReqResSimpleService api
+        "testSettingsKey2: testSettingsValue2.1", // Clear static header
+        "testSettingsKey3: *testSettingsValue3.1*", // Redacted header
+        "testSettingsKey4: {0}", // Clear runtime header
+        "testSettingsKey5: *{0}*" // Redacted runtime header
       ],
-      "Caching": {
+      "Caching": { // Specific caching settings overriding common ones
         "Mode": "GetAndFetch",
         "LifeSpan": "00:12:00",
         "ShouldInvalidateOnError": true
       },
-      "ResiliencePipelineKeys": [ "TestPipeline3" ]
+      "ResiliencePipelineKeys": [ "TestPipeline3" ] // Specific resilience pipelines applied to all IReqResSimpleService api methods
     },
-    "User": {
-      "BaseAddress": "https://reqres.in/api/users",
-      "RequestTimeout": "00:00:05",
-      "Headers": [
-        "testSettingsKey8: testSettingsValue8.1"
+    "User": { // Specific settings applied to the User CRUD api
+      "BaseAddress": "https://reqres.in/api/users", // Specific base address
+      "RequestTimeout": "00:00:05", // Specific request timeout
+      "Headers": [ // Specific headers applied to the User CRUD api
+        "testSettingsKey8: testSettingsValue8.1" // Clear static header
       ]
     }
   }
@@ -75,8 +77,8 @@ Here is an example of an appsettings.json file with some of the settings that co
 ```
 
 - You first have to start with the `Apizr` root section key.
-- Then you can define settings at common level with the `Common` section key, or specific level with the name of apis as section keys (here `IReqResSimpleService` classic api and `User` CRUD api).
-- Finally you can adjust following available settings:
+- Then you can define settings at common level with the `Common` section key, and/or specific level with the name of apis as section keys (here `IReqResSimpleService` classic api and `User` CRUD api).
+- Finally you can set following available settings:
   - `BaseAddress` (string): specifies the base API address
   - `BasePath` (string): specifies the base API address path
   - `Logging` (section): contains settings related to logging
@@ -107,8 +109,8 @@ options => options.WithConfiguration(context.Configuration)
 
 >[!NOTE]
 >
-> - Apizr will first load common settings, then specific settings, so specific settings will override the common ones. The same behavior as usual with fluent options registration actually.
-> - Order matters, meaning that you should first register the configuration from settings, then override it if needed with fluent options.
+> - Apizr will first load common settings, then specific settings, so specific settings will override or be merged with the common ones. The same behavior as usual with fluent options registration actually.
+> - Order matters, meaning that you should first register the configuration from settings, then override it with fluent options if needed .
 
 If you want to organize your settings in a more custom way, you can provide custom configuration section keys to Apizr at any registration level:
 

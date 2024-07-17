@@ -40,7 +40,7 @@ No need to write your own DTO classes. Mapster provides Mapster.Tool to help you
 
 ````csharp
 [AdaptTo("[name]Dto"), GenerateMapper]
-public class Student {
+public record Student {
     ...
 }
 ````
@@ -48,7 +48,7 @@ public class Student {
 Then Mapster will generate:
 
 ````csharp
-public class StudentDto {
+public record StudentDto {
     ...
 }
 public static class StudentMapper {
@@ -81,10 +81,10 @@ We could get a model class mapped to an api one like:
 
 ```csharp
 [MappedWith(typeof(User))]
-public class MinUser
+public record MinUser
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+    public int Id { get; init; }
+    public string Name { get; init; }
 }
 ```
 

@@ -3,9 +3,9 @@
 namespace Apizr.Tests.Models
 {
     [MappedWith<User>]
-    public class MinUser
+    public record MinUser
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int Id { get; init; }
+        public string Name { get; init; }
     }
 }

@@ -3,21 +3,21 @@ using System.Text.Json.Serialization;
 
 namespace Apizr.Tests.Models
 {
-    public class PagedResult<T> where T : class
+    public record PagedResult<T> where T : class
     {
         [JsonPropertyName("page")]
-        public int Page { get; set; }
+        public int Page { get; init; }
 
         [JsonPropertyName("per_page")]
-        public int PerPage { get; set; }
+        public int PerPage { get; init; }
 
         [JsonPropertyName("total")]
-        public int Total { get; set; }
+        public int Total { get; init; }
 
         [JsonPropertyName("total_pages")]
-        public int TotalPages { get; set; }
+        public int TotalPages { get; init; }
 
         [JsonPropertyName("data")]
-        public IEnumerable<T> Data { get; set; }
+        public IEnumerable<T> Data { get; init; }
     }
 }

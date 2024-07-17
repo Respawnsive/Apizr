@@ -185,25 +185,25 @@ You can do it at assembly or interface/class levels thanks to one of the provide
 <p>Here is CRUD api an example:</p>
 <pre><code class="lang-csharp">namespace Apizr.Sample.Models
 {
-    [CrudEntity(&quot;https://reqres.in/api/users&quot;, typeof(int), typeof(PagedResult&lt;&gt;))]
+    [BaseAddress(&quot;https://reqres.in/api/users&quot;)]
     [ReadAllResiliencePipeline(&quot;TransientHttpError&quot;)]
     [ReadResiliencePipeline(&quot;AnotherHttpError&quot;)]
-    public class User
+    public record User
     {
-        [JsonProperty(&quot;id&quot;)]
-        public int Id { get; set; }
+        [JsonPropertyName(&quot;id&quot;)]
+        public int Id { get; init; }
 
-        [JsonProperty(&quot;first_name&quot;)]
-        public string FirstName { get; set; }
+        [JsonPropertyName(&quot;first_name&quot;)]
+        public string FirstName { get; init; }
 
-        [JsonProperty(&quot;last_name&quot;)]
-        public string LastName { get; set; }
+        [JsonPropertyName(&quot;last_name&quot;)]
+        public string LastName { get; init; }
 
-        [JsonProperty(&quot;avatar&quot;)]
-        public string Avatar { get; set; }
+        [JsonPropertyName(&quot;avatar&quot;)]
+        public string Avatar { get; init; }
 
-        [JsonProperty(&quot;email&quot;)]
-        public string Email { get; set; }
+        [JsonPropertyName(&quot;email&quot;)]
+        public string Email { get; init; }
     }
 }
 </code></pre>
@@ -214,7 +214,7 @@ You can do it at assembly or interface/class levels thanks to one of the provide
 <pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
 </code></pre>
 <p>We can activate it at common level (to all apis) or specific level (dedicated to a named one).</p>
-<p>Please heads to the Settings doc article to see how to configure resiliencing automatically from settings.</p>
+<p>Please heads to the <a href="config_settings.html">Settings</a>)  doc article to see how to configure resiliencing automatically from settings.</p>
 <h6 id="manually">Manually</h6>
 <p>You can activate resiliencing at any levels by providing pipeline keys with this fluent option :</p>
 <pre><code class="lang-csharp">// pipeline keys
@@ -231,7 +231,7 @@ options =&gt; options.WithResiliencePipelineKeys([&quot;TransientHttpError&quot;
 <pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
 </code></pre>
 <p>We can set it at common level (to all apis) or specific level (dedicated to a named one).</p>
-<p>Please heads to the Settings doc article to see how to configure context automatically from loaded settings configuration.</p>
+<p>Please heads to the <a href="config_settings.html">Settings</a>)  doc article to see how to configure context automatically from loaded settings configuration.</p>
 <h5 id="manually-1">Manually</h5>
 <p>Some advanced options are also available to configure Polly context itself at any level:</p>
 <pre><code class="lang-csharp">options =&gt; options.WithResilienceContextOptions(contextOptions =&gt;

@@ -2,7 +2,7 @@
 
 ### Using `Try/Catch`
 
-Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.
+Here is an example of how to send a web request from an app - e.g. using Apizr in a MAUI mobile app.
 
 Inject ```IApizrManager<IYourDefinedInterface>``` where you need it - e.g. into your ViewModel constructor
 ```csharp

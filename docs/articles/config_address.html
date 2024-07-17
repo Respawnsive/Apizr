@@ -80,7 +80,7 @@
 
 <h2 id="configuring-base-address">Configuring base address</h2>
 <p>You can configure base address and base path either by attribute decoration or by fluent configuration.
-Fluent configuration allows you to load options automatically from settings (see Settings), or set options manually.
+Fluent configuration allows you to load options automatically from settings (see <a href="config_settings.html">Settings</a>), or set options manually.
 You can mix the configuration providing a base path by attribute and a base address/URI fluently.</p>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
@@ -103,7 +103,7 @@ public interface IYourApiInterface
 
 // OR the same for CRUD api
 [BaseAddress(&quot;YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH&quot;)]
-public class YourCrudEntity
+public record YourCrudEntity
 {
     // Your CRUD entity properties
 }
@@ -120,7 +120,7 @@ public interface IYourApiInterface
 
 // OR the same for CRUD api
 [AutoRegister(&quot;YOUR_CRUD_ENTITY_API_BASE_ADDRESS_OR_PATH&quot;)]
-public class YourCrudEntity
+public record YourCrudEntity
 {
     // Your CRUD entity properties
 }
@@ -134,7 +134,7 @@ public class YourCrudEntity
 <pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
 </code></pre>
 <p>We can set it at common level (shared by all apis) or specific level (dedicated to a named one).</p>
-<p>Please heads to the Settings doc article to see how to configure the base address or base path automatically from settings.</p>
+<p>Please heads to the <a href="config_settings.html">Settings</a>)  doc article to see how to configure the base address or base path automatically from settings.</p>
 <h4 id="manually">Manually</h4>
 <p>Configuring the base address or base path fluently with manual option allows you to set it dynamically.</p>
 <p>You can set the base address or a base path thanks to these options:</p>

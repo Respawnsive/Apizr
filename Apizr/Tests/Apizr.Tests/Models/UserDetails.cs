@@ -5,12 +5,12 @@ using Apizr.Requesting.Attributes;
 namespace Apizr.Tests.Models
 {
     [AutoRegister("https://reqres.in/api/users")]
-    public class UserDetails
+    public record UserDetails
     {
         [JsonPropertyName("data")]
-        public User User { get; set; }
+        public User User { get; init; }
 
         [JsonPropertyName("ad")]
-        public UserAd Ad { get; set; }
+        public UserAd Ad { get; init; }
     }
 }

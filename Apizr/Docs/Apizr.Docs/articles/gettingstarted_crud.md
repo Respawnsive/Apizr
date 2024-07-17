@@ -376,20 +376,20 @@ Not available.
 First you have to tell Apizr which entity to auto register a crud api for by assembly scanning thanks to the `AutoRegister` attribute:
 ```csharp
 [AutoRegister("https://mybaseuri.com/api/myentity")]
-public class MyEntity
+public record MyEntity
 {
     [JsonPropertyName("id")]
-    public int Id { get; set; }
+    public int Id { get; init; }
 
     ...
 }
 
  // OR with custom arguments
 [AutoRegister<ICrudApi<MyEntity, string, MyPagedResult<MyEntity>, MyReadAllParamsType>>("https://mybaseuri.com/api/myentity")]
-public class MyEntity
+public record MyEntity
 {
     [JsonPropertyName("id")]
-    public int Id { get; set; }
+    public int Id { get; init; }
 
     ...
 }
@@ -414,7 +414,7 @@ Apizr will scan assemblies to auto register managers for decorated entities.
 
 ## Using
 
-Here is an example of how to send a web request from an app - e.g. using Apizr in a Xamarin.Forms mobile app.
+Here is an example of how to send a web request from an app - e.g. using Apizr in a MAUI mobile app.
 
 Inject ```IApizrManager<ICrudApi<T, TKey, TReadAllResult, TReadAllParams>>``` where you need it - e.g. into your ViewModel constructor
 ```csharp

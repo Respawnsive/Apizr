@@ -9,7 +9,7 @@ You can configure the way your api request will be managed by Apizr at 3 differe
 
 At Design time, everything is set by attribute like we used to with Refit, decorating at different levels like assembly, interface/class or method.
 
-At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not. You can set options automatically with settings configuration loading (see Settings) or manually with fluent options.
+At Register time, you'll get the possibility to share some options or not with several api interfaces registrations or not. You can set options automatically with settings configuration loading (see [Settings](config_settings.md)) or manually with fluent options.
 
 At Request time, you'll get your last chance to adjust configuration before the request to be sent.
 

@@ -83,6 +83,160 @@
 <h3 id="60">6.0</h3>
 <h4 id="apizr">Apizr</h4>
 <ul>
+<li>[BaseAddress] Now we can <strong>set base address with the brand new <code>BaseAddress</code> attribure</strong> instead of the now removed <code>WebApi</code>, <code>CrudEntity</code> or <code>MappedCrudEntity</code> useless ones, and only if you need to set it at design time</li>
+</ul>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Former <code>WebApi</code>, <code>CrudEntity</code> and <code>MappedCrudEntity</code> attributes have been dropped out to keep things simple and consistent.</p>
+</div>
+<div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_tabid-classic" role="tab" aria-controls="tabpanel_2_tabid-classic" data-tab="tabid-classic" tabindex="0" aria-selected="true">Classic</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_tabid-crud" role="tab" aria-controls="tabpanel_2_tabid-crud" data-tab="tabid-crud" tabindex="-1">CRUD</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_tabid-classic" role="tab" aria-controls="tabpanel_2_tabid-classic" data-tab="tabid-classic" tabindex="-1">Classic</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_tabid-crud" role="tab" aria-controls="tabpanel_2_tabid-crud" data-tab="tabid-crud" tabindex="-1">CRUD</a>
+</li>
+</ul>
+<section id="tabpanel_2_tabid-classic" role="tabpanel" data-tab="tabid-classic">
+
+<pre><code>Don't write anymore:
+```csharp
+[WebApi(&quot;https://reqres.in/api&quot;)]
+public interface IReqResService
+{
+    [Get(&quot;/users&quot;)]
+    Task&lt;UserList&gt; GetUsersAsync();
+}
+```
+
+Now write:
+```csharp
+[BaseAddress(&quot;https://reqres.in/api&quot;)]
+public interface IReqResService
+{
+    [Get(&quot;/users&quot;)]
+    Task&lt;UserList&gt; GetUsersAsync();
+}
+```
+</code></pre>
+</section>
+<section id="tabpanel_2_tabid-crud" role="tabpanel" data-tab="tabid-crud" aria-hidden="true" hidden="hidden">
+
+<pre><code>Don't write anymore:
+```csharp
+[CrudEntity(&quot;https://reqres.in/api/users&quot;)]
+public record User
+{
+    //[...]
+}
+```
+
+Now write:
+```csharp
+[BaseAddress(&quot;https://reqres.in/api/users&quot;)]
+public record User
+{
+    //[...]
+}
+```
+***
+</code></pre>
+<ul>
+<li>[AutoRegister] Now we can <strong>tell Apizr to auto register apis with the brand new <code>AutoRegister</code> attribure</strong> instead of the now removed <code>WebApi</code>, <code>CrudEntity</code> or <code>MappedCrudEntity</code> useless ones</li>
+</ul>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Former <code>WebApi</code>, <code>CrudEntity</code> and <code>MappedCrudEntity</code> attributes have been dropped out to keep things simple and consistent.</p>
+</div>
+</section>
+<section id="tabpanel_2_tabid-classic" role="tabpanel" data-tab="tabid-classic" aria-hidden="true" hidden="hidden">
+
+<pre><code>Don't write anymore:
+```csharp
+[WebApi(&quot;https://reqres.in/api&quot;)]
+public interface IReqResService
+{
+    [Get(&quot;/users&quot;)]
+    Task&lt;UserList&gt; GetUsersAsync();
+}
+```
+
+Now write:
+```csharp
+[AutoRegister(&quot;https://reqres.in/api&quot;)]
+public interface IReqResService
+{
+    [Get(&quot;/users&quot;)]
+    Task&lt;UserList&gt; GetUsersAsync();
+}
+```
+</code></pre>
+</section>
+<section id="tabpanel_2_tabid-crud" role="tabpanel" data-tab="tabid-crud" aria-hidden="true" hidden="hidden">
+
+<pre><code>Don't write anymore:
+```csharp
+[CrudEntity(&quot;https://reqres.in/api/users&quot;)] 
+// OR [MappedCrudEntity(&quot;https://reqres.in/api/users&quot;)]
+public record User
+{
+    //[...]
+}
+```
+
+Now write:
+```csharp
+[AutoRegister(&quot;https://reqres.in/api/users&quot;)]
+public record User
+{
+    //[...]
+}
+```
+
+Note that `AutoRegister` attribute could take the api type as parameter or generic argument so that you could provide your own crud definition types if needed:
+```csharp
+[AutoRegister&lt;ICrudApi&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt;&gt;(&quot;https://reqres.in/api/users&quot;)]
+public record User
+{
+    //[...]
+}
+```
+***
+</code></pre>
+<ul>
+<li>[MappedWith] Now we can <strong>tell Apizr to map data while using MediatR/Optional thanks to the yet known <code>MappedWith</code> attribure</strong> instead of the now removed <code>CrudEntity</code> or <code>MappedCrudEntity</code> useless ones</li>
+</ul>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Former <code>CrudEntity</code> and <code>MappedCrudEntity</code> attributes have been dropped out to keep things simple and consistent.</p>
+</div>
+<pre><code>Don't write anymore:
+```csharp
+[CrudEntity&lt;MinUser&gt;(&quot;https://reqres.in/api/users&quot;)] 
+// OR [MappedCrudEntity&lt;MinUser&gt;(&quot;https://reqres.in/api/users&quot;)]
+public record User
+{
+    //[...]
+}
+```
+
+Now write:
+```csharp
+[MappedWith&lt;MinUser&gt;]
+public record User
+{
+    //[...]
+}
+```
+</code></pre>
+<ul>
 <li><p>[Polly] Now <strong>supporting the brand new Polly v8+ Resilience Strategies/Pipelines</strong> instead of former Polly v7- Policies</p>
 <ul>
 <li><p>You'll have to rewrite your policies as strategies/pipelines.
@@ -248,160 +402,7 @@ options =&gt; options.WithDelegatingHandler(serviceProvider =&gt; YourDelegating
 options =&gt; options.WithDelegatingHandler((serviceProvider, options) =&gt; YourDelegatingHandler)
 </code></pre>
 </li>
-<li><p>[BaseAddress] Now we can <strong>set base address with the brand new <code>BaseAddress</code> attribure</strong> instead of the <code>WebApi</code>, <code>CrudEntity</code> or <code>MappedCrudEntity</code> ones, and only if you need to set it at design time</p>
-</li>
 </ul>
-<div class="WARNING">
-<h5>Warning</h5>
-<p>Former <code>WebApi</code>, <code>CrudEntity</code> and <code>MappedCrudEntity</code> attributes have been dropped out to keep things simple and consistent.</p>
-</div>
-<div class="tabGroup" id="tabgroup_2">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_2_tabid-classic" role="tab" aria-controls="tabpanel_2_tabid-classic" data-tab="tabid-classic" tabindex="0" aria-selected="true">Classic</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_2_tabid-crud" role="tab" aria-controls="tabpanel_2_tabid-crud" data-tab="tabid-crud" tabindex="-1">CRUD</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_2_tabid-classic" role="tab" aria-controls="tabpanel_2_tabid-classic" data-tab="tabid-classic" tabindex="-1">Classic</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_2_tabid-crud" role="tab" aria-controls="tabpanel_2_tabid-crud" data-tab="tabid-crud" tabindex="-1">CRUD</a>
-</li>
-</ul>
-<section id="tabpanel_2_tabid-classic" role="tabpanel" data-tab="tabid-classic">
-
-<pre><code>Don't write anymore:
-```csharp
-[WebApi(&quot;https://reqres.in/api&quot;)]
-public interface IReqResService
-{
-    [Get(&quot;/users&quot;)]
-    Task&lt;UserList&gt; GetUsersAsync();
-}
-```
-
-Now write:
-```csharp
-[BaseAddress(&quot;https://reqres.in/api&quot;)]
-public interface IReqResService
-{
-    [Get(&quot;/users&quot;)]
-    Task&lt;UserList&gt; GetUsersAsync();
-}
-```
-</code></pre>
-</section>
-<section id="tabpanel_2_tabid-crud" role="tabpanel" data-tab="tabid-crud" aria-hidden="true" hidden="hidden">
-
-<pre><code>Don't write anymore:
-```csharp
-[CrudEntity(&quot;https://reqres.in/api/users&quot;)]
-public class User
-{
-    //[...]
-}
-```
-
-Now write:
-```csharp
-[BaseAddress(&quot;https://reqres.in/api/users&quot;)]
-public class User
-{
-    //[...]
-}
-```
-***
-</code></pre>
-<ul>
-<li>[AutoRegister] Now we can <strong>tell Apizr to auto register apis with the brand new <code>AutoRegister</code> attribure</strong> instead of the <code>WebApi</code>, <code>CrudEntity</code> or <code>MappedCrudEntity</code> ones</li>
-</ul>
-<div class="WARNING">
-<h5>Warning</h5>
-<p>Former <code>WebApi</code>, <code>CrudEntity</code> and <code>MappedCrudEntity</code> attributes have been dropped out to keep things simple and consistent.</p>
-</div>
-</section>
-<section id="tabpanel_2_tabid-classic" role="tabpanel" data-tab="tabid-classic" aria-hidden="true" hidden="hidden">
-
-<pre><code>Don't write anymore:
-```csharp
-[WebApi(&quot;https://reqres.in/api&quot;)]
-public interface IReqResService
-{
-    [Get(&quot;/users&quot;)]
-    Task&lt;UserList&gt; GetUsersAsync();
-}
-```
-
-Now write:
-```csharp
-[AutoRegister(&quot;https://reqres.in/api&quot;)]
-public interface IReqResService
-{
-    [Get(&quot;/users&quot;)]
-    Task&lt;UserList&gt; GetUsersAsync();
-}
-```
-</code></pre>
-</section>
-<section id="tabpanel_2_tabid-crud" role="tabpanel" data-tab="tabid-crud" aria-hidden="true" hidden="hidden">
-
-<pre><code>Don't write anymore:
-```csharp
-[CrudEntity(&quot;https://reqres.in/api/users&quot;)] 
-// OR [MappedCrudEntity(&quot;https://reqres.in/api/users&quot;)]
-public class User
-{
-    //[...]
-}
-```
-
-Now write:
-```csharp
-[AutoRegister(&quot;https://reqres.in/api/users&quot;)]
-public class User
-{
-    //[...]
-}
-```
-
-Note that `AutoRegister` attribute could take the api type as parameter or generic argument so that you could provide your own crud definition types if needed:
-```csharp
-[AutoRegister&lt;ICrudApi&lt;User, int, PagedResult&lt;User&gt;, IDictionary&lt;string, object&gt;&gt;&gt;(&quot;https://reqres.in/api/users&quot;)]
-public class User
-{
-    //[...]
-}
-```
-***
-</code></pre>
-<ul>
-<li>[MappedWith] Now we can <strong>tell Apizr to map data while using MediatR/Optional thanks to the yet known <code>MappedWith</code> attribure</strong> instead of the <code>CrudEntity</code> or <code>MappedCrudEntity</code> ones</li>
-</ul>
-<div class="WARNING">
-<h5>Warning</h5>
-<p>Former <code>CrudEntity</code> and <code>MappedCrudEntity</code> attributes have been dropped out to keep things simple and consistent.</p>
-</div>
-<pre><code>Don't write anymore:
-```csharp
-[CrudEntity&lt;MinUser&gt;(&quot;https://reqres.in/api/users&quot;)] 
-// OR [MappedCrudEntity&lt;MinUser&gt;(&quot;https://reqres.in/api/users&quot;)]
-public class User
-{
-    //[...]
-}
-```
-
-Now write:
-```csharp
-[MappedWith&lt;MinUser&gt;]
-public class User
-{
-    //[...]
-}
-```
-</code></pre>
 <h3 id="53">5.3</h3>
 <h4 id="apizr-1">Apizr</h4>
 <ul>

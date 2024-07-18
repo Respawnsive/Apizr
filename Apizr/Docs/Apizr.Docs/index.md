@@ -53,13 +53,13 @@ namespace Apizr.Sample
     {
         // (Refit) Define your web api interface methods
         [Get("/api/users")]
-        Task<UserList> GetUsersAsync();
+        Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get("/api/users/{userId}")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId);
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, [RequestOptions] IApizrRequestOptions options);
 
         [Post("/api/users")]
-        Task<User> CreateUser(User user);
+        Task<User> CreateUser(User user, [RequestOptions] IApizrRequestOptions options);
     }
 }
 ```
@@ -137,7 +137,7 @@ var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResServ
 
 And then you're good to go:
 ```csharp
-var userList = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+var userList = await reqResManager.ExecuteAsync((api, opt) => api.GetUsersAsync(opt));
 ```
 
 This request will be managed with the defined resilience strategies, data cached and all logged.

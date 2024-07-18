@@ -2,7 +2,7 @@
 
 Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority...)
 
-[![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](https://apizr.net/ "Go to project documentation")
+[![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](https://apizr.net/ "Go to project documentation") [![Browse - Source](https://img.shields.io/badge/browse-source_code-lightgrey?style=for-the-badge)](https://github.com/Respawnsive/Apizr "Go to project repository")
 
 ## What
 
@@ -37,8 +37,6 @@ The list is not exhaustive, there’s more, but what we wanted was playing with 
 
 Inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack), we wanted to make it simple to use, mixing attribute decorations and fluent configuration.
 
-Also, we built this lib to make it work with any .Net Standard 2.0 compliant platform, so we could use it seamlessly from any kind of app, with or without DI goodness.
-
 ## How
 
 An api definition with some attributes:
@@ -48,18 +46,20 @@ An api definition with some attributes:
 namespace Apizr.Sample
 {
     // (Apizr) Define your web api base url and ask for cache and logs
-    [WebApi("https://reqres.in/"), Cache, Log]
+    [BaseAddress("https://reqres.in/"), 
+    Cache(CacheMode.GetAndFetch, "01:00:00"), 
+    Log(HttpMessageParts.AllButBodies)]
     public interface IReqResService
     {
         // (Refit) Define your web api interface methods
         [Get("/api/users")]
-        Task<UserList> GetUsersAsync();
+        Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get("/api/users/{userId}")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId);
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, [RequestOptions] IApizrRequestOptions options);
 
         [Post("/api/users")]
-        Task<User> CreateUser(User user);
+        Task<User> CreateUser(User user, [RequestOptions] IApizrRequestOptions options);
     }
 }
 ```
@@ -116,7 +116,6 @@ var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResService>(
 Relies on `IServiceCollection` extension methods approach.
 
 ```csharp
-
 // (Logger) Configure logging the way you want, like
 services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
 
@@ -138,7 +137,7 @@ var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResServ
 
 And then you're good to go:
 ```csharp
-var userList = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+var userList = await reqResManager.ExecuteAsync((api, opt) => api.GetUsersAsync(opt));
 ```
 
 This request will be managed with the defined resilience strategies, data cached and all logged.
@@ -147,7 +146,8 @@ Apizr has a lot more to offer, just [read the doc](https://apizr.net)!
 
 ## Where
 
-[Change Log](CHANGELOG.md)
+- Please read the [Change Log](https://apizr.net/changelog.md) to get a picture of what's in.
+- Please read the [Breaking changes](https://apizr.net/articles/breakingchanges.md) to get a picture of what's changed.
 
 ### Managing (Core)
 

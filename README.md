@@ -1,8 +1,8 @@
 # Apizr
 
-Refit based web api client, but resilient (retry, connectivity, cache, auth, log, priority...)
+Refit based web api client management, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
 
-[![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](https://apizr.net/ "Go to project documentation")
+[![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](https://apizr.net "Go to project documentation")
 
 ## What
 
@@ -37,8 +37,6 @@ The list is not exhaustive, there’s more, but what we wanted was playing with al
 
 Inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack), we wanted to make it simple to use, mixing attribute decorations and fluent configuration.
 
-Also, we built this lib to make it work with any .Net Standard 2.0 compliant platform, so we could use it seamlessly from any kind of app, with or without DI goodness.
-
 ## How
 
 An api definition with some attributes:
@@ -55,13 +53,13 @@ namespace Apizr.Sample
     {
         // (Refit) Define your web api interface methods
         [Get("/api/users")]
-        Task<UserList> GetUsersAsync();
+        Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get("/api/users/{userId}")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId);
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, [RequestOptions] IApizrRequestOptions options);
 
         [Post("/api/users")]
-        Task<User> CreateUser(User user);
+        Task<User> CreateUser(User user, [RequestOptions] IApizrRequestOptions options);
     }
 }
 ```
@@ -118,7 +116,6 @@ var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResService>(
 Relies on `IServiceCollection` extension methods approach.
 
 ```csharp
-
 // (Logger) Configure logging the way you want, like
 services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
 
@@ -140,16 +137,17 @@ var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResServ
 
 And then you're good to go:
 ```csharp
-var userList = await reqResManager.ExecuteAsync(api => api.GetUsersAsync());
+var userList = await reqResManager.ExecuteAsync((api, opt) => api.GetUsersAsync(opt));
 ```
 
 This request will be managed with the defined resilience strategies, data cached and all logged.
 
-Apizr has a lot more to offer, just [read the doc](https://apizr.net)!
+Apizr has a lot more to offer, just [read the doc](https://apizr.net/articles/index.md)!
+
+- Please read the [Change Log](https://apizr.net/changelog.md) to get a picture of what's in.
+- Please read the [Breaking changes](https://apizr.net/articles/breakingchanges.md) to get a picture of what's changed.
 
 ## Where
-
-[Change Log](CHANGELOG.md)
 
 ### Managing (Core)
 
@@ -207,7 +205,8 @@ Install the NuGet reference package of your choice:
   - **Apizr.Integrations.MediatR** package enables request auto handling with mediation using [MediatR](https://github.com/jbogard/MediatR)
   - **Apizr.Integrations.Optional** package enables Optional result from mediation requests (requires MediatR integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
   - **Apizr.Integrations.AutoMapper** package enables data mapping using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
-  - **Apizr.Integrations.Mapster** package enables data mapping using [Mapster](https://github.com/MapsterMapper/Mapster)- **Apizr.Integrations.FileTransfer** package enables file transfer management for static registration
+  - **Apizr.Integrations.Mapster** package enables data mapping using [Mapster](https://github.com/MapsterMapper/Mapster)
+  - **Apizr.Integrations.FileTransfer** package enables file transfer management for static registration
   - **Apizr.Extensions.Microsoft.FileTransfer** package enables file transfer management for extended registration
   - **Apizr.Integrations.FileTransfer.MediatR** package enables file transfer management for mediation requests (requires MediatR integration and could work with Optional integration) using [MediatR](https://github.com/jbogard/MediatR)
   - **Apizr.Integrations.FileTransfer.Optional** package enables file transfer management for mediation requests with optional result (requires MediatR integration and could work with Optional integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)

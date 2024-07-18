@@ -117,13 +117,13 @@ namespace Apizr.Sample
     {
         // (Refit) Define your web api interface methods
         [Get(&quot;/api/users&quot;)]
-        Task&lt;UserList&gt; GetUsersAsync();
+        Task&lt;UserList&gt; GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get(&quot;/api/users/{userId}&quot;)]
-        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId);
+        Task&lt;UserDetails&gt; GetUserAsync([CacheKey] int userId, [RequestOptions] IApizrRequestOptions options);
 
         [Post(&quot;/api/users&quot;)]
-        Task&lt;User&gt; CreateUser(User user);
+        Task&lt;User&gt; CreateUser(User user, [RequestOptions] IApizrRequestOptions options);
     }
 }
 </code></pre>
@@ -201,7 +201,7 @@ var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqR
 </div>
 
 <p>And then you're good to go:</p>
-<pre><code class="lang-csharp">var userList = await reqResManager.ExecuteAsync(api =&gt; api.GetUsersAsync());
+<pre><code class="lang-csharp">var userList = await reqResManager.ExecuteAsync((api, opt) =&gt; api.GetUsersAsync(opt));
 </code></pre>
 <p>This request will be managed with the defined resilience strategies, data cached and all logged.</p>
 <p>Apizr has a lot more to offer, just <a href="articles/index.html">read the doc</a>!</p>

@@ -22,11 +22,23 @@ namespace Apizr.Extending.Configuring.Registry
             throw new InvalidOperationException($"This {nameof(ApizrExtendedRegistry)} is not configured for concurrent operations.");
         }
 
-        internal IApizrExtendedRegistry GetInstance(IServiceProvider serviceProvider)
+        IApizrExtendedRegistry IApizrExtendedRegistry.GetInstance(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
 
             return this;
+        }
+
+        void IApizrExtendedRegistry.MergeTo(IApizrExtendedRegistry targetRegistry)
+        {
+            foreach (var entry in ConcurrentRegistry) 
+                targetRegistry.TryAddManager(entry.Key, entry.Value);
+        }
+
+        bool IApizrExtendedRegistry.TryAddManager(Type managerType, Func<IApizrManager> managerFactory)
+        {
+            var registry = ThrowIfNotConcurrentImplementation();
+            return registry.TryAdd(managerType, managerFactory);
         }
 
         /// <inheritdoc />

@@ -152,6 +152,73 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public void ServiceCollection_With_Many_Registries_Should_Contain_Single_Registry_And_Many_Managers()
+        {
+            var services = new ServiceCollection();
+
+            services.AddApizr(registry => registry
+                .AddManagerFor<IReqResUserService>()
+                .AddManagerFor<IHttpBinService>()
+
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+
+            services.AddApizr(registry => registry
+                .AddUploadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddUploadManagerFor<ITransferSampleApi>()
+                .AddUploadManagerWith<string>(options => options.WithBaseAddress("https://test.com"))
+
+                .AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddDownloadManagerFor<ITransferSampleApi>()
+                .AddDownloadManagerWith<User>(options => options.WithBaseAddress("https://test.com"))
+
+                .AddTransferManager(options => options.WithBaseAddress("https://test.com"))
+                .AddTransferManagerFor<ITransferSampleApi>()
+                .AddTransferManagerWith<User, string>(options => options.WithBaseAddress("https://test.com")));
+
+            services.Should().Contain(x => x.ServiceType == typeof(IApizrManager<IReqResUserService>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrManager<IHttpBinService>))
+
+                .And.Contain(x => x.ServiceType == typeof(IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>))
+
+                .And.Contain(x => x.ServiceType == typeof(IApizrUploadManager<IUploadApi>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrUploadManager<ITransferSampleApi>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrUploadManager<IUploadApi<string>, string>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrUploadManagerWith<string>))
+
+                .And.Contain(x => x.ServiceType == typeof(IApizrDownloadManager<IDownloadApi>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrDownloadManager<ITransferSampleApi>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrDownloadManager<IDownloadApi<User>, User>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrDownloadManagerWith<User>))
+
+                .And.Contain(x => x.ServiceType == typeof(IApizrTransferManager<ITransferApi>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrTransferManager<ITransferSampleApi>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrTransferManager<ITransferApi<User, string>, User, string>))
+                .And.Contain(x => x.ServiceType == typeof(IApizrTransferManagerWith<User, string>));
+
+
+            var serviceProvider = services.BuildServiceProvider();
+            var registry = serviceProvider.GetService<IApizrExtendedRegistry>();
+            registry.Should().NotBeNull();
+
+            registry.ContainsManagerFor<IReqResUserService>().Should().BeTrue();
+            registry.ContainsManagerFor<IHttpBinService>().Should().BeTrue();
+
+            registry.ContainsCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>().Should().BeTrue();
+
+            registry.ContainsUploadManager().Should().BeTrue();
+            registry.ContainsUploadManagerFor<ITransferSampleApi>().Should().BeTrue();
+            registry.ContainsUploadManagerWith<string>().Should().BeTrue();
+
+            registry.ContainsDownloadManager().Should().BeTrue();
+            registry.ContainsDownloadManagerFor<ITransferSampleApi>().Should().BeTrue();
+            registry.ContainsDownloadManagerWith<User>().Should().BeTrue();
+
+            registry.ContainsTransferManager().Should().BeTrue();
+            registry.ContainsTransferManagerFor<ITransferSampleApi>().Should().BeTrue();
+            registry.ContainsTransferManagerWith<User, string>().Should().BeTrue();
+        }
+
+        [Fact]
         public void ServiceCollection_Should_Contain_Registry_And_Scanned_Managers()
         {
             var services = new ServiceCollection();
@@ -200,6 +267,57 @@ namespace Apizr.Tests
             registry.Should().NotBeNull();
 
             registry.TryGetManagerFor<IReqResUserService>(out _).Should().BeTrue();
+            registry.TryGetManagerFor<IHttpBinService>(out _).Should().BeTrue();
+
+            registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out _).Should().BeTrue();
+
+            registry.TryGetUploadManager(out _).Should().BeTrue();
+            registry.TryGetUploadManagerFor<ITransferSampleApi>(out _).Should().BeTrue();
+            registry.TryGetUploadManagerWith<string>(out _).Should().BeTrue();
+
+            registry.TryGetDownloadManager(out _).Should().BeTrue();
+            registry.TryGetDownloadManagerFor<ITransferSampleApi>(out _).Should().BeTrue();
+            registry.TryGetDownloadManagerWith<User>(out _).Should().BeTrue();
+
+            registry.TryGetTransferManager(out _).Should().BeTrue();
+            registry.TryGetTransferManagerFor<ITransferSampleApi>(out _).Should().BeTrue();
+            registry.TryGetTransferManagerWith<User, string>(out _).Should().BeTrue();
+        }
+
+        [Fact]
+        public void ServiceCollection_With_Many_Registries_Should_Resolve_Single_Registry_And_Many_Managers()
+        {
+            var services = new ServiceCollection();
+
+            services.AddApizr(registry => registry
+                .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress("http://test.com/1"))
+                .AddManagerFor<IHttpBinService>()
+
+                .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>());
+
+            services.AddApizr(registry => registry
+                .AddManagerFor<IReqResUserService>(options => options.WithBaseAddress("http://test.com/2")) // Should be ignored because it's not an override but a mistake
+
+                .AddUploadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddUploadManagerFor<ITransferSampleApi>()
+                .AddUploadManagerWith<string>(options => options.WithBaseAddress("https://test.com"))
+
+                .AddDownloadManager(options => options.WithBaseAddress("https://test.com"))
+                .AddDownloadManagerFor<ITransferSampleApi>()
+                .AddDownloadManagerWith<User>(options => options.WithBaseAddress("https://test.com"))
+
+                .AddTransferManager(options => options.WithBaseAddress("https://test.com"))
+                .AddTransferManagerFor<ITransferSampleApi>()
+                .AddTransferManagerWith<User, string>(options => options.WithBaseAddress("https://test.com")));
+
+            var serviceProvider = services.BuildServiceProvider();
+            var registry = serviceProvider.GetService<IApizrExtendedRegistry>();
+
+            registry.Should().NotBeNull();
+
+            registry.TryGetManagerFor<IReqResUserService>(out var reqResManager).Should().BeTrue();
+            reqResManager.Options.BaseUri.Should().Be("http://test.com/1"); // Second registration should be ignored
+
             registry.TryGetManagerFor<IHttpBinService>(out _).Should().BeTrue();
 
             registry.TryGetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(out _).Should().BeTrue();

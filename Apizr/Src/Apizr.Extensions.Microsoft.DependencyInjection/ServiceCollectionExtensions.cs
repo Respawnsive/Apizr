@@ -58,9 +58,9 @@ namespace Apizr
 
             var commonOptions = CreateCommonOptions(services, optionsBuilder);
 
-            var apizrRegistry = (ApizrExtendedRegistry)CreateRegistry(services, commonOptions, registryBuilder);
+            var apizrRegistry = CreateRegistry(services, commonOptions, registryBuilder);
 
-            services.AddSingleton(serviceProvider => apizrRegistry.GetInstance(serviceProvider));
+            services.AddOrReplaceSingleton(apizrRegistry);
 
             return services;
         }
@@ -988,6 +988,34 @@ namespace Apizr
             }
             else
                 services.AddSingleton(serviceType, factory);
+
+            return services;
+        }
+
+        internal static IServiceCollection AddOrReplaceSingleton(this IServiceCollection services, IApizrExtendedRegistry registry)
+        {
+            var serviceType = typeof(IApizrExtendedRegistry);
+            var serviceDescriptors = services.Where(sd => sd.ServiceType == serviceType).ToList();
+            if (serviceDescriptors.Any())
+            {
+                if (serviceDescriptors.Count > 1)
+                    throw new Exception("Can't merge with more than one registry");
+
+                var serviceDescriptor = serviceDescriptors.First();
+
+                object Factory(IServiceProvider serviceProvider)
+                {
+                    var previousRegistry = (IApizrExtendedRegistry) serviceDescriptor.ImplementationFactory!.Invoke(serviceProvider);
+                    previousRegistry.MergeTo(registry);
+
+                    return registry.GetInstance(serviceProvider);
+                }
+
+                services.Replace(new ServiceDescriptor(serviceType, Factory, ServiceLifetime.Singleton));
+            }
+            else
+                services.AddSingleton(serviceType, serviceProvider => registry.GetInstance(serviceProvider));
+
 
             return services;
         }

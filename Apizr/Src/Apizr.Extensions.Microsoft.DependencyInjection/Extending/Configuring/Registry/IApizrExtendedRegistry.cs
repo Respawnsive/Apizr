@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Apizr.Configuring.Registry;
 
 namespace Apizr.Extending.Configuring.Registry
@@ -8,5 +9,10 @@ namespace Apizr.Extending.Configuring.Registry
     /// </summary>
     public interface IApizrExtendedRegistry : IApizrEnumerableRegistry
     {
+        internal IApizrExtendedRegistry GetInstance(IServiceProvider serviceProvider);
+
+        internal void MergeTo(IApizrExtendedRegistry targetRegistry);
+
+        internal bool TryAddManager(Type managerType, Func<IApizrManager> managerFactory);
     }
 }

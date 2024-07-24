@@ -389,6 +389,11 @@ namespace Apizr.Extending.Configuring.Common
             => WithDelegatingHandler((_, _) => delegatingHandler, strategy);
 
         /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithDelegatingHandler<THandler>(
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler
+            => WithDelegatingHandler((serviceProvider, _) => serviceProvider.GetRequiredService<THandler>());
+
+        /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithDelegatingHandler<THandler>(Func<IServiceProvider, THandler> delegatingHandlerFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler
             => WithDelegatingHandler((serviceProvider, _) => delegatingHandlerFactory.Invoke(serviceProvider), strategy);
@@ -419,6 +424,10 @@ namespace Apizr.Extending.Configuring.Common
 
             return this;
         }
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithHttpMessageHandler<THandler>() where THandler : HttpMessageHandler
+            => WithHttpMessageHandler((serviceProvider, _) => serviceProvider.GetRequiredService<THandler>());
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithHttpMessageHandler<THandler>(Func<IServiceProvider, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler

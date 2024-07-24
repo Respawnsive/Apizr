@@ -21,6 +21,9 @@ options => options.WithDelegatingHandler((logger, options) => YourDelegatingHand
 // direct configuration
 options => options.WithDelegatingHandler(YourDelegatingHandler)
 
+// Or type configuration (has to be registered in the service collection)
+options => options.WithDelegatingHandler<YourDelegatingHandler>()
+
 // OR factory configuration with the service provider instance
 options => options.WithDelegatingHandler(serviceProvider => YourDelegatingHandler)
 

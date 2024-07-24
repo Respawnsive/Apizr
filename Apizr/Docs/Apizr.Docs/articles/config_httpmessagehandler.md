@@ -21,6 +21,9 @@ options => options.WithHttpMessageHandler((logger, options) => YourHttpMessageHa
 // direct configuration
 options => options.WithHttpMessageHandler(YourHttpMessageHandler)
 
+// Or type configuration (has to be registered in the service collection)
+options => options.WithHttpMessageHandler<YourHttpMessageHandler>()
+
 // OR factory configuration with the service provider instance
 options => options.WithHttpMessageHandler(serviceProvider => YourHttpMessageHandler)
 

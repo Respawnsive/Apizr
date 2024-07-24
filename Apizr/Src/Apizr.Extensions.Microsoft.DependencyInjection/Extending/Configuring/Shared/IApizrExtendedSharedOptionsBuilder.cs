@@ -82,6 +82,14 @@ namespace Apizr.Extending.Configuring.Shared
         /// <summary>
         /// Add a custom delegating handler inheriting from <see cref="DelegatingHandler"/> (serial call)
         /// </summary>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithDelegatingHandler<THandler>(
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler;
+
+        /// <summary>
+        /// Add a custom delegating handler inheriting from <see cref="DelegatingHandler"/> (serial call)
+        /// </summary>
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
         /// <returns></returns>
@@ -97,6 +105,13 @@ namespace Apizr.Extending.Configuring.Shared
         TApizrExtendedSharedOptionsBuilder WithDelegatingHandler<THandler>(
             Func<IServiceProvider, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler;
+
+        /// <summary>
+        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call)
+        /// </summary>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithHttpMessageHandler<THandler>()
+            where THandler : HttpMessageHandler;
 
         /// <summary>
         /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call)

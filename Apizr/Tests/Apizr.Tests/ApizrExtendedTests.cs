@@ -386,13 +386,15 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace))
                 .ConfigureServices((context, services) =>
                 {
+                    services.AddTransient<TestRequestHandler>();
+
                     services.AddApizrManagerFor<IReqResUserService>(config => config
                         .WithConfiguration(context.Configuration)
                         .WithLogging()
                         .WithAkavacheCacheHandler()
                         .WithCaching(lifeSpan: TimeSpan.Parse("00:07:00"))
                         .WithDelegatingHandler(watcher)
-                        .WithDelegatingHandler(new TestRequestHandler()));
+                        .WithDelegatingHandler<TestRequestHandler>());
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));

@@ -10,16 +10,6 @@ namespace Apizr
     /// </summary>
     public static class FusilladeOptionsBuilderExtensions
     {
-        [Obsolete("Use WithPriority instead")]
-        public static T WithPriorityManagement<T>(this T builder)
-            where T : IApizrGlobalCommonOptionsBuilderBase
-        {
-            if (builder is IApizrGlobalSharedRegistrationOptionsBuilderBase registrationBuilder)
-                registrationBuilder.WithPriority();
-
-            return builder;
-        }
-
         /// <summary>
         /// Enables priority management with Apizr
         /// </summary>

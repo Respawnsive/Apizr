@@ -24,6 +24,7 @@
 - [New][HttpMessageHandler] Now we can **register the extended way a HttpMessageHandler by its type**
 - [New][Cache] Now **CacheKey attribute allows composite cache key generation** from multiple decorated parameters
 - [New][Registry] Now we can **add multiple registry to the container and resolve a single merged one**
+- [New][BaseAddress/Path] Now we can **set a base address or path with a duplicate strategy**
 - [New][Target] Now **targeting multiple frameworks based on Refit targets**: `netstandard2.0;netstandard2.1;net462;net6.0;net7.0;net8.0`
 - [New/Breaking][BaseAddress] Now we can **set base address with the brand new `BaseAddress` attribure** instead of the now removed `WebApi`, `CrudEntity` or `MappedCrudEntity` useless ones, and only if you need to set it at design time
 - [New/Breaking][AutoRegister] Now we can **tell Apizr to auto register apis with the brand new `AutoRegister` attribure** instead of the now removed `WebApi`, `CrudEntity` or `MappedCrudEntity` useless ones

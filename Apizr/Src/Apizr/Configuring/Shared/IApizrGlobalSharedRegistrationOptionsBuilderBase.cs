@@ -38,24 +38,25 @@ namespace Apizr.Configuring.Shared
         /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>
         /// <param name="baseAddress">Your web api base address</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Replace)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithBaseAddress(string baseAddress);
-
-        internal TApizrOptionsBuilder WithBaseAddress(string baseAddress, ApizrDuplicateStrategy strategy);
+        TApizrOptionsBuilder WithBaseAddress(string baseAddress, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
         /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>
         /// <param name="baseAddress">Your web api base address</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Replace)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithBaseAddress(Uri baseAddress);
+        TApizrOptionsBuilder WithBaseAddress(Uri baseAddress, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
         /// <summary>
         /// Define your web api base path (could be defined with WebApiAttribute)
         /// </summary>
         /// <param name="basePath">Your web api base path</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Replace)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithBasePath(string basePath);
+        TApizrOptionsBuilder WithBasePath(string basePath, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
         /// <summary>
         /// Provide a custom HttpClientHandler

@@ -1709,10 +1709,10 @@ namespace Apizr.Tests
                         .SetMinimumLevel(LogLevel.Trace))
                 .ConfigureServices((_, services) =>
                 {
-                    services.AddApizrTransferManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
-                        .AddApizrTransferManagerFor<ITransferUndefinedApi>(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
-                        .AddApizrDownloadManager(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))
-                        .AddApizrDownloadManagerFor<ITransferUndefinedApi>(options => options.WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+                    services.AddApizrTransferManager(options => options.WithBaseAddress("https://proof.ovh.net/files"))
+                        .AddApizrTransferManagerFor<ITransferUndefinedApi>(options => options.WithBaseAddress("https://proof.ovh.net/files"))
+                        .AddApizrDownloadManager(options => options.WithBaseAddress("https://proof.ovh.net/files"))
+                        .AddApizrDownloadManagerFor<ITransferUndefinedApi>(options => options.WithBaseAddress("https://proof.ovh.net/files"));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1738,33 +1738,33 @@ namespace Apizr.Tests
 
             // Transfer
             // Built-in
-            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrTransferTypedManagerResult.Should().NotBeNull();
             apizrTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrCustomTransferManagerResult.Should().NotBeNull();
             apizrCustomTransferManagerResult.Length.Should().BePositive();
 
             // Download
             // Built-in
-            var apizrDownloadManagerResult = await apizrDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrDownloadManagerResult = await apizrDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrDownloadManagerResult.Should().NotBeNull();
             apizrDownloadManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var apizrDownloadTypedManagerResult = await apizrDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrDownloadTypedManagerResult = await apizrDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrDownloadTypedManagerResult.Should().NotBeNull();
             apizrDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrCustomDownloadManagerResult.Should().NotBeNull();
             apizrCustomDownloadManagerResult.Length.Should().BePositive();
         }
@@ -1780,7 +1780,7 @@ namespace Apizr.Tests
                 {
                     services.AddApizrTransferManager(options => options
                         .WithLogging()
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                        .WithBaseAddress("https://proof.ovh.net/files")
                         .WithProgress());
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -1800,7 +1800,7 @@ namespace Apizr.Tests
                 percentage = args.ProgressPercentage;
             };
 
-            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithProgress(progress)).ConfigureAwait(false);
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("10Mb.dat"), options => options.WithProgress(progress)).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
@@ -1824,7 +1824,7 @@ namespace Apizr.Tests
                 {
                     services.AddApizrTransferManager(options => options
                         .WithLogging()
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                        .WithBaseAddress("https://proof.ovh.net/files")
                         .WithProgress(progress));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -1837,7 +1837,7 @@ namespace Apizr.Tests
             var apizrTransferManager = scope.ServiceProvider.GetService<IApizrTransferManager>(); // Built-in
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("10Mb.dat")).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
@@ -2001,7 +2001,7 @@ namespace Apizr.Tests
 
                     services.AddApizrTransferManager(config => config
                         .WithLogging()
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                        .WithBaseAddress("https://proof.ovh.net/files")
                         .WithFileTransferMediation());
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -2014,7 +2014,7 @@ namespace Apizr.Tests
             var apizrMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator>();
 
             apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test100k.db"));
+            var result = await apizrMediator.SendDownloadQuery(new FileInfo("1Mb.dat"));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
         }
@@ -2032,7 +2032,7 @@ namespace Apizr.Tests
 
                     services.AddApizrTransferManager(config => config
                         .WithLogging()
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                        .WithBaseAddress("https://proof.ovh.net/files")
                         .WithFileTransferOptionalMediation());
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -2045,7 +2045,7 @@ namespace Apizr.Tests
             var apizrMediator = scope.ServiceProvider.GetRequiredService<IApizrOptionalMediator>();
 
             apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadOptionalQuery(new FileInfo("test100k.db"));
+            var result = await apizrMediator.SendDownloadOptionalQuery(new FileInfo("1Mb.dat"));
             result.Should().NotBeNull();
             result.Match(fileInfo =>
             {

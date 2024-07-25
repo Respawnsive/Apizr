@@ -41,29 +41,6 @@ namespace Apizr.Extending.Configuring.Manager
         IApizrExtendedManagerOptions IApizrExtendedManagerOptionsBuilder.ApizrOptions => Options;
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(string baseAddress)
-            => WithBaseAddress(_ => baseAddress);
-
-        /// <inheritdoc />
-        IApizrExtendedManagerOptionsBuilder
-            IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedManagerOptions,
-                IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(string baseAddress,
-                ApizrDuplicateStrategy strategy)
-        {
-            switch (strategy)
-            {
-                case ApizrDuplicateStrategy.Ignore:
-                    Options.BaseAddressFactory ??= _ => baseAddress;
-                    break;
-                default:
-                    Options.BaseAddressFactory = _ => baseAddress;
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithConfiguration(IConfiguration configuration)
             => WithConfiguration(configuration?.GetSection("Apizr"));
 
@@ -154,37 +131,69 @@ namespace Apizr.Extending.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
+        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(string baseAddress,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithBaseAddress(_ => baseAddress, strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
-            Options.BaseAddressFactory = baseAddressFactory;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.BaseAddressFactory ??= baseAddressFactory;
+                    break;
+                default:
+                    Options.BaseAddressFactory = baseAddressFactory;
+                    break;
+            }
 
             return this;
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Uri baseAddress)
-            => WithBaseAddress(_ => baseAddress);
+        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Uri baseAddress,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithBaseAddress(_ => baseAddress, strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
+        public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
-            Options.BaseUriFactory = baseAddressFactory;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.BaseUriFactory ??= baseAddressFactory;
+                    break;
+                default:
+                    Options.BaseUriFactory = baseAddressFactory;
+                    break;
+            }
 
             return this;
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithBasePath(string basePath)
-            => WithBasePath(_ => basePath);
+        public IApizrExtendedManagerOptionsBuilder WithBasePath(string basePath, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithBasePath(_ => basePath, strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory)
+        public IApizrExtendedManagerOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
-            Options.BasePathFactory = basePathFactory;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.BasePathFactory ??= basePathFactory;
+                    break;
+                default:
+                    Options.BasePathFactory = basePathFactory;
+                    break;
+            }
 
             return this;
         }
-
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithHttpClientHandler(HttpClientHandler httpClientHandler)
             => WithHttpClientHandler(_ => httpClientHandler);

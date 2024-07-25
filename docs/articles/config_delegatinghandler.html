@@ -106,6 +106,9 @@ options =&gt; options.WithDelegatingHandler((logger, options) =&gt; YourDelegati
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithDelegatingHandler(YourDelegatingHandler)
 
+// Or type configuration (has to be registered in the service collection)
+options =&gt; options.WithDelegatingHandler&lt;YourDelegatingHandler&gt;()
+
 // OR factory configuration with the service provider instance
 options =&gt; options.WithDelegatingHandler(serviceProvider =&gt; YourDelegatingHandler)
 

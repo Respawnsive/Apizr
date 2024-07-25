@@ -1061,7 +1061,7 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
-                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+                    .WithBaseAddress("https://proof.ovh.net/files"));
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             apizrRegistry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
@@ -1078,39 +1078,39 @@ namespace Apizr.Tests
             regCustomDownloadTypedManager.Should().NotBeNull(); // Custom
 
             // Shortcut
-            var regShortcutResult = await apizrRegistry.DownloadAsync(new FileInfo("test100k.db"));
+            var regShortcutResult = await apizrRegistry.DownloadAsync(new FileInfo("1Mb.dat"));
             regShortcutResult.Should().NotBeNull();
             regShortcutResult.Length.Should().BePositive();
 
             // Transfer
             // Built-in
-            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regTransferManagerResult.Should().NotBeNull();
             regTransferManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regTransferTypedManagerResult.Should().NotBeNull();
             regTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
             regCustomTransferTypedManagerResult.Length.Should().BePositive();
 
             // Download
             // Built-in
-            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regDownloadManagerResult.Should().NotBeNull();
             regDownloadManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regDownloadTypedManagerResult.Should().NotBeNull();
             regDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regCustomDownloadTypedManagerResult.Should().NotBeNull();
             regCustomDownloadTypedManagerResult.Length.Should().BePositive();
         }
@@ -1129,7 +1129,7 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
-                    .WithBaseAddress("http://speedtest.ftp.otenet.gr"));
+                    .WithBaseAddress("https://proof.ovh.net"));
 
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             apizrRegistry.TryGetTransferManagerFor<ITransferApi>(out var regTransferTypedManager).Should().BeTrue(); // Built-in
@@ -1146,39 +1146,39 @@ namespace Apizr.Tests
             regCustomDownloadTypedManager.Should().NotBeNull(); // Custom
 
             // Shortcut
-            var regShortcutResult = await apizrRegistry.DownloadAsync(new FileInfo("test100k.db"));
+            var regShortcutResult = await apizrRegistry.DownloadAsync(new FileInfo("1Mb.dat"));
             regShortcutResult.Should().NotBeNull();
             regShortcutResult.Length.Should().BePositive();
 
             // Transfer
             // Built-in
-            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regTransferManagerResult.Should().NotBeNull();
             regTransferManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regTransferTypedManagerResult.Should().NotBeNull();
             regTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
             regCustomTransferTypedManagerResult.Length.Should().BePositive();
 
             // Download
             // Built-in
-            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regDownloadManagerResult.Should().NotBeNull();
             regDownloadManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regDownloadTypedManagerResult.Should().NotBeNull();
             regDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regCustomDownloadTypedManagerResult.Should().NotBeNull();
             regCustomDownloadTypedManagerResult.Length.Should().BePositive();
         }
@@ -1194,7 +1194,7 @@ namespace Apizr.Tests
             };
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddTransferManager(options => options
-                        .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                        .WithBaseAddress("https://proof.ovh.net/files")
                         .WithProgress()),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
@@ -1204,7 +1204,7 @@ namespace Apizr.Tests
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             regTransferManager.Should().NotBeNull(); // Built-in
 
-            var fileInfo = await regTransferManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithProgress(progress)).ConfigureAwait(false);
+            var fileInfo = await regTransferManager.DownloadAsync(new FileInfo("10Mb.dat"), options => options.WithProgress(progress)).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
@@ -1221,7 +1221,7 @@ namespace Apizr.Tests
             };
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                 .AddTransferManager(options => options
-                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                    .WithBaseAddress("https://proof.ovh.net/files")
                     .WithProgress(progress)),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                     builder.AddXUnit(_outputHelper)
@@ -1231,7 +1231,7 @@ namespace Apizr.Tests
             apizrRegistry.TryGetTransferManager(out var regTransferManager).Should().BeTrue(); // Built-in
             regTransferManager.Should().NotBeNull(); // Built-in
 
-            var fileInfo = await regTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+            var fileInfo = await regTransferManager.DownloadAsync(new FileInfo("10Mb.dat")).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();

@@ -30,22 +30,25 @@ namespace Apizr.Extending.Configuring.Shared
         /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>
         /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Replace)</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory);
+        TApizrExtendedSharedOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
         /// <summary>
         /// Define your web api base address (could be defined with WebApiAttribute)
         /// </summary>
         /// <param name="baseAddressFactory">Your web api base address factory</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Replace)</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory);
+        TApizrExtendedSharedOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
         /// <summary>
         /// Define your web api base path (could be defined with WebApiAttribute)
         /// </summary>
         /// <param name="basePathFactory">Your web api base path factory</param>
+        /// <param name="strategy">The duplicate strategy if there's any other already (default: Replace)</param>
         /// <returns></returns>
-        TApizrExtendedSharedOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory);
+        TApizrExtendedSharedOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
         /// <summary>
         /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)

@@ -2179,7 +2179,7 @@ namespace Apizr.Tests
                             .AddDownloadManagerFor<ITransferUndefinedApi>(),
                         options => options
                             .WithLogging()
-                            .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+                            .WithBaseAddress("https://proof.ovh.net/files"));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -2205,33 +2205,33 @@ namespace Apizr.Tests
 
             // Transfer
             // Built-in
-            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrTransferTypedManagerResult.Should().NotBeNull();
             apizrTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrCustomTransferManagerResult.Should().NotBeNull();
             apizrCustomTransferManagerResult.Length.Should().BePositive();
 
             // Download
             // Built-in
-            var apizrDownloadManagerResult = await apizrDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrDownloadManagerResult = await apizrDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrDownloadManagerResult.Should().NotBeNull();
             apizrDownloadManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var apizrDownloadTypedManagerResult = await apizrDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrDownloadTypedManagerResult = await apizrDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrDownloadTypedManagerResult.Should().NotBeNull();
             apizrDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrCustomDownloadManagerResult.Should().NotBeNull();
             apizrCustomDownloadManagerResult.Length.Should().BePositive();
 
@@ -2253,39 +2253,39 @@ namespace Apizr.Tests
             regCustomDownloadTypedManager.Should().NotBeNull(); // Custom
 
             // Shortcut
-            var regShortcutResult = await registry.DownloadAsync(new FileInfo("test100k.db"));
+            var regShortcutResult = await registry.DownloadAsync(new FileInfo("1Mb.dat"));
             regShortcutResult.Should().NotBeNull();
             regShortcutResult.Length.Should().BePositive();
 
             // Transfer
             // Built-in
-            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regTransferManagerResult.Should().NotBeNull();
             regTransferManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regTransferTypedManagerResult.Should().NotBeNull();
             regTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
             regCustomTransferTypedManagerResult.Length.Should().BePositive();
 
             // Download
             // Built-in
-            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regDownloadManagerResult.Should().NotBeNull();
             regDownloadManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regDownloadTypedManagerResult.Should().NotBeNull();
             regDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regCustomDownloadTypedManagerResult.Should().NotBeNull();
             regCustomDownloadTypedManagerResult.Length.Should().BePositive();
         }
@@ -2308,7 +2308,7 @@ namespace Apizr.Tests
                                 options => options.WithBasePath("/files")),
                         options => options
                             .WithLogging()
-                            .WithBaseAddress("http://speedtest.ftp.otenet.gr"));
+                            .WithBaseAddress("https://proof.ovh.net"));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -2334,33 +2334,33 @@ namespace Apizr.Tests
 
             // Transfer
             // Built-in
-            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrTransferManagerResult = await apizrTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrTransferManagerResult.Should().NotBeNull();
             apizrTransferManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrTransferTypedManagerResult = await apizrTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrTransferTypedManagerResult.Should().NotBeNull();
             apizrTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+            var apizrCustomTransferManagerResult = await apizrCustomTransferManager.DownloadAsync(new FileInfo("1Mb.dat"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             apizrCustomTransferManagerResult.Should().NotBeNull();
             apizrCustomTransferManagerResult.Length.Should().BePositive();
 
             // Download
             // Built-in
-            var apizrDownloadManagerResult = await apizrDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrDownloadManagerResult = await apizrDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrDownloadManagerResult.Should().NotBeNull();
             apizrDownloadManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var apizrDownloadTypedManagerResult = await apizrDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var apizrDownloadTypedManagerResult = await apizrDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             apizrDownloadTypedManagerResult.Should().NotBeNull();
             apizrDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+            var apizrCustomDownloadManagerResult = await apizrCustomDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             apizrCustomDownloadManagerResult.Should().NotBeNull();
             apizrCustomDownloadManagerResult.Length.Should().BePositive();
 
@@ -2382,39 +2382,39 @@ namespace Apizr.Tests
             regCustomDownloadTypedManager.Should().NotBeNull(); // Custom
 
             // Shortcut
-            var regShortcutResult = await registry.DownloadAsync(new FileInfo("test100k.db"));
+            var regShortcutResult = await registry.DownloadAsync(new FileInfo("1Mb.dat"));
             regShortcutResult.Should().NotBeNull();
             regShortcutResult.Length.Should().BePositive();
 
             // Transfer
             // Built-in
-            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferManagerResult = await regTransferManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regTransferManagerResult.Should().NotBeNull();
             regTransferManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regTransferTypedManagerResult = await regTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regTransferTypedManagerResult.Should().NotBeNull();
             regTransferTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+            var regCustomTransferTypedManagerResult = await regCustomTransferTypedManager.DownloadAsync(new FileInfo("1Mb.dat"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             regCustomTransferTypedManagerResult.Should().NotBeNull();
             regCustomTransferTypedManagerResult.Length.Should().BePositive();
 
             // Download
             // Built-in
-            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regDownloadManagerResult = await regDownloadManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regDownloadManagerResult.Should().NotBeNull();
             regDownloadManagerResult.Length.Should().BePositive();
 
             // Built-in
-            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"));
+            var regDownloadTypedManagerResult = await regDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"));
             regDownloadTypedManagerResult.Should().NotBeNull();
             regDownloadTypedManagerResult.Length.Should().BePositive();
 
             // Custom
-            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+            var regCustomDownloadTypedManagerResult = await regCustomDownloadTypedManager.DownloadAsync(new FileInfo("1Mb.dat"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             regCustomDownloadTypedManagerResult.Should().NotBeNull();
             regCustomDownloadTypedManagerResult.Length.Should().BePositive();
         }
@@ -2438,7 +2438,7 @@ namespace Apizr.Tests
                     services.AddApizr(registry => registry
                         .AddTransferManager(options => options
                             .WithLogging()
-                            .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                            .WithBaseAddress("https://proof.ovh.net/files")
                             .WithProgress()
                             .IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
@@ -2452,7 +2452,7 @@ namespace Apizr.Tests
             var apizrTransferManager = scope.ServiceProvider.GetService<IApizrTransferManager>(); // Built-in
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithProgress(progress)).ConfigureAwait(false);
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("10Mb.dat"), options => options.WithProgress(progress)).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
@@ -2477,7 +2477,7 @@ namespace Apizr.Tests
                     services.AddApizr(registry => registry
                         .AddTransferManager(options => options
                             .WithLogging()
-                            .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                            .WithBaseAddress("https://proof.ovh.net/files")
                             .WithProgress(progress)
                             .IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
@@ -2491,7 +2491,7 @@ namespace Apizr.Tests
             var apizrTransferManager = scope.ServiceProvider.GetService<IApizrTransferManager>(); // Built-in
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("10Mb.dat")).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
@@ -2848,7 +2848,7 @@ namespace Apizr.Tests
                             .AddGroup(transferRegistry => transferRegistry
                                 .AddTransferManagerFor<ITransferSampleApi>()
                                 .AddTransferManager(options => options
-                                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"))),
+                                    .WithBaseAddress("https://proof.ovh.net/files"))),
                         config => config
                             .WithLogging()
                             .WithFileTransferMediation()
@@ -2864,7 +2864,7 @@ namespace Apizr.Tests
             var apizrMediator = scope.ServiceProvider.GetRequiredService<IApizrMediator>();
 
             apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadQuery(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+            var result = await apizrMediator.SendDownloadQuery(new FileInfo("1Mb.dat"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
         }
@@ -2884,7 +2884,7 @@ namespace Apizr.Tests
                         registry => registry
                             .AddTransferManagerFor<ITransferSampleApi>()
                             .AddTransferManager(options => options
-                                .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")),
+                                .WithBaseAddress("https://proof.ovh.net/files")),
                         config => config
                             .WithLogging()
                             .WithFileTransferOptionalMediation()
@@ -2900,7 +2900,7 @@ namespace Apizr.Tests
             var apizrMediator = scope.ServiceProvider.GetRequiredService<IApizrOptionalMediator>();
 
             apizrMediator.Should().NotBeNull();
-            var result = await apizrMediator.SendDownloadOptionalQuery(new FileInfo("test100k.db"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
+            var result = await apizrMediator.SendDownloadOptionalQuery(new FileInfo("1Mb.dat"), options => options.IgnoreMessageParts(HttpMessageParts.ResponseBody));
             result.Should().NotBeNull();
             result.Match(fileInfo =>
                 {

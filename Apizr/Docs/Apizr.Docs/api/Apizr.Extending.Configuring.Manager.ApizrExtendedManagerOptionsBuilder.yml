@@ -13,12 +13,12 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithAuthenticationHandler``2(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.String)
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Uri)
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func{System.IServiceProvider,System.String})
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.String)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithCacheHandler(Apizr.Caching.ICacheHandler)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithCacheHandler(System.Func{System.IServiceProvider,Apizr.Caching.ICacheHandler})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithCacheHandler(System.Type)
@@ -32,6 +32,7 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler(System.Type)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler``1
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConnectivityHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
@@ -43,6 +44,7 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHeaders``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpClientHandler(System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1(``0)
@@ -127,7 +129,6 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(Apizr.Progressing.IApizrProgress)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FileTransferOptionsBuilderExtensions.WithProgress``1(System.Action{Apizr.Progressing.ApizrProgressEventArgs})
-  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(Fusillade.Priority)
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(System.Int32)
@@ -198,46 +199,6 @@ items:
   nameWithType.vb: ApizrExtendedManagerOptionsBuilder.New(ApizrExtendedManagerOptions)
   fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.New(Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions)
   name.vb: New(ApizrExtendedManagerOptions)
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.String)
-  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.String)
-  id: WithBaseAddress(System.String)
-  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
-  langs:
-  - csharp
-  - vb
-  name: WithBaseAddress(string)
-  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(string)
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(string)
-  type: Method
-  source:
-    remote:
-      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-      branch: dev
-      repo: https://github.com/Respawnsive/Apizr.git
-    id: WithBaseAddress
-    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 43
-  assemblies:
-  - Apizr.Extensions.Microsoft.DependencyInjection
-  namespace: Apizr.Extending.Configuring.Manager
-  summary: Define your web api base address (could be defined with WebApiAttribute)
-  example: []
-  syntax:
-    content: public IApizrExtendedManagerOptionsBuilder WithBaseAddress(string baseAddress)
-    parameters:
-    - id: baseAddress
-      type: System.String
-      description: Your web api base address
-    return:
-      type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
-      description: ''
-    content.vb: Public Function WithBaseAddress(baseAddress As String) As IApizrExtendedManagerOptionsBuilder
-  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress*
-  implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String)
-  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(String)
-  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(String)
-  name.vb: WithBaseAddress(String)
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
   commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
   id: WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)
@@ -256,7 +217,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConfiguration
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 66
+    startLine: 43
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -293,7 +254,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConfiguration
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 70
+    startLine: 47
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -312,16 +273,16 @@ items:
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConfiguration*
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  id: WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithBaseAddress(Func<IServiceProvider, string>)
-  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Func<IServiceProvider, string>)
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func<System.IServiceProvider, string>)
+  name: WithBaseAddress(string, ApizrDuplicateStrategy)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(string, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(string, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
@@ -330,38 +291,84 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 156
+    startLine: 133
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
   summary: Define your web api base address (could be defined with WebApiAttribute)
   example: []
   syntax:
-    content: public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
+    content: public IApizrExtendedManagerOptionsBuilder WithBaseAddress(string baseAddress, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+    parameters:
+    - id: baseAddress
+      type: System.String
+      description: Your web api base address
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Replace)"
+    return:
+      type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithBaseAddress(baseAddress As String, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As IApizrExtendedManagerOptionsBuilder
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress*
+  implements:
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(String, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(String, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(String, ApizrDuplicateStrategy)
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithBaseAddress(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func<System.IServiceProvider, string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithBaseAddress
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
+    startLine: 138
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: Define your web api base address (could be defined with WebApiAttribute)
+  example: []
+  syntax:
+    content: public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     parameters:
     - id: baseAddressFactory
       type: System.Func{System.IServiceProvider,System.String}
       description: Your web api base address factory
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Replace)"
     return:
       type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
       description: ''
-    content.vb: Public Function WithBaseAddress(baseAddressFactory As Func(Of IServiceProvider, String)) As IApizrExtendedManagerOptionsBuilder
+    content.vb: Public Function WithBaseAddress(baseAddressFactory As Func(Of IServiceProvider, String), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As IApizrExtendedManagerOptionsBuilder
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress*
   implements:
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Func(Of IServiceProvider, String))
-  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func(Of System.IServiceProvider, String))
-  name.vb: WithBaseAddress(Func(Of IServiceProvider, String))
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Uri)
-  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Uri)
-  id: WithBaseAddress(System.Uri)
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func(Of System.IServiceProvider, String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithBaseAddress(Uri)
-  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Uri)
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Uri)
+  name: WithBaseAddress(Uri, ApizrDuplicateStrategy)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Uri, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Uri, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
@@ -370,35 +377,38 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 164
+    startLine: 155
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
   summary: Define your web api base address (could be defined with WebApiAttribute)
   example: []
   syntax:
-    content: public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Uri baseAddress)
+    content: public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Uri baseAddress, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     parameters:
     - id: baseAddress
       type: System.Uri
       description: Your web api base address
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Replace)"
     return:
       type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
       description: ''
-    content.vb: Public Function WithBaseAddress(baseAddress As Uri) As IApizrExtendedManagerOptionsBuilder
+    content.vb: Public Function WithBaseAddress(baseAddress As Uri, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As IApizrExtendedManagerOptionsBuilder
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri)
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  id: WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithBaseAddress(Func<IServiceProvider, Uri>)
-  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Func<IServiceProvider, Uri>)
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>)
+  name: WithBaseAddress(Func<IServiceProvider, Uri>, ApizrDuplicateStrategy)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Func<IServiceProvider, Uri>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
@@ -407,38 +417,41 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 168
+    startLine: 160
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
   summary: Define your web api base address (could be defined with WebApiAttribute)
   example: []
   syntax:
-    content: public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
+    content: public IApizrExtendedManagerOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     parameters:
     - id: baseAddressFactory
       type: System.Func{System.IServiceProvider,System.Uri}
       description: Your web api base address factory
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Replace)"
     return:
       type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
       description: ''
-    content.vb: Public Function WithBaseAddress(baseAddressFactory As Func(Of IServiceProvider, Uri)) As IApizrExtendedManagerOptionsBuilder
+    content.vb: Public Function WithBaseAddress(baseAddressFactory As Func(Of IServiceProvider, Uri), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As IApizrExtendedManagerOptionsBuilder
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress*
   implements:
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Func(Of IServiceProvider, Uri))
-  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri))
-  name.vb: WithBaseAddress(Func(Of IServiceProvider, Uri))
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.String)
-  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.String)
-  id: WithBasePath(System.String)
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBaseAddress(Func(Of IServiceProvider, Uri), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(Func(Of IServiceProvider, Uri), ApizrDuplicateStrategy)
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithBasePath(string)
-  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBasePath(string)
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(string)
+  name: WithBasePath(string, ApizrDuplicateStrategy)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBasePath(string, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(string, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
@@ -447,38 +460,41 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 176
+    startLine: 177
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
   summary: Define your web api base path (could be defined with WebApiAttribute)
   example: []
   syntax:
-    content: public IApizrExtendedManagerOptionsBuilder WithBasePath(string basePath)
+    content: public IApizrExtendedManagerOptionsBuilder WithBasePath(string basePath, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     parameters:
     - id: basePath
       type: System.String
       description: Your web api base path
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Replace)"
     return:
       type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
       description: ''
-    content.vb: Public Function WithBasePath(basePath As String) As IApizrExtendedManagerOptionsBuilder
+    content.vb: Public Function WithBasePath(basePath As String, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As IApizrExtendedManagerOptionsBuilder
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String)
-  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBasePath(String)
-  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(String)
-  name.vb: WithBasePath(String)
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func{System.IServiceProvider,System.String})
-  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func{System.IServiceProvider,System.String})
-  id: WithBasePath(System.Func{System.IServiceProvider,System.String})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBasePath(String, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(String, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBasePath(String, ApizrDuplicateStrategy)
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
   langs:
   - csharp
   - vb
-  name: WithBasePath(Func<IServiceProvider, string>)
-  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBasePath(Func<IServiceProvider, string>)
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func<System.IServiceProvider, string>)
+  name: WithBasePath(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBasePath(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func<System.IServiceProvider, string>, Apizr.Configuring.ApizrDuplicateStrategy)
   type: Method
   source:
     remote:
@@ -487,28 +503,31 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 180
+    startLine: 181
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
   summary: Define your web api base path (could be defined with WebApiAttribute)
   example: []
   syntax:
-    content: public IApizrExtendedManagerOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory)
+    content: public IApizrExtendedManagerOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     parameters:
     - id: basePathFactory
       type: System.Func{System.IServiceProvider,System.String}
       description: Your web api base path factory
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Replace)"
     return:
       type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
       description: ''
-    content.vb: Public Function WithBasePath(basePathFactory As Func(Of IServiceProvider, String)) As IApizrExtendedManagerOptionsBuilder
+    content.vb: Public Function WithBasePath(basePathFactory As Func(Of IServiceProvider, String), strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As IApizrExtendedManagerOptionsBuilder
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath*
   implements:
-  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String})
-  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBasePath(Func(Of IServiceProvider, String))
-  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func(Of System.IServiceProvider, String))
-  name.vb: WithBasePath(Func(Of IServiceProvider, String))
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithBasePath(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath(System.Func(Of System.IServiceProvider, String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBasePath(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)
   id: WithHttpClientHandler(System.Net.Http.HttpClientHandler)
@@ -527,7 +546,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 188
+    startLine: 197
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -564,7 +583,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 192
+    startLine: 201
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -604,7 +623,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConfigureHttpClientBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 200
+    startLine: 209
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -629,6 +648,48 @@ items:
   nameWithType.vb: ApizrExtendedManagerOptionsBuilder.ConfigureHttpClientBuilder(Action(Of IHttpClientBuilder), ApizrDuplicateStrategy)
   fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.ConfigureHttpClientBuilder(System.Action(Of Microsoft.Extensions.DependencyInjection.IHttpClientBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: ConfigureHttpClientBuilder(Action(Of IHttpClientBuilder), ApizrDuplicateStrategy)
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithDelegatingHandler<THandler>(ApizrDuplicateStrategy)
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler<THandler>(ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler<THandler>(Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithDelegatingHandler
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
+    startLine: 239
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: Add a custom delegating handler inheriting from <xref href="System.Net.Http.DelegatingHandler" data-throw-if-not-resolved="false"></xref> (serial call)
+  example: []
+  syntax:
+    content: 'public IApizrExtendedManagerOptionsBuilder WithDelegatingHandler<THandler>(ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler'
+    parameters:
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
+    typeParameters:
+    - id: THandler
+    return:
+      type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithDelegatingHandler(Of THandler As DelegatingHandler)(strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrExtendedManagerOptionsBuilder
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler(Of THandler)(ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler(Of THandler)(Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(ApizrDuplicateStrategy)
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   id: WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)
@@ -647,7 +708,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDelegatingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 230
+    startLine: 244
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -692,7 +753,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 235
+    startLine: 249
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -732,7 +793,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 243
+    startLine: 257
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -775,7 +836,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 249
+    startLine: 263
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -823,7 +884,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 260
+    startLine: 274
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -866,7 +927,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 271
+    startLine: 285
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -912,7 +973,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 281
+    startLine: 295
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -958,7 +1019,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 312
+    startLine: 326
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1007,7 +1068,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 344
+    startLine: 358
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1059,7 +1120,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 397
+    startLine: 411
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1096,7 +1157,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 401
+    startLine: 415
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1136,7 +1197,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 409
+    startLine: 423
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1173,7 +1234,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 413
+    startLine: 427
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1213,7 +1274,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDelegatingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 421
+    startLine: 435
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1258,7 +1319,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDelegatingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 426
+    startLine: 440
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1285,6 +1346,44 @@ items:
   nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler(Of THandler)(Func(Of IServiceProvider, IApizrManagerOptionsBase, THandler), ApizrDuplicateStrategy)
   fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler(Of THandler)(System.Func(Of System.IServiceProvider, Apizr.Configuring.Manager.IApizrManagerOptionsBase, THandler), Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: WithDelegatingHandler(Of THandler)(Func(Of IServiceProvider, IApizrManagerOptionsBase, THandler), ApizrDuplicateStrategy)
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1
+  commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1
+  id: WithHttpMessageHandler``1
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithHttpMessageHandler<THandler>()
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler<THandler>()
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler<THandler>()
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithHttpMessageHandler
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
+    startLine: 467
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: Add a custom http message handler inheriting from <xref href="System.Net.Http.HttpMessageHandler" data-throw-if-not-resolved="false"></xref> (last call)
+  example: []
+  syntax:
+    content: 'public IApizrExtendedManagerOptionsBuilder WithHttpMessageHandler<THandler>() where THandler : HttpMessageHandler'
+    typeParameters:
+    - id: THandler
+    return:
+      type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
+      description: ''
+    content.vb: Public Function WithHttpMessageHandler(Of THandler As HttpMessageHandler)() As IApizrExtendedManagerOptionsBuilder
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithHttpMessageHandler``1
+  nameWithType.vb: ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler(Of THandler)()
+  fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler(Of THandler)()
+  name.vb: WithHttpMessageHandler(Of THandler)()
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})
   commentId: M:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})
   id: WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})
@@ -1303,7 +1402,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpMessageHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 453
+    startLine: 471
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1345,7 +1444,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpMessageHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 457
+    startLine: 475
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1387,7 +1486,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpMessageHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 461
+    startLine: 479
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1429,7 +1528,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 473
+    startLine: 491
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1475,7 +1574,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 505
+    startLine: 523
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1523,7 +1622,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 512
+    startLine: 530
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1566,7 +1665,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 520
+    startLine: 538
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1611,7 +1710,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 524
+    startLine: 542
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1656,7 +1755,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 532
+    startLine: 550
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1702,7 +1801,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 538
+    startLine: 556
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1742,7 +1841,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 545
+    startLine: 563
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1787,7 +1886,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRefitSettings
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 557
+    startLine: 575
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1824,7 +1923,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRefitSettings
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 561
+    startLine: 579
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1864,7 +1963,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 570
+    startLine: 588
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1901,7 +2000,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 574
+    startLine: 592
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1941,7 +2040,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 582
+    startLine: 600
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1983,7 +2082,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 590
+    startLine: 608
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2023,7 +2122,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 598
+    startLine: 616
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2062,7 +2161,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConnectivityHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 603
+    startLine: 621
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2099,7 +2198,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 615
+    startLine: 633
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2136,7 +2235,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 619
+    startLine: 637
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2176,7 +2275,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 627
+    startLine: 645
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2215,7 +2314,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCacheHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 632
+    startLine: 650
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2252,7 +2351,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 644
+    startLine: 662
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2289,7 +2388,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 648
+    startLine: 666
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2329,7 +2428,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 656
+    startLine: 674
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2368,7 +2467,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithMappingHandler
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 661
+    startLine: 679
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2405,7 +2504,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceContextOptions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 673
+    startLine: 691
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2445,7 +2544,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionNames
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 689
+    startLine: 707
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2488,7 +2587,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionRule
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 698
+    startLine: 716
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2531,7 +2630,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResiliencePipelineKeys
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 730
+    startLine: 748
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -2577,7 +2676,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCaching
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptionsBuilder.cs
-    startLine: 784
+    startLine: 802
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -3746,47 +3845,6 @@ references:
     name: ApizrProgressEventArgs
     href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: )
-  - name: )
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-  parent: Apizr.FusilladeOptionsBuilderExtensions
-  definition: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
-  name: WithPriorityManagement<ApizrExtendedManagerOptionsBuilder>(ApizrExtendedManagerOptionsBuilder)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement<ApizrExtendedManagerOptionsBuilder>(ApizrExtendedManagerOptionsBuilder)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement<Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder>(Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of ApizrExtendedManagerOptionsBuilder)(ApizrExtendedManagerOptionsBuilder)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)(Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)
-  name.vb: WithPriorityManagement(Of ApizrExtendedManagerOptionsBuilder)(ApizrExtendedManagerOptionsBuilder)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)
-    name: WithPriorityManagement
-    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
-  - name: <
-  - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
-    name: ApizrExtendedManagerOptionsBuilder
-    href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html
-  - name: '>'
-  - name: (
-  - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
-    name: ApizrExtendedManagerOptionsBuilder
-    href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html
-  - name: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder)
-    name: WithPriorityManagement
-    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
-  - name: (
-  - name: Of
-  - name: " "
-  - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
-    name: ApizrExtendedManagerOptionsBuilder
-    href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html
-  - name: )
-  - name: (
-  - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder
-    name: ApizrExtendedManagerOptionsBuilder
-    href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html
   - name: )
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1
   commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
@@ -5109,44 +5167,6 @@ references:
     href: Apizr.Progressing.ApizrProgressEventArgs.html
   - name: )
   - name: )
-- uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-  commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-  href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
-  name: WithPriorityManagement<T>(T)
-  nameWithType: FusilladeOptionsBuilderExtensions.WithPriorityManagement<T>(T)
-  fullName: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement<T>(T)
-  nameWithType.vb: FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
-  fullName.vb: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement(Of T)(T)
-  name.vb: WithPriorityManagement(Of T)(T)
-  spec.csharp:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-    name: WithPriorityManagement
-    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
-  - name: <
-  - name: T
-  - name: '>'
-  - name: (
-  - name: T
-  - name: )
-  spec.vb:
-  - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriorityManagement``1(``0)
-    name: WithPriorityManagement
-    href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriorityManagement__1___0_
-  - name: (
-  - name: Of
-  - name: " "
-  - name: T
-  - name: )
-  - name: (
-  - name: T
-  - name: )
-- uid: Apizr.FusilladeOptionsBuilderExtensions
-  commentId: T:Apizr.FusilladeOptionsBuilderExtensions
-  parent: Apizr
-  href: Apizr.FusilladeOptionsBuilderExtensions.html
-  name: FusilladeOptionsBuilderExtensions
-  nameWithType: FusilladeOptionsBuilderExtensions
-  fullName: Apizr.FusilladeOptionsBuilderExtensions
 - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
   commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0)
   href: Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_
@@ -5178,6 +5198,13 @@ references:
   - name: (
   - name: T
   - name: )
+- uid: Apizr.FusilladeOptionsBuilderExtensions
+  commentId: T:Apizr.FusilladeOptionsBuilderExtensions
+  parent: Apizr
+  href: Apizr.FusilladeOptionsBuilderExtensions.html
+  name: FusilladeOptionsBuilderExtensions
+  nameWithType: FusilladeOptionsBuilderExtensions
+  fullName: Apizr.FusilladeOptionsBuilderExtensions
 - uid: Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
   commentId: M:Apizr.FusilladeOptionsBuilderExtensions.WithPriority``1(``0,Fusillade.Priority)
   isExternal: true
@@ -5593,84 +5620,6 @@ references:
   nameWithType.vb: ApizrExtendedManagerOptionsBuilder.New
   fullName.vb: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.New
   name.vb: New
-- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress*
-  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress
-  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithBaseAddress_System_String_
-  name: WithBaseAddress
-  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress
-  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String)
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_
-  name: WithBaseAddress(string)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(string)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(string)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBaseAddress(String)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBaseAddress(String)
-  name.vb: WithBaseAddress(String)
-  spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String)
-    name: WithBaseAddress
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_
-  - name: (
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: )
-  spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String)
-    name: WithBaseAddress
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_
-  - name: (
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: )
-- uid: System.String
-  commentId: T:System.String
-  parent: System
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.string
-  name: string
-  nameWithType: string
-  fullName: string
-  nameWithType.vb: String
-  fullName.vb: String
-  name.vb: String
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
-  isExternal: true
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_
-  name: WithBaseAddress(string)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBaseAddress(string)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBaseAddress(string)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBaseAddress(String)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBaseAddress(String)
-  name.vb: WithBaseAddress(String)
-  spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
-    name: WithBaseAddress
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_
-  - name: (
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: )
-  spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String)
-    name: WithBaseAddress
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_
-  - name: (
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: )
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConfiguration*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithConfiguration
   href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithConfiguration_Microsoft_Extensions_Configuration_IConfiguration_
@@ -5848,21 +5797,148 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfigurationsection
   - name: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
-  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__
-  name: WithBaseAddress(Func<IServiceProvider, string>)
-  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, string>)
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, string>)
-  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, String))
-  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, String))
-  name.vb: WithBaseAddress(Func(Of IServiceProvider, String))
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress*
+  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress
+  nameWithType: ApizrExtendedManagerOptionsBuilder.WithBaseAddress
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBaseAddress
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress(string, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(string, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(string, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBaseAddress(String, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBaseAddress(String, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(String, ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithBaseAddress
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Apizr.Configuring.ApizrDuplicateStrategy
+  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
+  parent: Apizr.Configuring
+  href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  name: ApizrDuplicateStrategy
+  nameWithType: ApizrDuplicateStrategy
+  fullName: Apizr.Configuring.ApizrDuplicateStrategy
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress(string, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBaseAddress(string, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBaseAddress(string, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBaseAddress(String, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBaseAddress(String, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(String, ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithBaseAddress
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithBaseAddress
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  href: Apizr.html
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithBaseAddress
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -5880,11 +5956,16 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -5904,6 +5985,11 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: System.Func{System.IServiceProvider,System.String}
   commentId: T:System.Func{System.IServiceProvider,System.String}
@@ -5952,20 +6038,20 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
-  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__
-  name: WithBaseAddress(Func<IServiceProvider, string>)
-  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, string>)
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, string>)
-  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, String))
-  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, String))
-  name.vb: WithBaseAddress(Func(Of IServiceProvider, String))
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -5983,11 +6069,16 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6007,6 +6098,11 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: System.Func`2
   commentId: T:System.Func`2
@@ -6042,35 +6138,45 @@ references:
   - name: " "
   - name: TResult
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_
-  name: WithBaseAddress(Uri)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(Uri)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(System.Uri)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBaseAddress(Uri)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBaseAddress(System.Uri)
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress(Uri, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(Uri, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(System.Uri, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBaseAddress(Uri, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBaseAddress(System.Uri, Apizr.Configuring.ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Uri
     name: Uri
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Uri
     name: Uri
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: System.Uri
   commentId: T:System.Uri
@@ -6080,50 +6186,60 @@ references:
   name: Uri
   nameWithType: Uri
   fullName: System.Uri
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_
-  name: WithBaseAddress(Uri)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBaseAddress(Uri)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBaseAddress(System.Uri)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBaseAddress(Uri)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBaseAddress(System.Uri)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress(Uri, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBaseAddress(Uri, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBaseAddress(System.Uri, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBaseAddress(Uri, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBaseAddress(System.Uri, Apizr.Configuring.ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Uri
     name: Uri
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBaseAddress_System_Uri_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Uri
     name: Uri
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
-  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__
-  name: WithBaseAddress(Func<IServiceProvider, Uri>)
-  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, Uri>)
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>)
-  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, Uri))
-  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri))
-  name.vb: WithBaseAddress(Func(Of IServiceProvider, Uri))
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress(Func<IServiceProvider, Uri>, ApizrDuplicateStrategy)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, Uri>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, Uri), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(Func(Of IServiceProvider, Uri), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6141,11 +6257,16 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6165,6 +6286,11 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: System.Func{System.IServiceProvider,System.Uri}
   commentId: T:System.Func{System.IServiceProvider,System.Uri}
@@ -6213,20 +6339,20 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
-  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__
-  name: WithBaseAddress(Func<IServiceProvider, Uri>)
-  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, Uri>)
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>)
-  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, Uri))
-  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri))
-  name.vb: WithBaseAddress(Func(Of IServiceProvider, Uri))
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBaseAddress(Func<IServiceProvider, Uri>, ApizrDuplicateStrategy)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(Func<IServiceProvider, Uri>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBaseAddress(System.Func<System.IServiceProvider, System.Uri>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(Func(Of IServiceProvider, Uri), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBaseAddress(System.Func(Of System.IServiceProvider, System.Uri), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBaseAddress(Func(Of IServiceProvider, Uri), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6244,11 +6370,16 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBaseAddress
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6268,89 +6399,114 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath
-  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithBasePath_System_String_
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
   name: WithBasePath
   nameWithType: ApizrExtendedManagerOptionsBuilder.WithBasePath
   fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithBasePath
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
-  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String)
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_
-  name: WithBasePath(string)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBasePath(string)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBasePath(string)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBasePath(String)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBasePath(String)
-  name.vb: WithBasePath(String)
+  definition: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBasePath(string, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBasePath(string, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBasePath(string, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBasePath(String, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBasePath(String, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBasePath(String, ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBasePath
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.String
     name: string
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBasePath
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String)
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_
-  name: WithBasePath(string)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBasePath(string)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBasePath(string)
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBasePath(String)
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBasePath(String)
-  name.vb: WithBasePath(String)
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBasePath(string, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBasePath(string, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithBasePath(string, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBasePath(String, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithBasePath(String, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBasePath(String, ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBasePath
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.String
     name: string
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String)
+  - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBasePath
-    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_
+    href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String})
-  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
-  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
-  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__
-  name: WithBasePath(Func<IServiceProvider, string>)
-  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBasePath(Func<IServiceProvider, string>)
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBasePath(System.Func<System.IServiceProvider, string>)
-  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBasePath(Func(Of IServiceProvider, String))
-  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBasePath(System.Func(Of System.IServiceProvider, String))
-  name.vb: WithBasePath(Func(Of IServiceProvider, String))
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBasePath(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithBasePath(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithBasePath(System.Func<System.IServiceProvider, string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithBasePath(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithBasePath(System.Func(Of System.IServiceProvider, String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBasePath(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBasePath
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6368,11 +6524,16 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBasePath
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6392,21 +6553,26 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
-- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
-  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
-  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__
-  name: WithBasePath(Func<IServiceProvider, string>)
-  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBasePath(Func<IServiceProvider, string>)
-  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBasePath(System.Func<System.IServiceProvider, string>)
-  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBasePath(Func(Of IServiceProvider, String))
-  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBasePath(System.Func(Of System.IServiceProvider, String))
-  name.vb: WithBasePath(Func(Of IServiceProvider, String))
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithBasePath(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBasePath(Func<IServiceProvider, string>, ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithBasePath(System.Func<System.IServiceProvider, string>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBasePath(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithBasePath(System.Func(Of System.IServiceProvider, String), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithBasePath(Func(Of IServiceProvider, String), ApizrDuplicateStrategy)
   spec.csharp:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBasePath
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6424,11 +6590,16 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
   spec.vb:
-  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String})
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)
     name: WithBasePath
-    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithBasePath_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_
   - name: (
   - uid: System.Func`2
     name: Func
@@ -6448,6 +6619,11 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )
 - uid: System.Net.Http.HttpClientHandler
   commentId: T:System.Net.Http.HttpClientHandler
@@ -6815,13 +6991,6 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.ihttpclientbuilder
   - name: )
-- uid: Apizr.Configuring.ApizrDuplicateStrategy
-  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
-  parent: Apizr.Configuring
-  href: Apizr.Configuring.ApizrDuplicateStrategy.html
-  name: ApizrDuplicateStrategy
-  nameWithType: ApizrDuplicateStrategy
-  fullName: Apizr.Configuring.ApizrDuplicateStrategy
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
   isExternal: true
@@ -6904,28 +7073,6 @@ references:
   - name: " "
   - name: T
   - name: )
-- uid: Apizr.Configuring
-  commentId: N:Apizr.Configuring
-  href: Apizr.html
-  name: Apizr.Configuring
-  nameWithType: Apizr.Configuring
-  fullName: Apizr.Configuring
-  spec.csharp:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Configuring
-    name: Configuring
-    href: Apizr.Configuring.html
-  spec.vb:
-  - uid: Apizr
-    name: Apizr
-    href: Apizr.html
-  - name: .
-  - uid: Apizr.Configuring
-    name: Configuring
-    href: Apizr.Configuring.html
 - uid: System.Net.Http.DelegatingHandler
   commentId: T:System.Net.Http.DelegatingHandler
   parent: System.Net.Http
@@ -6936,10 +7083,82 @@ references:
   fullName: System.Net.Http.DelegatingHandler
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler
-  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithDelegatingHandler__1_System_Func_System_IServiceProvider___0__Apizr_Configuring_ApizrDuplicateStrategy_
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithDelegatingHandler__1_Apizr_Configuring_ApizrDuplicateStrategy_
   name: WithDelegatingHandler
   nameWithType: ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler
   fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithDelegatingHandler
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithDelegatingHandler__1_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler<THandler>(ApizrDuplicateStrategy)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithDelegatingHandler<THandler>(ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithDelegatingHandler<THandler>(Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithDelegatingHandler(Of THandler)(ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithDelegatingHandler(Of THandler)(Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithDelegatingHandler__1_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithDelegatingHandler__1_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithDelegatingHandler__1_Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithDelegatingHandler<THandler>(ApizrDuplicateStrategy)
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithDelegatingHandler<THandler>(ApizrDuplicateStrategy)
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithDelegatingHandler<THandler>(Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithDelegatingHandler(Of THandler)(ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithDelegatingHandler(Of THandler)(Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithDelegatingHandler(Of THandler)(ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithDelegatingHandler__1_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithDelegatingHandler
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithDelegatingHandler__1_Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithDelegatingHandler``1(System.Func{System.IServiceProvider,{THandler}},Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
@@ -9983,10 +10202,70 @@ references:
   fullName: System.Net.Http.HttpMessageHandler
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler
-  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithHttpMessageHandler__1_System_Func_System_IServiceProvider___0__
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptionsBuilder_WithHttpMessageHandler__1
   name: WithHttpMessageHandler
   nameWithType: ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler
   fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithHttpMessageHandler
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithHttpMessageHandler``1
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithHttpMessageHandler``1
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}
+  definition: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHttpMessageHandler``1
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithHttpMessageHandler__1
+  name: WithHttpMessageHandler<THandler>()
+  nameWithType: IApizrExtendedSharedOptionsBuilder<IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder>.WithHttpMessageHandler<THandler>()
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder>.WithHttpMessageHandler<THandler>()
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of IApizrExtendedManagerOptions, IApizrExtendedManagerOptionsBuilder).WithHttpMessageHandler(Of THandler)()
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions, Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder).WithHttpMessageHandler(Of THandler)()
+  name.vb: WithHttpMessageHandler(Of THandler)()
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithHttpMessageHandler``1
+    name: WithHttpMessageHandler
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithHttpMessageHandler__1
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithHttpMessageHandler``1
+    name: WithHttpMessageHandler
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithHttpMessageHandler__1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - name: )
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHttpMessageHandler``1
+  commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHttpMessageHandler``1
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithHttpMessageHandler__1
+  name: WithHttpMessageHandler<THandler>()
+  nameWithType: IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithHttpMessageHandler<THandler>()
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder<TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder>.WithHttpMessageHandler<THandler>()
+  nameWithType.vb: IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithHttpMessageHandler(Of THandler)()
+  fullName.vb: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder(Of TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder).WithHttpMessageHandler(Of THandler)()
+  name.vb: WithHttpMessageHandler(Of THandler)()
+  spec.csharp:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHttpMessageHandler``1
+    name: WithHttpMessageHandler
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithHttpMessageHandler__1
+  - name: <
+  - name: THandler
+  - name: '>'
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithHttpMessageHandler``1
+    name: WithHttpMessageHandler
+    href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder-2.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithHttpMessageHandler__1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: THandler
+  - name: )
+  - name: (
+  - name: )
 - uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,{THandler}})
   commentId: M:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})
   parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}

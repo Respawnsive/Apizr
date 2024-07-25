@@ -132,21 +132,21 @@ namespace Apizr.Extending.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(string baseAddress)
-            => WithBaseAddress(_ => baseAddress);
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(string baseAddress,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithBaseAddress(_ => baseAddress, strategy);
 
         /// <inheritdoc />
-        IApizrExtendedCommonOptionsBuilder
-            IApizrGlobalSharedRegistrationOptionsBuilderBase<IApizrExtendedCommonOptions,
-                IApizrExtendedCommonOptionsBuilder>.WithBaseAddress(string baseAddress, ApizrDuplicateStrategy strategy)
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.BaseAddressFactory ??= _ => baseAddress;
+                    Options.BaseAddressFactory ??= baseAddressFactory;
                     break;
                 default:
-                    Options.BaseAddressFactory = _ => baseAddress;
+                    Options.BaseAddressFactory = baseAddressFactory;
                     break;
             }
 
@@ -154,33 +154,44 @@ namespace Apizr.Extending.Configuring.Common
         }
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Func<IServiceProvider, string> baseAddressFactory)
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Uri baseAddress,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithBaseAddress(_ => baseAddress, strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
-            Options.BaseAddressFactory = baseAddressFactory;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.BaseUriFactory ??= baseAddressFactory;
+                    break;
+                default:
+                    Options.BaseUriFactory = baseAddressFactory;
+                    break;
+            }
 
             return this;
         }
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Uri baseAddress)
-            => WithBaseAddress(_ => baseAddress);
+        public IApizrExtendedCommonOptionsBuilder WithBasePath(string basePath, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithBasePath(_ => basePath, strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder WithBaseAddress(Func<IServiceProvider, Uri> baseAddressFactory)
+        public IApizrExtendedCommonOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
-            Options.BaseUriFactory = baseAddressFactory;
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder WithBasePath(string basePath)
-            => WithBasePath(_ => basePath);
-
-        /// <inheritdoc />
-        public IApizrExtendedCommonOptionsBuilder WithBasePath(Func<IServiceProvider, string> basePathFactory)
-        {
-            Options.BasePathFactory = basePathFactory;
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.BasePathFactory ??= basePathFactory;
+                    break;
+                default:
+                    Options.BasePathFactory = basePathFactory;
+                    break;
+            }
 
             return this;
         }

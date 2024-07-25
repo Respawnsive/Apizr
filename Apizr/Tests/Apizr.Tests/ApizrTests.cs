@@ -717,11 +717,11 @@ namespace Apizr.Tests
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
-                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files"));
+                    .WithBaseAddress("https://proof.ovh.net/files"));
 
             apizrTransferManager.Should().NotBeNull(); // Built-in
             
-            var result = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"));
+            var result = await apizrTransferManager.DownloadAsync(new FileInfo("10Mb.dat"));
             result.Should().NotBeNull();
             result.Length.Should().BePositive();
         }
@@ -739,12 +739,12 @@ namespace Apizr.Tests
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
-                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                    .WithBaseAddress("https://proof.ovh.net/files")
                     .WithProgress());
             
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db"), options => options.WithProgress(progress)).ConfigureAwait(false);
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("10Mb.dat"), options => options.WithProgress(progress)).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();
@@ -763,12 +763,12 @@ namespace Apizr.Tests
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
-                    .WithBaseAddress("http://speedtest.ftp.otenet.gr/files")
+                    .WithBaseAddress("https://proof.ovh.net/files")
                     .WithProgress(progress));
             
             apizrTransferManager.Should().NotBeNull(); // Built-in
 
-            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("test10Mb.db")).ConfigureAwait(false);
+            var fileInfo = await apizrTransferManager.DownloadAsync(new FileInfo("10Mb.dat")).ConfigureAwait(false);
 
             percentage.Should().Be(100);
             fileInfo.Length.Should().BePositive();

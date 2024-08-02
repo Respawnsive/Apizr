@@ -3226,7 +3226,7 @@ namespace Apizr.Tests
 
             var streamPart = FileHelper.GetTestFileStreamPart("medium");
             var ct = new CancellationTokenSource();
-            ct.CancelAfter(TimeSpan.FromSeconds(2));
+            ct.CancelAfter(TimeSpan.FromSeconds(1));
 
             Func<Task> act = () => manager.ExecuteAsync((opt, api) => api.UploadAsync(streamPart, opt),
                 options => options.WithCancellation(ct.Token));

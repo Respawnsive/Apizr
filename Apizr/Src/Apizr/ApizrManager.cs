@@ -74,7 +74,7 @@ namespace Apizr
             {
                 // Apply registered request options if any
                 var properOptionsBase = baseOptions as IApizrProperOptionsBase;
-                if(properOptionsBase?.RequestOptionsBuilders.TryGetValue(requestName!, out var requestOptionsBuilderBase) == true)
+                if(!string.IsNullOrWhiteSpace(requestName) && properOptionsBase?.RequestOptionsBuilders.TryGetValue(requestName!, out var requestOptionsBuilderBase) == true)
                     requestOptionsBuilderBase.Invoke(builder);
 
                 // Refresh request scoped headers if any

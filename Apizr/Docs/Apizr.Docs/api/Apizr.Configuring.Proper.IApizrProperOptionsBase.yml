@@ -8,6 +8,8 @@ items:
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.CrudApiEntityType
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames
+  - Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo
   - Apizr.Configuring.Proper.IApizrProperOptionsBase.WebApiType
   langs:
@@ -24,7 +26,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrProperOptionsBase
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 10
+    startLine: 12
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -69,7 +71,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApiType
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 15
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -100,7 +102,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CrudApiEntityType
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 20
+    startLine: 22
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -131,7 +133,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TypeInfo
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 25
+    startLine: 27
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -144,6 +146,37 @@ items:
       type: System.Reflection.TypeInfo
     content.vb: ReadOnly Property TypeInfo As TypeInfo
   overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.TypeInfo*
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames
+  id: RequestNames
+  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: RequestNames
+  nameWithType: IApizrProperOptionsBase.RequestNames
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestNames
+    path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
+    startLine: 32
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Web api request names
+  example: []
+  syntax:
+    content: IReadOnlyList<string> RequestNames { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{System.String}
+    content.vb: ReadOnly Property RequestNames As IReadOnlyList(Of String)
+  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames*
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
   commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
   id: IsCrudApi
@@ -162,7 +195,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IsCrudApi
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 30
+    startLine: 37
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -193,7 +226,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Logger
     path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
-    startLine: 35
+    startLine: 42
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -206,6 +239,37 @@ items:
       type: Microsoft.Extensions.Logging.ILogger
     content.vb: ReadOnly Property Logger As ILogger
   overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger*
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders
+  commentId: P:Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders
+  id: RequestOptionsBuilders
+  parent: Apizr.Configuring.Proper.IApizrProperOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: RequestOptionsBuilders
+  nameWithType: IApizrProperOptionsBase.RequestOptionsBuilders
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: RequestOptionsBuilders
+    path: ../../Src/Apizr/Configuring/Proper/IApizrProperOptionsBase.cs
+    startLine: 47
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: The request options builders
+  example: []
+  syntax:
+    content: IDictionary<string, Action<IApizrRequestOptionsBuilder>> RequestOptionsBuilders { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IDictionary{System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}}
+    content.vb: ReadOnly Property RequestOptionsBuilders As IDictionary(Of String, Action(Of IApizrRequestOptionsBuilder))
+  overload: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders*
 references:
 - uid: Apizr.Configuring.Proper
   commentId: N:Apizr.Configuring.Proper
@@ -468,6 +532,112 @@ references:
     name: Reflection
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.reflection
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames*
+  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_RequestNames
+  name: RequestNames
+  nameWithType: IApizrProperOptionsBase.RequestNames
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames
+- uid: System.Collections.Generic.IReadOnlyList{System.String}
+  commentId: T:System.Collections.Generic.IReadOnlyList{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<string>
+  nameWithType: IReadOnlyList<string>
+  fullName: System.Collections.Generic.IReadOnlyList<string>
+  nameWithType.vb: IReadOnlyList(Of String)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of String)
+  name.vb: IReadOnlyList(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi*
   commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi
   href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_IsCrudApi
@@ -536,3 +706,102 @@ references:
     name: Logging
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
+- uid: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders*
+  commentId: Overload:Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders
+  href: Apizr.Configuring.Proper.IApizrProperOptionsBase.html#Apizr_Configuring_Proper_IApizrProperOptionsBase_RequestOptionsBuilders
+  name: RequestOptionsBuilders
+  nameWithType: IApizrProperOptionsBase.RequestOptionsBuilders
+  fullName: Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders
+- uid: System.Collections.Generic.IDictionary{System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<string, Action<IApizrRequestOptionsBuilder>>
+  nameWithType: IDictionary<string, Action<IApizrRequestOptionsBuilder>>
+  fullName: System.Collections.Generic.IDictionary<string, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>>
+  nameWithType.vb: IDictionary(Of String, Action(Of IApizrRequestOptionsBuilder))
+  fullName.vb: System.Collections.Generic.IDictionary(Of String, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
+  name.vb: IDictionary(Of String, Action(Of IApizrRequestOptionsBuilder))
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )

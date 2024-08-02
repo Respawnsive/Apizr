@@ -4,7 +4,9 @@ items:
   commentId: T:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
   id: IApizrGlobalProperOptionsBuilderBase`2
   parent: Apizr.Configuring.Proper
-  children: []
+  children:
+  - Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
   langs:
   - csharp
   - vb
@@ -19,7 +21,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrGlobalProperOptionsBuilderBase
     path: ../../Src/Apizr/Configuring/Proper/IApizrGlobalProperOptionsBuilderBase.cs
-    startLine: 14
+    startLine: 16
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -65,6 +67,94 @@ items:
   nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder)
   fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder)
   name.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder)
+- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
+  langs:
+  - csharp
+  - vb
+  name: WithRequestOptions(string, Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions(string, Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions(string, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/IApizrGlobalProperOptionsBuilderBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithRequestOptions
+    path: ../../Src/Apizr/Configuring/Proper/IApizrGlobalProperOptionsBuilderBase.cs
+    startLine: 28
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Configure options for specific requests
+  example: []
+  syntax:
+    content: TApizrProperOptionsBuilder WithRequestOptions(string requestName, Action<IApizrRequestOptionsBuilder> optionsBuilder, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+    parameters:
+    - id: requestName
+      type: System.String
+      description: The name of the request to configure
+    - id: optionsBuilder
+      type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+      description: The configuration builder
+    - id: duplicateStrategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
+    return:
+      type: '{TApizrProperOptionsBuilder}'
+      description: ''
+    content.vb: Function WithRequestOptions(requestName As String, optionsBuilder As Action(Of IApizrRequestOptionsBuilder), duplicateStrategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As TApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions*
+  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions(String, Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions(String, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithRequestOptions(String, Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2
+  langs:
+  - csharp
+  - vb
+  name: WithRequestOptions(string[], Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions(string[], Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions(string[], System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/IApizrGlobalProperOptionsBuilderBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithRequestOptions
+    path: ../../Src/Apizr/Configuring/Proper/IApizrGlobalProperOptionsBuilderBase.cs
+    startLine: 39
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Configure options for specific requests
+  example: []
+  syntax:
+    content: TApizrProperOptionsBuilder WithRequestOptions(string[] requestNames, Action<IApizrRequestOptionsBuilder> optionsBuilder, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+    parameters:
+    - id: requestNames
+      type: System.String[]
+      description: The name of the requests to configure
+    - id: optionsBuilder
+      type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+      description: The configuration builder
+    - id: duplicateStrategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
+    return:
+      type: '{TApizrProperOptionsBuilder}'
+      description: ''
+    content.vb: Function WithRequestOptions(requestNames As String(), optionsBuilder As Action(Of IApizrRequestOptionsBuilder), duplicateStrategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As TApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions*
+  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions(String(), Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions(String(), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithRequestOptions(String(), Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
 references:
 - uid: Apizr.Configuring.Proper
   commentId: N:Apizr.Configuring.Proper
@@ -3262,3 +3352,152 @@ references:
   - uid: Apizr.Logging
     name: Logging
     href: Apizr.Logging.html
+- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions*
+  commentId: Overload:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions
+  href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithRequestOptions
+  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions
+  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions
+  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions
+  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  parent: System
+  definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<IApizrRequestOptionsBuilder>
+  nameWithType: Action<IApizrRequestOptionsBuilder>
+  fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: Action(Of IApizrRequestOptionsBuilder)
+  fullName.vb: System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: Action(Of IApizrRequestOptionsBuilder)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: )
+- uid: Apizr.Configuring.ApizrDuplicateStrategy
+  commentId: T:Apizr.Configuring.ApizrDuplicateStrategy
+  parent: Apizr.Configuring
+  href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  name: ApizrDuplicateStrategy
+  nameWithType: ApizrDuplicateStrategy
+  fullName: Apizr.Configuring.ApizrDuplicateStrategy
+- uid: '{TApizrProperOptionsBuilder}'
+  commentId: '!:TApizrProperOptionsBuilder'
+  definition: TApizrProperOptionsBuilder
+  name: TApizrProperOptionsBuilder
+  nameWithType: TApizrProperOptionsBuilder
+  fullName: TApizrProperOptionsBuilder
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Apizr.Configuring
+  commentId: N:Apizr.Configuring
+  href: Apizr.html
+  name: Apizr.Configuring
+  nameWithType: Apizr.Configuring
+  fullName: Apizr.Configuring
+  spec.csharp:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+  spec.vb:
+  - uid: Apizr
+    name: Apizr
+    href: Apizr.html
+  - name: .
+  - uid: Apizr.Configuring
+    name: Configuring
+    href: Apizr.Configuring.html
+- uid: TApizrProperOptionsBuilder
+  name: TApizrProperOptionsBuilder
+  nameWithType: TApizrProperOptionsBuilder
+  fullName: TApizrProperOptionsBuilder
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )

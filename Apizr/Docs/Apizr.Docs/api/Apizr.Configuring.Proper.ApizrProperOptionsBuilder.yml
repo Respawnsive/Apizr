@@ -46,6 +46,8 @@ items:
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithOperationTimeout(System.Func{System.TimeSpan})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithOperationTimeout(System.TimeSpan)
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestTimeout(System.Func{System.TimeSpan})
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestTimeout(System.TimeSpan)
   - Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})
@@ -66,7 +68,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrProperOptionsBuilder
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 25
+    startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -126,7 +128,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: Options
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 30
+    startLine: 29
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -155,7 +157,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConfiguration
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 41
+    startLine: 40
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -192,7 +194,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConfiguration
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 45
+    startLine: 44
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -229,7 +231,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 131
+    startLine: 172
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -272,7 +274,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 135
+    startLine: 176
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -315,7 +317,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 152
+    startLine: 193
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -355,7 +357,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 156
+    startLine: 197
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -398,7 +400,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 173
+    startLine: 214
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -441,7 +443,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 177
+    startLine: 218
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -484,7 +486,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 194
+    startLine: 235
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -521,7 +523,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 198
+    startLine: 239
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -561,7 +563,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConfigureHttpClient
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 206
+    startLine: 247
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -604,7 +606,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 236
+    startLine: 277
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -644,7 +646,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 242
+    startLine: 283
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -687,7 +689,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 248
+    startLine: 289
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -741,7 +743,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 253
+    startLine: 294
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -795,7 +797,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 264
+    startLine: 305
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -841,7 +843,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 270
+    startLine: 311
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -890,7 +892,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 275
+    startLine: 316
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -936,7 +938,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 281
+    startLine: 322
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -985,7 +987,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 290
+    startLine: 331
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1030,7 +1032,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 295
+    startLine: 336
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1075,7 +1077,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 301
+    startLine: 342
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1120,7 +1122,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpMessageHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 328
+    startLine: 369
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1162,7 +1164,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpMessageHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 332
+    startLine: 373
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1204,7 +1206,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpMessageHandler
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 336
+    startLine: 377
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1246,7 +1248,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 347
+    startLine: 388
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1292,7 +1294,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 379
+    startLine: 420
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1340,7 +1342,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 386
+    startLine: 427
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1383,7 +1385,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 394
+    startLine: 435
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1429,7 +1431,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 399
+    startLine: 440
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1475,7 +1477,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 410
+    startLine: 451
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1515,7 +1517,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 417
+    startLine: 458
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1561,7 +1563,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 448
+    startLine: 489
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1610,7 +1612,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 480
+    startLine: 521
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1665,7 +1667,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 488
+    startLine: 529
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1720,7 +1722,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 532
+    startLine: 573
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1757,7 +1759,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 536
+    startLine: 577
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1797,7 +1799,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 544
+    startLine: 585
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1834,7 +1836,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 548
+    startLine: 589
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1874,7 +1876,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 556
+    startLine: 597
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1919,7 +1921,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 560
+    startLine: 601
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -1964,7 +1966,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceContextOptions
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 568
+    startLine: 609
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -2004,7 +2006,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionNames
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 584
+    startLine: 625
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -2047,7 +2049,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionRule
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 593
+    startLine: 634
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -2090,7 +2092,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResiliencePipelineKeys
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 625
+    startLine: 666
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -2136,7 +2138,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCaching
     path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
-    startLine: 679
+    startLine: 720
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Proper
@@ -2164,6 +2166,98 @@ items:
   nameWithType.vb: ApizrProperOptionsBuilder.WithCaching(CacheMode, TimeSpan?, Boolean)
   fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithCaching(Apizr.Caching.CacheMode, System.TimeSpan?, Boolean)
   name.vb: WithCaching(CacheMode, TimeSpan?, Boolean)
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithRequestOptions(string, Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  nameWithType: ApizrProperOptionsBuilder.WithRequestOptions(string, Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(string, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithRequestOptions
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+    startLine: 729
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Configure options for specific requests
+  example: []
+  syntax:
+    content: public IApizrProperOptionsBuilder WithRequestOptions(string requestName, Action<IApizrRequestOptionsBuilder> optionsBuilder, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+    parameters:
+    - id: requestName
+      type: System.String
+      description: The name of the request to configure
+    - id: optionsBuilder
+      type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+      description: The configuration builder
+    - id: duplicateStrategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
+    return:
+      type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
+    content.vb: Public Function WithRequestOptions(requestName As String, optionsBuilder As Action(Of IApizrRequestOptionsBuilder), duplicateStrategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions*
+  implements:
+  - Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrProperOptionsBuilder.WithRequestOptions(String, Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(String, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithRequestOptions(String, Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Proper.ApizrProperOptionsBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithRequestOptions(string[], Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  nameWithType: ApizrProperOptionsBuilder.WithRequestOptions(string[], Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(string[], System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithRequestOptions
+    path: ../../Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs
+    startLine: 735
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Proper
+  summary: Configure options for specific requests
+  example: []
+  syntax:
+    content: public IApizrProperOptionsBuilder WithRequestOptions(string[] requestNames, Action<IApizrRequestOptionsBuilder> optionsBuilder, ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+    parameters:
+    - id: requestNames
+      type: System.String[]
+      description: The name of the requests to configure
+    - id: optionsBuilder
+      type: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+      description: The configuration builder
+    - id: duplicateStrategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's any other already (default: Add)"
+    return:
+      type: Apizr.Configuring.Proper.IApizrProperOptionsBuilder
+      description: ''
+    content.vb: Public Function WithRequestOptions(requestNames As String(), optionsBuilder As Action(Of IApizrRequestOptionsBuilder), duplicateStrategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Add) As IApizrProperOptionsBuilder
+  overload: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions*
+  implements:
+  - Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: ApizrProperOptionsBuilder.WithRequestOptions(String(), Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(String(), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithRequestOptions(String(), Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
 references:
 - uid: Apizr.Configuring.Proper
   commentId: N:Apizr.Configuring.Proper
@@ -11950,4 +12044,309 @@ references:
   - name: Of
   - name: " "
   - name: T
+  - name: )
+- uid: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions*
+  commentId: Overload:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions
+  href: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.html#Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithRequestOptions
+  nameWithType: ApizrProperOptionsBuilder.WithRequestOptions
+  fullName: Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions
+- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+  definition: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithRequestOptions(string, Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalProperOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>.WithRequestOptions(string, Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithRequestOptions(string, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithRequestOptions(String, Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithRequestOptions(String, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithRequestOptions(String, Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithRequestOptions
+    href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithRequestOptions
+    href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  commentId: T:System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder}
+  parent: System
+  definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<IApizrRequestOptionsBuilder>
+  nameWithType: Action<IApizrRequestOptionsBuilder>
+  fullName: System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>
+  nameWithType.vb: Action(Of IApizrRequestOptionsBuilder)
+  fullName.vb: System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder)
+  name.vb: Action(Of IApizrRequestOptionsBuilder)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: )
+- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithRequestOptions(string, Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions(string, Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions(string, System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions(String, Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions(String, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithRequestOptions(String, Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithRequestOptions
+    href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithRequestOptions
+    href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}
+  definition: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithRequestOptions(string[], Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalProperOptionsBuilderBase<IApizrProperOptions, IApizrProperOptionsBuilder>.WithRequestOptions(string[], Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder>.WithRequestOptions(string[], System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of IApizrProperOptions, IApizrProperOptionsBuilder).WithRequestOptions(String(), Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of Apizr.Configuring.Proper.IApizrProperOptions, Apizr.Configuring.Proper.IApizrProperOptionsBuilder).WithRequestOptions(String(), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithRequestOptions(String(), Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithRequestOptions
+    href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase{Apizr.Configuring.Proper.IApizrProperOptions,Apizr.Configuring.Proper.IApizrProperOptionsBuilder}.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithRequestOptions
+    href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+- uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+  isExternal: true
+  href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  name: WithRequestOptions(string[], Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions(string[], Action<IApizrRequestOptionsBuilder>, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase<TApizrProperOptions, TApizrProperOptionsBuilder>.WithRequestOptions(string[], System.Action<Apizr.Configuring.Request.IApizrRequestOptionsBuilder>, Apizr.Configuring.ApizrDuplicateStrategy)
+  nameWithType.vb: IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions(String(), Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase(Of TApizrProperOptions, TApizrProperOptionsBuilder).WithRequestOptions(String(), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder), Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithRequestOptions(String(), Action(Of IApizrRequestOptionsBuilder), ApizrDuplicateStrategy)
+  spec.csharp:
+  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithRequestOptions
+    href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
+  - name: )
+  spec.vb:
+  - uid: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)
+    name: WithRequestOptions
+    href: Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase-2.html#Apizr_Configuring_Proper_IApizrGlobalProperOptionsBuilderBase_2_WithRequestOptions_System_String___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.Configuring.Request.IApizrRequestOptionsBuilder
+    name: IApizrRequestOptionsBuilder
+    href: Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Apizr.Configuring.ApizrDuplicateStrategy
+    name: ApizrDuplicateStrategy
+    href: Apizr.Configuring.ApizrDuplicateStrategy.html
   - name: )

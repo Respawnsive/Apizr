@@ -5,8 +5,10 @@
 
 - [New][Exceptions] Now we can **handle `IApizrResponse` safe response (based on Refit's `IApiResponse`) instead of catching exceptions**
 - [New][Configuration] Now we can **configure Apizr thanks to `IConfiguration` from Microsoft.Extensions** (e.g. from appsetings.json)
+- [New][Configuration] Now we can **configure request options fluently at register time** thanks to the brand new `WithRequestOptions` fluent option
+- [New][Refitter] Now we can **generate all the boilerplate thanks to Refitter** external package instead of the deprecated Apizr.Tools.NSwag one
 - [New/Breaking][Polly] Now **supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies
-- [New][Polly] Now **we can set resilience pipelines to apply fluently to the request** thanks to the brand new WithResiliencePipelineKeys fluent option
+- [New][Polly] Now **we can set resilience pipelines to apply fluently to the request** thanks to the brand new `WithResiliencePipelineKeys` fluent option
 - [New][Polly] Now **we can scope resilience pipelines executions to specific http method groups** thanks to the brand new `WithResiliencePipelineKeys's ApizrRequestMethod[]` optional parameter
 - [New][Polly] Now **we can scope resilience pipelines executions to specific http method groups** thanks to all brand new scoped `{RequestMethod}ResiliencePipeline` attributes like `GetResiliencePipeline`
 - [New][Cache] Now **we can set caching options to apply fluently to the request** thanks to the brand new `WithCaching` fluent option

@@ -1311,6 +1311,9 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.TypeInfo">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RequestNames">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.IsCrudApi">
             <inheritdoc />
         </member>
@@ -1374,6 +1377,9 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.Logger">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RequestOptionsBuilders">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.RefitSettings">
             <inheritdoc />
         </member>
@@ -1399,10 +1405,16 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.TypeInfo">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.RequestNames">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.IsCrudApi">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.Logger">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.RequestOptionsBuilders">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptionsBase.RefitSettings">
@@ -1604,6 +1616,12 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Manager.IApizrExtendedManagerOptionsBuilderBase">
             <summary>
             Builder options available for extended registration
@@ -1745,10 +1763,16 @@
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.TypeInfo">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.RequestNames">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.IsCrudApi">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.Logger">
+            <inheritdoc />
+        </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.RequestOptionsBuilders">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBuilder">
@@ -1902,6 +1926,12 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.Apizr#Configuring#Shared#IApizrInternalRegistrationOptionsBuilder#AddDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
@@ -1919,6 +1949,24 @@
             <summary>
             Builder options available at proper level for both static and extended registrations
             </summary>
+        </member>
+        <member name="M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Configure options for specific requests
+            </summary>
+            <param name="requestName">The name of the request to configure</param>
+            <param name="optionsBuilder">The configuration builder</param>
+            <param name="duplicateStrategy">The duplicate strategy if there's any other already (default: Add)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Proper.IApizrGlobalProperOptionsBuilderBase`2.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Configure options for specific requests
+            </summary>
+            <param name="requestNames">The name of the requests to configure</param>
+            <param name="optionsBuilder">The configuration builder</param>
+            <param name="duplicateStrategy">The duplicate strategy if there's any other already (default: Add)</param>
+            <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Proper.IApizrProperOptions">
             <summary>
@@ -1950,6 +1998,11 @@
             Web api interface or Crud api entity class type info
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestNames">
+            <summary>
+            Web api request names
+            </summary>
+        </member>
         <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.IsCrudApi">
             <summary>
             True if it's a CRUD api
@@ -1958,6 +2011,11 @@
         <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.Logger">
             <summary>
             The logger instance
+            </summary>
+        </member>
+        <member name="P:Apizr.Configuring.Proper.IApizrProperOptionsBase.RequestOptionsBuilders">
+            <summary>
+            The request options builders
             </summary>
         </member>
         <member name="T:Apizr.Configuring.Proper.IApizrProperOptionsBuilder`2">

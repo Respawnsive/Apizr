@@ -96,67 +96,87 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
 <h3 id="defining">Defining</h3>
 <p>Here is an example of an appsettings.json file with some of the settings that could be set:</p>
 <pre><code class="lang-json">{
-  &quot;Logging&quot;: {
-    &quot;LogLevel&quot;: { // No provider, LogLevel applies to all the enabled providers.
-      &quot;Default&quot;: &quot;Trace&quot;, // Default, application level if no other level applies
-      &quot;Microsoft&quot;: &quot;Warning&quot;, // Log level for log category which starts with text 'Microsoft' (i.e. 'Microsoft.*')
-      &quot;Microsoft.Extensions.Http.DefaultHttpClientFactory&quot;: &quot;Information&quot;
-    }
-  },
-  &quot;Apizr&quot;: { // Root section key
-    &quot;Common&quot;: { // Common settings shared by all apis
-      &quot;Logging&quot;: { // Common logging settings
-        &quot;HttpTracerMode&quot;: &quot;Everything&quot;,
-        &quot;TrafficVerbosity&quot;: &quot;All&quot;,
-        &quot;LogLevels&quot;: [ &quot;Trace&quot;, &quot;Information&quot;, &quot;Critical&quot; ]
-      },
-      &quot;OperationTimeout&quot;: &quot;00:00:10&quot;, // Common operation timeout
-      &quot;LoggedHeadersRedactionNames&quot;: [ &quot;testSettingsKey1&quot; ], // Headers to common redact in logs
-      &quot;ResilienceContext&quot;: { // Common resilience context settings
-        &quot;ContinueOnCapturedContext&quot;: false,
-        &quot;ReturnContextToPoolOnComplete&quot;: true
-      },
-      &quot;Headers&quot;: [ // Common headers applied to all apis
-        &quot;testSettingsKey6: testSettingsValue6.1&quot;
-      ],
-      &quot;ResiliencePipelineOptions&quot;: { // Common resilience pipeline applied to all apis
-        &quot;HttpGet&quot;: [ &quot;TestPipeline3&quot; ] // Resilience pipelines scoped to specific request method group
-      },
-      &quot;Caching&quot;: { // Common caching settings
-        &quot;Mode&quot;: &quot;GetAndFetch&quot;,
-        &quot;LifeSpan&quot;: &quot;00:15:00&quot;,
-        &quot;ShouldInvalidateOnError&quot;: false
-      }
+    &quot;Logging&quot;: {
+        &quot;LogLevel&quot;: { // No provider, LogLevel applies to all the enabled providers.
+            &quot;Default&quot;: &quot;Trace&quot;, // Default, application level if no other level applies
+            &quot;Microsoft&quot;: &quot;Warning&quot;, // Log level for log category which starts with text 'Microsoft' (i.e. 'Microsoft.*')
+            &quot;Microsoft.Extensions.Http.DefaultHttpClientFactory&quot;: &quot;Information&quot;
+        }
     },
-    &quot;IReqResSimpleService&quot;: { // Specific settings applied to the IReqResSimpleService api
-      &quot;BaseAddress&quot;: &quot;https://reqres.in/api&quot;, // Specific base address
-      &quot;RequestTimeout&quot;: &quot;00:00:03&quot;, // Specific request timeout
-      &quot;Headers&quot;: [ // Specific headers applied to the IReqResSimpleService api
-        &quot;testSettingsKey2: testSettingsValue2.1&quot;, // Clear static header
-        &quot;testSettingsKey3: *testSettingsValue3.1*&quot;, // Redacted header
-        &quot;testSettingsKey4: {0}&quot;, // Clear runtime header
-        &quot;testSettingsKey5: *{0}*&quot; // Redacted runtime header
-      ],
-      &quot;Caching&quot;: { // Specific caching settings overriding common ones
-        &quot;Mode&quot;: &quot;GetAndFetch&quot;,
-        &quot;LifeSpan&quot;: &quot;00:12:00&quot;,
-        &quot;ShouldInvalidateOnError&quot;: true
-      },
-      &quot;ResiliencePipelineKeys&quot;: [ &quot;TestPipeline3&quot; ] // Specific resilience pipelines applied to all IReqResSimpleService api methods
-    },
-    &quot;User&quot;: { // Specific settings applied to the User CRUD api
-      &quot;BaseAddress&quot;: &quot;https://reqres.in/api/users&quot;, // Specific base address
-      &quot;RequestTimeout&quot;: &quot;00:00:05&quot;, // Specific request timeout
-      &quot;Headers&quot;: [ // Specific headers applied to the User CRUD api
-        &quot;testSettingsKey8: testSettingsValue8.1&quot; // Clear static header
-      ]
+    &quot;Apizr&quot;: { // Root section key
+        &quot;CommonOptions&quot;: { // Common options shared by all apis
+            &quot;Logging&quot;: { // Common logging settings
+                &quot;HttpTracerMode&quot;: &quot;Everything&quot;,
+                &quot;TrafficVerbosity&quot;: &quot;All&quot;,
+                &quot;LogLevels&quot;: [&quot;Trace&quot;, &quot;Information&quot;, &quot;Critical&quot;]
+            },
+            &quot;OperationTimeout&quot;: &quot;00:00:10&quot;, // Common operation timeout
+            &quot;LoggedHeadersRedactionNames&quot;: [&quot;testSettingsKey1&quot;], // Headers to common redact in logs
+            &quot;ResilienceContext&quot;: { // Common resilience context settings
+                &quot;ContinueOnCapturedContext&quot;: false,
+                &quot;ReturnContextToPoolOnComplete&quot;: true
+            },
+            &quot;Headers&quot;: [// Common headers applied to all apis
+                &quot;testSettingsKey6: testSettingsValue6.1&quot;
+            ],
+            &quot;ResiliencePipelineOptions&quot;: { // Common resilience pipeline applied to all apis
+                &quot;HttpGet&quot;: [&quot;TestPipeline3&quot;]// Resilience pipelines scoped to specific request method group
+            },
+            &quot;Caching&quot;: { // Common caching settings
+                &quot;Mode&quot;: &quot;GetAndFetch&quot;,
+                &quot;LifeSpan&quot;: &quot;00:15:00&quot;,
+                &quot;ShouldInvalidateOnError&quot;: false
+            }
+        },
+        &quot;ProperOptions&quot;: { // Options specific to some apis
+            &quot;IReqResSimpleService&quot;: { // Options specific to IReqResSimpleService api
+                &quot;BaseAddress&quot;: &quot;https://reqres.in/api&quot;, // Specific base address
+                &quot;RequestTimeout&quot;: &quot;00:00:03&quot;, // Specific request timeout
+                &quot;Headers&quot;: [// Specific headers applied to the IReqResSimpleService api
+                    &quot;testSettingsKey2: testSettingsValue2.1&quot;, // Clear static header
+                    &quot;testSettingsKey3: *testSettingsValue3.1*&quot;, // Redacted header
+                    &quot;testSettingsKey4: {0}&quot;, // Clear runtime header
+                    &quot;testSettingsKey5: *{0}*&quot; // Redacted runtime header
+                ],
+                &quot;Caching&quot;: { // Specific caching settings overriding common ones
+                    &quot;Mode&quot;: &quot;GetAndFetch&quot;,
+                    &quot;LifeSpan&quot;: &quot;00:12:00&quot;,
+                    &quot;ShouldInvalidateOnError&quot;: true
+                },
+                &quot;ResiliencePipelineKeys&quot;: [&quot;TestPipeline3&quot;], // Specific resilience pipelines applied to all IReqResSimpleService api methods
+                &quot;RequestOptions&quot;: { // Options specific to some IReqResSimpleService api methods
+                    &quot;GetUsersAsync&quot;: { // Options specific to GetUsersAsync method
+                        &quot;Caching&quot;: {
+                            &quot;Mode&quot;: &quot;GetAndFetch&quot;,
+                            &quot;LifeSpan&quot;: &quot;00:10:00&quot;,
+                            &quot;ShouldInvalidateOnError&quot;: false
+                        },
+                        &quot;Headers&quot;: [
+                            &quot;testSettingsKey7: testSettingsValue7.1&quot;
+                        ]
+                    }
+                }
+            },
+            &quot;User&quot;: { // Options specific to User CRUD api
+                &quot;BaseAddress&quot;: &quot;https://reqres.in/api/users&quot;, // Specific base address
+                &quot;RequestTimeout&quot;: &quot;00:00:05&quot;, // Specific request timeout
+                &quot;Headers&quot;: [// Specific headers applied to the User CRUD api
+                    &quot;testSettingsKey8: testSettingsValue8.1&quot; // Clear static header
+                ]
+            }
+        }
     }
-  }
 }
 </code></pre>
 <ul>
 <li>You first have to start with the <code>Apizr</code> root section key.</li>
-<li>Then you can define settings at common level with the <code>Common</code> section key, and/or specific level with the name of apis as section keys (here <code>IReqResSimpleService</code> classic api and <code>User</code> CRUD api).</li>
+<li>Then you can define settings at:
+<ul>
+<li>Common level to set shared settings with the <code>CommonOptions</code> section key</li>
+<li>Proper level to set api specific settings with the <code>ProperOptions</code> section key followed by the name of apis as section keys (here <code>IReqResSimpleService</code> classic api and <code>User</code> CRUD api)</li>
+<li>Request level to set api method settings with the <code>RequestOptions</code> section key into the named api section (here <code>GetUsersAsync</code> method of <code>IReqResSimpleService</code> api)</li>
+</ul>
+</li>
 <li>Finally you can set following available settings:
 <ul>
 <li><code>BaseAddress</code> (string): specifies the base API address</li>

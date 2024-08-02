@@ -20,7 +20,8 @@ As you can mix stages and levels while configuring, here is the configuration pi
 - **3 (Design):** The **interface attribute configuration** level takes over all the previous ones and set a configuration to **a specific api interface**.
 - **4 (Register):** The **fluent proper or manager configuration** option (automatic or manual) takes over all the previous ones and set a configuration to **the registered api interface**.
 - **5 (Design):** The **method attribute configuration** level takes over all the previous ones and set a configuration to **a specific api interface method**.
-- **6 (Request):** The **fluent request configuration** option takes over all the previous ones and set a configuration to **the called api interface method**.
+- **6 (Register):** The **fluent proper or manager request configuration** option (automatic or manual) takes over all the previous ones and set a configuration to **the named api interface method**.
+- **7 (Request):** The **fluent request configuration** option takes over all the previous ones and set a configuration to **the called api interface method**.
 
 
 Let's take a quite complexe and dummy but exhaustive timeout configuration example to illustrate that pipeline.
@@ -37,6 +38,9 @@ namespace Apizr.Sample
         [Get("/users")]
         [RequestTimeout("00:01:00")]
         Task<UserList> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
+        
+        [Post("/users")]
+        Task<User> CreateUserAsync(User user, [RequestOptions] IApizrRequestOptions options);
     }
 }
 ```
@@ -55,7 +59,9 @@ public override void ConfigureServices(IServiceCollection services)
     services.AddApizr(
         registry => registry
             .AddManagerFor<IReqResService>(properOptions => 
-                properOptions.WithOperationTimeout(new TimeSpan(0,1,15)))
+                properOptions.WithOperationTimeout(new TimeSpan(0,1,15))
+                    .WithRequestOptions(nameof(IReqResService.GetUsersAsync), requestOptions =>
+                        requestOptions.WithRequestTimeout(new TimeSpan(0,0,50)))
             .AddManagerFor<IHttpBinService>()),
     
         commonOptions => commonOptions
@@ -79,6 +85,7 @@ Here is how Apizr will take its decision about that:
 - Then it detects we set an api operation timeout of 00:01:30 (interface attribute decoration)
 - Then it detects we registered another api operation timeout of 00:01:15 (fluent proper options)
 - Then it detects we set a request timeout of 00:01:00 (method attribute decoration)
+- Then it detects we registered another request timeout of 00:00:50 (fluent proper's request options)
 - Then it detects we registered another request timeout of 00:00:45 (fluent request options)
 
 And the winner is allways the closest one to the request call, so here 00:00:45.

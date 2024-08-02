@@ -64,6 +64,7 @@ namespace Apizr.Configuring.Proper
             }
 
             RequestOptionsBuilders = new Dictionary<string, Action<IApizrRequestOptionsBuilder>>();
+            RequestNames = typeInfo.GetMethods().Select(method => method.Name).ToList();
         }
 
         /// <inheritdoc />
@@ -74,6 +75,9 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public TypeInfo TypeInfo { get; }
+
+        /// <inheritdoc />
+        public IReadOnlyList<string> RequestNames { get; }
 
         /// <inheritdoc />
         public bool IsCrudApi => CrudApiEntityType != null;

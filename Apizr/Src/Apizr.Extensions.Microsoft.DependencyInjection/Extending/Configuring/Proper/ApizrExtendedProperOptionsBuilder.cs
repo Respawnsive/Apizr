@@ -39,17 +39,23 @@ namespace Apizr.Extending.Configuring.Proper
 
         /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithConfiguration(IConfiguration configuration)
-            => WithConfiguration(configuration?.GetSection("Apizr"));
+            => WithConfiguration(configuration?.GetSection("Apizr"), null);
 
         /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithConfiguration(IConfigurationSection configurationSection)
+            => WithConfiguration(configurationSection, null);
+
+        private IApizrExtendedProperOptionsBuilder WithConfiguration(IConfigurationSection configurationSection, string requestName)
         {
             if (configurationSection is not null)
             {
-                var isApizrSection = configurationSection.Key == "Apizr";
+                var isRequestOptions = !string.IsNullOrWhiteSpace(requestName);
                 var apiName = Options.CrudApiEntityType?.Name ?? Options.WebApiType.Name;
                 var configs = configurationSection.GetChildren().Where(config =>
-                    !isApizrSection || config.Key == apiName);
+                    config.Key == "Apizr" ||
+                    config.Key == "ProperOptions" || config.Path.Contains($"Apizr:ProperOptions:{apiName}") ||
+                    config.Key == "RequestOptions" || config.Path.Contains($"Apizr:ProperOptions:{apiName}:RequestOptions") ||
+                    Constants.ConfigurableSettings.Contains(config.Key));
                 foreach (var config in configs)
                 {
                     switch (config.Key)
@@ -61,25 +67,45 @@ namespace Apizr.Extending.Configuring.Proper
                             WithBasePath(config.Value);
                             break;
                         case "OperationTimeout":
-                            WithOperationTimeout(TimeSpan.Parse(config.Value!));
+                            if (isRequestOptions)
+                                WithRequestOptions(requestName, requestOptions => requestOptions.WithOperationTimeout(TimeSpan.Parse(config.Value!)));
+                            else
+                                WithOperationTimeout(TimeSpan.Parse(config.Value!));
                             break;
                         case "RequestTimeout":
-                            WithRequestTimeout(TimeSpan.Parse(config.Value!));
+                            if (isRequestOptions)
+                                WithRequestOptions(requestName, requestOptions => requestOptions.WithRequestTimeout(TimeSpan.Parse(config.Value!)));
+                            else
+                                WithRequestTimeout(TimeSpan.Parse(config.Value!));
                             break;
-                        case "HttpTracerMode":
-                            Options.HttpTracerModeFactory = _ => (HttpTracerMode)Enum.Parse(typeof(HttpTracerMode), config.Value!);
-                            break;
-                        case "TrafficVerbosity":
-                            Options.TrafficVerbosityFactory = _ => (HttpMessageParts)Enum.Parse(typeof(HttpMessageParts), config.Value!);
-                            break;
-                        case "LogLevels":
-                            Options.LogLevelsFactory = _ => config.GetChildren().Select(c => (LogLevel)Enum.Parse(typeof(LogLevel), c.Value!)).ToArray();
-                            break;
+                        case "Logging":
+                            {
+                                var logSection = config.GetChildren().ToList();
+                                var httpTracerModeValue = logSection.FirstOrDefault(c => c.Key == "HttpTracerMode")?.Value;
+                                var httpTracerMode = !string.IsNullOrEmpty(httpTracerModeValue) ? (HttpTracerMode)Enum.Parse(typeof(HttpTracerMode), httpTracerModeValue) : Constants.DefaultHttpTracerMode;
+                                var trafficVerbosityValue = logSection.FirstOrDefault(c => c.Key == "TrafficVerbosity")?.Value;
+                                var trafficVerbosity = !string.IsNullOrEmpty(trafficVerbosityValue) ? (HttpMessageParts)Enum.Parse(typeof(HttpMessageParts), trafficVerbosityValue) : Constants.DefaultTrafficVerbosity;
+                                var logLevelsValue = logSection.FirstOrDefault(c => c.Key == "LogLevels");
+                                var logLevels = logLevelsValue?.GetChildren().Select(c => (LogLevel)Enum.Parse(typeof(LogLevel), c.Value!)).ToArray() ?? Constants.DefaultLogLevels;
+
+                                if (isRequestOptions)
+                                    WithRequestOptions(requestName, requestOptions => requestOptions.WithLogging(httpTracerMode, trafficVerbosity, logLevels));
+                                else
+                                    WithLogging(httpTracerMode, trafficVerbosity, logLevels);
+
+                                break;
+                            }
                         case "Headers":
-                            WithHeaders(config.GetChildren().Select(c => c.Value!).ToList());
+                            if (isRequestOptions)
+                                WithRequestOptions(requestName, requestOptions => requestOptions.WithHeaders(config.GetChildren().Select(c => c.Value!).ToList()));
+                            else
+                                WithHeaders(config.GetChildren().Select(c => c.Value!).ToList());
                             break;
                         case "LoggedHeadersRedactionNames":
-                            WithLoggedHeadersRedactionNames(config.GetChildren().Select(c => c.Value!).ToList());
+                            if (isRequestOptions)
+                                WithRequestOptions(requestName, requestOptions => requestOptions.WithLoggedHeadersRedactionNames(config.GetChildren().Select(c => c.Value!).ToList()));
+                            else
+                                WithLoggedHeadersRedactionNames(config.GetChildren().Select(c => c.Value!).ToList());
                             break;
                         case "ContinueOnCapturedContext":
                             WithResilienceContextOptions(options => options.ContinueOnCapturedContext(bool.Parse(config.Value!)));
@@ -88,38 +114,54 @@ namespace Apizr.Extending.Configuring.Proper
                             WithResilienceContextOptions(options => options.ReturnToPoolOnComplete(bool.Parse(config.Value!)));
                             break;
                         case "ResiliencePipelineKeys":
-                            WithResiliencePipelineKeys(config.GetChildren().Select(c => c.Value!).ToArray());
+                            if (isRequestOptions)
+                                WithRequestOptions(requestName, requestOptions => requestOptions.WithResiliencePipelineKeys(config.GetChildren().Select(c => c.Value!).ToArray()));
+                            else
+                                WithResiliencePipelineKeys(config.GetChildren().Select(c => c.Value!).ToArray());
                             break;
                         case "ResiliencePipelineOptions":
-                        {
-                            var resiliencePipelineOptions = config.GetChildren().ToList();
-                            foreach (var resiliencePipelineOption in resiliencePipelineOptions)
                             {
-                                if (!ApizrRequestMethod.TryParse(resiliencePipelineOption.Key, out var requestMethod))
-                                    continue;
+                                var resiliencePipelineOptions = config.GetChildren().ToList();
+                                foreach (var resiliencePipelineOption in resiliencePipelineOptions)
+                                {
+                                    if (!ApizrRequestMethod.TryParse(resiliencePipelineOption.Key, out var requestMethod))
+                                        continue;
 
-                                var resiliencePipelineKeys = resiliencePipelineOption.GetChildren().Select(c => c.Value!).ToArray();
-                                WithResiliencePipelineKeys(resiliencePipelineKeys, [requestMethod]);
+                                    var resiliencePipelineKeys = resiliencePipelineOption.GetChildren().Select(c => c.Value!).ToArray();
+                                    WithResiliencePipelineKeys(resiliencePipelineKeys, [requestMethod]);
+                                }
+
+                                break;
                             }
-
-                            break;
-                        }
                         case "Caching":
-                        {
-                            var cacheSection = config.GetChildren().ToList();
-                            var modeValue = cacheSection.FirstOrDefault(c => c.Key == "Mode")?.Value;
-                            var mode = !string.IsNullOrEmpty(modeValue) ? (CacheMode)Enum.Parse(typeof(CacheMode), modeValue) : CacheMode.GetAndFetch;
-                            var lifeSpanValue = cacheSection.FirstOrDefault(c => c.Key == "LifeSpan")?.Value;
-                            var lifeSpan = !string.IsNullOrEmpty(lifeSpanValue) ? TimeSpan.Parse(lifeSpanValue) : TimeSpan.Zero;
-                            var shouldInvalidateOnErrorValue = cacheSection.FirstOrDefault(c => c.Key == "ShouldInvalidateOnError")?.Value;
-                            var shouldInvalidateOnError = !string.IsNullOrEmpty(shouldInvalidateOnErrorValue) && bool.Parse(shouldInvalidateOnErrorValue);
-                            WithCaching(mode, lifeSpan, shouldInvalidateOnError);
-                            break;
-                        }
+                            {
+                                var cacheSection = config.GetChildren().ToList();
+                                var modeValue = cacheSection.FirstOrDefault(c => c.Key == "Mode")?.Value;
+                                var mode = !string.IsNullOrEmpty(modeValue) ? (CacheMode)Enum.Parse(typeof(CacheMode), modeValue) : CacheMode.GetAndFetch;
+                                var lifeSpanValue = cacheSection.FirstOrDefault(c => c.Key == "LifeSpan")?.Value;
+                                var lifeSpan = !string.IsNullOrEmpty(lifeSpanValue) ? TimeSpan.Parse(lifeSpanValue) : TimeSpan.Zero;
+                                var shouldInvalidateOnErrorValue = cacheSection.FirstOrDefault(c => c.Key == "ShouldInvalidateOnError")?.Value;
+                                var shouldInvalidateOnError = !string.IsNullOrEmpty(shouldInvalidateOnErrorValue) && bool.Parse(shouldInvalidateOnErrorValue);
+
+                                if (isRequestOptions)
+                                    WithRequestOptions(requestName, requestOptions => requestOptions.WithCaching(mode, lifeSpan, shouldInvalidateOnError));
+                                else
+                                    WithCaching(mode, lifeSpan, shouldInvalidateOnError);
+
+                                break;
+                            }
                         default:
-                            if (config.GetChildren().Any())
-                                WithConfiguration(config);
-                            break;
+                            {
+                                if (config.GetChildren().Any())
+                                {
+                                    if (string.IsNullOrWhiteSpace(requestName))
+                                        requestName = Options.RequestNames.Contains(config.Key) ? config.Key : null;
+
+                                    WithConfiguration(config, requestName);
+                                }
+
+                                break;
+                            }
                     }
                 }
             }

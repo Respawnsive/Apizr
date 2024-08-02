@@ -184,6 +184,9 @@ namespace Apizr.Configuring.Manager
         public TypeInfo TypeInfo => Options.TypeInfo;
 
         /// <inheritdoc />
+        public IReadOnlyList<string> RequestNames => Options.RequestNames;
+
+        /// <inheritdoc />
         public bool IsCrudApi => Options.IsCrudApi;
 
         /// <inheritdoc />

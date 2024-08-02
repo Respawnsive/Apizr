@@ -3015,7 +3015,7 @@ namespace Apizr.Tests
                     services.AddApizr(registry => registry
 
                             .AddManagerFor<IReqResSimpleService>(options => options
-                                //.WithConfiguration(context.Configuration.GetSection("Apizr:IReqResSimpleService")) // Specific section (manual mapped config)
+                                //.WithConfiguration(context.Configuration.GetSection("Apizr:ProperOptions:IReqResSimpleService")) // Specific section (manual mapped config)
                                 .WithBaseAddress("https://reqres.in/api")
                                 .WithHeaders(_ => requestHeaders, scope: ApizrLifetimeScope.Request)
                                 .WithHeaders(["testKey6: testValue6.1", "testKey7: testValue7.2"])
@@ -3024,7 +3024,7 @@ namespace Apizr.Tests
                                 .WithDelegatingHandler(watcher))
 
                             .AddManagerFor<IHttpBinService>(options => options
-                                //.WithConfiguration(context.Configuration.GetSection("Apizr:IHttpBinService")) // Specific section (manual mapped config)
+                                //.WithConfiguration(context.Configuration.GetSection("Apizr:ProperOptions:IHttpBinService")) // Specific section (manual mapped config)
                                 .WithHeaders(["testKey3: testValue3.4", "testKey4: testValue4.2"])
                                 .WithLoggedHeadersRedactionNames(["testKey4"])
                                 .WithDelegatingHandler(watcher2))
@@ -3034,7 +3034,7 @@ namespace Apizr.Tests
                         options => options
                             .WithConfiguration(context.Configuration) // Whole configuration (auto mapped config)
                             //.WithConfiguration(context.Configuration.GetSection("Apizr")) // Root section (auto mapped config)
-                            //.WithConfiguration(context.Configuration.GetSection("Apizr:Common")) // Specific section (manual mapped config)
+                            //.WithConfiguration(context.Configuration.GetSection("Apizr:CommonOptions")) // Specific section (manual mapped config)
                             //.WithLogging()
                             .WithResilienceContextOptions(opt =>
                                 opt.ReturnToPoolOnComplete(false))
@@ -3080,11 +3080,12 @@ namespace Apizr.Tests
             watcher.Headers.GetValues("testKey7").Should().HaveCount(1).And.Contain("testValue7.2"); // Set by common option then by proper option
             watcher.Headers.GetValues("testKey8").Should().HaveCount(1).And.Contain("testValue8.1"); // Set by common option
             watcher.Headers.GetValues("testSettingsKey1").Should().HaveCount(1).And.Contain("testSettingsValue1.1"); // Set by common option expression
-            watcher.Headers.GetValues("testSettingsKey2").Should().HaveCount(1).And.Contain("testSettingsValue2.1"); // Set by common option configuration
-            watcher.Headers.GetValues("testSettingsKey3").Should().HaveCount(1).And.Contain("testSettingsValue3.1"); // Set by common option configuration
-            watcher.Headers.GetValues("testSettingsKey4").Should().HaveCount(1).And.Contain("testSettingsValue4.1"); // Set by common option configuration
-            watcher.Headers.GetValues("testSettingsKey5").Should().HaveCount(1).And.Contain("testSettingsValue5.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey2").Should().HaveCount(1).And.Contain("testSettingsValue2.1"); // Set by proper option configuration
+            watcher.Headers.GetValues("testSettingsKey3").Should().HaveCount(1).And.Contain("testSettingsValue3.1"); // Set by proper option configuration
+            watcher.Headers.GetValues("testSettingsKey4").Should().HaveCount(1).And.Contain("testSettingsValue4.1"); // Set by proper option configuration
+            watcher.Headers.GetValues("testSettingsKey5").Should().HaveCount(1).And.Contain("testSettingsValue5.1"); // Set by proper option configuration
             watcher.Headers.GetValues("testSettingsKey6").Should().HaveCount(1).And.Contain("testSettingsValue6.1"); // Set by common option configuration
+            watcher.Headers.GetValues("testSettingsKey7").Should().HaveCount(1).And.Contain("testSettingsValue7.1"); // Set by proper's request option configuration
             watcher.Headers.GetValues("testStoreKey1").Should().HaveCount(1).And.Contain("testStoreValue1.1"); // Set by common option from Store
             watcher.Headers.GetValues("testStoreKey2").Should().HaveCount(1).And.Contain("testStoreValue2.1"); // Set by common option from Store
 
@@ -3119,6 +3120,7 @@ namespace Apizr.Tests
             watcher.Headers.GetValues("testSettingsKey4").Should().HaveCount(1).And.Contain("testSettingsValue4.1"); // Same as previous value
             watcher.Headers.GetValues("testSettingsKey5").Should().HaveCount(1).And.Contain("testSettingsValue5.1"); // Same as previous value
             watcher.Headers.GetValues("testSettingsKey6").Should().HaveCount(1).And.Contain("testSettingsValue6.1"); // Same as previous value
+            watcher.Headers.GetValues("testSettingsKey7").Should().HaveCount(1).And.Contain("testSettingsValue7.1"); // Same as previous value
             watcher.Headers.GetValues("testStoreKey1").Should().HaveCount(1).And.Contain("testStoreValue1.2"); // Updated by request option
             watcher.Headers.GetValues("testStoreKey2").Should().HaveCount(1).And.Contain("testStoreValue2.2"); // Updated at request time (scope: Request)
             watcher.Headers.GetValues("testStoreKey3").Should().HaveCount(1).And.Contain("testStoreValue3.1"); // Set by request option from Store

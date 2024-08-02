@@ -28,6 +28,11 @@ namespace Apizr.Configuring.Proper
         TypeInfo TypeInfo { get; }
 
         /// <summary>
+        /// Web api request names
+        /// </summary>
+        IReadOnlyList<string> RequestNames { get; }
+
+        /// <summary>
         /// True if it's a CRUD api
         /// </summary>
         bool IsCrudApi { get; }

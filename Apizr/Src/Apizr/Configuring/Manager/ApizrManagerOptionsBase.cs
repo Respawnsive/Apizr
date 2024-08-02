@@ -30,6 +30,7 @@ namespace Apizr.Configuring.Manager
             RefitSettings = commonOptions.RefitSettings;
             ApizrConfigurationSection = commonOptions.ApizrConfigurationSection;
             RequestOptionsBuilders = properOptions.RequestOptionsBuilders?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            RequestNames = properOptions.RequestNames;
         }
 
         /// <inheritdoc />
@@ -40,6 +41,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public TypeInfo TypeInfo { get; }
+
+        /// <inheritdoc />
+        public IReadOnlyList<string> RequestNames { get; }
 
         /// <inheritdoc />
         public bool IsCrudApi { get; }

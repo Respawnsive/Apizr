@@ -8,11 +8,10 @@ using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
-using Apizr.Extending;
 using Apizr.Logging;
-using Apizr.Requesting;
 using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -681,6 +680,46 @@ namespace Apizr.Configuring.Proper
             bool shouldInvalidateOnError = false)
         {
             Options.CacheOptions[ApizrConfigurationSource.ProperOption] = new CacheAttribute(mode, lifeSpan, shouldInvalidateOnError);
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithRequestOptions(string requestName,
+            Action<IApizrRequestOptionsBuilder> optionsBuilder,
+            ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+            => WithRequestOptions([requestName], optionsBuilder, duplicateStrategy);
+
+        /// <inheritdoc />
+        public IApizrProperOptionsBuilder WithRequestOptions(string[] requestNames, 
+            Action<IApizrRequestOptionsBuilder> optionsBuilder,
+            ApizrDuplicateStrategy duplicateStrategy = ApizrDuplicateStrategy.Add)
+        {
+            foreach (var requestName in requestNames)
+            {
+                if (Options.RequestOptionsBuilders.ContainsKey(requestName))
+                {
+                    switch (duplicateStrategy)
+                    {
+                        case ApizrDuplicateStrategy.Ignore:
+                            // Skip request configuration
+                            break;
+                        case ApizrDuplicateStrategy.Replace:
+                            Options.RequestOptionsBuilders[requestName] = optionsBuilder;
+                            break;
+                        case ApizrDuplicateStrategy.Add:
+                        case ApizrDuplicateStrategy.Merge:
+                            Options.RequestOptionsBuilders[requestName] += optionsBuilder;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(duplicateStrategy), duplicateStrategy, null);
+                    }
+                }
+                else
+                {
+                    Options.RequestOptionsBuilders[requestName] = optionsBuilder;
+                }
+            }
 
             return this;
         }

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
+using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -26,6 +29,7 @@ namespace Apizr.Configuring.Manager
             Logger = properOptions.Logger;
             RefitSettings = commonOptions.RefitSettings;
             ApizrConfigurationSection = commonOptions.ApizrConfigurationSection;
+            RequestOptionsBuilders = properOptions.RequestOptionsBuilders?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
         }
 
         /// <inheritdoc />
@@ -42,6 +46,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }
+
+        /// <inheritdoc />
+        public IDictionary<string, Action<IApizrRequestOptionsBuilder>> RequestOptionsBuilders { get; }
 
         /// <inheritdoc />
         public RefitSettings RefitSettings { get; protected set; }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Apizr.Caching.Attributes;
+using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Extending;
 using Apizr.Requesting;
@@ -60,6 +62,8 @@ namespace Apizr.Configuring.Proper
                 var previous = ShouldRedactHeaderValue;
                 ShouldRedactHeaderValue = header => previous(header) || shouldRedactHeaderValue(header);
             }
+
+            RequestOptionsBuilders = new Dictionary<string, Action<IApizrRequestOptionsBuilder>>();
         }
 
         /// <inheritdoc />
@@ -76,5 +80,8 @@ namespace Apizr.Configuring.Proper
 
         /// <inheritdoc />
         public ILogger Logger { get; protected set; }
+
+        /// <inheritdoc />
+        public IDictionary<string, Action<IApizrRequestOptionsBuilder>> RequestOptionsBuilders { get; }
     }
 }

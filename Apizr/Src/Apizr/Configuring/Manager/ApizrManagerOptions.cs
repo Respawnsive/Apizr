@@ -7,6 +7,7 @@ using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Proper;
+using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
@@ -249,6 +250,9 @@ namespace Apizr.Configuring.Manager
 
         /// <inheritdoc />
         public ILogger Logger => Options.Logger;
+
+        /// <inheritdoc />
+        public IDictionary<string, Action<IApizrRequestOptionsBuilder>> RequestOptionsBuilders => Options.RequestOptionsBuilders;
 
         /// <inheritdoc />
         public RefitSettings RefitSettings => Options.RefitSettings;

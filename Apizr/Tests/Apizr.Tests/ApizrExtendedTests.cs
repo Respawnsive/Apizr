@@ -1023,6 +1023,8 @@ namespace Apizr.Tests
             ResiliencePropertyKey<string> testKey1 = new(nameof(testKey1));
             ResiliencePropertyKey<string> testKey2 = new(nameof(testKey2));
             ResiliencePropertyKey<string> testKey3 = new(nameof(testKey3));
+            ResiliencePropertyKey<string> testKey4 = new(nameof(testKey4));
+            ResiliencePropertyKey<string> testKey5 = new(nameof(testKey5));
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
@@ -1037,7 +1039,10 @@ namespace Apizr.Tests
                                 opt.ReturnToPoolOnComplete(false))
                             .WithResilienceProperty(testKey1, _ => "testValue1")
                             .WithResilienceProperty(testKey2, _ => "testValue2.1")
-                            .WithDelegatingHandler(watcher));
+                            .WithDelegatingHandler(watcher)
+                            .WithRequestOptions(nameof(IReqResUserService.GetUsersAsync), requestOptions =>
+                                requestOptions.WithResilienceProperty(testKey3, "testValue3.1")
+                                    .WithResilienceProperty(testKey4, "testValue4.1")));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1051,15 +1056,20 @@ namespace Apizr.Tests
 
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 options => options.WithResilienceProperty(testKey2, "testValue2.2")
-                    .WithResilienceProperty(testKey3, "testValue3"));
+                    .WithResilienceProperty(testKey4, "testValue4.2")
+                    .WithResilienceProperty(testKey5, "testValue5"));
 
             watcher.Context.Should().NotBeNull();
             watcher.Context.Properties.TryGetValue(testKey1, out var valueKey1).Should().BeTrue(); // Set by manager option
             valueKey1.Should().Be("testValue1");
             watcher.Context.Properties.TryGetValue(testKey2, out var valueKey2).Should().BeTrue(); // Set by manager option then updated by the request one
             valueKey2.Should().Be("testValue2.2");
-            watcher.Context.Properties.TryGetValue(testKey3, out var valueKey3).Should().BeTrue(); // Set by request option
-            valueKey3.Should().Be("testValue3");
+            watcher.Context.Properties.TryGetValue(testKey3, out var valueKey3).Should().BeTrue(); // Set by manager's request option
+            valueKey3.Should().Be("testValue3.1");
+            watcher.Context.Properties.TryGetValue(testKey4, out var valueKey4).Should().BeTrue(); // Set by manager's request option then updated by the request one
+            valueKey4.Should().Be("testValue4.2");
+            watcher.Context.Properties.TryGetValue(testKey5, out var valueKey5).Should().BeTrue(); // Set by request option
+            valueKey5.Should().Be("testValue5");
         }
 
         [Fact]

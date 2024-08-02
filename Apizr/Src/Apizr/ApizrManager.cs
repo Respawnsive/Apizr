@@ -17,6 +17,7 @@ using Apizr.Cancelling.Attributes.Operation;
 using Apizr.Cancelling.Attributes.Request;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
+using Apizr.Configuring.Proper;
 using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
@@ -44,6 +45,7 @@ namespace Apizr
         internal static IApizrRequestOptionsBuilder CreateRequestOptionsBuilder(
             IApizrGlobalSharedRegistrationOptionsBase baseOptions,
             Action<IApizrRequestOptionsBuilder> optionsBuilder = null,
+            string requestName = null,
             LogAttributeBase requestLogAttribute = null,
             IList<HandlerParameterAttribute> requestHandlerParameterAttributes = null,
             TimeoutAttributeBase operationTimeoutAttribute = null,
@@ -70,6 +72,11 @@ namespace Apizr
             // Only once with full options building
             if (baseOptions != null)
             {
+                // Apply registered request options if any
+                var properOptionsBase = baseOptions as IApizrProperOptionsBase;
+                if(properOptionsBase?.RequestOptionsBuilders.TryGetValue(requestName!, out var requestOptionsBuilderBase) == true)
+                    requestOptionsBuilderBase.Invoke(builder);
+
                 // Refresh request scoped headers if any
                 if (baseOptions.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Request), out var setFactory) == true)
                 {
@@ -227,7 +234,7 @@ namespace Apizr
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -322,7 +329,7 @@ namespace Apizr
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -445,7 +452,7 @@ namespace Apizr
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -551,7 +558,7 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
                 resiliencePipelineAttribute, requestCacheAttribute, methodDetails.RequestMethod);
 
@@ -720,7 +727,7 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
                 resiliencePipelineAttribute, requestCacheAttribute);
 
@@ -915,7 +922,7 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
                 resiliencePipelineAttribute, requestCacheAttribute);
 
@@ -1084,7 +1091,7 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
                 resiliencePipelineAttribute, requestCacheAttribute);
 
@@ -1292,7 +1299,7 @@ namespace Apizr
             var operationTimeoutAttribute = GetOperationTimeoutAttribute(methodDetails);
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute, resiliencePipelineAttribute);
 
             _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -1403,7 +1410,7 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
                 resiliencePipelineAttribute, requestCacheAttribute);
 
@@ -1578,7 +1585,7 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
                 resiliencePipelineAttribute, requestCacheAttribute);
 
@@ -1787,7 +1794,7 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
                 resiliencePipelineAttribute, requestCacheAttribute);
 
@@ -1960,7 +1967,7 @@ namespace Apizr
             var requestTimeoutAttribute = GetRequestTimeoutAttribute(methodDetails);
             var resiliencePipelineAttribute = GetMethodResiliencePipelineAttribute(methodDetails);
             var requestCacheAttribute = GetMethodCacheAttribute(methodDetails);
-            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, requestLogAttribute,
+            var requestOptionsBuilder = CreateRequestOptionsBuilder(_apizrOptions, optionsBuilder, methodDetails.MethodInfo.Name, requestLogAttribute,
                 requestHandlerParameterAttributes, operationTimeoutAttribute, requestTimeoutAttribute,
                 resiliencePipelineAttribute, requestCacheAttribute);
 

@@ -1309,6 +1309,10 @@ namespace Apizr.Tests
             ResiliencePropertyKey<string> testKey3 = new(nameof(testKey3));
             ResiliencePropertyKey<string> testKey4 = new(nameof(testKey4));
             ResiliencePropertyKey<string> testKey5 = new(nameof(testKey5));
+            ResiliencePropertyKey<string> testKey6 = new(nameof(testKey6));
+            ResiliencePropertyKey<string> testKey7 = new(nameof(testKey7));
+            ResiliencePropertyKey<string> testKey8 = new(nameof(testKey8));
+            ResiliencePropertyKey<string> testKey9 = new(nameof(testKey9));
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
@@ -1320,18 +1324,24 @@ namespace Apizr.Tests
                             registry.AddGroup(group => group.AddManagerFor<IReqResSimpleService>(
                                     // proper
                                     options => options.WithResilienceProperty(testKey3, _ => "testValue3.2")
-                                        .WithResilienceProperty(testKey4, _ => "testValue4.1")
-                                        .WithDelegatingHandler(watcher)),
+                                        .WithResilienceProperty(testKey7, _ => "testValue7.1")
+                                        .WithDelegatingHandler(watcher)
+                                        .WithRequestOptions(nameof(IReqResUserService.GetUsersAsync), requestOptions =>
+                                            requestOptions.WithResilienceProperty(testKey4, "testValue4.2")
+                                                .WithResilienceProperty(testKey8, "testValue8.1"))),
                                 // group
                                 options => options.WithResilienceProperty(testKey2, _ => "testValue2.2")
-                                    .WithResilienceProperty(testKey3, _ => "testValue3.1")),
+                                    .WithResilienceProperty(testKey6, _ => "testValue6.1")),
                         // common
                         options => options
                             .WithLogging()
                             .WithResilienceContextOptions(opt =>
                                 opt.ReturnToPoolOnComplete(false))
-                            .WithResilienceProperty(testKey1, _ => "testValue1")
-                            .WithResilienceProperty(testKey2, _ => "testValue2.1"));
+                            .WithResilienceProperty(testKey1, _ => "testValue1.1")
+                            .WithResilienceProperty(testKey2, _ => "testValue2.1")
+                            .WithResilienceProperty(testKey3, _ => "testValue3.1")
+                            .WithResilienceProperty(testKey4, _ => "testValue4.1")
+                            .WithResilienceProperty(testKey5, _ => "testValue5.1"));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -1346,22 +1356,29 @@ namespace Apizr.Tests
 
             await apizrManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt),
                 // request
-                options => options.WithResilienceProperty(testKey4, "testValue4.2")
-                    .WithResilienceProperty(testKey5, "testValue5"));
+                options => options.WithResilienceProperty(testKey5, "testValue5.2")
+                    .WithResilienceProperty(testKey9, "testValue9.1"));
 
             watcher.Context.Should().NotBeNull();
             watcher.Context.Properties.TryGetValue(testKey1, out var valueKey1).Should().BeTrue(); // Set by common option
-            valueKey1.Should().Be("testValue1");
+            valueKey1.Should().Be("testValue1.1");
             watcher.Context.Properties.TryGetValue(testKey2, out var valueKey2).Should().BeTrue(); // Set by common option then updated by the group one
             valueKey2.Should().Be("testValue2.2");
-            watcher.Context.Properties.TryGetValue(testKey3, out var valueKey3).Should().BeTrue(); // Set by group option then updated by the proper one
+            watcher.Context.Properties.TryGetValue(testKey3, out var valueKey3).Should().BeTrue(); // Set by common option then updated by the proper one
             valueKey3.Should().Be("testValue3.2");
-            watcher.Context.Properties.TryGetValue(testKey4, out var valueKey4).Should().BeTrue(); // Set by proper option then updated by the request one
+            watcher.Context.Properties.TryGetValue(testKey4, out var valueKey4).Should().BeTrue(); // Set by common option then updated by the proper's request one
             valueKey4.Should().Be("testValue4.2");
-            watcher.Context.Properties.TryGetValue(testKey5, out var valueKey5).Should().BeTrue(); // Set by request option
-            valueKey5.Should().Be("testValue5");
+            watcher.Context.Properties.TryGetValue(testKey5, out var valueKey5).Should().BeTrue(); // Set by common option then updated by the request one
+            valueKey5.Should().Be("testValue5.2");
+            watcher.Context.Properties.TryGetValue(testKey6, out var valueKey6).Should().BeTrue(); // Set by group option
+            valueKey6.Should().Be("testValue6.1");
+            watcher.Context.Properties.TryGetValue(testKey7, out var valueKey7).Should().BeTrue(); // Set by proper option
+            valueKey7.Should().Be("testValue7.1");
+            watcher.Context.Properties.TryGetValue(testKey8, out var valueKey8).Should().BeTrue(); // Set by proper's request option
+            valueKey8.Should().Be("testValue8.1");
+            watcher.Context.Properties.TryGetValue(testKey9, out var valueKey9).Should().BeTrue(); // Set by request option
+            valueKey9.Should().Be("testValue9.1");
         }
-
 
         [Fact]
         public async Task Calling_WithMediation_Should_Handle_Requests()

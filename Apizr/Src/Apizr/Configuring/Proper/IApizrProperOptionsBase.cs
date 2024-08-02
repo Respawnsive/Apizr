@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Microsoft.Extensions.Logging;
 
@@ -34,5 +36,10 @@ namespace Apizr.Configuring.Proper
         /// The logger instance
         /// </summary>
         ILogger Logger { get; }
+
+        /// <summary>
+        /// The request options builders
+        /// </summary>
+        IDictionary<string, Action<IApizrRequestOptionsBuilder>> RequestOptionsBuilders { get; }
     }
 }

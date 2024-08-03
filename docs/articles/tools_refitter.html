@@ -81,14 +81,14 @@
 <h2 id="refitter">Refitter</h2>
 <p>Refitter (<a href="https://refitter.github.io/">Documentation</a> | <a href="https://github.com/christianhelle/refitter">GitHub</a>) is a tool for generating a C# REST API Client using the <a href="https://github.com/reactiveui/refit">Refit</a> library.
 Refitter can generate the Refit interface and contracts from OpenAPI specifications.
-It could also format the generated Refit interface to be managed by <a href="https://www.apizr.net">Apizr</a> (v6+) and generate some registration helpers too.
+Refitter (v1.2+) could also format the generated Refit interface to be managed by <a href="https://www.apizr.net">Apizr</a> (v6+) and generate some registration helpers too.
 It comes in 2 forms:</p>
 <ul>
 <li>A <a href="https://refitter.github.io/articles/cli-tool.md">.NET CLI Tool</a> distributed via <a href="http://www.nuget.org/packages/refitter">nuget.org</a> that outputs a single C# file on disk</li>
 <li>A <a href="https://refitter.github.io/articles/source-generator.md">C# Source Generator</a> via the <a href="http://www.nuget.org/packages/refitter.sourcegenerator">Refitter.SourceGenerator</a> package that generates code on compile time based on a <a href="https://refitter.github.io/articles/refitter-file-format.md">.refitter</a> within the project directory.</li>
 </ul>
 <h3 id="generating-the-interfaces">Generating the interfaces</h3>
-<p>Refitter supports generating Apizr formatted Refit interfaces that can be managed then by Apizr (v6+).</p>
+<p>Refitter (v1.2+) supports generating Apizr formatted Refit interfaces that can be managed then by Apizr (v6+).</p>
 <p>You can enable Apizr formatted Refit interface generation either:</p>
 <ul>
 <li>With the <code>--use-apizr</code> command line argument</li>
@@ -101,9 +101,9 @@ It comes in 2 forms:</p>
 <li>Providing cancellation tokens by Apizr request options instead of a dedicated parameter (if <code>withRequestOptions</code> is set to <code>true</code>)</li>
 <li>Using method overloads instead of optional parameters (note that setting <code>useDynamicQuerystringParameters</code> to true improve overloading experience)</li>
 </ul>
-<p>From here, you're definitly free to use the formatted interface with Apizr by registering, configuring and using it following the Apizr documentation. But Refitter can go further by generating some helpers to make the configuration easier.</p>
+<p>From here, you're definitly free to use the formatted interface with Apizr by registering, configuring and using it following the Apizr documentation. But Refitter (v1.2+) can go further by generating some helpers to make the configuration easier.</p>
 <h3 id="generating-the-helpers">Generating the helpers</h3>
-<p>Refitter supports generating Apizr (v6+) bootstrapping code that allows the user to conveniently configure all generated Apizr formatted Refit interfaces by calling a single method.
+<p>Refitter (v1.2+) supports generating Apizr (v6+) bootstrapping code that allows the user to conveniently configure all generated Apizr formatted Refit interfaces by calling a single method.
 It could be either an extension method to <code>IServiceCollection</code> if DependencyInjectionSettings are set, or a static builder method if not.</p>
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">

@@ -351,9 +351,14 @@ var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqR
 </thead>
 <tbody>
 <tr>
-<td>Apizr.Tools.NSwag</td>
-<td><a href="https://www.nuget.org/packages/Apizr.Tools.NSwag/"><img src="https://img.shields.io/nuget/v/Apizr.Tools.NSwag.svg" alt="NuGet"></a></td>
-<td><a href="https://www.nuget.org/packages/Apizr.Tools.NSwag/"><img src="https://img.shields.io/nuget/vpre/Apizr.Tools.NSwag.svg" alt="NuGet Pre Release"></a></td>
+<td>Refitter</td>
+<td><a href="https://www.nuget.org/packages/refitter/"><img src="https://img.shields.io/nuget/v/refitter.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/refitter/"><img src="https://img.shields.io/nuget/vpre/refitter.svg" alt="NuGet Pre Release"></a></td>
+</tr>
+<tr>
+<td>Refitter.SourceGenerator</td>
+<td><a href="https://www.nuget.org/packages/refitter.sourcegenerator/"><img src="https://img.shields.io/nuget/v/refitter.sourcegenerator.svg" alt="NuGet"></a></td>
+<td><a href="https://www.nuget.org/packages/refitter.sourcegenerator/"><img src="https://img.shields.io/nuget/vpre/refitter.sourcegenerator.svg" alt="NuGet Pre Release"></a></td>
 </tr>
 </tbody>
 </table>
@@ -374,9 +379,10 @@ var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqR
 <li><strong>Apizr.Integrations.FileTransfer.MediatR</strong> package enables file transfer management for mediation requests (requires MediatR integration and could work with Optional integration) using <a href="https://github.com/jbogard/MediatR">MediatR</a></li>
 <li><strong>Apizr.Integrations.FileTransfer.Optional</strong> package enables file transfer management for mediation requests with optional result (requires MediatR integration and could work with Optional integration) using <a href="https://github.com/dnikolovv/optional-async">Optional.Async</a></li>
 </ul>
-<p>Install the NuGet .NET CLI Tool package if needed:</p>
+<p>Choose which generating approach suites to your needs by installing either:</p>
 <ul>
-<li><strong>Apizr.Tools.NSwag</strong> package enables Apizr files generation by command lines (Models, Apis and Registrations) from an OpenApi/Swagger definition using <a href="https://github.com/RicoSuter/NSwag">NSwag</a></li>
+<li>Refitter <a href="https://refitter.github.io/articles/cli-tool.md">.NET CLI Tool</a> distributed via <a href="http://www.nuget.org/packages/refitter">nuget.org</a> that outputs a single C# file on disk</li>
+<li>Refiiter <a href="https://refitter.github.io/articles/source-generator.md">C# Source Generator</a> via the <a href="http://www.nuget.org/packages/refitter.sourcegenerator">Refitter.SourceGenerator</a> package that generates code on compile time based on a <a href="https://refitter.github.io/articles/refitter-file-format.md">.refitter</a> within the project directory.</li>
 </ul>
 <p>Apizr core package make use of well known nuget packages to make the magic appear:</p>
 <table>
@@ -392,7 +398,7 @@ var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqR
 <td>Auto-implement web api interface and deal with HttpClient</td>
 </tr>
 <tr>
-<td><a href="https://github.com/App-vNext/Polly">Polly</a></td>
+<td><a href="https://github.com/App-vNext/Polly">Polly.Extensions</a></td>
 <td>Apply some policies like Retry, CircuitBreaker, etc...</td>
 </tr>
 <tr>

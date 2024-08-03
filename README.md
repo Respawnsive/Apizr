@@ -191,7 +191,8 @@ Apizr has a lot more to offer, just [read the doc](https://apizr.net/articles/in
 
 |Project|Current|Upcoming|
 |-------|-----|-----|
-|Apizr.Tools.NSwag|[![NuGet](https://img.shields.io/nuget/v/Apizr.Tools.NSwag.svg)](https://www.nuget.org/packages/Apizr.Tools.NSwag/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Tools.NSwag.svg)](https://www.nuget.org/packages/Apizr.Tools.NSwag/)|
+|Refitter|[![NuGet](https://img.shields.io/nuget/v/refitter.svg)](https://www.nuget.org/packages/refitter/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/refitter.svg)](https://www.nuget.org/packages/refitter/)|
+|Refitter.SourceGenerator|[![NuGet](https://img.shields.io/nuget/v/refitter.sourcegenerator.svg)](https://www.nuget.org/packages/refitter.sourcegenerator/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/refitter.sourcegenerator.svg)](https://www.nuget.org/packages/refitter.sourcegenerator/)|
 
 
 Install the NuGet reference package of your choice:
@@ -211,8 +212,10 @@ Install the NuGet reference package of your choice:
   - **Apizr.Integrations.FileTransfer.MediatR** package enables file transfer management for mediation requests (requires MediatR integration and could work with Optional integration) using [MediatR](https://github.com/jbogard/MediatR)
   - **Apizr.Integrations.FileTransfer.Optional** package enables file transfer management for mediation requests with optional result (requires MediatR integration and could work with Optional integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
  
-Install the NuGet .NET CLI Tool package if needed:
-  - **Apizr.Tools.NSwag** package enables Apizr files generation by command lines (Models, Apis and Registrations) from an OpenApi/Swagger definition using [NSwag](https://github.com/RicoSuter/NSwag)
+Choose which generating approach suites to your needs by installing either:
+  - Refitter [.NET CLI Tool](https://refitter.github.io/articles/cli-tool.md) distributed via [nuget.org](http://www.nuget.org/packages/refitter) that outputs a single C# file on disk
+  - Refiiter [C# Source Generator](https://refitter.github.io/articles/source-generator.md) via the [Refitter.SourceGenerator](http://www.nuget.org/packages/refitter.sourcegenerator) package that generates code on compile time based on a [.refitter](https://refitter.github.io/articles/refitter-file-format.md) within the project directory.
+
 
 
 Apizr core package make use of well known nuget packages to make the magic appear:
@@ -220,7 +223,7 @@ Apizr core package make use of well known nuget packages to make the magic appea
 |Package|Features|
 |-------|--------|
 |[Refit](https://github.com/reactiveui/refit)|Auto-implement web api interface and deal with HttpClient|
-|[Polly](https://github.com/App-vNext/Polly)|Apply some policies like Retry, CircuitBreaker, etc...|
+|[Polly.Extensions](https://github.com/App-vNext/Polly)|Apply some policies like Retry, CircuitBreaker, etc...|
 |[Microsoft.Extensions.Logging.Abstractions](https://github.com/BSiLabs/HttpTracer)|Delegate logging layer to MS Extensions Logging|
 
 It also comes with some handling interfaces to let you provide your own services for:

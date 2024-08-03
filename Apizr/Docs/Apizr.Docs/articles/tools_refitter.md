@@ -7,6 +7,15 @@ It comes in 2 forms:
 - A [.NET CLI Tool](https://refitter.github.io/articles/cli-tool.md) distributed via [nuget.org](http://www.nuget.org/packages/refitter) that outputs a single C# file on disk
 - A [C# Source Generator](https://refitter.github.io/articles/source-generator.md) via the [Refitter.SourceGenerator](http://www.nuget.org/packages/refitter.sourcegenerator) package that generates code on compile time based on a [.refitter](https://refitter.github.io/articles/refitter-file-format.md) within the project directory.
 
+### Installing the package
+
+Choose which generating approach suites to your needs by installing either:
+
+|Project|Current|Upcoming|
+|-------|-----|-----|
+|Refitter|[![NuGet](https://img.shields.io/nuget/v/refitter.svg)](https://www.nuget.org/packages/refitter/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/refitter.svg)](https://www.nuget.org/packages/refitter/)|
+|Refitter.SourceGenerator|[![NuGet](https://img.shields.io/nuget/v/refitter.sourcegenerator.svg)](https://www.nuget.org/packages/refitter.sourcegenerator/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/refitter.sourcegenerator.svg)](https://www.nuget.org/packages/refitter.sourcegenerator/)|
+
 ### Generating the interfaces
 
 Refitter (v1.2+) supports generating Apizr formatted Refit interfaces that can be managed then by Apizr (v6+).

@@ -24,7 +24,14 @@ Here is an example of an appsettings.json file with some of the settings that co
             "Microsoft.Extensions.Http.DefaultHttpClientFactory": "Information"
         }
     },
-    "Apizr": { // Root section key
+    "ResilienceOptions": { // Root Microsoft Resilience configuration section key (see Polly article)
+      "Retry": { // Retry configuration section key
+        "BackoffType": "Exponential",
+        "UseJitter": true,
+        "MaxRetryAttempts": 3
+      }
+    },
+    "Apizr": { // Root Apizr configuration section key
         "CommonOptions": { // Common options shared by all apis
             "Logging": { // Common logging settings
                 "HttpTracerMode": "Everything",

@@ -638,7 +638,7 @@ namespace Apizr.Tests
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
-                .ConfigureServices((_, services) =>
+                .ConfigureServices((context, services) =>
                 {
                     services.AddMemoryCache();
 
@@ -646,7 +646,7 @@ namespace Apizr.Tests
                         .WithLogging()
                         .WithDelegatingHandler(new TestRequestHandler())
                         .ConfigureHttpClientBuilder(builder => builder
-                            .AddStandardResilienceHandler()
+                            .AddStandardResilienceHandler(context.Configuration.GetSection("ResilienceOptions"))
                             .Configure(options => options.Retry.OnRetry = args =>
                             {
                                 retryCount = args.AttemptNumber + 1;

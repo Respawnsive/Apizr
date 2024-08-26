@@ -68,10 +68,6 @@ Some resilience strategies:
 ```csharp
 // (Polly) Create a resilience pipeline with some strategies
 var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
-    // Configure telemetry to get some logs from Polly process
-    .ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
-        loggingBuilder.Debug()))
-    // Add a retry strategy with some options
     .AddRetry(
         new RetryStrategyOptions<HttpResponseMessage>
         {
@@ -120,11 +116,15 @@ Relies on `IServiceCollection` extension methods approach.
 services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
 
 // (Apizr) Add an Apizr manager for the defined api to your container
-services.AddApizrManagerFor<IReqResService>(options => 
-    // With a cache handler
-    options.WithAkavacheCacheHandler());
+services.AddApizrManagerFor<IReqResService>(
+    options => options
+        // With a cache handler
+        .WithAkavacheCacheHandler()
+        // If using Microsoft Resilience
+        .ConfigureHttpClientBuilder(builder => builder
+            .AddStandardResilienceHandler()));
 
-// (Polly) Add the resilience pipeline with its key to your container
+// (Polly) Register the resilience pipeline (if not using Microsoft Resilience)
 services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
     builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
 ...

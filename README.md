@@ -42,6 +42,7 @@ Inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.Powe
 An api definition with some attributes:
 ```csharp
 // (Polly) Define a resilience pipeline key
+// OR use Microsoft Resilience instead
 [assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
@@ -66,7 +67,7 @@ namespace Apizr.Sample
 
 Some resilience strategies:
 ```csharp
-// (Polly) Create a resilience pipeline with some strategies
+// (Polly) Create a resilience pipeline (if not using Microsoft Resilience)
 var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
     // Configure telemetry to get some logs from Polly process
     .ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
@@ -120,11 +121,15 @@ Relies on `IServiceCollection` extension methods approach.
 services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
 
 // (Apizr) Add an Apizr manager for the defined api to your container
-services.AddApizrManagerFor<IReqResService>(options => 
-    // With a cache handler
-    options.WithAkavacheCacheHandler());
+services.AddApizrManagerFor<IReqResService>(
+    options => options
+        // With a cache handler
+        .WithAkavacheCacheHandler()
+        // If using Microsoft Resilience
+        .ConfigureHttpClientBuilder(builder => builder
+            .AddStandardResilienceHandler()));
 
-// (Polly) Add the resilience pipeline with its key to your container
+// (Polly) Add the resilience pipeline (if not using Microsoft Resilience)
 services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
     builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
 ...

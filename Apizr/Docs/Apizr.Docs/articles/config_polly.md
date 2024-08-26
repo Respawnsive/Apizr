@@ -217,7 +217,7 @@ Resiliencing could be activated automatically by providing an `IConfiguration` i
 options => options.WithConfiguration(context.Configuration)
 ```
 
-We can activate it at common level (to all apis) or specific level (dedicated to a named one).
+We can activate it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
 
 Please heads to the [Settings](config_settings.md))  doc article to see how to configure resiliencing automatically from settings.
 
@@ -245,7 +245,7 @@ Context parameters could be set automatically by providing an `IConfiguration` i
 options => options.WithConfiguration(context.Configuration)
 ```
 
-We can set it at common level (to all apis) or specific level (dedicated to a named one).
+We can set it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
 
 Please heads to the [Settings](config_settings.md))  doc article to see how to configure context automatically from loaded settings configuration.
 

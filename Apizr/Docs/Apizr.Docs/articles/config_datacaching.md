@@ -279,9 +279,9 @@ Caching could be activated automatically by providing an `IConfiguration` instan
 options => options.WithConfiguration(context.Configuration)
 ```
 
-We can activate it at common level (to all apis) or specific level (dedicated to a named one).
+We can activate it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
 
-Please heads to the [Settings](config_settings.md))  doc article to see how to configure caching automatically from settings.
+Please heads to the [Settings](config_settings.md)) doc article to see how to configure caching automatically from settings.
 
 ##### Manually
 

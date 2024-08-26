@@ -42,6 +42,7 @@ Inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.Powe
 An api definition with some attributes:
 ```csharp
 // (Polly) Define a resilience pipeline key
+// OR use Microsoft Resilience instead
 [assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
@@ -66,7 +67,7 @@ namespace Apizr.Sample
 
 Some resilience strategies:
 ```csharp
-// (Polly) Create a resilience pipeline with some strategies
+// (Polly) Create a resilience pipeline (if not using Microsoft Resilience)
 var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
     .AddRetry(
         new RetryStrategyOptions<HttpResponseMessage>

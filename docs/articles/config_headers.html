@@ -143,7 +143,7 @@ but you can do it with fluent configuration at register time.</p>
 <p>Headers could be set automatically by providing an <code>IConfiguration</code> instance containing the headers settings:</p>
 <pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
 </code></pre>
-<p>We can set it at common level (to all apis) or specific level (dedicated to a named one).</p>
+<p>We can set it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).</p>
 <p>Please heads to the <a href="config_settings.html">Settings</a>)  doc article to see how to configure headers automatically from loaded settings configuration.</p>
 <h4 id="manually">Manually</h4>
 <p>You can set headers with static values at register time by configuring fluent options:</p>
@@ -309,7 +309,13 @@ public interface IYourApi
 </div>
 </section>
 <section id="tabpanel_3_tabid-register" role="tabpanel" data-tab="tabid-register" aria-hidden="true" hidden="hidden">
-
+<h5 id="automatically-1">Automatically</h5>
+<p>Headers redaction names could be set automatically by providing an <code>IConfiguration</code> instance containing the headers settings:</p>
+<pre><code class="lang-csharp">options =&gt; options.WithConfiguration(context.Configuration)
+</code></pre>
+<p>We can set it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).</p>
+<p>Please heads to the <a href="config_settings.html">Settings</a>) doc article to see how to configure headers automatically from loaded settings configuration.</p>
+<h5 id="manually-1">Manually</h5>
 <p>You can tell Apizr to do so by surrounding values with a <code>*</code> and <code>*</code> star symbol while adding headers fluently:</p>
 <pre><code class="lang-csharp">options =&gt; options.WithHeaders([&quot;HeaderKey1: *HeaderValue1*&quot;, &quot;HeaderKey2: HeaderValue2&quot;])
 </code></pre>

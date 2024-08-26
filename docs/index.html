@@ -106,6 +106,7 @@
 <h2 id="how">How</h2>
 <p>An api definition with some attributes:</p>
 <pre><code class="lang-csharp">// (Polly) Define a resilience pipeline key
+// OR use Microsoft Resilience instead
 [assembly:ResiliencePipeline(&quot;TransientHttpError&quot;)]
 namespace Apizr.Sample
 {
@@ -128,12 +129,8 @@ namespace Apizr.Sample
 }
 </code></pre>
 <p>Some resilience strategies:</p>
-<pre><code class="lang-csharp">// (Polly) Create a resilience pipeline with some strategies
+<pre><code class="lang-csharp">// (Polly) Create a resilience pipeline (if not using Microsoft Resilience)
 var resiliencePipelineBuilder = new ResiliencePipelineBuilder&lt;HttpResponseMessage&gt;()
-    // Configure telemetry to get some logs from Polly process
-    .ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =&gt;
-        loggingBuilder.Debug()))
-    // Add a retry strategy with some options
     .AddRetry(
         new RetryStrategyOptions&lt;HttpResponseMessage&gt;
         {
@@ -185,11 +182,15 @@ var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResService&gt;(
 services.AddLogging(loggingBuilder =&gt; loggingBuilder.AddDebug());
 
 // (Apizr) Add an Apizr manager for the defined api to your container
-services.AddApizrManagerFor&lt;IReqResService&gt;(options =&gt; 
-    // With a cache handler
-    options.WithAkavacheCacheHandler());
+services.AddApizrManagerFor&lt;IReqResService&gt;(
+    options =&gt; options
+        // With a cache handler
+        .WithAkavacheCacheHandler()
+        // If using Microsoft Resilience
+        .ConfigureHttpClientBuilder(builder =&gt; builder
+            .AddStandardResilienceHandler()));
 
-// (Polly) Add the resilience pipeline with its key to your container
+// (Polly) Register the resilience pipeline (if not using Microsoft Resilience)
 services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
     builder =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));
 ...

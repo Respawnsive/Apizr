@@ -84,17 +84,34 @@ namespace Apizr
             if (request.Options.TryGetValue(Constants.PriorityOptionsKey, out var optionsPriorityValue) && optionsPriorityValue >= 0)
                 priority = optionsPriorityValue;
 #else
-            if (request.Properties.TryGetValue(Constants.PriorityKey, out var propertyPriorityObject) &&
-                propertyPriorityObject is int propertyPriorityValue and >= 0)
+            if (request.Properties.TryGetValue(Constants.PriorityKey, out var requestPropertiesPriorityObject) &&
+                requestPropertiesPriorityObject is int requestPropertiesPriorityIntValue and >= 0)
             {
-                priority = propertyPriorityValue;
+                priority = requestPropertiesPriorityIntValue;
             }
 #endif
             else if (request.TryGetApizrRequestOptions(out var requestOptions) &&
-                     requestOptions.HandlersParameters.TryGetValue(Constants.PriorityKey, out var requestOptionsPriorityObject) &&
-                     requestOptionsPriorityObject is int requestOptionsPriorityValue and >= 0)
+                     requestOptions.HandlersParameters.TryGetValue(Constants.PriorityKey, out var requestOptionsPriorityObject))
             {
-                priority = requestOptionsPriorityValue;
+                if (requestOptionsPriorityObject is int requestOptionsPriorityIntValue and >= 0)
+                {
+                    priority = requestOptionsPriorityIntValue;
+                }
+                else if(requestOptionsPriorityObject is Priority requestOptionsPriorityEnumValue)
+                {
+                    priority = (int)requestOptionsPriorityEnumValue;
+                }
+                else if(requestOptionsPriorityObject is string requestOptionsPriorityStringValue)
+                {
+                    if (int.TryParse(requestOptionsPriorityStringValue, out requestOptionsPriorityIntValue))
+                    {
+                        priority = requestOptionsPriorityIntValue;
+                    }
+                    else if (Enum.TryParse(requestOptionsPriorityStringValue, out requestOptionsPriorityEnumValue))
+                    {
+                        priority = (int)requestOptionsPriorityEnumValue;
+                    }
+                }
             }
 
             var priorityName = Enum.IsDefined(typeof(Priority), priority)

@@ -80,8 +80,8 @@
 
 <h2 id="settings">Settings</h2>
 <p>Most of Apizr settings could be set by providing an <code>IConfiguration</code> instance.
-We can set them at common level (shared by all apis) or specific level (dedicated to named apis).
-The following doc acrticle will focus on appsettings.json configuration.</p>
+We can set it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
+The following doc article will focus on appsettings.json configuration.</p>
 <div class="TIP">
 <h5>Tip</h5>
 <ul>
@@ -103,7 +103,14 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
             &quot;Microsoft.Extensions.Http.DefaultHttpClientFactory&quot;: &quot;Information&quot;
         }
     },
-    &quot;Apizr&quot;: { // Root section key
+    &quot;ResilienceOptions&quot;: { // Root Microsoft Resilience configuration section key (see Polly article)
+      &quot;Retry&quot;: { // Retry configuration section key
+        &quot;BackoffType&quot;: &quot;Exponential&quot;,
+        &quot;UseJitter&quot;: true,
+        &quot;MaxRetryAttempts&quot;: 3
+      }
+    },
+    &quot;Apizr&quot;: { // Root Apizr configuration section key
         &quot;CommonOptions&quot;: { // Common options shared by all apis
             &quot;Logging&quot;: { // Common logging settings
                 &quot;HttpTracerMode&quot;: &quot;Everything&quot;,
@@ -126,7 +133,8 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
                 &quot;Mode&quot;: &quot;GetAndFetch&quot;,
                 &quot;LifeSpan&quot;: &quot;00:15:00&quot;,
                 &quot;ShouldInvalidateOnError&quot;: false
-            }
+            },
+            &quot;Priority&quot;: &quot;UserInitiated&quot;
         },
         &quot;ProperOptions&quot;: { // Options specific to some apis
             &quot;IReqResSimpleService&quot;: { // Options specific to IReqResSimpleService api
@@ -134,7 +142,7 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
                 &quot;RequestTimeout&quot;: &quot;00:00:03&quot;, // Specific request timeout
                 &quot;Headers&quot;: [// Specific headers applied to the IReqResSimpleService api
                     &quot;testSettingsKey2: testSettingsValue2.1&quot;, // Clear static header
-                    &quot;testSettingsKey3: *testSettingsValue3.1*&quot;, // Redacted header
+                    &quot;testSettingsKey3: *testSettingsValue3.1*&quot;, // Redacted static header
                     &quot;testSettingsKey4: {0}&quot;, // Clear runtime header
                     &quot;testSettingsKey5: *{0}*&quot; // Redacted runtime header
                 ],
@@ -153,16 +161,19 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
                         },
                         &quot;Headers&quot;: [
                             &quot;testSettingsKey7: testSettingsValue7.1&quot;
-                        ]
+                        ],
+                        &quot;Priority&quot;: &quot;Speculative&quot;
                     }
-                }
+                },
+                &quot;Priority&quot;: &quot;Background&quot;
             },
             &quot;User&quot;: { // Options specific to User CRUD api
                 &quot;BaseAddress&quot;: &quot;https://reqres.in/api/users&quot;, // Specific base address
                 &quot;RequestTimeout&quot;: &quot;00:00:05&quot;, // Specific request timeout
                 &quot;Headers&quot;: [// Specific headers applied to the User CRUD api
                     &quot;testSettingsKey8: testSettingsValue8.1&quot; // Clear static header
-                ]
+                ],
+                &quot;Priority&quot;: 70
             }
         }
     }
@@ -197,7 +208,7 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
 <li><code>ReturnContextToPoolOnComplete</code> (bool): specifies whether to return the context to the pool on completion</li>
 </ul>
 </li>
-<li><code>Headers</code> (string array): specifies custom headers to be added to requests</li>
+<li><code>Headers</code> (string array): specifies custom headers to be added to requests (supporting either clear static, redacted static, clear runtime and redacted runtime values)</li>
 <li><code>ResiliencePipelineKeys</code> (string array): specifies the resilience pipeline keys to use</li>
 <li><code>ResiliencePipelineOptions</code> (dictionary): specifies the resilience pipeline keys to use but scoped to specific request <a href="/api/Apizr.Configuring.ApizrRequestMethod.html">method groups</a></li>
 <li><code>Caching</code> (section): contains settings related to caching
@@ -207,6 +218,7 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
 <li><code>ShouldInvalidateOnError</code> (bool): specifies whether to invalidate the cache on error</li>
 </ul>
 </li>
+<li><code>Priority</code> (enum member name or int): specifies the <a href="/api/Apizr.Configuring.Priority.html">priority</a> level for the request</li>
 </ul>
 </li>
 </ul>

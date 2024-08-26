@@ -125,6 +125,9 @@ namespace Apizr.Extending.Configuring.Common
                                 WithCaching(mode, lifeSpan, shouldInvalidateOnError);
                                 break;
                             }
+                        case "Priority":
+                            WithHandlerParameter(Constants.PriorityKey, config.Value);
+                            break;
                         default:
                             {
                                 if (config.GetChildren().Any())

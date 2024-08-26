@@ -150,6 +150,9 @@ namespace Apizr.Extending.Configuring.Proper
 
                                 break;
                             }
+                        case "Priority":
+                            WithHandlerParameter(Constants.PriorityKey, config.Value);
+                            break;
                         default:
                             {
                                 if (config.GetChildren().Any())

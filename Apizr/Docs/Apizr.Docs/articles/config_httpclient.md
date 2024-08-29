@@ -2,16 +2,16 @@
 
 You can configure HttpClient by its Builder thanks to this option:
 
-### [Static](#tab/tabid-static)
-
-```csharp
-options => options.ConfigureHttpClient(httpClient => httpClient.WhateverOption = whateverValue)
-```
-
 ### [Extended](#tab/tabid-extended)
 
 ```csharp
 options => options.ConfigureHttpClientBuilder(httpClientBuilder => httpClientBuilder.WhateverOption())
+```
+
+### [Static](#tab/tabid-static)
+
+```csharp
+options => options.ConfigureHttpClient(httpClient => httpClient.WhateverOption = whateverValue)
 ```
 
 ***

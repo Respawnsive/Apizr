@@ -87,19 +87,6 @@ Where `TCacheType` could be either `string` or `byte[]`, conforming to MS Extens
 
 You'll be able to register with one of the folowing options:
 
-##### [Static](#tab/tabid-static)
-
-```csharp
-// direct short configuration
-options => options.WithAkavacheCacheHandler()
-
-// OR direct configuration
-options => options.WithCacheHandler(new AkavacheCacheHandler())
-
-// OR factory configuration
-options => options.WithCacheHandler(() => new AkavacheCacheHandler())
-```
-
 ##### [Extended](#tab/tabid-extended)
 
 ```csharp
@@ -119,6 +106,19 @@ options => options.WithCacheHandler(new AkavacheCacheHandler())
 options => options.WithCacheHandler(serviceProvider => new AkavacheCacheHandler())
 ```
 
+##### [Static](#tab/tabid-static)
+
+```csharp
+// direct short configuration
+options => options.WithAkavacheCacheHandler()
+
+// OR direct configuration
+options => options.WithCacheHandler(new AkavacheCacheHandler())
+
+// OR factory configuration
+options => options.WithCacheHandler(() => new AkavacheCacheHandler())
+```
+
 ***
 
 Where most of it get overloads so you could set:
@@ -133,16 +133,6 @@ Barrel.ApplicationId = "YOUR_APPLICATION_NAME";
 ```
 
 Then you'll be able to register with one of the folowing options:
-
-##### [Static](#tab/tabid-static)
-
-```csharp
-// direct configuration
-options => options.WithCacheHandler(new MonkeyCacheHandler(Barrel.Current))
-
-// OR factory configuration
-options => options.WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
-```
 
 ##### [Extended](#tab/tabid-extended)
 
@@ -166,6 +156,16 @@ options => options.WithCacheHandler(serviceProvider => new MonkeyCacheHandler(Ba
 >
 >If you don't provide Barrel.Current to the MonkeyCacheHandler, don't forget to register it into your DI container.
 
+##### [Static](#tab/tabid-static)
+
+```csharp
+// direct configuration
+options => options.WithCacheHandler(new MonkeyCacheHandler(Barrel.Current))
+
+// OR factory configuration
+options => options.WithCacheHandler(() => new MonkeyCacheHandler(Barrel.Current))
+```
+
 ***
 
 ### Activating
@@ -186,7 +186,7 @@ namespace Apizr.Sample
     [BaseAddress("https://reqres.in/api")]
     public interface IReqResService
     {
-        [Get("/users"), Cache(CacheMode.GetAndFetch, "01:00:00")]
+        [Get("/users"), Cache(CacheMode.FetchOrGet, "01:00:00")]
         Task<UserList> GetUsersAsync();
 
         [Get("/users/{userId}"), Cache(CacheMode.GetOrFetch, "1.00:00:00")]
@@ -202,7 +202,7 @@ Here is CRUD api an example:
 namespace Apizr.Sample.Models
 {
     [BaseAddress("https://reqres.in/api/users")]
-    [CacheReadAll(CacheMode.GetAndFetch, "01:00:00")]
+    [CacheReadAll(CacheMode.FetchOrGet, "01:00:00")]
     [CacheRead(CacheMode.GetOrFetch, "1.00:00:00")]
     public record User
     {
@@ -230,7 +230,7 @@ Life time is actually a `TimeSpan` string representation which is parsed then. I
 
 Cache mode could be set to:
 
-  - `GetAndFetch` (default): the result is returned from request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.
+  - `FetchOrGet` (default): the result is returned from api request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.
   - `GetOrFetch`: the result is returned from cache if there’s some data already cached, otherwise from the request.
 
 In both cases, cached data is updated after each successful request call.
@@ -279,9 +279,9 @@ Caching could be activated automatically by providing an `IConfiguration` instan
 options => options.WithConfiguration(context.Configuration)
 ```
 
-We can activate it at common level (to all apis) or specific level (dedicated to a named one).
+We can activate it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
 
-Please heads to the [Settings](config_settings.md))  doc article to see how to configure caching automatically from settings.
+Please heads to the [Settings](config_settings.md)) doc article to see how to configure caching automatically from settings.
 
 ##### Manually
 
@@ -289,7 +289,7 @@ You can activate caching at any levels with this fluent option:
 
 ```csharp
 // Address
-options => options.WithCaching(mode: CacheMode.GetAndFetch, lifeSpan: TimeSpan.FromHours(1),
+options => options.WithCaching(mode: CacheMode.FetchOrGet, lifeSpan: TimeSpan.FromHours(1),
             shouldInvalidateOnError: false)
 ```
 

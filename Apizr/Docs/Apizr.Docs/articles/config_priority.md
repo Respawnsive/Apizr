@@ -72,13 +72,19 @@ By activating it, you're free to provide a priority or not.
 
 Here is how to activate it, thanks to the `WithPriority` extension method:
 ```csharp
-// activation configuration only
+// activation configuration only (minimum requirement)
 options => options.WithPriority()
 
-// activation with default priority configuration
+// OR activation configuration 
+// and configured priority (see Settings article)
+options => options
+    .WithConfiguration(context.Configuration)
+    .WithPriority()
+
+// OR activation with default priority configuration
 options => options.WithPriority(Priority.Background)
 
-// activation with default custom priority configuration
+// OR activation with default custom priority configuration
 options => options.WithPriority(70)
 ```
 

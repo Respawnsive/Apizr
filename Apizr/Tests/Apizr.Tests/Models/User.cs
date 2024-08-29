@@ -12,7 +12,7 @@ using Fusillade;
 namespace Apizr.Tests.Models
 {
     [AutoRegister<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>("https://reqres.in/api/users"),
-    CacheReadAll(CacheMode.GetAndFetch),
+    CacheReadAll(CacheMode.FetchOrGet),
     CacheRead(CacheMode.GetOrFetch),
     ReadAllHeaders("testKey1: testValue1", "testKey2: *testValue2*", "testKey3: {0}", "testKey4: *{0}*"),
     Log(HttpMessageParts.All),

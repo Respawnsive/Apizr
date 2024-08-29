@@ -6,7 +6,7 @@
 - [New][Exceptions] Now we can **handle `IApizrResponse` safe response (based on Refit's `IApiResponse`) instead of catching exceptions**
 - [New][Configuration] Now we can **configure Apizr thanks to `IConfiguration` from Microsoft.Extensions** (e.g. from appsetings.json)
 - [New][Configuration] Now we can **configure request options fluently at register time** thanks to the brand new `WithRequestOptions` fluent option
-- [New][Refitter] Now we can **generate all the boilerplate thanks to Refitter** external package instead of the deprecated Apizr.Tools.NSwag one
+- [New][Refitter] Now we can **generate all the boilerplate thanks to Refitter v1.2+** external package instead of the deprecated Apizr.Tools.NSwag one
 - [New/Breaking][Polly] Now **supporting only the brand new Polly v8+ Resilience Strategies/Pipelines/Registry** instead of former Polly v7- Policies
 - [New][Polly] Now **we can set resilience pipelines to apply fluently to the request** thanks to the brand new `WithResiliencePipelineKeys` fluent option
 - [New][Polly] Now **we can scope resilience pipelines executions to specific http method groups** thanks to the brand new `WithResiliencePipelineKeys's ApizrRequestMethod[]` optional parameter
@@ -31,6 +31,7 @@
 - [New/Breaking][BaseAddress] Now we can **set base address with the brand new `BaseAddress` attribure** instead of the now removed `WebApi`, `CrudEntity` or `MappedCrudEntity` useless ones, and only if you need to set it at design time
 - [New/Breaking][AutoRegister] Now we can **tell Apizr to auto register apis with the brand new `AutoRegister` attribure** instead of the now removed `WebApi`, `CrudEntity` or `MappedCrudEntity` useless ones
 - [New/Breaking][MappedWith] Now we can **tell Apizr to map data while using MediatR/Optional thanks to the yet known `MappedWith` attribure** instead of the now removed `CrudEntity` or `MappedCrudEntity` useless ones
+- [Breaking][CacheMode] Now **`CacheMode.GetAndFetch` enum option has been renamed to `CacheMode.FetchOrGet`** so that it says what it actually does and improve consistency with the other `CacheMode.GetOrFetch` option
 - [Breaking][Headers] Now **WithHeaders options take an enumerable parameter instead of a parameter array** so that we could provide some more optional parameters
 - [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
 - [Breaking][DelegatingHandler] Now we can **register DelegatingHandlers thanks to `WithDelegatingHandler` fluent option** instead of the `AddDelegatingHandler` deleted one for consistency.

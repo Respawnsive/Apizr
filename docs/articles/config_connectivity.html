@@ -88,24 +88,24 @@
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<pre><code class="lang-csharp">options =&gt; options.WithConnectivityHandler(() =&gt; YourConnectivityBoolean)
-</code></pre>
-</section>
-<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <pre><code class="lang-csharp">// Boolean factory
 options =&gt; options.WithConnectivityHandler(serviceProvider =&gt; YourConnectivityBoolean)
 
 // Boolean expression factory
 options =&gt; options.WithConnectivityHandler&lt;IYourRegisteredConnectivityService&gt;(service =&gt; service.YourConnectivityBoolean)
+</code></pre>
+</section>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">options =&gt; options.WithConnectivityHandler(() =&gt; YourConnectivityBoolean)
 </code></pre>
 </section>
 </div>
@@ -123,22 +123,13 @@ options =&gt; options.WithConnectivityHandler&lt;IYourRegisteredConnectivityServ
 <div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<pre><code class="lang-csharp">// direct configuration
-options =&gt; options.WithConnectivityHandler(YourConnectivityHandler)
-
-// OR factory configuration
-options =&gt; options.WithConnectivityHandler(() =&gt; YourConnectivityHandler)
-</code></pre>
-</section>
-<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithConnectivityHandler(YourConnectivityHandler)
@@ -151,6 +142,15 @@ options =&gt; options.WithConnectivityHandler&lt;YourConnectivityHandler&gt;()
 
 // OR type configuration
 options =&gt; options.WithConnectivityHandler(typeof(YourConnectivityHandler))
+</code></pre>
+</section>
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithConnectivityHandler(YourConnectivityHandler)
+
+// OR factory configuration
+options =&gt; options.WithConnectivityHandler(() =&gt; YourConnectivityHandler)
 </code></pre>
 </section>
 </div>

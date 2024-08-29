@@ -42,12 +42,13 @@ Inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.Powe
 An api definition with some attributes:
 ```csharp
 // (Polly) Define a resilience pipeline key
+// OR use Microsoft Resilience instead
 [assembly:ResiliencePipeline("TransientHttpError")]
 namespace Apizr.Sample
 {
     // (Apizr) Define your web api base url and ask for cache and logs
     [BaseAddress("https://reqres.in/"), 
-    Cache(CacheMode.GetAndFetch, "01:00:00"), 
+    Cache(CacheMode.FetchOrGet, "01:00:00"), 
     Log(HttpMessageParts.AllButBodies)]
     public interface IReqResService
     {
@@ -66,12 +67,8 @@ namespace Apizr.Sample
 
 Some resilience strategies:
 ```csharp
-// (Polly) Create a resilience pipeline with some strategies
+// (Polly) Create a resilience pipeline (if not using Microsoft Resilience)
 var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
-    // Configure telemetry to get some logs from Polly process
-    .ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
-        loggingBuilder.Debug()))
-    // Add a retry strategy with some options
     .AddRetry(
         new RetryStrategyOptions<HttpResponseMessage>
         {
@@ -88,6 +85,32 @@ var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessag
 ```
 
 An instance of this managed api:
+
+### [Extended](#tab/tabid-extended)
+
+Relies on `IServiceCollection` extension methods approach.
+
+```csharp
+// (Logger) Configure logging the way you want, like
+services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
+
+// (Apizr) Add an Apizr manager for the defined api to your container
+services.AddApizrManagerFor<IReqResService>(
+    options => options
+        // With a cache handler
+        .WithAkavacheCacheHandler()
+        // If using Microsoft Resilience
+        .ConfigureHttpClientBuilder(builder => builder
+            .AddStandardResilienceHandler()));
+
+// (Polly) Add the resilience pipeline (if not using Microsoft Resilience)
+services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+    builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
+...
+
+// (Apizr) Get your manager instance the way you want, like
+var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+```
 
 ### [Static](#tab/tabid-static)
 
@@ -109,28 +132,6 @@ var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResService>(
         .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
         // And with a cache handler
         .WithAkavacheCacheHandler());
-```
-
-### [Extended](#tab/tabid-extended)
-
-Relies on `IServiceCollection` extension methods approach.
-
-```csharp
-// (Logger) Configure logging the way you want, like
-services.AddLogging(loggingBuilder => loggingBuilder.AddDebug());
-
-// (Apizr) Add an Apizr manager for the defined api to your container
-services.AddApizrManagerFor<IReqResService>(options => 
-    // With a cache handler
-    options.WithAkavacheCacheHandler());
-
-// (Polly) Add the resilience pipeline with its key to your container
-services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
-    builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
-...
-
-// (Apizr) Get your manager instance the way you want, like
-var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
 ```
 
 ***

@@ -30,6 +30,19 @@ namespace Apizr.Sample
 
 To activate this feature, you have to configure it thanks to the options builder:
 
+#### [Extended](#tab/tabid-extended)
+
+```csharp
+options => options.WithAuthenticationHandler<ISettingsService, ISignInService>(
+    settingsService => settingsService.Token, 
+    signInService => signInService.SignInAsync)
+```
+
+- `settingsService` is your service managing settings
+- `signInService` is your service managing your login flow.
+
+Both services should be container registered as it will be resolved.
+
 #### [Static](#tab/tabid-static)
 
 ```csharp
@@ -46,19 +59,6 @@ options => options.WithAuthenticationHandler<YourSettingsService, YourSignInServ
 - `YourSettingsServiceInstance` should be replaced by whatever settings manager instance of your choice
 - `YourSignInServiceInstance` should be replaced by your service managing your login flow.
 
-#### [Extended](#tab/tabid-extended)
-
-```csharp
-options => options.WithAuthenticationHandler<ISettingsService, ISignInService>(
-    settingsService => settingsService.Token, 
-    signInService => signInService.SignInAsync)
-```
-
-- `settingsService` is your service managing settings
-- `signInService` is your service managing your login flow.
-
-Both services should be container registered as it will be resolved.
-
 ***
 
 In details:
@@ -70,6 +70,42 @@ In details:
 
 You may want to deal with authentication configuration in some other ways.
 Here are all other authentication options:
+
+##### [Extended](#tab/tabid-extended)
+
+- When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:
+```csharp
+options => options.WithAuthenticationHandler<ISettingsService>(
+    settingsService => settingsService.Token)
+```
+`settingsService.Token` should be here a public string property with a private setter, containing the token.
+
+- When you don't want Apizr to save the token anywhere but want to deal with the refresh token call with a method:
+```csharp
+options => options.WithAuthenticationHandler(OnRefreshToken)
+...
+private string OnRefreshTokden(HttpRequestMessage message)
+{
+    // whatever returning a refreshed string token
+}
+```
+
+- When you want to deal with the refresh token call with a method:
+```csharp
+options => options.WithAuthenticationHandler<ISettingsService>(
+    settingsService => settingsService.Token, OnRefreshToken)
+...
+private string OnRefreshTokden(HttpRequestMessage message)
+{
+    // whatever returning a refreshed string token
+}
+```
+
+- When you want to provide your own AuthenticationHandlerBase implementation:
+```csharp
+options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
+    (serviceProvider, options) => new YourAuthenticationHandler(...))
+```
 
 ##### [Static](#tab/tabid-static)
 
@@ -115,42 +151,6 @@ private string OnRefreshTokden(HttpRequestMessage message)
 ```csharp
 options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
     (logger, options) => new YourAuthenticationHandler(...))
-```
-
-##### [Extended](#tab/tabid-extended)
-
-- When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:
-```csharp
-options => options.WithAuthenticationHandler<ISettingsService>(
-    settingsService => settingsService.Token)
-```
-`settingsService.Token` should be here a public string property with a private setter, containing the token.
-
-- When you don't want Apizr to save the token anywhere but want to deal with the refresh token call with a method:
-```csharp
-options => options.WithAuthenticationHandler(OnRefreshToken)
-...
-private string OnRefreshTokden(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
-```
-
-- When you want to deal with the refresh token call with a method:
-```csharp
-options => options.WithAuthenticationHandler<ISettingsService>(
-    settingsService => settingsService.Token, OnRefreshToken)
-...
-private string OnRefreshTokden(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
-```
-
-- When you want to provide your own AuthenticationHandlerBase implementation:
-```csharp
-options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
-    (serviceProvider, options) => new YourAuthenticationHandler(...))
 ```
 
 ***

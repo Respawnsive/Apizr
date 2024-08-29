@@ -64,7 +64,7 @@ Headers could be set automatically by providing an `IConfiguration` instance con
 options => options.WithConfiguration(context.Configuration)
 ```
 
-We can set it at common level (to all apis) or specific level (dedicated to a named one).
+We can set it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
 
 Please heads to the [Settings](config_settings.md))  doc article to see how to configure headers automatically from loaded settings configuration.
 
@@ -242,6 +242,19 @@ Here we are asking Apizr to redact both headers 1 and 3 values, but also key mat
 > CRUD api headers could be set using provided dedicted method headers attributes (`ReadAllHeaders, ...`) 
 
 #### [Registering](#tab/tabid-register)
+
+##### Automatically
+
+Headers redaction names could be set automatically by providing an `IConfiguration` instance containing the headers settings:
+```csharp
+options => options.WithConfiguration(context.Configuration)
+```
+
+We can set it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
+
+Please heads to the [Settings](config_settings.md)) doc article to see how to configure headers automatically from loaded settings configuration.
+
+##### Manually
 
 You can tell Apizr to do so by surrounding values with a `*` and `*` star symbol while adding headers fluently:
 ```csharp

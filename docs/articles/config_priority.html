@@ -166,13 +166,19 @@ namespace Your.Namespace
 <p>Designing your apis using PriorityAttribute or not, you still have to activate priority management at register time.
 By activating it, you're free to provide a priority or not.</p>
 <p>Here is how to activate it, thanks to the <code>WithPriority</code> extension method:</p>
-<pre><code class="lang-csharp">// activation configuration only
+<pre><code class="lang-csharp">// activation configuration only (minimum requirement)
 options =&gt; options.WithPriority()
 
-// activation with default priority configuration
+// OR activation configuration 
+// and configured priority (see Settings article)
+options =&gt; options
+    .WithConfiguration(context.Configuration)
+    .WithPriority()
+
+// OR activation with default priority configuration
 options =&gt; options.WithPriority(Priority.Background)
 
-// activation with default custom priority configuration
+// OR activation with default custom priority configuration
 options =&gt; options.WithPriority(70)
 </code></pre>
 <p>All priority fluent options are available with and without using registry.

@@ -295,10 +295,7 @@ Where you could register it as we used to do it with any other apis, FileTransfe
 <div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
 <a href="#tabpanel_2_tabid-mediatr" role="tab" aria-controls="tabpanel_2_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
@@ -306,23 +303,11 @@ Where you could register it as we used to do it with any other apis, FileTransfe
 <li role="presentation">
 <a href="#tabpanel_2_tabid-optional" role="tab" aria-controls="tabpanel_2_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
+<li role="presentation">
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
+</li>
 </ul>
-<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<pre><code class="lang-csharp">// register the built-in transfer api
-var transferManager = ApizrBuilder.Current.CreateTransferManager(
-    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;));
-
-// Or register the built-in transfer api with custom types
-var transferManager = ApizrBuilder.Current.CreateTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&gt;(
-    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;));
-
-// OR register a custom transfer api
-var transferManager = ApizrBuilder.Current.CreateTransferManagerFor&lt;ITransferSampleApi&gt;();
-</code></pre>
-<p>Here you go with your <code>Transfer</code> manager instance.</p>
-</section>
-<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <pre><code class="lang-csharp">// register the built-in transfer api
 services.AddApizrTransferManager(
@@ -373,15 +358,27 @@ services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
 </code></pre>
 <p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
 </section>
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">// register the built-in transfer api
+var transferManager = ApizrBuilder.Current.CreateTransferManager(
+    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;));
+
+// Or register the built-in transfer api with custom types
+var transferManager = ApizrBuilder.Current.CreateTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&gt;(
+    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;));
+
+// OR register a custom transfer api
+var transferManager = ApizrBuilder.Current.CreateTransferManagerFor&lt;ITransferSampleApi&gt;();
+</code></pre>
+<p>Here you go with your <code>Transfer</code> manager instance.</p>
+</section>
 </div>
 <h4 id="registering-multiple-managers">Registering multiple managers</h4>
 <div class="tabGroup" id="tabgroup_3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_3_tabid-extended" role="tab" aria-controls="tabpanel_3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_3_tabid-extended" role="tab" aria-controls="tabpanel_3_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
 <a href="#tabpanel_3_tabid-mediatr" role="tab" aria-controls="tabpanel_3_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
@@ -389,28 +386,11 @@ services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
 <li role="presentation">
 <a href="#tabpanel_3_tabid-optional" role="tab" aria-controls="tabpanel_3_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
+<li role="presentation">
+<a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
+</li>
 </ul>
-<section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
-    // Built-in api
-    .AddTransferManager(options =&gt; options
-        .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
-    // Built-in api with custom types
-    .AddTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&gt;(options =&gt; options
-        .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
-    // Custom api
-    .AddTransferManagerFor&lt;ITransferSampleApi&gt;());
-</code></pre>
-<p>Then, get your <code>Transfer</code> manager instance by calling:</p>
-<pre><code class="lang-csharp">// for the built-in transfer api
-var transferManager = apizrRegistry.GetTransferManager();
-
-// OR for a custom transfer api
-var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&gt;();
-</code></pre>
-</section>
-<section id="tabpanel_3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_3_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <pre><code class="lang-csharp">services.AddApizr(registry =&gt; registry
     // Built-in api
@@ -466,6 +446,26 @@ var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&
 <p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
 <p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
 </section>
+<section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
+    // Built-in api
+    .AddTransferManager(options =&gt; options
+        .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
+    // Built-in api with custom types
+    .AddTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&gt;(options =&gt; options
+        .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
+    // Custom api
+    .AddTransferManagerFor&lt;ITransferSampleApi&gt;());
+</code></pre>
+<p>Then, get your <code>Transfer</code> manager instance by calling:</p>
+<pre><code class="lang-csharp">// for the built-in transfer api
+var transferManager = apizrRegistry.GetTransferManager();
+
+// OR for a custom transfer api
+var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&gt;();
+</code></pre>
+</section>
 </div>
 
 <p>You definitly can group registrations if needed like illustrated into the <a href="gettingstarted_classic.html">Getting started</a>.</p>
@@ -474,10 +474,7 @@ var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&
 <div class="tabGroup" id="tabgroup_4">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_4_tabid-static" role="tab" aria-controls="tabpanel_4_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_4_tabid-extended" role="tab" aria-controls="tabpanel_4_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_4_tabid-extended" role="tab" aria-controls="tabpanel_4_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
 <a href="#tabpanel_4_tabid-mediatr" role="tab" aria-controls="tabpanel_4_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
@@ -485,33 +482,11 @@ var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&
 <li role="presentation">
 <a href="#tabpanel_4_tabid-optional" role="tab" aria-controls="tabpanel_4_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
+<li role="presentation">
+<a href="#tabpanel_4_tabid-static" role="tab" aria-controls="tabpanel_4_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
+</li>
 </ul>
-<section id="tabpanel_4_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<p>Once you get an instance of your manager, here is how to play with it:</p>
-<pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(
-    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre>
-<p>Note that if you're in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
-<pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
-    options =&gt; options.WithDynamicPath(&quot;YOUR_DYNAMIC_PATH_HERE&quot;));
-</code></pre>
-<p>If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
-You can call download or upload methods directly from the registry itself.</p>
-<pre><code class="lang-csharp">// for the built-in transfer api
-var transferResult = await registry.DownloadAsync(
-    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-
-// OR for the built-in transfer api with custom param type
-var transferResult = await registry.DownloadWithAsync&lt;MyDownloadParamType&gt;(
-    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), myDownloadParams);
-
-// OR for a custom transfer api
-var transferResult = await registry.DownloadAsync&lt;ITransferSampleApi&gt;(
-    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre>
-</section>
-<section id="tabpanel_4_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_4_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <p>Once you get an instance of your manager by resolving/injecting <code>IApizrTransferManager</code> for the built-in one or <code>IApizrTransferManager&lt;TCustomApi&gt;</code> for the custom one, here is how to play with it:</p>
 <pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(
@@ -569,6 +544,31 @@ var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQue
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
 </code></pre>
 <p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
+</section>
+<section id="tabpanel_4_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<p>Once you get an instance of your manager, here is how to play with it:</p>
+<pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre>
+<p>Note that if you're in that case where you need to set a custom path dynamically at request time, here is how to do that:</p>
+<pre><code class="lang-csharp">var transferResult = await transferManager.DownloadAsync(new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), 
+    options =&gt; options.WithDynamicPath(&quot;YOUR_DYNAMIC_PATH_HERE&quot;));
+</code></pre>
+<p>If you registered with the registry, some provided shortcut methods could help you to write things without the need of the manager.
+You can call download or upload methods directly from the registry itself.</p>
+<pre><code class="lang-csharp">// for the built-in transfer api
+var transferResult = await registry.DownloadAsync(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+
+// OR for the built-in transfer api with custom param type
+var transferResult = await registry.DownloadWithAsync&lt;MyDownloadParamType&gt;(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), myDownloadParams);
+
+// OR for a custom transfer api
+var transferResult = await registry.DownloadAsync&lt;ITransferSampleApi&gt;(
+    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
+</code></pre>
 </section>
 </div>
 <h3 id="tracking-progress">Tracking progress</h3>

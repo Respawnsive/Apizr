@@ -1,8 +1,73 @@
 ﻿## Configuring Polly
 
-### With referenced `Polly.Extensions`
+If you are referencing the `Apizr.Extensions.Microsoft.DependencyInjection` package (extended registration), you may want to reference the `Microsoft.Extensions.Http.Resilience` optional package too, so that you can use all the Microsoft Resilience goodness.
 
-The `Polly.Extensions` integration offers many ways to handle requests resilience, individually or globally, and can be configured at design, register or request time.
+Anyway, both extended and static registrations let you configure Polly behaviors straight the way with the yet referenced `Polly.Extensions` package.
+
+### Using Microsoft Resilience
+
+With the extended registration approach only (not available with the static one), the `Microsoft.Extensions.Http.Resilience` optional package offers a pre-configured way to handle requests resilience, applied globally to all methods of an api interface.
+
+#### Installing
+
+First, you should read more about it from the [official documentation](https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience).
+
+Then, please install this package:
+
+|Project|Current|Upcoming|
+|-------|-----|-----|
+|Microsoft.Extensions.Http.Resilience|[![NuGet](https://img.shields.io/nuget/v/Microsoft.Extensions.Http.Resilience.svg)](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Microsoft.Extensions.Http.Resilience.svg)](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience/)|
+
+#### Registering
+
+Finally, just register it using `ConfigureHttpClientBuilder` then `AddStandardResilienceHandler` methods like so:
+```csharp
+options => options.ConfigureHttpClientBuilder(builder => builder
+    .AddStandardResilienceHandler())
+```
+
+If you need more control over pipeline scope, like per method tunning, you should use the `Polly.Extensions` integration instead or even mix both approaches, applying some global resilience handling with `Microsoft.Extensions.Http.Resilience` and some specific ones with `Polly.Extensions`.
+
+#### Configuring
+
+If you need more control over resilience settings, you can provide your configuration.
+
+You can do it either automatically from settings or manually with options.
+
+##### Automatically
+
+First, define your resilience settings like so:
+```json
+"ResilienceOptions": {
+    "Retry": {
+        "BackoffType": "Exponential",
+        "UseJitter": true,
+        "MaxRetryAttempts": 3
+    }
+}
+```
+
+Then provide it to the Resilience Handler:
+```csharp
+options => options.ConfigureHttpClientBuilder(builder => builder
+	.AddStandardResilienceHandler(configuration.GetSection("ResilienceOptions")))
+```
+
+##### Manually
+
+Just provide your configuration thanks to the dedicated builder:
+```csharp
+options => options.ConfigureHttpClientBuilder(builder => builder
+    .AddStandardResilienceHandler(resilienceOptions =>
+    {
+        resilienceOptions.CircuitBreaker.MinimumThroughput = 10;
+        // and so on...
+    }))
+```
+
+### Using Polly Extensions
+
+With both extended and static registrations, the `Polly.Extensions` integration offers many ways to handle requests resilience, individually or globally, and can be configured at design, register or request time.
 
 Apizr comes with a `ResiliencePipeline` attribute to apply some resilience strategies on apis, handled by [Polly](https://github.com/App-vNext/Polly).
 
@@ -18,10 +83,6 @@ Here is how to define a resilience pipeline with some strategies.
 
 ```csharp
 var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessage>()
-    // Configure telemetry to get some logs from Polly process
-    .ConfigureTelemetry(LoggerFactory.Create(loggingBuilder =>
-        loggingBuilder.Debug()))
-    // Add a retry strategy with some options
     .AddRetry(
         new RetryStrategyOptions<HttpResponseMessage>
         {
@@ -38,6 +99,20 @@ var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessag
 ```
 
 Now we have to register our pipeline:
+
+#### [Extended](#tab/tabid-extended)
+
+There's nothing specific to do with Apizr about Polly when using the extended approach.
+
+Just don't forget to register it into your container like you usualy do:
+
+```csharp
+// (Polly) Add the resilience pipeline with its key to your container
+services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+    builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
+```
+
+Note that `TransientHttpError` here is a key that will be used to identify the pipeline to apply to apis.
 
 #### [Static](#tab/tabid-static)
 
@@ -60,20 +135,6 @@ options => options.WithResiliencePipelineRegistry(resiliencePipelineRegistry)
 // OR factory configuration
 options => options.WithResiliencePipelineRegistry(() => resiliencePipelineRegistry)
 ```
-
-#### [Extended](#tab/tabid-extended)
-
-There's nothing specific to do with Apizr about Polly when using the extended approach.
-
-Just don't forget to register it into your container like you usualy do:
-
-```csharp
-// (Polly) Add the resilience pipeline with its key to your container
-services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
-    builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
-```
-
-Note that `TransientHttpError` here is a key that will be used to identify the pipeline to apply to apis.
 
 ***
 
@@ -156,7 +217,7 @@ Resiliencing could be activated automatically by providing an `IConfiguration` i
 options => options.WithConfiguration(context.Configuration)
 ```
 
-We can activate it at common level (to all apis) or specific level (dedicated to a named one).
+We can activate it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
 
 Please heads to the [Settings](config_settings.md))  doc article to see how to configure resiliencing automatically from settings.
 
@@ -175,20 +236,20 @@ options => options.WithResiliencePipelineKeys(["TransientHttpError"], [ApizrRequ
 
 Apizr will automatically tell Polly to handle request with pipelines that get a key matching the one provided by attributes or fluent options.
 
-#### Tunning context
+### Tunning Polly Context
 
-##### Automatically
+#### Automatically
 
 Context parameters could be set automatically by providing an `IConfiguration` instance containing the context settings:
 ```csharp
 options => options.WithConfiguration(context.Configuration)
 ```
 
-We can set it at common level (to all apis) or specific level (dedicated to a named one).
+We can set it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
 
 Please heads to the [Settings](config_settings.md))  doc article to see how to configure context automatically from loaded settings configuration.
 
-##### Manually
+#### Manually
 
 Some advanced options are also available to configure Polly context itself at any level:
 
@@ -213,35 +274,3 @@ options => options.WithResilienceProperty(testKey2, serviceProvider =>
 ```
 
 Note that if you provide a property with the same key at different levels, the closest one to the request will be the one used by Apizr.
-
-### With optional `Microsoft.Extensions.Http.Resilience`
-
-With the extended registration approach (not available with the static one), the `Microsoft.Extensions.Http.Resilience` optional package offers a pre-configured way to handle requests resilience, applied globally to all methods of an api interface.
-
-First, you should read more about it from the [official documentation](https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience).
-
-Then, please install this package:
-
-|Project|Current|Upcoming|
-|-------|-----|-----|
-|Microsoft.Extensions.Http.Resilience|[![NuGet](https://img.shields.io/nuget/v/Microsoft.Extensions.Http.Resilience.svg)](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Microsoft.Extensions.Http.Resilience.svg)](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience/)|
-
-Finally, just register it using `ConfigureHttpClientBuilder` then `AddStandardResilienceHandler` methods like so:
-```csharp
-options => options.ConfigureHttpClientBuilder(builder => builder
-    .AddStandardResilienceHandler()
-```
-
-Or maybe if you need more control over resilience settings:
-```csharp
-options => options.ConfigureHttpClientBuilder(builder => builder
-    .AddStandardResilienceHandler()
-    .Configure(handlerOptions =>
-    {
-        handlerOptions.CircuitBreaker.MinimumThroughput = 10;
-        // and so on...
-    })
-```
-
-If you need more control over pipeline scope, like per method tunning, you should use the `Polly.Extensions` integration instead.
-You definitly can mix both approaches, applying some global resilience handling with `Microsoft.Extensions.Http.Resilience` and some specific ones with `Polly.Extensions`.

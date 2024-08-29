@@ -1,8 +1,8 @@
 ﻿## Settings
 
 Most of Apizr settings could be set by providing an `IConfiguration` instance.
-We can set them at common level (shared by all apis) or specific level (dedicated to named apis).
-The following doc acrticle will focus on appsettings.json configuration.
+We can set it at common level (to all apis), specific level (dedicated to a named api) or even request level (dedicated to a named api's method).
+The following doc article will focus on appsettings.json configuration.
 
 >[!TIP]
 > - You must add the request options parameter `[RequestOptions] IApizrRequestOptions options` to your api methods to get all the Apizr goodness. 
@@ -24,7 +24,14 @@ Here is an example of an appsettings.json file with some of the settings that co
             "Microsoft.Extensions.Http.DefaultHttpClientFactory": "Information"
         }
     },
-    "Apizr": { // Root section key
+    "ResilienceOptions": { // Root Microsoft Resilience configuration section key (see Polly article)
+      "Retry": { // Retry configuration section key
+        "BackoffType": "Exponential",
+        "UseJitter": true,
+        "MaxRetryAttempts": 3
+      }
+    },
+    "Apizr": { // Root Apizr configuration section key
         "CommonOptions": { // Common options shared by all apis
             "Logging": { // Common logging settings
                 "HttpTracerMode": "Everything",
@@ -44,10 +51,11 @@ Here is an example of an appsettings.json file with some of the settings that co
                 "HttpGet": ["TestPipeline3"]// Resilience pipelines scoped to specific request method group
             },
             "Caching": { // Common caching settings
-                "Mode": "GetAndFetch",
+                "Mode": "FetchOrGet",
                 "LifeSpan": "00:15:00",
                 "ShouldInvalidateOnError": false
-            }
+            },
+            "Priority": "UserInitiated"
         },
         "ProperOptions": { // Options specific to some apis
             "IReqResSimpleService": { // Options specific to IReqResSimpleService api
@@ -55,12 +63,12 @@ Here is an example of an appsettings.json file with some of the settings that co
                 "RequestTimeout": "00:00:03", // Specific request timeout
                 "Headers": [// Specific headers applied to the IReqResSimpleService api
                     "testSettingsKey2: testSettingsValue2.1", // Clear static header
-                    "testSettingsKey3: *testSettingsValue3.1*", // Redacted header
+                    "testSettingsKey3: *testSettingsValue3.1*", // Redacted static header
                     "testSettingsKey4: {0}", // Clear runtime header
                     "testSettingsKey5: *{0}*" // Redacted runtime header
                 ],
                 "Caching": { // Specific caching settings overriding common ones
-                    "Mode": "GetAndFetch",
+                    "Mode": "FetchOrGet",
                     "LifeSpan": "00:12:00",
                     "ShouldInvalidateOnError": true
                 },
@@ -68,22 +76,25 @@ Here is an example of an appsettings.json file with some of the settings that co
                 "RequestOptions": { // Options specific to some IReqResSimpleService api methods
                     "GetUsersAsync": { // Options specific to GetUsersAsync method
                         "Caching": {
-                            "Mode": "GetAndFetch",
+                            "Mode": "FetchOrGet",
                             "LifeSpan": "00:10:00",
                             "ShouldInvalidateOnError": false
                         },
                         "Headers": [
                             "testSettingsKey7: testSettingsValue7.1"
-                        ]
+                        ],
+                        "Priority": "Speculative"
                     }
-                }
+                },
+                "Priority": "Background"
             },
             "User": { // Options specific to User CRUD api
                 "BaseAddress": "https://reqres.in/api/users", // Specific base address
                 "RequestTimeout": "00:00:05", // Specific request timeout
                 "Headers": [// Specific headers applied to the User CRUD api
                     "testSettingsKey8: testSettingsValue8.1" // Clear static header
-                ]
+                ],
+                "Priority": 70
             }
         }
     }
@@ -108,13 +119,14 @@ Here is an example of an appsettings.json file with some of the settings that co
   - `ResilienceContext` (section): contains settings related to the resilience context
     - `ContinueOnCapturedContext` (bool): specifies whether to continue on the captured context
     - `ReturnContextToPoolOnComplete` (bool): specifies whether to return the context to the pool on completion
-  - `Headers` (string array): specifies custom headers to be added to requests
+  - `Headers` (string array): specifies custom headers to be added to requests (supporting either clear static, redacted static, clear runtime and redacted runtime values)
   - `ResiliencePipelineKeys` (string array): specifies the resilience pipeline keys to use
   - `ResiliencePipelineOptions` (dictionary): specifies the resilience pipeline keys to use but scoped to specific request [method groups](/api/Apizr.Configuring.ApizrRequestMethod.html)
   - `Caching` (section): contains settings related to caching
     - `Mode` (enum member name): specifies the [caching mode](/api/Apizr.Caching.CacheMode.html)
     - `LifeSpan` (TimeSpan representation): specifies the lifespan of cached responses
     - `ShouldInvalidateOnError` (bool): specifies whether to invalidate the cache on error
+  - `Priority` (enum member name or int): specifies the [priority](/api/Apizr.Configuring.Priority.html) level for the request
 
 ### Registering
 

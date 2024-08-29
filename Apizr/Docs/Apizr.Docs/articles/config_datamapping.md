@@ -92,31 +92,6 @@ public record MinUser
 
 #### AutoMapper
 
-##### [Static](#tab/tabid-static)
-
-First create a `MapperConfiguration` with your profiles:
-
-```csharp
-var mapperConfig = new MapperConfiguration(config =>
-{
-    config.AddProfile<UserMinUserProfile>();
-    config.AddProfile<WhateverProfile>();
-});
-```
-
-Then you'll be able to register with this option:
-
-```csharp
-// direct short configuration
-options => options.WithAutoMapperMappingHandler(mapperConfig)
-
-// OR direct configuration
-options => options.WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
-
-// OR factory configuration
-options => options.WithMappingHandler(() => new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
-```
-
 ##### [Extended](#tab/tabid-extended)
 
 First register AutoMapper as you used to do:
@@ -146,24 +121,34 @@ options => options.WithMappingHandler<AutoMapperMappingHandler>()
 options => options.WithMappingHandler(typeof(AutoMapperMappingHandler))
 ```
 
-***
-
-#### Mapster
-
 ##### [Static](#tab/tabid-static)
 
-Register with one of the following options:
+First create a `MapperConfiguration` with your profiles:
+
+```csharp
+var mapperConfig = new MapperConfiguration(config =>
+{
+    config.AddProfile<UserMinUserProfile>();
+    config.AddProfile<WhateverProfile>();
+});
+```
+
+Then you'll be able to register with this option:
 
 ```csharp
 // direct short configuration
-options => options.WithMapsterMappingHandler(new Mapper())
+options => options.WithAutoMapperMappingHandler(mapperConfig)
 
 // OR direct configuration
-options => options.WithMappingHandler(new MapsterMappingHandler(new Mapper()))
+options => options.WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
 
 // OR factory configuration
-options => options.WithMappingHandler(() => new MapsterMappingHandler(new Mapper()))
+options => options.WithMappingHandler(() => new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
 ```
+
+***
+
+#### Mapster
 
 ##### [Extended](#tab/tabid-extended)
 
@@ -187,6 +172,21 @@ options => options.WithMappingHandler<MapsterMappingHandler>()
 
 // OR parameter type configuration
 options => options.WithMappingHandler(typeof(MapsterMappingHandler))
+```
+
+##### [Static](#tab/tabid-static)
+
+Register with one of the following options:
+
+```csharp
+// direct short configuration
+options => options.WithMapsterMappingHandler(new Mapper())
+
+// OR direct configuration
+options => options.WithMappingHandler(new MapsterMappingHandler(new Mapper()))
+
+// OR factory configuration
+options => options.WithMappingHandler(() => new MapsterMappingHandler(new Mapper()))
 ```
 
 ***

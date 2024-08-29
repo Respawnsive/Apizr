@@ -103,13 +103,25 @@
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended">
+
+<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService, ISignInService&gt;(
+    settingsService =&gt; settingsService.Token, 
+    signInService =&gt; signInService.SignInAsync)
+</code></pre>
+<ul>
+<li><code>settingsService</code> is your service managing settings</li>
+<li><code>signInService</code> is your service managing your login flow.</li>
+</ul>
+<p>Both services should be container registered as it will be resolved.</p>
+</section>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourSettingsService, YourSignInService&gt;(
     YourSettingsServiceInstance, settingsService =&gt; settingsService.Token, 
@@ -125,18 +137,6 @@ options =&gt; options.WithAuthenticationHandler&lt;YourSettingsService, YourSign
 <li><code>YourSignInServiceInstance</code> should be replaced by your service managing your login flow.</li>
 </ul>
 </section>
-<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-
-<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService, ISignInService&gt;(
-    settingsService =&gt; settingsService.Token, 
-    signInService =&gt; signInService.SignInAsync)
-</code></pre>
-<ul>
-<li><code>settingsService</code> is your service managing settings</li>
-<li><code>signInService</code> is your service managing your login flow.</li>
-</ul>
-<p>Both services should be container registered as it will be resolved.</p>
-</section>
 </div>
 
 <p>In details:</p>
@@ -150,13 +150,50 @@ Here are all other authentication options:</p>
 <div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended">
+
+<ul>
+<li>When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:</li>
+</ul>
+<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService&gt;(
+    settingsService =&gt; settingsService.Token)
+</code></pre>
+<p><code>settingsService.Token</code> should be here a public string property with a private setter, containing the token.</p>
+<ul>
+<li>When you don't want Apizr to save the token anywhere but want to deal with the refresh token call with a method:</li>
+</ul>
+<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler(OnRefreshToken)
+...
+private string OnRefreshTokden(HttpRequestMessage message)
+{
+    // whatever returning a refreshed string token
+}
+</code></pre>
+<ul>
+<li>When you want to deal with the refresh token call with a method:</li>
+</ul>
+<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService&gt;(
+    settingsService =&gt; settingsService.Token, OnRefreshToken)
+...
+private string OnRefreshTokden(HttpRequestMessage message)
+{
+    // whatever returning a refreshed string token
+}
+</code></pre>
+<ul>
+<li>When you want to provide your own AuthenticationHandlerBase implementation:</li>
+</ul>
+<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourAuthenticationHandler&gt;(
+    (serviceProvider, options) =&gt; new YourAuthenticationHandler(...))
+</code></pre>
+</section>
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 
 <ul>
 <li>When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:</li>
@@ -201,43 +238,6 @@ private string OnRefreshTokden(HttpRequestMessage message)
 </ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourAuthenticationHandler&gt;(
     (logger, options) =&gt; new YourAuthenticationHandler(...))
-</code></pre>
-</section>
-<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-
-<ul>
-<li>When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:</li>
-</ul>
-<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService&gt;(
-    settingsService =&gt; settingsService.Token)
-</code></pre>
-<p><code>settingsService.Token</code> should be here a public string property with a private setter, containing the token.</p>
-<ul>
-<li>When you don't want Apizr to save the token anywhere but want to deal with the refresh token call with a method:</li>
-</ul>
-<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler(OnRefreshToken)
-...
-private string OnRefreshTokden(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
-</code></pre>
-<ul>
-<li>When you want to deal with the refresh token call with a method:</li>
-</ul>
-<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService&gt;(
-    settingsService =&gt; settingsService.Token, OnRefreshToken)
-...
-private string OnRefreshTokden(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
-</code></pre>
-<ul>
-<li>When you want to provide your own AuthenticationHandlerBase implementation:</li>
-</ul>
-<pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;YourAuthenticationHandler&gt;(
-    (serviceProvider, options) =&gt; new YourAuthenticationHandler(...))
 </code></pre>
 </section>
 </div>

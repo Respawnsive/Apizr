@@ -141,7 +141,7 @@ namespace Apizr.Extending.Configuring.Manager
                             {
                                 var cacheSection = config.GetChildren().ToList();
                                 var modeValue = cacheSection.FirstOrDefault(c => c.Key == "Mode")?.Value;
-                                var mode = !string.IsNullOrEmpty(modeValue) ? (CacheMode)Enum.Parse(typeof(CacheMode), modeValue) : CacheMode.GetAndFetch;
+                                var mode = !string.IsNullOrEmpty(modeValue) ? (CacheMode)Enum.Parse(typeof(CacheMode), modeValue) : CacheMode.FetchOrGet;
                                 var lifeSpanValue = cacheSection.FirstOrDefault(c => c.Key == "LifeSpan")?.Value;
                                 var lifeSpan = !string.IsNullOrEmpty(lifeSpanValue) ? TimeSpan.Parse(lifeSpanValue) : TimeSpan.Zero;
                                 var shouldInvalidateOnErrorValue = cacheSection.FirstOrDefault(c => c.Key == "ShouldInvalidateOnError")?.Value;
@@ -154,6 +154,9 @@ namespace Apizr.Extending.Configuring.Manager
 
                                 break;
                             }
+                        case "Priority":
+                            WithHandlerParameter(Constants.PriorityKey, config.Value);
+                            break;
                         default:
                             {
                                 if (config.GetChildren().Any())
@@ -843,7 +846,7 @@ namespace Apizr.Extending.Configuring.Manager
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null,
+        public IApizrExtendedManagerOptionsBuilder WithCaching(CacheMode mode = CacheMode.FetchOrGet, TimeSpan? lifeSpan = null,
             bool shouldInvalidateOnError = false)
         {
             Options.CacheOptions[ApizrConfigurationSource.ManagerOption] = new CacheAttribute(mode, lifeSpan, shouldInvalidateOnError);

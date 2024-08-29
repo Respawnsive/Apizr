@@ -1,4 +1,6 @@
-﻿namespace Apizr.Caching
+﻿using System;
+
+namespace Apizr.Caching
 {
     /// <summary>
     /// Define the caching behaviour
@@ -6,17 +8,17 @@
     public enum CacheMode
     {
         /// <summary>
-        /// Returns fresh data when request succeed (no cache)
+        /// Returns fresh data when request succeed (api data only)
         /// </summary>
         None,
 
         /// <summary>
-        /// Returns fresh data when request succeed otherwise cached one if exist (dynamic data)
+        /// Returns fresh data when request succeed otherwise cached one if exist (api data first)
         /// </summary>
-        GetAndFetch,
+        FetchOrGet,
 
         /// <summary>
-        /// Returns cached data if we get some otherwise fresh one if request succeed (static data)
+        /// Returns cached data if we get some otherwise fresh one if request succeed (cache data first)
         /// </summary>
         GetOrFetch
     }

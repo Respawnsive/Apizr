@@ -261,13 +261,28 @@ You have to register your pipeline into a pipeline registry instead and provide 
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended">
+
+<p>Don't write anymore:</p>
+<pre><code class="lang-csharp">var registry = new PolicyRegistry
+{
+    { &quot;TransientHttpError&quot;, policy }
+};  
+...
+services.AddPolicyRegistry(registry);
+</code></pre>
+<p>Now write:</p>
+<pre><code class="lang-csharp">services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
+    builder =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));  
+</code></pre>
+</section>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 
 <p>Don't write anymore:</p>
 <pre><code class="lang-csharp">var registry = new PolicyRegistry
@@ -283,21 +298,6 @@ resiliencePipelineRegistry.TryAddBuilder&lt;HttpResponseMessage&gt;(&quot;Transi
     (builder, _) =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));  
 ...
 options =&gt; options.WithResiliencePipelineRegistry(resiliencePipelineRegistry)  
-</code></pre>
-</section>
-<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-
-<p>Don't write anymore:</p>
-<pre><code class="lang-csharp">var registry = new PolicyRegistry
-{
-    { &quot;TransientHttpError&quot;, policy }
-};  
-...
-services.AddPolicyRegistry(registry);
-</code></pre>
-<p>Now write:</p>
-<pre><code class="lang-csharp">services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
-    builder =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));  
 </code></pre>
 </section>
 </div>
@@ -400,6 +400,22 @@ options =&gt; options.WithDelegatingHandler(serviceProvider =&gt; YourDelegating
 
 // OR factory configuration with the service provider and options instances
 options =&gt; options.WithDelegatingHandler((serviceProvider, options) =&gt; YourDelegatingHandler)
+</code></pre>
+</li>
+<li><p>[CacheMode] Now <strong><code>CacheMode.GetAndFetch</code> enum option has been renamed to <code>CacheMode.FetchOrGet</code></strong> so that it says what it actually does and improve consistency with the other <code>CacheMode.GetOrFetch</code> option</p>
+<p>Don't write anymore:</p>
+<pre><code class="lang-csharp">// attribute configuration
+[Cache(CacheMode.GetAndFetch, ...)]
+
+// OR fluent configuration
+options =&gt; options.WithCaching(CacheMode.GetAndFetch, ...)
+</code></pre>
+<p>Now write:</p>
+<pre><code class="lang-csharp">// attribute configuration
+[Cache(CacheMode.FetchOrGet, ...)]
+
+// OR fluent configuration
+options =&gt; options.WithCaching(CacheMode.FetchOrGet, ...)
 </code></pre>
 </li>
 </ul>

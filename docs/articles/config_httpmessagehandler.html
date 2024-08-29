@@ -83,25 +83,13 @@
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<pre><code class="lang-csharp">// direct configuration
-options =&gt; options.WithHttpMessageHandler(YourHttpMessageHandler)
-
-// OR factory configuration with the logger instance
-options =&gt; options.WithHttpMessageHandler(logger =&gt; YourHttpMessageHandler)
-
-// OR factory configuration with the logger and options instances
-options =&gt; options.WithHttpMessageHandler((logger, options) =&gt; YourHttpMessageHandler)
-</code></pre>
-</section>
-<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithHttpMessageHandler(YourHttpMessageHandler)
@@ -114,6 +102,18 @@ options =&gt; options.WithHttpMessageHandler(serviceProvider =&gt; YourHttpMessa
 
 // OR factory configuration with the service provider and options instances
 options =&gt; options.WithHttpMessageHandler((serviceProvider, options) =&gt; YourHttpMessageHandler)
+</code></pre>
+</section>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithHttpMessageHandler(YourHttpMessageHandler)
+
+// OR factory configuration with the logger instance
+options =&gt; options.WithHttpMessageHandler(logger =&gt; YourHttpMessageHandler)
+
+// OR factory configuration with the logger and options instances
+options =&gt; options.WithHttpMessageHandler((logger, options) =&gt; YourHttpMessageHandler)
 </code></pre>
 </section>
 </div>

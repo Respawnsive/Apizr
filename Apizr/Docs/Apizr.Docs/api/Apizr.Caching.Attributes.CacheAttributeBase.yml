@@ -146,7 +146,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Tells Apizr to return a value if we get a cached result for it (GetOrFetch) or to try fetching fresh data every time (GetAndFetch)
+  summary: 'Define the caching behaviour (default: FetchOrGet = api data first otherwise cache)'
   example: []
   syntax:
     content: public CacheMode Mode { get; protected set; }
@@ -208,7 +208,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Cache with no specific lifetime, default GetAndFetch mode and no invalidation on error
+  summary: Cache with no specific lifetime, default FetchOrGet mode and no invalidation on error
   example: []
   syntax:
     content: protected CacheAttributeBase()
@@ -246,7 +246,7 @@ items:
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     content.vb: Protected Sub New(mode As CacheMode)
   overload: Apizr.Caching.Attributes.CacheAttributeBase.#ctor*
   nameWithType.vb: CacheAttributeBase.New(CacheMode)
@@ -274,7 +274,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Cache with default GetAndFetch mode, no invalidation on error but with a specific lifetime
+  summary: Cache with default FetchOrGet mode, no invalidation on error but with a specific lifetime
   example: []
   syntax:
     content: protected CacheAttributeBase(string lifeSpanRepresentation)
@@ -309,7 +309,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Cache with no specific lifetime, default GetAndFetch mode but with or without invalidation on error
+  summary: Cache with no specific lifetime, default FetchOrGet mode but with or without invalidation on error
   example: []
   syntax:
     content: protected CacheAttributeBase(bool shouldInvalidateOnError)
@@ -351,7 +351,7 @@ items:
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     - id: lifeSpanRepresentation
       type: System.String
       description: TimeSpan representation to parse
@@ -389,7 +389,7 @@ items:
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     - id: shouldInvalidateOnError
       type: System.Boolean
       description: Should invalidate on error
@@ -420,7 +420,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Cache with a specific lifetime and invalidation on error, but default GetAndFetch mode
+  summary: Cache with a specific lifetime and invalidation on error, but default FetchOrGet mode
   example: []
   syntax:
     content: protected CacheAttributeBase(TimeSpan lifeSpan, bool shouldInvalidateOnError)
@@ -465,7 +465,7 @@ items:
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     - id: lifeSpanRepresentation
       type: System.String
       description: This specific caching lifetime

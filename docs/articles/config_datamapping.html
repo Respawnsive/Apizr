@@ -169,33 +169,13 @@ public record MinUser
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<p>First create a <code>MapperConfiguration</code> with your profiles:</p>
-<pre><code class="lang-csharp">var mapperConfig = new MapperConfiguration(config =&gt;
-{
-    config.AddProfile&lt;UserMinUserProfile&gt;();
-    config.AddProfile&lt;WhateverProfile&gt;();
-});
-</code></pre>
-<p>Then you'll be able to register with this option:</p>
-<pre><code class="lang-csharp">// direct short configuration
-options =&gt; options.WithAutoMapperMappingHandler(mapperConfig)
-
-// OR direct configuration
-options =&gt; options.WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
-
-// OR factory configuration
-options =&gt; options.WithMappingHandler(() =&gt; new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
-</code></pre>
-</section>
-<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <p>First register AutoMapper as you used to do:</p>
 <pre><code class="lang-csharp">services.AddAutoMapper(ASSEMBLIES_CONTAINING_PROFILES);
@@ -220,31 +200,38 @@ options =&gt; options.WithMappingHandler&lt;AutoMapperMappingHandler&gt;()
 options =&gt; options.WithMappingHandler(typeof(AutoMapperMappingHandler))
 </code></pre>
 </section>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<p>First create a <code>MapperConfiguration</code> with your profiles:</p>
+<pre><code class="lang-csharp">var mapperConfig = new MapperConfiguration(config =&gt;
+{
+    config.AddProfile&lt;UserMinUserProfile&gt;();
+    config.AddProfile&lt;WhateverProfile&gt;();
+});
+</code></pre>
+<p>Then you'll be able to register with this option:</p>
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithAutoMapperMappingHandler(mapperConfig)
+
+// OR direct configuration
+options =&gt; options.WithMappingHandler(new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
+
+// OR factory configuration
+options =&gt; options.WithMappingHandler(() =&gt; new AutoMapperMappingHandler(mapperConfig.CreateMapper()))
+</code></pre>
+</section>
 </div>
 <h4 id="mapster-1">Mapster</h4>
 <div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<p>Register with one of the following options:</p>
-<pre><code class="lang-csharp">// direct short configuration
-options =&gt; options.WithMapsterMappingHandler(new Mapper())
-
-// OR direct configuration
-options =&gt; options.WithMappingHandler(new MapsterMappingHandler(new Mapper()))
-
-// OR factory configuration
-options =&gt; options.WithMappingHandler(() =&gt; new MapsterMappingHandler(new Mapper()))
-</code></pre>
-</section>
-<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <p>First register Mapster as you used to do:</p>
 <pre><code class="lang-csharp">var config = new TypeAdapterConfig();
@@ -262,6 +249,19 @@ options =&gt; options.WithMappingHandler&lt;MapsterMappingHandler&gt;()
 
 // OR parameter type configuration
 options =&gt; options.WithMappingHandler(typeof(MapsterMappingHandler))
+</code></pre>
+</section>
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<p>Register with one of the following options:</p>
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithMapsterMappingHandler(new Mapper())
+
+// OR direct configuration
+options =&gt; options.WithMappingHandler(new MapsterMappingHandler(new Mapper()))
+
+// OR factory configuration
+options =&gt; options.WithMappingHandler(() =&gt; new MapsterMappingHandler(new Mapper()))
 </code></pre>
 </section>
 </div>

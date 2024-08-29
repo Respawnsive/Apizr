@@ -161,6 +161,24 @@ Please find here some breaking changes while upgrading from previous versions
 
     - You can't register your policies into a policy registry and provide it to Apizr anymore. 
         You have to register your pipeline into a pipeline registry instead and provide it to Apizr:
+
+        ### [Extended](#tab/tabid-extended)
+
+        Don't write anymore:
+        ```csharp 
+        var registry = new PolicyRegistry
+        {
+            { "TransientHttpError", policy }
+        };  
+        ...
+        services.AddPolicyRegistry(registry);
+        ``` 
+
+        Now write:
+        ```csharp 
+        services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+            builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));  
+        ```
  
         ### [Static](#tab/tabid-static)
 
@@ -182,24 +200,6 @@ Please find here some breaking changes while upgrading from previous versions
         ...
         options => options.WithResiliencePipelineRegistry(resiliencePipelineRegistry)  
         ``` 
-
-        ### [Extended](#tab/tabid-extended)
-
-        Don't write anymore:
-        ```csharp 
-        var registry = new PolicyRegistry
-        {
-            { "TransientHttpError", policy }
-        };  
-        ...
-        services.AddPolicyRegistry(registry);
-        ``` 
-
-        Now write:
-        ```csharp 
-        services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
-            builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));  
-        ```
 
         ***
         
@@ -315,6 +315,26 @@ Please find here some breaking changes while upgrading from previous versions
 
     // OR factory configuration with the service provider and options instances
     options => options.WithDelegatingHandler((serviceProvider, options) => YourDelegatingHandler)
+    ```
+
+- [CacheMode] Now **`CacheMode.GetAndFetch` enum option has been renamed to `CacheMode.FetchOrGet`** so that it says what it actually does and improve consistency with the other `CacheMode.GetOrFetch` option
+
+    Don't write anymore:
+    ```csharp
+    // attribute configuration
+    [Cache(CacheMode.GetAndFetch, ...)]
+
+    // OR fluent configuration
+    options => options.WithCaching(CacheMode.GetAndFetch, ...)
+    ```
+
+    Now write:
+    ```csharp
+    // attribute configuration
+    [Cache(CacheMode.FetchOrGet, ...)]
+
+    // OR fluent configuration
+    options => options.WithCaching(CacheMode.FetchOrGet, ...)
     ```
 
 ### 5.3

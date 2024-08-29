@@ -268,7 +268,7 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     }
 
     /// <inheritdoc />
-    public IApizrRequestOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null,
+    public IApizrRequestOptionsBuilder WithCaching(CacheMode mode = CacheMode.FetchOrGet, TimeSpan? lifeSpan = null,
         bool shouldInvalidateOnError = false)
     {
         Options.CacheOptions[ApizrConfigurationSource.RequestOption] = new CacheAttribute(mode, lifeSpan, shouldInvalidateOnError);

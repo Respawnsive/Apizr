@@ -2,16 +2,6 @@
 
 You can set RefitSettings thanks to this option:
 
-### [Static](#tab/tabid-static)
-
-```csharp
-// direct configuration
-options => options.WithRefitSettings(YourOwnRefitSettings)
-
-// OR factory configuration
-options => options.WithRefitSettings(() => YourOwnRefitSettings)
-```
-
 ### [Extended](#tab/tabid-extended)
 
 ```csharp
@@ -20,6 +10,16 @@ options => options.WithRefitSettings(YourOwnRefitSettings)
 
 // OR factory configuration
 options => options.WithRefitSettings(serviceProvider => YourOwnRefitSettings)
+```
+
+### [Static](#tab/tabid-static)
+
+```csharp
+// direct configuration
+options => options.WithRefitSettings(YourOwnRefitSettings)
+
+// OR factory configuration
+options => options.WithRefitSettings(() => YourOwnRefitSettings)
 ```
 
 ***

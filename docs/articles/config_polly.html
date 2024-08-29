@@ -161,13 +161,23 @@
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended">
+
+<p>There's nothing specific to do with Apizr about Polly when using the extended approach.</p>
+<p>Just don't forget to register it into your container like you usualy do:</p>
+<pre><code class="lang-csharp">// (Polly) Add the resilience pipeline with its key to your container
+services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
+    builder =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));
+</code></pre>
+<p>Note that <code>TransientHttpError</code> here is a key that will be used to identify the pipeline to apply to apis.</p>
+</section>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 
 <p>First, build a registry and register your pipeline into it:</p>
 <pre><code class="lang-csharp">var resiliencePipelineRegistry = new ResiliencePipelineRegistry&lt;string&gt;();
@@ -182,16 +192,6 @@ options =&gt; options.WithResiliencePipelineRegistry(resiliencePipelineRegistry)
 // OR factory configuration
 options =&gt; options.WithResiliencePipelineRegistry(() =&gt; resiliencePipelineRegistry)
 </code></pre>
-</section>
-<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-
-<p>There's nothing specific to do with Apizr about Polly when using the extended approach.</p>
-<p>Just don't forget to register it into your container like you usualy do:</p>
-<pre><code class="lang-csharp">// (Polly) Add the resilience pipeline with its key to your container
-services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;TransientHttpError&quot;,
-    builder =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));
-</code></pre>
-<p>Note that <code>TransientHttpError</code> here is a key that will be used to identify the pipeline to apply to apis.</p>
 </section>
 </div>
 <h4 id="activating">Activating</h4>

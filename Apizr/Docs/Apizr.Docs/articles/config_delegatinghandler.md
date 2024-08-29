@@ -2,19 +2,6 @@
 
 You can add DelegatingHandlers thanks to this option:
 
-### [Static](#tab/tabid-static)
-
-```csharp
-// direct configuration
-options => options.WithDelegatingHandler(YourDelegatingHandler)
-
-// OR factory configuration with the logger instance
-options => options.WithDelegatingHandler(logger => YourDelegatingHandler)
-
-// OR factory configuration with the logger and options instances
-options => options.WithDelegatingHandler((logger, options) => YourDelegatingHandler)
-```
-
 ### [Extended](#tab/tabid-extended)
 
 ```csharp
@@ -29,6 +16,19 @@ options => options.WithDelegatingHandler(serviceProvider => YourDelegatingHandle
 
 // OR factory configuration with the service provider and options instances
 options => options.WithDelegatingHandler((serviceProvider, options) => YourDelegatingHandler)
+```
+
+### [Static](#tab/tabid-static)
+
+```csharp
+// direct configuration
+options => options.WithDelegatingHandler(YourDelegatingHandler)
+
+// OR factory configuration with the logger instance
+options => options.WithDelegatingHandler(logger => YourDelegatingHandler)
+
+// OR factory configuration with the logger and options instances
+options => options.WithDelegatingHandler((logger, options) => YourDelegatingHandler)
 ```
 
 ***

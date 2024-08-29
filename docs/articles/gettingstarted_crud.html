@@ -177,31 +177,13 @@ You still can read the api documentation about it <a href="/api/Apizr.Requesting
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<p>Here is an example of how to register a managed instance of the CRUD api interface:</p>
-<pre><code class="lang-csharp">// Apizr registration
-myContainer.RegistrationMethod(() =&gt;
-    ApizrBuilder.Current.CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
-        .WithBaseAddress(&quot;your specific T entity crud base uri&quot;))
-);
-</code></pre>
-<p>T must be a class.</p>
-<p>TKey must be primitive. If you don't provide it here, it will be defined as <code>int</code>.</p>
-<p>TReadAllResult must inherit from <code>IEnumerable&lt;&gt;</code> or be a class.
-If you don't use paged result, just don't provide any TReadAllResult here and it will be defined as <code>IEnumerable&lt;T&gt;</code>.</p>
-<p>TReadAllParams must be a class.
-If you don't use a custom class holding your query parameters, just don't provide any TReadAllParams here and it will be defined as <code>IDictionary&lt;string, object&gt;</code>.</p>
-<p>You have to provide the specific entity crud base uri with the options builder (if you don't plan to use entity crud attribute).</p>
-<p>Also, you could use the manager directly instead of registering it.</p>
-</section>
-<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <p>Here is an example of how to register a managed CRUD api interface:</p>
 <pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
@@ -219,6 +201,24 @@ If you don't use paged result, just don't provide any TReadAllResult here and it
 If you don't use a custom class holding your query parameters, just don't provide any TReadAllParams here and it will be defined as <code>IDictionary&lt;string, object&gt;</code>.</p>
 <p>You have to provide the specific entity crud base uri with the options builder (if you don't plan to use entity crud attribute).</p>
 </section>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<p>Here is an example of how to register a managed instance of the CRUD api interface:</p>
+<pre><code class="lang-csharp">// Apizr registration
+myContainer.RegistrationMethod(() =&gt;
+    ApizrBuilder.Current.CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(options =&gt; options
+        .WithBaseAddress(&quot;your specific T entity crud base uri&quot;))
+);
+</code></pre>
+<p>T must be a class.</p>
+<p>TKey must be primitive. If you don't provide it here, it will be defined as <code>int</code>.</p>
+<p>TReadAllResult must inherit from <code>IEnumerable&lt;&gt;</code> or be a class.
+If you don't use paged result, just don't provide any TReadAllResult here and it will be defined as <code>IEnumerable&lt;T&gt;</code>.</p>
+<p>TReadAllParams must be a class.
+If you don't use a custom class holding your query parameters, just don't provide any TReadAllParams here and it will be defined as <code>IDictionary&lt;string, object&gt;</code>.</p>
+<p>You have to provide the specific entity crud base uri with the options builder (if you don't plan to use entity crud attribute).</p>
+<p>Also, you could use the manager directly instead of registering it.</p>
+</section>
 </div>
 <h3 id="registering-multiple-interfaces">Registering multiple interfaces</h3>
 <p>You may want to register multiple managed api interfaces within the same project.
@@ -229,13 +229,53 @@ This is where the ApizrRegistry comes on stage.</p>
 <div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended">
+
+<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
+{
+    // Apizr registration
+    services.AddApizr(
+        registry =&gt; registry
+            .AddCrudManagerFor&lt;T1&gt;(
+                options =&gt; options.WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
+            .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
+                options =&gt; options.WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
+    
+        config =&gt; config
+            .WithAkavacheCacheHandler()
+    );
+}
+</code></pre>
+<p>Here is what we're saying in this example:</p>
+<ul>
+<li>Add a manager for T1 entity with CRUD api interface and default types into the registry, to register it into the container
+<ul>
+<li>Set a specific address dedicated to T1's manager</li>
+</ul>
+</li>
+<li>Add a manager for T2 entity with CRUD api interface and custom types into the registry, to register it into the container
+<ul>
+<li>Set a specific address dedicated to T2's manager</li>
+</ul>
+</li>
+<li>Apply common configuration to all managers by:
+<ul>
+<li>Providing a cache handler</li>
+</ul>
+</li>
+</ul>
+<p>It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
+And yes you can mix classic and CRUD manager registration into the same registry.</p>
+<p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
+<p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
+</section>
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-csharp">// Apizr registry
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
@@ -284,46 +324,6 @@ var t1Manager = apizrRegistry.GetCrudManagerFor&lt;T1&gt;();
 var t2Manager = apizrRegistry.GetCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;();
 </code></pre>
 </section>
-<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-
-<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
-{
-    // Apizr registration
-    services.AddApizr(
-        registry =&gt; registry
-            .AddCrudManagerFor&lt;T1&gt;(
-                options =&gt; options.WithBaseAddress(&quot;your specific T1 entity crud base uri&quot;)
-            .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
-                options =&gt; options.WithBaseAddress(&quot;your specific T2 entity crud base uri&quot;),
-    
-        config =&gt; config
-            .WithAkavacheCacheHandler()
-    );
-}
-</code></pre>
-<p>Here is what we're saying in this example:</p>
-<ul>
-<li>Add a manager for T1 entity with CRUD api interface and default types into the registry, to register it into the container
-<ul>
-<li>Set a specific address dedicated to T1's manager</li>
-</ul>
-</li>
-<li>Add a manager for T2 entity with CRUD api interface and custom types into the registry, to register it into the container
-<ul>
-<li>Set a specific address dedicated to T2's manager</li>
-</ul>
-</li>
-<li>Apply common configuration to all managers by:
-<ul>
-<li>Providing a cache handler</li>
-</ul>
-</li>
-</ul>
-<p>It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
-And yes you can mix classic and CRUD manager registration into the same registry.</p>
-<p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
-<p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
-</section>
 </div>
 
 <p>Here's how to get a manager from the registry:</p>
@@ -339,13 +339,66 @@ It could be usefull when requesting mutliple apis (multiple base address) commin
 <div class="tabGroup" id="tabgroup_3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_3_tabid-extended" role="tab" aria-controls="tabpanel_3_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_3_tabid-extended" role="tab" aria-controls="tabpanel_3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static">
+<section id="tabpanel_3_tabid-extended" role="tabpanel" data-tab="tabid-extended">
+
+<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
+{
+    // Apizr registration
+    services.AddApizr(
+        registry =&gt; registry
+            .AddGroup(
+                group =&gt; group
+                    .AddCrudManagerFor&lt;T1&gt;(
+                        config =&gt; config.WithBasePath(&quot;t1&quot;)
+                    .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
+                        config =&gt; config.WithBasePath(&quot;t2&quot;),
+                config =&gt; config.WithBaseAddress(&quot;https://crud.io/api&quot;))
+
+            .AddCrudManagerFor&lt;T3&gt;(
+                config =&gt; config.WithBaseAddress(&quot;https://crud.com/api&quot;),
+    
+        config =&gt; config.WithAkavacheCacheHandler()
+    );
+}
+</code></pre>
+<p>Here is what we're saying in this example:</p>
+<ul>
+<li>Add a manager for T1 entity with CRUD api interface and default types into the registry, to register it into the container
+<ul>
+<li>Set a common base address (<a href="https://crud.io/api">https://crud.io/api</a>) dedicated to T1's manager</li>
+<li>Set a specific base path (t1) dedicated to T1's manager</li>
+</ul>
+</li>
+<li>Add a manager for T2 entity with CRUD api interface and custom types into the registry, to register it into the container
+<ul>
+<li>Set a common base address (<a href="https://crud.io/api">https://crud.io/api</a>) dedicated to T2's manager</li>
+<li>Set a specific base path (t1) dedicated to T2's manager</li>
+</ul>
+</li>
+<li>Add a manager for T3 entity with CRUD api interface and default types into the registry, to register it into the container
+<ul>
+<li>Set a specific base address (<a href="https://crud.com/api">https://crud.com/api</a>) dedicated to T3's manager</li>
+</ul>
+</li>
+<li>Apply common configuration to all managers by:
+<ul>
+<li>Providing a cache handler</li>
+</ul>
+</li>
+</ul>
+<p>It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
+And yes you can mix classic and CRUD manager registration into the same registry/group.
+You can add mutliple group at the same level and go deeper with group into group itself.</p>
+<p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
+<p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
+</section>
+<section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-csharp">// Apizr registry
 var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
@@ -400,59 +453,6 @@ You can add mutliple group at the same level and go deeper with group into group
 <p>Also, you could register the registry itslef, instead of its populated managers and then use its managers directly.</p>
 <p>Or, you could use the managers directly from the registry instead of registering anything.</p>
 </section>
-<section id="tabpanel_3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
-
-<pre><code class="lang-csharp">public override void ConfigureServices(IServiceCollection services)
-{
-    // Apizr registration
-    services.AddApizr(
-        registry =&gt; registry
-            .AddGroup(
-                group =&gt; group
-                    .AddCrudManagerFor&lt;T1&gt;(
-                        config =&gt; config.WithBasePath(&quot;t1&quot;)
-                    .AddCrudManagerFor&lt;T2, T2Key, T2ReadAllResult, T2ReadAllParams&gt;(
-                        config =&gt; config.WithBasePath(&quot;t2&quot;),
-                config =&gt; config.WithBaseAddress(&quot;https://crud.io/api&quot;))
-
-            .AddCrudManagerFor&lt;T3&gt;(
-                config =&gt; config.WithBaseAddress(&quot;https://crud.com/api&quot;),
-    
-        config =&gt; config.WithAkavacheCacheHandler()
-    );
-}
-</code></pre>
-<p>Here is what we're saying in this example:</p>
-<ul>
-<li>Add a manager for T1 entity with CRUD api interface and default types into the registry, to register it into the container
-<ul>
-<li>Set a common base address (<a href="https://crud.io/api">https://crud.io/api</a>) dedicated to T1's manager</li>
-<li>Set a specific base path (t1) dedicated to T1's manager</li>
-</ul>
-</li>
-<li>Add a manager for T2 entity with CRUD api interface and custom types into the registry, to register it into the container
-<ul>
-<li>Set a common base address (<a href="https://crud.io/api">https://crud.io/api</a>) dedicated to T2's manager</li>
-<li>Set a specific base path (t1) dedicated to T2's manager</li>
-</ul>
-</li>
-<li>Add a manager for T3 entity with CRUD api interface and default types into the registry, to register it into the container
-<ul>
-<li>Set a specific base address (<a href="https://crud.com/api">https://crud.com/api</a>) dedicated to T3's manager</li>
-</ul>
-</li>
-<li>Apply common configuration to all managers by:
-<ul>
-<li>Providing a cache handler</li>
-</ul>
-</li>
-</ul>
-<p>It's an example, meaning if you don't need common and/or specific configuration, just don't provide it.
-And yes you can mix classic and CRUD manager registration into the same registry/group.
-You can add mutliple group at the same level and go deeper with group into group itself.</p>
-<p>Of course, each managers will be regitered into the container so that you can use it directly.</p>
-<p>Also, the registry itslef will be registered into the container, so you could use it to get its managers, instead of using each managers.</p>
-</section>
 </div>
 
 <p>Here's how to get a manager from the registry:</p>
@@ -469,17 +469,13 @@ var t3Manager = apizrRegistry.GetCrudManagerFor&lt;T3&gt;();
 <div class="tabGroup" id="tabgroup_4">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_4_tabid-static" role="tab" aria-controls="tabpanel_4_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_4_tabid-extended" role="tab" aria-controls="tabpanel_4_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_4_tabid-extended" role="tab" aria-controls="tabpanel_4_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_4_tabid-static" role="tab" aria-controls="tabpanel_4_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_4_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<p>Not available.</p>
-</section>
-<section id="tabpanel_4_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_4_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <p>First you have to tell Apizr which entity to auto register a crud api for by assembly scanning thanks to the <code>AutoRegister</code> attribute:</p>
 <pre><code class="lang-csharp">[AutoRegister(&quot;https://mybaseuri.com/api/myentity&quot;)]
@@ -514,6 +510,10 @@ public record MyEntity
 }
 </code></pre>
 <p>Apizr will scan assemblies to auto register managers for decorated entities.</p>
+</section>
+<section id="tabpanel_4_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<p>Not available.</p>
 </section>
 </div>
 <h2 id="using">Using</h2>

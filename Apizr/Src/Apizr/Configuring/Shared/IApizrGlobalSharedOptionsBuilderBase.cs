@@ -105,10 +105,10 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Cache data.
         /// </summary>
-        /// <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
+        /// <param name="mode">FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
         /// <param name="lifeSpan">This specific caching lifetime (Default: null = cache handler lifetime</param>
         /// <param name="shouldInvalidateOnError">Should invalidate on error (Default: false)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null, bool shouldInvalidateOnError = false);
+        TApizrOptionsBuilder WithCaching(CacheMode mode = CacheMode.FetchOrGet, TimeSpan? lifeSpan = null, bool shouldInvalidateOnError = false);
     }
 }

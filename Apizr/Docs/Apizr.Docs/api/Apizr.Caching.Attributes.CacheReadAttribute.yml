@@ -123,7 +123,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Cache with no specific lifetime, default GetAndFetch mode and no invalidation on error
+  summary: Cache with no specific lifetime, default FetchOrGet mode and no invalidation on error
   example: []
   syntax:
     content: public CacheReadAttribute()
@@ -161,7 +161,7 @@ items:
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     content.vb: Public Sub New(mode As CacheMode)
   overload: Apizr.Caching.Attributes.CacheReadAttribute.#ctor*
   nameWithType.vb: CacheReadAttribute.New(CacheMode)
@@ -189,7 +189,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Cache with default GetAndFetch mode, no invalidation on error but with a specific lifetime
+  summary: Cache with default FetchOrGet mode, no invalidation on error but with a specific lifetime
   example: []
   syntax:
     content: public CacheReadAttribute(string lifeSpanRepresentation)
@@ -224,7 +224,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Cache with no specific lifetime, default GetAndFetch mode but with or without invalidation on error
+  summary: Cache with no specific lifetime, default FetchOrGet mode but with or without invalidation on error
   example: []
   syntax:
     content: public CacheReadAttribute(bool shouldInvalidateOnError)
@@ -266,7 +266,7 @@ items:
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     - id: lifeSpanRepresentation
       type: System.String
       description: TimeSpan representation to parse
@@ -304,7 +304,7 @@ items:
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     - id: shouldInvalidateOnError
       type: System.Boolean
       description: Should invalidate on error
@@ -335,7 +335,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Cache with a specific lifetime and invalidation on error, but default GetAndFetch mode
+  summary: Cache with a specific lifetime and invalidation on error, but default FetchOrGet mode
   example: []
   syntax:
     content: public CacheReadAttribute(TimeSpan lifeSpan, bool shouldInvalidateOnError)
@@ -380,7 +380,7 @@ items:
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     - id: lifeSpanRepresentation
       type: System.String
       description: This specific caching lifetime

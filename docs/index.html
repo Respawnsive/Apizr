@@ -112,7 +112,7 @@ namespace Apizr.Sample
 {
     // (Apizr) Define your web api base url and ask for cache and logs
     [BaseAddress(&quot;https://reqres.in/&quot;), 
-    Cache(CacheMode.GetAndFetch, &quot;01:00:00&quot;), 
+    Cache(CacheMode.FetchOrGet, &quot;01:00:00&quot;), 
     Log(HttpMessageParts.AllButBodies)]
     public interface IReqResService
     {
@@ -149,33 +149,13 @@ var resiliencePipelineBuilder = new ResiliencePipelineBuilder&lt;HttpResponseMes
 <div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_1_tabid-extended" role="tab" aria-controls="tabpanel_1_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_1_tabid-static" role="tab" aria-controls="tabpanel_1_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<p>Relies on static builder instantiation approach.</p>
-<pre><code class="lang-csharp">// (Polly) Add the resilience pipeline with its key to a registry
-var resiliencePipelineRegistry = new ResiliencePipelineRegistry&lt;string&gt;();
-resiliencePipelineRegistry.TryAddBuilder&lt;HttpResponseMessage&gt;(&quot;TransientHttpError&quot;, 
-    (builder, _) =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));
-
-// (Apizr) Get your manager instance
-var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResService&gt;(
-    options =&gt; options
-        // With a logger
-        .WithLoggerFactory(LoggerFactory.Create(loggingBuilder =&gt;
-            loggingBuilder.Debug()))
-        // With the defined resilience pipeline registry
-        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-        // And with a cache handler
-        .WithAkavacheCacheHandler());
-</code></pre>
-</section>
-<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <p>Relies on <code>IServiceCollection</code> extension methods approach.</p>
 <pre><code class="lang-csharp">// (Logger) Configure logging the way you want, like
@@ -197,6 +177,26 @@ services.AddResiliencePipeline&lt;string, HttpResponseMessage&gt;(&quot;Transien
 
 // (Apizr) Get your manager instance the way you want, like
 var reqResManager = serviceProvider.GetRequiredService&lt;IApizrManager&lt;IReqResService&gt;&gt;();
+</code></pre>
+</section>
+<section id="tabpanel_1_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<p>Relies on static builder instantiation approach.</p>
+<pre><code class="lang-csharp">// (Polly) Add the resilience pipeline with its key to a registry
+var resiliencePipelineRegistry = new ResiliencePipelineRegistry&lt;string&gt;();
+resiliencePipelineRegistry.TryAddBuilder&lt;HttpResponseMessage&gt;(&quot;TransientHttpError&quot;, 
+    (builder, _) =&gt; builder.AddPipeline(resiliencePipelineBuilder.Build()));
+
+// (Apizr) Get your manager instance
+var reqResManager = ApizrBuilder.Current.CreateManagerFor&lt;IReqResService&gt;(
+    options =&gt; options
+        // With a logger
+        .WithLoggerFactory(LoggerFactory.Create(loggingBuilder =&gt;
+            loggingBuilder.Debug()))
+        // With the defined resilience pipeline registry
+        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+        // And with a cache handler
+        .WithAkavacheCacheHandler());
 </code></pre>
 </section>
 </div>

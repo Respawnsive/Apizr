@@ -2685,11 +2685,11 @@ items:
   summary: Cache data.
   example: []
   syntax:
-    content: public IApizrExtendedManagerOptionsBuilder WithCaching(CacheMode mode = CacheMode.GetAndFetch, TimeSpan? lifeSpan = null, bool shouldInvalidateOnError = false)
+    content: public IApizrExtendedManagerOptionsBuilder WithCaching(CacheMode mode = CacheMode.FetchOrGet, TimeSpan? lifeSpan = null, bool shouldInvalidateOnError = false)
     parameters:
     - id: mode
       type: Apizr.Caching.CacheMode
-      description: GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
+      description: FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one
     - id: lifeSpan
       type: System.Nullable{System.TimeSpan}
       description: 'This specific caching lifetime (Default: null = cache handler lifetime'
@@ -2699,7 +2699,7 @@ items:
     return:
       type: Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder
       description: ''
-    content.vb: Public Function WithCaching(mode As CacheMode = CacheMode.GetAndFetch, lifeSpan As TimeSpan? = Nothing, shouldInvalidateOnError As Boolean = False) As IApizrExtendedManagerOptionsBuilder
+    content.vb: Public Function WithCaching(mode As CacheMode = CacheMode.FetchOrGet, lifeSpan As TimeSpan? = Nothing, shouldInvalidateOnError As Boolean = False) As IApizrExtendedManagerOptionsBuilder
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptionsBuilder.WithCaching*
   implements:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase{Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptions,Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder}.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)

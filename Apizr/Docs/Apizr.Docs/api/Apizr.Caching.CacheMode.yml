@@ -5,7 +5,7 @@ items:
   id: CacheMode
   parent: Apizr.Caching
   children:
-  - Apizr.Caching.CacheMode.GetAndFetch
+  - Apizr.Caching.CacheMode.FetchOrGet
   - Apizr.Caching.CacheMode.GetOrFetch
   - Apizr.Caching.CacheMode.None
   langs:
@@ -22,7 +22,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheMode
     path: ../../Src/Apizr/Caching/CacheMode.cs
-    startLine: 5
+    startLine: 7
   assemblies:
   - Apizr
   namespace: Apizr.Caching
@@ -49,42 +49,42 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: None
     path: ../../Src/Apizr/Caching/CacheMode.cs
-    startLine: 10
+    startLine: 12
   assemblies:
   - Apizr
   namespace: Apizr.Caching
-  summary: Returns fresh data when request succeed (no cache)
+  summary: Returns fresh data when request succeed (api data only)
   example: []
   syntax:
     content: None = 0
     return:
       type: Apizr.Caching.CacheMode
-- uid: Apizr.Caching.CacheMode.GetAndFetch
-  commentId: F:Apizr.Caching.CacheMode.GetAndFetch
-  id: GetAndFetch
+- uid: Apizr.Caching.CacheMode.FetchOrGet
+  commentId: F:Apizr.Caching.CacheMode.FetchOrGet
+  id: FetchOrGet
   parent: Apizr.Caching.CacheMode
   langs:
   - csharp
   - vb
-  name: GetAndFetch
-  nameWithType: CacheMode.GetAndFetch
-  fullName: Apizr.Caching.CacheMode.GetAndFetch
+  name: FetchOrGet
+  nameWithType: CacheMode.FetchOrGet
+  fullName: Apizr.Caching.CacheMode.FetchOrGet
   type: Field
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/CacheMode.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: GetAndFetch
+    id: FetchOrGet
     path: ../../Src/Apizr/Caching/CacheMode.cs
-    startLine: 15
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Caching
-  summary: Returns fresh data when request succeed otherwise cached one if exist (dynamic data)
+  summary: Returns fresh data when request succeed otherwise cached one if exist (api data first)
   example: []
   syntax:
-    content: GetAndFetch = 1
+    content: FetchOrGet = 1
     return:
       type: Apizr.Caching.CacheMode
 - uid: Apizr.Caching.CacheMode.GetOrFetch
@@ -105,11 +105,11 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetOrFetch
     path: ../../Src/Apizr/Caching/CacheMode.cs
-    startLine: 20
+    startLine: 22
   assemblies:
   - Apizr
   namespace: Apizr.Caching
-  summary: Returns cached data if we get some otherwise fresh one if request succeed (static data)
+  summary: Returns cached data if we get some otherwise fresh one if request succeed (cache data first)
   example: []
   syntax:
     content: GetOrFetch = 2

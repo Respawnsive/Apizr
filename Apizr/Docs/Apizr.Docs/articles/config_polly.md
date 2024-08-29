@@ -100,6 +100,20 @@ var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessag
 
 Now we have to register our pipeline:
 
+#### [Extended](#tab/tabid-extended)
+
+There's nothing specific to do with Apizr about Polly when using the extended approach.
+
+Just don't forget to register it into your container like you usualy do:
+
+```csharp
+// (Polly) Add the resilience pipeline with its key to your container
+services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+    builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
+```
+
+Note that `TransientHttpError` here is a key that will be used to identify the pipeline to apply to apis.
+
 #### [Static](#tab/tabid-static)
 
 First, build a registry and register your pipeline into it:
@@ -121,20 +135,6 @@ options => options.WithResiliencePipelineRegistry(resiliencePipelineRegistry)
 // OR factory configuration
 options => options.WithResiliencePipelineRegistry(() => resiliencePipelineRegistry)
 ```
-
-#### [Extended](#tab/tabid-extended)
-
-There's nothing specific to do with Apizr about Polly when using the extended approach.
-
-Just don't forget to register it into your container like you usualy do:
-
-```csharp
-// (Polly) Add the resilience pipeline with its key to your container
-services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
-    builder => builder.AddPipeline(resiliencePipelineBuilder.Build()));
-```
-
-Note that `TransientHttpError` here is a key that will be used to identify the pipeline to apply to apis.
 
 ***
 

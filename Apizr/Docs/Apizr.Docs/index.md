@@ -48,7 +48,7 @@ namespace Apizr.Sample
 {
     // (Apizr) Define your web api base url and ask for cache and logs
     [BaseAddress("https://reqres.in/"), 
-    Cache(CacheMode.GetAndFetch, "01:00:00"), 
+    Cache(CacheMode.FetchOrGet, "01:00:00"), 
     Log(HttpMessageParts.AllButBodies)]
     public interface IReqResService
     {
@@ -86,28 +86,6 @@ var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessag
 
 An instance of this managed api:
 
-### [Static](#tab/tabid-static)
-
-Relies on static builder instantiation approach.
-
-```csharp
-// (Polly) Add the resilience pipeline with its key to a registry
-var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
-resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", 
-    (builder, _) => builder.AddPipeline(resiliencePipelineBuilder.Build()));
-
-// (Apizr) Get your manager instance
-var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResService>(
-    options => options
-        // With a logger
-        .WithLoggerFactory(LoggerFactory.Create(loggingBuilder =>
-            loggingBuilder.Debug()))
-        // With the defined resilience pipeline registry
-        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
-        // And with a cache handler
-        .WithAkavacheCacheHandler());
-```
-
 ### [Extended](#tab/tabid-extended)
 
 Relies on `IServiceCollection` extension methods approach.
@@ -132,6 +110,28 @@ services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError"
 
 // (Apizr) Get your manager instance the way you want, like
 var reqResManager = serviceProvider.GetRequiredService<IApizrManager<IReqResService>>();
+```
+
+### [Static](#tab/tabid-static)
+
+Relies on static builder instantiation approach.
+
+```csharp
+// (Polly) Add the resilience pipeline with its key to a registry
+var resiliencePipelineRegistry = new ResiliencePipelineRegistry<string>();
+resiliencePipelineRegistry.TryAddBuilder<HttpResponseMessage>("TransientHttpError", 
+    (builder, _) => builder.AddPipeline(resiliencePipelineBuilder.Build()));
+
+// (Apizr) Get your manager instance
+var reqResManager = ApizrBuilder.Current.CreateManagerFor<IReqResService>(
+    options => options
+        // With a logger
+        .WithLoggerFactory(LoggerFactory.Create(loggingBuilder =>
+            loggingBuilder.Debug()))
+        // With the defined resilience pipeline registry
+        .WithResiliencePipelineRegistry(resiliencePipelineRegistry)
+        // And with a cache handler
+        .WithAkavacheCacheHandler());
 ```
 
 ***

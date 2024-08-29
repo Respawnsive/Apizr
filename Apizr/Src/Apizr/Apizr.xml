@@ -418,7 +418,7 @@
         </member>
         <member name="P:Apizr.Caching.Attributes.CacheAttributeBase.Mode">
             <summary>
-            Tells Apizr to return a value if we get a cached result for it (GetOrFetch) or to try fetching fresh data every time (GetAndFetch)
+            Define the caching behaviour (default: FetchOrGet = api data first otherwise cache)
             </summary>
         </member>
         <member name="P:Apizr.Caching.Attributes.CacheAttributeBase.ShouldInvalidateOnError">
@@ -428,24 +428,24 @@
         </member>
         <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor">
             <summary>
-            Cache with no specific lifetime, default GetAndFetch mode and no invalidation on error
+            Cache with no specific lifetime, default FetchOrGet mode and no invalidation on error
             </summary>
         </member>
         <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode)">
             <summary>
             Cache with no specific lifetime, no invalidation on error but a specific cache mode
             </summary>
-            <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
+            <param name="mode">FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
         </member>
         <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(System.String)">
             <summary>
-            Cache with default GetAndFetch mode, no invalidation on error but with a specific lifetime
+            Cache with default FetchOrGet mode, no invalidation on error but with a specific lifetime
             </summary>
             <param name="lifeSpanRepresentation">TimeSpan representation to parse</param>
         </member>
         <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(System.Boolean)">
             <summary>
-            Cache with no specific lifetime, default GetAndFetch mode but with or without invalidation on error
+            Cache with no specific lifetime, default FetchOrGet mode but with or without invalidation on error
             </summary>
             <param name="shouldInvalidateOnError">Should invalidate on error</param>
         </member>
@@ -453,19 +453,19 @@
             <summary>
             Cache with a specific cache and mode specific lifetime, but no invalidation on error
             </summary>
-            <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
+            <param name="mode">FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
             <param name="lifeSpanRepresentation">TimeSpan representation to parse</param>
         </member>
         <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(Apizr.Caching.CacheMode,System.Boolean)">
             <summary>
             Cache with a specific cache and invalidation on error, but no specific lifetime
             </summary>
-            <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
+            <param name="mode">FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
             <param name="shouldInvalidateOnError">Should invalidate on error</param>
         </member>
         <member name="M:Apizr.Caching.Attributes.CacheAttributeBase.#ctor(System.TimeSpan,System.Boolean)">
             <summary>
-            Cache with a specific lifetime and invalidation on error, but default GetAndFetch mode
+            Cache with a specific lifetime and invalidation on error, but default FetchOrGet mode
             </summary>
             <param name="lifeSpan">This specific caching lifetime</param>
             <param name="shouldInvalidateOnError">Should invalidate on error</param>
@@ -474,7 +474,7 @@
             <summary>
             Cache with a specific cache mode, a specific lifetime and invalidation on error
             </summary>
-            <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
+            <param name="mode">FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
             <param name="lifeSpanRepresentation">This specific caching lifetime</param>
             <param name="shouldInvalidateOnError">Should invalidate on error</param>
         </member>
@@ -567,17 +567,17 @@
         </member>
         <member name="F:Apizr.Caching.CacheMode.None">
             <summary>
-            Returns fresh data when request succeed (no cache)
+            Returns fresh data when request succeed (api data only)
             </summary>
         </member>
-        <member name="F:Apizr.Caching.CacheMode.GetAndFetch">
+        <member name="F:Apizr.Caching.CacheMode.FetchOrGet">
             <summary>
-            Returns fresh data when request succeed otherwise cached one if exist (dynamic data)
+            Returns fresh data when request succeed otherwise cached one if exist (api data first)
             </summary>
         </member>
         <member name="F:Apizr.Caching.CacheMode.GetOrFetch">
             <summary>
-            Returns cached data if we get some otherwise fresh one if request succeed (static data)
+            Returns cached data if we get some otherwise fresh one if request succeed (cache data first)
             </summary>
         </member>
         <member name="T:Apizr.Caching.ICacheHandler">
@@ -2880,7 +2880,7 @@
             <summary>
             Cache data.
             </summary>
-            <param name="mode">GetAndFetch returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
+            <param name="mode">FetchOrGet returns fresh data when request succeed otherwise cached one, where GetOrFetch returns cached data if we get some otherwise fresh one</param>
             <param name="lifeSpan">This specific caching lifetime (Default: null = cache handler lifetime</param>
             <param name="shouldInvalidateOnError">Should invalidate on error (Default: false)</param>
             <returns></returns>
@@ -5705,6 +5705,15 @@
             </summary>
         </member>
         <member name="M:Apizr.Resiliencing.Attributes.Http.OptionsResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.PatchResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Patch http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.PatchResiliencePipelineAttribute.#ctor(System.String[])">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Resiliencing.Attributes.Http.PostResiliencePipelineAttribute">

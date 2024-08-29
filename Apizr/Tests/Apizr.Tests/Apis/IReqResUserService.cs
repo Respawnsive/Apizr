@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 using Refit;
 
 [assembly:GetResiliencePipeline("TransientHttpError")]
-[assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
+[assembly:Cache(CacheMode.FetchOrGet, "00:10:00")]
 //[assembly:Timeout("00:00:02")]
 //[assembly:Log(HttpMessageParts.All, HttpTracerMode.Everything, LogLevel.Trace)]
 [assembly:Priority(Priority.Background)]
@@ -29,7 +29,7 @@ namespace Apizr.Tests.Apis
      AutoRegister("https://reqres.in/api"),
      Log(HttpMessageParts.RequestAll, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information),
      Headers("testKey1: *testValue1*", "testKey2: testValue2.1"),
-     Cache(CacheMode.GetAndFetch, "00:09:00"),
+     Cache(CacheMode.FetchOrGet, "00:09:00"),
      PostResiliencePipeline("TransientHttpError2"),
      Priority(Priority.Speculative)]//, Timeout("00:00:04")]
     public interface IReqResUserService
@@ -46,7 +46,7 @@ namespace Apizr.Tests.Apis
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
-        [Get("/users"), Cache(CacheMode.GetAndFetch, "00:08:00")]
+        [Get("/users"), Cache(CacheMode.FetchOrGet, "00:08:00")]
         Task<ApiResult<User>> GetUsersAsync([Property(nameof(HttpStatusCode))] HttpStatusCode statusCode, [RequestOptions] IApizrRequestOptions options);
 
         [Get("/users")]
@@ -55,7 +55,7 @@ namespace Apizr.Tests.Apis
         [Get("/users"), 
          Log(HttpMessageParts.RequestBody, HttpTracerMode.ExceptionsOnly, LogLevel.Warning),
          Priority(Priority.UserInitiated), 
-         Cache(CacheMode.GetAndFetch, "00:08:00")]
+         Cache(CacheMode.FetchOrGet, "00:08:00")]
         Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
 
         [Get("/users")]

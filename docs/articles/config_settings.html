@@ -130,7 +130,7 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
                 &quot;HttpGet&quot;: [&quot;TestPipeline3&quot;]// Resilience pipelines scoped to specific request method group
             },
             &quot;Caching&quot;: { // Common caching settings
-                &quot;Mode&quot;: &quot;GetAndFetch&quot;,
+                &quot;Mode&quot;: &quot;FetchOrGet&quot;,
                 &quot;LifeSpan&quot;: &quot;00:15:00&quot;,
                 &quot;ShouldInvalidateOnError&quot;: false
             },
@@ -147,7 +147,7 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
                     &quot;testSettingsKey5: *{0}*&quot; // Redacted runtime header
                 ],
                 &quot;Caching&quot;: { // Specific caching settings overriding common ones
-                    &quot;Mode&quot;: &quot;GetAndFetch&quot;,
+                    &quot;Mode&quot;: &quot;FetchOrGet&quot;,
                     &quot;LifeSpan&quot;: &quot;00:12:00&quot;,
                     &quot;ShouldInvalidateOnError&quot;: true
                 },
@@ -155,7 +155,7 @@ Look at both csproj and MauiProgram files from the <a href="https://github.com/R
                 &quot;RequestOptions&quot;: { // Options specific to some IReqResSimpleService api methods
                     &quot;GetUsersAsync&quot;: { // Options specific to GetUsersAsync method
                         &quot;Caching&quot;: {
-                            &quot;Mode&quot;: &quot;GetAndFetch&quot;,
+                            &quot;Mode&quot;: &quot;FetchOrGet&quot;,
                             &quot;LifeSpan&quot;: &quot;00:10:00&quot;,
                             &quot;ShouldInvalidateOnError&quot;: false
                         },

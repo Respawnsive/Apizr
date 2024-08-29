@@ -12,7 +12,7 @@ using Apizr.Sample.Models;
 using Refit;
 
 [assembly:ResiliencePipeline("TransientHttpError")]
-[assembly:Cache(CacheMode.GetAndFetch, "00:10:00")]
+[assembly:Cache(CacheMode.FetchOrGet, "00:10:00")]
 [assembly:Log]
 namespace Apizr.Sample
 {

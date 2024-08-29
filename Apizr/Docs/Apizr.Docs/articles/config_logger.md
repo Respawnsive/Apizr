@@ -5,6 +5,18 @@ Apizr comes with a quite simple built-in Debug logger by default, but you'd bett
 
 You can configure logger only by fluent configuration.
 
+### [Extended](#tab/tabid-extended)
+
+There's nothing specific to do with Apizr about logger when using the extended approach.
+
+Just don't forget to configure it like you usualy do:
+
+```csharp
+loggingBuilder.AddConsole()
+```
+
+wherever in your app you get access to `ILoggingBuilder`.
+
 ### [Static](#tab/tabid-static)
 
 You can set logger configuration thanks to this option:
@@ -18,17 +30,5 @@ options => options.WithLoggerFactory(LoggerFactory.Create(loggingBuilder =>
 ```
 
 `LoggerFactory.Create` method is provided by Microsoft.Extensions.Logging which lets you add any compatible logger.
-
-### [Extended](#tab/tabid-extended)
-
-There's nothing specific to do with Apizr about logger when using the extended approach.
-
-Just don't forget to configure it like you usualy do:
-
-```csharp
-loggingBuilder.AddConsole()
-```
-
-wherever in your app you get access to `ILoggingBuilder`.
 
 ***

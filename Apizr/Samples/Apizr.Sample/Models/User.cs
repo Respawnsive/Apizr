@@ -9,7 +9,7 @@ using Apizr.Requesting;
 namespace Apizr.Sample.Models
 {
     [AutoRegister<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>>("https://reqres.in/api/users")]
-    [CacheReadAll(CacheMode.GetAndFetch)]
+    [CacheReadAll(CacheMode.FetchOrGet)]
     [CacheRead(CacheMode.GetOrFetch)]
     [Log(HttpMessageParts.All)]
     public class User

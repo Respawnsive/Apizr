@@ -31,6 +31,7 @@
 - [New/Breaking][BaseAddress] Now we can **set base address with the brand new `BaseAddress` attribure** instead of the now removed `WebApi`, `CrudEntity` or `MappedCrudEntity` useless ones, and only if you need to set it at design time
 - [New/Breaking][AutoRegister] Now we can **tell Apizr to auto register apis with the brand new `AutoRegister` attribure** instead of the now removed `WebApi`, `CrudEntity` or `MappedCrudEntity` useless ones
 - [New/Breaking][MappedWith] Now we can **tell Apizr to map data while using MediatR/Optional thanks to the yet known `MappedWith` attribure** instead of the now removed `CrudEntity` or `MappedCrudEntity` useless ones
+- [Breaking][CacheMode] Now **`CacheMode.GetAndFetch` enum option has been renamed to `CacheMode.FetchOrGet`** so that it says what it actually does and improve consistency with the other `CacheMode.GetOrFetch` option
 - [Breaking][Headers] Now **WithHeaders options take an enumerable parameter instead of a parameter array** so that we could provide some more optional parameters
 - [Breaking][Removed] **Previsoulsy deprecated extensions methods for backward compatibility have been removed** as they were not suitable anymore
 - [Breaking][DelegatingHandler] Now we can **register DelegatingHandlers thanks to `WithDelegatingHandler` fluent option** instead of the `AddDelegatingHandler` deleted one for consistency.

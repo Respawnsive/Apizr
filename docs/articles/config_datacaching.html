@@ -185,25 +185,13 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new DistributedCach
 <div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_2_tabid-extended" role="tab" aria-controls="tabpanel_2_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<pre><code class="lang-csharp">// direct short configuration
-options =&gt; options.WithAkavacheCacheHandler()
-
-// OR direct configuration
-options =&gt; options.WithCacheHandler(new AkavacheCacheHandler())
-
-// OR factory configuration
-options =&gt; options.WithCacheHandler(() =&gt; new AkavacheCacheHandler())
-</code></pre>
-</section>
-<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <pre><code class="lang-csharp">// direct short configuration
 options =&gt; options.WithAkavacheCacheHandler()
@@ -221,6 +209,18 @@ options =&gt; options.WithCacheHandler(new AkavacheCacheHandler())
 options =&gt; options.WithCacheHandler(serviceProvider =&gt; new AkavacheCacheHandler())
 </code></pre>
 </section>
+<section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">// direct short configuration
+options =&gt; options.WithAkavacheCacheHandler()
+
+// OR direct configuration
+options =&gt; options.WithCacheHandler(new AkavacheCacheHandler())
+
+// OR factory configuration
+options =&gt; options.WithCacheHandler(() =&gt; new AkavacheCacheHandler())
+</code></pre>
+</section>
 </div>
 
 <p>Where most of it get overloads so you could set:</p>
@@ -236,22 +236,13 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new AkavacheCacheHa
 <div class="tabGroup" id="tabgroup_3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="0" aria-selected="true">Static</a>
+<a href="#tabpanel_3_tabid-extended" role="tab" aria-controls="tabpanel_3_tabid-extended" data-tab="tabid-extended" tabindex="0" aria-selected="true">Extended</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_3_tabid-extended" role="tab" aria-controls="tabpanel_3_tabid-extended" data-tab="tabid-extended" tabindex="-1">Extended</a>
+<a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
-<section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static">
-
-<pre><code class="lang-csharp">// direct configuration
-options =&gt; options.WithCacheHandler(new MonkeyCacheHandler(Barrel.Current))
-
-// OR factory configuration
-options =&gt; options.WithCacheHandler(() =&gt; new MonkeyCacheHandler(Barrel.Current))
-</code></pre>
-</section>
-<section id="tabpanel_3_tabid-extended" role="tabpanel" data-tab="tabid-extended" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_3_tabid-extended" role="tabpanel" data-tab="tabid-extended">
 
 <pre><code class="lang-csharp">// closed type configuration
 options =&gt; options.WithCacheHandler&lt;MonkeyCacheHandler&gt;()
@@ -271,6 +262,15 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
 <p>If you don't provide Barrel.Current to the MonkeyCacheHandler, don't forget to register it into your DI container.</p>
 </div>
 </section>
+<section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-csharp">// direct configuration
+options =&gt; options.WithCacheHandler(new MonkeyCacheHandler(Barrel.Current))
+
+// OR factory configuration
+options =&gt; options.WithCacheHandler(() =&gt; new MonkeyCacheHandler(Barrel.Current))
+</code></pre>
+</section>
 </div>
 <h3 id="activating">Activating</h3>
 <p>You can activate caching either at:</p>
@@ -287,7 +287,7 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
     [BaseAddress(&quot;https://reqres.in/api&quot;)]
     public interface IReqResService
     {
-        [Get(&quot;/users&quot;), Cache(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
+        [Get(&quot;/users&quot;), Cache(CacheMode.FetchOrGet, &quot;01:00:00&quot;)]
         Task&lt;UserList&gt; GetUsersAsync();
 
         [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
@@ -300,7 +300,7 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
 <pre><code class="lang-csharp">namespace Apizr.Sample.Models
 {
     [BaseAddress(&quot;https://reqres.in/api/users&quot;)]
-    [CacheReadAll(CacheMode.GetAndFetch, &quot;01:00:00&quot;)]
+    [CacheReadAll(CacheMode.FetchOrGet, &quot;01:00:00&quot;)]
     [CacheRead(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
     public record User
     {
@@ -325,7 +325,7 @@ options =&gt; options.WithCacheHandler(serviceProvider =&gt; new MonkeyCacheHand
 <p>Life time is actually a <code>TimeSpan</code> string representation which is parsed then. Its optional and if you don’t provide it, the default cache provider settings will be applyed.</p>
 <p>Cache mode could be set to:</p>
 <ul>
-<li><code>GetAndFetch</code> (default): the result is returned from request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.</li>
+<li><code>FetchOrGet</code> (default): the result is returned from api request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.</li>
 <li><code>GetOrFetch</code>: the result is returned from cache if there’s some data already cached, otherwise from the request.</li>
 </ul>
 <p>In both cases, cached data is updated after each successful request call.</p>
@@ -382,7 +382,7 @@ You can decorate one or more parameters with it, then it will be included in the
 <h5 id="manually">Manually</h5>
 <p>You can activate caching at any levels with this fluent option:</p>
 <pre><code class="lang-csharp">// Address
-options =&gt; options.WithCaching(mode: CacheMode.GetAndFetch, lifeSpan: TimeSpan.FromHours(1),
+options =&gt; options.WithCaching(mode: CacheMode.FetchOrGet, lifeSpan: TimeSpan.FromHours(1),
             shouldInvalidateOnError: false)
 </code></pre>
 <h3 id="using">Using</h3>

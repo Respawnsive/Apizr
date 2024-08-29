@@ -51,7 +51,7 @@ Here is an example of an appsettings.json file with some of the settings that co
                 "HttpGet": ["TestPipeline3"]// Resilience pipelines scoped to specific request method group
             },
             "Caching": { // Common caching settings
-                "Mode": "GetAndFetch",
+                "Mode": "FetchOrGet",
                 "LifeSpan": "00:15:00",
                 "ShouldInvalidateOnError": false
             },
@@ -68,7 +68,7 @@ Here is an example of an appsettings.json file with some of the settings that co
                     "testSettingsKey5: *{0}*" // Redacted runtime header
                 ],
                 "Caching": { // Specific caching settings overriding common ones
-                    "Mode": "GetAndFetch",
+                    "Mode": "FetchOrGet",
                     "LifeSpan": "00:12:00",
                     "ShouldInvalidateOnError": true
                 },
@@ -76,7 +76,7 @@ Here is an example of an appsettings.json file with some of the settings that co
                 "RequestOptions": { // Options specific to some IReqResSimpleService api methods
                     "GetUsersAsync": { // Options specific to GetUsersAsync method
                         "Caching": {
-                            "Mode": "GetAndFetch",
+                            "Mode": "FetchOrGet",
                             "LifeSpan": "00:10:00",
                             "ShouldInvalidateOnError": false
                         },

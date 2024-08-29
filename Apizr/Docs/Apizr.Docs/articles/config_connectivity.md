@@ -12,12 +12,6 @@ You may want to provide just a simple boolean value to check connectivity.
 
 Here is the right option:
 
-### [Static](#tab/tabid-static)
-
-```csharp
-options => options.WithConnectivityHandler(() => YourConnectivityBoolean)
-```
-
 ### [Extended](#tab/tabid-extended)
 
 ```csharp
@@ -26,6 +20,12 @@ options => options.WithConnectivityHandler(serviceProvider => YourConnectivityBo
 
 // Boolean expression factory
 options => options.WithConnectivityHandler<IYourRegisteredConnectivityService>(service => service.YourConnectivityBoolean)
+```
+
+### [Static](#tab/tabid-static)
+
+```csharp
+options => options.WithConnectivityHandler(() => YourConnectivityBoolean)
 ```
 
 ***
@@ -46,16 +46,6 @@ public class YourConnectivityHandler : IConnectivityHandler
 
 Then just register it with this option:
 
-### [Static](#tab/tabid-static)
-
-```csharp
-// direct configuration
-options => options.WithConnectivityHandler(YourConnectivityHandler)
-
-// OR factory configuration
-options => options.WithConnectivityHandler(() => YourConnectivityHandler)
-```
-
 ### [Extended](#tab/tabid-extended)
 
 ```csharp
@@ -70,6 +60,16 @@ options => options.WithConnectivityHandler<YourConnectivityHandler>()
 
 // OR type configuration
 options => options.WithConnectivityHandler(typeof(YourConnectivityHandler))
+```
+
+### [Static](#tab/tabid-static)
+
+```csharp
+// direct configuration
+options => options.WithConnectivityHandler(YourConnectivityHandler)
+
+// OR factory configuration
+options => options.WithConnectivityHandler(() => YourConnectivityHandler)
 ```
 
 ***

@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 using Refit;
 
 //[assembly: GetResiliencePipeline("TransientHttpError")]
-//[assembly: Cache(CacheMode.GetAndFetch, "00:05:00")]
+//[assembly: Cache(CacheMode.FetchOrGet, "00:05:00")]
 //[assembly: OperationTimeout("00:05:00")]
 //[assembly: Log(HttpMessageParts.All, HttpTracerMode.Everything, LogLevel.Trace)]
 namespace Apizr.Tests.Apis
@@ -26,7 +26,7 @@ namespace Apizr.Tests.Apis
     [BaseAddress("https://reqres.in/api"), 
      Headers("testKey1: testValue1"), 
      PostResiliencePipeline("TransientHttpError2"),
-     Cache(CacheMode.GetAndFetch, "00:04:00"),
+     Cache(CacheMode.FetchOrGet, "00:04:00"),
      OperationTimeout("00:04:00"),
      Log(HttpMessageParts.AllButBodies, HttpTracerMode.Everything, LogLevel.Trace)]
     public interface IReqResParentApi
@@ -37,7 +37,7 @@ namespace Apizr.Tests.Apis
         [Get("/users"), 
          Headers("testKey1: testValue2"), 
          ResiliencePipeline("TestPipeline1"), 
-         Cache(CacheMode.GetAndFetch, "00:03:00"),
+         Cache(CacheMode.FetchOrGet, "00:03:00"),
          RequestTimeout("00:01:00"),
          Log(HttpMessageParts.HeadersOnly, HttpTracerMode.Everything, LogLevel.Trace)]
         Task<ApiResult<User>> GetUsersAsync([RequestOptions] IApizrRequestOptions options);
@@ -46,7 +46,7 @@ namespace Apizr.Tests.Apis
 
     [Headers("testKey1: testValue3"),
      PutResiliencePipeline("TransientHttpError3"),
-     Cache(CacheMode.GetAndFetch, "00:02:00"),
+     Cache(CacheMode.FetchOrGet, "00:02:00"),
      OperationTimeout("00:03:00"),
      Log(HttpMessageParts.AllButBodies, HttpTracerMode.Everything, LogLevel.Trace)]
     public interface IReqResChildApi : IReqResParentApi

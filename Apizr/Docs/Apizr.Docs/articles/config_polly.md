@@ -95,7 +95,7 @@ var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessag
             MaxRetryAttempts = 3,
             UseJitter = true,
             BackoffType = DelayBackoffType.Exponential
-        }));
+        });
 ```
 
 Now we have to register our pipeline:

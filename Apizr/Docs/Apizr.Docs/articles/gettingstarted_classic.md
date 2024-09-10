@@ -1,4 +1,10 @@
-﻿## Defining
+﻿## Watching
+
+Please find this getting started video tutorial on YouTube about how to get started with Apizr:
+
+> [!Video https://youtu.be/9qXekjZepLA]
+
+## Defining
 
 We could define our web api service just like:
 ```csharp

@@ -1,4 +1,10 @@
-﻿## Defining
+﻿## Watching
+
+Please find this getting started video tutorial on YouTube about how to get started with Apizr:
+
+> [!Video https://youtu.be/9qXekjZepLA]
+
+## Defining
 
 As we'll use the built-in yet defined ICrudApi, there's no more definition to do.
 

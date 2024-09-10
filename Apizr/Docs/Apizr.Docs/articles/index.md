@@ -12,3 +12,7 @@
 
 Apizr aims to provide a resilient and feature-rich web API client for .NET applications based on Refit, with the more resiliency we can, but without the boilerplate. 
 It comes among other things with built-in support for retrying failed requests, handling network connectivity issues, caching responses, managing authentication, logging, and request prioritization, but there's more.
+
+## Watching
+
+Please find this [Apizr YouTube Playlist](https://www.youtube.com/playlist?list=PLP7ES6CZYy_3zYjmOJzi3K_GZlViorgUO) to watch the Apizr in action.

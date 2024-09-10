@@ -2,7 +2,7 @@
 
 Refit based web api client management, but resilient (retry, connectivity, cache, auth, log, priority, etc...)
 
-[![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](articles/index.md "Go to project documentation") [![Browse - Source](https://img.shields.io/badge/browse-source_code-lightgrey?style=for-the-badge)](https://github.com/Respawnsive/Apizr "Go to project repository")
+[![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](articles/index.md "Go to project documentation") [![Browse - Source](https://img.shields.io/badge/browse-source_code-lightgrey?style=for-the-badge)](https://github.com/Respawnsive/Apizr "Go to project repository") [![Watch - Tutorials](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/playlist?list=PLP7ES6CZYy_3zYjmOJzi3K_GZlViorgUO "Watch tutorial videos")
 
 ## What
 
@@ -81,7 +81,7 @@ var resiliencePipelineBuilder = new ResiliencePipelineBuilder<HttpResponseMessag
             MaxRetryAttempts = 3,
             UseJitter = true,
             BackoffType = DelayBackoffType.Exponential
-        }));
+        });
 ```
 
 An instance of this managed api:

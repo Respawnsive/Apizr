@@ -2,7 +2,7 @@
 
 Please find this getting started video tutorial on YouTube about how to get started with Apizr:
 
-> [!Video https://youtu.be/9qXekjZepLA]
+> [!Video https://www.youtube.com/embed/9qXekjZepLA]
 
 ## Defining
 

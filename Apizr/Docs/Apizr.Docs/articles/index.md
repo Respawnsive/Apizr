@@ -15,4 +15,4 @@ It comes among other things with built-in support for retrying failed requests, 
 
 ## Watching
 
-Please find this [Apizr YouTube Playlist](https://www.youtube.com/playlist?list=PLP7ES6CZYy_3zYjmOJzi3K_GZlViorgUO) to watch the Apizr in action.
+Please find an Apizr playlist to watch Apizr in action on [![YouTube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/playlist?list=PLP7ES6CZYy_3zYjmOJzi3K_GZlViorgUO "Watch tutorial videos on YouTube")

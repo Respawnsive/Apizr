@@ -20,9 +20,11 @@ namespace Apizr;
 /// </summary>
 public static class FileTransferOptionsBuilderExtensions
 {
-    #region Transfer
+    #region Manager
 
     #region Single
+
+    #region Upload
 
     /// <summary>
     /// Create an upload manager for IUploadApi (you must at least provide a base url thanks to the options builder)
@@ -44,7 +46,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <returns></returns>
     public static IApizrUploadManager<TUploadApi> CreateUploadManagerFor<TUploadApi>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-        where TUploadApi : IUploadApi =>
+        where TUploadApi : IUploadApi<HttpResponseMessage> =>
         new ApizrUploadManager<TUploadApi>(
             builder.CreateManagerFor<TUploadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody)));
 
@@ -77,6 +79,10 @@ public static class FileTransferOptionsBuilderExtensions
             builder.CreateManagerFor<IUploadApi<TUploadApiResultData>>(
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.RequestBody)));
 
+    #endregion
+
+    #region Download
+
     /// <summary>
     /// Create a download manager for IDownloadApi (you must at least provide a base url thanks to the options builder)
     /// </summary>
@@ -97,7 +103,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <returns></returns>
     public static IApizrDownloadManager<TDownloadApi> CreateDownloadManagerFor<TDownloadApi>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-        where TDownloadApi : IDownloadApi =>
+        where TDownloadApi : IDownloadApi<IDictionary<string, object>> =>
         new ApizrDownloadManager<TDownloadApi>(
             builder.CreateManagerFor<TDownloadApi>(optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
@@ -130,6 +136,10 @@ public static class FileTransferOptionsBuilderExtensions
             builder.CreateManagerFor<IDownloadApi<TDownloadParams>>(
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody)));
 
+    #endregion
+
+    #region Transfer
+
     /// <summary>
     /// Create a transfer manager for ITransferApi (you must at least provide a base url thanks to the options builder)
     /// </summary>
@@ -153,7 +163,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <returns></returns>
     public static IApizrTransferManager<TTransferApi> CreateTransferManagerFor<TTransferApi>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-        where TTransferApi : ITransferApi =>
+        where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage> =>
         new ApizrTransferManager<TTransferApi>(
             builder.CreateDownloadManagerFor<TTransferApi>(
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody)),
@@ -171,7 +181,7 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrTransferManager<TTransferApi, TDownloadParams> CreateTransferManagerFor<TTransferApi,
         TDownloadParams>(this IApizrBuilder builder,
         Action<IApizrManagerOptionsBuilder> optionsBuilder = null)
-        where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi =>
+        where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage> =>
         new ApizrTransferManager<TTransferApi, TDownloadParams>(
             builder.CreateDownloadManagerFor<TTransferApi, TDownloadParams>(
                 optionsBuilder.IgnoreMessageParts(HttpMessageParts.ResponseBody)),
@@ -217,7 +227,11 @@ public static class FileTransferOptionsBuilderExtensions
 
     #endregion
 
+    #endregion
+
     #region Multiple
+
+    #region Upload
 
     /// <summary>
     /// Add an upload manager for IUploadApi
@@ -238,7 +252,7 @@ public static class FileTransferOptionsBuilderExtensions
     /// <returns></returns>
     public static IApizrRegistryBuilder AddUploadManagerFor<TUploadApi>(this IApizrRegistryBuilder builder,
         Action<IApizrProperOptionsBuilder> optionsBuilder = null)
-        where TUploadApi : IUploadApi
+        where TUploadApi : IUploadApi<HttpResponseMessage>
     {
         if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
         {
@@ -309,6 +323,10 @@ public static class FileTransferOptionsBuilderExtensions
         return builder;
     }
 
+    #endregion
+
+    #region Download
+
     /// <summary>
     /// Add a download manager for IDownloadApi
     /// </summary>
@@ -332,7 +350,7 @@ public static class FileTransferOptionsBuilderExtensions
         AddDownloadManagerFor<TDownloadApi>(
             this IApizrRegistryBuilder builder,
             Action<IApizrProperOptionsBuilder> optionsBuilder = null)
-        where TDownloadApi : IDownloadApi
+        where TDownloadApi : IDownloadApi<IDictionary<string, object>>
     {
         if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
         {
@@ -408,6 +426,10 @@ public static class FileTransferOptionsBuilderExtensions
         return builder;
     }
 
+    #endregion
+
+    #region Transfer
+
     /// <summary>
     /// Add a transfer manager for ITransferApi
     /// </summary>
@@ -431,7 +453,7 @@ public static class FileTransferOptionsBuilderExtensions
         AddTransferManagerFor<TTransferApi>(
             this IApizrRegistryBuilder builder,
             Action<IApizrProperOptionsBuilder> optionsBuilder = null)
-        where TTransferApi : ITransferApi
+        where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>
     {
         if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
         {
@@ -511,7 +533,7 @@ public static class FileTransferOptionsBuilderExtensions
     public static IApizrRegistryBuilder AddTransferManagerFor<TTransferApi, TDownloadParams>(
         this IApizrRegistryBuilder builder,
         Action<IApizrProperOptionsBuilder> optionsBuilder = null)
-        where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi
+        where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>
     {
         if (builder is IApizrInternalRegistryBuilder<IApizrProperOptionsBuilder> internalBuilder)
         {
@@ -631,6 +653,8 @@ public static class FileTransferOptionsBuilderExtensions
 
         return builder;
     }
+
+    #endregion
 
     #endregion
 

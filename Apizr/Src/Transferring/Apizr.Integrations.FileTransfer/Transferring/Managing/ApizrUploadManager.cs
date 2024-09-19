@@ -54,7 +54,7 @@ public class ApizrUploadManager<TUploadApi, TUploadApiResultData> : ApizrTransfe
     }
 }
 
-public class ApizrUploadManager<TUploadApi> : ApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrUploadManager<TUploadApi> where TUploadApi : IUploadApi
+public class ApizrUploadManager<TUploadApi> : ApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrUploadManager<TUploadApi> where TUploadApi : IUploadApi<HttpResponseMessage>
 {
     /// <inheritdoc />
     public ApizrUploadManager(IApizrManager<TUploadApi> fileTransferApiManager) : base(fileTransferApiManager)

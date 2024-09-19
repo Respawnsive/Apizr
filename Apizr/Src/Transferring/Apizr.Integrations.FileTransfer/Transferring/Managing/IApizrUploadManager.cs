@@ -43,8 +43,8 @@ public interface IApizrUploadManager<TUploadApi, TUploadApiResultData> : IApizrT
 /// The upload manager
 /// </summary>
 /// <typeparam name="TUploadApi">The upload api type to manage</typeparam>
-public interface IApizrUploadManager<TUploadApi> : IApizrUploadManager<TUploadApi, HttpResponseMessage> where TUploadApi : IUploadApi
-{}
+public interface IApizrUploadManager<TUploadApi> : IApizrUploadManager<TUploadApi, HttpResponseMessage> where TUploadApi : IUploadApi<HttpResponseMessage>
+{ }
 
 /// <summary>
 /// The upload manager

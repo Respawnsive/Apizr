@@ -5,7 +5,7 @@ using Apizr.Transferring.Requesting;
 namespace Apizr.Transferring.Managing;
 
 /// <summary>
-/// The transfer manager to work with both downloads and uploads and with a custom download query parameters type and no result
+/// The transfer manager to work with both downloads and uploads and with a custom download query parameters type and a custom upload result type
 /// </summary>
 /// <typeparam name="TTransferApi">The transfer api type to manage</typeparam>
 /// <typeparam name="TDownloadParams">The custom query parameters type</typeparam>
@@ -26,7 +26,7 @@ public interface IApizrTransferManager<TTransferApi, in TDownloadParams, TUpload
 public interface IApizrTransferManager<TTransferApi, in TDownloadParams> :
     IApizrDownloadManager<TTransferApi, TDownloadParams>,
     IApizrUploadManager<TTransferApi> 
-    where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>, IUploadApi
+    where TTransferApi : ITransferApi<TDownloadParams, HttpResponseMessage>
 {
 
 }
@@ -38,7 +38,7 @@ public interface IApizrTransferManager<TTransferApi, in TDownloadParams> :
 public interface IApizrTransferManager<TTransferApi> : 
     IApizrDownloadManager<TTransferApi>, 
     IApizrUploadManager<TTransferApi> 
-    where TTransferApi : ITransferApi
+    where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>
 {
 
 }
@@ -52,7 +52,7 @@ public interface IApizrTransferManager :
 { }
 
 /// <summary>
-/// The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and no result
+/// The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and a custom upload result type
 /// </summary>
 public interface IApizrTransferManagerWith<TDownloadParams, TUploadApiResultData> :
     IApizrDownloadManager<IDownloadApi<TDownloadParams>, TDownloadParams>,

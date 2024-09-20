@@ -4,18 +4,13 @@ using Apizr.Sample.MAUI.ViewModels;
 using Apizr.Sample.Models;
 using CommunityToolkit.Maui;
 using System.Reflection;
-using Apizr.Extending.Configuring.Common;
 using Apizr.Sample.MAUI.Infrastructure;
-using MetroLog.Maui;
 using MetroLog.MicrosoftExtensions;
 using MetroLog.Operators;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Polly;
 using Polly.Retry;
 using Microsoft.Extensions.Logging;
-using ReactiveUI;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Maui.Controls;
 
 namespace Apizr.Sample.MAUI
 {
@@ -29,7 +24,7 @@ namespace Apizr.Sample.MAUI
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .UsePrism(
-                    new DryIocKeyedContainerExtension(),
+                    new DryIocContainerExtension(),
                     prism => prism
                         .RegisterTypes(containerRegistry =>
                         {

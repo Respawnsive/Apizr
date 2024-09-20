@@ -26,11 +26,11 @@ items:
   summary: The upload manager
   example: []
   syntax:
-    content: 'public interface IApizrUploadManager<TUploadApi> : IApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrTransferManagerBase<TUploadApi>, IApizrManager where TUploadApi : IUploadApi'
+    content: 'public interface IApizrUploadManager<TUploadApi> : IApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrTransferManagerBase<TUploadApi>, IApizrManager where TUploadApi : IUploadApi<HttpResponseMessage>'
     typeParameters:
     - id: TUploadApi
       description: The upload api type to manage
-    content.vb: Public Interface IApizrUploadManager(Of TUploadApi As IUploadApi) Inherits IApizrUploadManager(Of TUploadApi, HttpResponseMessage), IApizrTransferManagerBase(Of TUploadApi), IApizrManager
+    content.vb: Public Interface IApizrUploadManager(Of TUploadApi As IUploadApi(Of HttpResponseMessage)) Inherits IApizrUploadManager(Of TUploadApi, HttpResponseMessage), IApizrTransferManagerBase(Of TUploadApi), IApizrManager
   inheritedMembers:
   - Apizr.Transferring.Managing.IApizrUploadManager{{TUploadApi},System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.ByteArrayPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Transferring.Managing.IApizrUploadManager{{TUploadApi},System.Net.Http.HttpResponseMessage}.UploadAsync(Refit.StreamPart,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})

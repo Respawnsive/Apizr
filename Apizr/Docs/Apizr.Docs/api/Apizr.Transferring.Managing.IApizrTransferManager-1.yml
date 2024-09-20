@@ -26,11 +26,11 @@ items:
   summary: The transfer manager to work with both downloads and uploads and with a dictionary query parameters type and no result
   example: []
   syntax:
-    content: 'public interface IApizrTransferManager<TTransferApi> : IApizrDownloadManager<TTransferApi>, IApizrDownloadManager<TTransferApi, IDictionary<string, object>>, IApizrUploadManager<TTransferApi>, IApizrUploadManager<TTransferApi, HttpResponseMessage>, IApizrTransferManagerBase<TTransferApi>, IApizrManager where TTransferApi : ITransferApi'
+    content: 'public interface IApizrTransferManager<TTransferApi> : IApizrDownloadManager<TTransferApi>, IApizrDownloadManager<TTransferApi, IDictionary<string, object>>, IApizrUploadManager<TTransferApi>, IApizrUploadManager<TTransferApi, HttpResponseMessage>, IApizrTransferManagerBase<TTransferApi>, IApizrManager where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>'
     typeParameters:
     - id: TTransferApi
       description: The transfer api type to manage
-    content.vb: Public Interface IApizrTransferManager(Of TTransferApi As ITransferApi) Inherits IApizrDownloadManager(Of TTransferApi), IApizrDownloadManager(Of TTransferApi, IDictionary(Of String, Object)), IApizrUploadManager(Of TTransferApi), IApizrUploadManager(Of TTransferApi, HttpResponseMessage), IApizrTransferManagerBase(Of TTransferApi), IApizrManager
+    content.vb: Public Interface IApizrTransferManager(Of TTransferApi As ITransferApi(Of IDictionary(Of String, Object), HttpResponseMessage)) Inherits IApizrDownloadManager(Of TTransferApi), IApizrDownloadManager(Of TTransferApi, IDictionary(Of String, Object)), IApizrUploadManager(Of TTransferApi), IApizrUploadManager(Of TTransferApi, HttpResponseMessage), IApizrTransferManagerBase(Of TTransferApi), IApizrManager
   inheritedMembers:
   - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},System.Collections.Generic.IDictionary{System.String,System.Object}}.DownloadAsync(System.IO.FileInfo,System.Collections.Generic.IDictionary{System.String,System.Object},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})

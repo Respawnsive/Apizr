@@ -78,7 +78,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: FileTransferRegistryExtensions
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 16
+    startLine: 13
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -114,7 +114,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetUploadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 25
+    startLine: 24
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -150,14 +150,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetUploadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 35
+    startLine: 34
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Get an upload manager instance
   example: []
   syntax:
-    content: 'public static IApizrUploadManager<TUploadApi> GetUploadManagerFor<TUploadApi>(this IApizrEnumerableRegistry registry) where TUploadApi : IUploadApi'
+    content: 'public static IApizrUploadManager<TUploadApi> GetUploadManagerFor<TUploadApi>(this IApizrEnumerableRegistry registry) where TUploadApi : IUploadApi<HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -168,7 +168,7 @@ items:
     return:
       type: Apizr.Transferring.Managing.IApizrUploadManager{{TUploadApi}}
       description: ''
-    content.vb: Public Shared Function GetUploadManagerFor(Of TUploadApi As IUploadApi)(registry As IApizrEnumerableRegistry) As IApizrUploadManager(Of TUploadApi)
+    content.vb: Public Shared Function GetUploadManagerFor(Of TUploadApi As IUploadApi(Of HttpResponseMessage))(registry As IApizrEnumerableRegistry) As IApizrUploadManager(Of TUploadApi)
   overload: Apizr.Extending.FileTransferRegistryExtensions.GetUploadManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.GetUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry)
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.GetUploadManagerFor(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
@@ -192,7 +192,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetUploadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 47
+    startLine: 46
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -236,7 +236,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetUploadManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 58
+    startLine: 57
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -278,7 +278,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetDownloadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 67
+    startLine: 70
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -314,14 +314,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 76
+    startLine: 79
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Get a download manager instance
   example: []
   syntax:
-    content: 'public static IApizrDownloadManager<TDownloadApi> GetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry) where TDownloadApi : IDownloadApi'
+    content: 'public static IApizrDownloadManager<TDownloadApi> GetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry) where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -332,7 +332,7 @@ items:
     return:
       type: Apizr.Transferring.Managing.IApizrDownloadManager{{TDownloadApi}}
       description: ''
-    content.vb: Public Shared Function GetDownloadManagerFor(Of TDownloadApi As IDownloadApi)(registry As IApizrEnumerableRegistry) As IApizrDownloadManager(Of TDownloadApi)
+    content.vb: Public Shared Function GetDownloadManagerFor(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))(registry As IApizrEnumerableRegistry) As IApizrDownloadManager(Of TDownloadApi)
   overload: Apizr.Extending.FileTransferRegistryExtensions.GetDownloadManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.GetDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry)
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.GetDownloadManagerFor(Of TDownloadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
@@ -356,7 +356,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 87
+    startLine: 90
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -400,7 +400,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetDownloadManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 97
+    startLine: 100
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -442,7 +442,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetTransferManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 105
+    startLine: 112
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -478,14 +478,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 114
+    startLine: 121
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Get a transfer manager instance
   example: []
   syntax:
-    content: 'public static IApizrTransferManager<TTransferApi> GetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry) where TTransferApi : ITransferApi'
+    content: 'public static IApizrTransferManager<TTransferApi> GetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry) where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -496,7 +496,7 @@ items:
     return:
       type: Apizr.Transferring.Managing.IApizrTransferManager{{TTransferApi}}
       description: ''
-    content.vb: Public Shared Function GetTransferManagerFor(Of TTransferApi As ITransferApi)(registry As IApizrEnumerableRegistry) As IApizrTransferManager(Of TTransferApi)
+    content.vb: Public Shared Function GetTransferManagerFor(Of TTransferApi As ITransferApi(Of IDictionary(Of String, Object), HttpResponseMessage))(registry As IApizrEnumerableRegistry) As IApizrTransferManager(Of TTransferApi)
   overload: Apizr.Extending.FileTransferRegistryExtensions.GetTransferManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.GetTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry)
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.GetTransferManagerFor(Of TTransferApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
@@ -520,7 +520,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 125
+    startLine: 132
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -564,7 +564,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 137
+    startLine: 144
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -610,7 +610,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetTransferManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 148
+    startLine: 155
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -654,7 +654,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetUploadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 161
+    startLine: 172
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -696,14 +696,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetUploadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 172
+    startLine: 183
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Get an upload manager instance
   example: []
   syntax:
-    content: 'public static bool TryGetUploadManagerFor<TUploadApi>(this IApizrEnumerableRegistry registry, out IApizrUploadManager<TUploadApi> manager) where TUploadApi : IUploadApi'
+    content: 'public static bool TryGetUploadManagerFor<TUploadApi>(this IApizrEnumerableRegistry registry, out IApizrUploadManager<TUploadApi> manager) where TUploadApi : IUploadApi<HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -717,7 +717,7 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Public Shared Function TryGetUploadManagerFor(Of TUploadApi As IUploadApi)(registry As IApizrEnumerableRegistry, manager As IApizrUploadManager(Of TUploadApi)) As Boolean
+    content.vb: Public Shared Function TryGetUploadManagerFor(Of TUploadApi As IUploadApi(Of HttpResponseMessage))(registry As IApizrEnumerableRegistry, manager As IApizrUploadManager(Of TUploadApi)) As Boolean
   overload: Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.TryGetUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry, IApizrUploadManager(Of TUploadApi))
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.TryGetUploadManagerFor(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrUploadManager(Of TUploadApi))
@@ -741,7 +741,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetUploadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 185
+    startLine: 196
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -788,7 +788,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetUploadManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 197
+    startLine: 208
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -833,7 +833,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetDownloadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 207
+    startLine: 222
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -875,14 +875,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 217
+    startLine: 232
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Get a download manager instance
   example: []
   syntax:
-    content: 'public static bool TryGetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi> manager) where TDownloadApi : IDownloadApi'
+    content: 'public static bool TryGetDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry, out IApizrDownloadManager<TDownloadApi> manager) where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -896,7 +896,7 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Public Shared Function TryGetDownloadManagerFor(Of TDownloadApi As IDownloadApi)(registry As IApizrEnumerableRegistry, manager As IApizrDownloadManager(Of TDownloadApi)) As Boolean
+    content.vb: Public Shared Function TryGetDownloadManagerFor(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))(registry As IApizrEnumerableRegistry, manager As IApizrDownloadManager(Of TDownloadApi)) As Boolean
   overload: Apizr.Extending.FileTransferRegistryExtensions.TryGetDownloadManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.TryGetDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry, IApizrDownloadManager(Of TDownloadApi))
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.TryGetDownloadManagerFor(Of TDownloadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrDownloadManager(Of TDownloadApi))
@@ -920,7 +920,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 229
+    startLine: 244
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -967,7 +967,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetDownloadManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 240
+    startLine: 255
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1012,7 +1012,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetTransferManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 249
+    startLine: 268
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1054,14 +1054,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 259
+    startLine: 278
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Get a transfer manager instance
   example: []
   syntax:
-    content: 'public static bool TryGetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi> manager) where TTransferApi : ITransferApi'
+    content: 'public static bool TryGetTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry, out IApizrTransferManager<TTransferApi> manager) where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -1075,7 +1075,7 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Public Shared Function TryGetTransferManagerFor(Of TTransferApi As ITransferApi)(registry As IApizrEnumerableRegistry, manager As IApizrTransferManager(Of TTransferApi)) As Boolean
+    content.vb: Public Shared Function TryGetTransferManagerFor(Of TTransferApi As ITransferApi(Of IDictionary(Of String, Object), HttpResponseMessage))(registry As IApizrEnumerableRegistry, manager As IApizrTransferManager(Of TTransferApi)) As Boolean
   overload: Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.TryGetTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry, IApizrTransferManager(Of TTransferApi))
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.TryGetTransferManagerFor(Of TTransferApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Apizr.Transferring.Managing.IApizrTransferManager(Of TTransferApi))
@@ -1099,7 +1099,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 271
+    startLine: 290
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1146,7 +1146,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 284
+    startLine: 303
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1195,7 +1195,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TryGetTransferManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 297
+    startLine: 316
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1242,7 +1242,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsUploadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 309
+    startLine: 332
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1278,14 +1278,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsUploadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 319
+    startLine: 342
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Check if registry contains a manager for <code class="typeparamref">TUploadApi</code> api type
   example: []
   syntax:
-    content: 'public static bool ContainsUploadManagerFor<TUploadApi>(this IApizrEnumerableRegistry registry) where TUploadApi : IUploadApi'
+    content: 'public static bool ContainsUploadManagerFor<TUploadApi>(this IApizrEnumerableRegistry registry) where TUploadApi : IUploadApi<HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -1296,7 +1296,7 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Public Shared Function ContainsUploadManagerFor(Of TUploadApi As IUploadApi)(registry As IApizrEnumerableRegistry) As Boolean
+    content.vb: Public Shared Function ContainsUploadManagerFor(Of TUploadApi As IUploadApi(Of HttpResponseMessage))(registry As IApizrEnumerableRegistry) As Boolean
   overload: Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.ContainsUploadManagerFor(Of TUploadApi)(IApizrEnumerableRegistry)
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.ContainsUploadManagerFor(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
@@ -1320,7 +1320,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsUploadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 331
+    startLine: 354
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1364,7 +1364,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsUploadManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 342
+    startLine: 365
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1406,7 +1406,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsDownloadManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 351
+    startLine: 378
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1442,14 +1442,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 361
+    startLine: 388
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Check if registry contains a manager for <code class="typeparamref">TDownloadApi</code> api type
   example: []
   syntax:
-    content: 'public static bool ContainsDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry) where TDownloadApi : IDownloadApi'
+    content: 'public static bool ContainsDownloadManagerFor<TDownloadApi>(this IApizrEnumerableRegistry registry) where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -1460,7 +1460,7 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Public Shared Function ContainsDownloadManagerFor(Of TDownloadApi As IDownloadApi)(registry As IApizrEnumerableRegistry) As Boolean
+    content.vb: Public Shared Function ContainsDownloadManagerFor(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))(registry As IApizrEnumerableRegistry) As Boolean
   overload: Apizr.Extending.FileTransferRegistryExtensions.ContainsDownloadManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.ContainsDownloadManagerFor(Of TDownloadApi)(IApizrEnumerableRegistry)
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.ContainsDownloadManagerFor(Of TDownloadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
@@ -1484,7 +1484,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 372
+    startLine: 399
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1528,7 +1528,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsDownloadManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 382
+    startLine: 409
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1570,7 +1570,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsTransferManager
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 390
+    startLine: 421
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1606,14 +1606,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 400
+    startLine: 431
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Check if registry contains a manager for <code class="typeparamref">TTransferApi</code> api type
   example: []
   syntax:
-    content: 'public static bool ContainsTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry) where TTransferApi : ITransferApi'
+    content: 'public static bool ContainsTransferManagerFor<TTransferApi>(this IApizrEnumerableRegistry registry) where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -1624,7 +1624,7 @@ items:
     return:
       type: System.Boolean
       description: ''
-    content.vb: Public Shared Function ContainsTransferManagerFor(Of TTransferApi As ITransferApi)(registry As IApizrEnumerableRegistry) As Boolean
+    content.vb: Public Shared Function ContainsTransferManagerFor(Of TTransferApi As ITransferApi(Of IDictionary(Of String, Object), HttpResponseMessage))(registry As IApizrEnumerableRegistry) As Boolean
   overload: Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManagerFor*
   nameWithType.vb: FileTransferRegistryExtensions.ContainsTransferManagerFor(Of TTransferApi)(IApizrEnumerableRegistry)
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.ContainsTransferManagerFor(Of TTransferApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry)
@@ -1648,7 +1648,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 411
+    startLine: 442
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1692,7 +1692,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsTransferManagerFor
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 423
+    startLine: 454
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1738,7 +1738,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ContainsTransferManagerWith
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 434
+    startLine: 465
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1782,7 +1782,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 449
+    startLine: 481
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1827,14 +1827,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 464
+    startLine: 496
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Upload a file from its bytes data
   example: []
   syntax:
-    content: 'public static Task<HttpResponseMessage> UploadAsync<TUploadApi>(this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi'
+    content: 'public static Task<HttpResponseMessage> UploadAsync<TUploadApi>(this IApizrEnumerableRegistry registry, ByteArrayPart byteArrayPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -1851,7 +1851,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
       description: ''
-    content.vb: Public Shared Function UploadAsync(Of TUploadApi As IUploadApi)(registry As IApizrEnumerableRegistry, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of HttpResponseMessage)
+    content.vb: Public Shared Function UploadAsync(Of TUploadApi As IUploadApi(Of HttpResponseMessage))(registry As IApizrEnumerableRegistry, byteArrayPart As ByteArrayPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of HttpResponseMessage)
   overload: Apizr.Extending.FileTransferRegistryExtensions.UploadAsync*
   nameWithType.vb: FileTransferRegistryExtensions.UploadAsync(Of TUploadApi)(IApizrEnumerableRegistry, ByteArrayPart, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.UploadAsync(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Refit.ByteArrayPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -1875,7 +1875,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 478
+    startLine: 510
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1925,7 +1925,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 490
+    startLine: 522
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -1970,14 +1970,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 504
+    startLine: 536
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Upload a file from its stream data
   example: []
   syntax:
-    content: 'public static Task<HttpResponseMessage> UploadAsync<TUploadApi>(this IApizrEnumerableRegistry registry, StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi'
+    content: 'public static Task<HttpResponseMessage> UploadAsync<TUploadApi>(this IApizrEnumerableRegistry registry, StreamPart streamPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -1994,7 +1994,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
       description: ''
-    content.vb: Public Shared Function UploadAsync(Of TUploadApi As IUploadApi)(registry As IApizrEnumerableRegistry, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of HttpResponseMessage)
+    content.vb: Public Shared Function UploadAsync(Of TUploadApi As IUploadApi(Of HttpResponseMessage))(registry As IApizrEnumerableRegistry, streamPart As StreamPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of HttpResponseMessage)
   overload: Apizr.Extending.FileTransferRegistryExtensions.UploadAsync*
   nameWithType.vb: FileTransferRegistryExtensions.UploadAsync(Of TUploadApi)(IApizrEnumerableRegistry, StreamPart, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.UploadAsync(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Refit.StreamPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -2018,7 +2018,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 517
+    startLine: 549
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2068,7 +2068,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 528
+    startLine: 560
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2113,14 +2113,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 542
+    startLine: 574
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Upload a file from its file info data
   example: []
   syntax:
-    content: 'public static Task<HttpResponseMessage> UploadAsync<TUploadApi>(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi'
+    content: 'public static Task<HttpResponseMessage> UploadAsync<TUploadApi>(this IApizrEnumerableRegistry registry, FileInfoPart fileInfoPart, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<HttpResponseMessage>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -2137,7 +2137,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
       description: ''
-    content.vb: Public Shared Function UploadAsync(Of TUploadApi As IUploadApi)(registry As IApizrEnumerableRegistry, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of HttpResponseMessage)
+    content.vb: Public Shared Function UploadAsync(Of TUploadApi As IUploadApi(Of HttpResponseMessage))(registry As IApizrEnumerableRegistry, fileInfoPart As FileInfoPart, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of HttpResponseMessage)
   overload: Apizr.Extending.FileTransferRegistryExtensions.UploadAsync*
   nameWithType.vb: FileTransferRegistryExtensions.UploadAsync(Of TUploadApi)(IApizrEnumerableRegistry, FileInfoPart, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.UploadAsync(Of TUploadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, Refit.FileInfoPart, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -2161,7 +2161,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 555
+    startLine: 587
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2211,7 +2211,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadWithAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 567
+    startLine: 599
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2259,7 +2259,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadWithAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 580
+    startLine: 612
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2307,7 +2307,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: UploadWithAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 592
+    startLine: 624
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2355,7 +2355,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 607
+    startLine: 639
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2400,7 +2400,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 621
+    startLine: 653
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2448,14 +2448,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 635
+    startLine: 667
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Download a file
   example: []
   syntax:
-    content: 'public static Task<FileInfo> DownloadAsync<TDownloadApi>(this IApizrEnumerableRegistry registry, FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi'
+    content: 'public static Task<FileInfo> DownloadAsync<TDownloadApi>(this IApizrEnumerableRegistry registry, FileInfo fileInfo, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -2472,7 +2472,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: Public Shared Function DownloadAsync(Of TDownloadApi As IDownloadApi)(registry As IApizrEnumerableRegistry, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function DownloadAsync(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))(registry As IApizrEnumerableRegistry, fileInfo As FileInfo, optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Extending.FileTransferRegistryExtensions.DownloadAsync*
   nameWithType.vb: FileTransferRegistryExtensions.DownloadAsync(Of TDownloadApi)(IApizrEnumerableRegistry, FileInfo, Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.DownloadAsync(Of TDownloadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, System.IO.FileInfo, System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -2496,14 +2496,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 649
+    startLine: 681
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
   summary: Download a file with custom query parameters
   example: []
   syntax:
-    content: 'public static Task<FileInfo> DownloadAsync<TDownloadApi>(this IApizrEnumerableRegistry registry, FileInfo fileInfo, IDictionary<string, object> downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi'
+    content: 'public static Task<FileInfo> DownloadAsync<TDownloadApi>(this IApizrEnumerableRegistry registry, FileInfo fileInfo, IDictionary<string, object> downloadParams, Action<IApizrRequestOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     parameters:
     - id: registry
       type: Apizr.Configuring.Registry.IApizrEnumerableRegistry
@@ -2523,7 +2523,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.IO.FileInfo}
       description: ''
-    content.vb: Public Shared Function DownloadAsync(Of TDownloadApi As IDownloadApi)(registry As IApizrEnumerableRegistry, fileInfo As FileInfo, downloadParams As IDictionary(Of String, Object), optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
+    content.vb: Public Shared Function DownloadAsync(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))(registry As IApizrEnumerableRegistry, fileInfo As FileInfo, downloadParams As IDictionary(Of String, Object), optionsBuilder As Action(Of IApizrRequestOptionsBuilder) = Nothing) As Task(Of FileInfo)
   overload: Apizr.Extending.FileTransferRegistryExtensions.DownloadAsync*
   nameWithType.vb: FileTransferRegistryExtensions.DownloadAsync(Of TDownloadApi)(IApizrEnumerableRegistry, FileInfo, IDictionary(Of String, Object), Action(Of IApizrRequestOptionsBuilder))
   fullName.vb: Apizr.Extending.FileTransferRegistryExtensions.DownloadAsync(Of TDownloadApi)(Apizr.Configuring.Registry.IApizrEnumerableRegistry, System.IO.FileInfo, System.Collections.Generic.IDictionary(Of String, Object), System.Action(Of Apizr.Configuring.Request.IApizrRequestOptionsBuilder))
@@ -2547,7 +2547,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 663
+    startLine: 695
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2597,7 +2597,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 678
+    startLine: 710
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2650,7 +2650,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadWithAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 692
+    startLine: 724
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending
@@ -2698,7 +2698,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DownloadWithAsync
     path: ../../Src/Transferring/Apizr.Integrations.FileTransfer/Extending/FileTransferRegistryExtensions.cs
-    startLine: 705
+    startLine: 737
   assemblies:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Extending

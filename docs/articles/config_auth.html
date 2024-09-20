@@ -170,7 +170,7 @@ Here are all other authentication options:</p>
 </ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler(OnRefreshToken)
 ...
-private string OnRefreshTokden(HttpRequestMessage message)
+private string OnRefreshToken(HttpRequestMessage message)
 {
     // whatever returning a refreshed string token
 }
@@ -181,7 +181,7 @@ private string OnRefreshTokden(HttpRequestMessage message)
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler&lt;ISettingsService&gt;(
     settingsService =&gt; settingsService.Token, OnRefreshToken)
 ...
-private string OnRefreshTokden(HttpRequestMessage message)
+private string OnRefreshToken(HttpRequestMessage message)
 {
     // whatever returning a refreshed string token
 }
@@ -211,7 +211,7 @@ options =&gt; options.WithAuthenticationHandler&lt;YourSettingsService&gt;(
 </ul>
 <pre><code class="lang-csharp">options =&gt; options.WithAuthenticationHandler(OnRefreshToken)
 ...
-private string OnRefreshTokden(HttpRequestMessage message)
+private string OnRefreshToken(HttpRequestMessage message)
 {
     // whatever returning a refreshed string token
 }
@@ -228,7 +228,7 @@ options =&gt; options.WithAuthenticationHandler&lt;YourSettingsService&gt;(
     () =&gt; YourSettingsServiceInstance, settingsService =&gt; settingsService.Token,
     OnRefreshToken)
 ...
-private string OnRefreshTokden(HttpRequestMessage message)
+private string OnRefreshToken(HttpRequestMessage message)
 {
     // whatever returning a refreshed string token
 }

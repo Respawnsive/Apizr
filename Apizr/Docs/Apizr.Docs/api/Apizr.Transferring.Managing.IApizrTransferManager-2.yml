@@ -26,13 +26,13 @@ items:
   summary: The transfer manager to work with both downloads and uploads and with a custom download query parameters type and no result
   example: []
   syntax:
-    content: 'public interface IApizrTransferManager<TTransferApi, in TDownloadParams> : IApizrDownloadManager<TTransferApi, TDownloadParams>, IApizrUploadManager<TTransferApi>, IApizrUploadManager<TTransferApi, HttpResponseMessage>, IApizrTransferManagerBase<TTransferApi>, IApizrManager where TTransferApi : ITransferApi<in TDownloadParams, HttpResponseMessage>, IUploadApi'
+    content: 'public interface IApizrTransferManager<TTransferApi, in TDownloadParams> : IApizrDownloadManager<TTransferApi, TDownloadParams>, IApizrUploadManager<TTransferApi>, IApizrUploadManager<TTransferApi, HttpResponseMessage>, IApizrTransferManagerBase<TTransferApi>, IApizrManager where TTransferApi : ITransferApi<in TDownloadParams, HttpResponseMessage>'
     typeParameters:
     - id: TTransferApi
       description: The transfer api type to manage
     - id: TDownloadParams
       description: The custom query parameters type
-    content.vb: Public Interface IApizrTransferManager(Of TTransferApi As {ITransferApi(Of In TDownloadParams, HttpResponseMessage), IUploadApi}, In TDownloadParams) Inherits IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi), IApizrUploadManager(Of TTransferApi, HttpResponseMessage), IApizrTransferManagerBase(Of TTransferApi), IApizrManager
+    content.vb: Public Interface IApizrTransferManager(Of TTransferApi As ITransferApi(Of In TDownloadParams, HttpResponseMessage), In TDownloadParams) Inherits IApizrDownloadManager(Of TTransferApi, TDownloadParams), IApizrUploadManager(Of TTransferApi), IApizrUploadManager(Of TTransferApi, HttpResponseMessage), IApizrTransferManagerBase(Of TTransferApi), IApizrManager
   inheritedMembers:
   - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})
   - Apizr.Transferring.Managing.IApizrDownloadManager{{TTransferApi},{TDownloadParams}}.DownloadAsync(System.IO.FileInfo,{TDownloadParams},System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})

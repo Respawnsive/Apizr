@@ -83,7 +83,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrUploadManager
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 29
+    startLine: 31
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -125,14 +125,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrUploadManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 40
+    startLine: 42
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
   summary: Add an upload manager for the provided upload api derived from IUploadApi
   example: []
   syntax:
-    content: 'public static IServiceCollection AddApizrUploadManagerFor<TUploadApi>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi'
+    content: 'public static IServiceCollection AddApizrUploadManagerFor<TUploadApi>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<HttpResponseMessage>'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -146,7 +146,7 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: Public Shared Function AddApizrUploadManagerFor(Of TUploadApi As IUploadApi)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrUploadManagerFor(Of TUploadApi As IUploadApi(Of HttpResponseMessage))(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrUploadManagerFor*
   nameWithType.vb: FileTransferExtendedOptionsBuilderExtensions.AddApizrUploadManagerFor(Of TUploadApi)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
   fullName.vb: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrUploadManagerFor(Of TUploadApi)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
@@ -170,7 +170,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrUploadManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 64
+    startLine: 66
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -217,7 +217,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrUploadManagerWith
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 77
+    startLine: 79
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -262,7 +262,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrDownloadManager
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 92
+    startLine: 98
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -304,14 +304,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 103
+    startLine: 109
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
   summary: Add a download manager for the provided download api derived from IDownloadApi
   example: []
   syntax:
-    content: 'public static IServiceCollection AddApizrDownloadManagerFor<TDownloadApi>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi'
+    content: 'public static IServiceCollection AddApizrDownloadManagerFor<TDownloadApi>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -325,7 +325,7 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: Public Shared Function AddApizrDownloadManagerFor(Of TDownloadApi As IDownloadApi)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrDownloadManagerFor(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrDownloadManagerFor*
   nameWithType.vb: FileTransferExtendedOptionsBuilderExtensions.AddApizrDownloadManagerFor(Of TDownloadApi)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
   fullName.vb: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrDownloadManagerFor(Of TDownloadApi)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
@@ -349,7 +349,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 127
+    startLine: 133
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -396,7 +396,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrDownloadManagerWith
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 141
+    startLine: 147
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -441,7 +441,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrTransferManager
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 156
+    startLine: 166
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -483,14 +483,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrTransferManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 167
+    startLine: 177
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
   summary: Add a transfer manager for the provided transfer api derived from ITransferApi
   example: []
   syntax:
-    content: 'public static IServiceCollection AddApizrTransferManagerFor<TTransferApi>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where TTransferApi : ITransferApi'
+    content: 'public static IServiceCollection AddApizrTransferManagerFor<TTransferApi>(this IServiceCollection services, Action<IApizrExtendedManagerOptionsBuilder> optionsBuilder = null) where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>'
     parameters:
     - id: services
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
@@ -504,7 +504,7 @@ items:
     return:
       type: Microsoft.Extensions.DependencyInjection.IServiceCollection
       description: ''
-    content.vb: Public Shared Function AddApizrTransferManagerFor(Of TTransferApi As ITransferApi)(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
+    content.vb: Public Shared Function AddApizrTransferManagerFor(Of TTransferApi As ITransferApi(Of IDictionary(Of String, Object), HttpResponseMessage))(services As IServiceCollection, optionsBuilder As Action(Of IApizrExtendedManagerOptionsBuilder) = Nothing) As IServiceCollection
   overload: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrTransferManagerFor*
   nameWithType.vb: FileTransferExtendedOptionsBuilderExtensions.AddApizrTransferManagerFor(Of TTransferApi)(IServiceCollection, Action(Of IApizrExtendedManagerOptionsBuilder))
   fullName.vb: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddApizrTransferManagerFor(Of TTransferApi)(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Apizr.Extending.Configuring.Manager.IApizrExtendedManagerOptionsBuilder))
@@ -528,7 +528,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrTransferManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 194
+    startLine: 204
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -575,7 +575,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrTransferManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 214
+    startLine: 224
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -624,7 +624,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddApizrTransferManagerWith
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 233
+    startLine: 243
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -671,7 +671,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddUploadManager
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 259
+    startLine: 273
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -713,14 +713,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddUploadManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 270
+    startLine: 284
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
   summary: Add an upload manager for the provided upload api derived from IUploadApi
   example: []
   syntax:
-    content: 'public static IApizrExtendedRegistryBuilder AddUploadManagerFor<TUploadApi>(this IApizrExtendedRegistryBuilder builder, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi'
+    content: 'public static IApizrExtendedRegistryBuilder AddUploadManagerFor<TUploadApi>(this IApizrExtendedRegistryBuilder builder, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TUploadApi : IUploadApi<HttpResponseMessage>'
     parameters:
     - id: builder
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
@@ -734,7 +734,7 @@ items:
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
       description: ''
-    content.vb: Public Shared Function AddUploadManagerFor(Of TUploadApi As IUploadApi)(builder As IApizrExtendedRegistryBuilder, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
+    content.vb: Public Shared Function AddUploadManagerFor(Of TUploadApi As IUploadApi(Of HttpResponseMessage))(builder As IApizrExtendedRegistryBuilder, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddUploadManagerFor*
   nameWithType.vb: FileTransferExtendedOptionsBuilderExtensions.AddUploadManagerFor(Of TUploadApi)(IApizrExtendedRegistryBuilder, Action(Of IApizrExtendedProperOptionsBuilder))
   fullName.vb: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddUploadManagerFor(Of TUploadApi)(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder, System.Action(Of Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder))
@@ -758,7 +758,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddUploadManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 302
+    startLine: 316
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -805,7 +805,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddUploadManagerWith
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 323
+    startLine: 337
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -850,7 +850,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDownloadManager
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 344
+    startLine: 362
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -892,14 +892,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 357
+    startLine: 375
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
   summary: Add a download manager for the provided download api derived from IDownloadApi
   example: []
   syntax:
-    content: 'public static IApizrExtendedRegistryBuilder AddDownloadManagerFor<TDownloadApi>(this IApizrExtendedRegistryBuilder builder, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi'
+    content: 'public static IApizrExtendedRegistryBuilder AddDownloadManagerFor<TDownloadApi>(this IApizrExtendedRegistryBuilder builder, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TDownloadApi : IDownloadApi<IDictionary<string, object>>'
     parameters:
     - id: builder
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
@@ -913,7 +913,7 @@ items:
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
       description: ''
-    content.vb: Public Shared Function AddDownloadManagerFor(Of TDownloadApi As IDownloadApi)(builder As IApizrExtendedRegistryBuilder, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
+    content.vb: Public Shared Function AddDownloadManagerFor(Of TDownloadApi As IDownloadApi(Of IDictionary(Of String, Object)))(builder As IApizrExtendedRegistryBuilder, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddDownloadManagerFor*
   nameWithType.vb: FileTransferExtendedOptionsBuilderExtensions.AddDownloadManagerFor(Of TDownloadApi)(IApizrExtendedRegistryBuilder, Action(Of IApizrExtendedProperOptionsBuilder))
   fullName.vb: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddDownloadManagerFor(Of TDownloadApi)(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder, System.Action(Of Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder))
@@ -937,7 +937,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDownloadManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 390
+    startLine: 408
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -984,7 +984,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddDownloadManagerWith
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 412
+    startLine: 430
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -1029,7 +1029,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManager
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 434
+    startLine: 456
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -1071,14 +1071,14 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 471
+    startLine: 493
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
   summary: Add a transfer manager for the provided transfer api derived from ITransferApi
   example: []
   syntax:
-    content: 'public static IApizrExtendedRegistryBuilder AddTransferManagerFor<TTransferApi>(this IApizrExtendedRegistryBuilder builder, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TTransferApi : ITransferApi'
+    content: 'public static IApizrExtendedRegistryBuilder AddTransferManagerFor<TTransferApi>(this IApizrExtendedRegistryBuilder builder, Action<IApizrExtendedProperOptionsBuilder> optionsBuilder = null) where TTransferApi : ITransferApi<IDictionary<string, object>, HttpResponseMessage>'
     parameters:
     - id: builder
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
@@ -1092,7 +1092,7 @@ items:
     return:
       type: Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder
       description: ''
-    content.vb: Public Shared Function AddTransferManagerFor(Of TTransferApi As ITransferApi)(builder As IApizrExtendedRegistryBuilder, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
+    content.vb: Public Shared Function AddTransferManagerFor(Of TTransferApi As ITransferApi(Of IDictionary(Of String, Object), HttpResponseMessage))(builder As IApizrExtendedRegistryBuilder, optionsBuilder As Action(Of IApizrExtendedProperOptionsBuilder) = Nothing) As IApizrExtendedRegistryBuilder
   overload: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddTransferManagerFor*
   nameWithType.vb: FileTransferExtendedOptionsBuilderExtensions.AddTransferManagerFor(Of TTransferApi)(IApizrExtendedRegistryBuilder, Action(Of IApizrExtendedProperOptionsBuilder))
   fullName.vb: Apizr.FileTransferExtendedOptionsBuilderExtensions.AddTransferManagerFor(Of TTransferApi)(Apizr.Extending.Configuring.Registry.IApizrExtendedRegistryBuilder, System.Action(Of Apizr.Extending.Configuring.Proper.IApizrExtendedProperOptionsBuilder))
@@ -1116,7 +1116,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 526
+    startLine: 549
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -1163,7 +1163,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManagerFor
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 563
+    startLine: 586
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr
@@ -1212,7 +1212,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AddTransferManagerWith
     path: ../../Src/Transferring/Apizr.Extensions.Microsoft.FileTransfer/FileTransferExtendedOptionsBuilderExtensions.cs
-    startLine: 599
+    startLine: 622
   assemblies:
   - Apizr.Extensions.Microsoft.FileTransfer
   namespace: Apizr

@@ -25,10 +25,10 @@ items:
   - Apizr.Integrations.FileTransfer
   namespace: Apizr.Transferring.Managing
   syntax:
-    content: 'public class ApizrUploadManager<TUploadApi> : ApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrUploadManager<TUploadApi>, IApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrTransferManagerBase<TUploadApi>, IApizrManager where TUploadApi : IUploadApi'
+    content: 'public class ApizrUploadManager<TUploadApi> : ApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrUploadManager<TUploadApi>, IApizrUploadManager<TUploadApi, HttpResponseMessage>, IApizrTransferManagerBase<TUploadApi>, IApizrManager where TUploadApi : IUploadApi<HttpResponseMessage>'
     typeParameters:
     - id: TUploadApi
-    content.vb: Public Class ApizrUploadManager(Of TUploadApi As IUploadApi) Inherits ApizrUploadManager(Of TUploadApi, HttpResponseMessage) Implements IApizrUploadManager(Of TUploadApi), IApizrUploadManager(Of TUploadApi, HttpResponseMessage), IApizrTransferManagerBase(Of TUploadApi), IApizrManager
+    content.vb: Public Class ApizrUploadManager(Of TUploadApi As IUploadApi(Of HttpResponseMessage)) Inherits ApizrUploadManager(Of TUploadApi, HttpResponseMessage) Implements IApizrUploadManager(Of TUploadApi), IApizrUploadManager(Of TUploadApi, HttpResponseMessage), IApizrTransferManagerBase(Of TUploadApi), IApizrManager
   inheritance:
   - System.Object
   - Apizr.Transferring.Managing.ApizrTransferManagerBase{{TUploadApi}}

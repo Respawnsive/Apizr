@@ -84,7 +84,7 @@ options => options.WithAuthenticationHandler<ISettingsService>(
 ```csharp
 options => options.WithAuthenticationHandler(OnRefreshToken)
 ...
-private string OnRefreshTokden(HttpRequestMessage message)
+private string OnRefreshToken(HttpRequestMessage message)
 {
     // whatever returning a refreshed string token
 }
@@ -95,7 +95,7 @@ private string OnRefreshTokden(HttpRequestMessage message)
 options => options.WithAuthenticationHandler<ISettingsService>(
     settingsService => settingsService.Token, OnRefreshToken)
 ...
-private string OnRefreshTokden(HttpRequestMessage message)
+private string OnRefreshToken(HttpRequestMessage message)
 {
     // whatever returning a refreshed string token
 }
@@ -124,7 +124,7 @@ options => options.WithAuthenticationHandler<YourSettingsService>(
 ```csharp
 options => options.WithAuthenticationHandler(OnRefreshToken)
 ...
-private string OnRefreshTokden(HttpRequestMessage message)
+private string OnRefreshToken(HttpRequestMessage message)
 {
     // whatever returning a refreshed string token
 }
@@ -141,7 +141,7 @@ options => options.WithAuthenticationHandler<YourSettingsService>(
     () => YourSettingsServiceInstance, settingsService => settingsService.Token,
     OnRefreshToken)
 ...
-private string OnRefreshTokden(HttpRequestMessage message)
+private string OnRefreshToken(HttpRequestMessage message)
 {
     // whatever returning a refreshed string token
 }

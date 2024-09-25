@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Logging;
 using Apizr.Progressing;
@@ -362,6 +363,34 @@ namespace Apizr.Tests
             // Calling it again with another cache key value should throw as expected but without any cached result
             var ex3 = await act2.Should().ThrowAsync<ApizrException<UserDetails>>();
             ex3.And.CachedResult.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_And_WithCacheControl_Should_Cache_ApizrResponse()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IApizrTestsApi>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .WithCaching(CacheMode.GetOrFetch));
+
+            // Clearing all cache
+            var cleared = await reqResManager.ClearCacheAsync();
+
+            cleared.Should().BeTrue();
+
+            // This one should succeed with request result
+            var response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync(opt));
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
         }
 
         [Fact]

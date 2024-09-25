@@ -867,10 +867,49 @@ namespace Apizr
                     cacheAttribute != null && 
                     cacheAttribute.Mode != CacheMode.None)
                 {
+                    var cacheLifeSpan = cacheAttribute.LifeSpan;
+
+                    var responseHeaders = response.ApiResponse.Headers;
+                    var contentHeaders = response.ApiResponse.ContentHeaders;
+                    if (responseHeaders.CacheControl != null)
+                    {
+                        var cacheControl = responseHeaders.CacheControl;
+                        if (!cacheControl.NoStore && (responseHeaders.Vary.Count != 1 || !responseHeaders.Vary.Contains("*")))
+                        {
+                            if (cacheControl.ToString().Contains("immutable"))
+                            {
+                                cacheLifeSpan = null; // Relying on default cache handler lifetime
+                            }
+                            else if (cacheControl.SharedMaxAge.HasValue)
+                            {
+                                cacheLifeSpan = cacheControl.SharedMaxAge.Value;
+                            }
+                            else if (cacheControl.MaxAge.HasValue)
+                            {
+                                cacheLifeSpan = cacheControl.MaxAge.Value;
+                            }
+                        }
+                    }
+                    else if(contentHeaders != null)
+                    {
+
+                        if (contentHeaders.Expires.HasValue && responseHeaders.Date.HasValue)
+                        {
+                            cacheLifeSpan = contentHeaders.Expires.Value - responseHeaders.Date.Value;
+                        }
+                        else if (contentHeaders.LastModified.HasValue)
+                        {
+                            // Calculating Heuristic Freshness
+                            // https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2
+                            var elapsed = DateTimeOffset.UtcNow - contentHeaders.LastModified.Value;
+                            cacheLifeSpan = TimeSpan.FromTicks((long)(elapsed.Ticks * 0.1));
+                        } 
+                    }
+
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
                         $"{methodDetails.MethodInfo.Name}: Caching result");
 
-                    await _cacheHandler.SetAsync(cacheKey, response.Result, cacheAttribute.LifeSpan,
+                    await _cacheHandler.SetAsync(cacheKey, response.Result, cacheLifeSpan,
                         requestOptionsBuilder.ApizrOptions.CancellationToken);
                 }
             }

@@ -12,6 +12,9 @@ namespace Apizr.Tests.Apis
     {
         [Get("/weatherforecast")]
         Task<IApiResponse<IReadOnlyList<WeatherForecast>>> GetWeatherForecastAsync([RequestOptions] IApizrRequestOptions options);
+
+        [Get("/weatherforecast")]
+        Task<IApiResponse<IReadOnlyList<WeatherForecast>>> GetWeatherForecastAsync([Query] string action, [RequestOptions] IApizrRequestOptions options);
     }
 
     public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

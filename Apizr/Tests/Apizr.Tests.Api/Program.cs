@@ -25,7 +25,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", (HttpContext context) =>
+app.MapGet("/weatherforecast", (HttpContext context, string? action = null) =>
 {
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
@@ -35,8 +35,11 @@ app.MapGet("/weatherforecast", (HttpContext context) =>
             summaries[Random.Shared.Next(summaries.Length)]
         ))
         .ToArray();
-
-    context.Response.Headers.CacheControl = "public,max-age=60";
+    if(action == "cache-control")
+        context.Response.Headers.CacheControl = "public,max-age=5";
+    else if(action == "immutable-cache-control")
+        context.Response.Headers.CacheControl = "public,max-age=5,immutable";
+    
     return Results.Ok(forecast);
 })
 .WithTags("WeatherForecast")

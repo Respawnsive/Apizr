@@ -374,7 +374,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithAkavacheCacheHandler()
-                    .WithCaching(CacheMode.GetOrFetch));
+                    .WithCaching(CacheMode.SetByHeader));
 
             // Clearing all cache
             var cleared = await reqResManager.ClearCacheAsync();
@@ -426,7 +426,7 @@ namespace Apizr.Tests
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
                     .WithAkavacheCacheHandler()
-                    .WithCaching(CacheMode.GetOrFetch));
+                    .WithCaching(CacheMode.SetByHeader));
 
             // Clearing all cache
             var cleared = await reqResManager.ClearCacheAsync();

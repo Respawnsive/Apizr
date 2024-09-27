@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Apizr.Caching.Attributes
 {
@@ -22,6 +23,21 @@ namespace Apizr.Caching.Attributes
         /// Tells Apizr to remove the cache on error
         /// </summary>
         public bool ShouldInvalidateOnError { get; protected set; }
+
+        internal string CacheKey { get; set; }
+
+        internal string FinalModeCacheKey => !string.IsNullOrWhiteSpace(CacheKey) ? $"FinalCacheMode_{CacheKey}" : null;
+
+        internal string HeadersCacheKey => !string.IsNullOrWhiteSpace(CacheKey) ? $"Headers_{CacheKey}" : null;
+
+        private CacheMode? _finalMode;
+        internal CacheMode FinalMode
+        {
+            get => _finalMode ?? Mode;
+            set => _finalMode = value;
+        }
+
+        internal IReadOnlyList<string> Headers { get; set; } = [];
 
         /// <summary>
         /// Cache with no specific lifetime, default FetchOrGet mode and no invalidation on error

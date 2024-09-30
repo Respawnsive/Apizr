@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
@@ -23,9 +22,11 @@ using Apizr.Tests.Settings;
 using AutoMapper;
 using FluentAssertions;
 using Mapster;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.FileSystemGlobbing;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using MonkeyCache.FileStore;
 using Polly;
 using Polly.Registry;
@@ -366,7 +367,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithAkavacheCacheHandler_And_WithCacheControl_Should_Cache_ApizrResponse()
+        public async Task Calling_WithAkavacheCacheHandler_And_WithCacheControlHeader_Should_Cache_ApizrResponse()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IApizrTestsApi>(options =>
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
@@ -418,7 +419,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithAkavacheCacheHandler_And_WithImmutableCacheControl_Should_Cache_ApizrResponse()
+        public async Task Calling_WithAkavacheCacheHandler_And_WithImmutableCacheControlHeader_Should_Cache_ApizrResponse()
         {
             var reqResManager = ApizrBuilder.Current.CreateManagerFor<IApizrTestsApi>(options =>
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
@@ -466,6 +467,164 @@ namespace Apizr.Tests
             response.ApiResponse.Should().BeNull();
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_And_WithExpiresHeader_Should_Cache_ApizrResponse()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IApizrTestsApi>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .WithCaching(CacheMode.SetByHeader));
+
+            // Clearing all cache
+            var cleared = await reqResManager.ClearCacheAsync();
+
+            cleared.Should().BeTrue();
+
+            // This one should succeed with request result
+            var response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("expires", opt));
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            await Task.Delay(3000);
+
+            // This one should succeed with cached result
+            response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("expires", opt));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().BeNull();
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            await Task.Delay(3000);
+
+            // This one should succeed with request result
+            response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("expires", opt));
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_And_WithETagHeader_Should_Cache_ApizrResponse()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IApizrTestsApi>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .WithCaching(CacheMode.SetByHeader));
+
+            // Clearing all cache
+            var cleared = await reqResManager.ClearCacheAsync();
+
+            cleared.Should().BeTrue();
+
+            // This one should succeed with request result
+            var response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("etag", opt));
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            await Task.Delay(3000);
+
+            // This one should succeed with cached result
+            response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("etag", opt));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.NotModified);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            await Task.Delay(3000);
+
+            // This one should succeed with request result
+            response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("etag", opt));
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_And_WithLastModifiedHeader_Should_Cache_ApizrResponse()
+        {
+            var reqResManager = ApizrBuilder.Current.CreateManagerFor<IApizrTestsApi>(options =>
+                options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .WithCaching(CacheMode.SetByHeader));
+
+            // Clearing all cache
+            var cleared = await reqResManager.ClearCacheAsync();
+
+            cleared.Should().BeTrue();
+
+            // This one should succeed with request result
+            var response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("last-modified", opt));
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            await Task.Delay(3000);
+
+            // This one should succeed with cached result
+            response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("last-modified", opt));
+
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeFalse();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.NotModified);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            await Task.Delay(3000);
+
+            // This one should succeed with request result
+            response = await reqResManager.ExecuteAsync((opt, api) => api.GetWeatherForecastAsync("last-modified", opt));
+
+            // and cache result in-memory
+            response.Should().NotBeNull();
+            response.IsSuccess.Should().BeTrue();
+            response.ApiResponse.Should().NotBeNull();
+            response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            response.Result.Should().NotBeNullOrEmpty();
+            response.DataSource.Should().Be(ApizrResponseDataSource.Request);
         }
 
         [Fact]

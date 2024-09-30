@@ -39,7 +39,37 @@ app.MapGet("/weatherforecast", (HttpContext context, string? action = null) =>
         context.Response.Headers.CacheControl = "public,max-age=5";
     else if(action == "immutable-cache-control")
         context.Response.Headers.CacheControl = "public,max-age=5,immutable";
-    
+    else if (action == "expires")
+        context.Response.Headers.Expires = DateTimeOffset.UtcNow.AddSeconds(5).ToString();
+    else if (action == "etag")
+    {
+        var etagString = context.Request.Headers.IfNoneMatch.FirstOrDefault();
+        if (!string.IsNullOrWhiteSpace(etagString) && DateTimeOffset.TryParse(etagString, out var etag))
+        {
+            if (etag.AddSeconds(5) > DateTimeOffset.UtcNow)
+            {
+                context.Response.Headers.ETag = etag.ToString();
+                context.Response.StatusCode = StatusCodes.Status304NotModified;
+                return Results.StatusCode(StatusCodes.Status304NotModified);
+            }
+        }
+        context.Response.Headers.ETag = DateTimeOffset.UtcNow.ToString();
+    }
+    else if (action == "last-modified")
+    {
+        var isModifiedSinceString = context.Request.Headers.IfModifiedSince.FirstOrDefault();
+        if(!string.IsNullOrWhiteSpace(isModifiedSinceString) && DateTimeOffset.TryParse(isModifiedSinceString, out var isModifiedSince))
+        {
+            if (isModifiedSince.AddSeconds(5) > DateTimeOffset.UtcNow)
+            {
+                context.Response.Headers.LastModified = isModifiedSinceString;
+                context.Response.StatusCode = StatusCodes.Status304NotModified;
+                return Results.StatusCode(StatusCodes.Status304NotModified);
+            }
+        }
+        context.Response.Headers.LastModified = DateTimeOffset.UtcNow.ToString();
+    }
+
     return Results.Ok(forecast);
 })
 .WithTags("WeatherForecast")

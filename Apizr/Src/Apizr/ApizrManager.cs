@@ -2792,32 +2792,44 @@ namespace Apizr
                         }
                     }
 
-                    if (contentHeaders?.Expires.HasValue is true && responseHeaders.Date.HasValue)
+                    var expires = contentHeaders?.Expires ?? default;
+                    if (expires != default || 
+                        (contentHeaders?.TryGetValues("Expires", out var expireValues) is true &&
+                          DateTimeOffset.TryParse(expireValues.FirstOrDefault(), out expires)))
                     {
-                        lifeSpan = contentHeaders.Expires.Value - responseHeaders.Date.Value;
-                        cacheEntries.Add(cacheAttribute.CacheKey, result);
-                        cacheEntries.Add(cacheAttribute.FinalModeCacheKey, CacheMode.GetOrFetch);
-                        return cacheEntries;
+                        var startDate = responseHeaders.Date ?? DateTimeOffset.UtcNow;
+                        if (expires > startDate)
+                        {
+                            lifeSpan = expires - startDate;
+                            cacheEntries.Add(cacheAttribute.CacheKey, result);
+                            cacheEntries.Add(cacheAttribute.FinalModeCacheKey, CacheMode.GetOrFetch);
+                            return cacheEntries;
+                        }
                     }
 
-                    if (responseHeaders.ETag is not null)
+                    var etag = responseHeaders.ETag?.ToString() ??
+                               (responseHeaders.TryGetValues("ETag", out var etagValues) ? etagValues.FirstOrDefault() : null);
+                    if (!string.IsNullOrWhiteSpace(etag))
                     {
                         lifeSpan = cacheAttribute.LifeSpan;
                         cacheEntries.Add(cacheAttribute.CacheKey, result);
 
-                        var cacheHeaders = new[] {$"If-None-Match: {responseHeaders.ETag}"};
+                        var cacheHeaders = new[] {$"If-None-Match: {etag}"};
                         cacheEntries.Add(cacheAttribute.HeadersCacheKey, cacheHeaders);
                         cacheEntries.Add(cacheAttribute.FinalModeCacheKey, CacheMode.FetchOrGet);
 
                         return cacheEntries;
                     }
 
-                    if (contentHeaders?.LastModified.HasValue is true)
+                    var lastModified = contentHeaders?.LastModified ?? default;
+                    if (lastModified != default || 
+                        (contentHeaders?.TryGetValues("Last-Modified", out var lastModifiedValues) is true &&
+                         DateTimeOffset.TryParse(lastModifiedValues.FirstOrDefault(), out lastModified)))
                     {
                         lifeSpan = cacheAttribute.LifeSpan;
                         cacheEntries.Add(cacheAttribute.CacheKey, result);
 
-                        var cacheHeaders = new[] {$"If-Modified-Since: {contentHeaders.LastModified.Value}"};
+                        var cacheHeaders = new[] {$"If-Modified-Since: {lastModified}"};
                         cacheEntries.Add(cacheAttribute.HeadersCacheKey, cacheHeaders);
                         cacheEntries.Add(cacheAttribute.FinalModeCacheKey, CacheMode.FetchOrGet);
 

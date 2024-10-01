@@ -1,3 +1,12 @@
+6.1.0
+---
+
+### All
+
+- [New][Cache] Now we can **let the server control the client cache mode and lifetime thanks to the brand new `SetByHeader` cache mode** (see `Cache-Control`, `Expires`, `ETag` and `Last-Modified` headers)
+- [New][Transfer] Now we can finally **use the `ITransferApi<TDownloadParams>` shortcut api** thanks to latest Refit updates
+- [Update][NuGet] Now **all package references are up to date** with the latest versions
+
 6.0.0
 ---
 

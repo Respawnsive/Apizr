@@ -325,10 +325,13 @@ options =&gt; options.WithCacheHandler(() =&gt; new MonkeyCacheHandler(Barrel.Cu
 <p>Life time is actually a <code>TimeSpan</code> string representation which is parsed then. Its optional and if you don’t provide it, the default cache provider settings will be applyed.</p>
 <p>Cache mode could be set to:</p>
 <ul>
+<li><code>None</code>: no caching at all</li>
 <li><code>FetchOrGet</code> (default): the result is returned from api request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.</li>
 <li><code>GetOrFetch</code>: the result is returned from cache if there’s some data already cached, otherwise from the request.</li>
+<li><code>SetByHeader</code>: let the server control the client cache mode and lifetime (works only with an <code>IApiResponse&lt;T&gt;</code> wrapped result relying on response headers such as <code>Cache-Control</code>, <code>Expires</code>, <code>ETag</code> and <code>Last-Modified</code>).</li>
 </ul>
-<p>In both cases, cached data is updated after each successful request call.</p>
+<p>In both <code>FetchOrGet</code> and <code>GetOrFetch</code> modes, cached data is updated after each successful request call.</p>
+<p>In the <code>SetByHeader</code> mode, the server control the mode which could ends to <code>None</code>, <code>FetchOrGet</code> or <code>GetOrFetch</code>.</p>
 <p>You also can define global caching settings by decorating the assembly or interface, then manage specific scenarios at method level.
 Apizr will apply the lowest level settings it could find.</p>
 <p>Back to the example, we are saying:</p>

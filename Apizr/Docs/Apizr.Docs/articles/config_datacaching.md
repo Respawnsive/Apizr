@@ -230,8 +230,10 @@ Life time is actually a `TimeSpan` string representation which is parsed then. I
 
 Cache mode could be set to:
 
+  - `None`: no caching at all
   - `FetchOrGet` (default): the result is returned from api request if it succeed, otherwise from cache if there’s some data already cached. In this specific case of request failing, cached data will be wrapped with the original exception into an ApizrException thrown by Apizr, so don’t forget to catch it.
   - `GetOrFetch`: the result is returned from cache if there’s some data already cached, otherwise from the request.
+  - `SetByHeader`: let the server control the cache mode and lifetime, by relying on its response headers (such as `Cache-Control`, `Expires`, `ETag` and `Last-Modified`). Works only with an `IApiResponse<T>` wrapped result.
 
 In both cases, cached data is updated after each successful request call.
 

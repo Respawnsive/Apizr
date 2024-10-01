@@ -8,6 +8,7 @@ items:
   - Apizr.Caching.CacheMode.FetchOrGet
   - Apizr.Caching.CacheMode.GetOrFetch
   - Apizr.Caching.CacheMode.None
+  - Apizr.Caching.CacheMode.SetByHeader
   langs:
   - csharp
   - vb
@@ -22,7 +23,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheMode
     path: ../../Src/Apizr/Caching/CacheMode.cs
-    startLine: 7
+    startLine: 8
   assemblies:
   - Apizr
   namespace: Apizr.Caching
@@ -49,7 +50,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: None
     path: ../../Src/Apizr/Caching/CacheMode.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - Apizr
   namespace: Apizr.Caching
@@ -77,7 +78,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: FetchOrGet
     path: ../../Src/Apizr/Caching/CacheMode.cs
-    startLine: 17
+    startLine: 18
   assemblies:
   - Apizr
   namespace: Apizr.Caching
@@ -105,7 +106,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetOrFetch
     path: ../../Src/Apizr/Caching/CacheMode.cs
-    startLine: 22
+    startLine: 23
   assemblies:
   - Apizr
   namespace: Apizr.Caching
@@ -113,6 +114,44 @@ items:
   example: []
   syntax:
     content: GetOrFetch = 2
+    return:
+      type: Apizr.Caching.CacheMode
+- uid: Apizr.Caching.CacheMode.SetByHeader
+  commentId: F:Apizr.Caching.CacheMode.SetByHeader
+  id: SetByHeader
+  parent: Apizr.Caching.CacheMode
+  langs:
+  - csharp
+  - vb
+  name: SetByHeader
+  nameWithType: CacheMode.SetByHeader
+  fullName: Apizr.Caching.CacheMode.SetByHeader
+  type: Field
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Caching/CacheMode.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: SetByHeader
+    path: ../../Src/Apizr/Caching/CacheMode.cs
+    startLine: 33
+  assemblies:
+  - Apizr
+  namespace: Apizr.Caching
+  summary: >-
+    <p>Relies on one of the following response header presence, ordered by precedence (otherwise None):</p>
+
+    <p>1. Cache-Control (GetOrFetch): Controls how Apizr should cache the data (e.g., max-age, no-store, immutable, etc.).</p>
+
+    <p>2. Expires (GetOrFetch): Specifies a date after which Apizr should fetch api data again.</p>
+
+    <p>3. ETag (FetchOrGet): Ask Apizr to use the If-None-Match header to check if the data has been modified and handle any 304 Not Modified response.</p>
+
+    <p>4. Last-Modified (FetchOrGet): Ask Apizr to use the If-Modified-Since header to check if the resource has been modified and handle any 304 Not Modified response.</p>
+  remarks: 'REQUIRED: Works only with <xref href="Refit.IApiResponse%601" data-throw-if-not-resolved="false"></xref> result while designing api interface'
+  example: []
+  syntax:
+    content: SetByHeader = 3
     return:
       type: Apizr.Caching.CacheMode
 references:
@@ -145,3 +184,28 @@ references:
   name: CacheMode
   nameWithType: CacheMode
   fullName: Apizr.Caching.CacheMode
+- uid: Refit.IApiResponse`1
+  commentId: T:Refit.IApiResponse`1
+  isExternal: true
+  name: IApiResponse<T>
+  nameWithType: IApiResponse<T>
+  fullName: Refit.IApiResponse<T>
+  nameWithType.vb: IApiResponse(Of T)
+  fullName.vb: Refit.IApiResponse(Of T)
+  name.vb: IApiResponse(Of T)
+  spec.csharp:
+  - uid: Refit.IApiResponse`1
+    name: IApiResponse
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Refit.IApiResponse`1
+    name: IApiResponse
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

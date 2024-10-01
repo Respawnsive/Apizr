@@ -116,6 +116,15 @@
         <td><p>Returns fresh data when request succeed (api data only)</p>
 </td>
       </tr>
+      <tr>
+        <td id="Apizr_Caching_CacheMode_SetByHeader">SetByHeader</td>
+        <td><p>Relies on one of the following response header presence, ordered by precedence (otherwise None):</p>
+<p>1. Cache-Control (GetOrFetch): Controls how Apizr should cache the data (e.g., max-age, no-store, immutable, etc.).</p>
+<p>2. Expires (GetOrFetch): Specifies a date after which Apizr should fetch api data again.</p>
+<p>3. ETag (FetchOrGet): Ask Apizr to use the If-None-Match header to check if the data has been modified and handle any 304 Not Modified response.</p>
+<p>4. Last-Modified (FetchOrGet): Ask Apizr to use the If-Modified-Since header to check if the resource has been modified and handle any 304 Not Modified response.</p>
+</td>
+      </tr>
     </tbody>
   </table>
 </article>
@@ -129,7 +138,7 @@
                     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Caching_CacheMode.md&amp;value=---%0Auid%3A%20Apizr.Caching.CacheMode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Caching/CacheMode.cs/#L8" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Caching/CacheMode.cs/#L9" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -580,6 +580,16 @@
             Returns cached data if we get some otherwise fresh one if request succeed (cache data first)
             </summary>
         </member>
+        <member name="F:Apizr.Caching.CacheMode.SetByHeader">
+            <summary>
+            <para>Relies on one of the following response header presence, ordered by precedence (otherwise None):</para>
+            <para>1. Cache-Control (GetOrFetch): Controls how Apizr should cache the data (e.g., max-age, no-store, immutable, etc.).</para>
+            <para>2. Expires (GetOrFetch): Specifies a date after which Apizr should fetch api data again.</para>
+            <para>3. ETag (FetchOrGet): Ask Apizr to use the If-None-Match header to check if the data has been modified and handle any 304 Not Modified response.</para>
+            <para>4. Last-Modified (FetchOrGet): Ask Apizr to use the If-Modified-Since header to check if the resource has been modified and handle any 304 Not Modified response.</para>
+            </summary>
+            <remarks>REQUIRED: Works only with <see cref="T:Refit.IApiResponse`1"/> result while designing api interface</remarks>
+        </member>
         <member name="T:Apizr.Caching.ICacheHandler">
             <summary>
             The cache handler method mapping interface
@@ -5705,15 +5715,6 @@
             </summary>
         </member>
         <member name="M:Apizr.Resiliencing.Attributes.Http.OptionsResiliencePipelineAttribute.#ctor(System.String[])">
-            <inheritdoc />
-        </member>
-        <member name="T:Apizr.Resiliencing.Attributes.Http.PatchResiliencePipelineAttribute">
-            <summary>
-            Tells Apizr to apply some policies to Patch http method
-            You have to provide a strategy registry to Apizr to use this feature
-            </summary>
-        </member>
-        <member name="M:Apizr.Resiliencing.Attributes.Http.PatchResiliencePipelineAttribute.#ctor(System.String[])">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Resiliencing.Attributes.Http.PostResiliencePipelineAttribute">

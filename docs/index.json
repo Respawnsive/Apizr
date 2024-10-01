@@ -142,7 +142,7 @@
   "api/Apizr.Caching.CacheMode.html": {
     "href": "api/Apizr.Caching.CacheMode.html",
     "title": "Enum CacheMode | Apizr",
-    "keywords": "Enum CacheMode Define the caching behaviour Namespace: Apizr.Caching Assembly: Apizr.dll Syntax public enum CacheMode Fields Name Description FetchOrGet Returns fresh data when request succeed otherwise cached one if exist (api data first) GetOrFetch Returns cached data if we get some otherwise fresh one if request succeed (cache data first) None Returns fresh data when request succeed (api data only)"
+    "keywords": "Enum CacheMode Define the caching behaviour Namespace: Apizr.Caching Assembly: Apizr.dll Syntax public enum CacheMode Fields Name Description FetchOrGet Returns fresh data when request succeed otherwise cached one if exist (api data first) GetOrFetch Returns cached data if we get some otherwise fresh one if request succeed (cache data first) None Returns fresh data when request succeed (api data only) SetByHeader Relies on one of the following response header presence, ordered by precedence (otherwise None): 1. Cache-Control (GetOrFetch): Controls how Apizr should cache the data (e.g., max-age, no-store, immutable, etc.). 2. Expires (GetOrFetch): Specifies a date after which Apizr should fetch api data again. 3. ETag (FetchOrGet): Ask Apizr to use the If-None-Match header to check if the data has been modified and handle any 304 Not Modified response. 4. Last-Modified (FetchOrGet): Ask Apizr to use the If-Modified-Since header to check if the resource has been modified and handle any 304 Not Modified response."
   },
   "api/Apizr.Caching.ICacheHandler.html": {
     "href": "api/Apizr.Caching.ICacheHandler.html",

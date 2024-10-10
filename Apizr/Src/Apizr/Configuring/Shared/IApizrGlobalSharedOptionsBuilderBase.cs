@@ -38,6 +38,23 @@ namespace Apizr.Configuring.Shared
         /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
+        /// <summary>
+        /// Catch potential exceptions
+        /// </summary>
+        /// <param name="onException">The exception callback returning handled flag</param>
+        /// <param name="letThrowOnExceptionWithEmptyCache">Let throw potential exception if there's no cached data to return (default: true)</param>
+        /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithExCatching(Func<ApizrException, bool> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
+
+        /// <summary>
+        /// Catch potential exceptions
+        /// </summary>
+        /// <param name="onException">The exception callback returning handled flag</param>
+        /// <param name="letThrowOnExceptionWithEmptyCache">Let throw potential exception if there's no cached data to return (default: true)</param>
+        /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, bool> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
         /// <summary>
         /// Set some parameters passed through all delegating handlers

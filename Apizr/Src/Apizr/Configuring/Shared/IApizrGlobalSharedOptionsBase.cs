@@ -32,7 +32,7 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Catching potential exception if defined
         /// </summary>
-        Action<ApizrException> OnException { get; }
+        Func<ApizrException, bool> OnException { get; }
 
         /// <summary>
         /// Let throw potential exception if there's no cached data to return

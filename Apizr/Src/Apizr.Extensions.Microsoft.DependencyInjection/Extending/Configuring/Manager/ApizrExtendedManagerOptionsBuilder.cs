@@ -541,20 +541,38 @@ namespace Apizr.Extending.Configuring.Manager
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.OnException ??= onException;
+                    Options.OnException ??= ex =>
+                    {
+                        onException(ex);
+                        return true;
+                    };
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.OnException = onException;
+                    Options.OnException = ex =>
+                    {
+                        onException(ex);
+                        return true;
+                    };
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
                     if (Options.OnException == null)
                     {
-                        Options.OnException = onException;
+                        Options.OnException = ex =>
+                        {
+                            onException(ex);
+                            return true;
+                        };
                     }
                     else
                     {
-                        Options.OnException += onException.Invoke;
+                        var previous = Options.OnException;
+                        Options.OnException = ex =>
+                        {
+                            previous(ex);
+                            onException(ex);
+                            return true;
+                        };
                     }
                     break;
                 default:
@@ -570,6 +588,51 @@ namespace Apizr.Extending.Configuring.Manager
         public IApizrExtendedManagerOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException,
             bool letThrowOnExceptionWithEmptyCache = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(ex => onException.Invoke((ApizrException<TResult>)ex), letThrowOnExceptionWithEmptyCache,
+                strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithExCatching(Func<ApizrException, bool> onException, bool letThrowOnExceptionWithEmptyCache = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+        {
+            switch (strategy)
+            {
+                case ApizrDuplicateStrategy.Ignore:
+                    Options.OnException ??= onException;
+                    break;
+                case ApizrDuplicateStrategy.Replace:
+                    Options.OnException = onException;
+                    break;
+                case ApizrDuplicateStrategy.Add:
+                case ApizrDuplicateStrategy.Merge:
+                    if (Options.OnException == null)
+                    {
+                        Options.OnException = onException;
+                    }
+                    else
+                    {
+                        var previous = Options.OnException;
+                        Options.OnException = ex =>
+                        {
+                            var handled = previous(ex);
+                            if (!handled)
+                                handled = onException(ex);
+                            return handled;
+                        };
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
+            }
+
+            Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, bool> onException,
+            bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
             => WithExCatching(ex => onException.Invoke((ApizrException<TResult>)ex), letThrowOnExceptionWithEmptyCache,
                 strategy);
 

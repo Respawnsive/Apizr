@@ -53,7 +53,7 @@ namespace Apizr.Configuring.Shared
         }
 
         /// <inheritdoc />
-        public Action<ApizrException> OnException { get; internal set; }
+        public Func<ApizrException, bool> OnException { get; internal set; }
 
         /// <inheritdoc />
         public bool LetThrowOnExceptionWithEmptyCache { get; internal set; }

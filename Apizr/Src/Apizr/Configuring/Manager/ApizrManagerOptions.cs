@@ -212,7 +212,7 @@ namespace Apizr.Configuring.Manager
         public LogLevel[] LogLevels => Options.LogLevels;
 
         /// <inheritdoc />
-        public Action<ApizrException> OnException => Options.OnException;
+        public Func<ApizrException, bool> OnException => Options.OnException;
 
         /// <inheritdoc />
         public bool LetThrowOnExceptionWithEmptyCache => Options.LetThrowOnExceptionWithEmptyCache;

@@ -37,6 +37,9 @@ namespace Apizr
         /// <inheritdoc />
         public ApizrException Exception { get; }
 
+        /// <inheritdoc />
+        public bool IsExceptionHandled { get; internal set; }
+
         #region Dispose
 
         private bool _disposed;

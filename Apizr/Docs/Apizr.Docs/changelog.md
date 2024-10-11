@@ -1,3 +1,14 @@
+6.2.0
+---
+
+### All
+
+- [New][Exceptions] Now we can **catch exceptions with a Func callback returning a handled boolean flag** thanks to `WithExCatching` fluent option
+- [New][Exceptions] Now we can **check for a handled boolean flag right from the exception** to adjust the handling behavior
+- [New][Exceptions] Now we can **let the exception throw even if it's yet been handled by registered handlers** thanks to the `letThrowOnHandledException` parameter
+- [Deprecated][Exceptions] Now **catching exceptions with an Action callback is deprecated** in favor of the new Func one
+- [Update][NuGet] Now **Polly.Extensions package reference has been updated to latest v8.4.2**
+
 6.1.0
 ---
 

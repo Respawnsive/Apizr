@@ -1,248 +1,326 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
 <html>
-
   <head>
     <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <title>Namespace Apizr | Apizr </title>
-      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Namespace Apizr | Apizr ">
-    
-    
-      <link rel="shortcut icon" href="../resources/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-      <link rel="stylesheet" href="../styles/docfx.css">
-      <link rel="stylesheet" href="../styles/main.css">
-      <meta property="docfx:navrel" content="../toc.html">
-      <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      
+      
+      <link rel="icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../resources/logo.png" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../resources/logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Apizr">
+
+        <article data-uid="Apizr">
 
   <h1 id="Apizr" data-uid="Apizr" class="text-break">Namespace Apizr</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
+
     <h3 id="classes">
 Classes
 </h3>
-      <h4><a class="xref" href="Apizr.AkavacheCacheHandler.html">AkavacheCacheHandler</a></h4>
-      <section><p>Akavache cache handler implementation</p>
-</section>
-      <h4><a class="xref" href="Apizr.AkavacheOptionsBuilderExtensions.html">AkavacheOptionsBuilderExtensions</a></h4>
-      <section><p>Akavache options builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.ApizrBuilder.html">ApizrBuilder</a></h4>
-      <section><p>The builder</p>
-</section>
-      <h4><a class="xref" href="Apizr.ApizrException.html">ApizrException</a></h4>
-      <section><p>An exception with optional cached object</p>
-</section>
-      <h4><a class="xref" href="Apizr.ApizrException-1.html">ApizrException&lt;TResult&gt;</a></h4>
-      <section><p>An exception with optional cached <code class="typeparamref">TResult</code></p>
-</section>
-      <h4><a class="xref" href="Apizr.ApizrHttpClient.html">ApizrHttpClient</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Apizr.ApizrManager.html">ApizrManager</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a></h4>
-      <section><p>The manager</p>
-</section>
-      <h4><a class="xref" href="Apizr.ApizrResponse.html">ApizrResponse</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Apizr.ApizrResponseExtensions.html">ApizrResponseExtensions</a></h4>
-      <section><p>ApizrResponse extensions methods</p>
-</section>
-      <h4><a class="xref" href="Apizr.ApizrResponse-1.html">ApizrResponse&lt;TResult&gt;</a></h4>
-      <section><p>Interface used to represent an API response managed by Apizr.</p>
-</section>
-      <h4><a class="xref" href="Apizr.AutoMapperMappingHandler.html">AutoMapperMappingHandler</a></h4>
-      <section><p>AutoMapper mapping handler implementation</p>
-</section>
-      <h4><a class="xref" href="Apizr.AutoMapperOptionsBuilderExtensions.html">AutoMapperOptionsBuilderExtensions</a></h4>
-      <section><p>AutoMapper options builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.AutoRegisterAttribute.html">AutoRegisterAttribute</a></h4>
-      <section><p>Tells Apizr to auto register a Manager for the provided api (works only with IServiceCollection extensions registration)</p>
-</section>
-      <h4><a class="xref" href="Apizr.AutoRegisterAttribute-1.html">AutoRegisterAttribute&lt;TWebApi&gt;</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Apizr.DistributedCacheHandler-1.html">DistributedCacheHandler&lt;TCache&gt;</a></h4>
-      <section><p>Distributed cache handler implementation</p>
-</section>
-      <h4><a class="xref" href="Apizr.FileTransferExtendedOptionsBuilderExtensions.html">FileTransferExtendedOptionsBuilderExtensions</a></h4>
-      <section><p>File transfer options builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html">FileTransferOptionsBuilderExtensions</a></h4>
-      <section><p>File transfer builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html">FusilladeOptionsBuilderExtensions</a></h4>
-      <section><p>Fusillade options builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.InMemoryCacheHandler.html">InMemoryCacheHandler</a></h4>
-      <section><p>InMemory cache handler implementation</p>
-</section>
-      <h4><a class="xref" href="Apizr.LazyFactory-1.html">LazyFactory&lt;TInstance&gt;</a></h4>
-      <section><p>A lazy instance</p>
-</section>
-      <h4><a class="xref" href="Apizr.MapsterMappingHandler.html">MapsterMappingHandler</a></h4>
-      <section><p>Mapster mapping handler implementation</p>
-</section>
-      <h4><a class="xref" href="Apizr.MapsterOptionsBuilderExtensions.html">MapsterOptionsBuilderExtensions</a></h4>
-      <section><p>Mapster options builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.MediationFileTransferOptionsBuilderExtensions.html">MediationFileTransferOptionsBuilderExtensions</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Apizr.MediationOptionsBuilderExtensions.html">MediationOptionsBuilderExtensions</a></h4>
-      <section><p>MediatR options builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.MicrosoftCachingOptionsBuilderExtensions.html">MicrosoftCachingOptionsBuilderExtensions</a></h4>
-      <section><p>Microsoft Caching options builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.MonkeyCacheHandler.html">MonkeyCacheHandler</a></h4>
-      <section><p>MonkeyCache cache handler implementation</p>
-</section>
-      <h4><a class="xref" href="Apizr.OptionalFileTransferOptionsBuilderExtensions.html">OptionalFileTransferOptionsBuilderExtensions</a></h4>
-      <section><p>Extensions for file transfer registration with optional result</p>
-</section>
-      <h4><a class="xref" href="Apizr.OptionalOptionsBuilderExtensions.html">OptionalOptionsBuilderExtensions</a></h4>
-      <section><p>Optional with MediatR options builder extensions</p>
-</section>
-      <h4><a class="xref" href="Apizr.PriorityAttribute.html">PriorityAttribute</a></h4>
-      <section><p>The Fusillade priority attribute</p>
-</section>
-      <h4><a class="xref" href="Apizr.PriorityHttpMessageHandler.html">PriorityHttpMessageHandler</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Apizr.ReadAllPriorityAttribute.html">ReadAllPriorityAttribute</a></h4>
-      <section><p>The Fusillade priority attribute</p>
-</section>
-      <h4><a class="xref" href="Apizr.ReadPriorityAttribute.html">ReadPriorityAttribute</a></h4>
-      <section><p>The Fusillade priority attribute</p>
-</section>
-      <h4><a class="xref" href="Apizr.ServiceCollectionExtensions.html">ServiceCollectionExtensions</a></h4>
-      <section><p>Apizr service collection extensions</p>
-</section>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.AkavacheCacheHandler.html">AkavacheCacheHandler</a></dt>
+      <dd><p>Akavache cache handler implementation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.AkavacheOptionsBuilderExtensions.html">AkavacheOptionsBuilderExtensions</a></dt>
+      <dd><p>Akavache options builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrBuilder.html">ApizrBuilder</a></dt>
+      <dd><p>The builder</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrException.html">ApizrException</a></dt>
+      <dd><p>An exception with optional cached object</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrException-1.html">ApizrException&lt;TResult&gt;</a></dt>
+      <dd><p>An exception with optional cached <code class="typeparamref">TResult</code></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrHttpClient.html">ApizrHttpClient</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrManager.html">ApizrManager</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a></dt>
+      <dd><p>The manager</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrResponse.html">ApizrResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrResponseExtensions.html">ApizrResponseExtensions</a></dt>
+      <dd><p>ApizrResponse extensions methods</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrResponse-1.html">ApizrResponse&lt;TResult&gt;</a></dt>
+      <dd><p>Interface used to represent an API response managed by Apizr.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.AutoMapperMappingHandler.html">AutoMapperMappingHandler</a></dt>
+      <dd><p>AutoMapper mapping handler implementation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.AutoMapperOptionsBuilderExtensions.html">AutoMapperOptionsBuilderExtensions</a></dt>
+      <dd><p>AutoMapper options builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.AutoRegisterAttribute.html">AutoRegisterAttribute</a></dt>
+      <dd><p>Tells Apizr to auto register a Manager for the provided api (works only with IServiceCollection extensions registration)</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.AutoRegisterAttribute-1.html">AutoRegisterAttribute&lt;TWebApi&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.DistributedCacheHandler-1.html">DistributedCacheHandler&lt;TCache&gt;</a></dt>
+      <dd><p>Distributed cache handler implementation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.FileTransferExtendedOptionsBuilderExtensions.html">FileTransferExtendedOptionsBuilderExtensions</a></dt>
+      <dd><p>File transfer options builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html">FileTransferOptionsBuilderExtensions</a></dt>
+      <dd><p>File transfer builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html">FusilladeOptionsBuilderExtensions</a></dt>
+      <dd><p>Fusillade options builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.InMemoryCacheHandler.html">InMemoryCacheHandler</a></dt>
+      <dd><p>InMemory cache handler implementation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.LazyFactory-1.html">LazyFactory&lt;TInstance&gt;</a></dt>
+      <dd><p>A lazy instance</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.MapsterMappingHandler.html">MapsterMappingHandler</a></dt>
+      <dd><p>Mapster mapping handler implementation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.MapsterOptionsBuilderExtensions.html">MapsterOptionsBuilderExtensions</a></dt>
+      <dd><p>Mapster options builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.MediationFileTransferOptionsBuilderExtensions.html">MediationFileTransferOptionsBuilderExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.MediationOptionsBuilderExtensions.html">MediationOptionsBuilderExtensions</a></dt>
+      <dd><p>MediatR options builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.MicrosoftCachingOptionsBuilderExtensions.html">MicrosoftCachingOptionsBuilderExtensions</a></dt>
+      <dd><p>Microsoft Caching options builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.MonkeyCacheHandler.html">MonkeyCacheHandler</a></dt>
+      <dd><p>MonkeyCache cache handler implementation</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.OptionalFileTransferOptionsBuilderExtensions.html">OptionalFileTransferOptionsBuilderExtensions</a></dt>
+      <dd><p>Extensions for file transfer registration with optional result</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.OptionalOptionsBuilderExtensions.html">OptionalOptionsBuilderExtensions</a></dt>
+      <dd><p>Optional with MediatR options builder extensions</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.PriorityAttribute.html">PriorityAttribute</a></dt>
+      <dd><p>The Fusillade priority attribute</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.PriorityHttpMessageHandler.html">PriorityHttpMessageHandler</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ReadAllPriorityAttribute.html">ReadAllPriorityAttribute</a></dt>
+      <dd><p>The Fusillade priority attribute</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ReadPriorityAttribute.html">ReadPriorityAttribute</a></dt>
+      <dd><p>The Fusillade priority attribute</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ServiceCollectionExtensions.html">ServiceCollectionExtensions</a></dt>
+      <dd><p>Apizr service collection extensions</p>
+</dd>
+    </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
-      <h4><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></h4>
-      <section><p>The builder</p>
-</section>
-      <h4><a class="xref" href="Apizr.IApizrManager.html">IApizrManager</a></h4>
-      <section><p>The manager definition</p>
-</section>
-      <h4><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager&lt;TWebApi&gt;</a></h4>
-      <section><p>The manager encapsulating <code class="typeparamref">TWebApi</code>'s task</p>
-</section>
-      <h4><a class="xref" href="Apizr.IApizrResponse.html">IApizrResponse</a></h4>
-      <section><p>Base interface used to represent an API response managed by Apizr.</p>
-</section>
-      <h4><a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse&lt;TResult&gt;</a></h4>
-      <section><p>Interface used to represent an API response managed by Apizr.</p>
-</section>
-      <h4><a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory&lt;TInstance&gt;</a></h4>
-      <section><p>A lazy instance</p>
-</section>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.IApizrBuilder.html">IApizrBuilder</a></dt>
+      <dd><p>The builder</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.IApizrManager.html">IApizrManager</a></dt>
+      <dd><p>The manager definition</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager&lt;TWebApi&gt;</a></dt>
+      <dd><p>The manager encapsulating <code class="typeparamref">TWebApi</code>'s task</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.IApizrResponse.html">IApizrResponse</a></dt>
+      <dd><p>Base interface used to represent an API response managed by Apizr.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse&lt;TResult&gt;</a></dt>
+      <dd><p>Interface used to represent an API response managed by Apizr.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory&lt;TInstance&gt;</a></dt>
+      <dd><p>A lazy instance</p>
+</dd>
+    </dl>
     <h3 id="enums">
 Enums
 </h3>
-      <h4><a class="xref" href="Apizr.ApizrResponseDataSource.html">ApizrResponseDataSource</a></h4>
-      <section></section>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Apizr.ApizrResponseDataSource.html">ApizrResponseDataSource</a></dt>
+      <dd></dd>
+    </dl>
 
 
 </article>
-          </div>
 
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In this article</h5>
-                <div></div>
-              </nav>
-            </div>
-          </div>
+        <div class="contribution d-print-none">
         </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      Supported by Respawnsive
-      
-          </div>
-        </div>
-      </footer>
-    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Supported by Respawnsive
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

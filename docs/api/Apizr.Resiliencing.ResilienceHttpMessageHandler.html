@@ -1,102 +1,134 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
 <html>
-
   <head>
     <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <title>Class ResilienceHttpMessageHandler | Apizr </title>
-      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class ResilienceHttpMessageHandler | Apizr ">
-    
-    <meta name="description" content="Base class for resilience handler, i.e. handlers that use resilience strategies to send the requests.">
-      <link rel="shortcut icon" href="../resources/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-      <link rel="stylesheet" href="../styles/docfx.css">
-      <link rel="stylesheet" href="../styles/main.css">
-      <meta property="docfx:navrel" content="../toc.html">
-      <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      
+      <meta name="description" content="Base class for resilience handler, i.e. handlers that use resilience strategies to send the requests.">
+      <link rel="icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Resiliencing_ResilienceHttpMessageHandler.md&amp;value=---%0Auid%3A%20Apizr.Resiliencing.ResilienceHttpMessageHandler%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../resources/logo.png" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../resources/logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler">
+
+        <article data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler">
 
 
 
-  <h1 id="Apizr_Resiliencing_ResilienceHttpMessageHandler" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler" class="text-break">Class ResilienceHttpMessageHandler</h1>
-  <div class="markdown level0 summary"><p>Base class for resilience handler, i.e. handlers that use resilience strategies to send the requests.</p>
+  <h1 id="Apizr_Resiliencing_ResilienceHttpMessageHandler" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler" class="text-break">
+Class ResilienceHttpMessageHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Apizr.html">Apizr</a>.<a class="xref" href="Apizr.Resiliencing.html">Resiliencing</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Apizr.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Base class for resilience handler, i.e. handlers that use resilience strategies to send the requests.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a></div>
-    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a></div>
-    <div class="level3"><span class="xref">ResilienceHttpMessageHandler</span></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ResilienceHttpMessageHandler : DelegatingHandler, IDisposable</code></pre>
   </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a></div>
+      <div><span class="xref">ResilienceHttpMessageHandler</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.dispose">DelegatingHandler.Dispose(bool)</a>
     </div>
@@ -127,285 +159,209 @@
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.html">Apizr</a>.<a class="xref" href="Apizr.Resiliencing.html">Resiliencing</a></h6>
-  <h6><strong>Assembly</strong>: Apizr.dll</h6>
-  <h5 id="Apizr_Resiliencing_ResilienceHttpMessageHandler_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ResilienceHttpMessageHandler : DelegatingHandler, IDisposable</code></pre>
-  </div>
-  <h3 id="constructors">Constructors
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_Polly_Registry_ResiliencePipelineRegistry_System_String__Apizr_Configuring_Manager_IApizrManagerOptionsBase_.md&amp;value=---%0Auid%3A%20Apizr.Resiliencing.ResilienceHttpMessageHandler.%23ctor(Polly.Registry.ResiliencePipelineRegistry%7BSystem.String%7D%2CApizr.Configuring.Manager.IApizrManagerOptionsBase)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L30">View Source</a>
-  </span>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
   <a id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor*"></a>
-  <h4 id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_Polly_Registry_ResiliencePipelineRegistry_System_String__Apizr_Configuring_Manager_IApizrManagerOptionsBase_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(Polly.Registry.ResiliencePipelineRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase)">ResilienceHttpMessageHandler(ResiliencePipelineRegistry&lt;string&gt;, IApizrManagerOptionsBase)</h4>
+
+  <h3 id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_Polly_Registry_ResiliencePipelineRegistry_System_String__Apizr_Configuring_Manager_IApizrManagerOptionsBase_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(Polly.Registry.ResiliencePipelineRegistry{System.String},Apizr.Configuring.Manager.IApizrManagerOptionsBase)">
+  ResilienceHttpMessageHandler(ResiliencePipelineRegistry&lt;string&gt;, IApizrManagerOptionsBase)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public ResilienceHttpMessageHandler(ResiliencePipelineRegistry&lt;string&gt; registry, IApizrManagerOptionsBase apizrOptions)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs">ResiliencePipelineRegistry</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
-        <td><span class="parametername">registry</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a></td>
-        <td><span class="parametername">apizrOptions</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_Polly_ResiliencePipeline_System_Net_Http_HttpResponseMessage__Apizr_Configuring_Manager_IApizrManagerOptionsBase_.md&amp;value=---%0Auid%3A%20Apizr.Resiliencing.ResilienceHttpMessageHandler.%23ctor(Polly.ResiliencePipeline%7BSystem.Net.Http.HttpResponseMessage%7D%2CApizr.Configuring.Manager.IApizrManagerOptionsBase)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L54">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>registry</code> <a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs">ResiliencePipelineRegistry</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>apizrOptions</code> <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor*"></a>
-  <h4 id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_Polly_ResiliencePipeline_System_Net_Http_HttpResponseMessage__Apizr_Configuring_Manager_IApizrManagerOptionsBase_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage},Apizr.Configuring.Manager.IApizrManagerOptionsBase)">ResilienceHttpMessageHandler(ResiliencePipeline&lt;HttpResponseMessage&gt;, IApizrManagerOptionsBase)</h4>
+
+  <h3 id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_Polly_ResiliencePipeline_System_Net_Http_HttpResponseMessage__Apizr_Configuring_Manager_IApizrManagerOptionsBase_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage},Apizr.Configuring.Manager.IApizrManagerOptionsBase)">
+  ResilienceHttpMessageHandler(ResiliencePipeline&lt;HttpResponseMessage&gt;, IApizrManagerOptionsBase)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Apizr.Resiliencing.ResilienceHttpMessageHandler.html">ResilienceHttpMessageHandler</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public ResilienceHttpMessageHandler(ResiliencePipeline&lt;HttpResponseMessage&gt; pipeline, IApizrManagerOptionsBase apizrOptions)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/ResiliencePipelineT.Async.cs">ResiliencePipeline</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage">HttpResponseMessage</a>&gt;</td>
-        <td><span class="parametername">pipeline</span></td>
-        <td><p>The pipeline to use for the message.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a></td>
-        <td><span class="parametername">apizrOptions</span></td>
-        <td><p>The Apizr options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If <code class="paramref">pipeline</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_Polly_ResiliencePipeline_System_Net_Http_HttpResponseMessage___Apizr_Configuring_Manager_IApizrManagerOptionsBase_.md&amp;value=---%0Auid%3A%20Apizr.Resiliencing.ResilienceHttpMessageHandler.%23ctor(System.Func%7BSystem.Net.Http.HttpRequestMessage%2CSystem.Threading.CancellationToken%2CPolly.ResiliencePipeline%7BSystem.Net.Http.HttpResponseMessage%7D%7D%2CApizr.Configuring.Manager.IApizrManagerOptionsBase)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L42">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pipeline</code> <a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/ResiliencePipelineT.Async.cs">ResiliencePipeline</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage">HttpResponseMessage</a>&gt;</dt>
+    <dd><p>The pipeline to use for the message.</p>
+</dd>
+    <dt><code>apizrOptions</code> <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a></dt>
+    <dd><p>The Apizr options</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>If <code class="paramref">pipeline</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+
+
   <a id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor*"></a>
-  <h4 id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_Polly_ResiliencePipeline_System_Net_Http_HttpResponseMessage___Apizr_Configuring_Manager_IApizrManagerOptionsBase_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}},Apizr.Configuring.Manager.IApizrManagerOptionsBase)">ResilienceHttpMessageHandler(Func&lt;HttpRequestMessage, CancellationToken, ResiliencePipeline&lt;HttpResponseMessage&gt;&gt;, IApizrManagerOptionsBase)</h4>
+
+  <h3 id="Apizr_Resiliencing_ResilienceHttpMessageHandler__ctor_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_Polly_ResiliencePipeline_System_Net_Http_HttpResponseMessage___Apizr_Configuring_Manager_IApizrManagerOptionsBase_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.#ctor(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,Polly.ResiliencePipeline{System.Net.Http.HttpResponseMessage}},Apizr.Configuring.Manager.IApizrManagerOptionsBase)">
+  ResilienceHttpMessageHandler(Func&lt;HttpRequestMessage, CancellationToken, ResiliencePipeline&lt;HttpResponseMessage&gt;&gt;, IApizrManagerOptionsBase)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Apizr.Resiliencing.ResilienceHttpMessageHandler.html">ResilienceHttpMessageHandler</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public ResilienceHttpMessageHandler(Func&lt;HttpRequestMessage, CancellationToken, ResiliencePipeline&lt;HttpResponseMessage&gt;&gt; pipelineProvider, IApizrManagerOptionsBase apizrOptions)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/ResiliencePipelineT.Async.cs">ResiliencePipeline</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage">HttpResponseMessage</a>&gt;&gt;</td>
-        <td><span class="parametername">pipelineProvider</span></td>
-        <td><p>The pipeline provider that supplies pipelines in response to an http message.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a></td>
-        <td><span class="parametername">apizrOptions</span></td>
-        <td><p>The Apizr options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If <code class="paramref">pipelineProvider</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Resiliencing_ResilienceHttpMessageHandler_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L73">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pipelineProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/ResiliencePipelineT.Async.cs">ResiliencePipeline</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage">HttpResponseMessage</a>&gt;&gt;</dt>
+    <dd><p>The pipeline provider that supplies pipelines in response to an http message.</p>
+</dd>
+    <dt><code>apizrOptions</code> <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a></dt>
+    <dd><p>The Apizr options</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>If <code class="paramref">pipelineProvider</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
   <a id="Apizr_Resiliencing_ResilienceHttpMessageHandler_SendAsync_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync*"></a>
-  <h4 id="Apizr_Resiliencing_ResilienceHttpMessageHandler_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">SendAsync(HttpRequestMessage, CancellationToken)</h4>
+
+  <h3 id="Apizr_Resiliencing_ResilienceHttpMessageHandler_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_" data-uid="Apizr.Resiliencing.ResilienceHttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+  SendAsync(HttpRequestMessage, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Sends an HTTP request to the inner handler to send to the server as an asynchronous operation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">protected override Task&lt;HttpResponseMessage&gt; SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a></td>
-        <td><span class="parametername">request</span></td>
-        <td><p>The HTTP request message to send to the server.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A cancellation token to cancel operation.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage">HttpResponseMessage</a>&gt;</td>
-        <td><p>The task object representing the asynchronous operation.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler.sendasync">DelegatingHandler.SendAsync(HttpRequestMessage, CancellationToken)</a></div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If <code class="paramref">request</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
-  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a></dt>
+    <dd><p>The HTTP request message to send to the server.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>A cancellation token to cancel operation.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpresponsemessage">HttpResponseMessage</a>&gt;</dt>
+    <dd><p>The task object representing the asynchronous operation.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p>If <code class="paramref">request</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+
+
 
 </article>
-          </div>
 
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Resiliencing_ResilienceHttpMessageHandler.md&amp;value=---%0Auid%3A%20Apizr.Resiliencing.ResilienceHttpMessageHandler%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L24" class="contribution-link">View Source</a>
-                  </li>
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In this article</h5>
-                <div></div>
-              </nav>
-            </div>
-          </div>
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Resiliencing/ResilienceHttpMessageHandler.cs/#L24" class="edit-link">Edit this page</a>
         </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      Supported by Respawnsive
-      
-          </div>
-        </div>
-      </footer>
-    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Supported by Respawnsive
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

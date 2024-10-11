@@ -8,6 +8,7 @@
 - [New][Exceptions] Now we can **let the exception throw even if it's yet been handled by registered handlers** thanks to the `letThrowOnHandledException` parameter
 - [Deprecated][Exceptions] Now **catching exceptions with an Action callback is deprecated** in favor of the new Func one
 - [Update][NuGet] Now **all package references are up to date** with the latest versions
+- [Update][Doc] Now **Doc website supports dark theme, larger code blocks** and some other improvements
 
 6.1.0
 ---

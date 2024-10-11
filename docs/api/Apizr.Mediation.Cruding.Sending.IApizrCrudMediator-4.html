@@ -1,1527 +1,1114 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
 <html>
-
   <head>
     <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <title>Interface IApizrCrudMediator&lt;TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams&gt; | Apizr </title>
-      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Interface IApizrCrudMediator&lt;TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams&gt; | Apizr ">
-    
-    <meta name="description" content="Apizr mediator dedicated to TApiEntity cruding, getting all shorter">
-      <link rel="shortcut icon" href="../resources/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-      <link rel="stylesheet" href="../styles/docfx.css">
-      <link rel="stylesheet" href="../styles/main.css">
-      <meta property="docfx:navrel" content="../toc.html">
-      <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      
+      <meta name="description" content="Apizr mediator dedicated to TApiEntity cruding, getting all shorter">
+      <link rel="icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../resources/logo.png" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../resources/logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4">
+
+        <article data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4">
 
 
 
-  <h1 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4" class="text-break">Interface IApizrCrudMediator&lt;TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams&gt;</h1>
-  <div class="markdown level0 summary"><p>Apizr mediator dedicated to <code class="typeparamref">TApiEntity</code> cruding, getting all shorter</p>
+  <h1 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4" class="text-break">
+Interface IApizrCrudMediator&lt;TApiEntity, TApiEntityKey, TReadAllResult, TReadAllParams&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L264"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Apizr.html">Apizr</a>.<a class="xref" href="Apizr.Mediation.html">Mediation</a>.<a class="xref" href="Apizr.Mediation.Cruding.html">Cruding</a>.<a class="xref" href="Apizr.Mediation.Cruding.Sending.html">Sending</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Apizr.Integrations.MediatR.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Apizr mediator dedicated to <code class="typeparamref">TApiEntity</code> cruding, getting all shorter</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.html">Apizr</a>.<a class="xref" href="Apizr.Mediation.html">Mediation</a>.<a class="xref" href="Apizr.Mediation.Cruding.html">Cruding</a>.<a class="xref" href="Apizr.Mediation.Cruding.Sending.html">Sending</a></h6>
-  <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
-  <h5 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IApizrCrudMediator&lt;TApiEntity, in TApiEntityKey, TReadAllResult, in TReadAllParams&gt; : IApizrCrudMediatorBase, IApizrMediatorBase where TApiEntity : class</code></pre>
   </div>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TApiEntity</span></td>
-        <td>Apizr mediator dedicated to TApiEntity cruding, getting all shorter</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApiEntityKey</span></td>
-        <td>Apizr mediator dedicated to TApiEntity cruding, getting all shorter</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td>Apizr mediator dedicated to TApiEntity cruding, getting all shorter</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllParams</span></td>
-        <td>Apizr mediator dedicated to TApiEntity cruding, getting all shorter</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendCreateCommand__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendCreateCommand(%600%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L275">View Source</a>
-  </span>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TApiEntity</code></dt>
+    <dd></dd>
+    <dt><code>TApiEntityKey</code></dt>
+    <dd></dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd></dd>
+    <dt><code>TReadAllParams</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendCreateCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendCreateCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendCreateCommand__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendCreateCommand(`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendCreateCommand(TApiEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendCreateCommand__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendCreateCommand(`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendCreateCommand(TApiEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.CreateCommand-1.html">CreateCommand&lt;TModelData&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;TApiEntity&gt; SendCreateCommand(TApiEntity entity, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntity</span></td>
-        <td><span class="parametername">entity</span></td>
-        <td><p>The entity to create</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TApiEntity&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendCreateCommand%60%601(%60%600%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L292">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>entity</code> <span class="xref">TApiEntity</span></dt>
+    <dd><p>The entity to create</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TApiEntity&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendCreateCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendCreateCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendCreateCommand&lt;TModelEntity&gt;(TModelEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendCreateCommand&lt;TModelEntity&gt;(TModelEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a mapped <a class="xref" href="Apizr.Mediation.Cruding.CreateCommand-1.html">CreateCommand&lt;TModelData&gt;</a> to Apizr using MediatR returning a mapped result</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;TModelEntity&gt; SendCreateCommand&lt;TModelEntity&gt;(TModelEntity entity, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TModelEntity</span></td>
-        <td><span class="parametername">entity</span></td>
-        <td><p>The entity to create</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TModelEntity&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntity</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendDeleteCommand__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendDeleteCommand(%601%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L465">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>entity</code> <span class="xref">TModelEntity</span></dt>
+    <dd><p>The entity to create</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TModelEntity&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntity</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendDeleteCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendDeleteCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendDeleteCommand__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendDeleteCommand(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendDeleteCommand(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendDeleteCommand__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendDeleteCommand(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendDeleteCommand(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L465"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.DeleteCommand-2.html">DeleteCommand&lt;T, TKey&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task SendDeleteCommand(TApiEntityKey key, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendReadAllQuery(System.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L312">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendReadAllQuery(Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendReadAllQuery(Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L312"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.ReadAllQuery-1.html">ReadAllQuery&lt;TReadAllResult&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;TReadAllResult&gt; SendReadAllQuery(Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TReadAllResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendReadAllQuery(%603%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L343">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TReadAllResult&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendReadAllQuery(TReadAllParams, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendReadAllQuery(TReadAllParams, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L343"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.ReadAllQuery-1.html">ReadAllQuery&lt;TReadAllResult&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;TReadAllResult&gt; SendReadAllQuery(TReadAllParams readAllParams, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TReadAllParams</span></td>
-        <td><span class="parametername">readAllParams</span></td>
-        <td><p>The read all filters</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TReadAllResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendReadAllQuery%60%601(System.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L327">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>readAllParams</code> <span class="xref">TReadAllParams</span></dt>
+    <dd><p>The read all filters</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TReadAllResult&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendReadAllQuery&lt;TModelEntityReadAllResult&gt;(Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendReadAllQuery&lt;TModelEntityReadAllResult&gt;(Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L327"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a mapped <a class="xref" href="Apizr.Mediation.Cruding.ReadAllQuery-1.html">ReadAllQuery&lt;TReadAllResult&gt;</a> to Apizr using MediatR returning mapped result</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;TModelEntityReadAllResult&gt; SendReadAllQuery&lt;TModelEntityReadAllResult&gt;(Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TModelEntityReadAllResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntityReadAllResult</span></td>
-        <td><p>The mapped result</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__1__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendReadAllQuery%60%601(%603%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L360">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TModelEntityReadAllResult&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntityReadAllResult</code></dt>
+    <dd><p>The mapped result</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__1__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery``1(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendReadAllQuery&lt;TModelEntityReadAllResult&gt;(TReadAllParams, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadAllQuery__1__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadAllQuery``1(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendReadAllQuery&lt;TModelEntityReadAllResult&gt;(TReadAllParams, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L360"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a mapped <a class="xref" href="Apizr.Mediation.Cruding.ReadAllQuery-1.html">ReadAllQuery&lt;TReadAllResult&gt;</a> to Apizr using MediatR returning a mapped result</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;TModelEntityReadAllResult&gt; SendReadAllQuery&lt;TModelEntityReadAllResult&gt;(TReadAllParams readAllParams, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TReadAllParams</span></td>
-        <td><span class="parametername">readAllParams</span></td>
-        <td><p>The read all filters</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TModelEntityReadAllResult&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntityReadAllResult</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendReadQuery(%601%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L381">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>readAllParams</code> <span class="xref">TReadAllParams</span></dt>
+    <dd><p>The read all filters</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TModelEntityReadAllResult&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntityReadAllResult</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadQuery(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendReadQuery(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadQuery(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendReadQuery(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L381"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.ReadQuery-2.html">ReadQuery&lt;TResultData, TKey&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;TApiEntity&gt; SendReadQuery(TApiEntityKey key, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TApiEntity&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadQuery__1__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendReadQuery%60%601(%601%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L398">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TApiEntity&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadQuery__1__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadQuery``1(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendReadQuery&lt;TModelEntity&gt;(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendReadQuery__1__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendReadQuery``1(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendReadQuery&lt;TModelEntity&gt;(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L398"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.ReadQuery-2.html">ReadQuery&lt;TResultData, TKey&gt;</a> to Apizr using MediatR returning a mapped result</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;TModelEntity&gt; SendReadQuery&lt;TModelEntity&gt;(TApiEntityKey key, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TModelEntity&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntity</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeCreateCommand__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeCreateCommand(%600%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L283">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TModelEntity&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntity</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeCreateCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeCreateCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeCreateCommand__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeCreateCommand(`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeCreateCommand(TApiEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeCreateCommand__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeCreateCommand(`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeCreateCommand(TApiEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L283"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.SafeCreateCommand-1.html">SafeCreateCommand&lt;TModelData&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&lt;TApiEntity&gt;&gt; SendSafeCreateCommand(TApiEntity entity, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntity</span></td>
-        <td><span class="parametername">entity</span></td>
-        <td><p>The entity to create</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TApiEntity&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeCreateCommand%60%601(%60%600%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L301">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>entity</code> <span class="xref">TApiEntity</span></dt>
+    <dd><p>The entity to create</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TApiEntity&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeCreateCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeCreateCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeCreateCommand&lt;TModelEntity&gt;(TModelEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeCreateCommand__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeCreateCommand``1(``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeCreateCommand&lt;TModelEntity&gt;(TModelEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L301"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a mapped <a class="xref" href="Apizr.Mediation.Cruding.SafeCreateCommand-1.html">SafeCreateCommand&lt;TModelData&gt;</a> to Apizr using MediatR returning a mapped result</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&lt;TModelEntity&gt;&gt; SendSafeCreateCommand&lt;TModelEntity&gt;(TModelEntity entity, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TModelEntity</span></td>
-        <td><span class="parametername">entity</span></td>
-        <td><p>The entity to create</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TModelEntity&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntity</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeDeleteCommand__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeDeleteCommand(%601%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L473">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>entity</code> <span class="xref">TModelEntity</span></dt>
+    <dd><p>The entity to create</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TModelEntity&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntity</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeDeleteCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeDeleteCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeDeleteCommand__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeDeleteCommand(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeDeleteCommand(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeDeleteCommand__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeDeleteCommand(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeDeleteCommand(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L473"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.SafeDeleteCommand-2.html">SafeDeleteCommand&lt;T, TKey&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&gt; SendSafeDeleteCommand(TApiEntityKey key, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse.html">IApizrResponse</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeReadAllQuery(System.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L319">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse.html">IApizrResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeReadAllQuery(Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeReadAllQuery(Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.SafeReadAllQuery-1.html">SafeReadAllQuery&lt;TReadAllResult&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&lt;TReadAllResult&gt;&gt; SendSafeReadAllQuery(Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TReadAllResult&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeReadAllQuery(%603%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L351">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TReadAllResult&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeReadAllQuery(TReadAllParams, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeReadAllQuery(TReadAllParams, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.SafeReadAllQuery-1.html">SafeReadAllQuery&lt;TReadAllResult&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&lt;TReadAllResult&gt;&gt; SendSafeReadAllQuery(TReadAllParams readAllParams, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TReadAllParams</span></td>
-        <td><span class="parametername">readAllParams</span></td>
-        <td><p>The read all filters</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TReadAllResult&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeReadAllQuery%60%601(System.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L335">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>readAllParams</code> <span class="xref">TReadAllParams</span></dt>
+    <dd><p>The read all filters</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TReadAllResult&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeReadAllQuery&lt;TModelEntityReadAllResult&gt;(Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery``1(System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeReadAllQuery&lt;TModelEntityReadAllResult&gt;(Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a mapped <a class="xref" href="Apizr.Mediation.Cruding.SafeReadAllQuery-1.html">SafeReadAllQuery&lt;TReadAllResult&gt;</a> to Apizr using MediatR returning mapped result</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&lt;TModelEntityReadAllResult&gt;&gt; SendSafeReadAllQuery&lt;TModelEntityReadAllResult&gt;(Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TModelEntityReadAllResult&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntityReadAllResult</span></td>
-        <td><p>The mapped result</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__1__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeReadAllQuery%60%601(%603%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L369">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TModelEntityReadAllResult&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntityReadAllResult</code></dt>
+    <dd><p>The mapped result</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__1__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery``1(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeReadAllQuery&lt;TModelEntityReadAllResult&gt;(TReadAllParams, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadAllQuery__1__3_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadAllQuery``1(`3,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeReadAllQuery&lt;TModelEntityReadAllResult&gt;(TReadAllParams, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L369"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a mapped <a class="xref" href="Apizr.Mediation.Cruding.SafeReadAllQuery-1.html">SafeReadAllQuery&lt;TReadAllResult&gt;</a> to Apizr using MediatR returning a mapped result</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&lt;TModelEntityReadAllResult&gt;&gt; SendSafeReadAllQuery&lt;TModelEntityReadAllResult&gt;(TReadAllParams readAllParams, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TReadAllParams</span></td>
-        <td><span class="parametername">readAllParams</span></td>
-        <td><p>The read all filters</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TModelEntityReadAllResult&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntityReadAllResult</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeReadQuery(%601%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L389">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>readAllParams</code> <span class="xref">TReadAllParams</span></dt>
+    <dd><p>The read all filters</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TModelEntityReadAllResult&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntityReadAllResult</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadQuery(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeReadQuery(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadQuery__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadQuery(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeReadQuery(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L389"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.SafeReadQuery-2.html">SafeReadQuery&lt;TResultData, TKey&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&lt;TApiEntity&gt;&gt; SendSafeReadQuery(TApiEntityKey key, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TApiEntity&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadQuery__1__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeReadQuery%60%601(%601%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L407">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TApiEntity&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadQuery_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadQuery*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadQuery__1__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadQuery``1(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeReadQuery&lt;TModelEntity&gt;(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeReadQuery__1__1_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeReadQuery``1(`1,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeReadQuery&lt;TModelEntity&gt;(TApiEntityKey, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L407"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.SafeReadQuery-2.html">SafeReadQuery&lt;TResultData, TKey&gt;</a> to Apizr using MediatR returning a mapped result</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&lt;TModelEntity&gt;&gt; SendSafeReadQuery&lt;TModelEntity&gt;(TApiEntityKey key, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TModelEntity&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntity</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeUpdateCommand__1__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeUpdateCommand(%601%2C%600%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L430">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse-1.html">IApizrResponse</a>&lt;TModelEntity&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntity</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeUpdateCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeUpdateCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeUpdateCommand__1__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeUpdateCommand(`1,`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeUpdateCommand(TApiEntityKey, TApiEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeUpdateCommand__1__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeUpdateCommand(`1,`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeUpdateCommand(TApiEntityKey, TApiEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L430"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.SafeUpdateCommand-2.html">SafeUpdateCommand&lt;TKey, TRequestData&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&gt; SendSafeUpdateCommand(TApiEntityKey key, TApiEntity entity, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">TApiEntity</span></td>
-        <td><span class="parametername">entity</span></td>
-        <td><p>The entity to update</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse.html">IApizrResponse</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeUpdateCommand__1__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendSafeUpdateCommand%60%601(%601%2C%60%600%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L452">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>entity</code> <span class="xref">TApiEntity</span></dt>
+    <dd><p>The entity to update</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse.html">IApizrResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeUpdateCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeUpdateCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeUpdateCommand__1__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeUpdateCommand``1(`1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendSafeUpdateCommand&lt;TModelEntity&gt;(TApiEntityKey, TModelEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendSafeUpdateCommand__1__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendSafeUpdateCommand``1(`1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendSafeUpdateCommand&lt;TModelEntity&gt;(TApiEntityKey, TModelEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L452"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a mapped <a class="xref" href="Apizr.Mediation.Cruding.SafeUpdateCommand-2.html">SafeUpdateCommand&lt;TKey, TRequestData&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IApizrResponse&gt; SendSafeUpdateCommand&lt;TModelEntity&gt;(TApiEntityKey key, TModelEntity entity, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelEntity</span></td>
-        <td><span class="parametername">entity</span></td>
-        <td><p>The entity to update</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse.html">IApizrResponse</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntity</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendUpdateCommand__1__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendUpdateCommand(%601%2C%600%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L420">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>entity</code> <span class="xref">TModelEntity</span></dt>
+    <dd><p>The entity to update</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Apizr.IApizrResponse.html">IApizrResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntity</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendUpdateCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendUpdateCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendUpdateCommand__1__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendUpdateCommand(`1,`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendUpdateCommand(TApiEntityKey, TApiEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendUpdateCommand__1__0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendUpdateCommand(`1,`0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendUpdateCommand(TApiEntityKey, TApiEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L420"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a <a class="xref" href="Apizr.Mediation.Cruding.UpdateCommand-2.html">UpdateCommand&lt;TKey, TRequestData&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task SendUpdateCommand(TApiEntityKey key, TApiEntity entity, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">TApiEntity</span></td>
-        <td><span class="parametername">entity</span></td>
-        <td><p>The entity to update</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendUpdateCommand__1__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604.SendUpdateCommand%60%601(%601%2C%60%600%2CSystem.Action%7BApizr.Configuring.Request.IApizrRequestOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L441">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>entity</code> <span class="xref">TApiEntity</span></dt>
+    <dd><p>The entity to update</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendUpdateCommand_" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendUpdateCommand*"></a>
-  <h4 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendUpdateCommand__1__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendUpdateCommand``1(`1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">SendUpdateCommand&lt;TModelEntity&gt;(TApiEntityKey, TModelEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4_SendUpdateCommand__1__1___0_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__" data-uid="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator`4.SendUpdateCommand``1(`1,``0,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder})">
+  SendUpdateCommand&lt;TModelEntity&gt;(TApiEntityKey, TModelEntity, Action&lt;IApizrRequestOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L441"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Send a mapped <a class="xref" href="Apizr.Mediation.Cruding.UpdateCommand-2.html">UpdateCommand&lt;TKey, TRequestData&gt;</a> to Apizr using MediatR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task SendUpdateCommand&lt;TModelEntity&gt;(TApiEntityKey key, TModelEntity entity, Action&lt;IApizrRequestOptionsBuilder&gt; optionsBuilder = null)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApiEntityKey</span></td>
-        <td><span class="parametername">key</span></td>
-        <td><p>The entity key</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">TModelEntity</span></td>
-        <td><span class="parametername">entity</span></td>
-        <td><p>The entity to update</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>Options provided to the request</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModelEntity</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <span class="xref">TApiEntityKey</span></dt>
+    <dd><p>The entity key</p>
+</dd>
+    <dt><code>entity</code> <span class="xref">TModelEntity</span></dt>
+    <dd><p>The entity to update</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Request.IApizrRequestOptionsBuilder.html">IApizrRequestOptionsBuilder</a>&gt;</dt>
+    <dd><p>Options provided to the request</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TModelEntity</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 </article>
-          </div>
 
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Cruding_Sending_IApizrCrudMediator_4.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%604%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L264" class="contribution-link">View Source</a>
-                  </li>
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In this article</h5>
-                <div></div>
-              </nav>
-            </div>
-          </div>
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Cruding/Sending/IApizrCrudMediator.cs/#L264" class="edit-link">Edit this page</a>
         </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      Supported by Respawnsive
-      
-          </div>
-        </div>
-      </footer>
-    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Supported by Respawnsive
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

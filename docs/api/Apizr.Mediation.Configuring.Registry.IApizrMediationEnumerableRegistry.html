@@ -1,1061 +1,845 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
 <html>
-
   <head>
     <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <title>Interface IApizrMediationEnumerableRegistry | Apizr </title>
-      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Interface IApizrMediationEnumerableRegistry | Apizr ">
-    
-    <meta name="description" content="Registry options available for extended registrations with mediation">
-      <link rel="shortcut icon" href="../resources/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-      <link rel="stylesheet" href="../styles/docfx.css">
-      <link rel="stylesheet" href="../styles/main.css">
-      <meta property="docfx:navrel" content="../toc.html">
-      <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      
+      <meta name="description" content="Registry options available for extended registrations with mediation">
+      <link rel="icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../resources/logo.png" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../resources/logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry">
+
+        <article data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry">
 
 
 
-  <h1 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry" class="text-break">Interface IApizrMediationEnumerableRegistry</h1>
-  <div class="markdown level0 summary"><p>Registry options available for extended registrations with mediation</p>
+  <h1 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry" class="text-break">
+Interface IApizrMediationEnumerableRegistry  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Apizr.html">Apizr</a>.<a class="xref" href="Apizr.Mediation.html">Mediation</a>.<a class="xref" href="Apizr.Mediation.Configuring.html">Configuring</a>.<a class="xref" href="Apizr.Mediation.Configuring.Registry.html">Registry</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Apizr.Integrations.MediatR.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Registry options available for extended registrations with mediation</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IApizrMediationEnumerableRegistry : IEnumerable&lt;KeyValuePair&lt;Type, Func&lt;IApizrMediatorBase&gt;&gt;&gt;, IEnumerable</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator">IEnumerable&lt;KeyValuePair&lt;Type, Func&lt;IApizrMediatorBase&gt;&gt;&gt;.GetEnumerator()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator">IEnumerable.GetEnumerator()</a>
     </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.html">Apizr</a>.<a class="xref" href="Apizr.Mediation.html">Mediation</a>.<a class="xref" href="Apizr.Mediation.Configuring.html">Configuring</a>.<a class="xref" href="Apizr.Mediation.Configuring.Registry.html">Registry</a></h6>
-  <h6><strong>Assembly</strong>: Apizr.Integrations.MediatR.dll</h6>
-  <h5 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IApizrMediationEnumerableRegistry : IEnumerable&lt;KeyValuePair&lt;Type, Func&lt;IApizrMediatorBase&gt;&gt;&gt;, IEnumerable</code></pre>
-  </div>
-  <h3 id="properties">Properties
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_Count.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L19">View Source</a>
-  </span>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_Count_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_Count" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count">Count</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_Count" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.Count">
+  Count
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Mediators count</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">int Count { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__1.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor%60%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L26">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__1" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``1">ContainsCrudMediatorFor&lt;T&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__1" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``1">
+  ContainsCrudMediatorFor&lt;T&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Check if registry contains a mediator for <code class="typeparamref">T</code> entity type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool ContainsCrudMediatorFor&lt;T&gt;() where T : class</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The entity type to manage</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__2.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor%60%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L34">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The entity type to manage</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__2" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``2">ContainsCrudMediatorFor&lt;T, TKey&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__2" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``2">
+  ContainsCrudMediatorFor&lt;T, TKey&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Check if registry contains a mediator for <code class="typeparamref">T</code> entity type with <code class="typeparamref">TKey</code> key type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool ContainsCrudMediatorFor&lt;T, TKey&gt;() where T : class</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The entity type to manage</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity key type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__3.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor%60%603%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L43">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The entity type to manage</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity key type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__3" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``3">ContainsCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__3" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``3">
+  ContainsCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Check if registry contains a mediator for <code class="typeparamref">T</code> entity type with <code class="typeparamref">TKey</code> key type and <code class="typeparamref">TReadAllResult</code> ReadAll result type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool ContainsCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;() where T : class</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The entity type to manage</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity key type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>The ReadAll result type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__4.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor%60%604%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L54">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The entity type to manage</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity key type</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>The ReadAll result type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__4" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``4">ContainsCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsCrudMediatorFor__4" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsCrudMediatorFor``4">
+  ContainsCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Check if registry contains a mediator for <code class="typeparamref">T</code> entity type with <code class="typeparamref">TKey</code> key type,
 <code class="typeparamref">TReadAllResult</code> ReadAll result type and <code class="typeparamref">TReadAllParams</code> ReadAll params type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool ContainsCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;() where T : class</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The entity type to manage</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity key type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>The ReadAll result type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllParams</span></td>
-        <td><p>The ReadAll params type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsMediatorFor__1.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor%60%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L61">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The entity type to manage</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity key type</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>The ReadAll result type</p>
+</dd>
+    <dt><code>TReadAllParams</code></dt>
+    <dd><p>The ReadAll params type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsMediatorFor__1" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor``1">ContainsMediatorFor&lt;TWebApi&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_ContainsMediatorFor__1" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.ContainsMediatorFor``1">
+  ContainsMediatorFor&lt;TWebApi&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Check if registry contains a mediator for <code class="typeparamref">TWebApi</code> api type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool ContainsMediatorFor&lt;TWebApi&gt;()</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TWebApi</span></td>
-        <td><p>The api type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__1.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor%60%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L72">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TWebApi</code></dt>
+    <dd><p>The api type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__1" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``1">GetCrudMediatorFor&lt;T&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__1" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``1">
+  GetCrudMediatorFor&lt;T&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Get a Crud mediator instance for an entity type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IApizrCrudMediator&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; GetCrudMediatorFor&lt;T&gt;() where T : class</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The managed entity type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__2.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor%60%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L80">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The managed entity type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__2" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``2">GetCrudMediatorFor&lt;T, TKey&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__2" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``2">
+  GetCrudMediatorFor&lt;T, TKey&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Get a Crud mediator instance for an entity type with a specific key type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IApizrCrudMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; GetCrudMediatorFor&lt;T, TKey&gt;() where T : class</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The managed entity type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity's key type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__3.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor%60%603%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L89">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The managed entity type</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity's key type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__3" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``3">GetCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__3" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``3">
+  GetCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Get a Crud mediator instance for an entity type with a specific key type and ReadAll result type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IApizrCrudMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt; GetCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;() where T : class</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, TReadAllResult, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The managed entity type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity's key type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>The ReadAll request result type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__4.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor%60%604%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L100">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, TReadAllResult, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The managed entity type</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity's key type</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>The ReadAll request result type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__4" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``4">GetCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetCrudMediatorFor__4" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetCrudMediatorFor``4">
+  GetCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Get a Crud mediator instance for an entity type with a specific key type, ReadAll result type and ReadAll params type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IApizrCrudMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt; GetCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;() where T : class</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The managed entity type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity's key type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>The ReadAll request result type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllParams</span></td>
-        <td><p>The ReadAll request params type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetMediatorFor__1.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor%60%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L108">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The managed entity type</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity's key type</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>The ReadAll request result type</p>
+</dd>
+    <dt><code>TReadAllParams</code></dt>
+    <dd><p>The ReadAll request params type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetMediatorFor__1" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor``1">GetMediatorFor&lt;TWebApi&gt;()</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_GetMediatorFor__1" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.GetMediatorFor``1">
+  GetMediatorFor&lt;TWebApi&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Get an api mediator instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IApizrMediator&lt;TWebApi&gt; GetMediatorFor&lt;TWebApi&gt;()</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Requesting.Sending.IApizrMediator-1.html">IApizrMediator</a>&lt;TWebApi&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TWebApi</span></td>
-        <td><p>The managed api type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor%60%601(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%7B%60%600%2CSystem.Int32%2CSystem.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D%7D%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L119">View Source</a>
-  </span>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Mediation.Requesting.Sending.IApizrMediator-1.html">IApizrMediator</a>&lt;TWebApi&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TWebApi</code></dt>
+    <dd><p>The managed api type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudMediatorFor&lt;T&gt;(out IApizrCrudMediator&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__1_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0_System_Int32_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``1(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,System.Int32,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+  TryGetCrudMediatorFor&lt;T&gt;(out IApizrCrudMediator&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Try to get a Crud mediator instance for an entity type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool TryGetCrudMediatorFor&lt;T&gt;(out IApizrCrudMediator&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; mediator) where T : class</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
-        <td><span class="parametername">mediator</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The managed entity type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor%60%602(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%7B%60%600%2C%60%601%2CSystem.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D%7D%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L127">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mediator</code> <a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The managed entity type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudMediatorFor&lt;T, TKey&gt;(out IApizrCrudMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__2_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``2(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+  TryGetCrudMediatorFor&lt;T, TKey&gt;(out IApizrCrudMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Try to get a Crud mediator instance for an entity type with a specific key type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool TryGetCrudMediatorFor&lt;T, TKey&gt;(out IApizrCrudMediator&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt; mediator) where T : class</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
-        <td><span class="parametername">mediator</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The managed entity type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity's key type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor%60%603(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%7B%60%600%2C%60%601%2C%60%602%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D%7D%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L136">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mediator</code> <a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The managed entity type</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity's key type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)">TryGetCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;(out IApizrCrudMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__3_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2_System_Collections_Generic_IDictionary_System_String_System_Object____" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``3(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,System.Collections.Generic.IDictionary{System.String,System.Object}}@)">
+  TryGetCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;(out IApizrCrudMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L136"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Try to get a Crud mediator instance for an entity type with a specific key type and ReadAll result type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool TryGetCrudMediatorFor&lt;T, TKey, TReadAllResult&gt;(out IApizrCrudMediator&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt; mediator) where T : class</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, TReadAllResult, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
-        <td><span class="parametername">mediator</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The managed entity type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity's key type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>The ReadAll request result type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor%60%604(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L146">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mediator</code> <a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, TReadAllResult, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The managed entity type</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity's key type</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>The ReadAll request result type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)">TryGetCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrCrudMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetCrudMediatorFor__4_Apizr_Mediation_Cruding_Sending_IApizrCrudMediator___0___1___2___3___" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetCrudMediatorFor``4(Apizr.Mediation.Cruding.Sending.IApizrCrudMediator{``0,``1,``2,``3}@)">
+  TryGetCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrCrudMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Try to get a Crud mediator instance for an entity type with a specific key type, ReadAll result type and ReadAll params type</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool TryGetCrudMediatorFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(out IApizrCrudMediator&lt;T, TKey, TReadAllResult, TReadAllParams&gt; mediator) where T : class</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;</td>
-        <td><span class="parametername">mediator</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The managed entity type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The entity's key type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>The ReadAll request result type</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllParams</span></td>
-        <td><p>The ReadAll request params type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor%60%601(Apizr.Mediation.Requesting.Sending.IApizrMediator%7B%60%600%7D%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L153">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mediator</code> <a class="xref" href="Apizr.Mediation.Cruding.Sending.IApizrCrudMediator-4.html">IApizrCrudMediator</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The managed entity type</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The entity's key type</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>The ReadAll request result type</p>
+</dd>
+    <dt><code>TReadAllParams</code></dt>
+    <dd><p>The ReadAll request params type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetMediatorFor_" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor*"></a>
-  <h4 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)">TryGetMediatorFor&lt;TWebApi&gt;(out IApizrMediator&lt;TWebApi&gt;)</h4>
+
+  <h3 id="Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry_TryGetMediatorFor__1_Apizr_Mediation_Requesting_Sending_IApizrMediator___0___" data-uid="Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry.TryGetMediatorFor``1(Apizr.Mediation.Requesting.Sending.IApizrMediator{``0}@)">
+  TryGetMediatorFor&lt;TWebApi&gt;(out IApizrMediator&lt;TWebApi&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Try to get an api mediator instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool TryGetMediatorFor&lt;TWebApi&gt;(out IApizrMediator&lt;TWebApi&gt; mediator)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Mediation.Requesting.Sending.IApizrMediator-1.html">IApizrMediator</a>&lt;TWebApi&gt;</td>
-        <td><span class="parametername">mediator</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TWebApi</span></td>
-        <td><p>The managed api type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>mediator</code> <a class="xref" href="Apizr.Mediation.Requesting.Sending.IApizrMediator-1.html">IApizrMediator</a>&lt;TWebApi&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TWebApi</code></dt>
+    <dd><p>The managed api type</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 </article>
-          </div>
 
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Mediation_Configuring_Registry_IApizrMediationEnumerableRegistry.md&amp;value=---%0Auid%3A%20Apizr.Mediation.Configuring.Registry.IApizrMediationEnumerableRegistry%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L12" class="contribution-link">View Source</a>
-                  </li>
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In this article</h5>
-                <div></div>
-              </nav>
-            </div>
-          </div>
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Handling/Apizr.Integrations.MediatR/Mediation/Configuring/Registry/IApizrMediationEnumerableRegistry.cs/#L12" class="edit-link">Edit this page</a>
         </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      Supported by Respawnsive
-      
-          </div>
-        </div>
-      </footer>
-    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Supported by Respawnsive
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

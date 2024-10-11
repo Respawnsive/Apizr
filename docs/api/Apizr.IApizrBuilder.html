@@ -1,688 +1,120 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
 <html>
-
   <head>
     <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <title>Interface IApizrBuilder | Apizr </title>
-      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Interface IApizrBuilder | Apizr ">
-    
-    <meta name="description" content="The builder">
-      <link rel="shortcut icon" href="../resources/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-      <link rel="stylesheet" href="../styles/docfx.css">
-      <link rel="stylesheet" href="../styles/main.css">
-      <meta property="docfx:navrel" content="../toc.html">
-      <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      
+      <meta name="description" content="The builder">
+      <link rel="icon" href="../resources/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../resources/logo.png" alt="">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../resources/logo.png" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Apizr.IApizrBuilder">
+
+        <article data-uid="Apizr.IApizrBuilder">
 
 
 
-  <h1 id="Apizr_IApizrBuilder" data-uid="Apizr.IApizrBuilder" class="text-break">Interface IApizrBuilder</h1>
-  <div class="markdown level0 summary"><p>The builder</p>
+  <h1 id="Apizr_IApizrBuilder" data-uid="Apizr.IApizrBuilder" class="text-break">
+Interface IApizrBuilder  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Apizr.html">Apizr</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Apizr.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>The builder</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Apizr.html">Apizr</a></h6>
-  <h6><strong>Assembly</strong>: Apizr.dll</h6>
-  <h5 id="Apizr_IApizrBuilder_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IApizrBuilder</code></pre>
   </div>
-  <h3 id="methods">Methods
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder_CreateCrudManagerFor__1_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder.CreateCrudManagerFor%60%601(System.Action%7BApizr.Configuring.Manager.IApizrManagerOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L43">View Source</a>
-  </span>
-  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
-  <h4 id="Apizr_IApizrBuilder_CreateCrudManagerFor__1_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateCrudManagerFor&lt;T&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance for <code class="typeparamref">T</code> object type (class),
-with key of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> and &quot;ReadAll&quot; query result of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>
-and ReadAll query parameters of type IDictionary{string,object}</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>The builder defining some options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The object type to manage with crud api calls (class)</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder_CreateCrudManagerFor__2_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder.CreateCrudManagerFor%60%602(System.Action%7BApizr.Configuring.Manager.IApizrManagerOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L55">View Source</a>
-  </span>
-  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
-  <h4 id="Apizr_IApizrBuilder_CreateCrudManagerFor__2_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``2(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateCrudManagerFor&lt;T, TKey&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance for <code class="typeparamref">T</code> object type (class),
-with key of type <code class="typeparamref">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>
-and ReadAll query parameters of type IDictionary{string,object}</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T, TKey&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>The builder defining some options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The object type to manage with crud api calls (class)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The object key type (primitive)</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder_CreateCrudManagerFor__3_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder.CreateCrudManagerFor%60%603(System.Action%7BApizr.Configuring.Manager.IApizrManagerOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L69">View Source</a>
-  </span>
-  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
-  <h4 id="Apizr_IApizrBuilder_CreateCrudManagerFor__3_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``3(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateCrudManagerFor&lt;T, TKey, TReadAllResult&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance for <code class="typeparamref">T</code> object type (class),
-with key of type <code class="typeparamref">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code class="typeparamref">TReadAllResult</code>
-and ReadAll query parameters of type IDictionary{string,object}</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T, TKey, TReadAllResult&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>The builder defining some options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, TReadAllResult, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The object type to manage with crud api calls (class)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The object key type (primitive)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>&quot;ReadAll&quot; query result type
-(should inherit from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> or be of class type)</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder_CreateCrudManagerFor__4_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder.CreateCrudManagerFor%60%604(System.Action%7BApizr.Configuring.Manager.IApizrManagerOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L86">View Source</a>
-  </span>
-  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
-  <h4 id="Apizr_IApizrBuilder_CreateCrudManagerFor__4_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``4(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance for <code class="typeparamref">T</code> object type (class),
-with key of type <code class="typeparamref">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code class="typeparamref">TReadAllResult</code>
-and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt; CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>The builder defining some options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The object type to manage with crud api calls (class)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The object key type (primitive)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>&quot;ReadAll&quot; query result type
-(should inherit from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> or be of class type)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllParams</span></td>
-        <td><p>ReadAll query parameters</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder_CreateCrudManagerFor__5_System_Func_Apizr_ILazyFactory_Apizr_Requesting_ICrudApi___0___1___2___3___Apizr_Connecting_IConnectivityHandler_Apizr_Caching_ICacheHandler_Apizr_Mapping_IMappingHandler_Apizr_ILazyFactory_Polly_Registry_ResiliencePipelineRegistry_System_String___Apizr_Configuring_Manager_IApizrManagerOptions_Apizr_Requesting_ICrudApi___0___1___2___3_____4__System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder.CreateCrudManagerFor%60%605(System.Func%7BApizr.ILazyFactory%7BApizr.Requesting.ICrudApi%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%7D%2CApizr.Connecting.IConnectivityHandler%2CApizr.Caching.ICacheHandler%2CApizr.Mapping.IMappingHandler%2CApizr.ILazyFactory%7BPolly.Registry.ResiliencePipelineRegistry%7BSystem.String%7D%7D%2CApizr.Configuring.Manager.IApizrManagerOptions%7BApizr.Requesting.ICrudApi%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%7D%2C%60%604%7D%2CSystem.Action%7BApizr.Configuring.Manager.IApizrManagerOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L105">View Source</a>
-  </span>
-  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
-  <h4 id="Apizr_IApizrBuilder_CreateCrudManagerFor__5_System_Func_Apizr_ILazyFactory_Apizr_Requesting_ICrudApi___0___1___2___3___Apizr_Connecting_IConnectivityHandler_Apizr_Caching_ICacheHandler_Apizr_Mapping_IMappingHandler_Apizr_ILazyFactory_Polly_Registry_ResiliencePipelineRegistry_System_String___Apizr_Configuring_Manager_IApizrManagerOptions_Apizr_Requesting_ICrudApi___0___1___2___3_____4__System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams, TApizrManager&gt;(Func&lt;ILazyFactory&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;, IApizrManagerOptions&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, TApizrManager&gt;, Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Create a <code class="typeparamref">TApizrManager</code> instance for a managed crud api for <code class="typeparamref">T</code> object (class),
-with key of type <code class="typeparamref">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code class="typeparamref">TReadAllResult</code>
-and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrManager CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams, TApizrManager&gt;(Func&lt;ILazyFactory&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;, IApizrManagerOptions&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, TApizrManager&gt; apizrManagerFactory, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class where TApizrManager : IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-7">Func</a>&lt;<a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, <a class="xref" href="Apizr.Connecting.IConnectivityHandler.html">IConnectivityHandler</a>, <a class="xref" href="Apizr.Caching.ICacheHandler.html">ICacheHandler</a>, <a class="xref" href="Apizr.Mapping.IMappingHandler.html">IMappingHandler</a>, <a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;<a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs">ResiliencePipelineRegistry</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptions-1.html">IApizrManagerOptions</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, TApizrManager&gt;</td>
-        <td><span class="parametername">apizrManagerFactory</span></td>
-        <td><p>The custom manager implementation instance factory</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>The builder defining some options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrManager</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The object type to manage with crud api calls (class)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TKey</span></td>
-        <td><p>The object key type (primitive)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllResult</span></td>
-        <td><p>&quot;ReadAll&quot; query result type
-(should inherit from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> or be of class type)</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TReadAllParams</span></td>
-        <td><p>ReadAll query parameters</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApizrManager</span></td>
-        <td><p>A custom <a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager&lt;TWebApi&gt;</a> implementation</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder_CreateManagerFor__1_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder.CreateManagerFor%60%601(System.Action%7BApizr.Configuring.Manager.IApizrManagerOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L123">View Source</a>
-  </span>
-  <a id="Apizr_IApizrBuilder_CreateManagerFor_" data-uid="Apizr.IApizrBuilder.CreateManagerFor*"></a>
-  <h4 id="Apizr_IApizrBuilder_CreateManagerFor__1_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateManagerFor&lt;TWebApi&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrManager&lt;TWebApi&gt; CreateManagerFor&lt;TWebApi&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>The builder defining some options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;TWebApi&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TWebApi</span></td>
-        <td><p>The web api interface to manage</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder_CreateManagerFor__2_System_Func_Apizr_ILazyFactory___0__Apizr_Connecting_IConnectivityHandler_Apizr_Caching_ICacheHandler_Apizr_Mapping_IMappingHandler_Apizr_ILazyFactory_Polly_Registry_ResiliencePipelineRegistry_System_String___Apizr_Configuring_Manager_IApizrManagerOptions___0____1__System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder.CreateManagerFor%60%602(System.Func%7BApizr.ILazyFactory%7B%60%600%7D%2CApizr.Connecting.IConnectivityHandler%2CApizr.Caching.ICacheHandler%2CApizr.Mapping.IMappingHandler%2CApizr.ILazyFactory%7BPolly.Registry.ResiliencePipelineRegistry%7BSystem.String%7D%7D%2CApizr.Configuring.Manager.IApizrManagerOptions%7B%60%600%7D%2C%60%601%7D%2CSystem.Action%7BApizr.Configuring.Manager.IApizrManagerOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L134">View Source</a>
-  </span>
-  <a id="Apizr_IApizrBuilder_CreateManagerFor_" data-uid="Apizr.IApizrBuilder.CreateManagerFor*"></a>
-  <h4 id="Apizr_IApizrBuilder_CreateManagerFor__2_System_Func_Apizr_ILazyFactory___0__Apizr_Connecting_IConnectivityHandler_Apizr_Caching_ICacheHandler_Apizr_Mapping_IMappingHandler_Apizr_ILazyFactory_Polly_Registry_ResiliencePipelineRegistry_System_String___Apizr_Configuring_Manager_IApizrManagerOptions___0____1__System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">CreateManagerFor&lt;TWebApi, TApizrManager&gt;(Func&lt;ILazyFactory&lt;TWebApi&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;, IApizrManagerOptions&lt;TWebApi&gt;, TApizrManager&gt;, Action&lt;IApizrManagerOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Create a <code class="typeparamref">TApizrManager</code> instance for a managed <code class="typeparamref">TWebApi</code></p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">TApizrManager CreateManagerFor&lt;TWebApi, TApizrManager&gt;(Func&lt;ILazyFactory&lt;TWebApi&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;, IApizrManagerOptions&lt;TWebApi&gt;, TApizrManager&gt; apizrManagerFactory, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where TApizrManager : IApizrManager&lt;TWebApi&gt;</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-7">Func</a>&lt;<a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;TWebApi&gt;, <a class="xref" href="Apizr.Connecting.IConnectivityHandler.html">IConnectivityHandler</a>, <a class="xref" href="Apizr.Caching.ICacheHandler.html">ICacheHandler</a>, <a class="xref" href="Apizr.Mapping.IMappingHandler.html">IMappingHandler</a>, <a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;<a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs">ResiliencePipelineRegistry</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptions-1.html">IApizrManagerOptions</a>&lt;TWebApi&gt;, TApizrManager&gt;</td>
-        <td><span class="parametername">apizrManagerFactory</span></td>
-        <td><p>The custom manager implementation instance factory</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">optionsBuilder</span></td>
-        <td><p>The builder defining some options</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TApizrManager</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TWebApi</span></td>
-        <td><p>The web api interface to manage</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="parametername">TApizrManager</span></td>
-        <td><p>A custom <a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager&lt;TWebApi&gt;</a> implementation</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder_CreateRegistry_System_Action_Apizr_Configuring_Registry_IApizrRegistryBuilder__System_Action_Apizr_Configuring_Common_IApizrCommonOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder.CreateRegistry(System.Action%7BApizr.Configuring.Registry.IApizrRegistryBuilder%7D%2CSystem.Action%7BApizr.Configuring.Common.IApizrCommonOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L27">View Source</a>
-  </span>
-  <a id="Apizr_IApizrBuilder_CreateRegistry_" data-uid="Apizr.IApizrBuilder.CreateRegistry*"></a>
-  <h4 id="Apizr_IApizrBuilder_CreateRegistry_System_Action_Apizr_Configuring_Registry_IApizrRegistryBuilder__System_Action_Apizr_Configuring_Common_IApizrCommonOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateRegistry(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">CreateRegistry(Action&lt;IApizrRegistryBuilder&gt;, Action&lt;IApizrCommonOptionsBuilder&gt;)</h4>
-  <div class="markdown level1 summary"><p>Create a registry with all managers built with both common and proper options</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IApizrRegistry CreateRegistry(Action&lt;IApizrRegistryBuilder&gt; registryBuilder, Action&lt;IApizrCommonOptionsBuilder&gt; commonOptionsBuilder = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a>&gt;</td>
-        <td><span class="parametername">registryBuilder</span></td>
-        <td><p>The registry builder with access to proper options</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Common.IApizrCommonOptionsBuilder.html">IApizrCommonOptionsBuilder</a>&gt;</td>
-        <td><span class="parametername">commonOptionsBuilder</span></td>
-        <td><p>The common options shared by all managers</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistry.html">IApizrRegistry</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="extensionmethods">Extension Methods</h3>
+
+
+
+
+
+
+
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
   <div>
       <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_CreateDownloadManager_Apizr_IApizrBuilder_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__">FileTransferOptionsBuilderExtensions.CreateDownloadManager(IApizrBuilder, Action&lt;IApizrManagerOptionsBuilder&gt;)</a>
   </div>
@@ -722,47 +154,440 @@ and ReadAll query parameters type (inheriting from IDictionary{string,object} or
   <div>
       <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_CreateUploadManagerWith__1_Apizr_IApizrBuilder_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__">FileTransferOptionsBuilderExtensions.CreateUploadManagerWith&lt;TUploadApiResultData&gt;(IApizrBuilder, Action&lt;IApizrManagerOptionsBuilder&gt;)</a>
   </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
+
+  <h3 id="Apizr_IApizrBuilder_CreateCrudManagerFor__1_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+  CreateCrudManagerFor&lt;T&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance for <code class="typeparamref">T</code> object type (class),
+with key of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> and &quot;ReadAll&quot; query result of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>
+and ReadAll query parameters of type IDictionary{string,object}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, int, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</dt>
+    <dd><p>The builder defining some options</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The object type to manage with crud api calls (class)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
+
+  <h3 id="Apizr_IApizrBuilder_CreateCrudManagerFor__2_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``2(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+  CreateCrudManagerFor&lt;T, TKey&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance for <code class="typeparamref">T</code> object type (class),
+with key of type <code class="typeparamref">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>
+and ReadAll query parameters of type IDictionary{string,object}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, IEnumerable&lt;T&gt;, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T, TKey&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</dt>
+    <dd><p>The builder defining some options</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The object type to manage with crud api calls (class)</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The object key type (primitive)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
+
+  <h3 id="Apizr_IApizrBuilder_CreateCrudManagerFor__3_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``3(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+  CreateCrudManagerFor&lt;T, TKey, TReadAllResult&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance for <code class="typeparamref">T</code> object type (class),
+with key of type <code class="typeparamref">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code class="typeparamref">TReadAllResult</code>
+and ReadAll query parameters of type IDictionary{string,object}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, IDictionary&lt;string, object&gt;&gt;&gt; CreateCrudManagerFor&lt;T, TKey, TReadAllResult&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</dt>
+    <dd><p>The builder defining some options</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, TReadAllResult, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The object type to manage with crud api calls (class)</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The object key type (primitive)</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>&quot;ReadAll&quot; query result type
+(should inherit from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> or be of class type)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
+
+  <h3 id="Apizr_IApizrBuilder_CreateCrudManagerFor__4_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``4(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+  CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance for <code class="typeparamref">T</code> object type (class),
+with key of type <code class="typeparamref">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code class="typeparamref">TReadAllResult</code>
+and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt; CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</dt>
+    <dd><p>The builder defining some options</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The object type to manage with crud api calls (class)</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The object key type (primitive)</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>&quot;ReadAll&quot; query result type
+(should inherit from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> or be of class type)</p>
+</dd>
+    <dt><code>TReadAllParams</code></dt>
+    <dd><p>ReadAll query parameters</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_IApizrBuilder_CreateCrudManagerFor_" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor*"></a>
+
+  <h3 id="Apizr_IApizrBuilder_CreateCrudManagerFor__5_System_Func_Apizr_ILazyFactory_Apizr_Requesting_ICrudApi___0___1___2___3___Apizr_Connecting_IConnectivityHandler_Apizr_Caching_ICacheHandler_Apizr_Mapping_IMappingHandler_Apizr_ILazyFactory_Polly_Registry_ResiliencePipelineRegistry_System_String___Apizr_Configuring_Manager_IApizrManagerOptions_Apizr_Requesting_ICrudApi___0___1___2___3_____4__System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateCrudManagerFor``5(System.Func{Apizr.ILazyFactory{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{Apizr.Requesting.ICrudApi{``0,``1,``2,``3}},``4},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+  CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams, TApizrManager&gt;(Func&lt;ILazyFactory&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;, IApizrManagerOptions&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, TApizrManager&gt;, Action&lt;IApizrManagerOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <code class="typeparamref">TApizrManager</code> instance for a managed crud api for <code class="typeparamref">T</code> object (class),
+with key of type <code class="typeparamref">TKey</code> (primitive) and &quot;ReadAll&quot; query result of type <code class="typeparamref">TReadAllResult</code>
+and ReadAll query parameters type (inheriting from IDictionary{string,object} or be of class type)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrManager CreateCrudManagerFor&lt;T, TKey, TReadAllResult, TReadAllParams, TApizrManager&gt;(Func&lt;ILazyFactory&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;, IApizrManagerOptions&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, TApizrManager&gt; apizrManagerFactory, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where T : class where TApizrManager : IApizrManager&lt;ICrudApi&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>apizrManagerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-7">Func</a>&lt;<a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, <a class="xref" href="Apizr.Connecting.IConnectivityHandler.html">IConnectivityHandler</a>, <a class="xref" href="Apizr.Caching.ICacheHandler.html">ICacheHandler</a>, <a class="xref" href="Apizr.Mapping.IMappingHandler.html">IMappingHandler</a>, <a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;<a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs">ResiliencePipelineRegistry</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptions-1.html">IApizrManagerOptions</a>&lt;<a class="xref" href="Apizr.Requesting.ICrudApi-4.html">ICrudApi</a>&lt;T, TKey, TReadAllResult, TReadAllParams&gt;&gt;, TApizrManager&gt;</dt>
+    <dd><p>The custom manager implementation instance factory</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</dt>
+    <dd><p>The builder defining some options</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrManager</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The object type to manage with crud api calls (class)</p>
+</dd>
+    <dt><code>TKey</code></dt>
+    <dd><p>The object key type (primitive)</p>
+</dd>
+    <dt><code>TReadAllResult</code></dt>
+    <dd><p>&quot;ReadAll&quot; query result type
+(should inherit from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> or be of class type)</p>
+</dd>
+    <dt><code>TReadAllParams</code></dt>
+    <dd><p>ReadAll query parameters</p>
+</dd>
+    <dt><code>TApizrManager</code></dt>
+    <dd><p>A custom <a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager&lt;TWebApi&gt;</a> implementation</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_IApizrBuilder_CreateManagerFor_" data-uid="Apizr.IApizrBuilder.CreateManagerFor*"></a>
+
+  <h3 id="Apizr_IApizrBuilder_CreateManagerFor__1_System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateManagerFor``1(System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+  CreateManagerFor&lt;TWebApi&gt;(Action&lt;IApizrManagerOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <a class="xref" href="Apizr.ApizrManager-1.html">ApizrManager&lt;TWebApi&gt;</a> instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IApizrManager&lt;TWebApi&gt; CreateManagerFor&lt;TWebApi&gt;(Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</dt>
+    <dd><p>The builder defining some options</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager</a>&lt;TWebApi&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TWebApi</code></dt>
+    <dd><p>The web api interface to manage</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_IApizrBuilder_CreateManagerFor_" data-uid="Apizr.IApizrBuilder.CreateManagerFor*"></a>
+
+  <h3 id="Apizr_IApizrBuilder_CreateManagerFor__2_System_Func_Apizr_ILazyFactory___0__Apizr_Connecting_IConnectivityHandler_Apizr_Caching_ICacheHandler_Apizr_Mapping_IMappingHandler_Apizr_ILazyFactory_Polly_Registry_ResiliencePipelineRegistry_System_String___Apizr_Configuring_Manager_IApizrManagerOptions___0____1__System_Action_Apizr_Configuring_Manager_IApizrManagerOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateManagerFor``2(System.Func{Apizr.ILazyFactory{``0},Apizr.Connecting.IConnectivityHandler,Apizr.Caching.ICacheHandler,Apizr.Mapping.IMappingHandler,Apizr.ILazyFactory{Polly.Registry.ResiliencePipelineRegistry{System.String}},Apizr.Configuring.Manager.IApizrManagerOptions{``0},``1},System.Action{Apizr.Configuring.Manager.IApizrManagerOptionsBuilder})">
+  CreateManagerFor&lt;TWebApi, TApizrManager&gt;(Func&lt;ILazyFactory&lt;TWebApi&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;, IApizrManagerOptions&lt;TWebApi&gt;, TApizrManager&gt;, Action&lt;IApizrManagerOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a <code class="typeparamref">TApizrManager</code> instance for a managed <code class="typeparamref">TWebApi</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrManager CreateManagerFor&lt;TWebApi, TApizrManager&gt;(Func&lt;ILazyFactory&lt;TWebApi&gt;, IConnectivityHandler, ICacheHandler, IMappingHandler, ILazyFactory&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;, IApizrManagerOptions&lt;TWebApi&gt;, TApizrManager&gt; apizrManagerFactory, Action&lt;IApizrManagerOptionsBuilder&gt; optionsBuilder = null) where TApizrManager : IApizrManager&lt;TWebApi&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>apizrManagerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-7">Func</a>&lt;<a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;TWebApi&gt;, <a class="xref" href="Apizr.Connecting.IConnectivityHandler.html">IConnectivityHandler</a>, <a class="xref" href="Apizr.Caching.ICacheHandler.html">ICacheHandler</a>, <a class="xref" href="Apizr.Mapping.IMappingHandler.html">IMappingHandler</a>, <a class="xref" href="Apizr.ILazyFactory-1.html">ILazyFactory</a>&lt;<a class="xref" href="https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs">ResiliencePipelineRegistry</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptions-1.html">IApizrManagerOptions</a>&lt;TWebApi&gt;, TApizrManager&gt;</dt>
+    <dd><p>The custom manager implementation instance factory</p>
+</dd>
+    <dt><code>optionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a>&gt;</dt>
+    <dd><p>The builder defining some options</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrManager</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TWebApi</code></dt>
+    <dd><p>The web api interface to manage</p>
+</dd>
+    <dt><code>TApizrManager</code></dt>
+    <dd><p>A custom <a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager&lt;TWebApi&gt;</a> implementation</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_IApizrBuilder_CreateRegistry_" data-uid="Apizr.IApizrBuilder.CreateRegistry*"></a>
+
+  <h3 id="Apizr_IApizrBuilder_CreateRegistry_System_Action_Apizr_Configuring_Registry_IApizrRegistryBuilder__System_Action_Apizr_Configuring_Common_IApizrCommonOptionsBuilder__" data-uid="Apizr.IApizrBuilder.CreateRegistry(System.Action{Apizr.Configuring.Registry.IApizrRegistryBuilder},System.Action{Apizr.Configuring.Common.IApizrCommonOptionsBuilder})">
+  CreateRegistry(Action&lt;IApizrRegistryBuilder&gt;, Action&lt;IApizrCommonOptionsBuilder&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a registry with all managers built with both common and proper options</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IApizrRegistry CreateRegistry(Action&lt;IApizrRegistryBuilder&gt; registryBuilder, Action&lt;IApizrCommonOptionsBuilder&gt; commonOptionsBuilder = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>registryBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Registry.IApizrRegistryBuilder.html">IApizrRegistryBuilder</a>&gt;</dt>
+    <dd><p>The registry builder with access to proper options</p>
+</dd>
+    <dt><code>commonOptionsBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Apizr.Configuring.Common.IApizrCommonOptionsBuilder.html">IApizrCommonOptionsBuilder</a>&gt;</dt>
+    <dd><p>The common options shared by all managers</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Configuring.Registry.IApizrRegistry.html">IApizrRegistry</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
 
 </article>
-          </div>
 
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_IApizrBuilder.md&amp;value=---%0Auid%3A%20Apizr.IApizrBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L17" class="contribution-link">View Source</a>
-                  </li>
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In this article</h5>
-                <div></div>
-              </nav>
-            </div>
-          </div>
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/IApizrBuilder.cs/#L17" class="edit-link">Edit this page</a>
         </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      Supported by Respawnsive
-      
-          </div>
-        </div>
-      </footer>
-    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Supported by Respawnsive
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

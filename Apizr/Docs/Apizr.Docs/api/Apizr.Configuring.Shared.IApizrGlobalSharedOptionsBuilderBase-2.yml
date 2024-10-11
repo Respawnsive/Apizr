@@ -7,7 +7,9 @@ items:
   children:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)
@@ -77,22 +79,34 @@ items:
   summary: Catch potential exceptions
   example: []
   syntax:
-    content: TApizrOptionsBuilder WithExCatching(Action<ApizrException> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+    content: >-
+      [Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")]
+
+      TApizrOptionsBuilder WithExCatching(Action<ApizrException> onException, bool letThrowOnException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     parameters:
     - id: onException
       type: System.Action{Apizr.ApizrException}
       description: The exception callback
-    - id: letThrowOnExceptionWithEmptyCache
+    - id: letThrowOnException
       type: System.Boolean
-      description: "Let throw potential exception if there's no cached data to return (default: true)"
+      description: 'Let throw potential exception (default: true)'
     - id: strategy
       type: Apizr.Configuring.ApizrDuplicateStrategy
       description: "The duplicate strategy if there's another callback already (default: Replace)"
     return:
       type: '{TApizrOptionsBuilder}'
       description: ''
-    content.vb: Function WithExCatching(onException As Action(Of ApizrException), letThrowOnExceptionWithEmptyCache As Boolean = True, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As TApizrOptionsBuilder
+    content.vb: >-
+      <Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")>
+
+      Function WithExCatching(onException As Action(Of ApizrException), letThrowOnException As Boolean = True, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As TApizrOptionsBuilder
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Catching an exception by an Action is now replaced by a Func returning a handled boolean flag
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Action(Of ApizrException), Boolean, ApizrDuplicateStrategy)
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(System.Action(Of Apizr.ApizrException), Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: WithExCatching(Action(Of ApizrException), Boolean, ApizrDuplicateStrategy)
@@ -114,21 +128,24 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithExCatching
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 39
+    startLine: 40
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
   summary: Catch potential exceptions
   example: []
   syntax:
-    content: TApizrOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+    content: >-
+      [Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")]
+
+      TApizrOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException, bool letThrowOnException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
     parameters:
     - id: onException
       type: System.Action{Apizr.ApizrException{{TResult}}}
       description: The exception callback
-    - id: letThrowOnExceptionWithEmptyCache
+    - id: letThrowOnException
       type: System.Boolean
-      description: "Let throw potential exception if there's no cached data to return (default: true)"
+      description: 'Let throw potential exception (default: true)'
     - id: strategy
       type: Apizr.Configuring.ApizrDuplicateStrategy
       description: "The duplicate strategy if there's another callback already (default: Replace)"
@@ -137,11 +154,110 @@ items:
     return:
       type: '{TApizrOptionsBuilder}'
       description: ''
-    content.vb: Function WithExCatching(Of TResult)(onException As Action(Of ApizrException(Of TResult)), letThrowOnExceptionWithEmptyCache As Boolean = True, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As TApizrOptionsBuilder
+    content.vb: >-
+      <Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")>
+
+      Function WithExCatching(Of TResult)(onException As Action(Of ApizrException(Of TResult)), letThrowOnException As Boolean = True, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As TApizrOptionsBuilder
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Catching an exception by an Action is now replaced by a Func returning a handled boolean flag
   nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(Action(Of ApizrException(Of TResult)), Boolean, ApizrDuplicateStrategy)
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(System.Action(Of Apizr.ApizrException(Of TResult)), Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
   name.vb: WithExCatching(Of TResult)(Action(Of ApizrException(Of TResult)), Boolean, ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
+  langs:
+  - csharp
+  - vb
+  name: WithExCatching(Func<ApizrException, bool>, bool, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(Func<ApizrException, bool>, bool, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching(System.Func<Apizr.ApizrException, bool>, bool, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithExCatching
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
+    startLine: 49
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: Catch potential exceptions
+  example: []
+  syntax:
+    content: TApizrOptionsBuilder WithExCatching(Func<ApizrException, bool> onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+    parameters:
+    - id: onException
+      type: System.Func{Apizr.ApizrException,System.Boolean}
+      description: The exception callback returning handled flag
+    - id: letThrowOnHandledException
+      type: System.Boolean
+      description: "Let throw potential exception even if it's handled (default: true)"
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's another callback already (default: Replace)"
+    return:
+      type: '{TApizrOptionsBuilder}'
+      description: ''
+    content.vb: Function WithExCatching(onException As Func(Of ApizrException, Boolean), letThrowOnHandledException As Boolean = True, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As TApizrOptionsBuilder
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Func(Of ApizrException, Boolean), Boolean, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(System.Func(Of Apizr.ApizrException, Boolean), Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithExCatching(Func(Of ApizrException, Boolean), Boolean, ApizrDuplicateStrategy)
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  id: WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2
+  langs:
+  - csharp
+  - vb
+  name: WithExCatching<TResult>(Func<ApizrException<TResult>, bool>, bool, ApizrDuplicateStrategy)
+  nameWithType: IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(Func<ApizrException<TResult>, bool>, bool, ApizrDuplicateStrategy)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithExCatching<TResult>(System.Func<Apizr.ApizrException<TResult>, bool>, bool, Apizr.Configuring.ApizrDuplicateStrategy)
+  type: Method
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: WithExCatching
+    path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
+    startLine: 58
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  summary: Catch potential exceptions
+  example: []
+  syntax:
+    content: TApizrOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, bool> onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+    parameters:
+    - id: onException
+      type: System.Func{Apizr.ApizrException{{TResult}},System.Boolean}
+      description: The exception callback returning handled flag
+    - id: letThrowOnHandledException
+      type: System.Boolean
+      description: "Let throw potential exception even if it's handled (default: true)"
+    - id: strategy
+      type: Apizr.Configuring.ApizrDuplicateStrategy
+      description: "The duplicate strategy if there's another callback already (default: Replace)"
+    typeParameters:
+    - id: TResult
+    return:
+      type: '{TApizrOptionsBuilder}'
+      description: ''
+    content.vb: Function WithExCatching(Of TResult)(onException As Func(Of ApizrException(Of TResult), Boolean), letThrowOnHandledException As Boolean = True, strategy As ApizrDuplicateStrategy = ApizrDuplicateStrategy.Replace) As TApizrOptionsBuilder
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*
+  nameWithType.vb: IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(Func(Of ApizrException(Of TResult), Boolean), Boolean, ApizrDuplicateStrategy)
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithExCatching(Of TResult)(System.Func(Of Apizr.ApizrException(Of TResult), Boolean), Boolean, Apizr.Configuring.ApizrDuplicateStrategy)
+  name.vb: WithExCatching(Of TResult)(Func(Of ApizrException(Of TResult), Boolean), Boolean, ApizrDuplicateStrategy)
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)
   id: WithHandlerParameter(System.String,System.Object)
@@ -160,7 +276,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHandlerParameter
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 47
+    startLine: 66
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -201,7 +317,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceProperty
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 55
+    startLine: 74
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -244,7 +360,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLogging
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 64
+    startLine: 83
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -288,7 +404,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithOperationTimeout
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 72
+    startLine: 91
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -325,7 +441,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithRequestTimeout
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 79
+    startLine: 98
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -362,7 +478,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResilienceContextOptions
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 86
+    startLine: 105
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -400,7 +516,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionNames
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 94
+    startLine: 113
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -441,7 +557,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithLoggedHeadersRedactionRule
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 102
+    startLine: 121
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -482,7 +598,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithCaching
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs
-    startLine: 111
+    startLine: 130
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -1490,6 +1606,138 @@ references:
   - name: TResult
   - name: )
   - name: )
+- uid: System.Func{Apizr.ApizrException,System.Boolean}
+  commentId: T:System.Func{Apizr.ApizrException,System.Boolean}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<ApizrException, bool>
+  nameWithType: Func<ApizrException, bool>
+  fullName: System.Func<Apizr.ApizrException, bool>
+  nameWithType.vb: Func(Of ApizrException, Boolean)
+  fullName.vb: System.Func(Of Apizr.ApizrException, Boolean)
+  name.vb: Func(Of ApizrException, Boolean)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Apizr.ApizrException
+    name: ApizrException
+    href: Apizr.ApizrException.html
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.ApizrException
+    name: ApizrException
+    href: Apizr.ApizrException.html
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Func{Apizr.ApizrException{{TResult}},System.Boolean}
+  commentId: T:System.Func{Apizr.ApizrException{``0},System.Boolean}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<ApizrException<TResult>, bool>
+  nameWithType: Func<ApizrException<TResult>, bool>
+  fullName: System.Func<Apizr.ApizrException<TResult>, bool>
+  nameWithType.vb: Func(Of ApizrException(Of TResult), Boolean)
+  fullName.vb: System.Func(Of Apizr.ApizrException(Of TResult), Boolean)
+  name.vb: Func(Of ApizrException(Of TResult), Boolean)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    href: Apizr.ApizrException-1.html
+  - name: <
+  - name: TResult
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.ApizrException`1
+    name: ApizrException
+    href: Apizr.ApizrException-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter*
   commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter
   href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_
@@ -1819,40 +2067,6 @@ references:
     name: Generic
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic
-- uid: System.Func`2
-  commentId: T:System.Func`2
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.func-2
-  name: Func<T, TResult>
-  nameWithType: Func<T, TResult>
-  fullName: System.Func<T, TResult>
-  nameWithType.vb: Func(Of T, TResult)
-  fullName.vb: System.Func(Of T, TResult)
-  name.vb: Func(Of T, TResult)
-  spec.csharp:
-  - uid: System.Func`2
-    name: Func
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
-  - name: <
-  - name: T
-  - name: ','
-  - name: " "
-  - name: TResult
-  - name: '>'
-  spec.vb:
-  - uid: System.Func`2
-    name: Func
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
-  - name: (
-  - name: Of
-  - name: " "
-  - name: T
-  - name: ','
-  - name: " "
-  - name: TResult
-  - name: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule*
   commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule
   href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_

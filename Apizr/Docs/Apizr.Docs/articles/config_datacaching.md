@@ -342,8 +342,8 @@ public interface IReqResService
 // Then we can handle the IApizrResponse<T> response comming from Apizr
 var response = await _reqResManager.ExecuteAsync(api => api.GetUsersAsync());
 
-// Log potential errors and maybe inform the user about it
-if(!response.IsSuccess)
+// Log potential unhandled exceptions and maybe inform the user about it
+if(!response.IsSuccess && !response.Exception.Handled)
 {
    _logger.LogError(response.Exception);
     Alert.Show("Error", response.Exception.Message);

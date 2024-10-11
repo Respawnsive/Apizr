@@ -8,7 +8,7 @@ items:
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.CacheOptions
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HttpTracerMode
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OperationTimeout
@@ -157,43 +157,43 @@ items:
   summary: Catching potential exception if defined
   example: []
   syntax:
-    content: Action<ApizrException> OnException { get; }
+    content: Func<ApizrException, bool> OnException { get; }
     parameters: []
     return:
-      type: System.Action{Apizr.ApizrException}
-    content.vb: ReadOnly Property OnException As Action(Of ApizrException)
+      type: System.Func{Apizr.ApizrException,System.Boolean}
+    content.vb: ReadOnly Property OnException As Func(Of ApizrException, Boolean)
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException*
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
-  id: LetThrowOnExceptionWithEmptyCache
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnHandledException
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnHandledException
+  id: LetThrowOnHandledException
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
   langs:
   - csharp
   - vb
-  name: LetThrowOnExceptionWithEmptyCache
-  nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+  name: LetThrowOnHandledException
+  nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnHandledException
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBase.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: LetThrowOnExceptionWithEmptyCache
+    id: LetThrowOnHandledException
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBase.cs
     startLine: 39
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
-  summary: Let throw potential exception if there's no cached data to return
+  summary: "Let throw potential exception even if it's handled (default: true)"
   example: []
   syntax:
-    content: bool LetThrowOnExceptionWithEmptyCache { get; }
+    content: bool LetThrowOnHandledException { get; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: ReadOnly Property LetThrowOnExceptionWithEmptyCache As Boolean
-  overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache*
+    content.vb: ReadOnly Property LetThrowOnHandledException As Boolean
+  overload: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnHandledException*
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.HandlersParameters
   id: HandlersParameters
@@ -494,66 +494,84 @@ references:
   name: OnException
   nameWithType: IApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
-- uid: System.Action{Apizr.ApizrException}
-  commentId: T:System.Action{Apizr.ApizrException}
+- uid: System.Func{Apizr.ApizrException,System.Boolean}
+  commentId: T:System.Func{Apizr.ApizrException,System.Boolean}
   parent: System
-  definition: System.Action`1
-  href: https://learn.microsoft.com/dotnet/api/system.action-1
-  name: Action<ApizrException>
-  nameWithType: Action<ApizrException>
-  fullName: System.Action<Apizr.ApizrException>
-  nameWithType.vb: Action(Of ApizrException)
-  fullName.vb: System.Action(Of Apizr.ApizrException)
-  name.vb: Action(Of ApizrException)
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<ApizrException, bool>
+  nameWithType: Func<ApizrException, bool>
+  fullName: System.Func<Apizr.ApizrException, bool>
+  nameWithType.vb: Func(Of ApizrException, Boolean)
+  fullName.vb: System.Func(Of Apizr.ApizrException, Boolean)
+  name.vb: Func(Of ApizrException, Boolean)
   spec.csharp:
-  - uid: System.Action`1
-    name: Action
+  - uid: System.Func`2
+    name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.action-1
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
   - uid: Apizr.ApizrException
     name: ApizrException
     href: Apizr.ApizrException.html
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: '>'
   spec.vb:
-  - uid: System.Action`1
-    name: Action
+  - uid: System.Func`2
+    name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.action-1
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: (
   - name: Of
   - name: " "
   - uid: Apizr.ApizrException
     name: ApizrException
     href: Apizr.ApizrException.html
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
-- uid: System.Action`1
-  commentId: T:System.Action`1
+- uid: System.Func`2
+  commentId: T:System.Func`2
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.action-1
-  name: Action<T>
-  nameWithType: Action<T>
-  fullName: System.Action<T>
-  nameWithType.vb: Action(Of T)
-  fullName.vb: System.Action(Of T)
-  name.vb: Action(Of T)
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
   spec.csharp:
-  - uid: System.Action`1
-    name: Action
+  - uid: System.Func`2
+    name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.action-1
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
   - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
   - name: '>'
   spec.vb:
-  - uid: System.Action`1
-    name: Action
+  - uid: System.Func`2
+    name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.action-1
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: (
   - name: Of
   - name: " "
   - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
   - name: )
 - uid: System
   commentId: N:System
@@ -562,12 +580,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache*
-  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LetThrowOnExceptionWithEmptyCache
-  name: LetThrowOnExceptionWithEmptyCache
-  nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnExceptionWithEmptyCache
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnHandledException*
+  commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnHandledException
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_LetThrowOnHandledException
+  name: LetThrowOnHandledException
+  nameWithType: IApizrGlobalSharedOptionsBase.LetThrowOnHandledException
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.LetThrowOnHandledException
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -763,40 +781,6 @@ references:
   name: RequestTimeout
   nameWithType: IApizrGlobalSharedOptionsBase.RequestTimeout
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.RequestTimeout
-- uid: System.Func`2
-  commentId: T:System.Func`2
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.func-2
-  name: Func<T, TResult>
-  nameWithType: Func<T, TResult>
-  fullName: System.Func<T, TResult>
-  nameWithType.vb: Func(Of T, TResult)
-  fullName.vb: System.Func(Of T, TResult)
-  name.vb: Func(Of T, TResult)
-  spec.csharp:
-  - uid: System.Func`2
-    name: Func
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
-  - name: <
-  - name: T
-  - name: ','
-  - name: " "
-  - name: TResult
-  - name: '>'
-  spec.vb:
-  - uid: System.Func`2
-    name: Func
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
-  - name: (
-  - name: Of
-  - name: " "
-  - name: T
-  - name: ','
-  - name: " "
-  - name: TResult
-  - name: )
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue*
   commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
   href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ShouldRedactHeaderValue

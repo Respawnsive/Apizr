@@ -1244,7 +1244,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithCaching(Apizr.Caching.CacheMode%2CSystem.Nullable%7BSystem.TimeSpan%7D%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L772">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L831">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithCaching_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithCaching*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">WithCaching(CacheMode, TimeSpan?, bool)</h4>
@@ -1769,7 +1769,8 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrCommonOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Catching an exception by an Action is now replaced by a Func returning a handled boolean flag&quot;)]
+public IApizrCommonOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; onException, bool letThrowOnException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1789,8 +1790,69 @@
       </tr>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><span class="parametername">letThrowOnExceptionWithEmptyCache</span></td>
-        <td><p>Let throw potential exception if there's no cached data to return (default: true)</p>
+        <td><span class="parametername">letThrowOnException</span></td>
+        <td><p>Let throw potential exception (default: true)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></td>
+        <td><span class="parametername">strategy</span></td>
+        <td><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Common.IApizrCommonOptionsBuilder.html">IApizrCommonOptionsBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching_System_Func_Apizr_ApizrException_System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching(System.Func%7BApizr.ApizrException%2CSystem.Boolean%7D%2CSystem.Boolean%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L475">View Source</a>
+  </span>
+  <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching*"></a>
+  <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching_System_Func_Apizr_ApizrException_System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">WithExCatching(Func&lt;ApizrException, bool&gt;, bool, ApizrDuplicateStrategy)</h4>
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrCommonOptionsBuilder WithExCatching(Func&lt;ApizrException, bool&gt; onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.ApizrException.html">ApizrException</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</td>
+        <td><span class="parametername">onException</span></td>
+        <td><p>The exception callback returning handled flag</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">letThrowOnHandledException</span></td>
+        <td><p>Let throw potential exception even if it's handled (default: true)</p>
 </td>
       </tr>
       <tr>
@@ -1821,7 +1883,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching%60%601(System.Action%7BApizr.ApizrException%7B%60%600%7D%7D%2CSystem.Boolean%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L448">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L467">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt;, bool, ApizrDuplicateStrategy)</h4>
@@ -1830,7 +1892,8 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt; onException, bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Catching an exception by an Action is now replaced by a Func returning a handled boolean flag&quot;)]
+public IApizrCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt; onException, bool letThrowOnException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1850,8 +1913,84 @@
       </tr>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><span class="parametername">letThrowOnExceptionWithEmptyCache</span></td>
-        <td><p>Let throw potential exception if there's no cached data to return (default: true)</p>
+        <td><span class="parametername">letThrowOnException</span></td>
+        <td><p>Let throw potential exception (default: true)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></td>
+        <td><span class="parametername">strategy</span></td>
+        <td><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Apizr.Configuring.Common.IApizrCommonOptionsBuilder.html">IApizrCommonOptionsBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching%60%601(System.Func%7BApizr.ApizrException%7B%60%600%7D%2CSystem.Boolean%7D%2CSystem.Boolean%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L508">View Source</a>
+  </span>
+  <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching*"></a>
+  <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, bool&gt;, bool, ApizrDuplicateStrategy)</h4>
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, bool&gt; onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TResult&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</td>
+        <td><span class="parametername">onException</span></td>
+        <td><p>The exception callback returning handled flag</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">letThrowOnHandledException</span></td>
+        <td><p>Let throw potential exception even if it's handled (default: true)</p>
 </td>
       </tr>
       <tr>
@@ -1897,7 +2036,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHandlerParameter_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHandlerParameter(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L455">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L514">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHandlerParameter_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHandlerParameter*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHandlerParameter_System_String_System_Object_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHandlerParameter(System.String,System.Object)">WithHandlerParameter(string, object)</h4>
@@ -1952,7 +2091,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Collections.Generic.IList%7BSystem.String%7D%2CApizr.Configuring.ApizrDuplicateStrategy%2CApizr.Configuring.ApizrRegistrationMode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L486">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L545">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">WithHeaders(IList&lt;string&gt;, ApizrDuplicateStrategy, ApizrRegistrationMode)</h4>
@@ -2013,7 +2152,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Func%7BSystem.Collections.Generic.IList%7BSystem.String%7D%7D%2CApizr.Configuring.ApizrDuplicateStrategy%2CApizr.Configuring.ApizrLifetimeScope%2CApizr.Configuring.ApizrRegistrationMode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L517">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L576">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">WithHeaders(Func&lt;IList&lt;string&gt;&gt;, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)</h4>
@@ -2080,7 +2219,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders%60%601(System.Func%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.String%7D%7D%5B%5D%2CApizr.Configuring.ApizrDuplicateStrategy%2CApizr.Configuring.ApizrLifetimeScope%2CApizr.Configuring.ApizrRegistrationMode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L557">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L616">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">WithHeaders&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)</h4>
@@ -2169,7 +2308,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders%60%601(%60%600%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.String%7D%7D%5B%5D%2CApizr.Configuring.ApizrDuplicateStrategy%2CApizr.Configuring.ApizrLifetimeScope%2CApizr.Configuring.ApizrRegistrationMode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L549">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L608">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">WithHeaders&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)</h4>
@@ -2548,7 +2687,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable%7BSystem.String%7D%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L677">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L736">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggedHeadersRedactionNames_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionNames*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">WithLoggedHeadersRedactionNames(IEnumerable&lt;string&gt;, ApizrDuplicateStrategy)</h4>
@@ -2603,7 +2742,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func%7BSystem.String%2CSystem.Boolean%7D%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L686">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L745">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggedHeadersRedactionRule_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionRule*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">WithLoggedHeadersRedactionRule(Func&lt;string, bool&gt;, ApizrDuplicateStrategy)</h4>
@@ -2658,7 +2797,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggerFactory_Microsoft_Extensions_Logging_ILoggerFactory_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L637">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L696">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggerFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggerFactory_Microsoft_Extensions_Logging_ILoggerFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)">WithLoggerFactory(ILoggerFactory)</h4>
@@ -2707,7 +2846,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggerFactory_System_Func_Microsoft_Extensions_Logging_ILoggerFactory__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory(System.Func%7BMicrosoft.Extensions.Logging.ILoggerFactory%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L641">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L700">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggerFactory_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLoggerFactory_System_Func_Microsoft_Extensions_Logging_ILoggerFactory__" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLoggerFactory(System.Func{Microsoft.Extensions.Logging.ILoggerFactory})">WithLoggerFactory(Func&lt;ILoggerFactory&gt;)</h4>
@@ -2756,7 +2895,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode%2CApizr.Logging.HttpMessageParts%2CMicrosoft.Extensions.Logging.LogLevel%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L463">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L522">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])</h4>
@@ -2816,7 +2955,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_System_Func_Apizr_Logging_HttpTracerMode__System_Func_Apizr_Logging_HttpMessageParts__System_Func_Microsoft_Extensions_Logging_LogLevel____.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func%7BApizr.Logging.HttpTracerMode%7D%2CSystem.Func%7BApizr.Logging.HttpMessageParts%7D%2CSystem.Func%7BMicrosoft.Extensions.Logging.LogLevel%5B%5D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L468">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L527">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_System_Func_Apizr_Logging_HttpTracerMode__System_Func_Apizr_Logging_HttpMessageParts__System_Func_Microsoft_Extensions_Logging_LogLevel____" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">WithLogging(Func&lt;HttpTracerMode&gt;, Func&lt;HttpMessageParts&gt;, Func&lt;LogLevel[]&gt;)</h4>
@@ -2877,7 +3016,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_System_Func_System_ValueTuple_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_____.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func%7BSystem.ValueTuple%7BApizr.Logging.HttpTracerMode%2CApizr.Logging.HttpMessageParts%2CMicrosoft.Extensions.Logging.LogLevel%5B%5D%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L479">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L538">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithLogging_System_Func_System_ValueTuple_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_____" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">WithLogging(Func&lt;(HttpTracerMode, HttpMessageParts, LogLevel[])&gt;)</h4>
@@ -2926,7 +3065,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithMappingHandler_Apizr_Mapping_IMappingHandler_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L649">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L708">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithMappingHandler_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithMappingHandler_Apizr_Mapping_IMappingHandler_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)">WithMappingHandler(IMappingHandler)</h4>
@@ -2975,7 +3114,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithMappingHandler_System_Func_Apizr_Mapping_IMappingHandler__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler(System.Func%7BApizr.Mapping.IMappingHandler%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L653">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L712">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithMappingHandler_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithMappingHandler_System_Func_Apizr_Mapping_IMappingHandler__" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithMappingHandler(System.Func{Apizr.Mapping.IMappingHandler})">WithMappingHandler(Func&lt;IMappingHandler&gt;)</h4>
@@ -3024,7 +3163,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithOperationTimeout_System_Func_System_TimeSpan__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithOperationTimeout(System.Func%7BSystem.TimeSpan%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L605">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L664">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithOperationTimeout_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithOperationTimeout*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithOperationTimeout_System_Func_System_TimeSpan__" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithOperationTimeout(System.Func{System.TimeSpan})">WithOperationTimeout(Func&lt;TimeSpan&gt;)</h4>
@@ -3073,7 +3212,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithOperationTimeout_System_TimeSpan_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithOperationTimeout(System.TimeSpan)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L601">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L660">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithOperationTimeout_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithOperationTimeout*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithOperationTimeout_System_TimeSpan_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithOperationTimeout(System.TimeSpan)">WithOperationTimeout(TimeSpan)</h4>
@@ -3220,7 +3359,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithRequestTimeout_System_Func_System_TimeSpan__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithRequestTimeout(System.Func%7BSystem.TimeSpan%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L617">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L676">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithRequestTimeout_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithRequestTimeout*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithRequestTimeout_System_Func_System_TimeSpan__" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithRequestTimeout(System.Func{System.TimeSpan})">WithRequestTimeout(Func&lt;TimeSpan&gt;)</h4>
@@ -3269,7 +3408,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithRequestTimeout_System_TimeSpan_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithRequestTimeout(System.TimeSpan)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L613">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L672">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithRequestTimeout_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithRequestTimeout*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithRequestTimeout_System_TimeSpan_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithRequestTimeout(System.TimeSpan)">WithRequestTimeout(TimeSpan)</h4>
@@ -3318,7 +3457,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceContextOptions(System.Action%7BApizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L661">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L720">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceContextOptions_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceContextOptions*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">WithResilienceContextOptions(Action&lt;IApizrResilienceContextOptionsBuilder&gt;)</h4>
@@ -3367,7 +3506,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResiliencePipelineKeys_System_String___System_Collections_Generic_IEnumerable_Apizr_Configuring_ApizrRequestMethod__Apizr_Configuring_ApizrDuplicateStrategy_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResiliencePipelineKeys(System.String%5B%5D%2CSystem.Collections.Generic.IEnumerable%7BApizr.Configuring.ApizrRequestMethod%7D%2CApizr.Configuring.ApizrDuplicateStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L718">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L777">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResiliencePipelineKeys_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResiliencePipelineKeys*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResiliencePipelineKeys_System_String___System_Collections_Generic_IEnumerable_Apizr_Configuring_ApizrRequestMethod__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">WithResiliencePipelineKeys(string[], IEnumerable&lt;ApizrRequestMethod&gt;, ApizrDuplicateStrategy)</h4>
@@ -3526,7 +3665,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0__System_Func___0__.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceProperty%60%601(Polly.ResiliencePropertyKey%7B%60%600%7D%2CSystem.Func%7B%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L629">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L688">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceProperty_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceProperty*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0__System_Func___0__" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})">WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, Func&lt;TValue&gt;)</h4>
@@ -3596,7 +3735,7 @@
     <a href="https://github.com/Respawnsive/Apizr/new/dev/apiSpec/new?filename=Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_.md&amp;value=---%0Auid%3A%20Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceProperty%60%601(Polly.ResiliencePropertyKey%7B%60%600%7D%2C%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L625">View Source</a>
+    <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptionsBuilder.cs/#L684">View Source</a>
   </span>
   <a id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceProperty_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceProperty*"></a>
   <h4 id="Apizr_Configuring_Common_ApizrCommonOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_" data-uid="Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, TValue)</h4>

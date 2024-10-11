@@ -4214,7 +4214,8 @@ namespace Apizr.Tests
                 options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
 
             // Calling it should throw but handled by Polly
-            await act.Should().ThrowAsync<ApizrException>();
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.And.Handled.Should().BeTrue();
 
             handledException.Should().Be(4);
 
@@ -4226,7 +4227,8 @@ namespace Apizr.Tests
                 options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Replace));
 
             // Calling it should throw but handled by Polly
-            await act.Should().ThrowAsync<ApizrException>();
+            ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.And.Handled.Should().BeTrue();
 
             handledException.Should().Be(1);
         }
@@ -4272,7 +4274,8 @@ namespace Apizr.Tests
                 options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
 
             // Calling it should throw but handled by Polly
-            await act.Should().ThrowAsync<ApizrException>();
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.And.Handled.Should().BeTrue();
 
             handledException.Should().Be(3);
 
@@ -4284,7 +4287,8 @@ namespace Apizr.Tests
                 options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Replace));
 
             // Calling it should throw but handled by Polly
-            await act.Should().ThrowAsync<ApizrException>();
+            ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.And.Handled.Should().BeFalse();
 
             handledException.Should().Be(1);
         }

@@ -215,7 +215,7 @@ namespace Apizr.Configuring.Manager
         public Func<ApizrException, bool> OnException => Options.OnException;
 
         /// <inheritdoc />
-        public bool LetThrowOnExceptionWithEmptyCache => Options.LetThrowOnExceptionWithEmptyCache;
+        public bool LetThrowOnHandledException => Options.LetThrowOnHandledException;
 
         /// <inheritdoc />
         public IDictionary<string, object> HandlersParameters => Options.HandlersParameters;

@@ -23,11 +23,6 @@ namespace Apizr
         /// The <see cref="ApizrException"/> object in case of unsuccessful response.
         /// </summary>
         ApizrException Exception { get; }
-
-        /// <summary>
-        /// Indicates whether the exception has been handled yet by callback thanks to WithExCatching option.
-        /// </summary>
-        bool IsExceptionHandled { get; }
     }
 
     /// <summary>

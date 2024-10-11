@@ -35,9 +35,9 @@ namespace Apizr.Configuring.Shared
         Func<ApizrException, bool> OnException { get; }
 
         /// <summary>
-        /// Let throw potential exception if there's no cached data to return
+        /// Let throw potential exception even if it's handled (default: true)
         /// </summary>
-        bool LetThrowOnExceptionWithEmptyCache { get; }
+        bool LetThrowOnHandledException { get; }
 
         /// <summary>
         /// Parameters passed through delegating handlers

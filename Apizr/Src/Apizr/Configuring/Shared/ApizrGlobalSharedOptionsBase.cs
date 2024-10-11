@@ -20,7 +20,7 @@ namespace Apizr.Configuring.Shared
             TrafficVerbosity = sharedOptions?.TrafficVerbosity ?? default;
             LogLevels = sharedOptions?.LogLevels.ToArray();
             OnException = sharedOptions?.OnException;
-            LetThrowOnExceptionWithEmptyCache = sharedOptions?.LetThrowOnExceptionWithEmptyCache ?? true;
+            LetThrowOnHandledException = sharedOptions?.LetThrowOnHandledException ?? true;
             HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
@@ -56,7 +56,7 @@ namespace Apizr.Configuring.Shared
         public Func<ApizrException, bool> OnException { get; internal set; }
 
         /// <inheritdoc />
-        public bool LetThrowOnExceptionWithEmptyCache { get; internal set; }
+        public bool LetThrowOnHandledException { get; internal set; }
 
         /// <inheritdoc />
         public IDictionary<string, object> HandlersParameters { get; protected set; }

@@ -389,8 +389,9 @@ namespace Apizr.Configuring.Proper
         }
 
         /// <inheritdoc />
+        [Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")]
         public IApizrProperOptionsBuilder WithExCatching(Action<ApizrException> onException,
-            bool letThrowOnExceptionWithEmptyCache = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            bool letThrowOnException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
             switch (strategy)
             {
@@ -433,20 +434,21 @@ namespace Apizr.Configuring.Proper
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
             }
 
-            Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
+            Options.LetThrowOnHandledException = letThrowOnException;
 
             return this;
         }
 
         /// <inheritdoc />
+        [Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")]
         public IApizrProperOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException,
-            bool letThrowOnExceptionWithEmptyCache = true,
+            bool letThrowOnException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
-            => WithExCatching(ex => onException.Invoke((ApizrException<TResult>)ex), letThrowOnExceptionWithEmptyCache,
+            => WithExCatching(ex => onException.Invoke((ApizrException<TResult>)ex), letThrowOnException,
                 strategy);
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithExCatching(Func<ApizrException, bool> onException, bool letThrowOnExceptionWithEmptyCache = true,
+        public IApizrProperOptionsBuilder WithExCatching(Func<ApizrException, bool> onException, bool letThrowOnHandledException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
         {
             switch (strategy)
@@ -466,28 +468,22 @@ namespace Apizr.Configuring.Proper
                     else
                     {
                         var previous = Options.OnException;
-                        Options.OnException = ex =>
-                        {
-                            var handled = previous(ex);
-                            if (!handled)
-                                handled = onException(ex);
-                            return handled;
-                        };
+                        Options.OnException = ex => previous(ex) || onException(ex);
                     }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
             }
 
-            Options.LetThrowOnExceptionWithEmptyCache = letThrowOnExceptionWithEmptyCache;
+            Options.LetThrowOnHandledException = letThrowOnHandledException;
 
             return this;
         }
 
         /// <inheritdoc />
-        public IApizrProperOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, bool> onException, bool letThrowOnExceptionWithEmptyCache = true,
+        public IApizrProperOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, bool> onException, bool letThrowOnHandledException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
-            => WithExCatching(ex => onException.Invoke((ApizrException<TResult>)ex), letThrowOnExceptionWithEmptyCache,
+            => WithExCatching(ex => onException.Invoke((ApizrException<TResult>)ex), letThrowOnHandledException,
                 strategy);
 
         /// <inheritdoc />

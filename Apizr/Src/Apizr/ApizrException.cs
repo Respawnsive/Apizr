@@ -14,8 +14,13 @@ namespace Apizr
 
         public ApizrException(Exception innerException) : base(innerException.Message, innerException)
         {
-            
+
         }
+
+        /// <summary>
+        /// Indicates whether the exception has been handled yet by callback thanks to WithExCatching option.
+        /// </summary>
+        public bool Handled { get; internal set; }
     }
 
     /// <summary>

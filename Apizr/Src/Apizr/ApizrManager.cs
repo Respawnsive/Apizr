@@ -280,8 +280,8 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                 await resiliencePipeline.ExecuteAsync(
-                    async _ => await executeApiMethod.Compile().Invoke(requestOptionsBuilder.ApizrOptions, webApi).ConfigureAwait(false),
-                    requestOptionsBuilder).ConfigureAwait(false);
+                    async _ => await executeApiMethod.Compile().Invoke(requestOptionsBuilder.ApizrOptions, webApi).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                    requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
             }
             catch (Exception e)
             {
@@ -384,8 +384,8 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                 await resiliencePipeline.ExecuteAsync(
-                    async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData).ConfigureAwait(false),
-                    requestOptionsBuilder).ConfigureAwait(false);
+                    async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                    requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
             }
             catch (Exception e)
             {
@@ -508,8 +508,8 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                 var apiResponse = await resiliencePipeline.ExecuteAsync(
-                    async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(false),
-                    requestOptionsBuilder).ConfigureAwait(false);
+                    async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                    requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
 
                 if (apiResponse.IsSuccessStatusCode && apiResponse.Error == null)
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -649,8 +649,8 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     result = await resiliencePipeline.ExecuteAsync(
-                        async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(false),
-                        requestOptionsBuilder).ConfigureAwait(false);
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                        requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
                 }
                 catch (Exception e)
                 {
@@ -843,8 +843,8 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     var apiResponse = await resiliencePipeline.ExecuteAsync(
-                        async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(false),
-                        requestOptionsBuilder).ConfigureAwait(false);
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                        requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
 
                     var apiResult = apiResponse.Content;
 
@@ -1061,8 +1061,8 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     result = await resiliencePipeline.ExecuteAsync(
-                        async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(false),
-                        requestOptionsBuilder).ConfigureAwait(false);
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                        requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
                 }
                 catch (Exception e)
                 {
@@ -1254,8 +1254,8 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     var apiResponse = await resiliencePipeline.ExecuteAsync(
-                        async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(false),
-                        requestOptionsBuilder).ConfigureAwait(false);
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                        requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
 
                     apiResult = apiResponse.Content;
 
@@ -1453,8 +1453,8 @@ namespace Apizr
                     $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                 var apiResponse = await resiliencePipeline.ExecuteAsync(
-                    async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData).ConfigureAwait(false),
-                    requestOptionsBuilder).ConfigureAwait(false);
+                    async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                    requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
 
                 if (apiResponse.IsSuccessStatusCode && apiResponse.Error == null)
                     _apizrOptions.Logger.Log(requestOptionsBuilder.ApizrOptions.LogLevels.Low(),
@@ -1599,8 +1599,8 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     result = await resiliencePipeline.ExecuteAsync(
-                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData).ConfigureAwait(false),
-                        requestOptionsBuilder).ConfigureAwait(false);
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                        requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
                 }
                 catch (Exception e)
                 {
@@ -1798,8 +1798,8 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     var apiResponse = await resiliencePipeline.ExecuteAsync(
-                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData).ConfigureAwait(false),
-                        requestOptionsBuilder).ConfigureAwait(false);
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiData).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                        requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
 
                     apiResult = apiResponse.Content;
 
@@ -2028,8 +2028,8 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     result = await resiliencePipeline.ExecuteAsync(
-                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiRequestData).ConfigureAwait(false),
-                        requestOptionsBuilder).ConfigureAwait(false);
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiRequestData).ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                        requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
                 }
                 catch (Exception e)
                 {
@@ -2225,8 +2225,9 @@ namespace Apizr
                         $"{methodDetails.MethodInfo.Name}: Executing the request");
 
                     var apiResponse = await resiliencePipeline.ExecuteAsync(
-                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiRequestData).ConfigureAwait(false),
-                        requestOptionsBuilder).ConfigureAwait(false);
+                        async options => await executeApiMethod.Compile().Invoke(options, webApi, apiRequestData)
+                            .ConfigureAwait(resilienceContext.ContinueOnCapturedContext),
+                        requestOptionsBuilder).ConfigureAwait(resilienceContext.ContinueOnCapturedContext);
 
                     apiResult = apiResponse.Content;
 

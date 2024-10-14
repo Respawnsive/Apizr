@@ -217,5 +217,23 @@ namespace Apizr.Extending.Configuring.Shared
         /// <param name="valueFactory">The resilience property's value factory</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithResilienceProperty<TValue>(ResiliencePropertyKey<TValue> key, Func<IServiceProvider, TValue> valueFactory);
+
+        /// <summary>
+        /// Catch potential exceptions
+        /// </summary>
+        /// <param name="exceptionHandlerFactory">The exception handler called back and returning handled boolean flag Task</param>
+        /// <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
+        /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithExCatching<THandler>(Func<IServiceProvider, THandler> exceptionHandlerFactory, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler;
+
+        /// <summary>
+        /// Catch potential exceptions
+        /// </summary>
+        /// <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
+        /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+        /// <returns></returns>
+        TApizrExtendedSharedOptionsBuilder WithExCatching<THandler>(bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler;
+
     }
 }

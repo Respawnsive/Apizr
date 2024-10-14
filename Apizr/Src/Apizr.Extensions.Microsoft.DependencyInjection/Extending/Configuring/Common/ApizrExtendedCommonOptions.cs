@@ -124,6 +124,14 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
+        private Func<IServiceProvider, IList<IApizrExceptionHandler>> _exceptionHandlersExtendedFactories;
+        /// <inheritdoc />
+        public Func<IServiceProvider, IList<IApizrExceptionHandler>> ExceptionHandlersExtendedFactories
+        {
+            get => _exceptionHandlersExtendedFactories;
+            set => _exceptionHandlersExtendedFactories = value != null ? serviceProvider => ExceptionHandlers = value.Invoke(serviceProvider) : null;
+        }
+
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />
         public Func<IServiceProvider, TimeSpan> OperationTimeoutFactory

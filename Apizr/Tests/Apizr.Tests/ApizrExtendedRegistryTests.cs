@@ -4293,5 +4293,84 @@ namespace Apizr.Tests
 
             handledException.Should().Be(1);
         }
+
+        [Fact]
+        public async Task Configuring_Exceptions_Handler_Class_Should_Handle_Exceptions()
+        {
+            var handledException = 0;
+            bool OnException(ApizrException ex)
+            {
+                handledException++;
+                return handledException == 1;
+            }
+
+            var myExHandler = new MyExHandler();
+
+            // Try to queue ex handlers
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddApizr(registry => registry
+                            .AddGroup(group => group
+                                    .AddManagerFor<IReqResUserService>(options => options
+                                        .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add)
+                                        .WithDelegatingHandler(new TestRequestHandler()))
+                                    .AddManagerFor<IReqResResourceService>(),
+                                options => options.WithExCatching<MyExHandler>(strategy: ApizrDuplicateStrategy.Add))
+                            .AddManagerFor<IHttpBinService>()
+                            .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+                        options => options
+                            .WithLogging()
+                            .WithExCatching<MyExHandler>(strategy: ApizrDuplicateStrategy.Add));
+
+                    services.AddSingleton(myExHandler);
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var reqResManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+
+            // Defining a transient throwing request
+            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout),
+                options => options.WithExCatching(myExHandler, strategy: ApizrDuplicateStrategy.Add));
+
+            // Calling it should throw but handled by Polly
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.And.Handled.Should().BeTrue();
+
+            myExHandler.Counter.Should().Be(3);
+            handledException.Should().Be(1);
+
+            // Try to replace queued ex handlers by the last one set at request time
+            myExHandler.Counter = 0;
+            handledException = 0;
+
+            // Defining a transient throwing request
+            act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout),
+                options => options.WithExCatching(myExHandler, strategy: ApizrDuplicateStrategy.Replace));
+
+            // Calling it should throw but handled by Polly
+            ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.And.Handled.Should().BeFalse();
+
+            myExHandler.Counter.Should().Be(1);
+            handledException.Should().Be(0);
+        }
+
+        public class MyExHandler : IApizrExceptionHandler
+        {
+            public int Counter { get; set; }
+
+            /// <inheritdoc />
+            public Task<bool> HandleAsync(ApizrException ex)
+            {
+                Counter++;
+                return Task.FromResult(Counter == 2);
+            }
+        }
     }
 }

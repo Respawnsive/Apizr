@@ -549,6 +549,7 @@ namespace Apizr
                 managerOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
                 managerOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
                 managerOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
+                managerOptions.ExceptionHandlersExtendedFactories?.Invoke(serviceProvider);
 
                 var headersFactories = managerOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key,
                     kvp => kvp.Value.Invoke(serviceProvider));

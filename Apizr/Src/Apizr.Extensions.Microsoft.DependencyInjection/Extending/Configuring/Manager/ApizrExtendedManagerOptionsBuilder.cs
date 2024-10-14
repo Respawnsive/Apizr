@@ -532,13 +532,11 @@ namespace Apizr.Extending.Configuring.Manager
             Options.HttpMessageHandlerFactory = httpMessageHandlerFactory;
 
             return this;
-        }
-
-        /// <inheritdoc />
+        }/// <inheritdoc />
         [Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")]
         public IApizrExtendedManagerOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
-            => WithExCatching(new ApizrExceptionHandler(onException),
+            => WithExCatching(_ => new ApizrExceptionHandler(onException),
                 letThrowOnException,
                 strategy);
 
@@ -548,50 +546,77 @@ namespace Apizr.Extending.Configuring.Manager
             bool letThrowOnException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
             => WithExCatching(
-                new ApizrExceptionHandler<TResult>(onException),
+                _ => new ApizrExceptionHandler<TResult>(onException),
                 letThrowOnException,
                 strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithExCatching(Func<ApizrException, bool> onException, bool letThrowOnHandledException = true,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
-            => WithExCatching(
-                new ApizrExceptionHandler(onException),
-                letThrowOnHandledException,
-                strategy);
-
-        /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, bool> onException,
+        public IApizrExtendedManagerOptionsBuilder WithExCatching(Func<ApizrException, bool> onException,
             bool letThrowOnHandledException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
             => WithExCatching(
-                new ApizrExceptionHandler<TResult>(onException),
+                _ => new ApizrExceptionHandler(onException),
                 letThrowOnHandledException,
                 strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithExCatching(Func<ApizrException, Task<bool>> onException, bool letThrowOnHandledException = true,
+        public IApizrExtendedManagerOptionsBuilder WithExCatching<TResult>(
+            Func<ApizrException<TResult>, bool> onException,
+            bool letThrowOnHandledException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
-            => WithExCatching(new ApizrExceptionHandler(onException), letThrowOnHandledException,
+            => WithExCatching(
+                _ => new ApizrExceptionHandler<TResult>(onException),
+                letThrowOnHandledException,
                 strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithExCatching<THandler>(THandler exceptionHandler, bool letThrowOnHandledException = true,
+        public IApizrExtendedManagerOptionsBuilder WithExCatching(Func<ApizrException, Task<bool>> onException,
+            bool letThrowOnHandledException = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(_ => new ApizrExceptionHandler(onException), letThrowOnHandledException,
+                strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithExCatching<THandler>(THandler exceptionHandler,
+            bool letThrowOnHandledException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler
+            => WithExCatching(_ => exceptionHandler, letThrowOnHandledException, strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithExCatching<TResult>(
+            Func<ApizrException<TResult>, Task<bool>> onException, bool letThrowOnHandledException = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(
+                _ => new ApizrExceptionHandler<TResult>(onException),
+                letThrowOnHandledException,
+                strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedManagerOptionsBuilder WithExCatching<THandler>(Func<IServiceProvider, THandler> exceptionHandlerFactory,
+            bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler
         {
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    if (Options.ExceptionHandlers.Count == 0)
-                        Options.ExceptionHandlers.Add(exceptionHandler);
+                    Options.ExceptionHandlersExtendedFactories ??= serviceProvider => [exceptionHandlerFactory(serviceProvider)];
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.ExceptionHandlers.Clear();
-                    Options.ExceptionHandlers.Add(exceptionHandler);
+                    Options.ExceptionHandlersExtendedFactories = serviceProvider => [exceptionHandlerFactory(serviceProvider)];
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    Options.ExceptionHandlers.Add(exceptionHandler);
+                    if (Options.ExceptionHandlersExtendedFactories == null)
+                        Options.ExceptionHandlersExtendedFactories = serviceProvider => [exceptionHandlerFactory(serviceProvider)];
+                    else
+                    {
+                        var previous = Options.ExceptionHandlersExtendedFactories;
+                        Options.ExceptionHandlersExtendedFactories = serviceProvider =>
+                        {
+                            var exceptionHandlers = previous?.Invoke(serviceProvider) ?? [];
+                            exceptionHandlers.Add(exceptionHandlerFactory(serviceProvider));
+                            return exceptionHandlers;
+                        };
+                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(strategy), strategy, null);
@@ -600,15 +625,14 @@ namespace Apizr.Extending.Configuring.Manager
             Options.LetThrowOnHandledException = letThrowOnHandledException;
 
             return this;
+
         }
 
         /// <inheritdoc />
-        public IApizrExtendedManagerOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, Task<bool>> onException, bool letThrowOnHandledException = true,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
-            => WithExCatching(
-                new ApizrExceptionHandler<TResult>(onException),
-                letThrowOnHandledException,
-                strategy);
+        public IApizrExtendedManagerOptionsBuilder WithExCatching<THandler>(bool letThrowOnHandledException = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler
+            => WithExCatching(serviceProvider => serviceProvider.GetRequiredService<THandler>(),
+                letThrowOnHandledException, strategy);
 
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithHandlerParameter(string key, object value)

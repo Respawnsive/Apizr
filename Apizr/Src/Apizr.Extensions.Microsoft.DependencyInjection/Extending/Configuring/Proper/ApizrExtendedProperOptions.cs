@@ -92,6 +92,7 @@ namespace Apizr.Extending.Configuring.Proper
             OperationTimeoutFactory = operationTimeout.HasValue ? _ => operationTimeout!.Value : sharedOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = requestTimeout.HasValue ? _ => requestTimeout!.Value : sharedOptions.RequestTimeoutFactory;
             HeadersExtendedFactories = sharedOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            ExceptionHandlersExtendedFactories = sharedOptions.ExceptionHandlersExtendedFactories;
             _resiliencePropertiesExtendedFactories = sharedOptions?.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ?? [];
         }
 
@@ -172,6 +173,14 @@ namespace Apizr.Extending.Configuring.Proper
 
         /// <inheritdoc />
         public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
+
+        private Func<IServiceProvider, IList<IApizrExceptionHandler>> _exceptionHandlersExtendedFactories;
+        /// <inheritdoc />
+        public Func<IServiceProvider, IList<IApizrExceptionHandler>> ExceptionHandlersExtendedFactories
+        {
+            get => _exceptionHandlersExtendedFactories;
+            set => _exceptionHandlersExtendedFactories = value != null ? serviceProvider => ExceptionHandlers = value.Invoke(serviceProvider) : null;
+        }
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

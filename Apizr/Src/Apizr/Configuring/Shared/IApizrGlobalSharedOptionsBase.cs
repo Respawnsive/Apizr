@@ -33,7 +33,7 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Catching potential exception if defined
         /// </summary>
-        Func<ApizrException, Task<bool>> OnException { get; }
+        IList<IApizrExceptionHandler> ExceptionHandlers { get; }
 
         /// <summary>
         /// Let throw potential exception even if it's handled (default: true)

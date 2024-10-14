@@ -20,9 +20,9 @@ namespace Apizr.Configuring.Shared
             HttpTracerMode = sharedOptions?.HttpTracerMode ?? default;
             TrafficVerbosity = sharedOptions?.TrafficVerbosity ?? default;
             LogLevels = sharedOptions?.LogLevels.ToArray();
-            OnException = sharedOptions?.OnException;
             LetThrowOnHandledException = sharedOptions?.LetThrowOnHandledException ?? true;
             HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
+            ExceptionHandlers = sharedOptions?.ExceptionHandlers?.ToList() ?? [];
             OperationTimeout = sharedOptions?.OperationTimeout;
             RequestTimeout = sharedOptions?.RequestTimeout;
             ShouldRedactHeaderValue = sharedOptions?.ShouldRedactHeaderValue;
@@ -55,6 +55,9 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public Func<ApizrException, Task<bool>> OnException { get; internal set; }
+
+        /// <inheritdoc />
+        public IList<IApizrExceptionHandler> ExceptionHandlers { get; protected set; }
 
         /// <inheritdoc />
         public bool LetThrowOnHandledException { get; internal set; }

@@ -213,7 +213,7 @@ namespace Apizr.Configuring.Manager
         public LogLevel[] LogLevels => Options.LogLevels;
 
         /// <inheritdoc />
-        public Func<ApizrException, Task<bool>> OnException => Options.OnException;
+        public IList<IApizrExceptionHandler> ExceptionHandlers => Options.ExceptionHandlers;
 
         /// <inheritdoc />
         public bool LetThrowOnHandledException => Options.LetThrowOnHandledException;

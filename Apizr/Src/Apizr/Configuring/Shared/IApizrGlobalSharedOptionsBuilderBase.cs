@@ -5,6 +5,7 @@ using System;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Resiliencing;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Apizr.Caching;
 
 namespace Apizr.Configuring.Shared
@@ -40,10 +41,11 @@ namespace Apizr.Configuring.Shared
         /// <returns></returns>
         [Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")]
         TApizrOptionsBuilder WithExCatching<TResult>(Action<ApizrException<TResult>> onException, bool letThrowOnException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
+
         /// <summary>
         /// Catch potential exceptions
         /// </summary>
-        /// <param name="onException">The exception callback returning handled flag</param>
+        /// <param name="onException">The exception callback returning handled boolean flag</param>
         /// <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
         /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
         /// <returns></returns>
@@ -52,12 +54,30 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Catch potential exceptions
         /// </summary>
-        /// <param name="onException">The exception callback returning handled flag</param>
+        /// <param name="onException">The exception callback returning handled boolean flag</param>
         /// <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
         /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, bool> onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
 
+        /// <summary>
+        /// Catch potential exceptions
+        /// </summary>
+        /// <param name="onException">The exception callback returning handled boolean flag Task</param>
+        /// <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
+        /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithExCatching(Func<ApizrException, Task<bool>> onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
+
+        /// <summary>
+        /// Catch potential exceptions
+        /// </summary>
+        /// <param name="onException">The exception callback returning a handled boolean flag Task</param>
+        /// <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
+        /// <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithExCatching<TResult>(Func<ApizrException<TResult>, Task<bool>> onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace);
+        
         /// <summary>
         /// Set some parameters passed through all delegating handlers
         /// </summary>

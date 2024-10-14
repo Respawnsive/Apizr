@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Logging;
@@ -53,7 +54,7 @@ namespace Apizr.Configuring.Shared
         }
 
         /// <inheritdoc />
-        public Func<ApizrException, bool> OnException { get; internal set; }
+        public Func<ApizrException, Task<bool>> OnException { get; internal set; }
 
         /// <inheritdoc />
         public bool LetThrowOnHandledException { get; internal set; }

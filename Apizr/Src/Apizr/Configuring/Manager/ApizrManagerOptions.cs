@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading.Tasks;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Common;
@@ -212,7 +213,7 @@ namespace Apizr.Configuring.Manager
         public LogLevel[] LogLevels => Options.LogLevels;
 
         /// <inheritdoc />
-        public Func<ApizrException, bool> OnException => Options.OnException;
+        public Func<ApizrException, Task<bool>> OnException => Options.OnException;
 
         /// <inheritdoc />
         public bool LetThrowOnHandledException => Options.LetThrowOnHandledException;

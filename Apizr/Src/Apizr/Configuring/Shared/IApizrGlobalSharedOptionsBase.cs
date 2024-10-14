@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 using Apizr.Caching.Attributes;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Resiliencing;
@@ -32,7 +33,7 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// Catching potential exception if defined
         /// </summary>
-        Func<ApizrException, bool> OnException { get; }
+        Func<ApizrException, Task<bool>> OnException { get; }
 
         /// <summary>
         /// Let throw potential exception even if it's handled (default: true)

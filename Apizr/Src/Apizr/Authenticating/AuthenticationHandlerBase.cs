@@ -53,7 +53,7 @@ namespace Apizr.Authenticating
                 {
                     // We have one, then clone the request in case we need to re-issue it with a refreshed token
                     logger?.Log(logLevels.Low(), $"{context.OperationKey}: Saved token will be used");
-                    clonedRequest = await this.CloneHttpRequestMessageAsync(request);
+                    clonedRequest = await this.CloneHttpRequestMessageAsync(request).ConfigureAwait(false);
                 }
                 else
                 {

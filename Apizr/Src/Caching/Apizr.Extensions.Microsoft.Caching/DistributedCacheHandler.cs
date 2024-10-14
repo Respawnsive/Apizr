@@ -29,13 +29,13 @@ namespace Apizr
 
             if (typeof(TCache) == typeof(byte[]))
             {
-                var data = await value.ToSerializedByteArrayAsync(_contentSerializer);
-                await _distributedCache.SetAsync(key, data, options, cancellationToken);
+                var data = await value.ToSerializedByteArrayAsync(_contentSerializer).ConfigureAwait(false);
+                await _distributedCache.SetAsync(key, data, options, cancellationToken).ConfigureAwait(false);
             }
             else if (typeof(TCache) == typeof(string))
             {
-                var data = await value.ToSerializedStringAsync(_contentSerializer);
-                await _distributedCache.SetStringAsync(key, data, options, cancellationToken);
+                var data = await value.ToSerializedStringAsync(_contentSerializer).ConfigureAwait(false);
+                await _distributedCache.SetStringAsync(key, data, options, cancellationToken).ConfigureAwait(false);
             }
             else
             {
@@ -48,13 +48,13 @@ namespace Apizr
         {
             if (typeof(TCache) == typeof(byte[]))
             {
-                var result = await _distributedCache.GetAsync(key, cancellationToken);
-                return await result.FromSerializedByteArrayAsync<TData>(_contentSerializer, cancellationToken);
+                var result = await _distributedCache.GetAsync(key, cancellationToken).ConfigureAwait(false);
+                return await result.FromSerializedByteArrayAsync<TData>(_contentSerializer, cancellationToken).ConfigureAwait(false);
             }
             else if (typeof(TCache) == typeof(string))
             {
-                var result = await _distributedCache.GetStringAsync(key, cancellationToken);
-                return await result.FromSerializedStringAsync<TData>(_contentSerializer, cancellationToken);
+                var result = await _distributedCache.GetStringAsync(key, cancellationToken).ConfigureAwait(false);
+                return await result.FromSerializedStringAsync<TData>(_contentSerializer, cancellationToken).ConfigureAwait(false);
             }
             else
             {
@@ -67,7 +67,7 @@ namespace Apizr
         {
             try
             {
-                await _distributedCache.RemoveAsync(key, cancellationToken);
+                await _distributedCache.RemoveAsync(key, cancellationToken).ConfigureAwait(false);
                 return true;
             }
             catch (Exception)

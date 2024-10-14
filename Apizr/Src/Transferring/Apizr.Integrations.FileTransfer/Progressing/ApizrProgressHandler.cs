@@ -37,12 +37,12 @@ namespace Apizr.Progressing
             if(progress != null)
                 AddRequestProgress(request, progress);
 
-            var response = await base.SendAsync(request, cancellationToken);
+            var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
             if (progress != null && response is {Content: { }})
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                await AddResponseProgressAsync(request, response, progress);
+                await AddResponseProgressAsync(request, response, progress).ConfigureAwait(false);
             }
 
             return response;
@@ -59,7 +59,7 @@ namespace Apizr.Progressing
         private static async Task AddResponseProgressAsync(HttpRequestMessage request, HttpResponseMessage response,
             IApizrProgress progress)
         {
-            var stream = await response.Content.ReadAsStreamAsync();
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             var progressStream = new ApizrProgressStream(stream, progress, request, response);
             HttpContent progressContent = new StreamContent(progressStream);
             response.Content.Headers.CopyTo(progressContent.Headers);

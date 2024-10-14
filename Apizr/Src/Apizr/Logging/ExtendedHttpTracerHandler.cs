@@ -149,7 +149,7 @@ namespace Apizr.Logging
             var httpErrorRequestHeaders = GetRequestHeaders(request, verbosity, shouldRedactHeaderValue);
             sb.AppendLine(httpErrorRequestHeaders);
 
-            var httpErrorRequestBody = await GetRequestBody(request);
+            var httpErrorRequestBody = await GetRequestBody(request).ConfigureAwait(false);
             sb.AppendLine(httpErrorRequestBody);
 
             if (sb.Length > 0)
@@ -187,7 +187,7 @@ namespace Apizr.Logging
 
             if (verbosity.HasFlag(HttpMessageParts.RequestBody))
             {
-                var httpErrorRequestBody = await GetRequestBody(request);
+                var httpErrorRequestBody = await GetRequestBody(request).ConfigureAwait(false);
                 sb.AppendLine(httpErrorRequestBody);
             }
 

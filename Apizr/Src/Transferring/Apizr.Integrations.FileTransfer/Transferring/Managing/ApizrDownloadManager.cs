@@ -26,7 +26,7 @@ public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransfer
         using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         using var fs = File.Create(fileInfo.FullName);
         if (ms.CanSeek) ms.Seek(0, SeekOrigin.Begin);
-        await ms.CopyToAsync(fs);
+        await ms.CopyToAsync(fs).ConfigureAwait(false);
 
         return fileInfo;
     }
@@ -43,7 +43,7 @@ public class ApizrDownloadManager<TDownloadApi, TDownloadParams> : ApizrTransfer
         using var ms = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         using var fs = File.Create(fileInfo.FullName);
         if (ms.CanSeek) ms.Seek(0, SeekOrigin.Begin);
-        await ms.CopyToAsync(fs);
+        await ms.CopyToAsync(fs).ConfigureAwait(false);
 
         return fileInfo;
     }

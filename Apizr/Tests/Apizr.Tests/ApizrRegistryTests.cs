@@ -1222,7 +1222,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Configuring_Exceptions_Handler_Should_Handle_Exceptions()
+        public async Task Configuring_Obsolete_Exceptions_Handler_Should_Handle_Exceptions()
         {
             var handledException = 0;
             void OnException(ApizrException ex)
@@ -1306,11 +1306,11 @@ namespace Apizr.Tests
             Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout),
                 options => options.WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add));
 
-            // Calling it should throw but handled by Polly
+            // Calling it should throw
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.And.Handled.Should().BeTrue();
 
-            handledException.Should().Be(3);
+            handledException.Should().Be(4);
 
             // Try to replace queued ex handlers by the last one set at request time
             handledException = 0;

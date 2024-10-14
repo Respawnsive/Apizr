@@ -59,7 +59,7 @@ internal class ApizrProgressStream : ApizrDelegatingStream
 
     public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
-        var readCount = await InnerStream.ReadAsync(buffer, offset, count, cancellationToken);
+        var readCount = await InnerStream.ReadAsync(buffer, offset, count, cancellationToken).ConfigureAwait(false);
         ReportBytesReceived(readCount, userState: null);
         return readCount;
     }
@@ -91,7 +91,7 @@ internal class ApizrProgressStream : ApizrDelegatingStream
 
     public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
-        await InnerStream.WriteAsync(buffer, offset, count, cancellationToken);
+        await InnerStream.WriteAsync(buffer, offset, count, cancellationToken).ConfigureAwait(false);
         ReportBytesSent(count, userState: null);
     }
 

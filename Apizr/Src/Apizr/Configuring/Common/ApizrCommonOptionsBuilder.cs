@@ -469,8 +469,12 @@ namespace Apizr.Configuring.Common
                     {
                         var previous = Options.OnException;
                         Options.OnException = async ex =>
-                            await previous(ex).ConfigureAwait(false) ||
-                            await onException(ex).ConfigureAwait(false);
+                        {
+                            var previousHandled = await previous(ex).ConfigureAwait(false);
+                            var currentHandled = await onException(ex).ConfigureAwait(false);
+
+                            return previousHandled || currentHandled;
+                        };
                     }
                     break;
                 default:

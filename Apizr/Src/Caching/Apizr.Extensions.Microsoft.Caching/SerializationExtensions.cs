@@ -19,13 +19,13 @@ namespace Apizr
             try
             {
                 var httpContent = contentSerializer.ToHttpContent(obj);
-                return await httpContent.ReadAsByteArrayAsync();
+                return await httpContent.ReadAsByteArrayAsync().ConfigureAwait(false);
             }
             catch (System.Exception)
             {
                 // only for retro-compatibility
                 using var memoryStream = new MemoryStream();
-                await JsonSerializer.SerializeAsync(memoryStream, obj);
+                await JsonSerializer.SerializeAsync(memoryStream, obj).ConfigureAwait(false);
                 return memoryStream.ToArray();
             }
         }
@@ -38,13 +38,13 @@ namespace Apizr
             try
             {
                 var content = new ByteArrayContent(byteArray);
-                return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken);
+                return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken).ConfigureAwait(false);
             }
             catch (System.Exception)
             {
                 // only for retro-compatibility
                 using var memoryStream = new MemoryStream(byteArray);
-                return await JsonSerializer.DeserializeAsync<T>(memoryStream, cancellationToken: cancellationToken);
+                return await JsonSerializer.DeserializeAsync<T>(memoryStream, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -54,7 +54,7 @@ namespace Apizr
                 return null;
 
             var httpContent = contentSerializer.ToHttpContent(obj);
-            return await httpContent.ReadAsStringAsync();
+            return await httpContent.ReadAsStringAsync().ConfigureAwait(false);
         }
 
         internal static async Task<T> FromSerializedStringAsync<T>(this string str, IHttpContentSerializer contentSerializer, CancellationToken cancellationToken = default)
@@ -63,7 +63,7 @@ namespace Apizr
                 return default;
 
             var content = new StringContent(str);
-            return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken);
+            return await contentSerializer.FromHttpContentAsync<T>(content, cancellationToken).ConfigureAwait(false);
         }
     }
 }

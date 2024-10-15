@@ -4304,6 +4304,14 @@ namespace Apizr.Tests
                 return handledException == 1;
             }
 
+            bool OnResolvedException(IServiceProvider sp, ApizrException ex)
+            {
+                var logger = sp.GetRequiredService<ILogger<ApizrExtendedRegistryTests>>();
+                logger.LogError(ex, "Handled by resolved exception handler");
+
+                return true;
+            }
+
             var myExHandler = new MyExHandler();
 
             // Try to queue ex handlers
@@ -4317,6 +4325,7 @@ namespace Apizr.Tests
                             .AddGroup(group => group
                                     .AddManagerFor<IReqResUserService>(options => options
                                         .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add)
+                                        .WithExCatching(OnResolvedException, strategy: ApizrDuplicateStrategy.Add)
                                         .WithDelegatingHandler(new TestRequestHandler()))
                                     .AddManagerFor<IReqResResourceService>(),
                                 options => options.WithExCatching<MyExHandler>(strategy: ApizrDuplicateStrategy.Add))

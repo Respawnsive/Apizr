@@ -528,7 +528,9 @@ namespace Apizr.Extending.Configuring.Proper
             Options.HttpMessageHandlerFactory = httpMessageHandlerFactory;
 
             return this;
-        }/// <inheritdoc />
+        }
+
+        /// <inheritdoc />
         [Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")]
         public IApizrExtendedProperOptionsBuilder WithExCatching(Action<ApizrException> onException,
             bool letThrowOnException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
@@ -573,12 +575,6 @@ namespace Apizr.Extending.Configuring.Proper
                 strategy);
 
         /// <inheritdoc />
-        public IApizrExtendedProperOptionsBuilder WithExCatching<THandler>(THandler exceptionHandler,
-            bool letThrowOnHandledException = true,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler
-            => WithExCatching(_ => exceptionHandler, letThrowOnHandledException, strategy);
-
-        /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithExCatching<TResult>(
             Func<ApizrException<TResult>, Task<bool>> onException, bool letThrowOnHandledException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
@@ -586,6 +582,45 @@ namespace Apizr.Extending.Configuring.Proper
                 _ => new ApizrExceptionHandler<TResult>(onException),
                 letThrowOnHandledException,
                 strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithExCatching(Func<IServiceProvider, ApizrException, bool> onException, bool letThrowOnHandledException = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(serviceProvider => new ApizrExceptionHandler(ex => onException(serviceProvider, ex)),
+                letThrowOnHandledException,
+                strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithExCatching<TResult>(Func<IServiceProvider, ApizrException<TResult>, bool> onException, bool letThrowOnHandledException = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(serviceProvider =>
+                new ApizrExceptionHandler(ex => onException(serviceProvider, (ApizrException<TResult>)ex)),
+                letThrowOnHandledException,
+                strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithExCatching(
+            Func<IServiceProvider, ApizrException, Task<bool>> onException, bool letThrowOnHandledException = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(serviceProvider => new ApizrExceptionHandler(ex => onException(serviceProvider, ex)),
+                letThrowOnHandledException,
+                strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithExCatching<TResult>(
+            Func<IServiceProvider, ApizrException<TResult>, Task<bool>> onException,
+            bool letThrowOnHandledException = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
+            => WithExCatching(serviceProvider =>
+                new ApizrExceptionHandler(ex => onException(serviceProvider, (ApizrException<TResult>)ex)),
+                letThrowOnHandledException,
+                strategy);
+
+        /// <inheritdoc />
+        public IApizrExtendedProperOptionsBuilder WithExCatching<THandler>(THandler exceptionHandler,
+            bool letThrowOnHandledException = true,
+            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler
+            => WithExCatching(_ => exceptionHandler, letThrowOnHandledException, strategy);
 
         /// <inheritdoc />
         public IApizrExtendedProperOptionsBuilder WithExCatching<THandler>(Func<IServiceProvider, THandler> exceptionHandlerFactory,

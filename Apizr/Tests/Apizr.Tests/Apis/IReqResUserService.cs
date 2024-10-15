@@ -101,7 +101,7 @@ namespace Apizr.Tests.Apis
         Task<UserDetails> GetUserAsync(int userId, IDictionary<string, object> parameters, [Priority] int priority, CancellationToken cancellationToken);
 
         [Get("/users/{userId}")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId, IDictionary<string, object> parameters, [CacheKey] ReadAllUsersParams customParams, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, IDictionary<string, object> parameters, [CacheKey(nameof(ReadAllUsersParams.Param1))] ReadAllUsersParams customParams, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
 
         [Get("/users/{userId}")]
         Task<UserDetails> GetUserAsync(int userId);

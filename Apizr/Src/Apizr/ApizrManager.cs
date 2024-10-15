@@ -2680,43 +2680,38 @@ namespace Apizr
                     if (extractedArgumentValue == null)
                         continue;
 
-                    object parameterValue = null;
-                    var isArgumentValuePrimitive = extractedArgumentValue.GetType().GetTypeInfo().IsPrimitive ||
-                                                   extractedArgumentValue is decimal ||
-                                                   extractedArgumentValue is string;
+                    //// Set argument value if cache key is still null
+                    var parameterValue = extractedArgument.Value;
 
-                    // If it's a primitive, just set the value
-                    if (isArgumentValuePrimitive)
+                    // Prepare formatted name and value pair for our cache key
+                    string parameter = null;
+
+                    // Simple param value OR complex type with overriden ToString
+                    var value = parameterValue.ToString();
+                    if (!string.IsNullOrWhiteSpace(value) && value != parameterValue.GetType().ToString())
                     {
-                        parameterValue = extractedArgument.Value;
+                        parameter = value.Contains(":") && !value.Contains("[")
+                            ? $"{parameterName}:{{{value}}}"
+                            : $"{parameterName}:{value}";
+                    }
+                    // Dictionary param key values
+                    else if (parameterValue is IDictionary objectDictionary)
+                    {
+                        parameter = $"{parameterName}:[{objectDictionary.ToString(":", ", ")}]";
                     }
                     else
                     {
-                        // Is there a specific cache key with a target field?
-                        var cacheKeyAttribute =
-                            specificCacheKey?.ParameterInfo.GetCustomAttribute<CacheKeyAttribute>(true);
-                        if (!string.IsNullOrWhiteSpace(cacheKeyAttribute?.PropertyName))
-                        {
-                            // There's a specific cache key with a target field!
-                            var cacheKeyField = extractedArgument
-                                .Value
-                                .GetType()
-                                .GetRuntimeFields()
-                                .FirstOrDefault(x => x.Name.Equals(cacheKeyAttribute.PropertyName));
+                        // Is there a specific cache key with target properties?
+                        var cacheKeyAttribute = specificCacheKey?.ParameterInfo.GetCustomAttribute<CacheKeyAttribute>(true);
 
-                            // If we can find it, we set its value to the cache key
-                            if (cacheKeyField != null)
-                                parameterValue = cacheKeyField.GetValue(extractedArgument.Value);
-                        }
+                        // Complex type param values without override
+                        var complexParameters = parameterValue.ToString(":", ", ", cacheKeyAttribute?.PropertyNames);
+                        if (!string.IsNullOrWhiteSpace(complexParameters))
+                            parameter = $"{parameterName}:{{{complexParameters}}}"; 
                     }
 
-                    // Set argument value if cache key is still null
-                    if (parameterValue == null)
-                        parameterValue = extractedArgument.Value;
-
-                    // Add formatted name and value pair to our cache key
-                    var parameter = GetParameterKeyValues(parameterName, parameterValue);
-                    parameters.Add(parameter);
+                    if(!string.IsNullOrWhiteSpace(parameter))
+                        parameters.Add(parameter);
                 }
 
                 cacheKey += $"{string.Join(", ", parameters)})";

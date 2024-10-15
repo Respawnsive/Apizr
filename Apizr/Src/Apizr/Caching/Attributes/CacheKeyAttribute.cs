@@ -3,13 +3,13 @@
 namespace Apizr.Caching.Attributes
 {
     /// <summary>
-    /// Tells Apizr the key to cache value at
+    /// The decorated parameter will be used as cache key
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public class CacheKeyAttribute : Attribute
     {
         /// <summary>
-        /// The decorated parameter will be used as cache key (should be primitive otherwise ToString() method will be used, unless providing a property name)
+        /// The decorated parameter will be used as cache key
         /// </summary>
         public CacheKeyAttribute()
         {
@@ -17,18 +17,19 @@ namespace Apizr.Caching.Attributes
         }
 
         /// <summary>
-        /// If you use non primitive type (like your ModelClass object) as Cache Primary key you should provide 
-        /// property name of primitive primary Id, otherwise ToString() method will be used.
+        /// If you decorate a complex type as cache key, you may want to provide 
+        /// its properties to include by name or to override its ToString() method.
+        /// Otherwise, Apizr will take all its non-null properties.
         /// </summary>
-        /// <param name="propertyName">Property name.</param>
-        public CacheKeyAttribute(string propertyName)
+        /// <param name="propertyNames">Properties to include as cache key (default: all non-null properties).</param>
+        public CacheKeyAttribute(params string[] propertyNames)
         {
-            PropertyName = propertyName;
+            PropertyNames = propertyNames;
         }
 
         /// <summary>
-        /// Property name of primitive primary Id
+        /// Properties of to include as cache key (default: all non-null properties).
         /// </summary>
-        public string PropertyName { get; }
+        public string[] PropertyNames { get; }
     }
 }

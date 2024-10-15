@@ -28,7 +28,7 @@ namespace Apizr.Tests.Models
 
         //public override string ToString()
         //{
-        //    return $"{nameof(Param1)}: {Param1}";
+        //    return $"{nameof(Param2)}: {Param2}";
         //}
     }
 }

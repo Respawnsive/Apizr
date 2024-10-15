@@ -53,6 +53,7 @@ namespace Apizr.Configuring.Manager
             HttpMessageHandlerFactory = properOptions.HttpMessageHandlerFactory;
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
+            ExceptionHandlersFactory = properOptions.ExceptionHandlersFactory;
         }
 
         private Func<Uri> _baseUriFactory;
@@ -155,6 +156,14 @@ namespace Apizr.Configuring.Manager
         {
             get => _requestTimeoutFactory;
             set => _requestTimeoutFactory = value != null ? () => (TimeSpan)(RequestTimeout = value.Invoke()) : null;
+        }
+
+        private Func<IList<IApizrExceptionHandler>> _exceptionHandlersFactory;
+        /// <inheritdoc />
+        public Func<IList<IApizrExceptionHandler>> ExceptionHandlersFactory
+        {
+            get => _exceptionHandlersFactory;
+            set => _exceptionHandlersFactory = value != null ? () => ExceptionHandlers = value.Invoke() : null;
         }
     }
     

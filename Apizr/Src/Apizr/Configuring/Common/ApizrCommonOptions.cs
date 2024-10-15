@@ -134,5 +134,13 @@ namespace Apizr.Configuring.Common
             get => _logLevelsFactory;
             set => _logLevelsFactory = () => LogLevels = value.Invoke();
         }
+
+        private Func<IList<IApizrExceptionHandler>> _exceptionHandlersFactory;
+        /// <inheritdoc />
+        public Func<IList<IApizrExceptionHandler>> ExceptionHandlersFactory
+        {
+            get => _exceptionHandlersFactory;
+            set => _exceptionHandlersFactory = value != null ? () => ExceptionHandlers = value.Invoke() : null;
+        }
     }
 }

@@ -599,19 +599,19 @@ namespace Apizr.Extending.Configuring.Common
             switch (strategy)
             {
                 case ApizrDuplicateStrategy.Ignore:
-                    Options.ExceptionHandlersExtendedFactories ??= serviceProvider => [exceptionHandlerFactory(serviceProvider)];
+                    Options.ExceptionHandlersFactory ??= serviceProvider => [exceptionHandlerFactory(serviceProvider)];
                     break;
                 case ApizrDuplicateStrategy.Replace:
-                    Options.ExceptionHandlersExtendedFactories = serviceProvider => [exceptionHandlerFactory(serviceProvider)];
+                    Options.ExceptionHandlersFactory = serviceProvider => [exceptionHandlerFactory(serviceProvider)];
                     break;
                 case ApizrDuplicateStrategy.Add:
                 case ApizrDuplicateStrategy.Merge:
-                    if(Options.ExceptionHandlersExtendedFactories == null)
-                        Options.ExceptionHandlersExtendedFactories = serviceProvider => [exceptionHandlerFactory(serviceProvider)];
+                    if(Options.ExceptionHandlersFactory == null)
+                        Options.ExceptionHandlersFactory = serviceProvider => [exceptionHandlerFactory(serviceProvider)];
                     else
                     {
-                        var previous = Options.ExceptionHandlersExtendedFactories;
-                        Options.ExceptionHandlersExtendedFactories = serviceProvider =>
+                        var previous = Options.ExceptionHandlersFactory;
+                        Options.ExceptionHandlersFactory = serviceProvider =>
                         {
                             var exceptionHandlers = previous?.Invoke(serviceProvider) ?? [];
                             exceptionHandlers.Add(exceptionHandlerFactory(serviceProvider));

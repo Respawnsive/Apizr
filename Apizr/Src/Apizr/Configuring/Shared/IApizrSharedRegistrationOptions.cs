@@ -72,5 +72,10 @@ namespace Apizr.Configuring.Shared
         /// The request timeout factory (each request try)
         /// </summary>
         Func<TimeSpan> RequestTimeoutFactory { get; }
+
+        /// <summary>
+        /// Exception handlers factory
+        /// </summary>
+        Func<IList<IApizrExceptionHandler>> ExceptionHandlersFactory { get; }
     }
 }

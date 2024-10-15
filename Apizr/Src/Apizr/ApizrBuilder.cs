@@ -220,6 +220,7 @@ namespace Apizr
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
+            builder.ApizrOptions.ExceptionHandlersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -332,6 +333,7 @@ namespace Apizr
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
+            builder.ApizrOptions.ExceptionHandlersFactory?.Invoke();
 
             return builder.ApizrOptions;
         }
@@ -394,6 +396,7 @@ namespace Apizr
             builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
+            builder.ApizrOptions.ExceptionHandlersFactory?.Invoke();
 
             if (builder.ApizrOptions.HeadersFactories?.TryGetValue((ApizrRegistrationMode.Set, ApizrLifetimeScope.Api), out var setFactory) == true)
             {

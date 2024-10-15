@@ -27,7 +27,9 @@ using FluentAssertions;
 using Fusillade;
 using Mapster;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileSystemGlobbing;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MonkeyCache.FileStore;
 using Polly;
@@ -2536,6 +2538,76 @@ namespace Apizr.Tests
             // attempts should be equal to 2 as request timed out before the 3rd retry
             retryCount.Should().Be(2);
             testHandler.Attempts.Should().Be(2);
+        }
+
+        [Fact]
+        public async Task Configuring_Exceptions_Handler_Class_Should_Handle_Exceptions()
+        {
+            var handledException = 0;
+            bool OnException(ApizrException ex)
+            {
+                handledException++;
+                return handledException == 1;
+            }
+
+            var myExHandler = new MyExHandler();
+
+            // Try to queue ex handlers
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                    .AddGroup(group => group
+                            .AddManagerFor<IReqResUserService>(options => options
+                                .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add)
+                                .WithDelegatingHandler(new TestRequestHandler()))
+                            .AddManagerFor<IReqResResourceService>(),
+                        options => options.WithExCatching(myExHandler, strategy: ApizrDuplicateStrategy.Add))
+                    .AddManagerFor<IHttpBinService>()
+                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithExCatching(() => myExHandler, strategy: ApizrDuplicateStrategy.Add));
+
+
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+            // Defining a transient throwing request
+            Func<Task> act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout),
+                options => options.WithExCatching(myExHandler, strategy: ApizrDuplicateStrategy.Add));
+
+            // Calling it should throw but handled by Polly
+            var ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.And.Handled.Should().BeTrue();
+
+            myExHandler.Counter.Should().Be(3);
+            handledException.Should().Be(1);
+
+            // Try to replace queued ex handlers by the last one set at request time
+            myExHandler.Counter = 0;
+            handledException = 0;
+
+            // Defining a transient throwing request
+            act = () => reqResManager.ExecuteAsync(api => api.GetUsersAsync(HttpStatusCode.RequestTimeout),
+                options => options.WithExCatching(myExHandler, strategy: ApizrDuplicateStrategy.Replace));
+
+            // Calling it should throw but handled by Polly
+            ex = await act.Should().ThrowAsync<ApizrException>();
+            ex.And.Handled.Should().BeFalse();
+
+            myExHandler.Counter.Should().Be(1);
+            handledException.Should().Be(0);
+        }
+
+        public class MyExHandler : IApizrExceptionHandler
+        {
+            public int Counter { get; set; }
+
+            /// <inheritdoc />
+            public Task<bool> HandleAsync(ApizrException ex)
+            {
+                Counter++;
+                return Task.FromResult(Counter == 2);
+            }
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Apizr.Extending.Configuring.Manager
             OperationTimeoutFactory = properOptions.OperationTimeoutFactory;
             RequestTimeoutFactory = properOptions.RequestTimeoutFactory;
             HeadersExtendedFactories = properOptions.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
-            ExceptionHandlersExtendedFactories = properOptions.ExceptionHandlersExtendedFactories;
+            ExceptionHandlersFactory = properOptions.ExceptionHandlersFactory;
             _resiliencePropertiesExtendedFactories = properOptions.ResiliencePropertiesExtendedFactories?.ToDictionary(kpv => kpv.Key, kpv => kpv.Value) ??
                                                      new Dictionary<string, Func<IServiceProvider, object>>();
         }
@@ -177,12 +177,12 @@ namespace Apizr.Extending.Configuring.Manager
         /// <inheritdoc />
         public IDictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>> HeadersExtendedFactories { get; }
 
-        private Func<IServiceProvider, IList<IApizrExceptionHandler>> _exceptionHandlersExtendedFactories;
+        private Func<IServiceProvider, IList<IApizrExceptionHandler>> _exceptionHandlersFactory;
         /// <inheritdoc />
-        public Func<IServiceProvider, IList<IApizrExceptionHandler>> ExceptionHandlersExtendedFactories
+        public Func<IServiceProvider, IList<IApizrExceptionHandler>> ExceptionHandlersFactory
         {
-            get => _exceptionHandlersExtendedFactories;
-            set => _exceptionHandlersExtendedFactories = value != null ? serviceProvider => ExceptionHandlers = value.Invoke(serviceProvider) : null;
+            get => _exceptionHandlersFactory;
+            set => _exceptionHandlersFactory = value != null ? serviceProvider => ExceptionHandlers = value.Invoke(serviceProvider) : null;
         }
 
         private Func<IServiceProvider, TimeSpan> _operationTimeoutFactory;

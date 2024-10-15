@@ -4278,7 +4278,7 @@ namespace Apizr.Tests
             var ex = await act.Should().ThrowAsync<ApizrException>();
             ex.And.Handled.Should().BeTrue();
 
-            handledException.Should().Be(3);
+            handledException.Should().Be(4);
 
             // Try to replace queued ex handlers by the last one set at request time
             handledException = 0;
@@ -4312,6 +4312,13 @@ namespace Apizr.Tests
                 return true;
             }
 
+            bool mismatchHandled = false;
+            bool OnMismatchException(ApizrException<User> ex)
+            {
+                mismatchHandled = true;
+                return false;
+            }
+
             var myExHandler = new MyExHandler();
 
             // Try to queue ex handlers
@@ -4326,6 +4333,7 @@ namespace Apizr.Tests
                                     .AddManagerFor<IReqResUserService>(options => options
                                         .WithExCatching(OnException, strategy: ApizrDuplicateStrategy.Add)
                                         .WithExCatching(OnResolvedException, strategy: ApizrDuplicateStrategy.Add)
+                                        .WithExCatching<User>(OnMismatchException, strategy: ApizrDuplicateStrategy.Add)
                                         .WithDelegatingHandler(new TestRequestHandler()))
                                     .AddManagerFor<IReqResResourceService>(),
                                 options => options.WithExCatching<MyExHandler>(strategy: ApizrDuplicateStrategy.Add))
@@ -4353,6 +4361,7 @@ namespace Apizr.Tests
 
             myExHandler.Counter.Should().Be(3);
             handledException.Should().Be(1);
+            mismatchHandled.Should().BeFalse();
 
             // Try to replace queued ex handlers by the last one set at request time
             myExHandler.Counter = 0;
@@ -4368,6 +4377,7 @@ namespace Apizr.Tests
 
             myExHandler.Counter.Should().Be(1);
             handledException.Should().Be(0);
+            mismatchHandled.Should().BeFalse();
         }
 
         public class MyExHandler : IApizrExceptionHandler

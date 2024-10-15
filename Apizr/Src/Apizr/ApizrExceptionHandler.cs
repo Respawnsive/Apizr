@@ -33,17 +33,38 @@ public class ApizrExceptionHandler<TResult> : ApizrExceptionHandler
 {
     [Obsolete("Catching an exception by an Action is now replaced by a Func returning a handled boolean flag")]
     public ApizrExceptionHandler(Action<ApizrException<TResult>> handler) : base(ex =>
-        handler((ApizrException<TResult>)ex))
+    {
+        if (ex is ApizrException<TResult> apizrException)
+        {
+            handler(apizrException);
+            return Task.FromResult(true);
+        }
+
+        return Task.FromResult(false);
+    })
     {
     }
 
     public ApizrExceptionHandler(Func<ApizrException<TResult>, bool> handler) : base(ex =>
-        handler((ApizrException<TResult>)ex))
+    {
+        if (ex is ApizrException<TResult> apizrException)
+        {
+            var handled = handler(apizrException);
+            return Task.FromResult(handled);
+        }
+
+        return Task.FromResult(false);
+    })
     {
     }
 
     public ApizrExceptionHandler(Func<ApizrException<TResult>, Task<bool>> handler) : base(ex =>
-        handler((ApizrException<TResult>) ex))
+    {
+        if (ex is ApizrException<TResult> apizrException)
+            return handler(apizrException);
+
+        return Task.FromResult(false);
+    })
     {
     }
 }

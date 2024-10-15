@@ -594,7 +594,7 @@ namespace Apizr.Extending.Configuring.Proper
         public IApizrExtendedProperOptionsBuilder WithExCatching<TResult>(Func<IServiceProvider, ApizrException<TResult>, bool> onException, bool letThrowOnHandledException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
             => WithExCatching(serviceProvider =>
-                new ApizrExceptionHandler(ex => onException(serviceProvider, (ApizrException<TResult>)ex)),
+                new ApizrExceptionHandler<TResult>(ex => onException(serviceProvider, ex)),
                 letThrowOnHandledException,
                 strategy);
 
@@ -612,7 +612,7 @@ namespace Apizr.Extending.Configuring.Proper
             bool letThrowOnHandledException = true,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)
             => WithExCatching(serviceProvider =>
-                new ApizrExceptionHandler(ex => onException(serviceProvider, (ApizrException<TResult>)ex)),
+                new ApizrExceptionHandler<TResult>(ex => onException(serviceProvider, ex)),
                 letThrowOnHandledException,
                 strategy);
 

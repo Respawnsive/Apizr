@@ -270,9 +270,8 @@ namespace Apizr.Sample
 }
 ```
 
->[!TIP]
->
->Cache key generation supports complex type parameters so you can group your parameters into a single one to include them all.
+Cache key generation supports complex type parameters, so you can group your parameters into a single one to include them all.
+If you don't want them all included, but few of it, you can either provide property names to include within the CacheKey attribute constructor, or get the full control by overriding its ToString() method.
 
 #### Fluent configuration
 

@@ -89,7 +89,7 @@
 
 
   <h1 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2" class="text-break">
-Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L20"><i class="bi bi-code-slash"></i></a>
+Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBuilder&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L21"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -154,7 +154,7 @@ Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBu
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
   WithCaching(CacheMode, TimeSpan?, bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L131"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L160"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Cache data.</p>
@@ -198,7 +198,7 @@ Interface IApizrGlobalSharedOptionsBuilderBase&lt;TApizrOptions, TApizrOptionsBu
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Action&lt;ApizrException&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -243,7 +243,7 @@ TApizrOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; onException, bo
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Func_Apizr_ApizrException_System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;ApizrException, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L52"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -257,7 +257,51 @@ TApizrOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; onException, bo
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>onException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.ApizrException.html">ApizrException</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
-    <dd><p>The exception callback returning handled flag</p>
+    <dd><p>The exception callback returning handled boolean flag</p>
+</dd>
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Func_Apizr_ApizrException_System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching(Func&lt;ApizrException, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithExCatching(Func&lt;ApizrException, Task&lt;bool&gt;&gt; onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.ApizrException.html">ApizrException</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd><p>The exception callback returning handled boolean flag Task</p>
 </dd>
     <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
     <dd><p>Let throw potential exception even if it's handled (default: true)</p>
@@ -287,7 +331,7 @@ TApizrOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; onException, bo
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L42"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -337,7 +381,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L61"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -351,7 +395,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>onException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TResult&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
-    <dd><p>The exception callback returning handled flag</p>
+    <dd><p>The exception callback returning handled boolean flag</p>
 </dd>
     <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
     <dd><p>Let throw potential exception even if it's handled (default: true)</p>
@@ -382,11 +426,109 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
 
 
+  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt; onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TResult&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd><p>The exception callback returning a handled boolean flag Task</p>
+</dd>
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResult</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1___0_System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching&lt;THandler&gt;(THandler, bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrOptionsBuilder WithExCatching&lt;THandler&gt;(THandler exceptionHandler, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>exceptionHandler</code> <span class="xref">THandler</span></dt>
+    <dd><p>The exception handler called back and returning handled boolean flag Task</p>
+</dd>
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>THandler</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter*"></a>
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithHandlerParameter(System.String,System.Object)">
   WithHandlerParameter(string, object)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L96"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some parameters passed through all delegating handlers</p>
@@ -427,7 +569,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithLoggedHeadersRedactionNames(IEnumerable&lt;string&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L143"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the collection of HTTP headers names for which values should be redacted before logging.</p>
@@ -468,7 +610,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithLoggedHeadersRedactionRule(Func&lt;string, bool&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L151"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func&lt;T, TResult&gt;</a> which determines whether to redact the HTTP header value before logging.</p>
@@ -509,7 +651,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
   WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L113"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -552,7 +694,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithOperationTimeout_System_TimeSpan_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithOperationTimeout(System.TimeSpan)">
   WithOperationTimeout(TimeSpan)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L121"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the operation (overall request tries)</p>
@@ -590,7 +732,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithRequestTimeout_System_TimeSpan_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithRequestTimeout(System.TimeSpan)">
   WithRequestTimeout(TimeSpan)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L128"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the request (each request try)</p>
@@ -628,7 +770,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
   WithResilienceContextOptions(Action&lt;IApizrResilienceContextOptionsBuilder&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L135"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some options to the resilience context</p>
@@ -666,7 +808,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 
   <h3 id="Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_" data-uid="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
   WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, TValue)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L104"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some resilience properties to the resilience context</p>
@@ -712,7 +854,7 @@ TApizrOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;T
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L20" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Shared/IApizrGlobalSharedOptionsBuilderBase.cs/#L21" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -7,6 +7,7 @@ items:
   children:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase)
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
@@ -31,7 +32,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrGlobalSharedOptionsBase
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -73,7 +74,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -105,7 +106,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerMode
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 34
+    startLine: 35
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -138,7 +139,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosity
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 37
+    startLine: 38
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -171,7 +172,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevels
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 41
+    startLine: 42
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -204,21 +205,51 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OnException
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 55
+    startLine: 56
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Shared
+  example: []
+  syntax:
+    content: public Func<ApizrException, Task<bool>> OnException { get; }
+    parameters: []
+    return:
+      type: System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}}
+    content.vb: Public Property OnException As Func(Of ApizrException, Task(Of Boolean))
+  overload: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException*
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  id: ExceptionHandlers
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  langs:
+  - csharp
+  - vb
+  name: ExceptionHandlers
+  nameWithType: ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ExceptionHandlers
+    path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
+    startLine: 59
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
   summary: Catching potential exception if defined
   example: []
   syntax:
-    content: public Func<ApizrException, bool> OnException { get; }
+    content: public IList<IApizrExceptionHandler> ExceptionHandlers { get; protected set; }
     parameters: []
     return:
-      type: System.Func{Apizr.ApizrException,System.Boolean}
-    content.vb: Public Property OnException As Func(Of ApizrException, Boolean)
-  overload: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException*
+      type: System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}
+    content.vb: Public Property ExceptionHandlers As IList(Of IApizrExceptionHandler)
+  overload: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers*
   implements:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
+  - Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ExceptionHandlers
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   id: LetThrowOnHandledException
@@ -237,7 +268,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LetThrowOnHandledException
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 58
+    startLine: 62
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -270,7 +301,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HandlersParameters
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 61
+    startLine: 65
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -303,7 +334,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeout
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 64
+    startLine: 68
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -336,7 +367,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeout
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 67
+    startLine: 71
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -369,7 +400,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ShouldRedactHeaderValue
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 70
+    startLine: 74
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -402,7 +433,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResiliencePipelineOptions
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 73
+    startLine: 77
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -435,7 +466,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheOptions
     path: ../../Src/Apizr/Configuring/Shared/ApizrGlobalSharedOptionsBase.cs
-    startLine: 76
+    startLine: 80
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -838,24 +869,17 @@ references:
   name: OnException
   nameWithType: ApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
-  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
-  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_OnException
-  name: OnException
-  nameWithType: IApizrGlobalSharedOptionsBase.OnException
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException
-- uid: System.Func{Apizr.ApizrException,System.Boolean}
-  commentId: T:System.Func{Apizr.ApizrException,System.Boolean}
+- uid: System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}}
+  commentId: T:System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}}
   parent: System
   definition: System.Func`2
   href: https://learn.microsoft.com/dotnet/api/system.func-2
-  name: Func<ApizrException, bool>
-  nameWithType: Func<ApizrException, bool>
-  fullName: System.Func<Apizr.ApizrException, bool>
-  nameWithType.vb: Func(Of ApizrException, Boolean)
-  fullName.vb: System.Func(Of Apizr.ApizrException, Boolean)
-  name.vb: Func(Of ApizrException, Boolean)
+  name: Func<ApizrException, Task<bool>>
+  nameWithType: Func<ApizrException, Task<bool>>
+  fullName: System.Func<Apizr.ApizrException, System.Threading.Tasks.Task<bool>>
+  nameWithType.vb: Func(Of ApizrException, Task(Of Boolean))
+  fullName.vb: System.Func(Of Apizr.ApizrException, System.Threading.Tasks.Task(Of Boolean))
+  name.vb: Func(Of ApizrException, Task(Of Boolean))
   spec.csharp:
   - uid: System.Func`2
     name: Func
@@ -867,10 +891,16 @@ references:
     href: Apizr.ApizrException.html
   - name: ','
   - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
   - uid: System.Boolean
     name: bool
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
   - name: '>'
   spec.vb:
   - uid: System.Func`2
@@ -885,10 +915,18 @@ references:
     href: Apizr.ApizrException.html
   - name: ','
   - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.Boolean
     name: Boolean
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
   - name: )
 - uid: System.Func`2
   commentId: T:System.Func`2
@@ -924,6 +962,117 @@ references:
   - name: " "
   - name: TResult
   - name: )
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers*
+  commentId: Overload:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ExceptionHandlers
+  name: ExceptionHandlers
+  nameWithType: ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ExceptionHandlers
+  commentId: P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ExceptionHandlers
+  parent: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBase_ExceptionHandlers
+  name: ExceptionHandlers
+  nameWithType: IApizrGlobalSharedOptionsBase.ExceptionHandlers
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ExceptionHandlers
+- uid: System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}
+  commentId: T:System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<IApizrExceptionHandler>
+  nameWithType: IList<IApizrExceptionHandler>
+  fullName: System.Collections.Generic.IList<Apizr.IApizrExceptionHandler>
+  nameWithType.vb: IList(Of IApizrExceptionHandler)
+  fullName.vb: System.Collections.Generic.IList(Of Apizr.IApizrExceptionHandler)
+  name.vb: IList(Of IApizrExceptionHandler)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: Apizr.IApizrExceptionHandler
+    name: IApizrExceptionHandler
+    href: Apizr.IApizrExceptionHandler.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.IApizrExceptionHandler
+    name: IApizrExceptionHandler
+    href: Apizr.IApizrExceptionHandler.html
+  - name: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException*
   commentId: Overload:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_LetThrowOnHandledException
@@ -1042,43 +1191,6 @@ references:
   - name: " "
   - name: TValue
   - name: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
-  spec.csharp:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Collections
-    name: Collections
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections
-  - name: .
-  - uid: System.Collections.Generic
-    name: Generic
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
-  spec.vb:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Collections
-    name: Collections
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections
-  - name: .
-  - uid: System.Collections.Generic
-    name: Generic
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout*
   commentId: Overload:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
   href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_OperationTimeout

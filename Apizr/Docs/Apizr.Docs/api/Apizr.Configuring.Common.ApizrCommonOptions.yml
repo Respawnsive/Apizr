@@ -12,6 +12,7 @@ items:
   - Apizr.Configuring.Common.ApizrCommonOptions.CacheHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.ConnectivityHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.DelegatingHandlersFactories
+  - Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientConfigurationBuilder
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpClientHandlerFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.HttpMessageHandlerFactory
@@ -73,6 +74,7 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
@@ -712,6 +714,39 @@ items:
   overload: Apizr.Configuring.Common.ApizrCommonOptions.LogLevelsFactory*
   implements:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.LogLevelsFactory
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory
+  commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory
+  id: ExceptionHandlersFactory
+  parent: Apizr.Configuring.Common.ApizrCommonOptions
+  langs:
+  - csharp
+  - vb
+  name: ExceptionHandlersFactory
+  nameWithType: ApizrCommonOptions.ExceptionHandlersFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ExceptionHandlersFactory
+    path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
+    startLine: 139
+  assemblies:
+  - Apizr
+  namespace: Apizr.Configuring.Common
+  summary: Exception handlers factory
+  example: []
+  syntax:
+    content: public Func<IList<IApizrExceptionHandler>> ExceptionHandlersFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}}
+    content.vb: Public Property ExceptionHandlersFactory As Func(Of IList(Of IApizrExceptionHandler))
+  overload: Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory*
+  implements:
+  - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.ExceptionHandlersFactory
 references:
 - uid: Apizr.Configuring.Common
   commentId: N:Apizr.Configuring.Common
@@ -908,6 +943,13 @@ references:
   name: OnException
   nameWithType: ApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ExceptionHandlers
+  name: ExceptionHandlers
+  nameWithType: ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -2257,5 +2299,65 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.loglevel
   - name: (
+  - name: )
+  - name: )
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory*
+  commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory
+  href: Apizr.Configuring.Common.ApizrCommonOptions.html#Apizr_Configuring_Common_ApizrCommonOptions_ExceptionHandlersFactory
+  name: ExceptionHandlersFactory
+  nameWithType: ApizrCommonOptions.ExceptionHandlersFactory
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory
+- uid: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.ExceptionHandlersFactory
+  commentId: P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.ExceptionHandlersFactory
+  parent: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions
+  href: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.html#Apizr_Configuring_Shared_IApizrSharedRegistrationOptions_ExceptionHandlersFactory
+  name: ExceptionHandlersFactory
+  nameWithType: IApizrSharedRegistrationOptions.ExceptionHandlersFactory
+  fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.ExceptionHandlersFactory
+- uid: System.Func{System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}}
+  commentId: T:System.Func{System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}}
+  parent: System
+  definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
+  name: Func<IList<IApizrExceptionHandler>>
+  nameWithType: Func<IList<IApizrExceptionHandler>>
+  fullName: System.Func<System.Collections.Generic.IList<Apizr.IApizrExceptionHandler>>
+  nameWithType.vb: Func(Of IList(Of IApizrExceptionHandler))
+  fullName.vb: System.Func(Of System.Collections.Generic.IList(Of Apizr.IApizrExceptionHandler))
+  name.vb: Func(Of IList(Of IApizrExceptionHandler))
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: Apizr.IApizrExceptionHandler
+    name: IApizrExceptionHandler
+    href: Apizr.IApizrExceptionHandler.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.IApizrExceptionHandler
+    name: IApizrExceptionHandler
+    href: Apizr.IApizrExceptionHandler.html
   - name: )
   - name: )

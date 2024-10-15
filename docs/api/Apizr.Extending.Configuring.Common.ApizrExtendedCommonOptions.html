@@ -174,6 +174,9 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
       <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_OnException">ApizrGlobalSharedOptionsBase.OnException</a>
     </div>
     <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ExceptionHandlers">ApizrGlobalSharedOptionsBase.ExceptionHandlers</a>
+    </div>
+    <div>
       <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_LetThrowOnHandledException">ApizrGlobalSharedOptionsBase.LetThrowOnHandledException</a>
     </div>
     <div>
@@ -484,7 +487,7 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_DelegatingHandlersExtendedFactories" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.DelegatingHandlersExtendedFactories">
   DelegatingHandlersExtendedFactories
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L144"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L152"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Delegating handlers factories</p>
@@ -502,6 +505,38 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_ExceptionHandlersFactory_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.ExceptionHandlersFactory*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_ExceptionHandlersFactory" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.ExceptionHandlersFactory">
+  ExceptionHandlersFactory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Exception handlers factory</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;IServiceProvider, IList&lt;IApizrExceptionHandler&gt;&gt; ExceptionHandlersFactory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="Apizr.IApizrExceptionHandler.html">IApizrExceptionHandler</a>&gt;&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -612,7 +647,7 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_HttpMessageHandlerFactory" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.HttpMessageHandlerFactory">
   HttpMessageHandlerFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L155"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>HttpMessageHandler factory</p>
@@ -772,7 +807,7 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_ObjectMappings" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.ObjectMappings">
   ObjectMappings
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L161"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Mappings between api request object and model object used for classic auto registration</p>
@@ -804,7 +839,7 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_OperationTimeoutFactory" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.OperationTimeoutFactory">
   OperationTimeoutFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L137"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The operation timeout factory (overall request tries)</p>
@@ -836,7 +871,7 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_PostRegistrationActions" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.PostRegistrationActions">
   PostRegistrationActions
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L159"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L167"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Post registration actions</p>
@@ -868,7 +903,7 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_PostRegistries" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.PostRegistries">
   PostRegistries
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L164"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Other registries plugged during post registration actions</p>
@@ -932,7 +967,7 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_RequestTimeoutFactory" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.RequestTimeoutFactory">
   RequestTimeoutFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L145"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The request timeout factory (each request try)</p>
@@ -996,7 +1031,7 @@ Class ApizrExtendedCommonOptions  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptions_WebApis" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptions.WebApis">
   WebApis
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptions.cs/#L158"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Web apis auto registered with <a class="xref" href="Apizr.IApizrManager-1.html">IApizrManager&lt;TWebApi&gt;</a></p>

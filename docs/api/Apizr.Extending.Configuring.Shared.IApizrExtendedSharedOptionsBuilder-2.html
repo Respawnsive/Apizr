@@ -167,6 +167,15 @@ Interface IApizrExtendedSharedOptionsBuilder&lt;TApizrExtendedSharedOptions, TAp
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, bool&gt;, bool, ApizrDuplicateStrategy)</a>
     </div>
     <div>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching_System_Func_Apizr_ApizrException_System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithExCatching(Func&lt;ApizrException, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)</a>
+    </div>
+    <div>
+      <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithExCatching__1___0_System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithExCatching&lt;THandler&gt;(THandler, bool, ApizrDuplicateStrategy)</a>
+    </div>
+    <div>
       <a class="xref" href="Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedOptionsBuilderBase_2_WithHandlerParameter_System_String_System_Object_">IApizrGlobalSharedOptionsBuilderBase&lt;TApizrExtendedSharedOptions, TApizrExtendedSharedOptionsBuilder&gt;.WithHandlerParameter(string, object)</a>
     </div>
     <div>
@@ -689,6 +698,287 @@ Interface IApizrExtendedSharedOptionsBuilder&lt;TApizrExtendedSharedOptions, TAp
 </dd>
     <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
     <dd><p>The duplicate strategy if there's any other already (default: Add)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrExtendedSharedOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>THandler</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching_System_Func_System_IServiceProvider_Apizr_ApizrException_System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching(System.Func{System.IServiceProvider,Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching(Func&lt;IServiceProvider, ApizrException, bool&gt;, bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptionsBuilder.cs/#L228"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithExCatching(Func&lt;IServiceProvider, ApizrException, bool&gt; onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd><p>The exception callback returning handled boolean flag</p>
+</dd>
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrExtendedSharedOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching_System_Func_System_IServiceProvider_Apizr_ApizrException_System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching(System.Func{System.IServiceProvider,Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching(Func&lt;IServiceProvider, ApizrException, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptionsBuilder.cs/#L246"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithExCatching(Func&lt;IServiceProvider, ApizrException, Task&lt;bool&gt;&gt; onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a>, <a class="xref" href="Apizr.ApizrException.html">ApizrException</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd><p>The exception callback returning a handled boolean flag Task</p>
+</dd>
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrExtendedSharedOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching__1_System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching``1(System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching&lt;THandler&gt;(bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptionsBuilder.cs/#L272"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithExCatching&lt;THandler&gt;(bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrExtendedSharedOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>THandler</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching__1_System_Func_System_IServiceProvider_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching``1(System.Func{System.IServiceProvider,Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching&lt;TResult&gt;(Func&lt;IServiceProvider, ApizrException&lt;TResult&gt;, bool&gt;, bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptionsBuilder.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithExCatching&lt;TResult&gt;(Func&lt;IServiceProvider, ApizrException&lt;TResult&gt;, bool&gt; onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a>, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TResult&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd><p>The exception callback returning handled boolean flag</p>
+</dd>
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrExtendedSharedOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResult</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching__1_System_Func_System_IServiceProvider_Apizr_ApizrException___0__System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching``1(System.Func{System.IServiceProvider,Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching&lt;TResult&gt;(Func&lt;IServiceProvider, ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptionsBuilder.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithExCatching&lt;TResult&gt;(Func&lt;IServiceProvider, ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt; onException, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a>, <a class="xref" href="Apizr.ApizrException-1.html">ApizrException</a>&lt;TResult&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd><p>The exception callback returning a handled boolean flag Task</p>
+</dd>
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TApizrExtendedSharedOptionsBuilder</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TResult</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptionsBuilder_2_WithExCatching__1_System_Func_System_IServiceProvider___0__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptionsBuilder`2.WithExCatching``1(System.Func{System.IServiceProvider,``0},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithExCatching&lt;THandler&gt;(Func&lt;IServiceProvider, THandler&gt;, bool, ApizrDuplicateStrategy)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Shared/IApizrExtendedSharedOptionsBuilder.cs/#L264"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Catch potential exceptions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TApizrExtendedSharedOptionsBuilder WithExCatching&lt;THandler&gt;(Func&lt;IServiceProvider, THandler&gt; exceptionHandlerFactory, bool letThrowOnHandledException = true, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Replace) where THandler : IApizrExceptionHandler</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>exceptionHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a>, THandler&gt;</dt>
+    <dd><p>The exception handler called back and returning handled boolean flag Task</p>
+</dd>
+    <dt><code>letThrowOnHandledException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Let throw potential exception even if it's handled (default: true)</p>
+</dd>
+    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
+    <dd><p>The duplicate strategy if there's another callback already (default: Replace)</p>
 </dd>
   </dl>
 

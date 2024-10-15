@@ -17,6 +17,7 @@ items:
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiEntityKeyType
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllParamsType
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.CrudApiReadAllResultType
+  - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ExceptionHandlersFactory
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HeadersExtendedFactories
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HttpClientBuilder
   - Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HttpClientHandlerFactory
@@ -100,6 +101,7 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
+  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OperationTimeout
@@ -170,7 +172,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CrudApiEntityKeyType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 68
+    startLine: 69
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -203,7 +205,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CrudApiReadAllResultType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 71
+    startLine: 72
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -236,7 +238,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CrudApiReadAllParamsType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 74
+    startLine: 75
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -269,7 +271,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrManagerImplementationType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 77
+    startLine: 78
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -302,7 +304,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 80
+    startLine: 81
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -335,7 +337,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 83
+    startLine: 84
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -368,7 +370,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerType
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 86
+    startLine: 87
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -401,7 +403,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 90
+    startLine: 91
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -434,7 +436,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 98
+    startLine: 99
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -467,7 +469,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 106
+    startLine: 107
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -500,7 +502,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 114
+    startLine: 115
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -533,7 +535,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 122
+    startLine: 123
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -566,7 +568,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 130
+    startLine: 131
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -599,7 +601,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 138
+    startLine: 139
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -632,7 +634,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 146
+    startLine: 147
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -665,7 +667,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpMessageHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 153
+    startLine: 154
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -698,7 +700,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettingsFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 157
+    startLine: 158
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -731,7 +733,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 164
+    startLine: 165
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -764,7 +766,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 167
+    startLine: 168
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -797,7 +799,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 170
+    startLine: 171
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -830,7 +832,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientBuilder
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 173
+    startLine: 174
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -863,7 +865,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HeadersExtendedFactories
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 176
+    startLine: 177
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -878,6 +880,39 @@ items:
   overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.HeadersExtendedFactories*
   implements:
   - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.HeadersExtendedFactories
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ExceptionHandlersFactory
+  commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ExceptionHandlersFactory
+  id: ExceptionHandlersFactory
+  parent: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions
+  langs:
+  - csharp
+  - vb
+  name: ExceptionHandlersFactory
+  nameWithType: ApizrExtendedManagerOptions.ExceptionHandlersFactory
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ExceptionHandlersFactory
+  type: Property
+  source:
+    remote:
+      path: Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: ExceptionHandlersFactory
+    path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
+    startLine: 181
+  assemblies:
+  - Apizr.Extensions.Microsoft.DependencyInjection
+  namespace: Apizr.Extending.Configuring.Manager
+  summary: Exception handlers factory
+  example: []
+  syntax:
+    content: public Func<IServiceProvider, IList<IApizrExceptionHandler>> ExceptionHandlersFactory { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.IServiceProvider,System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}}
+    content.vb: Public Property ExceptionHandlersFactory As Func(Of IServiceProvider, IList(Of IApizrExceptionHandler))
+  overload: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ExceptionHandlersFactory*
+  implements:
+  - Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.ExceptionHandlersFactory
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.OperationTimeoutFactory
   commentId: P:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.OperationTimeoutFactory
   id: OperationTimeoutFactory
@@ -896,7 +931,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeoutFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 180
+    startLine: 189
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -929,7 +964,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeoutFactory
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 188
+    startLine: 197
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -962,7 +997,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WebApis
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 195
+    startLine: 204
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -995,7 +1030,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ObjectMappings
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 198
+    startLine: 207
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1028,7 +1063,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: PostRegistries
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 201
+    startLine: 210
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1061,7 +1096,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: PostRegistrationActions
     path: ../../Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Manager/ApizrExtendedManagerOptions.cs
-    startLine: 204
+    startLine: 213
   assemblies:
   - Apizr.Extensions.Microsoft.DependencyInjection
   namespace: Apizr.Extending.Configuring.Manager
@@ -1399,6 +1434,13 @@ references:
   name: OnException
   nameWithType: ApizrGlobalSharedOptionsBase.OnException
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
+- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
+  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ExceptionHandlers
+  name: ExceptionHandlers
+  nameWithType: ApizrGlobalSharedOptionsBase.ExceptionHandlers
+  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -3110,6 +3152,78 @@ references:
     name: Generic
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ExceptionHandlersFactory*
+  commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ExceptionHandlersFactory
+  href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_ExceptionHandlersFactory
+  name: ExceptionHandlersFactory
+  nameWithType: ApizrExtendedManagerOptions.ExceptionHandlersFactory
+  fullName: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.ExceptionHandlersFactory
+- uid: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.ExceptionHandlersFactory
+  commentId: P:Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.ExceptionHandlersFactory
+  parent: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions
+  href: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.html#Apizr_Extending_Configuring_Shared_IApizrExtendedSharedOptions_ExceptionHandlersFactory
+  name: ExceptionHandlersFactory
+  nameWithType: IApizrExtendedSharedOptions.ExceptionHandlersFactory
+  fullName: Apizr.Extending.Configuring.Shared.IApizrExtendedSharedOptions.ExceptionHandlersFactory
+- uid: System.Func{System.IServiceProvider,System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}}
+  commentId: T:System.Func{System.IServiceProvider,System.Collections.Generic.IList{Apizr.IApizrExceptionHandler}}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<IServiceProvider, IList<IApizrExceptionHandler>>
+  nameWithType: Func<IServiceProvider, IList<IApizrExceptionHandler>>
+  fullName: System.Func<System.IServiceProvider, System.Collections.Generic.IList<Apizr.IApizrExceptionHandler>>
+  nameWithType.vb: Func(Of IServiceProvider, IList(Of IApizrExceptionHandler))
+  fullName.vb: System.Func(Of System.IServiceProvider, System.Collections.Generic.IList(Of Apizr.IApizrExceptionHandler))
+  name.vb: Func(Of IServiceProvider, IList(Of IApizrExceptionHandler))
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: Apizr.IApizrExceptionHandler
+    name: IApizrExceptionHandler
+    href: Apizr.IApizrExceptionHandler.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IServiceProvider
+    name: IServiceProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iserviceprovider
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Apizr.IApizrExceptionHandler
+    name: IApizrExceptionHandler
+    href: Apizr.IApizrExceptionHandler.html
+  - name: )
+  - name: )
 - uid: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.OperationTimeoutFactory*
   commentId: Overload:Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.OperationTimeoutFactory
   href: Apizr.Extending.Configuring.Manager.ApizrExtendedManagerOptions.html#Apizr_Extending_Configuring_Manager_ApizrExtendedManagerOptions_OperationTimeoutFactory

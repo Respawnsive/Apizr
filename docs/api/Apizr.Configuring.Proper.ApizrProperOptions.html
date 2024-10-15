@@ -188,6 +188,9 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
       <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_OnException">ApizrGlobalSharedOptionsBase.OnException</a>
     </div>
     <div>
+      <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_ExceptionHandlers">ApizrGlobalSharedOptionsBase.ExceptionHandlers</a>
+    </div>
+    <div>
       <a class="xref" href="Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_LetThrowOnHandledException">ApizrGlobalSharedOptionsBase.LetThrowOnHandledException</a>
     </div>
     <div>
@@ -329,7 +332,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_BaseAddressFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.BaseAddressFactory">
   BaseAddressFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L86"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Base address factory</p>
@@ -361,7 +364,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_BasePathFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.BasePathFactory">
   BasePathFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L94"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Base path factory</p>
@@ -393,7 +396,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_BaseUriFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.BaseUriFactory">
   BaseUriFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L78"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Base uri factory</p>
@@ -425,7 +428,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_DelegatingHandlersFactories" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.DelegatingHandlersFactories">
   DelegatingHandlersFactories
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L134"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>DelegatingHandler factories</p>
@@ -453,11 +456,43 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
 
 
+  <a id="Apizr_Configuring_Proper_ApizrProperOptions_ExceptionHandlersFactory_" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.ExceptionHandlersFactory*"></a>
+
+  <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_ExceptionHandlersFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.ExceptionHandlersFactory">
+  ExceptionHandlersFactory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Exception handlers factory</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;IList&lt;IApizrExceptionHandler&gt;&gt; ExceptionHandlersFactory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="Apizr.IApizrExceptionHandler.html">IApizrExceptionHandler</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="Apizr_Configuring_Proper_ApizrProperOptions_HttpClientConfigurationBuilder_" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.HttpClientConfigurationBuilder*"></a>
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_HttpClientConfigurationBuilder" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.HttpClientConfigurationBuilder">
   HttpClientConfigurationBuilder
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L131"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>HttpClient configuration builder</p>
@@ -489,7 +524,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_HttpClientHandlerFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.HttpClientHandlerFactory">
   HttpClientHandlerFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L128"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>HttpClientHandler factory</p>
@@ -521,7 +556,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_HttpMessageHandlerFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.HttpMessageHandlerFactory">
   HttpMessageHandlerFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L136"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L137"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>HttpMessageHandler factory</p>
@@ -553,7 +588,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_HttpTracerModeFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.HttpTracerModeFactory">
   HttpTracerModeFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L102"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Http traffic tracing mode factory</p>
@@ -585,7 +620,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_LogLevelsFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.LogLevelsFactory">
   LogLevelsFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L118"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Log levels factory</p>
@@ -617,7 +652,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_LoggerFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.LoggerFactory">
   LoggerFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L125"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The Logger factory</p>
@@ -649,7 +684,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_OperationTimeoutFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.OperationTimeoutFactory">
   OperationTimeoutFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L141"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The operation timeout factory (overall request tries)</p>
@@ -681,7 +716,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_RequestTimeoutFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.RequestTimeoutFactory">
   RequestTimeoutFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L149"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The request timeout factory (each request try)</p>
@@ -713,7 +748,7 @@ Class ApizrProperOptions  <a class="header-action link-secondary" title="View so
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptions_TrafficVerbosityFactory" data-uid="Apizr.Configuring.Proper.ApizrProperOptions.TrafficVerbosityFactory">
   TrafficVerbosityFactory
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptions.cs/#L110"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Http traffic tracing verbosity factory</p>

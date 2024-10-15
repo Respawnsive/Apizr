@@ -53,6 +53,9 @@
             An exception with optional cached <typeparamref name="TResult"/>
             </summary>
         </member>
+        <member name="M:Apizr.ApizrExceptionHandler.HandleAsync(Apizr.ApizrException)">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.ApizrManager`1">
             <summary>
             The manager
@@ -839,6 +842,9 @@
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.LogLevelsFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Common.ApizrCommonOptions.ExceptionHandlersFactory">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Common.ApizrCommonOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Common.IApizrCommonOptionsBase" />
         </member>
@@ -976,6 +982,18 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithExCatching``1(System.Func{``0},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
@@ -1309,6 +1327,9 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.RequestTimeoutFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions.ExceptionHandlersFactory">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Manager.ApizrManagerOptions`1">
             <inheritdoc cref="T:Apizr.Configuring.Manager.IApizrManagerOptions`1"/>
         </member>
@@ -1359,7 +1380,7 @@
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.LogLevels">
             <inheritdoc />
         </member>
-        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.OnException">
+        <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.ExceptionHandlers">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Manager.ApizrManagerOptions`1.LetThrowOnHandledException">
@@ -1571,6 +1592,18 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(System.Func{``0},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
             <inheritdoc />
         </member>
@@ -1764,6 +1797,9 @@
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.RequestTimeoutFactory">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Proper.ApizrProperOptions.ExceptionHandlersFactory">
+            <inheritdoc />
+        </member>
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptionsBase" />
         </member>
@@ -1900,6 +1936,18 @@
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(System.Func{``0},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
@@ -2528,6 +2576,15 @@
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <inheritdoc />
+        </member>
         <member name="M:Apizr.Configuring.Request.ApizrRequestOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
             <inheritdoc />
         </member>
@@ -2672,6 +2729,9 @@
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException">
             <inheritdoc />
         </member>
+        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers">
+            <inheritdoc />
+        </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException">
             <inheritdoc />
         </member>
@@ -2782,7 +2842,7 @@
             Log levels while writing
             </summary>
         </member>
-        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.OnException">
+        <member name="P:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBase.ExceptionHandlers">
             <summary>
             Catching potential exception if defined
             </summary>
@@ -2857,7 +2917,7 @@
             <summary>
             Catch potential exceptions
             </summary>
-            <param name="onException">The exception callback returning handled flag</param>
+            <param name="onException">The exception callback returning handled boolean flag</param>
             <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
             <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
             <returns></returns>
@@ -2866,7 +2926,34 @@
             <summary>
             Catch potential exceptions
             </summary>
-            <param name="onException">The exception callback returning handled flag</param>
+            <param name="onException">The exception callback returning handled boolean flag</param>
+            <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
+            <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Catch potential exceptions
+            </summary>
+            <param name="onException">The exception callback returning handled boolean flag Task</param>
+            <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
+            <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Catch potential exceptions
+            </summary>
+            <param name="onException">The exception callback returning a handled boolean flag Task</param>
+            <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
+            <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedOptionsBuilderBase`2.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Catch potential exceptions
+            </summary>
+            <param name="exceptionHandler">The exception handler called back and returning handled boolean flag Task</param>
             <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
             <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
             <returns></returns>
@@ -3135,6 +3222,11 @@
             The request timeout factory (each request try)
             </summary>
         </member>
+        <member name="P:Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.ExceptionHandlersFactory">
+            <summary>
+            Exception handlers factory
+            </summary>
+        </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBase">
             <summary>
             Options available at both common and proper level for both static and extended registrations
@@ -3357,6 +3449,15 @@
             </summary>
             <param name="key">The resilience property's key</param>
             <param name="valueFactory">The resilience property's value factory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithExCatching``1(System.Func{``0},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
+            <summary>
+            Catch potential exceptions
+            </summary>
+            <param name="exceptionHandlerFactory">The exception handler called back and returning handled boolean flag Task</param>
+            <param name="letThrowOnHandledException">Let throw potential exception even if it's handled (default: true)</param>
+            <param name="strategy">The duplicate strategy if there's another callback already (default: Replace)</param>
             <returns></returns>
         </member>
         <member name="T:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilderBase">

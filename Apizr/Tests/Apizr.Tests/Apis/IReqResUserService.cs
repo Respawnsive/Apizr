@@ -118,6 +118,9 @@ namespace Apizr.Tests.Apis
         [Post("/users")]
         Task<User> CreateUser(User user, CancellationToken cancellationToken);
 
+        [Post("/{path}")]
+        Task<CreateUser> CreateCachedUser([Body, CacheKey(nameof(Models.CreateUser.Email))] CreateUser user, string path, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+
         [Get("/users")]
         Task<ApiResult<User>> GetDelayedUsersAsync([Query] int delay, [RequestOptions] IApizrRequestOptions options);
 

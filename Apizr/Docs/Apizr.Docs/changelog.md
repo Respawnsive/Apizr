@@ -1,3 +1,19 @@
+6.3.0
+---
+
+### All
+
+- [New][Exceptions] Now we can **catch exceptions with a Func callback returning a Task of a handled boolean flag** thanks to `WithExCatching` fluent option
+- [New][Exceptions] Now we can **catch exceptions by providing a custom exception handler implementing `IApizrExceptionHandler`** thanks to `WithExCatching` fluent option
+- [New][ConfigureAwait] Now we can **adjust Http handlers task awaiting configuration** thanks to `ContinueOnCapturedContext` fluent option
+- [New][CacheKey] Now we can **choose multiple complex type's properties to be included in cache key** computation
+- [Fix][CacheKey] Now **providing a property name to the CacheKey attribute actually includes the property in cache key** computation as expected
+ 
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [New][Exceptions] Now we can **catch exceptions with a Func callback providing IServiceProvider and returning a Task of a handled boolean flag** thanks to `WithExCatching` fluent option
+- [New][Exceptions] Now we can **catch exceptions by resolving a custom exception handler implementing `IApizrExceptionHandler`** thanks to `WithExCatching` fluent option
+ 
 6.2.0
 ---
 

@@ -6,8 +6,8 @@ items:
   parent: Apizr.Caching.Attributes
   children:
   - Apizr.Caching.Attributes.CacheKeyAttribute.#ctor
-  - Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String)
-  - Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName
+  - Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String[])
+  - Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames
   langs:
   - csharp
   - vb
@@ -26,7 +26,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Tells Apizr the key to cache value at
+  summary: The decorated parameter will be used as cache key
   example: []
   syntax:
     content: >-
@@ -111,7 +111,7 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: The decorated parameter will be used as cache key (should be primitive otherwise ToString() method will be used, unless providing a property name)
+  summary: The decorated parameter will be used as cache key
   example: []
   syntax:
     content: public CacheKeyAttribute()
@@ -120,16 +120,16 @@ items:
   nameWithType.vb: CacheKeyAttribute.New()
   fullName.vb: Apizr.Caching.Attributes.CacheKeyAttribute.New()
   name.vb: New()
-- uid: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String)
-  commentId: M:Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String)
-  id: '#ctor(System.String)'
+- uid: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String[])
+  commentId: M:Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String[])
+  id: '#ctor(System.String[])'
   parent: Apizr.Caching.Attributes.CacheKeyAttribute
   langs:
   - csharp
   - vb
-  name: CacheKeyAttribute(string)
-  nameWithType: CacheKeyAttribute.CacheKeyAttribute(string)
-  fullName: Apizr.Caching.Attributes.CacheKeyAttribute.CacheKeyAttribute(string)
+  name: CacheKeyAttribute(params string[])
+  nameWithType: CacheKeyAttribute.CacheKeyAttribute(params string[])
+  fullName: Apizr.Caching.Attributes.CacheKeyAttribute.CacheKeyAttribute(params string[])
   type: Constructor
   source:
     remote:
@@ -138,57 +138,59 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Caching/Attributes/CacheKeyAttribute.cs
-    startLine: 23
+    startLine: 24
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
   summary: >-
-    If you use non primitive type (like your ModelClass object) as Cache Primary key you should provide 
+    If you decorate a complex type as cache key, you may want to provide 
 
-    property name of primitive primary Id, otherwise ToString() method will be used.
+    its properties to include by name or to override its ToString() method.
+
+    Otherwise, Apizr will take all its non-null properties.
   example: []
   syntax:
-    content: public CacheKeyAttribute(string propertyName)
+    content: public CacheKeyAttribute(params string[] propertyNames)
     parameters:
-    - id: propertyName
-      type: System.String
-      description: Property name.
-    content.vb: Public Sub New(propertyName As String)
+    - id: propertyNames
+      type: System.String[]
+      description: 'Properties to include as cache key (default: all non-null properties).'
+    content.vb: Public Sub New(ParamArray propertyNames As String())
   overload: Apizr.Caching.Attributes.CacheKeyAttribute.#ctor*
-  nameWithType.vb: CacheKeyAttribute.New(String)
-  fullName.vb: Apizr.Caching.Attributes.CacheKeyAttribute.New(String)
-  name.vb: New(String)
-- uid: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName
-  commentId: P:Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName
-  id: PropertyName
+  nameWithType.vb: CacheKeyAttribute.New(ParamArray String())
+  fullName.vb: Apizr.Caching.Attributes.CacheKeyAttribute.New(ParamArray String())
+  name.vb: New(ParamArray String())
+- uid: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames
+  commentId: P:Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames
+  id: PropertyNames
   parent: Apizr.Caching.Attributes.CacheKeyAttribute
   langs:
   - csharp
   - vb
-  name: PropertyName
-  nameWithType: CacheKeyAttribute.PropertyName
-  fullName: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName
+  name: PropertyNames
+  nameWithType: CacheKeyAttribute.PropertyNames
+  fullName: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames
   type: Property
   source:
     remote:
       path: Apizr/Src/Apizr/Caching/Attributes/CacheKeyAttribute.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: PropertyName
+    id: PropertyNames
     path: ../../Src/Apizr/Caching/Attributes/CacheKeyAttribute.cs
-    startLine: 31
+    startLine: 32
   assemblies:
   - Apizr
   namespace: Apizr.Caching.Attributes
-  summary: Property name of primitive primary Id
+  summary: 'Properties of to include as cache key (default: all non-null properties).'
   example: []
   syntax:
-    content: public string PropertyName { get; }
+    content: public string[] PropertyNames { get; }
     parameters: []
     return:
-      type: System.String
-    content.vb: Public ReadOnly Property PropertyName As String
-  overload: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName*
+      type: System.String[]
+    content.vb: Public ReadOnly Property PropertyNames As String()
+  overload: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames*
 references:
 - uid: Apizr.Caching.Attributes
   commentId: N:Apizr.Caching.Attributes
@@ -2023,20 +2025,32 @@ references:
   nameWithType.vb: CacheKeyAttribute.New
   fullName.vb: Apizr.Caching.Attributes.CacheKeyAttribute.New
   name.vb: New
-- uid: System.String
-  commentId: T:System.String
-  parent: System
+- uid: System.String[]
   isExternal: true
   href: https://learn.microsoft.com/dotnet/api/system.string
-  name: string
-  nameWithType: string
-  fullName: string
-  nameWithType.vb: String
-  fullName.vb: String
-  name.vb: String
-- uid: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName*
-  commentId: Overload:Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName
-  href: Apizr.Caching.Attributes.CacheKeyAttribute.html#Apizr_Caching_Attributes_CacheKeyAttribute_PropertyName
-  name: PropertyName
-  nameWithType: CacheKeyAttribute.PropertyName
-  fullName: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+- uid: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames*
+  commentId: Overload:Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames
+  href: Apizr.Caching.Attributes.CacheKeyAttribute.html#Apizr_Caching_Attributes_CacheKeyAttribute_PropertyNames
+  name: PropertyNames
+  nameWithType: CacheKeyAttribute.PropertyNames
+  fullName: Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames

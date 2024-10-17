@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class CacheKeyAttribute | Apizr ">
       
-      <meta name="description" content="Tells Apizr the key to cache value at">
+      <meta name="description" content="The decorated parameter will be used as cache key">
       <link rel="icon" href="../resources/favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -97,7 +97,7 @@ Class CacheKeyAttribute  <a class="header-action link-secondary" title="View sou
   <dl><dt>Assembly</dt><dd>Apizr.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Tells Apizr the key to cache value at</p>
+  <div class="markdown summary"><p>The decorated parameter will be used as cache key</p>
 </div>
   <div class="markdown conceptual"></div>
 
@@ -267,7 +267,7 @@ public class CacheKeyAttribute : Attribute</code></pre>
   <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Caching/Attributes/CacheKeyAttribute.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>The decorated parameter will be used as cache key (should be primitive otherwise ToString() method will be used, unless providing a property name)</p>
+  <div class="markdown level1 summary"><p>The decorated parameter will be used as cache key</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -289,24 +289,25 @@ public class CacheKeyAttribute : Attribute</code></pre>
 
   <a id="Apizr_Caching_Attributes_CacheKeyAttribute__ctor_" data-uid="Apizr.Caching.Attributes.CacheKeyAttribute.#ctor*"></a>
 
-  <h3 id="Apizr_Caching_Attributes_CacheKeyAttribute__ctor_System_String_" data-uid="Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String)">
-  CacheKeyAttribute(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Caching/Attributes/CacheKeyAttribute.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Caching_Attributes_CacheKeyAttribute__ctor_System_String___" data-uid="Apizr.Caching.Attributes.CacheKeyAttribute.#ctor(System.String[])">
+  CacheKeyAttribute(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Caching/Attributes/CacheKeyAttribute.cs/#L25"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>If you use non primitive type (like your ModelClass object) as Cache Primary key you should provide
-property name of primitive primary Id, otherwise ToString() method will be used.</p>
+  <div class="markdown level1 summary"><p>If you decorate a complex type as cache key, you may want to provide
+its properties to include by name or to override its ToString() method.
+Otherwise, Apizr will take all its non-null properties.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CacheKeyAttribute(string propertyName)</code></pre>
+    <pre><code class="lang-csharp hljs">public CacheKeyAttribute(params string[] propertyNames)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>propertyName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>Property name.</p>
+    <dt><code>propertyNames</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd><p>Properties to include as cache key (default: all non-null properties).</p>
 </dd>
   </dl>
 
@@ -325,19 +326,19 @@ property name of primitive primary Id, otherwise ToString() method will be used.
 </h2>
 
 
-  <a id="Apizr_Caching_Attributes_CacheKeyAttribute_PropertyName_" data-uid="Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName*"></a>
+  <a id="Apizr_Caching_Attributes_CacheKeyAttribute_PropertyNames_" data-uid="Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames*"></a>
 
-  <h3 id="Apizr_Caching_Attributes_CacheKeyAttribute_PropertyName" data-uid="Apizr.Caching.Attributes.CacheKeyAttribute.PropertyName">
-  PropertyName
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Caching/Attributes/CacheKeyAttribute.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Caching_Attributes_CacheKeyAttribute_PropertyNames" data-uid="Apizr.Caching.Attributes.CacheKeyAttribute.PropertyNames">
+  PropertyNames
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Caching/Attributes/CacheKeyAttribute.cs/#L33"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Property name of primitive primary Id</p>
+  <div class="markdown level1 summary"><p>Properties of to include as cache key (default: all non-null properties).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string PropertyName { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string[] PropertyNames { get; }</code></pre>
   </div>
 
 
@@ -346,7 +347,7 @@ property name of primitive primary Id, otherwise ToString() method will be used.
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
     <dd></dd>
   </dl>
 

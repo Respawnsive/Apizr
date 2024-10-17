@@ -365,7 +365,7 @@ Apizr will apply the lowest level settings it could find.</p>
 </li>
 </ul>
 <h4 id="cachekey-attribute">CacheKey attribute</h4>
-<p>By default, Apizr will use all the method parameters (name and value) to generate a cache key (excepting property parameters, neither cancellation token parameters).
+<p>By default, Apizr will use all the method parameters (name and value) to generate a cache key (excepting property parameters, neither cancellation token).
 But you may want to define your own cache key, choosing by yourself which parameter to include and which not.
 That's what the <code>CacheKey</code> attribute is made for.
 You can decorate one or more parameters with it, then it will be included in the cache key generation:</p>
@@ -379,10 +379,59 @@ You can decorate one or more parameters with it, then it will be included in the
     }
 }
 </code></pre>
-<div class="TIP">
-<h5>Tip</h5>
-<p>Cache key generation supports complex type parameters so you can group your parameters into a single one to include them all.</p>
-</div>
+<p>Cache key generation supports complex type parameters, so you can group your parameters into a single one to include them all as cache key:</p>
+<pre><code class="lang-csharp">public record GetUserParams
+{
+    [AliasAs(&quot;userId&quot;)]
+    public int UserId { get; init; }
+
+    [AliasAs(&quot;organizationId&quot;)]
+    public int OrganizationId { get; init; }
+
+    [AliasAs(&quot;serviceName&quot;)]
+    public string ServiceName { get; init; }
+}
+
+namespace Apizr.Sample
+{
+    [BaseAddress(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([Query, CacheKey] GetUserParams parameters);
+    }
+}
+</code></pre>
+<p>If you don't want them all included but few of it, you can provide properties to include by name within the CacheKey attribute constructor:</p>
+<pre><code class="lang-csharp">namespace Apizr.Sample
+{
+    [BaseAddress(&quot;https://reqres.in/api&quot;)]
+    public interface IReqResService
+    {
+        [Get(&quot;/users/{userId}&quot;), Cache(CacheMode.GetOrFetch, &quot;1.00:00:00&quot;)]
+        Task&lt;UserDetails&gt; GetUserAsync([Query, CacheKey(&quot;UserId&quot;, &quot;ServiceName&quot;)] GetUserParams parameters);
+    }
+}
+</code></pre>
+<p>Finally, if you want to get the full control of complex type's cache key formatting, you can still override its ToString() method:</p>
+<pre><code class="lang-csharp">public record GetUserParams
+{
+    [AliasAs(&quot;userId&quot;)]
+    public int UserId { get; init; }
+
+    [AliasAs(&quot;organizationId&quot;)]
+    public int OrganizationId { get; init; }
+
+    [AliasAs(&quot;serviceName&quot;)]
+    public string ServiceName { get; init; }
+
+    public override string ToString()
+    {
+        // Some custom cache key formatting
+        return $&quot;UserId: {UserId}&quot;;
+    }
+}
+</code></pre>
 <h4 id="fluent-configuration">Fluent configuration</h4>
 <h5 id="automatically">Automatically</h5>
 <p>Caching could be activated automatically by providing an <code>IConfiguration</code> instance containing cache settings to Apizr:</p>

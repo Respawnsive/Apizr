@@ -84,12 +84,107 @@ You can set it thanks to this option:
 options => options.WithExCatching(OnException)
 ```
 
-### [Registering](#tab/tabid-registering)
+#### While registering
 
 Configuring an exception handling callback at register time allows you to get some Global Exception Handling concepts right in place.
 
 `WithExCatching` builder option is available with or without using registry.
 It means that you can share your handling callback globally by setting it at registry level and/or set some specific one at api level.
+
+### [Extended](#tab/tabid-extended)
+
+Here is a quite simple scenario:
+```csharp
+services.AddApizrManagerFor<IReqResUserService>(options => options
+                    .WithExCatching(OnException));
+
+private bool OnException(ApizrException ex)
+{
+    // this is a global exception handling callback 
+    if (ex.InnerException is IOException)
+	{
+		// handle no network exception globally for example
+        Alert.Show("No network", "Please check your connection and try again");
+
+        // Tell other exception handling callbacks that we handled it yet
+		return true;
+	}
+
+    return false;
+}
+```
+
+And here is a more complexe scenario:
+```csharp
+services.AddApizr(
+    registry => registry
+        .AddManagerFor<IHttpBinService>()
+        .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+        .AddGroup(
+            group => group
+                .AddManagerFor<IReqResResourceService>()
+                .AddManagerFor<IReqResUserService>(
+                    // IReqResUserService dedicated exception handling callback
+                    options => options.WithExCatching(OnReqResUserException, strategy: ApizrDuplicateStrategy.Add)),
+
+            // Group exception handling callback common to IReqResUserService & IReqResResourceService apis
+            options => options.WithExCatching(OnGroupException, strategy: ApizrDuplicateStrategy.Add))
+
+    // Global exception handling callback common to all apis
+    options => options.WithExCatching(OnGlobalException, strategy: ApizrDuplicateStrategy.Add));
+
+private bool OnGlobalException(ApizrException ex)
+{
+    // this is a global exception handling callback 
+    // called back in case of exception thrown 
+    // while requesting with any managed api from the registry
+    if (ex.InnerException is IOException)
+	{
+		// handle no network exception globally for example
+        Alert.Show("No network", "Please check your connection and try again");
+
+        // Tell other exception handling callbacks that we handled it yet
+		return true;
+	}
+
+    return false;
+}
+
+private bool OnGroupException(IServiceProvider serviceProvider, ApizrException ex)
+{
+    // this is a group exception handling callback 
+    // called back in case of exception thrown 
+    // while requesting with any managed api from the group
+    if(!ex.Handled) // Not yet handled ?
+    {
+		// handle it here at group level, like logging things
+        var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred");
+
+        return true;
+	}
+
+    return false;
+}
+
+private async Task<bool> OnReqResUserException(ApizrException ex)
+{
+    // this is a dedicated exception handling callback 
+    // called back in case of exception thrown 
+    // while requesting with IReqResUserService managed api
+    if(!ex.Handled) // Not yet handled ?
+    {
+		// handle it here at api level
+        await whateverService.DoSomethingAsync();
+        ...
+        return true;
+	}
+
+    return false;
+}
+```
+
+### [Static](#tab/tabid-static)
 
 Here is a quite simple scenario:
 ```csharp
@@ -148,24 +243,22 @@ private bool OnGlobalException(ApizrException ex)
     return false;
 }
 
-private bool OnGroupException(IServiceProvider serviceProvider, ApizrException ex)
+private bool OnGroupException(ApizrException ex)
 {
     // this is a group exception handling callback 
     // called back in case of exception thrown 
     // while requesting with any managed api from the group
     if(!ex.Handled) // Not yet handled ?
     {
-		// handle it here at group level, like logging things
-        var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred");
-
+		// handle it here at group level
+        ...
         return true;
 	}
 
     return false;
 }
 
-private bool OnReqResUserException(ApizrException ex)
+private async Task<bool> OnReqResUserException(ApizrException ex)
 {
     // this is a dedicated exception handling callback 
     // called back in case of exception thrown 
@@ -173,6 +266,7 @@ private bool OnReqResUserException(ApizrException ex)
     if(!ex.Handled) // Not yet handled ?
     {
 		// handle it here at api level
+        await whateverService.DoSomethingAsync();
         ...
         return true;
 	}
@@ -180,6 +274,8 @@ private bool OnReqResUserException(ApizrException ex)
     return false;
 }
 ```
+
+***
 
 Here, as I registered callbacks with `Add` strategy, I'm telling Apizr to:
 - Call back `OnGlobalException` then `OnGroupException` then `OnReqResUserException` in case of any exception thrown while requesting with ```IReqResUserService``` api
@@ -194,7 +290,7 @@ But you definitly can tell Apizr to not throw the final exception if yet handled
 
 Note that you can mix it with other handling solutions.
 
-### [Requesting](#tab/tabid-requesting)
+#### While requesting
 
 Configuring an exception handling callback at request time allows you to set it at the very end, just before sending the request, like trycatching does.
 
@@ -202,7 +298,7 @@ Configuring an exception handling callback at request time allows you to set it 
 public ObservableCollection<User> Users { get; set; }
 ...
 var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
-
+...
 try
 {
 	var users = await reqResManager.ExecuteAsync((options, api) => api.GetUsersAsync(options), 
@@ -246,8 +342,6 @@ As I leaved the `letThrowOnHandledException` parameter to its default `true` val
 But you definitly can tell Apizr to not throw the final exception if yet handled, by setting `letThrowOnHandledException` parameter to `false` and then dealing with result default value.
 
 Note that you can mix it with other handling solutions.
-
-***
 
 You may notice that:
 - ```strategy``` parameter let you adjust the behavior in case of mixing (default: ```Replace```):

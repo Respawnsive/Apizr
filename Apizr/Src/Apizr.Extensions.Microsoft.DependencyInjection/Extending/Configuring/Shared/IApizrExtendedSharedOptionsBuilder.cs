@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Authenticating;
 using Apizr.Configuring;
@@ -156,7 +157,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// <param name="getTokenExpression">The get only token expression</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TSettingsService>(
-            Expression<Func<TSettingsService, Task<string>>> getTokenExpression);
+            Expression<Func<TSettingsService, HttpRequestMessage, CancellationToken, Task<string>>> getTokenExpression);
 
         /// <summary>
         /// Provide your own settings management service
@@ -166,8 +167,8 @@ namespace Apizr.Extending.Configuring.Shared
         /// <param name="setTokenExpression">The set token expression</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TSettingsService>(
-            Expression<Func<TSettingsService, Task<string>>> getTokenExpression,
-            Expression<Func<TSettingsService, string, Task>> setTokenExpression);
+            Expression<Func<TSettingsService, HttpRequestMessage, CancellationToken, Task<string>>> getTokenExpression,
+            Expression<Func<TSettingsService, HttpRequestMessage, string, CancellationToken, Task>> setTokenExpression);
 
         /// <summary>
         /// Provide your own token management services
@@ -176,7 +177,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// <param name="refreshTokenExpression">The method called to refresh the token</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TTokenService>(
-            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
+            Expression<Func<TTokenService, HttpRequestMessage, string, CancellationToken, Task<string>>> refreshTokenExpression);
 
         /// <summary>
         /// Provide your own settings management and token management services
@@ -188,9 +189,9 @@ namespace Apizr.Extending.Configuring.Shared
         /// <param name="refreshTokenExpression">The method called to refresh the token</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
-            Expression<Func<TSettingsService, Task<string>>> getTokenExpression,
-            Expression<Func<TSettingsService, string, Task>> setTokenExpression,
-            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
+            Expression<Func<TSettingsService, HttpRequestMessage, CancellationToken, Task<string>>> getTokenExpression,
+            Expression<Func<TSettingsService, HttpRequestMessage, string, CancellationToken, Task>> setTokenExpression,
+            Expression<Func<TTokenService, HttpRequestMessage, string, CancellationToken, Task<string>>> refreshTokenExpression);
 
         /// <summary>
         /// Provide your own settings management and token management services
@@ -201,9 +202,9 @@ namespace Apizr.Extending.Configuring.Shared
         /// <param name="refreshTokenExpression">The method called to refresh the token</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TAuthService>(
-            Expression<Func<TAuthService, Task<string>>> getTokenExpression,
-            Expression<Func<TAuthService, string, Task>> setTokenExpression,
-            Expression<Func<TAuthService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
+            Expression<Func<TAuthService, HttpRequestMessage, CancellationToken, Task<string>>> getTokenExpression,
+            Expression<Func<TAuthService, HttpRequestMessage, string, CancellationToken, Task>> setTokenExpression,
+            Expression<Func<TAuthService, HttpRequestMessage, string, CancellationToken, Task<string>>> refreshTokenExpression);
 
         /// <summary>
         /// Provide your own settings management service with its token source
@@ -224,7 +225,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
             Expression<Func<TSettingsService, string>> tokenPropertyExpression,
-            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
+            Expression<Func<TTokenService, HttpRequestMessage, string, CancellationToken, Task<string>>> refreshTokenMethod);
 
         /// <summary>
         /// Provide your own auth management service
@@ -235,7 +236,7 @@ namespace Apizr.Extending.Configuring.Shared
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler<TAuthService>(
             Expression<Func<TAuthService, string>> tokenPropertyExpression,
-            Expression<Func<TAuthService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
+            Expression<Func<TAuthService, HttpRequestMessage, string, CancellationToken, Task<string>>> refreshTokenMethod);
 
         /// <summary>
         /// Add some headers to the request

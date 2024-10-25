@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Apizr.Configuring.Manager;
 using Apizr.Extending;
@@ -14,9 +15,9 @@ namespace Apizr.Authenticating
     /// </summary>
     public class AuthenticationHandler : AuthenticationHandlerBase
     {
-        private readonly Func<Task<string>> _getTokenFactory;
-        private readonly Func<string, Task> _setTokenFactory;
-        private readonly Func<HttpRequestMessage, Task<string>> _refreshTokenFactory;
+        private readonly Func<HttpRequestMessage, CancellationToken, Task<string>> _getTokenFactory;
+        private readonly Func<HttpRequestMessage, string, CancellationToken, Task> _setTokenFactory;
+        private readonly Func<HttpRequestMessage, string, CancellationToken, Task<string>> _refreshTokenFactory;
 
         /// <summary>
         /// The authentication handler constructor
@@ -27,7 +28,7 @@ namespace Apizr.Authenticating
         /// <exception cref="ArgumentNullException"></exception>
         public AuthenticationHandler(ILogger logger,
             IApizrManagerOptionsBase apizrOptions,
-            Func<Task<string>> getTokenFactory) : base(logger, apizrOptions)
+            Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory) : base(logger, apizrOptions)
         {
             _getTokenFactory = getTokenFactory ?? throw new ArgumentNullException(nameof(getTokenFactory));
         }
@@ -42,8 +43,8 @@ namespace Apizr.Authenticating
         /// <exception cref="ArgumentNullException"></exception>
         public AuthenticationHandler(ILogger logger,
             IApizrManagerOptionsBase apizrOptions,
-            Func<Task<string>> getTokenFactory,
-            Func<string, Task> setTokenFactory) : base(logger, apizrOptions)
+            Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory,
+            Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory) : base(logger, apizrOptions)
         {
             _getTokenFactory = getTokenFactory ?? throw new ArgumentNullException(nameof(getTokenFactory));
             _setTokenFactory = setTokenFactory ?? throw new ArgumentNullException(nameof(setTokenFactory));
@@ -58,7 +59,7 @@ namespace Apizr.Authenticating
         /// <exception cref="ArgumentNullException"></exception>
         public AuthenticationHandler(ILogger logger, 
             IApizrManagerOptionsBase apizrOptions, 
-            Func<HttpRequestMessage, Task<string>> refreshTokenFactory) : base(logger, apizrOptions)
+            Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory) : base(logger, apizrOptions)
         {
             _refreshTokenFactory = refreshTokenFactory ?? throw new ArgumentNullException(nameof(refreshTokenFactory));
         }
@@ -74,23 +75,28 @@ namespace Apizr.Authenticating
         /// <exception cref="ArgumentNullException"></exception>
         public AuthenticationHandler(ILogger logger,
             IApizrManagerOptionsBase apizrOptions,
-            Func<Task<string>> getTokenFactory,
-            Func<string, Task> setTokenFactory,
-            Func<HttpRequestMessage, Task<string>> refreshTokenFactory) : base(logger, apizrOptions)
+            Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory,
+            Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory,
+            Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory) : base(logger, apizrOptions)
         {
             _getTokenFactory = getTokenFactory ?? throw new ArgumentNullException(nameof(getTokenFactory));
             _setTokenFactory = setTokenFactory ?? throw new ArgumentNullException(nameof(setTokenFactory));
             _refreshTokenFactory = refreshTokenFactory ?? throw new ArgumentNullException(nameof(refreshTokenFactory));
         }
 
+        /// <param name="request"></param>
+        /// <param name="ct"></param>
         /// <inheritdoc />
-        public override Task<string> GetTokenAsync() => _getTokenFactory?.Invoke() ?? Task.FromResult<string>(null);
+        public override Task<string> GetTokenAsync(HttpRequestMessage request, CancellationToken ct = default) =>
+            _getTokenFactory?.Invoke(request, ct) ?? Task.FromResult<string>(null);
 
         /// <inheritdoc />
-        public override Task SetTokenAsync(string token) => _setTokenFactory?.Invoke(token) ?? Task.CompletedTask;
+        public override Task SetTokenAsync(HttpRequestMessage request, string token, CancellationToken ct = default) =>
+            _setTokenFactory?.Invoke(request, token, ct) ?? Task.CompletedTask;
 
         /// <inheritdoc />
-        public override Task<string> RefreshTokenAsync(HttpRequestMessage request) =>
-            _refreshTokenFactory?.Invoke(request) ?? GetTokenAsync();
+        public override Task<string> RefreshTokenAsync(HttpRequestMessage request, string token,
+            CancellationToken ct = default) =>
+            _refreshTokenFactory?.Invoke(request, token, ct) ?? GetTokenAsync(request, ct);
     }
 }

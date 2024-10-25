@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
@@ -70,7 +71,7 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="getTokenFactory">The method called to get local constant token</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler(Func<Task<string>> getTokenFactory);
+        TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory);
 
         /// <summary>
         /// Provide methods to get and set the authorization token when needed
@@ -78,15 +79,15 @@ namespace Apizr.Configuring.Shared
         /// <param name="getTokenFactory">The method called to get local token</param>
         /// <param name="setTokenFactory">The method called to set local token</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler(Func<Task<string>> getTokenFactory,
-            Func<string, Task> setTokenFactory);
+        TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory,
+            Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory);
 
         /// <summary>
         /// Provide a method to refresh the authorization token when needed
         /// </summary>
         /// <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
+        TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory);
 
         /// <summary>
         /// Provide methods to get, set and refresh the authorization token when needed
@@ -95,9 +96,9 @@ namespace Apizr.Configuring.Shared
         /// <param name="setTokenFactory">The method called to get local token</param>
         /// <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler(Func<Task<string>> getTokenFactory,
-            Func<string, Task> setTokenFactory,
-            Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
+        TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory,
+            Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory,
+            Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory);
 
         /// <summary>
         /// Add a custom delegating handler inheriting from <see cref="DelegatingHandler"/> (serial call)

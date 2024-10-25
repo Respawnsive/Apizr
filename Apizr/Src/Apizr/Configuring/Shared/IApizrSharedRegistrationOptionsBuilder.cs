@@ -74,7 +74,44 @@ namespace Apizr.Configuring.Shared
         /// <typeparam name="TAuthenticationHandler">Your <see cref="AuthenticationHandlerBase"/> implementation</typeparam>
         /// <param name="authenticationHandlerFactory">A <typeparamref name="TAuthenticationHandler"/> instance factory</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(Func<ILogger, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase;
+        TApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
+            Func<ILogger, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
+            where TAuthenticationHandler : AuthenticationHandlerBase;
+
+        /// <summary>
+        /// Provide your own settings management service
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting constant token)</typeparam>
+        /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
+        /// <param name="getTokenExpression">The get only token expression</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(
+            TSettingsService settingsService,
+            Expression<Func<TSettingsService, Task<string>>> getTokenExpression);
+
+        /// <summary>
+        /// Provide your own settings management service
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+        /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
+        /// <param name="getTokenExpression">The get token expression</param>
+        /// <param name="setTokenExpression">The set token expression</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(
+            TSettingsService settingsService,
+            Expression<Func<TSettingsService, Task<string>>> getTokenExpression,
+            Expression<Func<TSettingsService, string, Task>> setTokenExpression);
+
+        /// <summary>
+        /// Provide your own token management services
+        /// </summary>
+        /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
+        /// <param name="tokenService">A <typeparamref name="TTokenService"/> instance</param>
+        /// <param name="refreshTokenExpression">The method called to refresh the token</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TTokenService>(
+            TTokenService tokenService,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
 
         /// <summary>
         /// Provide your own settings management and token management services
@@ -82,61 +119,180 @@ namespace Apizr.Configuring.Shared
         /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
         /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
         /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
-        /// <param name="tokenProperty">The token property used for saving</param>
+        /// <param name="getTokenExpression">The get token expression</param>
+        /// <param name="setTokenExpression">The set token expression</param>
         /// <param name="tokenService">A <typeparamref name="TTokenService"/> instance</param>
-        /// <param name="refreshTokenMethod">The method called to refresh the token</param>
+        /// <param name="refreshTokenExpression">The method called to refresh the token</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty, TTokenService tokenService, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
+            TSettingsService settingsService,
+            Expression<Func<TSettingsService, Task<string>>> getTokenExpression,
+            Expression<Func<TSettingsService, string, Task>> setTokenExpression,
+            TTokenService tokenService,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
 
         /// <summary>
         /// Provide your own settings management and token management services
         /// </summary>
-        /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
-        /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
-        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
-        /// <param name="tokenProperty">The token property used for saving</param>
-        /// <param name="tokenServiceFactory">A <typeparamref name="TTokenService"/> instance factory</param>
-        /// <param name="refreshTokenMethod">The method called to refresh the token</param>
+        /// <typeparam name="TAuthService">Your auth management service (saving/getting/refreshing token)</typeparam>
+        /// <param name="authService">A <typeparamref name="TAuthService"/> instance</param>
+        /// <param name="getTokenExpression">The get token expression</param>
+        /// <param name="setTokenExpression">The set token expression</param>
+        /// <param name="refreshTokenExpression">The method called to refresh the token</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty, Func<TTokenService> tokenServiceFactory, Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
+        TApizrOptionsBuilder WithAuthenticationHandler<TAuthService>(
+            TAuthService authService,
+            Expression<Func<TAuthService, Task<string>>> getTokenExpression,
+            Expression<Func<TAuthService, string, Task>> setTokenExpression,
+            Expression<Func<TAuthService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
 
         /// <summary>
         /// Provide your own settings management service with its token source
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (getting token)</typeparam>
         /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
-        /// <param name="tokenProperty">The token property to get from</param>
+        /// <param name="tokenPropertyExpression">The token property to get from and set to</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty);
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(
+            TSettingsService settingsService,
+            Expression<Func<TSettingsService, string>> tokenPropertyExpression);
 
         /// <summary>
-        /// Provide your own settings management service and a method to refresh the token
+        /// Provide your own settings management and token management services
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+        /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
         /// <param name="settingsService">A <typeparamref name="TSettingsService"/> instance</param>
-        /// <param name="tokenProperty">The token property used for saving</param>
-        /// <param name="refreshTokenFactory">The method factory called to refresh the token</param>
+        /// <param name="tokenPropertyExpression">The token property to get from and set to</param>
+        /// <param name="tokenService">A <typeparamref name="TTokenService"/> instance</param>
+        /// <param name="refreshTokenMethod">The method called to refresh the token</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(TSettingsService settingsService, Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
+            TSettingsService settingsService, 
+            Expression<Func<TSettingsService, string>> tokenPropertyExpression,
+            TTokenService tokenService,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
 
         /// <summary>
-        /// Provide your own settings management service with its token property
+        /// Provide your own auth management service
+        /// </summary>
+        /// <typeparam name="TAuthService">Your auth management service (saving/getting/refreshing token)</typeparam>
+        /// <param name="authService">A <typeparamref name="TAuthService"/> instance</param>
+        /// <param name="tokenPropertyExpression">The token property to get from and set to</param>
+        /// <param name="refreshTokenMethod">The method called to refresh the token</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TAuthService>(
+            TAuthService authService,
+            Expression<Func<TAuthService, string>> tokenPropertyExpression,
+            Expression<Func<TAuthService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
+
+        /// <summary>
+        /// Provide your own settings management service
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (getting constant token)</typeparam>
+        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+        /// <param name="getTokenExpression">The get only token expression</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(
+            Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, Task<string>>> getTokenExpression);
+
+        /// <summary>
+        /// Provide your own settings management service
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+        /// <param name="getTokenExpression">The get token expression</param>
+        /// <param name="setTokenExpression">The set token expression</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(
+            Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, Task<string>>> getTokenExpression,
+            Expression<Func<TSettingsService, string, Task>> setTokenExpression);
+
+        /// <summary>
+        /// Provide your own token management services
+        /// </summary>
+        /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
+        /// <param name="tokenServiceFactory">A <typeparamref name="TTokenService"/> instance factory</param>
+        /// <param name="refreshTokenExpression">The method called to refresh the token</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TTokenService>(
+            Func<TTokenService> tokenServiceFactory,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
+
+        /// <summary>
+        /// Provide your own settings management and token management services
+        /// </summary>
+        /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+        /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
+        /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
+        /// <param name="getTokenExpression">The get token expression</param>
+        /// <param name="setTokenExpression">The set token expression</param>
+        /// <param name="tokenServiceFactory">A <typeparamref name="TTokenService"/> instance factory</param>
+        /// <param name="refreshTokenExpression">The method called to refresh the token</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
+            Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, Task<string>>> getTokenExpression,
+            Expression<Func<TSettingsService, string, Task>> setTokenExpression,
+            Func<TTokenService> tokenServiceFactory,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
+
+        /// <summary>
+        /// Provide your own auth management service
+        /// </summary>
+        /// <typeparam name="TAuthService">Your auth management service (saving/getting/refreshing token)</typeparam>
+        /// <param name="authServiceFactory">A <typeparamref name="TAuthService"/> instance factory</param>
+        /// <param name="getTokenExpression">The get token expression</param>
+        /// <param name="setTokenExpression">The set token expression</param>
+        /// <param name="refreshTokenExpression">The method called to refresh the token</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TAuthService>(
+            Func<TAuthService> authServiceFactory,
+            Expression<Func<TAuthService, Task<string>>> getTokenExpression,
+            Expression<Func<TAuthService, string, Task>> setTokenExpression,
+            Expression<Func<TAuthService, HttpRequestMessage, Task<string>>> refreshTokenExpression);
+
+        /// <summary>
+        /// Provide your own settings management service with its token source
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (getting token)</typeparam>
         /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
-        /// <param name="tokenProperty">The token property to get from</param>
+        /// <param name="tokenPropertyExpression">The token property to get from and set to</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty);
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(
+            Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>> tokenPropertyExpression);
 
         /// <summary>
-        /// Provide your own settings management service and a method to refresh the token
+        /// Provide your own settings management and token management services
         /// </summary>
         /// <typeparam name="TSettingsService">Your settings management service (saving/getting token)</typeparam>
+        /// <typeparam name="TTokenService">Your token management service (refreshing token)</typeparam>
         /// <param name="settingsServiceFactory">A <typeparamref name="TSettingsService"/> instance factory</param>
-        /// <param name="tokenProperty">The token property used for saving</param>
-        /// <param name="refreshTokenFactory">The method factory called to refresh the token</param>
+        /// <param name="tokenPropertyExpression">The token property to get from and set to</param>
+        /// <param name="tokenServiceFactory">A <typeparamref name="TTokenService"/> instance factory</param>
+        /// <param name="refreshTokenMethod">The method called to refresh the token</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService>(Func<TSettingsService> settingsServiceFactory, Expression<Func<TSettingsService, string>> tokenProperty, Func<HttpRequestMessage, Task<string>> refreshTokenFactory);
+        TApizrOptionsBuilder WithAuthenticationHandler<TSettingsService, TTokenService>(
+            Func<TSettingsService> settingsServiceFactory,
+            Expression<Func<TSettingsService, string>> tokenPropertyExpression,
+            Func<TTokenService> tokenServiceFactory,
+            Expression<Func<TTokenService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
+
+        /// <summary>
+        /// Provide your own auth management service
+        /// </summary>
+        /// <typeparam name="TAuthService">Your auth management service (saving/getting/refreshing token)</typeparam>
+        /// <param name="authServiceFactory">A <typeparamref name="TAuthService"/> instance factory</param>
+        /// <param name="tokenPropertyExpression">The token property to get from and set to</param>
+        /// <param name="refreshTokenMethod">The method called to refresh the token</param>
+        /// <returns></returns>
+        TApizrOptionsBuilder WithAuthenticationHandler<TAuthService>(
+            Func<TAuthService> authServiceFactory,
+            Expression<Func<TAuthService, string>> tokenPropertyExpression,
+            Expression<Func<TAuthService, HttpRequestMessage, Task<string>>> refreshTokenMethod);
 
         /// <summary>
         /// Add a custom delegating handler inheriting from <see cref="DelegatingHandler"/> (serial call)

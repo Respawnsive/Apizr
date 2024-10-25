@@ -89,7 +89,7 @@
 
 
   <h1 id="Apizr_Authenticating_IAuthenticationHandler" data-uid="Apizr.Authenticating.IAuthenticationHandler" class="text-break">
-Interface IAuthenticationHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L9"><i class="bi bi-code-slash"></i></a>
+Interface IAuthenticationHandler  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L10"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -121,25 +121,25 @@ Interface IAuthenticationHandler  <a class="header-action link-secondary" title=
 </h2>
 
 
-  <a id="Apizr_Authenticating_IAuthenticationHandler_GetToken_" data-uid="Apizr.Authenticating.IAuthenticationHandler.GetToken*"></a>
+  <a id="Apizr_Authenticating_IAuthenticationHandler_GetTokenAsync_" data-uid="Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync*"></a>
 
-  <h3 id="Apizr_Authenticating_IAuthenticationHandler_GetToken" data-uid="Apizr.Authenticating.IAuthenticationHandler.GetToken">
-  GetToken()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Authenticating_IAuthenticationHandler_GetTokenAsync" data-uid="Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync">
+  GetTokenAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>The method called to get token from settings</p>
+  <div class="markdown level1 summary"><p>The method called to get local token</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">string GetToken()</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;string&gt; GetTokenAsync()</code></pre>
   </div>
 
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -157,7 +157,7 @@ Interface IAuthenticationHandler  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Authenticating_IAuthenticationHandler_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_" data-uid="Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
   RefreshTokenAsync(HttpRequestMessage)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L29"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The method called to refresh token when rejected or empty</p>
@@ -191,28 +191,33 @@ Interface IAuthenticationHandler  <a class="header-action link-secondary" title=
 
 
 
-  <a id="Apizr_Authenticating_IAuthenticationHandler_SetToken_" data-uid="Apizr.Authenticating.IAuthenticationHandler.SetToken*"></a>
+  <a id="Apizr_Authenticating_IAuthenticationHandler_SetTokenAsync_" data-uid="Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync*"></a>
 
-  <h3 id="Apizr_Authenticating_IAuthenticationHandler_SetToken_System_String_" data-uid="Apizr.Authenticating.IAuthenticationHandler.SetToken(System.String)">
-  SetToken(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Authenticating_IAuthenticationHandler_SetTokenAsync_System_String_" data-uid="Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.String)">
+  SetTokenAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>The method called to save token into settings</p>
+  <div class="markdown level1 summary"><p>The method called to set local token</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void SetToken(string token)</code></pre>
+    <pre><code class="lang-csharp hljs">Task SetTokenAsync(string token)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>token</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>The token to save</p>
+    <dd><p>The token to set</p>
 </dd>
   </dl>
 
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -228,7 +233,7 @@ Interface IAuthenticationHandler  <a class="header-action link-secondary" title=
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L9" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/IAuthenticationHandler.cs/#L10" class="edit-link">Edit this page</a>
         </div>
 
 

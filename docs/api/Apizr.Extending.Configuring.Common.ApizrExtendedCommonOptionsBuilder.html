@@ -89,7 +89,7 @@
 
 
   <h1 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder" class="text-break">
-Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L30"><i class="bi bi-code-slash"></i></a>
+Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L31"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -230,7 +230,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_Options" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.Options">
   Options
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L33"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -265,7 +265,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_ConfigureHttpClientBuilder_System_Action_Microsoft_Extensions_DependencyInjection_IHttpClientBuilder__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.ConfigureHttpClientBuilder(System.Action{Microsoft.Extensions.DependencyInjection.IHttpClientBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
   ConfigureHttpClientBuilder(Action&lt;IHttpClientBuilder&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L474"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L619"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adjust some HttpClient settings</p>
@@ -306,7 +306,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
   WithAuthenticationHandler(Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L262"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a method to refresh the authorization token when needed</p>
@@ -342,9 +342,170 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
 
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_System_Func_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})">
+  WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L247"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide methods to only get the authorization constant token when needed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt; getTokenFactory)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>The method called to get local constant token</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_System_Func_System_Threading_Tasks_Task_System_String___System_Func_System_String_System_Threading_Tasks_Task__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})">
+  WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt;, Func&lt;string, Task&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide methods to get and set the authorization token when needed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt; getTokenFactory, Func&lt;string, Task&gt; setTokenFactory)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>The method called to get local token</p>
+</dd>
+    <dt><code>setTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;</dt>
+    <dd><p>The method called to set local token</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_System_Func_System_Threading_Tasks_Task_System_String___System_Func_System_String_System_Threading_Tasks_Task__System_Func_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+  WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt;, Func&lt;string, Task&gt;, Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L269"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide methods to get, set and refresh the authorization token when needed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt; getTokenFactory, Func&lt;string, Task&gt; setTokenFactory, Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt; refreshTokenFactory)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>The method called to get local token</p>
+</dd>
+    <dt><code>setTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;</dt>
+    <dd><p>The method called to get local token</p>
+</dd>
+    <dt><code>refreshTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>Refresh token method called when expired or empty</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_System_Type_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler(System.Type)">
+  WithAuthenticationHandler(Type)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L229"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own <a class="xref" href="Apizr.Extending.Authenticating.AuthenticationHandlerBase-1.html">AuthenticationHandlerBase&lt;TWebApi&gt;</a> generic implementation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(Type authenticationHandlerType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>authenticationHandlerType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd><p>Your own <a class="xref" href="Apizr.Extending.Authenticating.AuthenticationHandlerBase-1.html">AuthenticationHandlerBase&lt;TWebApi&gt;</a> generic implementation</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Func_System_IServiceProvider_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
   WithAuthenticationHandler&lt;TAuthenticationHandler&gt;(Func&lt;IServiceProvider, IApizrManagerOptionsBase, TAuthenticationHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L230"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L223"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own <a class="xref" href="Apizr.Authenticating.AuthenticationHandlerBase.html">AuthenticationHandlerBase</a> implementation</p>
@@ -386,23 +547,67 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_String___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
-  WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L247"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TTokenService&gt;(Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L305"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Provide your own settings management service with its token property</p>
+  <div class="markdown level1 summary"><p>Provide your own token management services</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenProperty)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TTokenService&gt;(Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>tokenProperty</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
-    <dd><p>The token property to get from</p>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The method called to refresh the token</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TTokenService</code></dt>
+    <dd><p>Your token management service (refreshing token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_String___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
+  WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L353"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management service with its token source</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenPropertyExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tokenPropertyExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>The token property to get from and set to</p>
 </dd>
   </dl>
 
@@ -430,26 +635,116 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_String___System_Func_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
-  WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt;, Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L258"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_String___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TAuthService&gt;(Expression&lt;Func&lt;TAuthService, string&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L392"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Provide your own settings management service and a method to refresh the token</p>
+  <div class="markdown level1 summary"><p>Provide your own auth management service</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenProperty, Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt; refreshTokenFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(Expression&lt;Func&lt;TAuthService, string&gt;&gt; tokenPropertyExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>tokenProperty</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
-    <dd><p>The token property used for saving</p>
+    <dt><code>tokenPropertyExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>The token property to get from and set to</p>
 </dd>
-    <dt><code>refreshTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
-    <dd><p>The method factory called to refresh the token</p>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAuthService</code></dt>
+    <dd><p>Your auth management service (saving/getting/refreshing token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get only token expression</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TSettingsService</code></dt>
+    <dd><p>Your settings management service (getting constant token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+  WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L290"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt; setTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get token expression</p>
+</dd>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dd><p>The set token expression</p>
 </dd>
   </dl>
 
@@ -477,9 +772,9 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__2_System_Linq_Expressions_Expression_System_Func___0_System_String___System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``2(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TAuthService&gt;(Expression&lt;Func&lt;TAuthService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TAuthService, string, Task&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L335"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
@@ -487,15 +782,117 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenProperty, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenMethod)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(Expression&lt;Func&lt;TAuthService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TAuthService, string, Task&gt;&gt; setTokenExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>tokenProperty</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
-    <dd><p>The token property used for saving</p>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get token expression</p>
 </dd>
-    <dt><code>refreshTokenMethod</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dd><p>The set token expression</p>
+</dd>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The method called to refresh the token</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAuthService</code></dt>
+    <dd><p>Your auth management service (saving/getting/refreshing token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__2_System_Linq_Expressions_Expression_System_Func___0_System_String___System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``2(System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L371"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenPropertyExpression, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tokenPropertyExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>The token property to get from and set to</p>
+</dd>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Extending.Configuring.Common.IApizrExtendedCommonOptionsBuilder.html">IApizrExtendedCommonOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TSettingsService</code></dt>
+    <dd><p>Your settings management service (saving/getting token)</p>
+</dd>
+    <dt><code>TTokenService</code></dt>
+    <dd><p>Your token management service (refreshing token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithAuthenticationHandler__2_System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task___System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithAuthenticationHandler``2(System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt; setTokenExpression, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get token expression</p>
+</dd>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dd><p>The set token expression</p>
+</dd>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd><p>The method called to refresh the token</p>
 </dd>
   </dl>
@@ -529,7 +926,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithBaseAddress_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBaseAddress(Func&lt;IServiceProvider, string&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L151"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
@@ -570,7 +967,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithBaseAddress_System_Func_System_IServiceProvider_System_Uri__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithBaseAddress(System.Func{System.IServiceProvider,System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBaseAddress(Func&lt;IServiceProvider, Uri&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L173"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
@@ -611,7 +1008,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBaseAddress(string, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L146"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
@@ -652,7 +1049,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithBaseAddress_System_Uri_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBaseAddress(Uri, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L167"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L168"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
@@ -693,7 +1090,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithBasePath_System_Func_System_IServiceProvider_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithBasePath(System.Func{System.IServiceProvider,System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBasePath(Func&lt;IServiceProvider, string&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L194"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base path (could be defined with WebApiAttribute)</p>
@@ -734,7 +1131,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBasePath(string, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L189"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L190"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base path (could be defined with WebApiAttribute)</p>
@@ -775,7 +1172,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithCacheHandler_Apizr_Caching_ICacheHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithCacheHandler(Apizr.Caching.ICacheHandler)">
   WithCacheHandler(ICacheHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L743"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L888"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a cache handler to cache data</p>
@@ -813,7 +1210,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithCacheHandler_System_Func_System_IServiceProvider_Apizr_Caching_ICacheHandler__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithCacheHandler(System.Func{System.IServiceProvider,Apizr.Caching.ICacheHandler})">
   WithCacheHandler(Func&lt;IServiceProvider, ICacheHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L747"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L892"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a cache handler to cache data</p>
@@ -851,7 +1248,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithCacheHandler_System_Type_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithCacheHandler(System.Type)">
   WithCacheHandler(Type)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L760"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L905"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a cache handler to cache data</p>
@@ -889,7 +1286,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithCacheHandler__1" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithCacheHandler``1">
   WithCacheHandler&lt;TCacheHandler&gt;()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L755"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L900"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a cache handler to cache data</p>
@@ -927,7 +1324,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
   WithCaching(CacheMode, TimeSpan?, bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L912"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L1057"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Cache data.</p>
@@ -971,7 +1368,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithConfiguration_Microsoft_Extensions_Configuration_IConfiguration_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
   WithConfiguration(IConfiguration)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L44"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set options from configuration</p>
@@ -1009,7 +1406,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithConfiguration_Microsoft_Extensions_Configuration_IConfigurationSection_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
   WithConfiguration(IConfigurationSection)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L48"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set options from a specific configuration section</p>
@@ -1047,7 +1444,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithConnectivityHandler_Apizr_Connecting_IConnectivityHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
   WithConnectivityHandler(IConnectivityHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L698"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L843"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a connectivity handler to check connectivity before sending a request</p>
@@ -1085,7 +1482,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithConnectivityHandler_System_Func_System_Boolean__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler(System.Func{System.Boolean})">
   WithConnectivityHandler(Func&lt;bool&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L718"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L863"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a function to invoke while checking connectivity</p>
@@ -1123,7 +1520,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithConnectivityHandler_System_Func_System_IServiceProvider_Apizr_Connecting_IConnectivityHandler__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler(System.Func{System.IServiceProvider,Apizr.Connecting.IConnectivityHandler})">
   WithConnectivityHandler(Func&lt;IServiceProvider, IConnectivityHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L702"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L847"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a connectivity handler to check connectivity before sending a request</p>
@@ -1161,7 +1558,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithConnectivityHandler_System_Type_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler(System.Type)">
   WithConnectivityHandler(Type)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L731"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L876"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a connectivity handler to check connectivity before sending a request</p>
@@ -1199,7 +1596,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithConnectivityHandler__1" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler``1">
   WithConnectivityHandler&lt;TConnectivityHandler&gt;()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L726"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L871"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a connectivity handler to check connectivity before sending a request</p>
@@ -1237,7 +1634,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithConnectivityHandler__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithConnectivityHandler``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
   WithConnectivityHandler&lt;TConnectivityHandler&gt;(Expression&lt;Func&lt;TConnectivityHandler, bool&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L710"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L855"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a connectivity handler to check connectivity before sending a request</p>
@@ -1280,7 +1677,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithDelegatingHandler__1_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithDelegatingHandler``1(Apizr.Configuring.ApizrDuplicateStrategy)">
   WithDelegatingHandler&lt;THandler&gt;(ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L413"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L558"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
@@ -1323,7 +1720,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithDelegatingHandler__1_System_Func_System_IServiceProvider_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithDelegatingHandler&lt;THandler&gt;(Func&lt;IServiceProvider, IApizrManagerOptionsBase, THandler&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L423"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L568"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
@@ -1369,7 +1766,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithDelegatingHandler__1_System_Func_System_IServiceProvider___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithDelegatingHandler``1(System.Func{System.IServiceProvider,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithDelegatingHandler&lt;THandler&gt;(Func&lt;IServiceProvider, THandler&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L418"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L563"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
@@ -1415,7 +1812,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithDelegatingHandler&lt;THandler&gt;(THandler, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L408"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L553"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
@@ -1461,7 +1858,7 @@ Class ApizrExtendedCommonOptionsBuilder  <a class="header-action link-secondary"
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Action&lt;ApizrException&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L504"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L649"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1506,7 +1903,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching(Action&lt;ApizrExceptio
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching_System_Func_Apizr_ApizrException_System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;ApizrException, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L522"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L667"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1550,7 +1947,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching(Action&lt;ApizrExceptio
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching_System_Func_Apizr_ApizrException_System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;ApizrException, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L541"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L686"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1594,7 +1991,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching(Action&lt;ApizrExceptio
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching_System_Func_System_IServiceProvider_Apizr_ApizrException_System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Func{System.IServiceProvider,Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;IServiceProvider, ApizrException, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L557"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L702"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1638,7 +2035,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching(Action&lt;ApizrExceptio
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching_System_Func_System_IServiceProvider_Apizr_ApizrException_System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching(System.Func{System.IServiceProvider,Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;IServiceProvider, ApizrException, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L572"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L717"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1682,7 +2079,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching(Action&lt;ApizrExceptio
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L512"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L657"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1732,7 +2129,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching__1_System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;THandler&gt;(bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L633"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L778"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1778,7 +2175,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L531"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L676"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1827,7 +2224,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L548"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L693"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1876,7 +2273,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching__1_System_Func_System_IServiceProvider_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(System.Func{System.IServiceProvider,Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;IServiceProvider, ApizrException&lt;TResult&gt;, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L564"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L709"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1925,7 +2322,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching__1_System_Func_System_IServiceProvider_Apizr_ApizrException___0__System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(System.Func{System.IServiceProvider,Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;IServiceProvider, ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L580"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L725"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1974,7 +2371,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching__1_System_Func_System_IServiceProvider___0__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(System.Func{System.IServiceProvider,``0},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;THandler&gt;(Func&lt;IServiceProvider, THandler&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L596"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L741"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2023,7 +2420,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithExCatching__1___0_System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;THandler&gt;(THandler, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L590"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L735"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2072,7 +2469,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHandlerParameter_System_String_System_Object_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
   WithHandlerParameter(string, object)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L639"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L784"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some parameters passed through all delegating handlers</p>
@@ -2113,7 +2510,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders(IList&lt;string&gt;, ApizrDuplicateStrategy, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L413"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request</p>
@@ -2157,7 +2554,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHeaders_System_Func_System_IServiceProvider_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders(System.Func{System.IServiceProvider,System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders(Func&lt;IServiceProvider, IList&lt;string&gt;&gt;, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L444"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request</p>
@@ -2204,7 +2601,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHeaders__1_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHeaders``1(System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders&lt;TSettingsService&gt;(Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L476"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request loaded from service properties</p>
@@ -2257,7 +2654,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHttpClientHandler_System_Func_System_IServiceProvider_System_Net_Http_HttpClientHandler__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpClientHandler(System.Func{System.IServiceProvider,System.Net.Http.HttpClientHandler})">
   WithHttpClientHandler(Func&lt;IServiceProvider, HttpClientHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L214"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L215"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a custom HttpClientHandler</p>
@@ -2295,7 +2692,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHttpClientHandler_System_Net_Http_HttpClientHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
   WithHttpClientHandler(HttpClientHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L211"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a custom HttpClientHandler</p>
@@ -2333,7 +2730,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHttpMessageHandler__1" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpMessageHandler``1">
   WithHttpMessageHandler&lt;THandler&gt;()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L450"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L595"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2370,7 +2767,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHttpMessageHandler__1_System_Func_System_IServiceProvider_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
   WithHttpMessageHandler&lt;THandler&gt;(Func&lt;IServiceProvider, IApizrManagerOptionsBase, THandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L462"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L607"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2413,7 +2810,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHttpMessageHandler__1_System_Func_System_IServiceProvider___0__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpMessageHandler``1(System.Func{System.IServiceProvider,``0})">
   WithHttpMessageHandler&lt;THandler&gt;(Func&lt;IServiceProvider, THandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L454"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L599"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2456,7 +2853,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithHttpMessageHandler__1___0_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithHttpMessageHandler``1(``0)">
   WithHttpMessageHandler&lt;THandler&gt;(THandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L458"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L603"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2499,7 +2896,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithLoggedHeadersRedactionNames(IEnumerable&lt;string&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L817"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L962"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the collection of HTTP headers names for which values should be redacted before logging.</p>
@@ -2540,7 +2937,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithLoggedHeadersRedactionRule(Func&lt;string, bool&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L826"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L971"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func&lt;T, TResult&gt;</a> which determines whether to redact the HTTP header value before logging.</p>
@@ -2581,7 +2978,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
   WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L659"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L804"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -2624,7 +3021,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_System_Func_System_IServiceProvider_Apizr_Logging_HttpTracerMode__System_Func_System_IServiceProvider_Apizr_Logging_HttpMessageParts__System_Func_System_IServiceProvider_Microsoft_Extensions_Logging_LogLevel____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,Apizr.Logging.HttpTracerMode},System.Func{System.IServiceProvider,Apizr.Logging.HttpMessageParts},System.Func{System.IServiceProvider,Microsoft.Extensions.Logging.LogLevel[]})">
   WithLogging(Func&lt;IServiceProvider, HttpTracerMode&gt;, Func&lt;IServiceProvider, HttpMessageParts&gt;, Func&lt;IServiceProvider, LogLevel[]&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L672"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L817"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -2668,7 +3065,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithLogging_System_Func_System_IServiceProvider_System_ValueTuple_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_____" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithLogging(System.Func{System.IServiceProvider,System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
   WithLogging(Func&lt;IServiceProvider, (HttpTracerMode, HttpMessageParts, LogLevel[])&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L665"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L810"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -2706,7 +3103,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithMappingHandler_Apizr_Mapping_IMappingHandler_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)">
   WithMappingHandler(IMappingHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L772"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L917"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a mapping handler to map entities</p>
@@ -2744,7 +3141,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithMappingHandler_System_Func_System_IServiceProvider_Apizr_Mapping_IMappingHandler__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithMappingHandler(System.Func{System.IServiceProvider,Apizr.Mapping.IMappingHandler})">
   WithMappingHandler(Func&lt;IServiceProvider, IMappingHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L776"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L921"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a mapping handler to auto map entities during mediation</p>
@@ -2782,7 +3179,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithMappingHandler_System_Type_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithMappingHandler(System.Type)">
   WithMappingHandler(Type)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L789"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L934"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a mapping handler to auto map entities during mediation</p>
@@ -2820,7 +3217,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithMappingHandler__1" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithMappingHandler``1">
   WithMappingHandler&lt;TMappingHandler&gt;()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L784"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L929"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a mapping handler to auto map entities during mediation</p>
@@ -2858,7 +3255,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithOperationTimeout_System_Func_System_IServiceProvider_System_TimeSpan__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithOperationTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
   WithOperationTimeout(Func&lt;IServiceProvider, TimeSpan&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L388"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L533"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the operation (overall request tries)</p>
@@ -2896,7 +3293,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithOperationTimeout_System_TimeSpan_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
   WithOperationTimeout(TimeSpan)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L384"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L529"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the operation (overall request tries)</p>
@@ -2934,7 +3331,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithRefitSettings_Refit_RefitSettings_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRefitSettings(Refit.RefitSettings)">
   WithRefitSettings(RefitSettings)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L685"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L830"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide some Refit specific settings</p>
@@ -2972,7 +3369,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithRefitSettings_System_Func_System_IServiceProvider_Refit_RefitSettings__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRefitSettings(System.Func{System.IServiceProvider,Refit.RefitSettings})">
   WithRefitSettings(Func&lt;IServiceProvider, RefitSettings&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L689"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L834"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide some Refit specific settings</p>
@@ -3010,7 +3407,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithRequestTimeout_System_Func_System_IServiceProvider_System_TimeSpan__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRequestTimeout(System.Func{System.IServiceProvider,System.TimeSpan})">
   WithRequestTimeout(Func&lt;IServiceProvider, TimeSpan&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L545"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the request (each request try)</p>
@@ -3048,7 +3445,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithRequestTimeout_System_TimeSpan_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithRequestTimeout(System.TimeSpan)">
   WithRequestTimeout(TimeSpan)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L396"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L541"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the request (each request try)</p>
@@ -3086,7 +3483,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
   WithResilienceContextOptions(Action&lt;IApizrResilienceContextOptionsBuilder&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L801"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L946"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some options to the resilience context</p>
@@ -3124,7 +3521,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithResiliencePipelineKeys_System_String___System_Collections_Generic_IEnumerable_Apizr_Configuring_ApizrRequestMethod__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithResiliencePipelineKeys(string[], IEnumerable&lt;ApizrRequestMethod&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L858"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L1003"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Apply some resilience strategies by getting pipelines from registry with key matching.</p>
@@ -3168,7 +3565,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0__System_Func_System_IServiceProvider___0__" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{System.IServiceProvider,``0})">
   WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, Func&lt;IServiceProvider, TValue&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L651"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L796"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some resilience properties to the resilience context</p>
@@ -3214,7 +3611,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 
   <h3 id="Apizr_Extending_Configuring_Common_ApizrExtendedCommonOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_" data-uid="Apizr.Extending.Configuring.Common.ApizrExtendedCommonOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
   WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, TValue)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L647"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L792"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some resilience properties to the resilience context</p>
@@ -3260,7 +3657,7 @@ public IApizrExtendedCommonOptionsBuilder WithExCatching&lt;TResult&gt;(Action&l
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L30" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr.Extensions.Microsoft.DependencyInjection/Extending/Configuring/Common/ApizrExtendedCommonOptionsBuilder.cs/#L31" class="edit-link">Edit this page</a>
         </div>
 
 

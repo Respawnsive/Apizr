@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -48,7 +49,7 @@ namespace Apizr.Authenticating
             {
                 // Authorization required! Get the token from saved settings if available
                 logger?.Log(logLevels.Low(), $"{context.OperationKey}: Authorization required with scheme {auth.Scheme}");
-                token = GetToken();
+                token = await GetTokenAsync().ConfigureAwait(false);
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     // We have one, then clone the request in case we need to re-issue it with a refreshed token
@@ -97,53 +98,59 @@ namespace Apizr.Authenticating
             }
 
             // Save the refreshed token if succeed or clear it if not
-            this.SetToken(token);
+            await SetTokenAsync(token).ConfigureAwait(false);
             logger?.Log(logLevels.Low(), $"{context.OperationKey}: Token saved");
 
             return response;
         }
 
         /// <inheritdoc />
-        public abstract string GetToken();
+        public abstract Task<string> GetTokenAsync();
 
         /// <inheritdoc />
-        public abstract void SetToken(string token);
+        public abstract Task SetTokenAsync(string token);
 
         /// <inheritdoc />
         public abstract Task<string> RefreshTokenAsync(HttpRequestMessage request);
 
         /// <summary>
         /// Clone a HttpRequestMessage
-        /// Credit: http://stackoverflow.com/questions/25044166/how-to-clone-a-httprequestmessage-when-the-original-request-has-content
         /// </summary>
-        /// <param name="req">The request</param>
+        /// <param name="request">The request</param>
         /// <returns>A copy of the request</returns>
-        protected async Task<HttpRequestMessage> CloneHttpRequestMessageAsync(HttpRequestMessage req)
+        protected async Task<HttpRequestMessage> CloneHttpRequestMessageAsync(HttpRequestMessage request)
         {
-            var clone = new HttpRequestMessage(req.Method, req.RequestUri);
-
-            // Copy the request's content (via a MemoryStream) into the cloned object
-            var ms = new MemoryStream();
-            if (req.Content != null)
+            var clone = new HttpRequestMessage(request.Method, request.RequestUri)
             {
-                await req.Content.CopyToAsync(ms).ConfigureAwait(false);
-                ms.Position = 0;
-                clone.Content = new StreamContent(ms);
+                Version = request.Version,
+#if NET6_0_OR_GREATER
+                VersionPolicy = request.VersionPolicy
+#endif
+            };
 
-                // Copy the content headers
-                if (req.Content.Headers != null)
-                    foreach (var h in req.Content.Headers)
-                        clone.Content.Headers.Add(h.Key, h.Value);
-            }
-
-
-            clone.Version = req.Version;
-
-            foreach (var prop in req.Properties)
+            foreach (var prop in request.Properties)
                 clone.Properties.Add(prop);
 
-            foreach (var header in req.Headers)
+#if NET6_0_OR_GREATER
+            foreach (var option in request.Options)
+                clone.Options.Set(new HttpRequestOptionsKey<object>(option.Key), option.Value);
+#endif
+
+            foreach (var header in request.Headers)
                 clone.Headers.TryAddWithoutValidation(header.Key, header.Value);
+
+            // Copy the request's content (via a MemoryStream) into the cloned object
+            var memoryStream = new MemoryStream();
+            if (request.Content != null)
+            {
+                await request.Content.CopyToAsync(memoryStream).ConfigureAwait(false);
+                memoryStream.Position = 0;
+                clone.Content = new StreamContent(memoryStream);
+
+                // Copy the content headers
+                foreach (var h in request.Content.Headers)
+                    clone.Content.Headers.TryAddWithoutValidation(h.Key, h.Value);
+            }
 
             return clone;
         }

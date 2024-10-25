@@ -1,3 +1,17 @@
+6.4.0
+---
+
+### All
+
+- [New][Authentication] Now **`WithAuthenticationHandler` option provide many more overloads** to fit more use cases, like property mapping, local methods, service methods, custom handler, etc.
+- [New][Authentication] Now **`AuthenticationHandlerBase` does clone request Options** as well as former Properties
+- [New][Authentication] Now **`AuthenticationHandlerBase` performances has been improved** by caching compiled factories
+- [Improvement/Breaking][Authentication] Now **`AuthenticationHandlerBase`'s GetToken & SetToken former methods upgraded to GetTokenAsync & SetTokenAsync** as we can now wait for it
+ 
+### Apizr.Extensions.Microsoft.DependencyInjection
+
+- [New][Authentication] Now we can **register a custom open generic authentication handler inheriting from `AuthenticationHandlerBase<TWebApi>`** without needs of any instance factory.
+
 6.3.0
 ---
 

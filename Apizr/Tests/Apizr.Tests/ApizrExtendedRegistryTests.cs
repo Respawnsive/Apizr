@@ -566,6 +566,69 @@ namespace Apizr.Tests
         }
 
         [Fact]
+        public async Task Calling_WithAuthenticationHandler_With_Local_Token_Should_Authenticate_Request()
+        {
+            var getCounter = 0;
+            var setCounter = 0;
+            var refreshCounter = 0;
+            string token = null;
+            Task<string> OnGetToken()
+            {
+                getCounter++;
+                return Task.FromResult(token);
+            }
+
+            Task OnSetToken(string tk)
+            {
+                if (token != tk)
+                    setCounter++;
+                return Task.FromResult(token = tk);
+            }
+
+            Task<string> OnRefreshToken(HttpRequestMessage _)
+            {
+                refreshCounter++;
+                return Task.FromResult("token");
+            }
+
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddApizr(registry => registry
+                        .AddManagerFor<IHttpBinService>(
+                            options => options
+                                .WithLogging()
+                                .WithHttpMessageHandler(new WatchingRequestHandler())
+                                .WithAuthenticationHandler(OnGetToken, OnSetToken, OnRefreshToken)
+                                .WithLoggedHeadersRedactionNames(["Authorization"])));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+
+            var result1 = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result1.IsSuccessStatusCode.Should().BeTrue();
+            token.Should().Be("token");
+            getCounter.Should().Be(1);
+            setCounter.Should().Be(1);
+            refreshCounter.Should().Be(1);
+
+            var result2 = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result2.IsSuccessStatusCode.Should().BeTrue();
+            token.Should().Be("token");
+            getCounter.Should().Be(2);
+            setCounter.Should().Be(1);
+            refreshCounter.Should().Be(1);
+        }
+
+        [Fact]
         public async Task Calling_WithAuthenticationHandler_With_Default_Token_Should_Authenticate_Request()
         {
             var testSettings = new TestSettings("token");
@@ -683,6 +746,72 @@ namespace Apizr.Tests
 
             result.IsSuccessStatusCode.Should().BeTrue();
             token.Should().Be("tokenA");
+        }
+
+        [Fact]
+        public async Task Calling_WithAuthenticationHandler_With_Local_Token_Service_Should_Authenticate_Request()
+        {
+            var tokenService = new TokenService();
+
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddSingleton(tokenService);
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddManagerFor<IHttpBinService>(),
+                        options => options
+                            .WithLogging()
+                            .WithAuthenticationHandler<TokenService, TokenService>(
+                                ts => ts.GetTokenAsync(),
+                                (ts, token) => ts.SetTokenAsync(token),
+                                (ts, message) => ts.RefreshTokenAsync(message)));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+
+            var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result.IsSuccessStatusCode.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task Calling_WithAuthenticationHandler_With_Local_Token_Handler_Should_Authenticate_Request()
+        {
+            var tokenService = new TokenService();
+
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddSingleton(tokenService);
+                    services.AddTransient(typeof(AuthHandler<>));
+
+                    services.AddApizr(
+                        registry => registry
+                            .AddManagerFor<IHttpBinService>(),
+                        options => options
+                            .WithLogging()
+                            .WithAuthenticationHandler(typeof(AuthHandler<>)));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            var httpBinManager = scope.ServiceProvider.GetRequiredService<IApizrManager<IHttpBinService>>();
+
+            var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
+
+            result.IsSuccessStatusCode.Should().BeTrue();
         }
 
         [Fact]

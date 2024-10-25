@@ -1,5 +1,4 @@
 ﻿using Apizr.Configuring.Proper;
-using Apizr.Extending.Configuring.Common;
 using Apizr.Extending.Configuring.Shared;
 
 namespace Apizr.Extending.Configuring.Proper

@@ -28,127 +28,178 @@ namespace Apizr.Sample
 
 ### Configuring
 
-To activate this feature, you have to configure it thanks to the options builder:
+To activate this feature, you have to configure it thanks to the options builder.
 
-#### [Extended](#tab/tabid-extended)
-
+You can do it with both extended and static registrations using local handling methods:
 ```csharp
-options => options.WithAuthenticationHandler<ISettingsService, ISignInService>(
-    settingsService => settingsService.Token, 
-    signInService => signInService.SignInAsync)
+options => options.WithAuthenticationHandler(OnGetTokenAsync, OnSetTokenAsync, OnRefreshTokenAsync)
+
+...
+
+private Task<string> OnGetTokenAsync()
+{
+    // Return local stored token
+}
+
+private Task OnSetTokenAsync(string tk)
+{
+    // Save token to local store
+}
+
+private Task<string> OnRefreshTokenAsync(HttpRequestMessage message)
+{
+    // Refresh the unauthorized token by sending a refreshing request, 
+    // or processing a login flow that returns a fresh token.
+}
+
 ```
-
-- `settingsService` is your service managing settings
-- `signInService` is your service managing your login flow.
-
-Both services should be container registered as it will be resolved.
-
-#### [Static](#tab/tabid-static)
-
-```csharp
-options => options.WithAuthenticationHandler<YourSettingsService, YourSignInService>(
-    YourSettingsServiceInstance, settingsService => settingsService.Token, 
-    YourSignInServiceInstance, signInService => signInService.SignInAsync)
-
-// OR with service factory
-options => options.WithAuthenticationHandler<YourSettingsService, YourSignInService>(
-    () => YourSettingsServiceInstance, settingsService => settingsService.Token, 
-    () => YourSignInServiceInstance, signInService => signInService.SignInAsync)
-```
-
-- `YourSettingsServiceInstance` should be replaced by whatever settings manager instance of your choice
-- `YourSignInServiceInstance` should be replaced by your service managing your login flow.
-
-***
-
-In details:
-
-- `settingsService.Token` should be a public string property, saved locally on device.
-- `signInService.SignInAsync` should be a method taking an HttpRequestMessage parameter and returning a refreshed access token.
 
 #### More
 
-You may want to deal with authentication configuration in some other ways.
-Here are all other authentication options:
+You may want to deal with authentication configuration with deeper control and customizations.
+Here are some other authentication options:
 
 ##### [Extended](#tab/tabid-extended)
 
-- When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:
+- When you want the token to be saved to and load from a property by Apizr, as well as be refreshed when needed:
 ```csharp
+// by service mappings (both services should be registered in DI)
+options => options.WithAuthenticationHandler<ISettingsService, IAuthService>(
+    settingsService => settingsService.Token, 
+    authService => authService.RefreshAsync)
+```
+
+- When you don't want Apizr to refresh the token neither save it, but just load its constant value when needed:
+```csharp
+// by local handling methods
+options => options.WithAuthenticationHandler(OnGetTokenAsync)
+
+// OR by service hanling methods
+options => options.WithAuthenticationHandler<ISettingsService>(
+    settingsService => settingsService.GetTokenAsync())
+
+// OR by property mapping expression with public getter only
 options => options.WithAuthenticationHandler<ISettingsService>(
     settingsService => settingsService.Token)
 ```
-`settingsService.Token` should be here a public string property with a private setter, containing the token.
 
-- When you don't want Apizr to save the token anywhere but want to deal with the refresh token call with a method:
+- When you don't want Apizr to refresh the token, but just save and load it when needed:
 ```csharp
-options => options.WithAuthenticationHandler(OnRefreshToken)
-...
-private string OnRefreshToken(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
-```
+// by local handling methods
+options => options.WithAuthenticationHandler(OnGetTokenAsync, OnSetTokenAsync)
 
-- When you want to deal with the refresh token call with a method:
-```csharp
+// OR by service hanling methods
 options => options.WithAuthenticationHandler<ISettingsService>(
-    settingsService => settingsService.Token, OnRefreshToken)
-...
-private string OnRefreshToken(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
+    settingsService => settingsService.GetTokenAsync(),
+    (settingsService, token) => settingsService.SetTokenAsync(token))
+
+// OR by property mapping expression with public getter and setter
+options => options.WithAuthenticationHandler<ISettingsService>(
+    settingsService => settingsService.Token)
 ```
 
-- When you want to provide your own AuthenticationHandlerBase implementation:
+- When you don't want Apizr to save the token anywhere, but just deal with the refresh token method:
 ```csharp
+// by local handling methods
+options => options.WithAuthenticationHandler(OnRefreshTokenAsync)
+
+// OR by service hanling methods
+options => options.WithAuthenticationHandler<IAuthService>(
+    (authService, message) => authService.RefreshTokenAsync(message))
+```
+
+- When you want to provide your own `AuthenticationHandlerBase<TWebApi>` open generic implementation:
+```csharp
+// by open generic auto resolving (need to be registered in DI)
+options => options.WithAuthenticationHandler(typeof(YourAuthenticationHandler<>))
+...
+service.AddTransient(typeof(YourAuthenticationHandler<>)))
+```
+
+- When you want to provide your own `AuthenticationHandlerBase` implementation:
+```csharp
+// by manual instantiation
 options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
     (serviceProvider, options) => new YourAuthenticationHandler(...))
 ```
 
 ##### [Static](#tab/tabid-static)
 
-- When you don't want Apizr to save the token anywhere neither refresh it, but just want to load it when needed:
+- When you want the token to be saved to and load from a property by Apizr, as well as be refreshed when needed:
 ```csharp
+// by service mappings
+options => options.WithAuthenticationHandler<YourSettingsService, YourAuthService>(
+    YourSettingsServiceInstance, settingsService => settingsService.Token, 
+    YourAuthServiceInstance, authService => authService.RefreshAsync)
+
+// OR by service mapping factory
+options => options.WithAuthenticationHandler<YourSettingsService, YourAuthService>(
+    () => YourSettingsServiceInstance, settingsService => settingsService.Token, 
+    () => YourAuthServiceInstance, authService => authService.RefreshAsync)
+```
+
+- When you don't want Apizr to refresh the token neither save it, but just load its constant value when needed:
+```csharp
+// by local handling methods
+options => options.WithAuthenticationHandler(OnGetTokenAsync)
+
+// OR by service hanling methods
+options => options.WithAuthenticationHandler<YourSettingsService>(
+    YourSettingsServiceInstance, settingsService => settingsService.GetTokenAsync())
+
+// OR by property mapping expression with public getter only
 options => options.WithAuthenticationHandler<YourSettingsService>(
     YourSettingsServiceInstance, settingsService => settingsService.Token)
 
-// OR with service factory
+// OR by property mapping expression factory with public getter only
 options => options.WithAuthenticationHandler<YourSettingsService>(
     () => YourSettingsServiceInstance, settingsService => settingsService.Token)
 ```
-`settingsService.Token` should be here a public string property with a private setter, containing the token.
 
-- When you don't want Apizr to save the token anywhere but want to deal with the refresh token call with a method:
+- When you don't want Apizr to refresh the token, but just save and load it when needed:
 ```csharp
-options => options.WithAuthenticationHandler(OnRefreshToken)
-...
-private string OnRefreshToken(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
+// by local handling methods
+options => options.WithAuthenticationHandler(OnGetTokenAsync, OnSetTokenAsync)
+
+// OR by service hanling methods
+options => options.WithAuthenticationHandler<YourSettingsService>(
+    YourSettingsServiceInstance, 
+    settingsService => settingsService.GetTokenAsync(),
+    (settingsService, token) => settingsService.SetTokenAsync(token))
+
+// OR by service factory hanling methods
+options => options.WithAuthenticationHandler<YourSettingsService>(
+    () => YourSettingsServiceInstance, 
+    settingsService => settingsService.GetTokenAsync(),
+    (settingsService, token) => settingsService.SetTokenAsync(token))
+
+// OR by property mapping expression with public getter and setter
+options => options.WithAuthenticationHandler<YourSettingsService>(
+    YourSettingsServiceInstance, settingsService => settingsService.Token)
+
+// OR by property mapping expression factory with public getter and setter
+options => options.WithAuthenticationHandler<YourSettingsService>(
+    () => YourSettingsServiceInstance, settingsService => settingsService.Token)
 ```
 
-- When you want to deal with the refresh token call with a method:
+- When you don't want Apizr to save the token anywhere, but just deal with the refresh token method:
 ```csharp
-options => options.WithAuthenticationHandler<YourSettingsService>(
-    YourSettingsServiceInstance, settingsService => settingsService.Token,
-    OnRefreshToken)
+// by local handling methods
+options => options.WithAuthenticationHandler(OnRefreshTokenAsync)
 
-// Or with service factory
-options => options.WithAuthenticationHandler<YourSettingsService>(
-    () => YourSettingsServiceInstance, settingsService => settingsService.Token,
-    OnRefreshToken)
-...
-private string OnRefreshToken(HttpRequestMessage message)
-{
-    // whatever returning a refreshed string token
-}
+// OR by service hanling methods
+options => options.WithAuthenticationHandler<YourAuthService>(
+    YourAuthServiceInstance, (authService, message) => authService.RefreshTokenAsync(message))
+
+// OR by service hanling methods
+options => options.WithAuthenticationHandler<YourAuthService>(
+    () => YourAuthServiceInstance, (authService, message) => authService.RefreshTokenAsync(message))
+```ice.AddTransient(typeof(YourAuthenticationHandler<>)))
 ```
 
-- When you want to provide your own AuthenticationHandlerBase implementation:
+- When you want to provide your own `AuthenticationHandlerBase` implementation:
 ```csharp
+// by manual instantiation
 options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
     (logger, options) => new YourAuthenticationHandler(...))
 ```
@@ -158,7 +209,7 @@ options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
 ### Processing
 
 There's nothing more to deal with.
-Protected requests will be authenticated by Apizr, otherwise it will ask user to sign in.
+Protected requests will be authenticated by Apizr thnaks to the get/set methods, otherwise it will call the refresh one.
  
 Anyway, here is the AuthenticationHandler's SendAsync method FYI:
 
@@ -181,7 +232,7 @@ protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage 
     {
         // Authorization required! Get the token from saved settings if available
         logger?.Log(logLevel, $"{context.OperationKey}: Authorization required with scheme {auth.Scheme}");
-        token = GetToken();
+        token = await GetTokenAsync();
         if (!string.IsNullOrWhiteSpace(token))
         {
             // We have one, then clone the request in case we need to re-issue it with a refreshed token
@@ -230,7 +281,7 @@ protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage 
     }
 
     // Save the refreshed token if succeed or clear it if not
-    this.SetToken(token);
+    await SetTokenAsync(token);
     logger?.Log(logLevel, $"{context.OperationKey}: Token saved");
 
     return response;
@@ -242,11 +293,11 @@ The workflow:
 - We check if the request needs to be authenticated
 - If so, we try to load a previously saved token
   - If there’s one, we clone the request in case we need to re-issue it with a refreshed token (as token could be rejected server side)
-  - If there’s not, we ask for a refreshed one (launching your signin feature and waiting for the resulting token)
+  - If there’s not, we ask for a refreshed one, depending on your `RefreshTokenAsync` implementation (at this stage, a login flow)
 - We set the authentication header with the token
 - We finally send the request
 - We check if we get an Unauthorized response
-  - If so and if it was sent with a saved token, we ask for a refreshed one (launching your signin feature and waiting for the resulting token)
+  - If so and if it was sent with a saved token, we ask for a refreshed one, depending on your `RefreshTokenAsync` implementation (at this stage, a refresh request or a login flow)
   - We set the authentication header of the cloned request with the refreshed token
   - We send the cloned request
 - We save the token if succeed or clear it if not

@@ -89,7 +89,7 @@
 
 
   <h1 id="Apizr_Authenticating_AuthenticationHandlerBase" data-uid="Apizr.Authenticating.AuthenticationHandlerBase" class="text-break">
-Class AuthenticationHandlerBase  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L17"><i class="bi bi-code-slash"></i></a>
+Class AuthenticationHandlerBase  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L18"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -130,8 +130,7 @@ Class AuthenticationHandlerBase  <a class="header-action link-secondary" title="
     <dt>Derived</dt>
     <dd>
       <div><a class="xref" href="Apizr.Authenticating.AuthenticationHandler.html">AuthenticationHandler</a></div>
-      <div><a class="xref" href="Apizr.Authenticating.AuthenticationHandler-1.html">AuthenticationHandler&lt;TSettingsService&gt;</a></div>
-      <div><a class="xref" href="Apizr.Authenticating.AuthenticationHandler-2.html">AuthenticationHandler&lt;TSettingsService, TTokenService&gt;</a></div>
+      <div><a class="xref" href="Apizr.Extending.Authenticating.AuthenticationHandlerBase-1.html">AuthenticationHandlerBase&lt;TWebApi&gt;</a></div>
     </dd>
   </dl>
 
@@ -183,7 +182,7 @@ Class AuthenticationHandlerBase  <a class="header-action link-secondary" title="
 
   <h3 id="Apizr_Authenticating_AuthenticationHandlerBase__ctor_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)">
   AuthenticationHandlerBase(ILogger, IApizrManagerOptionsBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L28"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The authentication handler constructor</p>
@@ -222,7 +221,7 @@ Class AuthenticationHandlerBase  <a class="header-action link-secondary" title="
 
   <h3 id="Apizr_Authenticating_AuthenticationHandlerBase_ApizrOptions" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.ApizrOptions">
   ApizrOptions
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L21"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -252,7 +251,7 @@ Class AuthenticationHandlerBase  <a class="header-action link-secondary" title="
 
   <h3 id="Apizr_Authenticating_AuthenticationHandlerBase_Logger" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.Logger">
   Logger
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -290,18 +289,17 @@ Class AuthenticationHandlerBase  <a class="header-action link-secondary" title="
   <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L121"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Clone a HttpRequestMessage
-Credit: <a href="http://stackoverflow.com/questions/25044166/how-to-clone-a-httprequestmessage-when-the-original-request-has-content">http://stackoverflow.com/questions/25044166/how-to-clone-a-httprequestmessage-when-the-original-request-has-content</a></p>
+  <div class="markdown level1 summary"><p>Clone a HttpRequestMessage</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected Task&lt;HttpRequestMessage&gt; CloneHttpRequestMessageAsync(HttpRequestMessage req)</code></pre>
+    <pre><code class="lang-csharp hljs">protected Task&lt;HttpRequestMessage&gt; CloneHttpRequestMessageAsync(HttpRequestMessage request)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>req</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a></dt>
+    <dt><code>request</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a></dt>
     <dd><p>The request</p>
 </dd>
   </dl>
@@ -323,25 +321,25 @@ Credit: <a href="http://stackoverflow.com/questions/25044166/how-to-clone-a-http
 
 
 
-  <a id="Apizr_Authenticating_AuthenticationHandlerBase_GetToken_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.GetToken*"></a>
+  <a id="Apizr_Authenticating_AuthenticationHandlerBase_GetTokenAsync_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync*"></a>
 
-  <h3 id="Apizr_Authenticating_AuthenticationHandlerBase_GetToken" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.GetToken">
-  GetToken()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Authenticating_AuthenticationHandlerBase_GetTokenAsync" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync">
+  GetTokenAsync()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L108"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>The method called to get token from settings</p>
+  <div class="markdown level1 summary"><p>The method called to get local token</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract string GetToken()</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract Task&lt;string&gt; GetTokenAsync()</code></pre>
   </div>
 
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -359,7 +357,7 @@ Credit: <a href="http://stackoverflow.com/questions/25044166/how-to-clone-a-http
 
   <h3 id="Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
   RefreshTokenAsync(HttpRequestMessage)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L114"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The method called to refresh token when rejected or empty</p>
@@ -397,7 +395,7 @@ Credit: <a href="http://stackoverflow.com/questions/25044166/how-to-clone-a-http
 
   <h3 id="Apizr_Authenticating_AuthenticationHandlerBase_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
   SendAsync(HttpRequestMessage, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -431,28 +429,33 @@ Credit: <a href="http://stackoverflow.com/questions/25044166/how-to-clone-a-http
 
 
 
-  <a id="Apizr_Authenticating_AuthenticationHandlerBase_SetToken_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.SetToken*"></a>
+  <a id="Apizr_Authenticating_AuthenticationHandlerBase_SetTokenAsync_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync*"></a>
 
-  <h3 id="Apizr_Authenticating_AuthenticationHandlerBase_SetToken_System_String_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)">
-  SetToken(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Authenticating_AuthenticationHandlerBase_SetTokenAsync_System_String_" data-uid="Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(System.String)">
+  SetTokenAsync(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L111"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>The method called to save token into settings</p>
+  <div class="markdown level1 summary"><p>The method called to set local token</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract void SetToken(string token)</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract Task SetTokenAsync(string token)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>token</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>The token to save</p>
+    <dd><p>The token to set</p>
 </dd>
   </dl>
 
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -468,7 +471,7 @@ Credit: <a href="http://stackoverflow.com/questions/25044166/how-to-clone-a-http
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L17" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Authenticating/AuthenticationHandlerBase.cs/#L18" class="edit-link">Edit this page</a>
         </div>
 
 

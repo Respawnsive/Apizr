@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Apizr.Authenticating
@@ -9,16 +10,16 @@ namespace Apizr.Authenticating
     public interface IAuthenticationHandler
     {
         /// <summary>
-        /// The method called to get token from settings
+        /// The method called to get local token
         /// </summary>
         /// <returns></returns>
-        string GetToken();
+        Task<string> GetTokenAsync();
 
         /// <summary>
-        /// The method called to save token into settings
+        /// The method called to set local token
         /// </summary>
-        /// <param name="token">The token to save</param>
-        void SetToken(string token);
+        /// <param name="token">The token to set</param>
+        Task SetTokenAsync(string token);
 
         /// <summary>
         /// The method called to refresh token when rejected or empty

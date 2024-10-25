@@ -6,9 +6,12 @@ items:
   parent: Apizr.Authenticating
   children:
   - Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
-  - Apizr.Authenticating.AuthenticationHandler.GetToken
+  - Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}})
+  - Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})
+  - Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  - Apizr.Authenticating.AuthenticationHandler.GetTokenAsync
   - Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
-  - Apizr.Authenticating.AuthenticationHandler.SetToken(System.String)
+  - Apizr.Authenticating.AuthenticationHandler.SetTokenAsync(System.String)
   langs:
   - csharp
   - vb
@@ -23,7 +26,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: AuthenticationHandler
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
-    startLine: 13
+    startLine: 14
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -55,6 +58,99 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
+- uid: Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}})
+  commentId: M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}})
+  id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}})'
+  parent: Apizr.Authenticating.AuthenticationHandler
+  langs:
+  - csharp
+  - vb
+  name: AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<Task<string>>)
+  nameWithType: AuthenticationHandler.AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<Task<string>>)
+  fullName: Apizr.Authenticating.AuthenticationHandler.AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func<System.Threading.Tasks.Task<string>>)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
+    startLine: 27
+  assemblies:
+  - Apizr
+  namespace: Apizr.Authenticating
+  summary: The authentication handler constructor
+  example: []
+  syntax:
+    content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<Task<string>> getTokenFactory)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
+    - id: apizrOptions
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+      description: The Apizr options
+    - id: getTokenFactory
+      type: System.Func{System.Threading.Tasks.Task{System.String}}
+      description: The get token factory
+    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase, getTokenFactory As Func(Of Task(Of String)))
+  overload: Apizr.Authenticating.AuthenticationHandler.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: ''
+  nameWithType.vb: AuthenticationHandler.New(ILogger, IApizrManagerOptionsBase, Func(Of Task(Of String)))
+  fullName.vb: Apizr.Authenticating.AuthenticationHandler.New(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func(Of System.Threading.Tasks.Task(Of String)))
+  name.vb: New(ILogger, IApizrManagerOptionsBase, Func(Of Task(Of String)))
+- uid: Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})
+  commentId: M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})
+  id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})'
+  parent: Apizr.Authenticating.AuthenticationHandler
+  langs:
+  - csharp
+  - vb
+  name: AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<Task<string>>, Func<string, Task>)
+  nameWithType: AuthenticationHandler.AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<Task<string>>, Func<string, Task>)
+  fullName: Apizr.Authenticating.AuthenticationHandler.AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func<System.Threading.Tasks.Task<string>>, System.Func<string, System.Threading.Tasks.Task>)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
+    startLine: 42
+  assemblies:
+  - Apizr
+  namespace: Apizr.Authenticating
+  summary: The authentication handler constructor
+  example: []
+  syntax:
+    content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<Task<string>> getTokenFactory, Func<string, Task> setTokenFactory)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
+    - id: apizrOptions
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+      description: The Apizr options
+    - id: getTokenFactory
+      type: System.Func{System.Threading.Tasks.Task{System.String}}
+      description: The get token factory
+    - id: setTokenFactory
+      type: System.Func{System.String,System.Threading.Tasks.Task}
+      description: The set token factory
+    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase, getTokenFactory As Func(Of Task(Of String)), setTokenFactory As Func(Of String, Task))
+  overload: Apizr.Authenticating.AuthenticationHandler.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: ''
+  nameWithType.vb: AuthenticationHandler.New(ILogger, IApizrManagerOptionsBase, Func(Of Task(Of String)), Func(Of String, Task))
+  fullName.vb: Apizr.Authenticating.AuthenticationHandler.New(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func(Of System.Threading.Tasks.Task(Of String)), System.Func(Of String, System.Threading.Tasks.Task))
+  name.vb: New(ILogger, IApizrManagerOptionsBase, Func(Of Task(Of String)), Func(Of String, Task))
 - uid: Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   commentId: M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
   id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})'
@@ -73,7 +169,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: .ctor
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
-    startLine: 24
+    startLine: 58
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -100,74 +196,127 @@ items:
   nameWithType.vb: AuthenticationHandler.New(ILogger, IApizrManagerOptionsBase, Func(Of HttpRequestMessage, Task(Of String)))
   fullName.vb: Apizr.Authenticating.AuthenticationHandler.New(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String)))
   name.vb: New(ILogger, IApizrManagerOptionsBase, Func(Of HttpRequestMessage, Task(Of String)))
-- uid: Apizr.Authenticating.AuthenticationHandler.GetToken
-  commentId: M:Apizr.Authenticating.AuthenticationHandler.GetToken
-  id: GetToken
+- uid: Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  commentId: M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  id: '#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})'
   parent: Apizr.Authenticating.AuthenticationHandler
   langs:
   - csharp
   - vb
-  name: GetToken()
-  nameWithType: AuthenticationHandler.GetToken()
-  fullName: Apizr.Authenticating.AuthenticationHandler.GetToken()
+  name: AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<Task<string>>, Func<string, Task>, Func<HttpRequestMessage, Task<string>>)
+  nameWithType: AuthenticationHandler.AuthenticationHandler(ILogger, IApizrManagerOptionsBase, Func<Task<string>>, Func<string, Task>, Func<HttpRequestMessage, Task<string>>)
+  fullName: Apizr.Authenticating.AuthenticationHandler.AuthenticationHandler(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func<System.Threading.Tasks.Task<string>>, System.Func<string, System.Threading.Tasks.Task>, System.Func<System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<string>>)
+  type: Constructor
+  source:
+    remote:
+      path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
+      branch: dev
+      repo: https://github.com/Respawnsive/Apizr.git
+    id: .ctor
+    path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
+    startLine: 74
+  assemblies:
+  - Apizr
+  namespace: Apizr.Authenticating
+  summary: The authentication handler constructor
+  example: []
+  syntax:
+    content: public AuthenticationHandler(ILogger logger, IApizrManagerOptionsBase apizrOptions, Func<Task<string>> getTokenFactory, Func<string, Task> setTokenFactory, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: The logger
+    - id: apizrOptions
+      type: Apizr.Configuring.Manager.IApizrManagerOptionsBase
+      description: The Apizr options
+    - id: getTokenFactory
+      type: System.Func{System.Threading.Tasks.Task{System.String}}
+      description: The get token factory
+    - id: setTokenFactory
+      type: System.Func{System.String,System.Threading.Tasks.Task}
+      description: The set token factory
+    - id: refreshTokenFactory
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+      description: The refresh token factory
+    content.vb: Public Sub New(logger As ILogger, apizrOptions As IApizrManagerOptionsBase, getTokenFactory As Func(Of Task(Of String)), setTokenFactory As Func(Of String, Task), refreshTokenFactory As Func(Of HttpRequestMessage, Task(Of String)))
+  overload: Apizr.Authenticating.AuthenticationHandler.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: ''
+  nameWithType.vb: AuthenticationHandler.New(ILogger, IApizrManagerOptionsBase, Func(Of Task(Of String)), Func(Of String, Task), Func(Of HttpRequestMessage, Task(Of String)))
+  fullName.vb: Apizr.Authenticating.AuthenticationHandler.New(Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Func(Of System.Threading.Tasks.Task(Of String)), System.Func(Of String, System.Threading.Tasks.Task), System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String)))
+  name.vb: New(ILogger, IApizrManagerOptionsBase, Func(Of Task(Of String)), Func(Of String, Task), Func(Of HttpRequestMessage, Task(Of String)))
+- uid: Apizr.Authenticating.AuthenticationHandler.GetTokenAsync
+  commentId: M:Apizr.Authenticating.AuthenticationHandler.GetTokenAsync
+  id: GetTokenAsync
+  parent: Apizr.Authenticating.AuthenticationHandler
+  langs:
+  - csharp
+  - vb
+  name: GetTokenAsync()
+  nameWithType: AuthenticationHandler.GetTokenAsync()
+  fullName: Apizr.Authenticating.AuthenticationHandler.GetTokenAsync()
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: GetToken
+    id: GetTokenAsync
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
-    startLine: 30
+    startLine: 86
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: The method called to get token from settings
+  summary: The method called to get local token
   example: []
   syntax:
-    content: public override string GetToken()
+    content: public override Task<string> GetTokenAsync()
     return:
-      type: System.String
+      type: System.Threading.Tasks.Task{System.String}
       description: ''
-    content.vb: Public Overrides Function GetToken() As String
-  overridden: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
-  overload: Apizr.Authenticating.AuthenticationHandler.GetToken*
-- uid: Apizr.Authenticating.AuthenticationHandler.SetToken(System.String)
-  commentId: M:Apizr.Authenticating.AuthenticationHandler.SetToken(System.String)
-  id: SetToken(System.String)
+    content.vb: Public Overrides Function GetTokenAsync() As Task(Of String)
+  overridden: Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync
+  overload: Apizr.Authenticating.AuthenticationHandler.GetTokenAsync*
+- uid: Apizr.Authenticating.AuthenticationHandler.SetTokenAsync(System.String)
+  commentId: M:Apizr.Authenticating.AuthenticationHandler.SetTokenAsync(System.String)
+  id: SetTokenAsync(System.String)
   parent: Apizr.Authenticating.AuthenticationHandler
   langs:
   - csharp
   - vb
-  name: SetToken(string)
-  nameWithType: AuthenticationHandler.SetToken(string)
-  fullName: Apizr.Authenticating.AuthenticationHandler.SetToken(string)
+  name: SetTokenAsync(string)
+  nameWithType: AuthenticationHandler.SetTokenAsync(string)
+  fullName: Apizr.Authenticating.AuthenticationHandler.SetTokenAsync(string)
   type: Method
   source:
     remote:
       path: Apizr/Src/Apizr/Authenticating/AuthenticationHandler.cs
       branch: dev
       repo: https://github.com/Respawnsive/Apizr.git
-    id: SetToken
+    id: SetTokenAsync
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
-    startLine: 33
+    startLine: 89
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
-  summary: The method called to save token into settings
+  summary: The method called to set local token
   example: []
   syntax:
-    content: public override void SetToken(string token)
+    content: public override Task SetTokenAsync(string token)
     parameters:
     - id: token
       type: System.String
-      description: The token to save
-    content.vb: Public Overrides Sub SetToken(token As String)
-  overridden: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
-  overload: Apizr.Authenticating.AuthenticationHandler.SetToken*
-  nameWithType.vb: AuthenticationHandler.SetToken(String)
-  fullName.vb: Apizr.Authenticating.AuthenticationHandler.SetToken(String)
-  name.vb: SetToken(String)
+      description: The token to set
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Overrides Function SetTokenAsync(token As String) As Task
+  overridden: Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(System.String)
+  overload: Apizr.Authenticating.AuthenticationHandler.SetTokenAsync*
+  nameWithType.vb: AuthenticationHandler.SetTokenAsync(String)
+  fullName.vb: Apizr.Authenticating.AuthenticationHandler.SetTokenAsync(String)
+  name.vb: SetTokenAsync(String)
 - uid: Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   commentId: M:Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
   id: RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
@@ -186,7 +335,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefreshTokenAsync
     path: ../../Src/Apizr/Authenticating/AuthenticationHandler.cs
-    startLine: 36
+    startLine: 92
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -693,7 +842,7 @@ references:
   fullName: System.ArgumentNullException
 - uid: Apizr.Authenticating.AuthenticationHandler.#ctor*
   commentId: Overload:Apizr.Authenticating.AuthenticationHandler.#ctor
-  href: Apizr.Authenticating.AuthenticationHandler.html#Apizr_Authenticating_AuthenticationHandler__ctor_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String___
+  href: Apizr.Authenticating.AuthenticationHandler.html#Apizr_Authenticating_AuthenticationHandler__ctor_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase_System_Func_System_Threading_Tasks_Task_System_String___
   name: AuthenticationHandler
   nameWithType: AuthenticationHandler.AuthenticationHandler
   fullName: Apizr.Authenticating.AuthenticationHandler.AuthenticationHandler
@@ -715,29 +864,23 @@ references:
   name: IApizrManagerOptionsBase
   nameWithType: IApizrManagerOptionsBase
   fullName: Apizr.Configuring.Manager.IApizrManagerOptionsBase
-- uid: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
-  commentId: T:System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+- uid: System.Func{System.Threading.Tasks.Task{System.String}}
+  commentId: T:System.Func{System.Threading.Tasks.Task{System.String}}
   parent: System
-  definition: System.Func`2
-  href: https://learn.microsoft.com/dotnet/api/system.func-2
-  name: Func<HttpRequestMessage, Task<string>>
-  nameWithType: Func<HttpRequestMessage, Task<string>>
-  fullName: System.Func<System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<string>>
-  nameWithType.vb: Func(Of HttpRequestMessage, Task(Of String))
-  fullName.vb: System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String))
-  name.vb: Func(Of HttpRequestMessage, Task(Of String))
+  definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
+  name: Func<Task<string>>
+  nameWithType: Func<Task<string>>
+  fullName: System.Func<System.Threading.Tasks.Task<string>>
+  nameWithType.vb: Func(Of Task(Of String))
+  fullName.vb: System.Func(Of System.Threading.Tasks.Task(Of String))
+  name.vb: Func(Of Task(Of String))
   spec.csharp:
-  - uid: System.Func`2
+  - uid: System.Func`1
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: <
-  - uid: System.Net.Http.HttpRequestMessage
-    name: HttpRequestMessage
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
-  - name: ','
-  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
     isExternal: true
@@ -750,18 +893,12 @@ references:
   - name: '>'
   - name: '>'
   spec.vb:
-  - uid: System.Func`2
+  - uid: System.Func`1
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
   - name: (
   - name: Of
-  - name: " "
-  - uid: System.Net.Http.HttpRequestMessage
-    name: HttpRequestMessage
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
-  - name: ','
   - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
@@ -843,6 +980,81 @@ references:
   - uid: Apizr.Configuring.Manager
     name: Manager
     href: Apizr.Configuring.Manager.html
+- uid: System.Func`1
+  commentId: T:System.Func`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
+  name: Func<TResult>
+  nameWithType: Func<TResult>
+  fullName: System.Func<TResult>
+  nameWithType.vb: Func(Of TResult)
+  fullName.vb: System.Func(Of TResult)
+  name.vb: Func(Of TResult)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Func{System.String,System.Threading.Tasks.Task}
+  commentId: T:System.Func{System.String,System.Threading.Tasks.Task}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<string, Task>
+  nameWithType: Func<string, Task>
+  fullName: System.Func<string, System.Threading.Tasks.Task>
+  nameWithType.vb: Func(Of String, Task)
+  fullName.vb: System.Func(Of String, System.Threading.Tasks.Task)
+  name.vb: Func(Of String, Task)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  - name: )
 - uid: System.Func`2
   commentId: T:System.Func`2
   isExternal: true
@@ -877,121 +1089,92 @@ references:
   - name: " "
   - name: TResult
   - name: )
-- uid: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
-  commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.GetToken
-  parent: Apizr.Authenticating.AuthenticationHandlerBase
-  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetToken
-  name: GetToken()
-  nameWithType: AuthenticationHandlerBase.GetToken()
-  fullName: Apizr.Authenticating.AuthenticationHandlerBase.GetToken()
-  spec.csharp:
-  - uid: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
-    name: GetToken
-    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetToken
-  - name: (
-  - name: )
-  spec.vb:
-  - uid: Apizr.Authenticating.AuthenticationHandlerBase.GetToken
-    name: GetToken
-    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetToken
-  - name: (
-  - name: )
-- uid: Apizr.Authenticating.AuthenticationHandler.GetToken*
-  commentId: Overload:Apizr.Authenticating.AuthenticationHandler.GetToken
-  href: Apizr.Authenticating.AuthenticationHandler.html#Apizr_Authenticating_AuthenticationHandler_GetToken
-  name: GetToken
-  nameWithType: AuthenticationHandler.GetToken
-  fullName: Apizr.Authenticating.AuthenticationHandler.GetToken
-- uid: System.String
-  commentId: T:System.String
+- uid: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+  commentId: T:System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
   parent: System
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.string
-  name: string
-  nameWithType: string
-  fullName: string
-  nameWithType.vb: String
-  fullName.vb: String
-  name.vb: String
-- uid: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
-  commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
-  parent: Apizr.Authenticating.AuthenticationHandlerBase
-  isExternal: true
-  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetToken_System_String_
-  name: SetToken(string)
-  nameWithType: AuthenticationHandlerBase.SetToken(string)
-  fullName: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(string)
-  nameWithType.vb: AuthenticationHandlerBase.SetToken(String)
-  fullName.vb: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(String)
-  name.vb: SetToken(String)
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<HttpRequestMessage, Task<string>>
+  nameWithType: Func<HttpRequestMessage, Task<string>>
+  fullName: System.Func<System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<string>>
+  nameWithType.vb: Func(Of HttpRequestMessage, Task(Of String))
+  fullName.vb: System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String))
+  name.vb: Func(Of HttpRequestMessage, Task(Of String))
   spec.csharp:
-  - uid: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
-    name: SetToken
-    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetToken_System_String_
-  - name: (
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
   - uid: System.String
     name: string
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: )
+  - name: '>'
+  - name: '>'
   spec.vb:
-  - uid: Apizr.Authenticating.AuthenticationHandlerBase.SetToken(System.String)
-    name: SetToken
-    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetToken_System_String_
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-- uid: Apizr.Authenticating.AuthenticationHandler.SetToken*
-  commentId: Overload:Apizr.Authenticating.AuthenticationHandler.SetToken
-  href: Apizr.Authenticating.AuthenticationHandler.html#Apizr_Authenticating_AuthenticationHandler_SetToken_System_String_
-  name: SetToken
-  nameWithType: AuthenticationHandler.SetToken
-  fullName: Apizr.Authenticating.AuthenticationHandler.SetToken
-- uid: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
-  commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+  - name: )
+- uid: Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync
+  commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync
   parent: Apizr.Authenticating.AuthenticationHandlerBase
-  isExternal: true
-  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
-  name: RefreshTokenAsync(HttpRequestMessage)
-  nameWithType: AuthenticationHandlerBase.RefreshTokenAsync(HttpRequestMessage)
-  fullName: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetTokenAsync
+  name: GetTokenAsync()
+  nameWithType: AuthenticationHandlerBase.GetTokenAsync()
+  fullName: Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync()
   spec.csharp:
-  - uid: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
-    name: RefreshTokenAsync
-    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
+  - uid: Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync
+    name: GetTokenAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetTokenAsync
   - name: (
-  - uid: System.Net.Http.HttpRequestMessage
-    name: HttpRequestMessage
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
   - name: )
   spec.vb:
-  - uid: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
-    name: RefreshTokenAsync
-    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
+  - uid: Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync
+    name: GetTokenAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_GetTokenAsync
   - name: (
-  - uid: System.Net.Http.HttpRequestMessage
-    name: HttpRequestMessage
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
   - name: )
-- uid: Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync*
-  commentId: Overload:Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync
-  href: Apizr.Authenticating.AuthenticationHandler.html#Apizr_Authenticating_AuthenticationHandler_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
-  name: RefreshTokenAsync
-  nameWithType: AuthenticationHandler.RefreshTokenAsync
-  fullName: Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync
-- uid: System.Net.Http.HttpRequestMessage
-  commentId: T:System.Net.Http.HttpRequestMessage
-  parent: System.Net.Http
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
-  name: HttpRequestMessage
-  nameWithType: HttpRequestMessage
-  fullName: System.Net.Http.HttpRequestMessage
+- uid: Apizr.Authenticating.AuthenticationHandler.GetTokenAsync*
+  commentId: Overload:Apizr.Authenticating.AuthenticationHandler.GetTokenAsync
+  href: Apizr.Authenticating.AuthenticationHandler.html#Apizr_Authenticating_AuthenticationHandler_GetTokenAsync
+  name: GetTokenAsync
+  nameWithType: AuthenticationHandler.GetTokenAsync
+  fullName: Apizr.Authenticating.AuthenticationHandler.GetTokenAsync
 - uid: System.Threading.Tasks.Task{System.String}
   commentId: T:System.Threading.Tasks.Task{System.String}
   parent: System.Threading.Tasks
@@ -1092,3 +1275,101 @@ references:
     name: Tasks
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(System.String)
+  commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(System.String)
+  parent: Apizr.Authenticating.AuthenticationHandlerBase
+  isExternal: true
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetTokenAsync_System_String_
+  name: SetTokenAsync(string)
+  nameWithType: AuthenticationHandlerBase.SetTokenAsync(string)
+  fullName: Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(string)
+  nameWithType.vb: AuthenticationHandlerBase.SetTokenAsync(String)
+  fullName.vb: Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(String)
+  name.vb: SetTokenAsync(String)
+  spec.csharp:
+  - uid: Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(System.String)
+    name: SetTokenAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetTokenAsync_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(System.String)
+    name: SetTokenAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_SetTokenAsync_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Apizr.Authenticating.AuthenticationHandler.SetTokenAsync*
+  commentId: Overload:Apizr.Authenticating.AuthenticationHandler.SetTokenAsync
+  href: Apizr.Authenticating.AuthenticationHandler.html#Apizr_Authenticating_AuthenticationHandler_SetTokenAsync_System_String_
+  name: SetTokenAsync
+  nameWithType: AuthenticationHandler.SetTokenAsync
+  fullName: Apizr.Authenticating.AuthenticationHandler.SetTokenAsync
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+  commentId: M:Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+  parent: Apizr.Authenticating.AuthenticationHandlerBase
+  isExternal: true
+  href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
+  name: RefreshTokenAsync(HttpRequestMessage)
+  nameWithType: AuthenticationHandlerBase.RefreshTokenAsync(HttpRequestMessage)
+  fullName: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+  spec.csharp:
+  - uid: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+    name: RefreshTokenAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
+  - name: (
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: )
+  spec.vb:
+  - uid: Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+    name: RefreshTokenAsync
+    href: Apizr.Authenticating.AuthenticationHandlerBase.html#Apizr_Authenticating_AuthenticationHandlerBase_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
+  - name: (
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: )
+- uid: Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync*
+  commentId: Overload:Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync
+  href: Apizr.Authenticating.AuthenticationHandler.html#Apizr_Authenticating_AuthenticationHandler_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
+  name: RefreshTokenAsync
+  nameWithType: AuthenticationHandler.RefreshTokenAsync
+  fullName: Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync
+- uid: System.Net.Http.HttpRequestMessage
+  commentId: T:System.Net.Http.HttpRequestMessage
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  name: HttpRequestMessage
+  nameWithType: HttpRequestMessage
+  fullName: System.Net.Http.HttpRequestMessage

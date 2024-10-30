@@ -271,8 +271,7 @@ namespace Apizr.Tests
         public async Task Calling_WithAuthenticationHandler_ProperOption_Should_Authenticate_Request()
         {
             string token = null;
-
-            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "token");
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "token");
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
@@ -281,8 +280,7 @@ namespace Apizr.Tests
                 .ConfigureServices((_, services) =>
                 {
                     services.AddApizrManagerFor<IHttpBinService>(options => options
-                        .WithLogging()
-                        .WithAuthenticationHandler(OnRefreshToken));
+                        .WithLogging().WithAuthenticationHandler(OnRefreshToken));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
@@ -306,20 +304,20 @@ namespace Apizr.Tests
             var setCounter = 0;
             var refreshCounter = 0;
             string token = null;
-            Task<string> OnGetToken()
+            Task<string> OnGetToken(HttpRequestMessage request, CancellationToken ct)
             {
                 getCounter++;
                 return Task.FromResult(token);
             }
 
-            Task OnSetToken(string tk)
+            Task OnSetToken(HttpRequestMessage request, string tk, CancellationToken ct)
             {
                 if (token != tk)
                     setCounter++;
                 return Task.FromResult(token = tk);
             }
 
-            Task<string> OnRefreshToken(HttpRequestMessage _)
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct)
             {
                 refreshCounter++;
                 return Task.FromResult("token");
@@ -407,9 +405,9 @@ namespace Apizr.Tests
                         services.AddApizrManagerFor<IHttpBinService>(options =>
                 options.WithLogging()
                     .WithAuthenticationHandler<TokenService, TokenService>(
-                        ts => ts.GetTokenAsync(),
-                        (ts, token) => ts.SetTokenAsync(token),
-                        (ts, message) => ts.RefreshTokenAsync(message)));
+                        (ts, request, ct) => ts.GetTokenAsync(request, ct),
+                        (ts, request, tk, ct) => ts.SetTokenAsync(request, tk, ct),
+                        (ts, request, tk, ct) => ts.RefreshTokenAsync(request, tk, ct)));
                     })
                 .Build();
 
@@ -471,7 +469,7 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "tokenA");
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "tokenA");
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
@@ -480,8 +478,7 @@ namespace Apizr.Tests
                 .ConfigureServices((_, services) =>
                 {
                     services.AddApizrManagerFor<IHttpBinService>(options => options
-                        .WithLogging()
-                        .WithAuthenticationHandler(OnRefreshToken));
+                        .WithLogging().WithAuthenticationHandler(OnRefreshToken));
 
                     services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
                         builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));

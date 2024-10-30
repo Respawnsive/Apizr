@@ -159,7 +159,7 @@ namespace Apizr.Tests
         public async Task Calling_WithAuthenticationHandler_Should_Authenticate_Request()
         {
             string token = null;
-            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "token");
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "token");
 
             var httpBinManager = ApizrBuilder.Current.CreateManagerFor<IHttpBinService>(options =>
                 options.WithLoggerFactory(LoggerFactory.Create(builder =>
@@ -182,20 +182,20 @@ namespace Apizr.Tests
             var setCounter = 0;
             var refreshCounter = 0;
             string token = null;
-            Task<string> OnGetToken()
+            Task<string> OnGetToken(HttpRequestMessage request, CancellationToken ct)
             {
                 getCounter++;
                 return Task.FromResult(token);
             }
 
-            Task OnSetToken(string tk)
+            Task OnSetToken(HttpRequestMessage request, string tk, CancellationToken ct)
             {
                 if (token != tk)
                     setCounter++;
                 return Task.FromResult(token = tk);
             }
 
-            Task<string> OnRefreshToken(HttpRequestMessage _)
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct)
             {
                 refreshCounter++;
                 return Task.FromResult("token");
@@ -206,8 +206,7 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
-                    .WithHttpMessageHandler(new WatchingRequestHandler())
-                    .WithAuthenticationHandler(OnGetToken, OnSetToken, OnRefreshToken));
+                    .WithHttpMessageHandler(new WatchingRequestHandler()).WithAuthenticationHandler(OnGetToken, OnSetToken, OnRefreshToken));
 
             var result1 = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
 
@@ -255,10 +254,10 @@ namespace Apizr.Tests
                     .WithLogging()
                     .WithAuthenticationHandler(
                         tokenService, 
-                        ts => ts.GetTokenAsync(),
-                        (ts, token) => ts.SetTokenAsync(token), 
+                        (ts, request, ct) => ts.GetTokenAsync(request, ct),
+                        (ts, request, tk, ct) => ts.SetTokenAsync(request, tk, ct), 
                         tokenService,
-                        (ts, message) => ts.RefreshTokenAsync(message)));
+                        (ts, request, tk, ct) => ts.RefreshTokenAsync(request, tk, ct)));
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
 

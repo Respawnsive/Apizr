@@ -287,8 +287,8 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAuthenticationHandler_ProperOption_Should_Authenticate_Request()
         {
-            string token = null;
-            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "token");
+            string token = null; 
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "token");
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
@@ -314,20 +314,20 @@ namespace Apizr.Tests
             var setCounter = 0;
             var refreshCounter = 0;
             string token = null;
-            Task<string> OnGetToken()
+            Task<string> OnGetToken(HttpRequestMessage request, CancellationToken ct)
             {
                 getCounter++;
                 return Task.FromResult(token);
             }
 
-            Task OnSetToken(string tk)
+            Task OnSetToken(HttpRequestMessage request, string tk, CancellationToken ct)
             {
                 if (token != tk)
                     setCounter++;
                 return Task.FromResult(token = tk);
             }
 
-            Task<string> OnRefreshToken(HttpRequestMessage _)
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct)
             {
                 refreshCounter++;
                 return Task.FromResult("token");
@@ -394,10 +394,10 @@ namespace Apizr.Tests
                     .AddManagerFor<IHttpBinService>(options =>
                         options.WithAuthenticationHandler(
                             tokenService,
-                            ts => ts.GetTokenAsync(),
-                            (ts, token) => ts.SetTokenAsync(token),
+                            (ts, request, ct) => ts.GetTokenAsync(request, ct),
+                            (ts, request, tk, ct) => ts.SetTokenAsync(request, tk, ct),
                             tokenService,
-                            (ts, message) => ts.RefreshTokenAsync(message))),
+                            (ts, request, tk, ct) => ts.RefreshTokenAsync(request, tk, ct))),
                 options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
@@ -448,16 +448,14 @@ namespace Apizr.Tests
         public async Task Calling_WithAuthenticationHandler_CommonOption_Should_Authenticate_Request()
         {
             string token = null;
-
-            Task<string> OnRefreshToken(HttpRequestMessage _) => Task.FromResult(token = "token");
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "token");
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IHttpBinService>(),
                 config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
-                    .WithLogging()
-                    .WithAuthenticationHandler(OnRefreshToken));
+                    .WithLogging().WithAuthenticationHandler(OnRefreshToken));
 
             var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 
@@ -472,17 +470,15 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            Task<string> OnRefreshTokenA(HttpRequestMessage _) => Task.FromResult(token = "tokenA");
-            Task<string> OnRefreshTokenB(HttpRequestMessage _) => Task.FromResult(token = "tokenB");
+            Task<string> OnRefreshTokenA(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "tokenA");
+            Task<string> OnRefreshTokenB(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "tokenB");
 
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                    .AddManagerFor<IHttpBinService>(options => options
-                        .WithAuthenticationHandler(OnRefreshTokenA)),
+                    .AddManagerFor<IHttpBinService>(options => options.WithAuthenticationHandler(OnRefreshTokenA)),
                 config => config.WithLoggerFactory(LoggerFactory.Create(builder =>
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
-                    .WithLogging()
-                    .WithAuthenticationHandler(OnRefreshTokenB));
+                    .WithLogging().WithAuthenticationHandler(OnRefreshTokenB));
 
             var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
 

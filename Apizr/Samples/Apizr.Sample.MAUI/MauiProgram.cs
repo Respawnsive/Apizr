@@ -130,8 +130,7 @@ namespace Apizr.Sample.MAUI
             services.AddApizr(
                 apizrRegistry => apizrRegistry
                     .AddManagerFor<IReqResService>()
-                    .AddManagerFor<IHttpBinService>(options => options
-                        .WithAuthenticationHandler(OnRefreshToken))
+                    .AddManagerFor<IHttpBinService>(options => options.WithAuthenticationHandler((Func<HttpRequestMessage, CancellationToken, Task<string>>) OnRefreshToken))
                     .AddCrudManagerFor([typeof(User)]),
 
                 config => config

@@ -623,7 +623,7 @@ namespace Apizr
                 }
             }
 
-            if (Equals(result, default) || requestCacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.FinalMode != CacheMode.GetOrFetch)
             {
                 ResilienceContext resilienceContext = null;
                 ApizrException<TApiData> ex = null;
@@ -1046,7 +1046,7 @@ namespace Apizr
                 }
             }
 
-            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.FinalMode != CacheMode.GetOrFetch)
             {
                 ResilienceContext resilienceContext = null;
                 ApizrException<TModelData> ex = null;
@@ -1596,7 +1596,7 @@ namespace Apizr
                 }
             }
 
-            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.FinalMode != CacheMode.GetOrFetch)
             {
                 ResilienceContext resilienceContext = null;
                 ApizrException<TApiData> ex = null;
@@ -2036,7 +2036,7 @@ namespace Apizr
                 }
             }
 
-            if (Equals(result, default) || cacheAttribute?.Mode != CacheMode.GetOrFetch)
+            if (Equals(result, default) || cacheAttribute?.FinalMode != CacheMode.GetOrFetch)
             {
                 ResilienceContext resilienceContext = null;
                 ApizrException<TModelResultData> ex = null;

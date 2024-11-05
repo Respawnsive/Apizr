@@ -643,7 +643,7 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public async Task Calling_WithAkavacheCacheHandler_With_Post_CacheKey_Should_Cache_Result()
+        public async Task Calling_WithAkavacheCacheHandler_With_Post_CacheKey_And_FetchOrGet_Should_Cache_Result()
         {
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
                     .AddManagerFor<IReqResUserService>(),
@@ -683,6 +683,66 @@ namespace Apizr.Tests
             // This one should fail but with cached result
             var ex2 = await act1.Should().ThrowAsync<ApizrException<CreateUser>>();
             ex2.And.CachedResult.Should().NotBeNull();
+
+            // Changing cache key value
+            user = new CreateUser
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Avatar = "https://reqres.in/img/faces/1-image.jpg",
+                Email = "jd2@email.com" // #2
+            };
+
+            // Defining another throwing request
+            Func<Task<CreateUser>> act2 = () => reqResManager.ExecuteAsync(api => api.CreateCachedUser(user, "users", HttpStatusCode.BadRequest));
+
+            // Calling it again with another cache key value should throw as expected but without any cached result
+            var ex3 = await act2.Should().ThrowAsync<ApizrException<CreateUser>>();
+            ex3.And.CachedResult.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task Calling_WithAkavacheCacheHandler_With_Post_CacheKey_And_GetOrFetch_Should_Cache_Result()
+        {
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
+                    .AddManagerFor<IReqResUserService>(
+                        options => options.WithCaching(CacheMode.GetOrFetch)),
+                options => options.WithLoggerFactory(LoggerFactory.Create(builder =>
+                        builder.AddXUnit(_outputHelper)
+                            .SetMinimumLevel(LogLevel.Trace)))
+                    .WithLogging()
+                    .WithAkavacheCacheHandler()
+                    .WithDelegatingHandler(new TestRequestHandler()));
+
+            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+
+            // Clearing cache
+            await reqResManager.ClearCacheAsync();
+
+            var user = new CreateUser
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Avatar = "https://reqres.in/img/faces/1-image.jpg",
+                Email = "jd1@email.com" // #1
+            };
+
+            // Defining a throwing request
+            Func<Task<CreateUser>> act1 = () => reqResManager.ExecuteAsync(api => api.CreateCachedUser(user, "users", HttpStatusCode.BadRequest));
+
+            // Calling it at first execution should throw as expected without any cached result
+            var ex = await act1.Should().ThrowAsync<ApizrException<CreateUser>>();
+            ex.And.CachedResult.Should().BeNull();
+
+            // This one should succeed
+            var result = await reqResManager.ExecuteAsync(api => api.CreateCachedUser(user, "users", HttpStatusCode.OK));
+
+            // and cache result in-memory
+            result.Should().NotBeNull();
+
+            // This one should not fail but return cached result
+            var actResult = await act1.Should().NotThrowAsync<ApizrException<CreateUser>>();
+            actResult.And.Subject.Should().NotBeNull();
 
             // Changing cache key value
             user = new CreateUser

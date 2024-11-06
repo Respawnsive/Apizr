@@ -5,9 +5,9 @@ items:
   id: IAuthenticationHandler
   parent: Apizr.Authenticating
   children:
-  - Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync
-  - Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
-  - Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.String)
+  - Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  - Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)
+  - Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)
   langs:
   - csharp
   - vb
@@ -22,7 +22,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IAuthenticationHandler
     path: ../../Src/Apizr/Authenticating/IAuthenticationHandler.cs
-    startLine: 9
+    startLine: 10
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
@@ -31,16 +31,16 @@ items:
   syntax:
     content: public interface IAuthenticationHandler
     content.vb: Public Interface IAuthenticationHandler
-- uid: Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync
-  commentId: M:Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync
-  id: GetTokenAsync
+- uid: Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  commentId: M:Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  id: GetTokenAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   parent: Apizr.Authenticating.IAuthenticationHandler
   langs:
   - csharp
   - vb
-  name: GetTokenAsync()
-  nameWithType: IAuthenticationHandler.GetTokenAsync()
-  fullName: Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync()
+  name: GetTokenAsync(HttpRequestMessage, CancellationToken)
+  nameWithType: IAuthenticationHandler.GetTokenAsync(HttpRequestMessage, CancellationToken)
+  fullName: Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
@@ -49,29 +49,36 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: GetTokenAsync
     path: ../../Src/Apizr/Authenticating/IAuthenticationHandler.cs
-    startLine: 15
+    startLine: 18
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
   summary: The method called to get local token
   example: []
   syntax:
-    content: Task<string> GetTokenAsync()
+    content: Task<string> GetTokenAsync(HttpRequestMessage request, CancellationToken ct = default)
+    parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+      description: The request to authenticate
+    - id: ct
+      type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{System.String}
-      description: ''
-    content.vb: Function GetTokenAsync() As Task(Of String)
+      description: The saved token
+    content.vb: Function GetTokenAsync(request As HttpRequestMessage, ct As CancellationToken = Nothing) As Task(Of String)
   overload: Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync*
-- uid: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.String)
-  commentId: M:Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.String)
-  id: SetTokenAsync(System.String)
+- uid: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)
+  commentId: M:Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)
+  id: SetTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)
   parent: Apizr.Authenticating.IAuthenticationHandler
   langs:
   - csharp
   - vb
-  name: SetTokenAsync(string)
-  nameWithType: IAuthenticationHandler.SetTokenAsync(string)
-  fullName: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(string)
+  name: SetTokenAsync(HttpRequestMessage, string, CancellationToken)
+  nameWithType: IAuthenticationHandler.SetTokenAsync(HttpRequestMessage, string, CancellationToken)
+  fullName: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.Net.Http.HttpRequestMessage, string, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
@@ -80,35 +87,41 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: SetTokenAsync
     path: ../../Src/Apizr/Authenticating/IAuthenticationHandler.cs
-    startLine: 21
+    startLine: 26
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
   summary: The method called to set local token
   example: []
   syntax:
-    content: Task SetTokenAsync(string token)
+    content: Task SetTokenAsync(HttpRequestMessage request, string token, CancellationToken ct = default)
     parameters:
+    - id: request
+      type: System.Net.Http.HttpRequestMessage
+      description: The request to authenticate
     - id: token
       type: System.String
-      description: The token to set
+      description: The token to save
+    - id: ct
+      type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task
-    content.vb: Function SetTokenAsync(token As String) As Task
+    content.vb: Function SetTokenAsync(request As HttpRequestMessage, token As String, ct As CancellationToken = Nothing) As Task
   overload: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync*
-  nameWithType.vb: IAuthenticationHandler.SetTokenAsync(String)
-  fullName.vb: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(String)
-  name.vb: SetTokenAsync(String)
-- uid: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
-  commentId: M:Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
-  id: RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+  nameWithType.vb: IAuthenticationHandler.SetTokenAsync(HttpRequestMessage, String, CancellationToken)
+  fullName.vb: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.Net.Http.HttpRequestMessage, String, System.Threading.CancellationToken)
+  name.vb: SetTokenAsync(HttpRequestMessage, String, CancellationToken)
+- uid: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)
+  commentId: M:Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)
+  id: RefreshTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)
   parent: Apizr.Authenticating.IAuthenticationHandler
   langs:
   - csharp
   - vb
-  name: RefreshTokenAsync(HttpRequestMessage)
-  nameWithType: IAuthenticationHandler.RefreshTokenAsync(HttpRequestMessage)
-  fullName: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)
+  name: RefreshTokenAsync(HttpRequestMessage, string, CancellationToken)
+  nameWithType: IAuthenticationHandler.RefreshTokenAsync(HttpRequestMessage, string, CancellationToken)
+  fullName: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage, string, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
@@ -117,23 +130,32 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefreshTokenAsync
     path: ../../Src/Apizr/Authenticating/IAuthenticationHandler.cs
-    startLine: 28
+    startLine: 35
   assemblies:
   - Apizr
   namespace: Apizr.Authenticating
   summary: The method called to refresh token when rejected or empty
   example: []
   syntax:
-    content: Task<string> RefreshTokenAsync(HttpRequestMessage request)
+    content: Task<string> RefreshTokenAsync(HttpRequestMessage request, string token, CancellationToken ct = default)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
       description: The request to authenticate
+    - id: token
+      type: System.String
+      description: The former token
+    - id: ct
+      type: System.Threading.CancellationToken
+      description: The cancellation token
     return:
       type: System.Threading.Tasks.Task{System.String}
-      description: ''
-    content.vb: Function RefreshTokenAsync(request As HttpRequestMessage) As Task(Of String)
+      description: The refreshed token
+    content.vb: Function RefreshTokenAsync(request As HttpRequestMessage, token As String, ct As CancellationToken = Nothing) As Task(Of String)
   overload: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync*
+  nameWithType.vb: IAuthenticationHandler.RefreshTokenAsync(HttpRequestMessage, String, CancellationToken)
+  fullName.vb: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage, String, System.Threading.CancellationToken)
+  name.vb: RefreshTokenAsync(HttpRequestMessage, String, CancellationToken)
 references:
 - uid: Apizr.Authenticating
   commentId: N:Apizr.Authenticating
@@ -159,10 +181,26 @@ references:
     href: Apizr.Authenticating.html
 - uid: Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync*
   commentId: Overload:Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync
-  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_GetTokenAsync
+  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_GetTokenAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_
   name: GetTokenAsync
   nameWithType: IAuthenticationHandler.GetTokenAsync
   fullName: Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync
+- uid: System.Net.Http.HttpRequestMessage
+  commentId: T:System.Net.Http.HttpRequestMessage
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  name: HttpRequestMessage
+  nameWithType: HttpRequestMessage
+  fullName: System.Net.Http.HttpRequestMessage
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
 - uid: System.Threading.Tasks.Task{System.String}
   commentId: T:System.Threading.Tasks.Task{System.String}
   parent: System.Threading.Tasks
@@ -198,6 +236,70 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
@@ -265,7 +367,7 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync*
   commentId: Overload:Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync
-  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_SetTokenAsync_System_String_
+  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_SetTokenAsync_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_
   name: SetTokenAsync
   nameWithType: IAuthenticationHandler.SetTokenAsync
   fullName: Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync
@@ -297,52 +399,7 @@ references:
   fullName: System
 - uid: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync*
   commentId: Overload:Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync
-  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_
+  href: Apizr.Authenticating.IAuthenticationHandler.html#Apizr_Authenticating_IAuthenticationHandler_RefreshTokenAsync_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_
   name: RefreshTokenAsync
   nameWithType: IAuthenticationHandler.RefreshTokenAsync
   fullName: Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync
-- uid: System.Net.Http.HttpRequestMessage
-  commentId: T:System.Net.Http.HttpRequestMessage
-  parent: System.Net.Http
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
-  name: HttpRequestMessage
-  nameWithType: HttpRequestMessage
-  fullName: System.Net.Http.HttpRequestMessage
-- uid: System.Net.Http
-  commentId: N:System.Net.Http
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system
-  name: System.Net.Http
-  nameWithType: System.Net.Http
-  fullName: System.Net.Http
-  spec.csharp:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Net
-    name: Net
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net
-  - name: .
-  - uid: System.Net.Http
-    name: Http
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http
-  spec.vb:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Net
-    name: Net
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net
-  - name: .
-  - uid: System.Net.Http
-    name: Http
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http

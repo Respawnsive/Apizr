@@ -89,7 +89,7 @@
 
 
   <h1 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder" class="text-break">
-Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L29"><i class="bi bi-code-slash"></i></a>
+Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L30"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -225,7 +225,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_Options" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.Options">
   Options
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L35"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The options</p>
@@ -261,7 +261,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_ConfigureHttpClient_System_Action_System_Net_Http_HttpClient__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)">
   ConfigureHttpClient(Action&lt;HttpClient&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L256"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L257"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Configure HttpClient</p>
@@ -300,9 +300,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
-  WithAuthenticationHandler(Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
+  WithAuthenticationHandler(Func&lt;HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L306"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a method to refresh the authorization token when needed</p>
@@ -310,12 +310,12 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler(Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt; refreshTokenFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler(Func&lt;HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt; refreshTokenFactory)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>refreshTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dt><code>refreshTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
     <dd><p>Refresh token method called when expired or empty</p>
 </dd>
   </dl>
@@ -338,9 +338,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_System_Func_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})">
-  WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
+  WithAuthenticationHandler(Func&lt;HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L293"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide methods to only get the authorization constant token when needed</p>
@@ -348,12 +348,12 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt; getTokenFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler(Func&lt;HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt; getTokenFactory)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
     <dd><p>The method called to get local constant token</p>
 </dd>
   </dl>
@@ -376,9 +376,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_System_Func_System_Threading_Tasks_Task_System_String___System_Func_System_String_System_Threading_Tasks_Task__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})">
-  WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt;, Func&lt;string, Task&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L298"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String___System_Func_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
+  WithAuthenticationHandler(Func&lt;HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;, Func&lt;HttpRequestMessage, string, CancellationToken, Task&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L299"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide methods to get and set the authorization token when needed</p>
@@ -386,15 +386,15 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt; getTokenFactory, Func&lt;string, Task&gt; setTokenFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler(Func&lt;HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt; getTokenFactory, Func&lt;HttpRequestMessage, string, CancellationToken, Task&gt; setTokenFactory)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
     <dd><p>The method called to get local token</p>
 </dd>
-    <dt><code>setTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;</dt>
+    <dt><code>setTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;</dt>
     <dd><p>The method called to set local token</p>
 </dd>
   </dl>
@@ -417,9 +417,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_System_Func_System_Threading_Tasks_Task_System_String___System_Func_System_String_System_Threading_Tasks_Task__System_Func_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
-  WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt;, Func&lt;string, Task&gt;, Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String___System_Func_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task__System_Func_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
+  WithAuthenticationHandler(Func&lt;HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;, Func&lt;HttpRequestMessage, string, CancellationToken, Task&gt;, Func&lt;HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L312"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide methods to get, set and refresh the authorization token when needed</p>
@@ -427,18 +427,18 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler(Func&lt;Task&lt;string&gt;&gt; getTokenFactory, Func&lt;string, Task&gt; setTokenFactory, Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt; refreshTokenFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler(Func&lt;HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt; getTokenFactory, Func&lt;HttpRequestMessage, string, CancellationToken, Task&gt; setTokenFactory, Func&lt;HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt; refreshTokenFactory)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dt><code>getTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
     <dd><p>The method called to get local token</p>
 </dd>
-    <dt><code>setTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;</dt>
+    <dt><code>setTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;</dt>
     <dd><p>The method called to get local token</p>
 </dd>
-    <dt><code>refreshTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dt><code>refreshTokenFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
     <dd><p>Refresh token method called when expired or empty</p>
 </dd>
   </dl>
@@ -463,7 +463,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
   WithAuthenticationHandler&lt;TAuthenticationHandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, TAuthenticationHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L286"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L287"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own <a class="xref" href="Apizr.Authenticating.AuthenticationHandlerBase.html">AuthenticationHandlerBase</a> implementation factory</p>
@@ -505,9 +505,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TTokenService&gt;(Func&lt;TTokenService&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L483"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TTokenService&gt;(Func&lt;TTokenService&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L486"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own token management services</p>
@@ -515,7 +515,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TTokenService&gt;(Func&lt;TTokenService&gt; tokenServiceFactory, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TTokenService&gt;(Func&lt;TTokenService&gt; tokenServiceFactory, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -523,7 +523,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
     <dt><code>tokenServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TTokenService&gt;</dt>
     <dd><p>A <code class="typeparamref">TTokenService</code> instance factory</p>
 </dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd><p>The method called to refresh the token</p>
 </dd>
   </dl>
@@ -552,9 +552,159 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L459"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt; settingsServiceFactory, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt; getTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>settingsServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TSettingsService&gt;</dt>
+    <dd><p>A <code class="typeparamref">TSettingsService</code> instance factory</p>
+</dd>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get only token expression</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TSettingsService</code></dt>
+    <dd><p>Your settings management service (getting constant token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
+  WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L471"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt; settingsServiceFactory, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt; setTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>settingsServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TSettingsService&gt;</dt>
+    <dd><p>A <code class="typeparamref">TSettingsService</code> instance factory</p>
+</dd>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get token expression</p>
+</dd>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dd><p>The set token expression</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TSettingsService</code></dt>
+    <dd><p>Your settings management service (saving/getting token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TAuthService&gt;(Func&lt;TAuthService&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L519"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own auth management service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(Func&lt;TAuthService&gt; authServiceFactory, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt; setTokenExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>authServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TAuthService&gt;</dt>
+    <dd><p>A <code class="typeparamref">TAuthService</code> instance factory</p>
+</dd>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get token expression</p>
+</dd>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dd><p>The set token expression</p>
+</dd>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The method called to refresh the token</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAuthService</code></dt>
+    <dd><p>Your auth management service (saving/getting/refreshing token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
+
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
   WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L532"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L537"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own settings management service with its token source</p>
@@ -599,9 +749,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TAuthService&gt;(Func&lt;TAuthService&gt;, Expression&lt;Func&lt;TAuthService, string&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L572"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TAuthService&gt;(Func&lt;TAuthService&gt;, Expression&lt;Func&lt;TAuthService, string&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L578"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own auth management service</p>
@@ -609,7 +759,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(Func&lt;TAuthService&gt; authServiceFactory, Expression&lt;Func&lt;TAuthService, string&gt;&gt; tokenPropertyExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(Func&lt;TAuthService&gt; authServiceFactory, Expression&lt;Func&lt;TAuthService, string&gt;&gt; tokenPropertyExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -620,7 +770,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
     <dt><code>tokenPropertyExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
     <dd><p>The token property to get from and set to</p>
 </dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -648,159 +798,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L456"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt; settingsServiceFactory, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>settingsServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TSettingsService&gt;</dt>
-    <dd><p>A <code class="typeparamref">TSettingsService</code> instance factory</p>
-</dd>
-    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The get only token expression</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TSettingsService</code></dt>
-    <dd><p>Your settings management service (getting constant token)</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
-
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
-  WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L468"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt; settingsServiceFactory, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt; setTokenExpression)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>settingsServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TSettingsService&gt;</dt>
-    <dd><p>A <code class="typeparamref">TSettingsService</code> instance factory</p>
-</dd>
-    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The get token expression</p>
-</dd>
-    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
-    <dd><p>The set token expression</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TSettingsService</code></dt>
-    <dd><p>Your settings management service (saving/getting token)</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
-
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TAuthService&gt;(Func&lt;TAuthService&gt;, Expression&lt;Func&lt;TAuthService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TAuthService, string, Task&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L514"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Provide your own auth management service</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(Func&lt;TAuthService&gt; authServiceFactory, Expression&lt;Func&lt;TAuthService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TAuthService, string, Task&gt;&gt; setTokenExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>authServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TAuthService&gt;</dt>
-    <dd><p>A <code class="typeparamref">TAuthService</code> instance factory</p>
-</dd>
-    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The get token expression</p>
-</dd>
-    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
-    <dd><p>The set token expression</p>
-</dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The method called to refresh the token</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TAuthService</code></dt>
-    <dd><p>Your auth management service (saving/getting/refreshing token)</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
-
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TTokenService&gt;(TTokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L346"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TTokenService&gt;(TTokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L347"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own token management services</p>
@@ -808,7 +808,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TTokenService&gt;(TTokenService tokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TTokenService&gt;(TTokenService tokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -816,7 +816,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
     <dt><code>tokenService</code> <span class="xref">TTokenService</span></dt>
     <dd><p>A <code class="typeparamref">TTokenService</code> instance</p>
 </dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd><p>The method called to refresh the token</p>
 </dd>
   </dl>
@@ -845,9 +845,159 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService settingsService, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt; getTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>settingsService</code> <span class="xref">TSettingsService</span></dt>
+    <dd><p>A <code class="typeparamref">TSettingsService</code> instance</p>
+</dd>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get only token expression</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TSettingsService</code></dt>
+    <dd><p>Your settings management service (getting constant token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
+  WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService settingsService, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt; setTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>settingsService</code> <span class="xref">TSettingsService</span></dt>
+    <dd><p>A <code class="typeparamref">TSettingsService</code> instance</p>
+</dd>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get token expression</p>
+</dd>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dd><p>The set token expression</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TSettingsService</code></dt>
+    <dd><p>Your settings management service (saving/getting token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
+
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TAuthService&gt;(TAuthService, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L379"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(TAuthService authService, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt; setTokenExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>authService</code> <span class="xref">TAuthService</span></dt>
+    <dd><p>A <code class="typeparamref">TAuthService</code> instance</p>
+</dd>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The get token expression</p>
+</dd>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dd><p>The set token expression</p>
+</dd>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The method called to refresh the token</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TAuthService</code></dt>
+    <dd><p>Your auth management service (saving/getting/refreshing token)</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
+
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
   WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L395"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L397"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own settings management service with its token source</p>
@@ -892,9 +1042,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TAuthService&gt;(TAuthService, Expression&lt;Func&lt;TAuthService, string&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L435"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TAuthService&gt;(TAuthService, Expression&lt;Func&lt;TAuthService, string&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L438"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own auth management service</p>
@@ -902,7 +1052,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(TAuthService authService, Expression&lt;Func&lt;TAuthService, string&gt;&gt; tokenPropertyExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(TAuthService authService, Expression&lt;Func&lt;TAuthService, string&gt;&gt; tokenPropertyExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -913,7 +1063,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
     <dt><code>tokenPropertyExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
     <dd><p>The token property to get from and set to</p>
 </dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -941,76 +1091,35 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L319"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__2_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task___System_Func___1__System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt;, Func&lt;TTokenService&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L499"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
+  <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService settingsService, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Func&lt;TSettingsService&gt; settingsServiceFactory, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt; setTokenExpression, Func&lt;TTokenService&gt; tokenServiceFactory, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>settingsService</code> <span class="xref">TSettingsService</span></dt>
-    <dd><p>A <code class="typeparamref">TSettingsService</code> instance</p>
+    <dt><code>settingsServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TSettingsService&gt;</dt>
+    <dd><p>A <code class="typeparamref">TSettingsService</code> instance factory</p>
 </dd>
-    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The get only token expression</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TSettingsService</code></dt>
-    <dd><p>Your settings management service (getting constant token)</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
-
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
-  WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L331"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Provide your own settings management service</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService&gt;(TSettingsService settingsService, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt; setTokenExpression)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>settingsService</code> <span class="xref">TSettingsService</span></dt>
-    <dd><p>A <code class="typeparamref">TSettingsService</code> instance</p>
-</dd>
-    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd><p>The get token expression</p>
 </dd>
-    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
     <dd><p>The set token expression</p>
+</dd>
+    <dt><code>tokenServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TTokenService&gt;</dt>
+    <dd><p>A <code class="typeparamref">TTokenService</code> instance factory</p>
+</dd>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dd><p>The method called to refresh the token</p>
 </dd>
   </dl>
 
@@ -1025,58 +1134,8 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
     <dt><code>TSettingsService</code></dt>
     <dd><p>Your settings management service (saving/getting token)</p>
 </dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
-
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task___System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TAuthService&gt;(TAuthService, Expression&lt;Func&lt;TAuthService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TAuthService, string, Task&gt;&gt;, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L377"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TAuthService&gt;(TAuthService authService, Expression&lt;Func&lt;TAuthService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TAuthService, string, Task&gt;&gt; setTokenExpression, Expression&lt;Func&lt;TAuthService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>authService</code> <span class="xref">TAuthService</span></dt>
-    <dd><p>A <code class="typeparamref">TAuthService</code> instance</p>
-</dd>
-    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The get token expression</p>
-</dd>
-    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
-    <dd><p>The set token expression</p>
-</dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TAuthService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The method called to refresh the token</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TAuthService</code></dt>
-    <dd><p>Your auth management service (saving/getting/refreshing token)</p>
+    <dt><code>TTokenService</code></dt>
+    <dd><p>Your token management service (refreshing token)</p>
 </dd>
   </dl>
 
@@ -1091,9 +1150,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__2_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String___System_Func___1__System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;, Func&lt;TTokenService&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L550"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__2_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String___System_Func___1__System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;, Func&lt;TTokenService&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L555"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
@@ -1101,7 +1160,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Func&lt;TSettingsService&gt; settingsServiceFactory, Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenPropertyExpression, Func&lt;TTokenService&gt; tokenServiceFactory, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Func&lt;TSettingsService&gt; settingsServiceFactory, Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenPropertyExpression, Func&lt;TTokenService&gt; tokenServiceFactory, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -1115,7 +1174,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
     <dt><code>tokenServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TTokenService&gt;</dt>
     <dd><p>A <code class="typeparamref">TTokenService</code> instance factory</p>
 </dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -1146,9 +1205,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__2_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task___System_Func___1__System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt;, Func&lt;TTokenService&gt;, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L495"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__2___0_System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_____1_System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt;, TTokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L359"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
@@ -1156,24 +1215,24 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(Func&lt;TSettingsService&gt; settingsServiceFactory, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt; setTokenExpression, Func&lt;TTokenService&gt; tokenServiceFactory, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(TSettingsService settingsService, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, CancellationToken, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, HttpRequestMessage, string, CancellationToken, Task&gt;&gt; setTokenExpression, TTokenService tokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>settingsServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TSettingsService&gt;</dt>
-    <dd><p>A <code class="typeparamref">TSettingsService</code> instance factory</p>
+    <dt><code>settingsService</code> <span class="xref">TSettingsService</span></dt>
+    <dd><p>A <code class="typeparamref">TSettingsService</code> instance</p>
 </dd>
-    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd><p>The get token expression</p>
 </dd>
-    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
+    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
     <dd><p>The set token expression</p>
 </dd>
-    <dt><code>tokenServiceFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TTokenService&gt;</dt>
-    <dd><p>A <code class="typeparamref">TTokenService</code> instance factory</p>
+    <dt><code>tokenService</code> <span class="xref">TTokenService</span></dt>
+    <dd><p>A <code class="typeparamref">TTokenService</code> instance</p>
 </dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd><p>The method called to refresh the token</p>
 </dd>
   </dl>
@@ -1205,9 +1264,9 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__2___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____1_System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;, TTokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L413"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__2___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____1_System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_String_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
+  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;, TTokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L415"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
@@ -1215,7 +1274,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(TSettingsService settingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenPropertyExpression, TTokenService tokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(TSettingsService settingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt; tokenPropertyExpression, TTokenService tokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, string, CancellationToken, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -1229,67 +1288,8 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
     <dt><code>tokenService</code> <span class="xref">TTokenService</span></dt>
     <dd><p>A <code class="typeparamref">TTokenService</code> instance</p>
 </dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
+    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
     <dd></dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBuilder.html">IApizrManagerOptionsBuilder</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TSettingsService</code></dt>
-    <dd><p>Your settings management service (saving/getting token)</p>
-</dd>
-    <dt><code>TTokenService</code></dt>
-    <dd><p>Your token management service (refreshing token)</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler*"></a>
-
-  <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithAuthenticationHandler__2___0_System_Linq_Expressions_Expression_System_Func___0_System_Threading_Tasks_Task_System_String____System_Linq_Expressions_Expression_System_Func___0_System_String_System_Threading_Tasks_Task_____1_System_Linq_Expressions_Expression_System_Func___1_System_Net_Http_HttpRequestMessage_System_Threading_Tasks_Task_System_String____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
-  WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt;, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt;, TTokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L358"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Provide your own settings management and token management services</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrManagerOptionsBuilder WithAuthenticationHandler&lt;TSettingsService, TTokenService&gt;(TSettingsService settingsService, Expression&lt;Func&lt;TSettingsService, Task&lt;string&gt;&gt;&gt; getTokenExpression, Expression&lt;Func&lt;TSettingsService, string, Task&gt;&gt; setTokenExpression, TTokenService tokenService, Expression&lt;Func&lt;TTokenService, HttpRequestMessage, Task&lt;string&gt;&gt;&gt; refreshTokenExpression)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>settingsService</code> <span class="xref">TSettingsService</span></dt>
-    <dd><p>A <code class="typeparamref">TSettingsService</code> instance</p>
-</dd>
-    <dt><code>getTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The get token expression</p>
-</dd>
-    <dt><code>setTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TSettingsService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>&gt;&gt;</dt>
-    <dd><p>The set token expression</p>
-</dd>
-    <dt><code>tokenService</code> <span class="xref">TTokenService</span></dt>
-    <dd><p>A <code class="typeparamref">TTokenService</code> instance</p>
-</dd>
-    <dt><code>refreshTokenExpression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;TTokenService, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;</dt>
-    <dd><p>The method called to refresh the token</p>
-</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
@@ -1321,7 +1321,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithBaseAddress_System_Func_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBaseAddress(System.Func{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBaseAddress(Func&lt;string&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L186"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
@@ -1362,7 +1362,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithBaseAddress_System_Func_System_Uri__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBaseAddress(System.Func{System.Uri},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBaseAddress(Func&lt;Uri&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L207"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
@@ -1403,7 +1403,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithBaseAddress_System_String_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBaseAddress(string, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L181"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L182"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
@@ -1444,7 +1444,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithBaseAddress_System_Uri_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBaseAddress(Uri, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L203"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base address (could be defined with WebApiAttribute)</p>
@@ -1485,7 +1485,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithBasePath_System_Func_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBasePath(System.Func{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBasePath(Func&lt;string&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L228"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base path (could be defined with WebApiAttribute)</p>
@@ -1526,7 +1526,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithBasePath_System_String_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithBasePath(string, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L224"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define your web api base path (could be defined with WebApiAttribute)</p>
@@ -1567,7 +1567,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithCacheHandler_Apizr_Caching_ICacheHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithCacheHandler(Apizr.Caching.ICacheHandler)">
   WithCacheHandler(ICacheHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L691"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L697"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a cache handler to cache data</p>
@@ -1605,7 +1605,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithCacheHandler_System_Func_Apizr_Caching_ICacheHandler__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithCacheHandler(System.Func{Apizr.Caching.ICacheHandler})">
   WithCacheHandler(Func&lt;ICacheHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L695"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L701"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a cache handler to cache data</p>
@@ -1643,7 +1643,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
   WithCaching(CacheMode, TimeSpan?, bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1114"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1120"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Cache data.</p>
@@ -1687,7 +1687,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithConfiguration_Microsoft_Extensions_Configuration_IConfiguration_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
   WithConfiguration(IConfiguration)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L46"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set options from configuration</p>
@@ -1725,7 +1725,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithConfiguration_Microsoft_Extensions_Configuration_IConfigurationSection_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfigurationSection)">
   WithConfiguration(IConfigurationSection)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L50"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set options from a specific configuration section</p>
@@ -1763,7 +1763,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithConnectivityHandler_Apizr_Connecting_IConnectivityHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithConnectivityHandler(Apizr.Connecting.IConnectivityHandler)">
   WithConnectivityHandler(IConnectivityHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L679"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L685"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a connectivity handler to check connectivity before sending a request</p>
@@ -1801,7 +1801,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithConnectivityHandler_System_Func_Apizr_Connecting_IConnectivityHandler__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithConnectivityHandler(System.Func{Apizr.Connecting.IConnectivityHandler})">
   WithConnectivityHandler(Func&lt;IConnectivityHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L683"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L689"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a connectivity handler</p>
@@ -1839,7 +1839,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithConnectivityHandler_System_Func_System_Boolean__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithConnectivityHandler(System.Func{System.Boolean})">
   WithConnectivityHandler(Func&lt;bool&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L675"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L681"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a function to invoke while checking connectivity</p>
@@ -1877,7 +1877,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L604"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L610"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
@@ -1923,7 +1923,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L598"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L604"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
@@ -1969,7 +1969,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithDelegatingHandler__1___0_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithDelegatingHandler&lt;THandler&gt;(THandler, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L593"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L599"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
@@ -2015,7 +2015,7 @@ Class ApizrManagerOptionsBuilder  <a class="header-action link-secondary" title=
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Action&lt;ApizrException&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L703"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L709"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2060,7 +2060,7 @@ public IApizrManagerOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; o
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithExCatching_System_Func_Apizr_ApizrException_System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;ApizrException, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L721"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L727"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2104,7 +2104,7 @@ public IApizrManagerOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; o
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithExCatching_System_Func_Apizr_ApizrException_System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;ApizrException, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L738"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L744"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2148,7 +2148,7 @@ public IApizrManagerOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; o
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L711"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L717"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2198,7 +2198,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L729"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L735"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2247,7 +2247,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L752"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L758"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2296,7 +2296,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithExCatching__1_System_Func___0__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(System.Func{``0},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;THandler&gt;(Func&lt;THandler&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L760"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L766"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2345,7 +2345,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithExCatching__1___0_System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;THandler&gt;(THandler, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L744"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L750"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2394,7 +2394,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHandlerParameter_System_String_System_Object_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
   WithHandlerParameter(string, object)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L796"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L802"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some parameters passed through all delegating handlers</p>
@@ -2435,7 +2435,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders(IList&lt;string&gt;, ApizrDuplicateStrategy, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L828"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L834"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request</p>
@@ -2479,7 +2479,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders(Func&lt;IList&lt;string&gt;&gt;, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L859"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L865"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request</p>
@@ -2526,7 +2526,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L899"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L905"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request loaded from service properties</p>
@@ -2582,7 +2582,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L891"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L897"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request loaded from service properties</p>
@@ -2638,7 +2638,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHttpClientHandler_System_Func_System_Net_Http_HttpClientHandler__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpClientHandler(System.Func{System.Net.Http.HttpClientHandler})">
   WithHttpClientHandler(Func&lt;HttpClientHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L249"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a custom HttpClientHandler</p>
@@ -2676,7 +2676,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHttpClientHandler_System_Net_Http_HttpClientHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpClientHandler(System.Net.Http.HttpClientHandler)">
   WithHttpClientHandler(HttpClientHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L245"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a custom HttpClientHandler</p>
@@ -2714,7 +2714,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
   WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L639"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L645"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2757,7 +2757,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})">
   WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L635"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L641"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2800,7 +2800,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithHttpMessageHandler__1___0_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpMessageHandler``1(``0)">
   WithHttpMessageHandler&lt;THandler&gt;(THandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L631"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L637"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2843,7 +2843,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithLoggedHeadersRedactionNames(IEnumerable&lt;string&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1019"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1025"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the collection of HTTP headers names for which values should be redacted before logging.</p>
@@ -2884,7 +2884,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithLoggedHeadersRedactionRule(Func&lt;string, bool&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1028"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1034"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func&lt;T, TResult&gt;</a> which determines whether to redact the HTTP header value before logging.</p>
@@ -2925,7 +2925,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLoggerFactory_Microsoft_Extensions_Logging_ILoggerFactory_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory)">
   WithLoggerFactory(ILoggerFactory)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L979"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L985"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a logger factory</p>
@@ -2963,7 +2963,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLoggerFactory_System_Func_Microsoft_Extensions_Logging_ILoggerFactory__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLoggerFactory(System.Func{Microsoft.Extensions.Logging.ILoggerFactory})">
   WithLoggerFactory(Func&lt;ILoggerFactory&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L983"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L989"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a logger factory</p>
@@ -3001,7 +3001,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
   WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L804"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L810"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -3044,7 +3044,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLogging_System_Func_Apizr_Logging_HttpTracerMode__System_Func_Apizr_Logging_HttpMessageParts__System_Func_Microsoft_Extensions_Logging_LogLevel____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
   WithLogging(Func&lt;HttpTracerMode&gt;, Func&lt;HttpMessageParts&gt;, Func&lt;LogLevel[]&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L810"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L816"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -3088,7 +3088,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithLogging_System_Func_System_ValueTuple_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_____" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
   WithLogging(Func&lt;(HttpTracerMode, HttpMessageParts, LogLevel[])&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L821"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L827"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -3126,7 +3126,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithMappingHandler_Apizr_Mapping_IMappingHandler_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithMappingHandler(Apizr.Mapping.IMappingHandler)">
   WithMappingHandler(IMappingHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L991"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L997"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a mapping handler to map entities</p>
@@ -3164,7 +3164,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithMappingHandler_System_Func_Apizr_Mapping_IMappingHandler__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithMappingHandler(System.Func{Apizr.Mapping.IMappingHandler})">
   WithMappingHandler(Func&lt;IMappingHandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L995"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1001"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a mapping handler to map entities</p>
@@ -3202,7 +3202,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithOperationTimeout_System_Func_System_TimeSpan__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithOperationTimeout(System.Func{System.TimeSpan})">
   WithOperationTimeout(Func&lt;TimeSpan&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L947"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L953"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the operation (overall request tries)</p>
@@ -3240,7 +3240,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithOperationTimeout_System_TimeSpan_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
   WithOperationTimeout(TimeSpan)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L943"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L949"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the operation (overall request tries)</p>
@@ -3278,7 +3278,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithRefitSettings_Refit_RefitSettings_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRefitSettings(Refit.RefitSettings)">
   WithRefitSettings(RefitSettings)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L650"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L656"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide some Refit specific settings</p>
@@ -3316,7 +3316,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithRefitSettings_System_Func_Refit_RefitSettings__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRefitSettings(System.Func{Refit.RefitSettings})">
   WithRefitSettings(Func&lt;RefitSettings&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L654"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L660"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide some Refit specific settings</p>
@@ -3354,7 +3354,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithRequestOptions(string, Action&lt;IApizrRequestOptionsBuilder&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1138"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1144"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Configure options for specific requests</p>
@@ -3398,7 +3398,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithRequestOptions_System_String___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithRequestOptions(string[], Action&lt;IApizrRequestOptionsBuilder&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1144"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1150"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Configure options for specific requests</p>
@@ -3442,7 +3442,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithRequestTimeout_System_Func_System_TimeSpan__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRequestTimeout(System.Func{System.TimeSpan})">
   WithRequestTimeout(Func&lt;TimeSpan&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L959"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L965"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the request (each request try)</p>
@@ -3480,7 +3480,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithRequestTimeout_System_TimeSpan_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRequestTimeout(System.TimeSpan)">
   WithRequestTimeout(TimeSpan)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L955"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L961"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the request (each request try)</p>
@@ -3518,7 +3518,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
   WithResilienceContextOptions(Action&lt;IApizrResilienceContextOptionsBuilder&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1003"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1009"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some options to the resilience context</p>
@@ -3556,7 +3556,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithResiliencePipelineKeys_System_String___System_Collections_Generic_IEnumerable_Apizr_Configuring_ApizrRequestMethod__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithResiliencePipelineKeys(string[], IEnumerable&lt;ApizrRequestMethod&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1060"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L1066"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Apply some resilience strategies by getting pipelines from registry with key matching.</p>
@@ -3600,7 +3600,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithResiliencePipelineRegistry_Polly_Registry_ResiliencePipelineRegistry_System_String__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})">
   WithResiliencePipelineRegistry(ResiliencePipelineRegistry&lt;string&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L662"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L668"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a resilience pipeline registry</p>
@@ -3638,7 +3638,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithResiliencePipelineRegistry_System_Func_Polly_Registry_ResiliencePipelineRegistry_System_String___" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResiliencePipelineRegistry(System.Func{Polly.Registry.ResiliencePipelineRegistry{System.String}})">
   WithResiliencePipelineRegistry(Func&lt;ResiliencePipelineRegistry&lt;string&gt;&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L667"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L673"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Provide a resilience pipeline registry</p>
@@ -3676,7 +3676,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0__System_Func___0__" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})">
   WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, Func&lt;TValue&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L971"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L977"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some resilience properties to the resilience context</p>
@@ -3722,7 +3722,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 
   <h3 id="Apizr_Configuring_Manager_ApizrManagerOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_" data-uid="Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
   WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, TValue)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L967"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L973"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some resilience properties to the resilience context</p>
@@ -3768,7 +3768,7 @@ public IApizrManagerOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;Apizr
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L29" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Manager/ApizrManagerOptionsBuilder.cs/#L30" class="edit-link">Edit this page</a>
         </div>
 
 

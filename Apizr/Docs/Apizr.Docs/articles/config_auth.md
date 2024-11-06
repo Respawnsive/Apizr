@@ -30,23 +30,23 @@ namespace Apizr.Sample
 
 To activate this feature, you have to configure it thanks to the options builder.
 
-You can do it with both extended and static registrations using local handling methods:
+You can do it with both extended and static registrations, for example by using local handling methods:
 ```csharp
 options => options.WithAuthenticationHandler(OnGetTokenAsync, OnSetTokenAsync, OnRefreshTokenAsync)
 
 ...
 
-private Task<string> OnGetTokenAsync()
+private Task<string> OnGetTokenAsync(HttpRequestMessage request, CancellationToken ct)
 {
     // Return local stored token
 }
 
-private Task OnSetTokenAsync(string tk)
+private Task OnSetTokenAsync(HttpRequestMessage request, string token, CancellationToken ct)
 {
     // Save token to local store
 }
 
-private Task<string> OnRefreshTokenAsync(HttpRequestMessage message)
+private Task<string> OnRefreshTokenAsync(HttpRequestMessage request, string token, CancellationToken ct)
 {
     // Refresh the unauthorized token by sending a refreshing request, 
     // or processing a login flow that returns a fresh token.
@@ -63,10 +63,10 @@ Here are some other authentication options:
 
 - When you want the token to be saved to and load from a property by Apizr, as well as be refreshed when needed:
 ```csharp
-// by service mappings (both services should be registered in DI)
+// by service mappings (both services should be registered in service collection)
 options => options.WithAuthenticationHandler<ISettingsService, IAuthService>(
     settingsService => settingsService.Token, 
-    authService => authService.RefreshAsync)
+    (authService, request, tk, ct) => authService.RefreshTokenAsync(request, tk, ct))
 ```
 
 - When you don't want Apizr to refresh the token neither save it, but just load its constant value when needed:
@@ -76,7 +76,7 @@ options => options.WithAuthenticationHandler(OnGetTokenAsync)
 
 // OR by service hanling methods
 options => options.WithAuthenticationHandler<ISettingsService>(
-    settingsService => settingsService.GetTokenAsync())
+    (settingsService, request, ct) => settingsService.GetTokenAsync(request, ct))
 
 // OR by property mapping expression with public getter only
 options => options.WithAuthenticationHandler<ISettingsService>(
@@ -90,8 +90,8 @@ options => options.WithAuthenticationHandler(OnGetTokenAsync, OnSetTokenAsync)
 
 // OR by service hanling methods
 options => options.WithAuthenticationHandler<ISettingsService>(
-    settingsService => settingsService.GetTokenAsync(),
-    (settingsService, token) => settingsService.SetTokenAsync(token))
+    (settingsService, request, ct) => settingsService.GetTokenAsync(request, ct),
+    (settingsService, request, tk, ct) => settingsService.SetTokenAsync(request, tk, ct))
 
 // OR by property mapping expression with public getter and setter
 options => options.WithAuthenticationHandler<ISettingsService>(
@@ -105,12 +105,12 @@ options => options.WithAuthenticationHandler(OnRefreshTokenAsync)
 
 // OR by service hanling methods
 options => options.WithAuthenticationHandler<IAuthService>(
-    (authService, message) => authService.RefreshTokenAsync(message))
+    (authService, request, tk, ct) => authService.RefreshTokenAsync(request, tk, ct))
 ```
 
 - When you want to provide your own `AuthenticationHandlerBase<TWebApi>` open generic implementation:
 ```csharp
-// by open generic auto resolving (need to be registered in DI)
+// by open generic auto resolving (need to be registered in service collection)
 options => options.WithAuthenticationHandler(typeof(YourAuthenticationHandler<>))
 ...
 service.AddTransient(typeof(YourAuthenticationHandler<>)))
@@ -130,12 +130,12 @@ options => options.WithAuthenticationHandler<YourAuthenticationHandler>(
 // by service mappings
 options => options.WithAuthenticationHandler<YourSettingsService, YourAuthService>(
     YourSettingsServiceInstance, settingsService => settingsService.Token, 
-    YourAuthServiceInstance, authService => authService.RefreshAsync)
+    YourAuthServiceInstance, (authService, request, tk, ct) => authService.RefreshTokenAsync(request, tk, ct))
 
 // OR by service mapping factory
 options => options.WithAuthenticationHandler<YourSettingsService, YourAuthService>(
     () => YourSettingsServiceInstance, settingsService => settingsService.Token, 
-    () => YourAuthServiceInstance, authService => authService.RefreshAsync)
+    () => YourAuthServiceInstance, (authService, request, tk, ct) => authService.RefreshTokenAsync(request, tk, ct))
 ```
 
 - When you don't want Apizr to refresh the token neither save it, but just load its constant value when needed:
@@ -145,7 +145,7 @@ options => options.WithAuthenticationHandler(OnGetTokenAsync)
 
 // OR by service hanling methods
 options => options.WithAuthenticationHandler<YourSettingsService>(
-    YourSettingsServiceInstance, settingsService => settingsService.GetTokenAsync())
+    YourSettingsServiceInstance, (settingsService, request, ct) => settingsService.GetTokenAsync(request, ct))
 
 // OR by property mapping expression with public getter only
 options => options.WithAuthenticationHandler<YourSettingsService>(
@@ -164,14 +164,14 @@ options => options.WithAuthenticationHandler(OnGetTokenAsync, OnSetTokenAsync)
 // OR by service hanling methods
 options => options.WithAuthenticationHandler<YourSettingsService>(
     YourSettingsServiceInstance, 
-    settingsService => settingsService.GetTokenAsync(),
-    (settingsService, token) => settingsService.SetTokenAsync(token))
+    (settingsService, request, ct) => settingsService.GetTokenAsync(request, ct),
+    (settingsService, request, tk, ct) => settingsService.SetTokenAsync(request, tk, ct))
 
 // OR by service factory hanling methods
 options => options.WithAuthenticationHandler<YourSettingsService>(
     () => YourSettingsServiceInstance, 
-    settingsService => settingsService.GetTokenAsync(),
-    (settingsService, token) => settingsService.SetTokenAsync(token))
+    (settingsService, request, ct) => settingsService.GetTokenAsync(request, ct),
+    (settingsService, request, tk, ct) => settingsService.SetTokenAsync(request, tk, ct))
 
 // OR by property mapping expression with public getter and setter
 options => options.WithAuthenticationHandler<YourSettingsService>(
@@ -189,12 +189,11 @@ options => options.WithAuthenticationHandler(OnRefreshTokenAsync)
 
 // OR by service hanling methods
 options => options.WithAuthenticationHandler<YourAuthService>(
-    YourAuthServiceInstance, (authService, message) => authService.RefreshTokenAsync(message))
+    YourAuthServiceInstance, (authService, request, tk, ct) => authService.RefreshTokenAsync(request, tk, ct))
 
 // OR by service hanling methods
 options => options.WithAuthenticationHandler<YourAuthService>(
-    () => YourAuthServiceInstance, (authService, message) => authService.RefreshTokenAsync(message))
-```ice.AddTransient(typeof(YourAuthenticationHandler<>)))
+    () => YourAuthServiceInstance, (authService, request, tk, ct) => authService.RefreshTokenAsync(request, tk, ct))
 ```
 
 - When you want to provide your own `AuthenticationHandlerBase` implementation:
@@ -216,73 +215,81 @@ Anyway, here is the AuthenticationHandler's SendAsync method FYI:
 ```csharp
 protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 {
-    HttpRequestMessage clonedRequest = null;
-    string token = null;
-
-    var context = request.GetOrBuildApizrResilienceContext();
-    if (!context.TryGetLogger(out var logger, out var logLevel, out _, out _))
-    {
-        logger = _logger;
-        logLevel = _apizrOptions.LogLevel;
-    }
-
     // See if the request has an authorize header
     var auth = request.Headers.Authorization;
-    if (auth != null)
-    {
-        // Authorization required! Get the token from saved settings if available
-        logger?.Log(logLevel, $"{context.OperationKey}: Authorization required with scheme {auth.Scheme}");
-        token = await GetTokenAsync();
-        if (!string.IsNullOrWhiteSpace(token))
-        {
-            // We have one, then clone the request in case we need to re-issue it with a refreshed token
-            logger?.Log(logLevel, $"{context.OperationKey}: Saved token will be used");
-            clonedRequest = await this.CloneHttpRequestMessageAsync(request);
-        }
-        else
-        {
-            // Refresh the token
-            logger?.Log(logLevel, $"{context.OperationKey}: No token saved yet. Refreshing token...");
-            token = await this.RefreshTokenAsync(request).ConfigureAwait(false);
-        }
+    if(auth == null) // No authorization header, just send the request
+        return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-        // Set the authentication header
-        request.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
-        logger?.Log(logLevel, $"{context.OperationKey}: Authorization header has been set");
+    // Authorization required!
+    HttpRequestMessage clonedRequest = null;
+    string refreshedToken = null;
+
+    // Get logging config
+    var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
+    if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
+    {
+        logger = Logger;
+        logLevels = ApizrOptions.LogLevels;
     }
 
+    // Get the token from saved settings if available
+    logger?.Log(logLevels.Low(), $"{context.OperationKey}: Authorization required with scheme {auth.Scheme}");
+    var formerToken = await GetTokenAsync(request, cancellationToken).ConfigureAwait(false);
+    if (!string.IsNullOrWhiteSpace(formerToken))
+    {
+        // We have one, then clone the request in case we need to re-issue it with a refreshed token
+        logger?.Log(logLevels.Low(), $"{context.OperationKey}: Saved token will be used");
+        clonedRequest = await CloneHttpRequestMessageAsync(request).ConfigureAwait(false);
+    }
+    else
+    {
+        // Refresh the token
+        logger?.Log(logLevels.Low(), $"{context.OperationKey}: No token saved yet. Refreshing token...");
+        refreshedToken = await RefreshTokenAsync(request, formerToken, cancellationToken).ConfigureAwait(false);
+        // If no token is provided, fail fast by returning an Unauthorized response without sending the request
+        if (string.IsNullOrEmpty(refreshedToken))
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized) { Content = new StringContent("Authorization token is missing.") };
+    }
+
+    // Set the authentication header
+    request.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, refreshedToken ?? formerToken);
+    logger?.Log(logLevels.Low(), $"{context.OperationKey}: Authorization header has been set");
+
     // Send the request
-    logger?.Log(logLevel, $"{context.OperationKey}: Sending request with authorization header...");
+    logger?.Log(logLevels.Low(), $"{context.OperationKey}: Sending request...");
     var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
     // Check if we get an Unauthorized response with token from settings
-    if (response.StatusCode == HttpStatusCode.Unauthorized && auth != null && clonedRequest != null)
+    if (response.StatusCode == HttpStatusCode.Unauthorized && clonedRequest != null)
     {
-        logger?.Log(logLevel, $"{context.OperationKey}: Unauthorized !");
+        logger?.Log(logLevels.Medium(), $"{context.OperationKey}: Unauthorized !");
 
         // Refresh the token
-        logger?.Log(logLevel, $"{context.OperationKey}: Refreshing token...");
-        token = await this.RefreshTokenAsync(request).ConfigureAwait(false);
+        logger?.Log(logLevels.Low(), $"{context.OperationKey}: Refreshing token...");
+        refreshedToken = await RefreshTokenAsync(request, formerToken, cancellationToken).ConfigureAwait(false);
 
         // Set the authentication header with refreshed token 
-        clonedRequest.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
-        logger?.Log(logLevel, $"{context.OperationKey}: Authorization header has been set with refreshed token");
+        clonedRequest.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, refreshedToken);
+        logger?.Log(logLevels.Low(), $"{context.OperationKey}: Authorization header has been set with refreshed token");
 
         // Send the request
-        logger?.Log(logLevel, $"{context.OperationKey}: Sending request again but with refreshed authorization header...");
+        logger?.Log(logLevels.Low(), $"{context.OperationKey}: Sending request again but with refreshed authorization header...");
         response = await base.SendAsync(clonedRequest, cancellationToken).ConfigureAwait(false);
     }
 
     // Clear the token if unauthorized
     if (response.StatusCode == HttpStatusCode.Unauthorized)
     {
-        token = null;
-        logger?.Log(logLevel, $"{context.OperationKey}: Unauthorized ! Token has been cleared");
+        refreshedToken = string.Empty; // Some services may require a non-null value to be cached
+        logger?.Log(logLevels.High(), $"{context.OperationKey}: Unauthorized ! Token has been cleared");
     }
 
     // Save the refreshed token if succeed or clear it if not
-    await SetTokenAsync(token);
-    logger?.Log(logLevel, $"{context.OperationKey}: Token saved");
+    if (refreshedToken != null && refreshedToken != formerToken)
+    {
+        await SetTokenAsync(request, refreshedToken, cancellationToken).ConfigureAwait(false);
+        logger?.Log(logLevels.Low(), $"{context.OperationKey}: Refreshed token saved");
+    }
 
     return response;
 }

@@ -240,7 +240,7 @@
             The authentication handler implementation refreshing token
             </summary>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             The authentication handler constructor
             </summary>
@@ -249,7 +249,7 @@
             <param name="getTokenFactory">The get token factory</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
             <summary>
             The authentication handler constructor
             </summary>
@@ -259,7 +259,7 @@
             <param name="setTokenFactory">The set token factory</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             The authentication handler constructor
             </summary>
@@ -268,7 +268,7 @@
             <param name="refreshTokenFactory">The refresh token factory</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             The authentication handler constructor
             </summary>
@@ -279,13 +279,15 @@
             <param name="setTokenFactory">The set token factory</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.GetTokenAsync">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.GetTokenAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <param name="request"></param>
+            <param name="ct"></param>
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.SetTokenAsync(System.String)">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.SetTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Authenticating.AuthenticationHandlerBase">
@@ -300,13 +302,13 @@
             <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync">
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(System.String)">
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.SetTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.RefreshTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.CloneHttpRequestMessageAsync(System.Net.Http.HttpRequestMessage)">
@@ -321,24 +323,30 @@
             The authentication handler definition
             </summary>
         </member>
-        <member name="M:Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync">
+        <member name="M:Apizr.Authenticating.IAuthenticationHandler.GetTokenAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
             <summary>
             The method called to get local token
             </summary>
-            <returns></returns>
+            <param name="request">The request to authenticate</param>
+            <param name="ct">The cancellation token</param>
+            <returns>The saved token</returns>
         </member>
-        <member name="M:Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.String)">
+        <member name="M:Apizr.Authenticating.IAuthenticationHandler.SetTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)">
             <summary>
             The method called to set local token
             </summary>
-            <param name="token">The token to set</param>
+            <param name="request">The request to authenticate</param>
+            <param name="token">The token to save</param>
+            <param name="ct">The cancellation token</param>
         </member>
-        <member name="M:Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage)">
+        <member name="M:Apizr.Authenticating.IAuthenticationHandler.RefreshTokenAsync(System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken)">
             <summary>
             The method called to refresh token when rejected or empty
             </summary>
             <param name="request">The request to authenticate</param>
-            <returns></returns>
+            <param name="token">The former token</param>
+            <param name="ct">The cancellation token</param>
+            <returns>The refreshed token</returns>
         </member>
         <member name="T:Apizr.AutoRegisterAttribute">
             <summary>
@@ -882,64 +890,64 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -1529,64 +1537,64 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -1941,64 +1949,64 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -3210,14 +3218,14 @@
             <param name="httpClientHandler">An <see cref="T:System.Net.Http.HttpClientHandler"/> instance</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             Provide methods to only get the authorization constant token when needed
             </summary>
             <param name="getTokenFactory">The method called to get local constant token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})">
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
             <summary>
             Provide methods to get and set the authorization token when needed
             </summary>
@@ -3225,14 +3233,14 @@
             <param name="setTokenFactory">The method called to set local token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             Provide a method to refresh the authorization token when needed
             </summary>
             <param name="refreshTokenFactory">Refresh token method called when expired or empty</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             Provide methods to get, set and refresh the authorization token when needed
             </summary>
@@ -3404,7 +3412,7 @@
             <param name="authenticationHandlerFactory">A <typeparamref name="TAuthenticationHandler"/> instance factory</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own settings management service
             </summary>
@@ -3413,7 +3421,7 @@
             <param name="getTokenExpression">The get only token expression</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
             <summary>
             Provide your own settings management service
             </summary>
@@ -3423,7 +3431,7 @@
             <param name="setTokenExpression">The set token expression</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own token management services
             </summary>
@@ -3432,7 +3440,7 @@
             <param name="refreshTokenExpression">The method called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own settings management and token management services
             </summary>
@@ -3445,7 +3453,7 @@
             <param name="refreshTokenExpression">The method called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own settings management and token management services
             </summary>
@@ -3465,7 +3473,7 @@
             <param name="tokenPropertyExpression">The token property to get from and set to</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``2(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},``1,System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own settings management and token management services
             </summary>
@@ -3477,7 +3485,7 @@
             <param name="refreshTokenMethod">The method called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own auth management service
             </summary>
@@ -3487,7 +3495,7 @@
             <param name="refreshTokenMethod">The method called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own settings management service
             </summary>
@@ -3496,7 +3504,7 @@
             <param name="getTokenExpression">The get only token expression</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}})">
             <summary>
             Provide your own settings management service
             </summary>
@@ -3506,7 +3514,7 @@
             <param name="setTokenExpression">The set token expression</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own token management services
             </summary>
@@ -3515,7 +3523,7 @@
             <param name="refreshTokenExpression">The method called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own settings management and token management services
             </summary>
@@ -3528,7 +3536,7 @@
             <param name="refreshTokenExpression">The method called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.String,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own auth management service
             </summary>
@@ -3548,7 +3556,7 @@
             <param name="tokenPropertyExpression">The token property to get from and set to</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``2(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Func{``1},System.Linq.Expressions.Expression{System.Func{``1,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own settings management and token management services
             </summary>
@@ -3560,7 +3568,7 @@
             <param name="refreshTokenMethod">The method called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Linq.Expressions.Expression{System.Func{``0,System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}})">
             <summary>
             Provide your own auth management service
             </summary>
@@ -6084,6 +6092,15 @@
             </summary>
         </member>
         <member name="M:Apizr.Resiliencing.Attributes.Http.OptionsResiliencePipelineAttribute.#ctor(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Apizr.Resiliencing.Attributes.Http.PatchResiliencePipelineAttribute">
+            <summary>
+            Tells Apizr to apply some policies to Patch http method
+            You have to provide a strategy registry to Apizr to use this feature
+            </summary>
+        </member>
+        <member name="M:Apizr.Resiliencing.Attributes.Http.PatchResiliencePipelineAttribute.#ctor(System.String[])">
             <inheritdoc />
         </member>
         <member name="T:Apizr.Resiliencing.Attributes.Http.PostResiliencePipelineAttribute">

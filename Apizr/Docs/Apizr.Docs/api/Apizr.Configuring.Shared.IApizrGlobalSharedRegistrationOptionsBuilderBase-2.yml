@@ -5,10 +5,10 @@ items:
   id: IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   parent: Apizr.Configuring.Shared
   children:
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})
-  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})
+  - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBaseAddress(System.Uri,Apizr.Configuring.ApizrDuplicateStrategy)
   - Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithBasePath(System.String,Apizr.Configuring.ApizrDuplicateStrategy)
@@ -33,7 +33,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: IApizrGlobalSharedRegistrationOptionsBuilderBase
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -91,7 +91,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConfiguration
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 27
+    startLine: 28
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -128,7 +128,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithConfiguration
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 34
+    startLine: 35
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -165,7 +165,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 42
+    startLine: 43
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -206,7 +206,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBaseAddress
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 50
+    startLine: 51
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -246,7 +246,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithBasePath
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 58
+    startLine: 59
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -287,7 +287,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpClientHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 65
+    startLine: 66
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -306,16 +306,16 @@ items:
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithHttpClientHandler*
   nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHttpClientHandler(HttpClientHandler)
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithHttpClientHandler(System.Net.Http.HttpClientHandler)
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})
-  id: WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}})
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
+  id: WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   langs:
   - csharp
   - vb
-  name: WithAuthenticationHandler(Func<Task<string>>)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(Func<Task<string>>)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(System.Func<System.Threading.Tasks.Task<string>>)
+  name: WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>>)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Threading.Tasks.Task<string>>)
   type: Method
   source:
     remote:
@@ -324,36 +324,36 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 72
+    startLine: 73
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
   summary: Provide methods to only get the authorization constant token when needed
   example: []
   syntax:
-    content: TApizrOptionsBuilder WithAuthenticationHandler(Func<Task<string>> getTokenFactory)
+    content: TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory)
     parameters:
     - id: getTokenFactory
-      type: System.Func{System.Threading.Tasks.Task{System.String}}
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
       description: The method called to get local constant token
     return:
       type: '{TApizrOptionsBuilder}'
       description: ''
-    content.vb: Function WithAuthenticationHandler(getTokenFactory As Func(Of Task(Of String))) As TApizrOptionsBuilder
+    content.vb: Function WithAuthenticationHandler(getTokenFactory As Func(Of HttpRequestMessage, CancellationToken, Task(Of String))) As TApizrOptionsBuilder
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler*
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of Task(Of String)))
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Threading.Tasks.Task(Of String)))
-  name.vb: WithAuthenticationHandler(Func(Of Task(Of String)))
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})
-  id: WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task})
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of HttpRequestMessage, CancellationToken, Task(Of String)))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Threading.Tasks.Task(Of String)))
+  name.vb: WithAuthenticationHandler(Func(Of HttpRequestMessage, CancellationToken, Task(Of String)))
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})
+  id: WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   langs:
   - csharp
   - vb
-  name: WithAuthenticationHandler(Func<Task<string>>, Func<string, Task>)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(Func<Task<string>>, Func<string, Task>)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(System.Func<System.Threading.Tasks.Task<string>>, System.Func<string, System.Threading.Tasks.Task>)
+  name: WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>>, Func<HttpRequestMessage, string, CancellationToken, Task>)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>>, Func<HttpRequestMessage, string, CancellationToken, Task>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Threading.Tasks.Task<string>>, System.Func<System.Net.Http.HttpRequestMessage, string, System.Threading.CancellationToken, System.Threading.Tasks.Task>)
   type: Method
   source:
     remote:
@@ -362,39 +362,39 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 80
+    startLine: 81
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
   summary: Provide methods to get and set the authorization token when needed
   example: []
   syntax:
-    content: TApizrOptionsBuilder WithAuthenticationHandler(Func<Task<string>> getTokenFactory, Func<string, Task> setTokenFactory)
+    content: TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory, Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory)
     parameters:
     - id: getTokenFactory
-      type: System.Func{System.Threading.Tasks.Task{System.String}}
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
       description: The method called to get local token
     - id: setTokenFactory
-      type: System.Func{System.String,System.Threading.Tasks.Task}
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}
       description: The method called to set local token
     return:
       type: '{TApizrOptionsBuilder}'
       description: ''
-    content.vb: Function WithAuthenticationHandler(getTokenFactory As Func(Of Task(Of String)), setTokenFactory As Func(Of String, Task)) As TApizrOptionsBuilder
+    content.vb: Function WithAuthenticationHandler(getTokenFactory As Func(Of HttpRequestMessage, CancellationToken, Task(Of String)), setTokenFactory As Func(Of HttpRequestMessage, String, CancellationToken, Task)) As TApizrOptionsBuilder
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler*
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of Task(Of String)), Func(Of String, Task))
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Threading.Tasks.Task(Of String)), System.Func(Of String, System.Threading.Tasks.Task))
-  name.vb: WithAuthenticationHandler(Func(Of Task(Of String)), Func(Of String, Task))
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
-  id: WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of HttpRequestMessage, CancellationToken, Task(Of String)), Func(Of HttpRequestMessage, String, CancellationToken, Task))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Threading.Tasks.Task(Of String)), System.Func(Of System.Net.Http.HttpRequestMessage, String, System.Threading.CancellationToken, System.Threading.Tasks.Task))
+  name.vb: WithAuthenticationHandler(Func(Of HttpRequestMessage, CancellationToken, Task(Of String)), Func(Of HttpRequestMessage, String, CancellationToken, Task))
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
+  id: WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   langs:
   - csharp
   - vb
-  name: WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>>)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>>)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(System.Func<System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<string>>)
+  name: WithAuthenticationHandler(Func<HttpRequestMessage, string, CancellationToken, Task<string>>)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(Func<HttpRequestMessage, string, CancellationToken, Task<string>>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(System.Func<System.Net.Http.HttpRequestMessage, string, System.Threading.CancellationToken, System.Threading.Tasks.Task<string>>)
   type: Method
   source:
     remote:
@@ -403,36 +403,36 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 88
+    startLine: 89
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
   summary: Provide a method to refresh the authorization token when needed
   example: []
   syntax:
-    content: TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+    content: TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory)
     parameters:
     - id: refreshTokenFactory
-      type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
       description: Refresh token method called when expired or empty
     return:
       type: '{TApizrOptionsBuilder}'
       description: ''
-    content.vb: Function WithAuthenticationHandler(refreshTokenFactory As Func(Of HttpRequestMessage, Task(Of String))) As TApizrOptionsBuilder
+    content.vb: Function WithAuthenticationHandler(refreshTokenFactory As Func(Of HttpRequestMessage, String, CancellationToken, Task(Of String))) As TApizrOptionsBuilder
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler*
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of HttpRequestMessage, Task(Of String)))
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String)))
-  name.vb: WithAuthenticationHandler(Func(Of HttpRequestMessage, Task(Of String)))
-- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
-  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
-  id: WithAuthenticationHandler(System.Func{System.Threading.Tasks.Task{System.String}},System.Func{System.String,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}})
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of HttpRequestMessage, String, CancellationToken, Task(Of String)))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Net.Http.HttpRequestMessage, String, System.Threading.CancellationToken, System.Threading.Tasks.Task(Of String)))
+  name.vb: WithAuthenticationHandler(Func(Of HttpRequestMessage, String, CancellationToken, Task(Of String)))
+- uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
+  commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
+  id: WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})
   parent: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2
   langs:
   - csharp
   - vb
-  name: WithAuthenticationHandler(Func<Task<string>>, Func<string, Task>, Func<HttpRequestMessage, Task<string>>)
-  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(Func<Task<string>>, Func<string, Task>, Func<HttpRequestMessage, Task<string>>)
-  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(System.Func<System.Threading.Tasks.Task<string>>, System.Func<string, System.Threading.Tasks.Task>, System.Func<System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<string>>)
+  name: WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>>, Func<HttpRequestMessage, string, CancellationToken, Task>, Func<HttpRequestMessage, string, CancellationToken, Task<string>>)
+  nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>>, Func<HttpRequestMessage, string, CancellationToken, Task>, Func<HttpRequestMessage, string, CancellationToken, Task<string>>)
+  fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler(System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Threading.Tasks.Task<string>>, System.Func<System.Net.Http.HttpRequestMessage, string, System.Threading.CancellationToken, System.Threading.Tasks.Task>, System.Func<System.Net.Http.HttpRequestMessage, string, System.Threading.CancellationToken, System.Threading.Tasks.Task<string>>)
   type: Method
   source:
     remote:
@@ -441,32 +441,32 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithAuthenticationHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 97
+    startLine: 98
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
   summary: Provide methods to get, set and refresh the authorization token when needed
   example: []
   syntax:
-    content: TApizrOptionsBuilder WithAuthenticationHandler(Func<Task<string>> getTokenFactory, Func<string, Task> setTokenFactory, Func<HttpRequestMessage, Task<string>> refreshTokenFactory)
+    content: TApizrOptionsBuilder WithAuthenticationHandler(Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory, Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory, Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory)
     parameters:
     - id: getTokenFactory
-      type: System.Func{System.Threading.Tasks.Task{System.String}}
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
       description: The method called to get local token
     - id: setTokenFactory
-      type: System.Func{System.String,System.Threading.Tasks.Task}
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}
       description: The method called to get local token
     - id: refreshTokenFactory
-      type: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+      type: System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
       description: Refresh token method called when expired or empty
     return:
       type: '{TApizrOptionsBuilder}'
       description: ''
-    content.vb: Function WithAuthenticationHandler(getTokenFactory As Func(Of Task(Of String)), setTokenFactory As Func(Of String, Task), refreshTokenFactory As Func(Of HttpRequestMessage, Task(Of String))) As TApizrOptionsBuilder
+    content.vb: Function WithAuthenticationHandler(getTokenFactory As Func(Of HttpRequestMessage, CancellationToken, Task(Of String)), setTokenFactory As Func(Of HttpRequestMessage, String, CancellationToken, Task), refreshTokenFactory As Func(Of HttpRequestMessage, String, CancellationToken, Task(Of String))) As TApizrOptionsBuilder
   overload: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler*
-  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of Task(Of String)), Func(Of String, Task), Func(Of HttpRequestMessage, Task(Of String)))
-  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Threading.Tasks.Task(Of String)), System.Func(Of String, System.Threading.Tasks.Task), System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String)))
-  name.vb: WithAuthenticationHandler(Func(Of Task(Of String)), Func(Of String, Task), Func(Of HttpRequestMessage, Task(Of String)))
+  nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(Func(Of HttpRequestMessage, CancellationToken, Task(Of String)), Func(Of HttpRequestMessage, String, CancellationToken, Task), Func(Of HttpRequestMessage, String, CancellationToken, Task(Of String)))
+  fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler(System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Threading.Tasks.Task(Of String)), System.Func(Of System.Net.Http.HttpRequestMessage, String, System.Threading.CancellationToken, System.Threading.Tasks.Task), System.Func(Of System.Net.Http.HttpRequestMessage, String, System.Threading.CancellationToken, System.Threading.Tasks.Task(Of String)))
+  name.vb: WithAuthenticationHandler(Func(Of HttpRequestMessage, CancellationToken, Task(Of String)), Func(Of HttpRequestMessage, String, CancellationToken, Task), Func(Of HttpRequestMessage, String, CancellationToken, Task(Of String)))
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
   commentId: M:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
   id: WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)
@@ -485,7 +485,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithDelegatingHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 107
+    startLine: 108
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -528,7 +528,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHttpMessageHandler
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 115
+    startLine: 116
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -568,7 +568,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithHeaders
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 124
+    startLine: 125
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -612,7 +612,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: WithResiliencePipelineKeys
     path: ../../Src/Apizr/Configuring/Shared/IApizrGlobalSharedRegistrationOptionsBuilderBase.cs
-    startLine: 135
+    startLine: 136
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Shared
@@ -3806,29 +3806,41 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.net.http
 - uid: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler*
   commentId: Overload:Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase`2.WithAuthenticationHandler
-  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithAuthenticationHandler_System_Func_System_Threading_Tasks_Task_System_String___
+  href: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase-2.html#Apizr_Configuring_Shared_IApizrGlobalSharedRegistrationOptionsBuilderBase_2_WithAuthenticationHandler_System_Func_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_System_Threading_Tasks_Task_System_String___
   name: WithAuthenticationHandler
   nameWithType: IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler
   fullName: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase<TApizrOptions, TApizrOptionsBuilder>.WithAuthenticationHandler
   nameWithType.vb: IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler
   fullName.vb: Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBuilderBase(Of TApizrOptions, TApizrOptionsBuilder).WithAuthenticationHandler
-- uid: System.Func{System.Threading.Tasks.Task{System.String}}
-  commentId: T:System.Func{System.Threading.Tasks.Task{System.String}}
+- uid: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
+  commentId: T:System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
   parent: System
-  definition: System.Func`1
-  href: https://learn.microsoft.com/dotnet/api/system.func-1
-  name: Func<Task<string>>
-  nameWithType: Func<Task<string>>
-  fullName: System.Func<System.Threading.Tasks.Task<string>>
-  nameWithType.vb: Func(Of Task(Of String))
-  fullName.vb: System.Func(Of System.Threading.Tasks.Task(Of String))
-  name.vb: Func(Of Task(Of String))
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<HttpRequestMessage, CancellationToken, Task<string>>
+  nameWithType: Func<HttpRequestMessage, CancellationToken, Task<string>>
+  fullName: System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Threading.Tasks.Task<string>>
+  nameWithType.vb: Func(Of HttpRequestMessage, CancellationToken, Task(Of String))
+  fullName.vb: System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Threading.Tasks.Task(Of String))
+  name.vb: Func(Of HttpRequestMessage, CancellationToken, Task(Of String))
   spec.csharp:
-  - uid: System.Func`1
+  - uid: System.Func`3
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-1
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
     isExternal: true
@@ -3841,12 +3853,24 @@ references:
   - name: '>'
   - name: '>'
   spec.vb:
-  - uid: System.Func`1
+  - uid: System.Func`3
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-1
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: (
   - name: Of
+  - name: " "
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: ','
   - name: " "
   - uid: System.Threading.Tasks.Task`1
     name: Task
@@ -3861,55 +3885,79 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
   - name: )
-- uid: System.Func`1
-  commentId: T:System.Func`1
+- uid: System.Func`3
+  commentId: T:System.Func`3
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.func-1
-  name: Func<TResult>
-  nameWithType: Func<TResult>
-  fullName: System.Func<TResult>
-  nameWithType.vb: Func(Of TResult)
-  fullName.vb: System.Func(Of TResult)
-  name.vb: Func(Of TResult)
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
   spec.csharp:
-  - uid: System.Func`1
+  - uid: System.Func`3
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-1
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
   - name: TResult
   - name: '>'
   spec.vb:
-  - uid: System.Func`1
+  - uid: System.Func`3
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-1
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
   - name: (
   - name: Of
   - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
   - name: TResult
   - name: )
-- uid: System.Func{System.String,System.Threading.Tasks.Task}
-  commentId: T:System.Func{System.String,System.Threading.Tasks.Task}
+- uid: System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}
+  commentId: T:System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task}
   parent: System
-  definition: System.Func`2
-  href: https://learn.microsoft.com/dotnet/api/system.func-2
-  name: Func<string, Task>
-  nameWithType: Func<string, Task>
-  fullName: System.Func<string, System.Threading.Tasks.Task>
-  nameWithType.vb: Func(Of String, Task)
-  fullName.vb: System.Func(Of String, System.Threading.Tasks.Task)
-  name.vb: Func(Of String, Task)
+  definition: System.Func`4
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
+  name: Func<HttpRequestMessage, string, CancellationToken, Task>
+  nameWithType: Func<HttpRequestMessage, string, CancellationToken, Task>
+  fullName: System.Func<System.Net.Http.HttpRequestMessage, string, System.Threading.CancellationToken, System.Threading.Tasks.Task>
+  nameWithType.vb: Func(Of HttpRequestMessage, String, CancellationToken, Task)
+  fullName.vb: System.Func(Of System.Net.Http.HttpRequestMessage, String, System.Threading.CancellationToken, System.Threading.Tasks.Task)
+  name.vb: Func(Of HttpRequestMessage, String, CancellationToken, Task)
   spec.csharp:
-  - uid: System.Func`2
+  - uid: System.Func`4
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: <
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
   - uid: System.String
     name: string
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: ','
   - name: " "
   - uid: System.Threading.Tasks.Task
@@ -3918,12 +3966,18 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: '>'
   spec.vb:
-  - uid: System.Func`2
+  - uid: System.Func`4
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: (
   - name: Of
+  - name: " "
+  - uid: System.Net.Http.HttpRequestMessage
+    name: HttpRequestMessage
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
   - name: " "
   - uid: System.String
     name: String
@@ -3931,66 +3985,96 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: ','
   - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: ','
+  - name: " "
   - uid: System.Threading.Tasks.Task
     name: Task
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
   - name: )
-- uid: System.Func`2
-  commentId: T:System.Func`2
+- uid: System.Func`4
+  commentId: T:System.Func`4
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.func-2
-  name: Func<T, TResult>
-  nameWithType: Func<T, TResult>
-  fullName: System.Func<T, TResult>
-  nameWithType.vb: Func(Of T, TResult)
-  fullName.vb: System.Func(Of T, TResult)
-  name.vb: Func(Of T, TResult)
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
+  name: Func<T1, T2, T3, TResult>
+  nameWithType: Func<T1, T2, T3, TResult>
+  fullName: System.Func<T1, T2, T3, TResult>
+  nameWithType.vb: Func(Of T1, T2, T3, TResult)
+  fullName.vb: System.Func(Of T1, T2, T3, TResult)
+  name.vb: Func(Of T1, T2, T3, TResult)
   spec.csharp:
-  - uid: System.Func`2
+  - uid: System.Func`4
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: <
-  - name: T
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
   - name: ','
   - name: " "
   - name: TResult
   - name: '>'
   spec.vb:
-  - uid: System.Func`2
+  - uid: System.Func`4
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: (
   - name: Of
   - name: " "
-  - name: T
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
   - name: ','
   - name: " "
   - name: TResult
   - name: )
-- uid: System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
-  commentId: T:System.Func{System.Net.Http.HttpRequestMessage,System.Threading.Tasks.Task{System.String}}
+- uid: System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
+  commentId: T:System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}}
   parent: System
-  definition: System.Func`2
-  href: https://learn.microsoft.com/dotnet/api/system.func-2
-  name: Func<HttpRequestMessage, Task<string>>
-  nameWithType: Func<HttpRequestMessage, Task<string>>
-  fullName: System.Func<System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task<string>>
-  nameWithType.vb: Func(Of HttpRequestMessage, Task(Of String))
-  fullName.vb: System.Func(Of System.Net.Http.HttpRequestMessage, System.Threading.Tasks.Task(Of String))
-  name.vb: Func(Of HttpRequestMessage, Task(Of String))
+  definition: System.Func`4
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
+  name: Func<HttpRequestMessage, string, CancellationToken, Task<string>>
+  nameWithType: Func<HttpRequestMessage, string, CancellationToken, Task<string>>
+  fullName: System.Func<System.Net.Http.HttpRequestMessage, string, System.Threading.CancellationToken, System.Threading.Tasks.Task<string>>
+  nameWithType.vb: Func(Of HttpRequestMessage, String, CancellationToken, Task(Of String))
+  fullName.vb: System.Func(Of System.Net.Http.HttpRequestMessage, String, System.Threading.CancellationToken, System.Threading.Tasks.Task(Of String))
+  name.vb: Func(Of HttpRequestMessage, String, CancellationToken, Task(Of String))
   spec.csharp:
-  - uid: System.Func`2
+  - uid: System.Func`4
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: <
   - uid: System.Net.Http.HttpRequestMessage
     name: HttpRequestMessage
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: ','
   - name: " "
   - uid: System.Threading.Tasks.Task`1
@@ -4005,10 +4089,10 @@ references:
   - name: '>'
   - name: '>'
   spec.vb:
-  - uid: System.Func`2
+  - uid: System.Func`4
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-2
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
   - name: (
   - name: Of
   - name: " "
@@ -4016,6 +4100,18 @@ references:
     name: HttpRequestMessage
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestmessage
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: ','
   - name: " "
   - uid: System.Threading.Tasks.Task`1

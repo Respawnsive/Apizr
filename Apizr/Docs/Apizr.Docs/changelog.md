@@ -5,8 +5,10 @@
 
 - [New][Authentication] Now **`WithAuthenticationHandler` option provide many more overloads** to fit more use cases, like property mapping, local methods, service methods, custom handler, etc.
 - [New][Authentication] Now **`AuthenticationHandlerBase` does clone request Options** as well as former Properties
-- [New][Authentication] Now **`AuthenticationHandlerBase` performances has been improved** by caching compiled factories
-- [Improvement/Breaking][Authentication] Now **`AuthenticationHandlerBase`'s GetToken & SetToken former methods upgraded to GetTokenAsync & SetTokenAsync** as we can now wait for it
+- [New][Authentication] Now **`AuthenticationHandlerBase` performances and behavior have been improved** by caching compiled factories and adjusting authentication flow
+- [Improvement/Breaking][Authentication] Now **`AuthenticationHandlerBase`'s GetToken & SetToken former methods upgraded to GetTokenAsync & SetTokenAsync** so we could wait for it
+- [Improvement/Breaking][Authentication] Now **`WithAuthenticationHandler` option's methods handle more parameters** like HttpRequestMessage & CancellationToken
+- [Fix][CacheKey] Now **POST methods returning a result could finally be data cached and key discriminated** as expected
  
 ### Apizr.Extensions.Microsoft.DependencyInjection
 

@@ -116,7 +116,7 @@ namespace Apizr.Extending.Configuring.Manager
         public Func<IServiceProvider, HttpTracerMode> HttpTracerModeFactory
         {
             get => _httpTracerModeFactory;
-            set => _httpTracerModeFactory = serviceProvider => HttpTracerMode = value.Invoke(serviceProvider);
+            set => _httpTracerModeFactory = value != null ? serviceProvider => HttpTracerMode = value.Invoke(serviceProvider) : null;
         }
 
         private Func<IServiceProvider, HttpMessageParts> _trafficVerbosityFactory;
@@ -124,7 +124,7 @@ namespace Apizr.Extending.Configuring.Manager
         public Func<IServiceProvider, HttpMessageParts> TrafficVerbosityFactory
         {
             get => _trafficVerbosityFactory;
-            set => _trafficVerbosityFactory = serviceProvider => TrafficVerbosity = value.Invoke(serviceProvider);
+            set => _trafficVerbosityFactory = value != null ? serviceProvider => TrafficVerbosity = value.Invoke(serviceProvider) : null;
         }
 
         private Func<IServiceProvider, LogLevel[]> _logLevelsFactory;
@@ -132,7 +132,7 @@ namespace Apizr.Extending.Configuring.Manager
         public Func<IServiceProvider, LogLevel[]> LogLevelsFactory
         {
             get => _logLevelsFactory;
-            set => _logLevelsFactory = serviceProvider => LogLevels = value.Invoke(serviceProvider);
+            set => _logLevelsFactory = value != null ? serviceProvider => LogLevels = value.Invoke(serviceProvider) : null;
         }
 
         private Func<IServiceProvider, string, ILogger> _loggerFactory;

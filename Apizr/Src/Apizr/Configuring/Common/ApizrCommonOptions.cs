@@ -24,7 +24,6 @@ namespace Apizr.Configuring.Common
         {
             HttpTracerModeFactory = () => HttpTracerMode.Everything;
             TrafficVerbosityFactory = () => HttpMessageParts.All;
-            LogLevelsFactory = () => new []{Constants.LowLogLevel, Constants.MediumLogLevel, Constants.HighLogLevel};
             LoggerFactoryFactory = () => new DebugLoggerFactory(Constants.LowLogLevel);
             ResiliencePipelineRegistryFactory = () => new ResiliencePipelineRegistry<string>();
             HttpClientHandlerFactory = () => new HttpClientHandler();
@@ -132,7 +131,7 @@ namespace Apizr.Configuring.Common
         public Func<LogLevel[]> LogLevelsFactory
         {
             get => _logLevelsFactory;
-            set => _logLevelsFactory = () => LogLevels = value.Invoke();
+            set => _logLevelsFactory = value != null ? () => LogLevels = value.Invoke() : null;
         }
 
         private Func<IList<IApizrExceptionHandler>> _exceptionHandlersFactory;

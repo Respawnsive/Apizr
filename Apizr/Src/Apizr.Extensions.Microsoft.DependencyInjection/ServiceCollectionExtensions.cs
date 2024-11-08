@@ -541,9 +541,9 @@ namespace Apizr
                 }
 
                 managerOptions.BaseUriFactory?.Invoke(serviceProvider);
-                managerOptions.LogLevelsFactory.Invoke(serviceProvider);
-                managerOptions.TrafficVerbosityFactory.Invoke(serviceProvider);
-                managerOptions.HttpTracerModeFactory.Invoke(serviceProvider);
+                managerOptions.LogLevelsFactory?.Invoke(serviceProvider);
+                managerOptions.TrafficVerbosityFactory?.Invoke(serviceProvider);
+                managerOptions.HttpTracerModeFactory?.Invoke(serviceProvider);
                 managerOptions.RefitSettingsFactory.Invoke(serviceProvider);
                 managerOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
                 managerOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
@@ -839,8 +839,8 @@ namespace Apizr
                 baseAddress,
                 basePath,
                 handlersParameters,
-                properLogAttribute?.HttpTracerMode ?? (commonOptions.HttpTracerMode != HttpTracerMode.Unspecified ? commonOptions.HttpTracerMode : commonLogAttribute?.HttpTracerMode),
-                properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosity != HttpMessageParts.Unspecified ? commonOptions.TrafficVerbosity : commonLogAttribute?.TrafficVerbosity),
+                properLogAttribute?.HttpTracerMode ?? (commonOptions.HttpTracerModeFactory != null ? null : commonLogAttribute?.HttpTracerMode),
+                properLogAttribute?.TrafficVerbosity ?? (commonOptions.TrafficVerbosityFactory != null ? null : commonLogAttribute?.TrafficVerbosity),
                 properOperationTimeoutAttribute?.Timeout ?? commonOperationTimeoutAttribute?.Timeout,
                 properRequestTimeoutAttribute?.Timeout ?? commonRequestTimeoutAttribute?.Timeout,
                 commonResiliencePipelineAttributes,
@@ -848,7 +848,7 @@ namespace Apizr
                 commonCacheAttribute,
                 properCacheAttribute,
                 redactHeaders.Count > 0 ? header => redactHeaders.Contains(header) : null,
-                properLogAttribute?.LogLevels ?? (commonOptions.LogLevels?.Any() == true ? commonOptions.LogLevels : commonLogAttribute?.LogLevels))) as IApizrExtendedProperOptionsBuilder;
+                properLogAttribute?.LogLevels ?? (commonOptions.LogLevelsFactory != null ? null : commonLogAttribute?.LogLevels))) as IApizrExtendedProperOptionsBuilder;
 
             if(commonOptions.ApizrConfigurationSection != null)
                 builder.WithConfiguration(commonOptions.ApizrConfigurationSection);

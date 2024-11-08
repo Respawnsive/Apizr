@@ -16,7 +16,7 @@ namespace Apizr.Extending
         /// <returns></returns>
         public static LogLevel Low(this IEnumerable<LogLevel> enumerable)
         {
-            return enumerable.OrderBy(x => x).First();
+            return enumerable?.OrderBy(x => x).FirstOrDefault() ?? LogLevel.None;
         }
 
         /// <summary>
@@ -26,8 +26,10 @@ namespace Apizr.Extending
         /// <returns></returns>
         public static LogLevel Medium(this IEnumerable<LogLevel> enumerable)
         {
-            var list = enumerable.ToList();
-            if (list.Count < 2)
+            var list = enumerable?.ToList();
+            if (list == null || list.Count == 0)
+                return LogLevel.None;
+            if (list.Count == 1)
                 return list.First();
 
             var mediumIndex = (list.Count - 1) / 2;
@@ -41,7 +43,7 @@ namespace Apizr.Extending
         /// <returns></returns>
         public static LogLevel High(this IEnumerable<LogLevel> enumerable)
         {
-            return enumerable.OrderBy(x => x).Last();
+            return enumerable?.OrderBy(x => x).LastOrDefault() ?? LogLevel.None;
         }
     }
 }

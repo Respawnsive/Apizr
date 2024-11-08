@@ -19,7 +19,7 @@ namespace Apizr.Configuring.Shared
         {
             HttpTracerMode = sharedOptions?.HttpTracerMode ?? default;
             TrafficVerbosity = sharedOptions?.TrafficVerbosity ?? default;
-            LogLevels = sharedOptions?.LogLevels.ToArray();
+            LogLevels = sharedOptions?.LogLevels?.ToArray();
             LetThrowOnHandledException = sharedOptions?.LetThrowOnHandledException ?? true;
             HandlersParameters = sharedOptions?.HandlersParameters?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ?? [];
             ExceptionHandlers = sharedOptions?.ExceptionHandlers?.ToList() ?? [];
@@ -37,24 +37,9 @@ namespace Apizr.Configuring.Shared
 
         /// <inheritdoc />
         public HttpMessageParts TrafficVerbosity { get; internal set; }
-        
-        private LogLevel[] _logLevels;
-        /// <inheritdoc />
-        public LogLevel[] LogLevels
-        {
-            get => _logLevels;
-            internal set => _logLevels = value?.Length > 0
-                ? value
-                :
-                [
-                    Constants.LowLogLevel, 
-                    Constants.MediumLogLevel, 
-                    Constants.HighLogLevel
-                ];
-        }
 
         /// <inheritdoc />
-        public Func<ApizrException, Task<bool>> OnException { get; internal set; }
+        public LogLevel[] LogLevels { get; internal set; }
 
         /// <inheritdoc />
         public IList<IApizrExceptionHandler> ExceptionHandlers { get; protected set; }

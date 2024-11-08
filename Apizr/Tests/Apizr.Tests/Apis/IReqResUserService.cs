@@ -27,7 +27,7 @@ namespace Apizr.Tests.Apis
 {
     [//BaseAddress("https://reqres.in/api"), 
      AutoRegister("https://reqres.in/api"),
-     Log(HttpMessageParts.RequestAll, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information),
+     //Log(HttpMessageParts.RequestAll, HttpTracerMode.ErrorsAndExceptionsOnly, LogLevel.Information),
      Headers("testKey1: *testValue1*", "testKey2: testValue2.1"),
      Cache(CacheMode.FetchOrGet, "00:09:00"),
      PostResiliencePipeline("TransientHttpError2"),

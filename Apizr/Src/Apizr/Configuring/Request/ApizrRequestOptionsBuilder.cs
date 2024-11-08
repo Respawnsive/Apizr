@@ -35,7 +35,7 @@ public class ApizrRequestOptionsBuilder : IApizrRequestOptionsBuilder, IApizrInt
     {
         Options.HttpTracerMode = httpTracerMode;
         Options.TrafficVerbosity = trafficVerbosity;
-        Options.LogLevels = logLevels;
+        Options.LogLevels = logLevels?.Length > 0 ? logLevels : Constants.DefaultLogLevels;
 
         return this;
     }

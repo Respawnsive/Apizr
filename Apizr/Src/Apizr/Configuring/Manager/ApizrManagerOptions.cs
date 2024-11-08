@@ -101,7 +101,7 @@ namespace Apizr.Configuring.Manager
         public Func<LogLevel[]> LogLevelsFactory
         {
             get => _logLevelsFactory;
-            set => _logLevelsFactory = () => LogLevels = value.Invoke();
+            set => _logLevelsFactory = value != null ? () => LogLevels = value.Invoke() : null;
         }
 
         /// <inheritdoc />

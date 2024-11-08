@@ -27,6 +27,7 @@ namespace Apizr.Configuring.Proper
         /// <param name="commonCacheAttribute">Global caching options</param>
         /// <param name="properCacheAttribute">Specific caching options</param>
         /// <param name="shouldRedactHeaderValue">Headers to redact value</param>
+        /// <param name="logLevels">The log levels</param>
         protected ApizrProperOptionsBase(IApizrGlobalSharedRegistrationOptionsBase sharedOptions, 
             Type webApiType,
             Type crudApiEntityType,
@@ -35,7 +36,8 @@ namespace Apizr.Configuring.Proper
             ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes,
             CacheAttribute commonCacheAttribute,
             CacheAttribute properCacheAttribute,
-            Func<string, bool> shouldRedactHeaderValue = null) : base(sharedOptions)
+            Func<string, bool> shouldRedactHeaderValue = null,
+            params LogLevel[] logLevels) : base(sharedOptions)
         {
             WebApiType = webApiType;
             CrudApiEntityType = crudApiEntityType;
@@ -65,6 +67,7 @@ namespace Apizr.Configuring.Proper
 
             RequestOptionsBuilders = new Dictionary<string, Action<IApizrRequestOptionsBuilder>>();
             RequestNames = typeInfo.GetMethods().Select(method => method.Name).ToList();
+            LogLevels = logLevels;
         }
 
         /// <inheritdoc />

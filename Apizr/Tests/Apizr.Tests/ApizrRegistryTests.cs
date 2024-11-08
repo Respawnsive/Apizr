@@ -434,8 +434,11 @@ namespace Apizr.Tests
         [Fact]
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
-            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry => registry
-                .AddManagerFor<IReqResUserService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning)));
+            var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
+                registry => registry
+                    .AddManagerFor<IReqResUserService>(),
+                options => options
+                    .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies, LogLevel.Warning));
 
             var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
 

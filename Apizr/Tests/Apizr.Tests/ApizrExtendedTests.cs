@@ -27,12 +27,10 @@ using Apizr.Tests.Models;
 using Apizr.Tests.Settings;
 using Apizr.Transferring.Managing;
 using Apizr.Transferring.Requesting;
-using AutoMapper.Internal;
 using FluentAssertions;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Http.Resilience;
 using Microsoft.Extensions.Logging;
@@ -454,7 +452,7 @@ namespace Apizr.Tests
         public void Calling_WithLogging_Should_Set_LoggingSettings()
         {
             var services = new ServiceCollection();
-            services.AddApizrManagerFor<IReqResUserService>(options => options.WithLogging((HttpTracerMode) HttpTracerMode.ExceptionsOnly, (HttpMessageParts) HttpMessageParts.RequestCookies, LogLevel.Warning));
+            services.AddApizrManagerFor<IReqResUserService>(options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies, LogLevel.Warning));
 
             var serviceProvider = services.BuildServiceProvider();
             var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();

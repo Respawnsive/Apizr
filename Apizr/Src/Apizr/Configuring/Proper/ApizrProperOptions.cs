@@ -54,7 +54,7 @@ namespace Apizr.Configuring.Proper
             CacheAttribute properCacheAttribute,
             Func<string, bool> shouldRedactHeaderValue = null,
             params LogLevel[] logLevels) : base(sharedOptions, webApiType, crudApiEntityType, typeInfo, commonResiliencePipelineAttributes, 
-            properResiliencePipelineAttributes, commonCacheAttribute, properCacheAttribute, shouldRedactHeaderValue)
+            properResiliencePipelineAttributes, commonCacheAttribute, properCacheAttribute, shouldRedactHeaderValue, logLevels)
         {
             BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
             BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? () => baseAddress : sharedOptions.BaseAddressFactory;
@@ -62,7 +62,7 @@ namespace Apizr.Configuring.Proper
             HandlersParameters = handlersParameters;
             HttpTracerModeFactory = httpTracerMode.HasValue ? () => httpTracerMode.Value : sharedOptions.HttpTracerModeFactory;
             TrafficVerbosityFactory = trafficVerbosity.HasValue ? () => trafficVerbosity.Value : sharedOptions.TrafficVerbosityFactory;
-            LogLevelsFactory = logLevels?.Any() == true ? () => logLevels : sharedOptions.LogLevelsFactory;
+            LogLevelsFactory = sharedOptions.LogLevelsFactory;
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = sharedOptions.HttpClientConfigurationBuilder;
@@ -118,7 +118,7 @@ namespace Apizr.Configuring.Proper
         public Func<LogLevel[]> LogLevelsFactory
         {
             get => _logLevelsFactory;
-            set => _logLevelsFactory = () => LogLevels = value.Invoke();
+            set => _logLevelsFactory = value != null ? () => LogLevels = value.Invoke() : null;
         }
 
         /// <inheritdoc />

@@ -844,7 +844,7 @@ namespace Apizr.Extending.Configuring.Manager
         public IApizrExtendedManagerOptionsBuilder WithLogging(HttpTracerMode httpTracerMode = HttpTracerMode.Everything,
             HttpMessageParts trafficVerbosity = HttpMessageParts.All,
             params LogLevel[] logLevels)
-            => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevels);
+            => WithLogging(_ => httpTracerMode, _ => trafficVerbosity, _ => logLevels?.Length > 0 ? logLevels : Constants.DefaultLogLevels);
 
         /// <inheritdoc />
         public IApizrExtendedManagerOptionsBuilder WithLogging(

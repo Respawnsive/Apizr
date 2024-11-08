@@ -214,7 +214,7 @@ namespace Apizr
 
             builder.ApizrOptions.BaseUriFactory?.Invoke();
             builder.ApizrOptions.BasePathFactory?.Invoke();
-            builder.ApizrOptions.LogLevelsFactory.Invoke();
+            builder.ApizrOptions.LogLevelsFactory?.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();
@@ -328,7 +328,7 @@ namespace Apizr
             builder.ApizrOptions.BaseUriFactory?.Invoke();
             builder.ApizrOptions.BaseAddressFactory?.Invoke();
             builder.ApizrOptions.BasePathFactory?.Invoke();
-            builder.ApizrOptions.LogLevelsFactory.Invoke();
+            builder.ApizrOptions.LogLevelsFactory?.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
@@ -389,7 +389,7 @@ namespace Apizr
             }
 
             builder.ApizrOptions.BaseUriFactory?.Invoke();
-            builder.ApizrOptions.LogLevelsFactory.Invoke();
+            builder.ApizrOptions.LogLevelsFactory?.Invoke();
             builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
             builder.ApizrOptions.HttpTracerModeFactory.Invoke();
             builder.ApizrOptions.RefitSettingsFactory.Invoke();

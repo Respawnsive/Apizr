@@ -12,7 +12,7 @@ using Refit;
 namespace Apizr.Tests.Apis
 {
     [AutoRegister("https://httpbin.org"), 
-     Log(HttpMessageParts.None), 
+     //Log(HttpMessageParts.None), 
      Headers("testKey1: testValue1"), 
      ResiliencePipeline("TransientHttpError")]
     public interface IHttpBinService

@@ -22,6 +22,10 @@ namespace Apizr.Configuring.Common
         /// </summary>
         public ApizrCommonOptions(IApizrCommonOptions baseCommonOptions = null) : base(baseCommonOptions)
         {
+            BaseAddressFactory = baseCommonOptions?.BaseAddressFactory;
+            BaseUriFactory = baseCommonOptions?.BaseUriFactory;
+            BasePathFactory = baseCommonOptions?.BasePathFactory;
+            LogLevelsFactory = baseCommonOptions?.LogLevelsFactory;
             LoggerFactoryFactory = baseCommonOptions?.LoggerFactoryFactory ?? (() => new DebugLoggerFactory(Constants.LowLogLevel));
             ResiliencePipelineRegistryFactory = baseCommonOptions?.ResiliencePipelineRegistryFactory ?? (() => new ResiliencePipelineRegistry<string>());
             HttpClientHandlerFactory = baseCommonOptions?.HttpClientHandlerFactory ?? (() => new HttpClientHandler());

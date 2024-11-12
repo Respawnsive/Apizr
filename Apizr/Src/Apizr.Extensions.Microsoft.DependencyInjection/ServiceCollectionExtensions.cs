@@ -525,28 +525,22 @@ namespace Apizr
 
             services.TryAddSingleton(managerOptionsServiceType, serviceProvider =>
             {
-                if (managerOptions.BaseUriFactory == null)
+                managerOptions.BaseUriFactory?.Invoke(serviceProvider);
+                managerOptions.BaseAddressFactory?.Invoke(serviceProvider);
+                managerOptions.BasePathFactory?.Invoke(serviceProvider);
+                var baseAddress = managerOptions.BaseUri?.ToString() ?? managerOptions.BaseAddress;
+                if (Uri.TryCreate(UrlHelper.Combine(baseAddress, managerOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
                 {
-                    managerOptions.BaseAddressFactory?.Invoke(serviceProvider);
-                    managerOptions.BasePathFactory?.Invoke(serviceProvider);
-                    if (Uri.TryCreate(UrlHelper.Combine(managerOptions.BaseAddress, managerOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
-                        managerOptionsBuilder.WithBaseAddress(baseUri);
-                }
-                else if (managerOptions.BasePathFactory != null)
-                {
+                    managerOptionsBuilder.WithBaseAddress(baseUri);
                     managerOptions.BaseUriFactory?.Invoke(serviceProvider);
-                    managerOptions.BasePathFactory?.Invoke(serviceProvider);
-                    if (Uri.TryCreate(UrlHelper.Combine(managerOptions.BaseUri?.ToString(), managerOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
-                        managerOptionsBuilder.WithBaseAddress(baseUri);
                 }
 
-                managerOptions.BaseUriFactory?.Invoke(serviceProvider);
                 managerOptions.LogLevelsFactory?.Invoke(serviceProvider);
                 managerOptions.TrafficVerbosityFactory?.Invoke(serviceProvider);
                 managerOptions.HttpTracerModeFactory?.Invoke(serviceProvider);
-                managerOptions.RefitSettingsFactory.Invoke(serviceProvider);
-                managerOptions.HttpClientHandlerFactory.Invoke(serviceProvider);
-                managerOptions.LoggerFactory.Invoke(serviceProvider, webApiFriendlyName);
+                managerOptions.RefitSettingsFactory?.Invoke(serviceProvider);
+                managerOptions.HttpClientHandlerFactory?.Invoke(serviceProvider);
+                managerOptions.LoggerFactory?.Invoke(serviceProvider, webApiFriendlyName);
                 managerOptions.OperationTimeoutFactory?.Invoke(serviceProvider);
                 managerOptions.RequestTimeoutFactory?.Invoke(serviceProvider);
                 managerOptions.ExceptionHandlersFactory?.Invoke(serviceProvider);

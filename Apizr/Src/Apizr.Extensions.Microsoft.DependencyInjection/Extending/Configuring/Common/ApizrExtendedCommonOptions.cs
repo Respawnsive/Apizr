@@ -25,6 +25,10 @@ namespace Apizr.Extending.Configuring.Common
         public ApizrExtendedCommonOptions(IApizrExtendedCommonOptions baseCommonOptions = null) : base(
             baseCommonOptions)
         {
+            BaseAddressFactory = baseCommonOptions?.BaseAddressFactory;
+            BaseUriFactory = baseCommonOptions?.BaseUriFactory;
+            BasePathFactory = baseCommonOptions?.BasePathFactory;
+            LogLevelsFactory = baseCommonOptions?.LogLevelsFactory;
             HttpClientHandlerFactory = baseCommonOptions?.HttpClientHandlerFactory ?? (_ => new HttpClientHandler());
             HttpClientBuilder = baseCommonOptions?.HttpClientBuilder ?? (_ => { });
             RefitSettingsFactory = baseCommonOptions?.RefitSettingsFactory ?? (_ => new RefitSettings());

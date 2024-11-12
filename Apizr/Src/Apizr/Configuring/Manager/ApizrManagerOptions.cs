@@ -85,7 +85,7 @@ namespace Apizr.Configuring.Manager
         public Func<HttpTracerMode> HttpTracerModeFactory
         {
             get => _httpTracerModeFactory;
-            set => _httpTracerModeFactory = () => HttpTracerMode = value.Invoke();
+            set => _httpTracerModeFactory = value != null ? () => HttpTracerMode = value.Invoke() : null;
         }
 
         private Func<HttpMessageParts> _trafficVerbosityFactory;
@@ -93,7 +93,7 @@ namespace Apizr.Configuring.Manager
         public Func<HttpMessageParts> TrafficVerbosityFactory
         {
             get => _trafficVerbosityFactory;
-            set => _trafficVerbosityFactory = () => TrafficVerbosity = value.Invoke();
+            set => _trafficVerbosityFactory = value != null ? () => TrafficVerbosity = value.Invoke() : null;
         }
         
         private Func<LogLevel[]> _logLevelsFactory;

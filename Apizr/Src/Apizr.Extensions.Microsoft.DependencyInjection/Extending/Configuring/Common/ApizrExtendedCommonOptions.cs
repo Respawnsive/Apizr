@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using Apizr.Caching;
@@ -21,22 +22,28 @@ namespace Apizr.Extending.Configuring.Common
     /// <inheritdoc cref="IApizrExtendedCommonOptions"/>
     public class ApizrExtendedCommonOptions : ApizrCommonOptionsBase, IApizrExtendedCommonOptions
     {
-        public ApizrExtendedCommonOptions()
+        public ApizrExtendedCommonOptions(IApizrExtendedCommonOptions baseCommonOptions = null) : base(
+            baseCommonOptions)
         {
-            HttpTracerModeFactory = _ => HttpTracerMode.Everything;
-            TrafficVerbosityFactory = _ => HttpMessageParts.All;
-            HttpClientHandlerFactory = _ => new HttpClientHandler();
-            HttpClientBuilder = _ => { };
-            RefitSettingsFactory = _ => new RefitSettings();
-            ConnectivityHandlerType = typeof(DefaultConnectivityHandler);
-            CacheHandlerType = typeof(VoidCacheHandler);
-            MappingHandlerType = typeof(VoidMappingHandler);
-            DelegatingHandlersExtendedFactories = new Dictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>();
-            WebApis = new Dictionary<Type, BaseAddressAttribute>();
-            ObjectMappings = new Dictionary<Assembly, MappedWithAttribute[]>();
-            PostRegistries = new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
-            PostRegistrationActions = new List<Action<IApizrExtendedManagerOptions, IServiceCollection>>();
-            HeadersExtendedFactories = new Dictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>();
+            HttpClientHandlerFactory = baseCommonOptions?.HttpClientHandlerFactory ?? (_ => new HttpClientHandler());
+            HttpClientBuilder = baseCommonOptions?.HttpClientBuilder ?? (_ => { });
+            RefitSettingsFactory = baseCommonOptions?.RefitSettingsFactory ?? (_ => new RefitSettings());
+            ConnectivityHandlerType = baseCommonOptions?.ConnectivityHandlerType ?? typeof(DefaultConnectivityHandler);
+            CacheHandlerType = baseCommonOptions?.CacheHandlerType ?? typeof(VoidCacheHandler);
+            MappingHandlerType = baseCommonOptions?.MappingHandlerType ?? typeof(VoidMappingHandler);
+            DelegatingHandlersExtendedFactories =
+                baseCommonOptions?.DelegatingHandlersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                new Dictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>();
+            WebApis = baseCommonOptions?.WebApis?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                      new Dictionary<Type, BaseAddressAttribute>();
+            ObjectMappings = baseCommonOptions?.ObjectMappings?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                             new Dictionary<Assembly, MappedWithAttribute[]>();
+            PostRegistries = baseCommonOptions?.PostRegistries?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                             new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
+            PostRegistrationActions = baseCommonOptions?.PostRegistrationActions?.ToList() ?? [];
+            HeadersExtendedFactories =
+                baseCommonOptions?.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                new Dictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>();
             _resiliencePropertiesExtendedFactories = new Dictionary<string, Func<IServiceProvider, object>>();
         }
 

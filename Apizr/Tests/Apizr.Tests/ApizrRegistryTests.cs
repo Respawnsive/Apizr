@@ -432,19 +432,62 @@ namespace Apizr.Tests
         }
 
         [Fact]
-        public void Calling_WithLogging_Should_Set_LoggingSettings()
+        public async Task Calling_WithLogging_Should_Set_LoggingSettings()
         {
+            var watcher = new WatchingRequestHandler();
+
             var apizrRegistry = ApizrBuilder.Current.CreateRegistry(
                 registry => registry
-                    .AddManagerFor<IReqResUserService>(),
+                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>()
+                    .AddManagerFor<IHttpBinService>()
+                    .AddGroup(group => group
+                        .AddManagerFor<IReqResResourceService>()
+                        .AddManagerFor<IReqResUserService>(
+                            options => options
+                                .WithLogging(HttpTracerMode.Everything, HttpMessageParts.AllButRequestBody, LogLevel.Trace)
+                                .WithBaseAddress("https://reqres.in/api")),
+                        options => options
+                            .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies, LogLevel.Warning)),
                 options => options
-                    .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies, LogLevel.Warning));
+                    .WithLogging(HttpTracerMode.ErrorsAndExceptionsOnly, HttpMessageParts.HeadersOnly, LogLevel.Debug)
+                    .WithDelegatingHandler(watcher));
 
-            var reqResManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+            // set by common registry fluent options
+            var userManager = apizrRegistry.GetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            userManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ErrorsAndExceptionsOnly);
+            userManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.HeadersOnly);
+            userManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Debug);
 
-            reqResManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
-            reqResManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
-            reqResManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Warning);
+            // set by proper attribute
+            var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
+            httpBinManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+            httpBinManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.None);
+            httpBinManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Critical);
+
+            // set by common group fluent options
+            var reqResResourceManager = apizrRegistry.GetManagerFor<IReqResResourceService>();
+            reqResResourceManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+            reqResResourceManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
+            reqResResourceManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Warning);
+
+            // set by proper fluent options
+            var reqResUserManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+            reqResUserManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.Everything);
+            reqResUserManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.AllButRequestBody);
+            reqResUserManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Trace);
+
+            // set by request attribute
+            await reqResUserManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt));
+            watcher.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+            watcher.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestBody);
+            watcher.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Warning);
+
+            // set by request fluent options
+            await reqResUserManager.ExecuteAsync((opt, api) => api.GetUsersAsync(opt), options => options
+                .WithLogging(HttpTracerMode.Everything, HttpMessageParts.AllButResponseBody, LogLevel.Error));
+            watcher.Options.HttpTracerMode.Should().Be(HttpTracerMode.Everything);
+            watcher.Options.TrafficVerbosity.Should().Be(HttpMessageParts.AllButResponseBody);
+            watcher.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Error);
         }
 
         [Fact]

@@ -20,19 +20,19 @@ namespace Apizr.Configuring.Common
         /// <summary>
         /// The Apizr common options constructor
         /// </summary>
-        public ApizrCommonOptions()
+        public ApizrCommonOptions(IApizrCommonOptions baseCommonOptions = null) : base(baseCommonOptions)
         {
-            HttpTracerModeFactory = () => HttpTracerMode.Everything;
-            TrafficVerbosityFactory = () => HttpMessageParts.All;
-            LoggerFactoryFactory = () => new DebugLoggerFactory(Constants.LowLogLevel);
-            ResiliencePipelineRegistryFactory = () => new ResiliencePipelineRegistry<string>();
-            HttpClientHandlerFactory = () => new HttpClientHandler();
-            HttpClientConfigurationBuilder = _ => { };
-            RefitSettingsFactory = () => new RefitSettings();
-            ConnectivityHandlerFactory = () => new DefaultConnectivityHandler(() => true);
-            CacheHandlerFactory = () => new VoidCacheHandler();
-            MappingHandlerFactory = () => new VoidMappingHandler();
-            DelegatingHandlersFactories = new Dictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>();
+            LoggerFactoryFactory = baseCommonOptions?.LoggerFactoryFactory ?? (() => new DebugLoggerFactory(Constants.LowLogLevel));
+            ResiliencePipelineRegistryFactory = baseCommonOptions?.ResiliencePipelineRegistryFactory ?? (() => new ResiliencePipelineRegistry<string>());
+            HttpClientHandlerFactory = baseCommonOptions?.HttpClientHandlerFactory ?? (() => new HttpClientHandler());
+            HttpClientConfigurationBuilder = baseCommonOptions?.HttpClientConfigurationBuilder ?? (_ => { });
+            RefitSettingsFactory = baseCommonOptions?.RefitSettingsFactory ?? (() => new RefitSettings());
+            ConnectivityHandlerFactory = baseCommonOptions?.ConnectivityHandlerFactory ?? (() => new DefaultConnectivityHandler(() => true));
+            CacheHandlerFactory = baseCommonOptions?.CacheHandlerFactory ?? (() => new VoidCacheHandler());
+            MappingHandlerFactory = baseCommonOptions?.MappingHandlerFactory ?? (() => new VoidMappingHandler());
+            DelegatingHandlersFactories =
+                baseCommonOptions?.DelegatingHandlersFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                new Dictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>();
         }
 
         private Func<Uri> _baseUriFactory;
@@ -115,7 +115,7 @@ namespace Apizr.Configuring.Common
         public Func<HttpTracerMode> HttpTracerModeFactory
         {
             get => _httpTracerModeFactory;
-            set => _httpTracerModeFactory = () => HttpTracerMode = value.Invoke();
+            set => _httpTracerModeFactory = value != null ? () => HttpTracerMode = value.Invoke() : null;
         }
 
         private Func<HttpMessageParts> _trafficVerbosityFactory;
@@ -123,7 +123,7 @@ namespace Apizr.Configuring.Common
         public Func<HttpMessageParts> TrafficVerbosityFactory
         {
             get => _trafficVerbosityFactory;
-            set => _trafficVerbosityFactory = () => TrafficVerbosity = value.Invoke();
+            set => _trafficVerbosityFactory = value != null ? () => TrafficVerbosity = value.Invoke() : null;
         }
 
         private Func<LogLevel[]> _logLevelsFactory;

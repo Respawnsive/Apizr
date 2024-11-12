@@ -8,8 +8,10 @@ namespace Apizr.Configuring.Common
     public abstract class ApizrCommonOptionsBase : ApizrGlobalSharedRegistrationOptionsBase, IApizrCommonOptionsBase
     {
         /// <inheritdoc />
-        protected ApizrCommonOptionsBase()
+        protected ApizrCommonOptionsBase(IApizrCommonOptionsBase baseCommonOptions = null) : base(baseCommonOptions)
         {
+            RefitSettings = baseCommonOptions?.RefitSettings;
+            ApizrConfigurationSection = baseCommonOptions?.ApizrConfigurationSection;
         }
 
         /// <inheritdoc />

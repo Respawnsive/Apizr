@@ -7,12 +7,13 @@ using Apizr.Configuring.Request;
 using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Resiliencing.Attributes;
+using Microsoft.Extensions.Logging;
 using Refit;
 
 namespace Apizr.Tests.Apis
 {
     [AutoRegister("https://httpbin.org"), 
-     //Log(HttpMessageParts.None), 
+     Log(HttpMessageParts.None, HttpTracerMode.ExceptionsOnly, LogLevel.Critical), 
      Headers("testKey1: testValue1"), 
      ResiliencePipeline("TransientHttpError")]
     public interface IHttpBinService

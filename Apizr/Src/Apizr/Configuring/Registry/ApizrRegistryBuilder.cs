@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Apizr.Caching;
 using Apizr.Configuring.Common;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Proper;
 using Apizr.Connecting;
-using Apizr.Extending;
 using Apizr.Mapping;
 using Apizr.Requesting;
-using Apizr.Requesting.Attributes;
-using Microsoft.Extensions.Options;
 using Polly.Registry;
 
 namespace Apizr.Configuring.Registry

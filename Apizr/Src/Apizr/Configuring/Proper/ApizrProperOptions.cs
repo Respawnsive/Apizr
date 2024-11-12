@@ -53,16 +53,16 @@ namespace Apizr.Configuring.Proper
             CacheAttribute commonCacheAttribute,
             CacheAttribute properCacheAttribute,
             Func<string, bool> shouldRedactHeaderValue = null,
-            params LogLevel[] logLevels) : base(sharedOptions, webApiType, crudApiEntityType, typeInfo, commonResiliencePipelineAttributes, 
-            properResiliencePipelineAttributes, commonCacheAttribute, properCacheAttribute, shouldRedactHeaderValue, logLevels)
+            params LogLevel[] logLevels) : base(sharedOptions, webApiType, crudApiEntityType, typeInfo, baseAddress, basePath, httpTracerMode, trafficVerbosity, 
+            commonResiliencePipelineAttributes, properResiliencePipelineAttributes, commonCacheAttribute, properCacheAttribute, shouldRedactHeaderValue, logLevels)
         {
-            BaseUriFactory = !string.IsNullOrWhiteSpace(baseAddress) ? null : sharedOptions.BaseUriFactory;
-            BaseAddressFactory = !string.IsNullOrWhiteSpace(baseAddress) ? () => baseAddress : sharedOptions.BaseAddressFactory;
-            BasePathFactory = !string.IsNullOrWhiteSpace(basePath) ? () => basePath : sharedOptions.BasePathFactory;
+            BaseUriFactory = string.IsNullOrWhiteSpace(baseAddress) ? sharedOptions.BaseUriFactory : null;
+            BaseAddressFactory = string.IsNullOrWhiteSpace(baseAddress) ? sharedOptions.BaseAddressFactory : null;
+            BasePathFactory = string.IsNullOrWhiteSpace(basePath) ? sharedOptions.BasePathFactory : null;
             HandlersParameters = handlersParameters;
-            HttpTracerModeFactory = httpTracerMode.HasValue ? () => httpTracerMode.Value : sharedOptions.HttpTracerModeFactory;
-            TrafficVerbosityFactory = trafficVerbosity.HasValue ? () => trafficVerbosity.Value : sharedOptions.TrafficVerbosityFactory;
-            LogLevelsFactory = sharedOptions.LogLevelsFactory;
+            HttpTracerModeFactory = httpTracerMode == null ? sharedOptions.HttpTracerModeFactory : null;
+            TrafficVerbosityFactory = trafficVerbosity == null ? sharedOptions.TrafficVerbosityFactory : null;
+            LogLevelsFactory = logLevels == null ? sharedOptions.LogLevelsFactory : null;
             LoggerFactory = (loggerFactory, webApiFriendlyName) => Logger = loggerFactory.CreateLogger(webApiFriendlyName);
             HttpClientHandlerFactory = sharedOptions.HttpClientHandlerFactory;
             HttpClientConfigurationBuilder = sharedOptions.HttpClientConfigurationBuilder;
@@ -102,7 +102,7 @@ namespace Apizr.Configuring.Proper
         public Func<HttpTracerMode> HttpTracerModeFactory
         {
             get => _httpTracerModeFactory;
-            set => _httpTracerModeFactory = () => HttpTracerMode = value.Invoke();
+            set => _httpTracerModeFactory = value != null ? () => HttpTracerMode = value.Invoke() : null;
         }
 
         private Func<HttpMessageParts> _trafficVerbosityFactory;
@@ -110,7 +110,7 @@ namespace Apizr.Configuring.Proper
         public Func<HttpMessageParts> TrafficVerbosityFactory
         {
             get => _trafficVerbosityFactory;
-            set => _trafficVerbosityFactory = () => TrafficVerbosity = value.Invoke();
+            set => _trafficVerbosityFactory = value != null ? () => TrafficVerbosity = value.Invoke() : null;
         }
 
         private Func<LogLevel[]> _logLevelsFactory;

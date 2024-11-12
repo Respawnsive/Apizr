@@ -662,16 +662,40 @@ namespace Apizr.Tests
             var services = new ServiceCollection();
             services.AddLogging(builder => builder.AddXUnit(_outputHelper).SetMinimumLevel(LogLevel.Trace));
             services.AddApizr(registry => registry
-                    .AddManagerFor<IReqResUserService>(),
-                options => options.WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies,
-                    LogLevel.Warning));
+                    .AddGroup(group => group
+                            .AddManagerFor<IReqResUserService>()
+                            .AddManagerFor<IReqResResourceService>(
+                                options => options
+                                    .WithLogging(HttpTracerMode.Everything, HttpMessageParts.AllButRequestBody, LogLevel.Trace)),
+                        options => options
+                            .WithLogging(HttpTracerMode.ExceptionsOnly, HttpMessageParts.RequestCookies, LogLevel.Warning))
+                    .AddManagerFor<IHttpBinService>()
+                    .AddCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(),
+                options => options
+                    .WithLogging(HttpTracerMode.ErrorsAndExceptionsOnly, HttpMessageParts.HeadersOnly, LogLevel.Debug));
 
             var serviceProvider = services.BuildServiceProvider();
-            var fixture = serviceProvider.GetRequiredService<IApizrManager<IReqResUserService>>();
+            var apizrRegistry = serviceProvider.GetService<IApizrExtendedRegistry>();
 
-            fixture.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
-            fixture.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
-            fixture.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Warning);
+            var reqResUserManager = apizrRegistry.GetManagerFor<IReqResUserService>();
+            reqResUserManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+            reqResUserManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.RequestCookies);
+            reqResUserManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Warning);
+
+            var reqResResourceManager = apizrRegistry.GetManagerFor<IReqResResourceService>();
+            reqResResourceManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.Everything);
+            reqResResourceManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.AllButRequestBody);
+            reqResResourceManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Trace);
+
+            var httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>();
+            httpBinManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ExceptionsOnly);
+            httpBinManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.None);
+            httpBinManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Critical);
+
+            var userManager = apizrRegistry.GetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>();
+            userManager.Options.HttpTracerMode.Should().Be(HttpTracerMode.ErrorsAndExceptionsOnly);
+            userManager.Options.TrafficVerbosity.Should().Be(HttpMessageParts.HeadersOnly);
+            userManager.Options.LogLevels.Should().AllBeEquivalentTo(LogLevel.Debug);
         }
 
         [Fact]

@@ -15,7 +15,7 @@ namespace Apizr.Tests.Models
     CacheReadAll(CacheMode.FetchOrGet),
     CacheRead(CacheMode.GetOrFetch),
     ReadAllHeaders("testKey1: testValue1", "testKey2: *testValue2*", "testKey3: {0}", "testKey4: *{0}*"),
-    Log(HttpMessageParts.All),
+    //Log(HttpMessageParts.All),
     ReadAllPriority(Priority.Background)]
     public record User
     {

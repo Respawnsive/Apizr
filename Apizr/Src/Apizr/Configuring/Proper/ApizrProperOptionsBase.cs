@@ -6,6 +6,7 @@ using Apizr.Caching.Attributes;
 using Apizr.Configuring.Request;
 using Apizr.Configuring.Shared;
 using Apizr.Extending;
+using Apizr.Logging;
 using Apizr.Requesting;
 using Apizr.Resiliencing.Attributes;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,10 @@ namespace Apizr.Configuring.Proper
         /// <param name="webApiType">The web api type</param>
         /// <param name="crudApiEntityType">The crud api entity type if any</param>
         /// <param name="typeInfo">The type info</param>
+        /// <param name="baseAddress">The web api base address</param>
+        /// <param name="basePath">The web api base path</param>
+        /// <param name="httpTracerMode">The http tracer mode</param>
+        /// <param name="trafficVerbosity">The traffic verbosity</param>
         /// <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
         /// <param name="properResiliencePipelineAttributes">Specific resilience pipelines</param>
         /// <param name="commonCacheAttribute">Global caching options</param>
@@ -32,6 +37,10 @@ namespace Apizr.Configuring.Proper
             Type webApiType,
             Type crudApiEntityType,
             TypeInfo typeInfo,
+            string baseAddress,
+            string basePath,
+            HttpTracerMode? httpTracerMode,
+            HttpMessageParts? trafficVerbosity,
             ResiliencePipelineAttributeBase[] commonResiliencePipelineAttributes,
             ResiliencePipelineAttributeBase[] properResiliencePipelineAttributes,
             CacheAttribute commonCacheAttribute,
@@ -42,6 +51,12 @@ namespace Apizr.Configuring.Proper
             WebApiType = webApiType;
             CrudApiEntityType = crudApiEntityType;
             TypeInfo = typeInfo;
+
+            if(!string.IsNullOrWhiteSpace(baseAddress))
+                BaseAddress = baseAddress;
+
+            if (!string.IsNullOrWhiteSpace(basePath)) 
+                BasePath = basePath;
 
             if (commonResiliencePipelineAttributes?.Length > 0)
                 ResiliencePipelineOptions[ApizrConfigurationSource.CommonAttribute] = commonResiliencePipelineAttributes;
@@ -67,6 +82,13 @@ namespace Apizr.Configuring.Proper
 
             RequestOptionsBuilders = new Dictionary<string, Action<IApizrRequestOptionsBuilder>>();
             RequestNames = typeInfo.GetMethods().Select(method => method.Name).ToList();
+            
+            if(httpTracerMode.HasValue)
+                HttpTracerMode = httpTracerMode.Value;
+
+            if (trafficVerbosity.HasValue)
+                TrafficVerbosity = trafficVerbosity.Value;
+
             LogLevels = logLevels;
         }
 

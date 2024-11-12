@@ -626,10 +626,8 @@ namespace Apizr
         private static IApizrExtendedCommonOptions CreateCommonOptions(IServiceCollection services,
             Action<IApizrExtendedCommonOptionsBuilder> commonOptionsBuilder = null, IApizrExtendedCommonOptions baseCommonOptions = null)
         {
-            if (baseCommonOptions is not ApizrExtendedCommonOptions baseApizrCommonOptions)
-                baseApizrCommonOptions = new ApizrExtendedCommonOptions();
-
-            var builder = new ApizrExtendedCommonOptionsBuilder(baseApizrCommonOptions) as IApizrExtendedCommonOptionsBuilder;
+            var commonOptions = new ApizrExtendedCommonOptions(baseCommonOptions);
+            var builder = new ApizrExtendedCommonOptionsBuilder(commonOptions) as IApizrExtendedCommonOptionsBuilder;
 
             commonOptionsBuilder?.Invoke(builder);
 

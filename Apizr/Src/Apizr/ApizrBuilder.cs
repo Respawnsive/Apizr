@@ -203,21 +203,20 @@ namespace Apizr
         #region Builder
 
         internal IApizrCommonOptions CreateCommonOptions(
-            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null, IApizrCommonOptions baseCommonOptions = null)
+            Action<IApizrCommonOptionsBuilder> commonOptionsBuilder = null, 
+            IApizrCommonOptions baseCommonOptions = null)
         {
-            if (baseCommonOptions is not ApizrCommonOptions baseApizrCommonOptions)
-                baseApizrCommonOptions = new ApizrCommonOptions();
-
-            var builder = new ApizrCommonOptionsBuilder(baseApizrCommonOptions) as IApizrCommonOptionsBuilder;
+            var commonOptions = new ApizrCommonOptions(baseCommonOptions);
+            var builder = new ApizrCommonOptionsBuilder(commonOptions) as IApizrCommonOptionsBuilder;
 
             commonOptionsBuilder?.Invoke(builder);
 
             builder.ApizrOptions.BaseUriFactory?.Invoke();
             builder.ApizrOptions.BasePathFactory?.Invoke();
             builder.ApizrOptions.LogLevelsFactory?.Invoke();
-            builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
-            builder.ApizrOptions.HttpTracerModeFactory.Invoke();
-            builder.ApizrOptions.RefitSettingsFactory.Invoke();
+            builder.ApizrOptions.TrafficVerbosityFactory?.Invoke();
+            builder.ApizrOptions.HttpTracerModeFactory?.Invoke();
+            builder.ApizrOptions.RefitSettingsFactory?.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
             builder.ApizrOptions.ExceptionHandlersFactory?.Invoke();
@@ -329,8 +328,8 @@ namespace Apizr
             builder.ApizrOptions.BaseAddressFactory?.Invoke();
             builder.ApizrOptions.BasePathFactory?.Invoke();
             builder.ApizrOptions.LogLevelsFactory?.Invoke();
-            builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
-            builder.ApizrOptions.HttpTracerModeFactory.Invoke();
+            builder.ApizrOptions.TrafficVerbosityFactory?.Invoke();
+            builder.ApizrOptions.HttpTracerModeFactory?.Invoke();
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
             builder.ApizrOptions.ExceptionHandlersFactory?.Invoke();
@@ -390,10 +389,10 @@ namespace Apizr
 
             builder.ApizrOptions.BaseUriFactory?.Invoke();
             builder.ApizrOptions.LogLevelsFactory?.Invoke();
-            builder.ApizrOptions.TrafficVerbosityFactory.Invoke();
-            builder.ApizrOptions.HttpTracerModeFactory.Invoke();
-            builder.ApizrOptions.RefitSettingsFactory.Invoke();
-            builder.ApizrOptions.LoggerFactory.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
+            builder.ApizrOptions.TrafficVerbosityFactory?.Invoke();
+            builder.ApizrOptions.HttpTracerModeFactory?.Invoke();
+            builder.ApizrOptions.RefitSettingsFactory?.Invoke();
+            builder.ApizrOptions.LoggerFactory?.Invoke(builder.ApizrOptions.LoggerFactoryFactory.Invoke(), builder.ApizrOptions.WebApiType.GetFriendlyName());
             builder.ApizrOptions.OperationTimeoutFactory?.Invoke();
             builder.ApizrOptions.RequestTimeoutFactory?.Invoke();
             builder.ApizrOptions.ExceptionHandlersFactory?.Invoke();

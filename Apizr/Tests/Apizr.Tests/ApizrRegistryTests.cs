@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Akavache;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
@@ -567,7 +568,9 @@ namespace Apizr.Tests
 
             // This one should fail but with cached result
             var ex2 = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
-            ex2.And.CachedResult.Should().NotBeNull();
+            ex2.And.CachedResult.Should().NotBeNull(); 
+            
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -636,6 +639,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             response.Result.Should().BeNull();
             response.DataSource.Should().Be(ApizrResponseDataSource.None);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -686,6 +691,8 @@ namespace Apizr.Tests
             // Calling it again with another cache key value should throw as expected but without any cached result
             var ex3 = await act2.Should().ThrowAsync<ApizrException<UserDetails>>();
             ex3.And.CachedResult.Should().BeNull();
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -745,6 +752,8 @@ namespace Apizr.Tests
             // Calling it again with another cache key value should throw as expected but without any cached result
             var ex3 = await act2.Should().ThrowAsync<ApizrException<CreateUser>>();
             ex3.And.CachedResult.Should().BeNull();
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -805,6 +814,8 @@ namespace Apizr.Tests
             // Calling it again with another cache key value should throw as expected but without any cached result
             var ex3 = await act2.Should().ThrowAsync<ApizrException<CreateUser>>();
             ex3.And.CachedResult.Should().BeNull();
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -860,6 +871,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -914,6 +927,8 @@ namespace Apizr.Tests
             response.ApiResponse.Should().BeNull();
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -969,6 +984,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -1025,6 +1042,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -1081,6 +1100,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]

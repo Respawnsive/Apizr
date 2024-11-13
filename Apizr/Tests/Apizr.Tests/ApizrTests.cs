@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Akavache;
 using Apizr.Authenticating;
 using Apizr.Caching;
 using Apizr.Configuring;
@@ -620,6 +621,9 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
+            //await BlobCache.Shutdown();
         }
 
         [Fact]
@@ -671,6 +675,8 @@ namespace Apizr.Tests
             response.ApiResponse.Should().BeNull();
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -723,6 +729,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -776,6 +784,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -829,6 +839,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]

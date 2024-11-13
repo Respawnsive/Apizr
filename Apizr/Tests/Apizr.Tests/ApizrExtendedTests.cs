@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Akavache;
 using Apizr.Caching;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
@@ -237,7 +238,7 @@ namespace Apizr.Tests
             mockHttp.When("https://reqres.in/api/*")
                 .Respond("application/json", json); // Respond with JSON
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -271,7 +272,7 @@ namespace Apizr.Tests
             string token = null;
             Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "token");
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -321,7 +322,7 @@ namespace Apizr.Tests
                 return Task.FromResult("token");
             }
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -361,7 +362,7 @@ namespace Apizr.Tests
         {
             var testSettings = new TestSettings("token");
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -392,7 +393,7 @@ namespace Apizr.Tests
         {
             var tokenService = new TokenService();
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -423,7 +424,7 @@ namespace Apizr.Tests
         {
             var tokenService = new TokenService();
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -469,7 +470,7 @@ namespace Apizr.Tests
 
             Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "tokenA");
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -498,7 +499,7 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -554,12 +555,14 @@ namespace Apizr.Tests
             // This one should fail but with cached result
             var ex2 = await act.Should().ThrowAsync<ApizrException<ApiResult<User>>>();
             ex2.And.CachedResult.Should().NotBeNull();
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_Should_Cache_ApizrResponse()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -631,12 +634,14 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             response.Result.Should().BeNull();
             response.DataSource.Should().Be(ApizrResponseDataSource.None);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_With_Multiple_CacheKey_Should_Cache_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -690,12 +695,14 @@ namespace Apizr.Tests
             // Calling it again with another cache key value should throw as expected but without any cached result
             var ex3 = await act2.Should().ThrowAsync<ApizrException<UserDetails>>();
             ex3.And.CachedResult.Should().BeNull();
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_With_Post_CacheKey_And_FetchOrGet_Should_Cache_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -758,12 +765,14 @@ namespace Apizr.Tests
             // Calling it again with another cache key value should throw as expected but without any cached result
             var ex3 = await act2.Should().ThrowAsync<ApizrException<CreateUser>>();
             ex3.And.CachedResult.Should().BeNull();
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_With_Post_CacheKey_And_GetOrFetch_Should_Cache_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -825,12 +834,14 @@ namespace Apizr.Tests
             // Calling it again with another cache key value should throw as expected but without any cached result
             var ex3 = await act2.Should().ThrowAsync<ApizrException<CreateUser>>();
             ex3.And.CachedResult.Should().BeNull();
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_And_WithCacheControlHeader_Should_Cache_ApizrResponse()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -886,12 +897,14 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_And_WithImmutableCacheControlHeader_Should_Cache_ApizrResponse()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -946,12 +959,14 @@ namespace Apizr.Tests
             response.ApiResponse.Should().BeNull();
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Cache);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_And_WithExpiresHeader_Should_Cache_ApizrResponse()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1007,12 +1022,14 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_And_WithETagHeader_Should_Cache_ApizrResponse()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1069,12 +1086,14 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
         public async Task Calling_WithAkavacheCacheHandler_And_WithLastModifiedHeader_Should_Cache_ApizrResponse()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1131,6 +1150,8 @@ namespace Apizr.Tests
             response.ApiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Result.Should().NotBeNullOrEmpty();
             response.DataSource.Should().Be(ApizrResponseDataSource.Request);
+
+            BlobCache.UserAccount.InvalidateAll();
         }
 
         [Fact]
@@ -1139,7 +1160,7 @@ namespace Apizr.Tests
             var maxRetryAttempts = 3;
             var retryCount = 0;
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1193,7 +1214,7 @@ namespace Apizr.Tests
             var maxRetryAttempts = 3;
             var retryCount = 0;
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1233,7 +1254,7 @@ namespace Apizr.Tests
         {
             var isConnected = false;
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1283,7 +1304,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAutoMapperMappingHandler_Should_Map_Data()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1317,7 +1338,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAutoMapperMappingHandler_Should_Map_Scanned_Data()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1352,7 +1373,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAutoMapperMappingHandler_Should_Map_Crud_Data()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1386,7 +1407,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithAutoMapperMappingHandler_Should_Map_Scanned_Crud_Data()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1421,7 +1442,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMappingHandler_With_AutoMapper_Should_Map_Data()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1462,7 +1483,7 @@ namespace Apizr.Tests
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1504,7 +1525,7 @@ namespace Apizr.Tests
                 .TwoWays()
                 .Map(minUser => minUser.Name, user => user.FirstName);
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1542,7 +1563,7 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1585,7 +1606,7 @@ namespace Apizr.Tests
             ResiliencePropertyKey<string> testKey4 = new(nameof(testKey4));
             ResiliencePropertyKey<string> testKey5 = new(nameof(testKey5));
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1634,7 +1655,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMediation_Should_Handle_Requests()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1673,7 +1694,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMediation_With_Crud_Should_Handle_Requests()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1708,7 +1729,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMediation_With_Scanning_Should_Handle_Requests()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1747,7 +1768,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithMediation_With_Crud_Scanning_Should_Handle_Requests()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1782,7 +1803,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Both_WithMediation_And_WithAutoMapperMappingHandler_Should_Handle_Requests()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1828,7 +1849,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Both_WithMediation_And_WithAutoMapperMappingHandler_With_Crud_Should_Handle_Requests()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1874,7 +1895,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Both_WithMediation_And_WithAutoMapperMappingHandler_With_Scanning_Should_Handle_Requests()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1921,7 +1942,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithOptionalMediation_Should_Handle_Requests_With_Optional_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -1960,7 +1981,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithOptionalMediation_With_Crud_Should_Handle_Requests_With_Optional_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2003,7 +2024,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithOptionalMediation_With_Scanning_Should_Handle_Requests_With_Optional_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2042,7 +2063,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithOptionalMediation_With_Crud_Scanning_Should_Handle_Requests_With_Optional_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2085,7 +2106,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Both_WithOptionalMediation_And_WithAutoMapperMappingHandler_Should_Handle_Requests_With_Optional_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2147,7 +2168,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Both_WithOptionalMediation_And_WithAutoMapperMappingHandler_With_Crud_Should_Handle_Requests_With_Optional_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2209,7 +2230,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_Both_WithOptionalMediation_And_WithAutoMapperMappingHandler_With_Scanning_Should_Handle_Requests_With_Optional_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2272,7 +2293,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Downloading_File_Should_Succeed()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2341,7 +2362,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Downloading_File_With_Local_Progress_Should_Report_Progress()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2385,7 +2406,7 @@ namespace Apizr.Tests
                 percentage = args.ProgressPercentage;
             };
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2415,7 +2436,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Uploading_File_Should_Succeed()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2484,7 +2505,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Uploading_File_With_Local_Progress_Should_Report_Progress()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2529,7 +2550,7 @@ namespace Apizr.Tests
                 percentage = args.ProgressPercentage;
             };
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2560,7 +2581,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithFileTransferMediation_Should_Handle_Requests()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2591,7 +2612,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_WithFileTransferOptionalMediation_Should_Handle_Requests_With_Optional_Result()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2630,7 +2651,7 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2674,7 +2695,7 @@ namespace Apizr.Tests
             var requestHeaders = new List<string> { "testKey3: testValue3.1", "testKey4: testValue4.1" };
             var testStore = new TestSettings("testStoreKey2: testStoreValue2.1");
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2790,7 +2811,7 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2819,7 +2840,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Concurrent_Requests_Should_Not_Throw()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2849,7 +2870,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Cancelling_A_Get_Request_Should_Throw_An_OperationCanceledException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2878,7 +2899,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Cancelling_A_Post_Request_Should_Throw_An_OperationCanceledException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2909,7 +2930,7 @@ namespace Apizr.Tests
         {
             var watcher = new WatchingRequestHandler();
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2936,7 +2957,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_BA_WithOperationTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2964,7 +2985,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_AB_WithOperationTimeout_Then_Client_Should_Throw_A_TimeoutException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -2992,7 +3013,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_BA_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3020,7 +3041,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_AB_WithRequestTimeout_Then_Client_Should_Throw_A_TimeoutException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3048,7 +3069,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_DCBA_WithOperationTimeout_And_WithRequestTimeout_Then_Request_Should_Throw_A_TimeoutException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3078,7 +3099,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task When_Calling_ABCD_WithOperationTimeout_And_WithRequestTimeout_Then_Client_Should_Throw_A_TimeoutException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3108,7 +3129,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_BCA_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Request_TimeoutRejectedException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3140,7 +3161,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_ACB_Both_WithTimeout_And_WithCancellation_Should_Throw_A_Client_TimeoutRejectedException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3172,7 +3193,7 @@ namespace Apizr.Tests
         [Fact]
         public async Task Calling_BAC_Both_WithTimeout_And_WithCancellation_Should_Throw_An_OperationCanceledException()
         {
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3209,7 +3230,7 @@ namespace Apizr.Tests
             var maxRetryCount = 3;
             var retryCount = 0;
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3280,7 +3301,7 @@ namespace Apizr.Tests
             var maxRetryCount = 3;
             var retryCount = 0;
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3351,7 +3372,7 @@ namespace Apizr.Tests
             var maxRetryCount = 3;
             var retryCount = 0;
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))
@@ -3426,7 +3447,7 @@ namespace Apizr.Tests
             var maxRetryCount = 3;
             var retryCount = 0;
 
-            var host = Host.CreateDefaultBuilder()
+            using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
                         .SetMinimumLevel(LogLevel.Trace))

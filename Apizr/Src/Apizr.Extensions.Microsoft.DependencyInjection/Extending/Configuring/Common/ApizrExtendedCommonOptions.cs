@@ -25,19 +25,31 @@ namespace Apizr.Extending.Configuring.Common
         public ApizrExtendedCommonOptions(IApizrExtendedCommonOptions baseCommonOptions = null) : base(
             baseCommonOptions)
         {
-            BaseAddressFactory = baseCommonOptions?.BaseAddressFactory;
-            BaseUriFactory = baseCommonOptions?.BaseUriFactory;
-            BasePathFactory = baseCommonOptions?.BasePathFactory;
-            LogLevelsFactory = baseCommonOptions?.LogLevelsFactory;
-            HttpClientHandlerFactory = baseCommonOptions?.HttpClientHandlerFactory ?? (_ => new HttpClientHandler());
-            HttpClientBuilder = baseCommonOptions?.HttpClientBuilder ?? (_ => { });
-            RefitSettingsFactory = baseCommonOptions?.RefitSettingsFactory ?? (_ => new RefitSettings());
             ConnectivityHandlerType = baseCommonOptions?.ConnectivityHandlerType ?? typeof(DefaultConnectivityHandler);
             CacheHandlerType = baseCommonOptions?.CacheHandlerType ?? typeof(VoidCacheHandler);
             MappingHandlerType = baseCommonOptions?.MappingHandlerType ?? typeof(VoidMappingHandler);
+            BaseUriFactory = baseCommonOptions?.BaseUriFactory;
+            BaseAddressFactory = baseCommonOptions?.BaseAddressFactory;
+            BasePathFactory = baseCommonOptions?.BasePathFactory;
+            HttpTracerModeFactory = baseCommonOptions?.HttpTracerModeFactory;
+            TrafficVerbosityFactory = baseCommonOptions?.TrafficVerbosityFactory;
+            LogLevelsFactory = baseCommonOptions?.LogLevelsFactory;
+            HttpClientHandlerFactory = baseCommonOptions?.HttpClientHandlerFactory ?? (_ => new HttpClientHandler());
+            RefitSettingsFactory = baseCommonOptions?.RefitSettingsFactory ?? (_ => new RefitSettings());
+            ConnectivityHandlerFactory = baseCommonOptions?.ConnectivityHandlerFactory;
+            CacheHandlerFactory = baseCommonOptions?.CacheHandlerFactory;
+            MappingHandlerFactory = baseCommonOptions?.MappingHandlerFactory;
+            HttpClientBuilder = baseCommonOptions?.HttpClientBuilder ?? (_ => { });
+            HeadersExtendedFactories =
+                baseCommonOptions?.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
+                new Dictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>();
+            ExceptionHandlersFactory = baseCommonOptions?.ExceptionHandlersFactory;
+            OperationTimeoutFactory = baseCommonOptions?.OperationTimeoutFactory;
+            RequestTimeoutFactory = baseCommonOptions?.RequestTimeoutFactory;
             DelegatingHandlersExtendedFactories =
                 baseCommonOptions?.DelegatingHandlersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
                 new Dictionary<Type, Func<IServiceProvider, IApizrManagerOptionsBase, DelegatingHandler>>();
+            HttpMessageHandlerFactory = baseCommonOptions?.HttpMessageHandlerFactory;
             WebApis = baseCommonOptions?.WebApis?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
                       new Dictionary<Type, BaseAddressAttribute>();
             ObjectMappings = baseCommonOptions?.ObjectMappings?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
@@ -45,10 +57,7 @@ namespace Apizr.Extending.Configuring.Common
             PostRegistries = baseCommonOptions?.PostRegistries?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
                              new Dictionary<Type, IApizrExtendedConcurrentRegistryBase>();
             PostRegistrationActions = baseCommonOptions?.PostRegistrationActions?.ToList() ?? [];
-            HeadersExtendedFactories =
-                baseCommonOptions?.HeadersExtendedFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
-                new Dictionary<(ApizrRegistrationMode, ApizrLifetimeScope), Func<IServiceProvider, Func<IList<string>>>>();
-            _resiliencePropertiesExtendedFactories = new Dictionary<string, Func<IServiceProvider, object>>();
+            _resiliencePropertiesExtendedFactories = baseCommonOptions?.ResiliencePropertiesExtendedFactories ?? new Dictionary<string, Func<IServiceProvider, object>>();
         }
 
         /// <inheritdoc />

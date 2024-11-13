@@ -22,10 +22,9 @@ namespace Apizr.Configuring.Common
         /// </summary>
         public ApizrCommonOptions(IApizrCommonOptions baseCommonOptions = null) : base(baseCommonOptions)
         {
-            BaseAddressFactory = baseCommonOptions?.BaseAddressFactory;
             BaseUriFactory = baseCommonOptions?.BaseUriFactory;
+            BaseAddressFactory = baseCommonOptions?.BaseAddressFactory;
             BasePathFactory = baseCommonOptions?.BasePathFactory;
-            LogLevelsFactory = baseCommonOptions?.LogLevelsFactory;
             LoggerFactoryFactory = baseCommonOptions?.LoggerFactoryFactory ?? (() => new DebugLoggerFactory(Constants.LowLogLevel));
             ResiliencePipelineRegistryFactory = baseCommonOptions?.ResiliencePipelineRegistryFactory ?? (() => new ResiliencePipelineRegistry<string>());
             HttpClientHandlerFactory = baseCommonOptions?.HttpClientHandlerFactory ?? (() => new HttpClientHandler());
@@ -37,6 +36,13 @@ namespace Apizr.Configuring.Common
             DelegatingHandlersFactories =
                 baseCommonOptions?.DelegatingHandlersFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
                 new Dictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>();
+            HttpMessageHandlerFactory = baseCommonOptions?.HttpMessageHandlerFactory;
+            OperationTimeoutFactory = baseCommonOptions?.OperationTimeoutFactory;
+            RequestTimeoutFactory = baseCommonOptions?.RequestTimeoutFactory;
+            HttpTracerModeFactory = baseCommonOptions?.HttpTracerModeFactory;
+            TrafficVerbosityFactory = baseCommonOptions?.TrafficVerbosityFactory;
+            LogLevelsFactory = baseCommonOptions?.LogLevelsFactory;
+            ExceptionHandlersFactory = baseCommonOptions?.ExceptionHandlersFactory;
         }
 
         private Func<Uri> _baseUriFactory;

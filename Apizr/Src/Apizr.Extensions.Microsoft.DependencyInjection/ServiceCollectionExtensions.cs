@@ -642,12 +642,14 @@ namespace Apizr
                     services.AddOrReplaceSingleton(typeof(IConnectivityHandler), builder.ApizrOptions.ConnectivityHandlerType);
 
                 // Cache handler
-                var cacheHandlerFactory = builder.ApizrOptions.GetCacheHanderFactory();
+                var cacheHandlerInternalFactory = builder.ApizrOptions.GetCacheHandlerInternalFactory();
+                var cacheHandlerFactory = cacheHandlerInternalFactory != null
+                    ? _ => cacheHandlerInternalFactory.Invoke()
+                    : builder.ApizrOptions.CacheHandlerFactory;
                 if (cacheHandlerFactory != null)
                 {
-                    Func<IServiceProvider, ICacheHandler> factory = _ => cacheHandlerFactory.Invoke();
-                    services.AddOrReplaceSingleton(typeof(ICacheHandler), factory);
-                    builder.WithCacheHandler(factory);
+                    services.AddOrReplaceSingleton(typeof(ICacheHandler), cacheHandlerFactory);
+                    builder.WithCacheHandler(cacheHandlerFactory);
                 }
                 else
                 {
@@ -662,12 +664,14 @@ namespace Apizr
                 }
 
                 // Mapping handler
-                var mappingHandlerFactory = builder.ApizrOptions.GetMappingHanderFactory();
+                var mappingHandlerInternalFactory = builder.ApizrOptions.GetMappingHandlerInternalFactory();
+                var mappingHandlerFactory = mappingHandlerInternalFactory != null
+                    ? _ => mappingHandlerInternalFactory.Invoke()
+                    : builder.ApizrOptions.MappingHandlerFactory;
                 if (mappingHandlerFactory != null)
                 {
-                    Func<IServiceProvider, IMappingHandler> factory = _ => mappingHandlerFactory.Invoke();
-                    services.AddOrReplaceSingleton(typeof(IMappingHandler), factory);
-                    builder.WithMappingHandler(factory);
+                    services.AddOrReplaceSingleton(typeof(IMappingHandler), mappingHandlerFactory);
+                    builder.WithMappingHandler(mappingHandlerFactory);
                 }
                 else
                 {
@@ -879,7 +883,7 @@ namespace Apizr
                 services.AddOrReplaceSingleton(typeof(IConnectivityHandler), builder.ApizrOptions.ConnectivityHandlerType);
 
             // Cache handler
-            var cacheHandlerFactory = builder.ApizrOptions.GetCacheHanderFactory();
+            var cacheHandlerFactory = builder.ApizrOptions.GetCacheHandlerInternalFactory();
             if (cacheHandlerFactory != null)
             {
                 Func<IServiceProvider, ICacheHandler> factory = _ => cacheHandlerFactory.Invoke();
@@ -899,7 +903,7 @@ namespace Apizr
             }
 
             // Mapping handler
-            var mappingHandlerFactory = builder.ApizrOptions.GetMappingHanderFactory();
+            var mappingHandlerFactory = builder.ApizrOptions.GetMappingHandlerInternalFactory();
             if (mappingHandlerFactory != null)
             {
                 Func<IServiceProvider, IMappingHandler> factory = _ => mappingHandlerFactory.Invoke();

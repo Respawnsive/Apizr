@@ -191,8 +191,8 @@ namespace Apizr
             var lazyWebApi = new LazyFactory<TWebApi>(webApiFactory);
             var lazyResiliencePipelineRegistry = new LazyFactory<ResiliencePipelineRegistry<string>>(apizrOptions.ResiliencePipelineRegistryFactory);
             var apizrManager = apizrManagerFactory(lazyWebApi, apizrOptions.ConnectivityHandlerFactory.Invoke(),
-                apizrOptions.GetCacheHanderFactory()?.Invoke() ?? apizrOptions.CacheHandlerFactory.Invoke(),
-                apizrOptions.GetMappingHanderFactory()?.Invoke() ?? apizrOptions.MappingHandlerFactory.Invoke(),
+                apizrOptions.GetCacheHandlerInternalFactory()?.Invoke() ?? apizrOptions.CacheHandlerFactory.Invoke(),
+                apizrOptions.GetMappingHandlerInternalFactory()?.Invoke() ?? apizrOptions.MappingHandlerFactory.Invoke(),
                 lazyResiliencePipelineRegistry, new ApizrManagerOptions<TWebApi>(apizrOptions));
 
             return apizrManager;

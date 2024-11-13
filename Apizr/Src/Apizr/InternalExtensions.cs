@@ -30,13 +30,13 @@ namespace Apizr
 
         private static Func<ICacheHandler> _cacheHandlerFactory;
 
-        internal static void SetCacheHandlerFactory(this IApizrGlobalCommonOptionsBuilderBase builder,
+        internal static void SetCacheHandlerInternalFactory(this IApizrGlobalCommonOptionsBuilderBase builder,
             Func<ICacheHandler> cacheHandlerFactory)
         {
             _cacheHandlerFactory = cacheHandlerFactory;
         }
 
-        internal static Func<ICacheHandler> GetCacheHanderFactory(this IApizrCommonOptionsBase builder) =>
+        internal static Func<ICacheHandler> GetCacheHandlerInternalFactory(this IApizrCommonOptionsBase builder) =>
             _cacheHandlerFactory;
 
         #endregion
@@ -63,13 +63,13 @@ namespace Apizr
 
         private static Func<IMappingHandler> _mappingHandlerFactory;
 
-        internal static void SetMappingHandlerFactory(this IApizrCommonOptionsBuilderBase builder,
+        internal static void SetMappingHandlerInternalFactory(this IApizrCommonOptionsBuilderBase builder,
             Func<IMappingHandler> mappingHandlerFactory)
         {
             _mappingHandlerFactory = mappingHandlerFactory;
         }
 
-        internal static Func<IMappingHandler> GetMappingHanderFactory(this IApizrCommonOptionsBase builder) =>
+        internal static Func<IMappingHandler> GetMappingHandlerInternalFactory(this IApizrCommonOptionsBase builder) =>
             _mappingHandlerFactory;
 
         #endregion

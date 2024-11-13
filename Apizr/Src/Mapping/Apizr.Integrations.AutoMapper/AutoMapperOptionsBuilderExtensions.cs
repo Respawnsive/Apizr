@@ -18,7 +18,7 @@ namespace Apizr
         public static TBuilder WithAutoMapperMappingHandler<TBuilder>(this TBuilder builder, IMapper mapper)
             where TBuilder : IApizrCommonOptionsBuilderBase
         {
-            builder.SetMappingHandlerFactory(() => new AutoMapperMappingHandler(mapper));
+            builder.SetMappingHandlerInternalFactory(() => new AutoMapperMappingHandler(mapper));
 
             return builder;
         }
@@ -33,7 +33,7 @@ namespace Apizr
         public static TBuilder WithAutoMapperMappingHandler<TBuilder>(this TBuilder builder, IConfigurationProvider configuration)
             where TBuilder : IApizrCommonOptionsBuilderBase
         {
-            builder.SetMappingHandlerFactory(() => new AutoMapperMappingHandler(configuration.CreateMapper()));
+            builder.SetMappingHandlerInternalFactory(() => new AutoMapperMappingHandler(configuration.CreateMapper()));
 
             return builder;
         }

@@ -19,7 +19,7 @@ namespace Apizr
         public static TBuilder WithMapsterMappingHandler<TBuilder>(this TBuilder builder, IMapper mapper)
             where TBuilder : IApizrCommonOptionsBuilderBase
         {
-            builder.SetMappingHandlerFactory(() => new MapsterMappingHandler(mapper));
+            builder.SetMappingHandlerInternalFactory(() => new MapsterMappingHandler(mapper));
 
             return builder;
         }

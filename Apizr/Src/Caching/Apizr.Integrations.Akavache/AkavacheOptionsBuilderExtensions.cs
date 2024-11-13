@@ -18,7 +18,7 @@ namespace Apizr
         public static TBuilder WithAkavacheCacheHandler<TBuilder>(this TBuilder builder)
             where TBuilder : IApizrGlobalCommonOptionsBuilderBase
         {
-            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler());
+            builder.SetCacheHandlerInternalFactory(() => new AkavacheCacheHandler());
 
             return builder;
         }
@@ -33,7 +33,7 @@ namespace Apizr
         public static TBuilder WithAkavacheCacheHandler<TBuilder>(this TBuilder builder, Func<IBlobCache> blobCacheFactory)
             where TBuilder : IApizrGlobalCommonOptionsBuilderBase
         {
-            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler(blobCacheFactory));
+            builder.SetCacheHandlerInternalFactory(() => new AkavacheCacheHandler(blobCacheFactory));
 
             return builder;
         }
@@ -48,7 +48,7 @@ namespace Apizr
         public static TBuilder WithAkavacheCacheHandler<TBuilder>(this TBuilder builder, string applicationName) 
             where TBuilder : IApizrGlobalCommonOptionsBuilderBase
         {
-            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler(applicationName));
+            builder.SetCacheHandlerInternalFactory(() => new AkavacheCacheHandler(applicationName));
 
             return builder;
         }
@@ -64,7 +64,7 @@ namespace Apizr
         public static TBuilder WithAkavacheCacheHandler<TBuilder>(this TBuilder builder, Func<IBlobCache> blobCacheFactory, string applicationName) 
             where TBuilder : IApizrGlobalCommonOptionsBuilderBase
         {
-            builder.SetCacheHandlerFactory(() => new AkavacheCacheHandler(blobCacheFactory, applicationName));
+            builder.SetCacheHandlerInternalFactory(() => new AkavacheCacheHandler(blobCacheFactory, applicationName));
 
             return builder;
         }

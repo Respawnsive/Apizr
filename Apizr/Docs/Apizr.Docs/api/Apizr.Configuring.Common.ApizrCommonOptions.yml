@@ -5,7 +5,7 @@ items:
   id: ApizrCommonOptions
   parent: Apizr.Configuring.Common
   children:
-  - Apizr.Configuring.Common.ApizrCommonOptions.#ctor
+  - Apizr.Configuring.Common.ApizrCommonOptions.#ctor(Apizr.Configuring.Common.IApizrCommonOptions)
   - Apizr.Configuring.Common.ApizrCommonOptions.BaseAddressFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.BasePathFactory
   - Apizr.Configuring.Common.ApizrCommonOptions.BaseUriFactory
@@ -73,7 +73,6 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
-  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
@@ -89,16 +88,16 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: Apizr.Configuring.Common.ApizrCommonOptions.#ctor
-  commentId: M:Apizr.Configuring.Common.ApizrCommonOptions.#ctor
-  id: '#ctor'
+- uid: Apizr.Configuring.Common.ApizrCommonOptions.#ctor(Apizr.Configuring.Common.IApizrCommonOptions)
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptions.#ctor(Apizr.Configuring.Common.IApizrCommonOptions)
+  id: '#ctor(Apizr.Configuring.Common.IApizrCommonOptions)'
   parent: Apizr.Configuring.Common.ApizrCommonOptions
   langs:
   - csharp
   - vb
-  name: ApizrCommonOptions()
-  nameWithType: ApizrCommonOptions.ApizrCommonOptions()
-  fullName: Apizr.Configuring.Common.ApizrCommonOptions.ApizrCommonOptions()
+  name: ApizrCommonOptions(IApizrCommonOptions)
+  nameWithType: ApizrCommonOptions.ApizrCommonOptions(IApizrCommonOptions)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptions.ApizrCommonOptions(Apizr.Configuring.Common.IApizrCommonOptions)
   type: Constructor
   source:
     remote:
@@ -114,12 +113,15 @@ items:
   summary: The Apizr common options constructor
   example: []
   syntax:
-    content: public ApizrCommonOptions()
-    content.vb: Public Sub New()
+    content: public ApizrCommonOptions(IApizrCommonOptions baseCommonOptions = null)
+    parameters:
+    - id: baseCommonOptions
+      type: Apizr.Configuring.Common.IApizrCommonOptions
+    content.vb: Public Sub New(baseCommonOptions As IApizrCommonOptions = Nothing)
   overload: Apizr.Configuring.Common.ApizrCommonOptions.#ctor*
-  nameWithType.vb: ApizrCommonOptions.New()
-  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptions.New()
-  name.vb: New()
+  nameWithType.vb: ApizrCommonOptions.New(IApizrCommonOptions)
+  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptions.New(Apizr.Configuring.Common.IApizrCommonOptions)
+  name.vb: New(IApizrCommonOptions)
 - uid: Apizr.Configuring.Common.ApizrCommonOptions.BaseUriFactory
   commentId: P:Apizr.Configuring.Common.ApizrCommonOptions.BaseUriFactory
   id: BaseUriFactory
@@ -138,7 +140,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseUriFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 40
+    startLine: 49
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -171,7 +173,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BaseAddressFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 48
+    startLine: 57
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -204,7 +206,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: BasePathFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 56
+    startLine: 65
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -237,7 +239,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LoggerFactoryFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 63
+    startLine: 72
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -270,7 +272,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ResiliencePipelineRegistryFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 66
+    startLine: 75
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -303,7 +305,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 69
+    startLine: 78
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -336,7 +338,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpClientConfigurationBuilder
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 72
+    startLine: 81
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -369,7 +371,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettingsFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 76
+    startLine: 85
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -402,7 +404,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ConnectivityHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 83
+    startLine: 92
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -435,7 +437,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: CacheHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 86
+    startLine: 95
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -468,7 +470,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: MappingHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 89
+    startLine: 98
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -501,7 +503,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: DelegatingHandlersFactories
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 92
+    startLine: 101
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -534,7 +536,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpMessageHandlerFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 95
+    startLine: 104
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -567,7 +569,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: OperationTimeoutFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 99
+    startLine: 108
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -600,7 +602,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RequestTimeoutFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 107
+    startLine: 116
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -633,7 +635,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: HttpTracerModeFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 115
+    startLine: 124
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -666,7 +668,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: TrafficVerbosityFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 123
+    startLine: 132
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -699,7 +701,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: LogLevelsFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 131
+    startLine: 140
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -732,7 +734,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ExceptionHandlersFactory
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptions.cs
-    startLine: 139
+    startLine: 148
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -936,13 +938,6 @@ references:
   name: LogLevels
   nameWithType: ApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
-  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
-  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
-  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_OnException
-  name: OnException
-  nameWithType: ApizrGlobalSharedOptionsBase.OnException
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -1257,7 +1252,7 @@ references:
     href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Common.ApizrCommonOptions.#ctor*
   commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptions.#ctor
-  href: Apizr.Configuring.Common.ApizrCommonOptions.html#Apizr_Configuring_Common_ApizrCommonOptions__ctor
+  href: Apizr.Configuring.Common.ApizrCommonOptions.html#Apizr_Configuring_Common_ApizrCommonOptions__ctor_Apizr_Configuring_Common_IApizrCommonOptions_
   name: ApizrCommonOptions
   nameWithType: ApizrCommonOptions.ApizrCommonOptions
   fullName: Apizr.Configuring.Common.ApizrCommonOptions.ApizrCommonOptions
@@ -1482,7 +1477,7 @@ references:
   - uid: Polly.Registry.ResiliencePipelineRegistry`1
     name: ResiliencePipelineRegistry
     isExternal: true
-    href: https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs
+    href: https://github.com/App-vNext/Polly/blob/520ee38ce6d199c3dfc75c87188a0857880edc94/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs
   - name: <
   - uid: System.String
     name: string
@@ -1501,7 +1496,7 @@ references:
   - uid: Polly.Registry.ResiliencePipelineRegistry`1
     name: ResiliencePipelineRegistry
     isExternal: true
-    href: https://github.com/App-vNext/Polly/blob/077cf388fc5a85a7f6cd0fdcb2b68d17a898019e/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs
+    href: https://github.com/App-vNext/Polly/blob/520ee38ce6d199c3dfc75c87188a0857880edc94/src/Polly.Core/Registry/ResiliencePipelineRegistry.TResult.cs
   - name: (
   - name: Of
   - name: " "

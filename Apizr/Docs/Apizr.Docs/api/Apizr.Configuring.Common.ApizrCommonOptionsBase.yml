@@ -5,7 +5,7 @@ items:
   id: ApizrCommonOptionsBase
   parent: Apizr.Configuring.Common
   children:
-  - Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor
+  - Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor(Apizr.Configuring.Common.IApizrCommonOptionsBase)
   - Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrConfigurationSection
   - Apizr.Configuring.Common.ApizrCommonOptionsBase.RefitSettings
   langs:
@@ -53,7 +53,6 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HttpTracerMode
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.TrafficVerbosity
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
-  - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LetThrowOnHandledException
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.HandlersParameters
@@ -69,16 +68,16 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor
-  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor
-  id: '#ctor'
+- uid: Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor(Apizr.Configuring.Common.IApizrCommonOptionsBase)
+  commentId: M:Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor(Apizr.Configuring.Common.IApizrCommonOptionsBase)
+  id: '#ctor(Apizr.Configuring.Common.IApizrCommonOptionsBase)'
   parent: Apizr.Configuring.Common.ApizrCommonOptionsBase
   langs:
   - csharp
   - vb
-  name: ApizrCommonOptionsBase()
-  nameWithType: ApizrCommonOptionsBase.ApizrCommonOptionsBase()
-  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrCommonOptionsBase()
+  name: ApizrCommonOptionsBase(IApizrCommonOptionsBase)
+  nameWithType: ApizrCommonOptionsBase.ApizrCommonOptionsBase(IApizrCommonOptionsBase)
+  fullName: Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrCommonOptionsBase(Apizr.Configuring.Common.IApizrCommonOptionsBase)
   type: Constructor
   source:
     remote:
@@ -93,12 +92,15 @@ items:
   namespace: Apizr.Configuring.Common
   example: []
   syntax:
-    content: protected ApizrCommonOptionsBase()
-    content.vb: Protected Sub New()
+    content: protected ApizrCommonOptionsBase(IApizrCommonOptionsBase baseCommonOptions = null)
+    parameters:
+    - id: baseCommonOptions
+      type: Apizr.Configuring.Common.IApizrCommonOptionsBase
+    content.vb: Protected Sub New(baseCommonOptions As IApizrCommonOptionsBase = Nothing)
   overload: Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor*
-  nameWithType.vb: ApizrCommonOptionsBase.New()
-  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBase.New()
-  name.vb: New()
+  nameWithType.vb: ApizrCommonOptionsBase.New(IApizrCommonOptionsBase)
+  fullName.vb: Apizr.Configuring.Common.ApizrCommonOptionsBase.New(Apizr.Configuring.Common.IApizrCommonOptionsBase)
+  name.vb: New(IApizrCommonOptionsBase)
 - uid: Apizr.Configuring.Common.ApizrCommonOptionsBase.RefitSettings
   commentId: P:Apizr.Configuring.Common.ApizrCommonOptionsBase.RefitSettings
   id: RefitSettings
@@ -117,7 +119,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: RefitSettings
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
-    startLine: 15
+    startLine: 17
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -150,7 +152,7 @@ items:
       repo: https://github.com/Respawnsive/Apizr.git
     id: ApizrConfigurationSection
     path: ../../Src/Apizr/Configuring/Common/ApizrCommonOptionsBase.cs
-    startLine: 18
+    startLine: 20
   assemblies:
   - Apizr
   namespace: Apizr.Configuring.Common
@@ -312,13 +314,6 @@ references:
   name: LogLevels
   nameWithType: ApizrGlobalSharedOptionsBase.LogLevels
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels
-- uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
-  commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
-  parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
-  href: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.html#Apizr_Configuring_Shared_ApizrGlobalSharedOptionsBase_OnException
-  name: OnException
-  nameWithType: ApizrGlobalSharedOptionsBase.OnException
-  fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException
 - uid: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   commentId: P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers
   parent: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase
@@ -633,7 +628,7 @@ references:
     href: Apizr.Configuring.Shared.html
 - uid: Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor*
   commentId: Overload:Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor
-  href: Apizr.Configuring.Common.ApizrCommonOptionsBase.html#Apizr_Configuring_Common_ApizrCommonOptionsBase__ctor
+  href: Apizr.Configuring.Common.ApizrCommonOptionsBase.html#Apizr_Configuring_Common_ApizrCommonOptionsBase__ctor_Apizr_Configuring_Common_IApizrCommonOptionsBase_
   name: ApizrCommonOptionsBase
   nameWithType: ApizrCommonOptionsBase.ApizrCommonOptionsBase
   fullName: Apizr.Configuring.Common.ApizrCommonOptionsBase.ApizrCommonOptionsBase

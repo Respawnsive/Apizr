@@ -8,7 +8,11 @@
 - [New][Authentication] Now **`AuthenticationHandlerBase` performances and behavior have been improved** by caching compiled factories and adjusting authentication flow
 - [Improvement/Breaking][Authentication] Now **`AuthenticationHandlerBase`'s GetToken & SetToken former methods upgraded to GetTokenAsync & SetTokenAsync** so we could wait for it
 - [Improvement/Breaking][Authentication] Now **`WithAuthenticationHandler` option's methods handle more parameters** like HttpRequestMessage & CancellationToken
+- [Improvement][CacheKey] Now **cache key generator extracts values from selected parameters only** to improve performances
+- [Fix][CacheKey] Now **cache key generator handle parameters initialized right into the ExecuteAsync call** as expected
 - [Fix][CacheKey] Now **POST methods returning a result could finally be data cached and key discriminated** as expected
+- [Fix][Config] Now **configuration pipeline spreads options from common to request level** as expected
+- [Update][NuGet] Now **Refit package reference has been updated to latest v8**
  
 ### Apizr.Extensions.Microsoft.DependencyInjection
 

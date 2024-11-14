@@ -767,7 +767,7 @@
         <member name="T:Apizr.Configuring.Common.ApizrCommonOptions">
             <inheritdoc cref="T:Apizr.Configuring.Common.IApizrCommonOptions"/>
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptions.#ctor">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptions.#ctor(Apizr.Configuring.Common.IApizrCommonOptions)">
             <summary>
             The Apizr common options constructor
             </summary>
@@ -832,7 +832,7 @@
         <member name="T:Apizr.Configuring.Common.ApizrCommonOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Common.IApizrCommonOptionsBase" />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBase.#ctor(Apizr.Configuring.Common.IApizrCommonOptionsBase)">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Common.ApizrCommonOptionsBase.RefitSettings">
@@ -1865,7 +1865,7 @@
         <member name="T:Apizr.Configuring.Proper.ApizrProperOptionsBase">
             <inheritdoc cref="T:Apizr.Configuring.Proper.IApizrProperOptionsBase" />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.Type,System.Reflection.TypeInfo,Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBase.#ctor(Apizr.Configuring.Shared.IApizrGlobalSharedRegistrationOptionsBase,System.Type,System.Type,System.Reflection.TypeInfo,System.String,System.String,System.Nullable{Apizr.Logging.HttpTracerMode},System.Nullable{Apizr.Logging.HttpMessageParts},Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Resiliencing.Attributes.ResiliencePipelineAttributeBase[],Apizr.Caching.Attributes.CacheAttribute,Apizr.Caching.Attributes.CacheAttribute,System.Func{System.String,System.Boolean},Microsoft.Extensions.Logging.LogLevel[])">
             <summary>
             The proper options constructor
             </summary>
@@ -1873,11 +1873,16 @@
             <param name="webApiType">The web api type</param>
             <param name="crudApiEntityType">The crud api entity type if any</param>
             <param name="typeInfo">The type info</param>
+            <param name="baseAddress">The web api base address</param>
+            <param name="basePath">The web api base path</param>
+            <param name="httpTracerMode">The http tracer mode</param>
+            <param name="trafficVerbosity">The traffic verbosity</param>
             <param name="commonResiliencePipelineAttributes">Global resilience pipelines</param>
             <param name="properResiliencePipelineAttributes">Specific resilience pipelines</param>
             <param name="commonCacheAttribute">Global caching options</param>
             <param name="properCacheAttribute">Specific caching options</param>
             <param name="shouldRedactHeaderValue">Headers to redact value</param>
+            <param name="logLevels">The log levels</param>
         </member>
         <member name="P:Apizr.Configuring.Proper.ApizrProperOptionsBase.WebApiType">
             <inheritdoc />
@@ -2825,9 +2830,6 @@
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.LogLevels">
-            <inheritdoc />
-        </member>
-        <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.OnException">
             <inheritdoc />
         </member>
         <member name="P:Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ExceptionHandlers">

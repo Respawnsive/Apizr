@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,23 +9,30 @@ namespace Apizr.Extending
     {
         internal static string ToString(this object source, string keyValueSeparator, string sequenceSeparator, params string[] includedProperties)
         {
-            var props = new Dictionary<string, string>();
             if (source == null)
                 throw new ArgumentException("Parameter source can not be null.");
 
-            var type = source.GetType();
-            var propsToInclude = includedProperties?.Length > 0
-                ? type.GetProperties().Where(prop => includedProperties.Contains(prop.Name)).ToArray()
-                : type.GetProperties();
-            foreach (var prop in propsToInclude)
+            var includeAllProperties = includedProperties == null || includedProperties.Length == 0;
+            var includedPropertiesSet = new HashSet<string>(includedProperties ?? [], StringComparer.OrdinalIgnoreCase);
+            var pairs = new List<string>();
+
+            if (source is IDictionary sourceDictionary)
             {
-                var val = prop.GetValue(source, []);
-                var valStr = val?.ToString();
-                if(!string.IsNullOrEmpty(valStr))
-                    props.Add(prop.Name, valStr);
+                foreach (DictionaryEntry entry in sourceDictionary)
+                {
+                    if(includeAllProperties || includedPropertiesSet.Contains(entry.Key.ToString()))
+                        pairs.Add($"{entry.Key}{keyValueSeparator}{entry.Value}");
+                }
+            }
+            else
+            {
+                pairs.AddRange(source.GetType()
+                    .GetProperties()
+                    .Where(prop => includeAllProperties || includedPropertiesSet.Contains(prop.Name))
+                    .Select(prop => $"{prop.Name}{keyValueSeparator}{prop.GetValue(source)}"));
             }
 
-            return props.ToString(keyValueSeparator, sequenceSeparator);
+            return string.Join(sequenceSeparator, pairs);
         }
-	}
+    }
 }

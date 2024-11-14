@@ -2633,84 +2633,59 @@ namespace Apizr
                     return true;
                 }
 
-                // There's one or more parameters!
-                // Get arguments values
-                var extractedArguments = methodCallExpression.Arguments
-                    .SelectMany(ExtractConstants)
-                    .ToList();
-
-                // Get a potential specific cache key
-                var specificCacheKeys = methodParameters
+                // Get method parameters suitable for cache key
+                var hasCacheKeyAttribute = methodParameters.Any(mp => mp.CustomAttributes.Any(y => y.AttributeType == typeof(CacheKeyAttribute)));
+                var cacheKeyMethodParameters = methodParameters
                     .Select((methodParameter, index) => new
                     {
-                        Index = index,
-                        ParameterInfo = methodParameter
+                        Index = index, // parameter position
+                        ParameterInfo = methodParameter, // parameter infos
+                        CacheKeyAttribute = hasCacheKeyAttribute ? // potential cache key attribute
+                            methodParameter.GetCustomAttribute<CacheKeyAttribute>(true) : 
+                            null
                     })
-                    .Where(x => x.ParameterInfo.CustomAttributes.Any(y => y.AttributeType == typeof(CacheKeyAttribute)))
+                    .Where(x => 
+                        (!hasCacheKeyAttribute || // no cache key attribute anywhere
+                         x.CacheKeyAttribute != null) && // or cache key attribute on this parameter
+                         x.ParameterInfo.ParameterType != typeof(CancellationToken) && // not a cancellation token
+                         x.ParameterInfo.CustomAttributes.All(customAttribute => !typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(customAttribute.AttributeType.GetTypeInfo()))) // not a Refit property
                     .ToList();
 
                 var parameters = new List<string>();
-                for (var i = 0; i <= extractedArguments.Count - 1; i++)
+                foreach (var cacheKeyMethodParameter in cacheKeyMethodParameters)
                 {
-                    // If we get any specific cache keys, ignore all other arguments
-                    if (specificCacheKeys.Count > 0)
-                    {
-                        if (i < specificCacheKeys.Min(specificCacheKey => specificCacheKey.Index))
-                            continue;
-                        if (i > specificCacheKeys.Max(specificCacheKey => specificCacheKey.Index))
-                            break;
-                        if(specificCacheKeys.All(specificCacheKey => specificCacheKey.Index != i))
-                            continue;
-                    }
-
-                    // Get a potential specific cache key
-                    var specificCacheKey = specificCacheKeys.FirstOrDefault(x => x.Index == i);
-
-                    // Ignore CancellationToken and Refit Property parameters
-                    var parameterInfo = methodParameters[i];
-                    if (typeof(CancellationToken).GetTypeInfo()
-                            .IsAssignableFrom(parameterInfo.ParameterType.GetTypeInfo())
-                        || parameterInfo.CustomAttributes.Any(x =>
-                            typeof(PropertyAttribute).GetTypeInfo().IsAssignableFrom(x.AttributeType.GetTypeInfo())))
-                        continue;
-
+                    var parameterInfo = cacheKeyMethodParameter.ParameterInfo;
                     var parameterName = parameterInfo.Name;
-                    var extractedArgument = extractedArguments[i];
-                    var extractedArgumentValue = extractedArgument.Value;
+                    var extractedArgumentValues = ExtractConstants(methodCallExpression.Arguments.ElementAt(cacheKeyMethodParameter.Index)).ToList();
+                    var extractedArgumentValue = extractedArgumentValues.FirstOrDefault()?.Value;
                     if (extractedArgumentValue == null)
                         continue;
-
-                    //// Set argument value if cache key is still null
-                    var parameterValue = extractedArgument.Value;
 
                     // Prepare formatted name and value pair for our cache key
                     string parameter = null;
 
                     // Simple param value OR complex type with overriden ToString
-                    var value = parameterValue.ToString();
-                    if (!string.IsNullOrWhiteSpace(value) && value != parameterValue.GetType().ToString())
+                    var value = extractedArgumentValue.ToString();
+                    if (!string.IsNullOrWhiteSpace(value) && value != extractedArgumentValue.GetType().ToString())
                     {
                         parameter = value.Contains(":") && !value.Contains("[")
                             ? $"{parameterName}:{{{value}}}"
                             : $"{parameterName}:{value}";
                     }
                     // Dictionary param key values
-                    else if (parameterValue is IDictionary objectDictionary)
+                    else if (extractedArgumentValue is IDictionary objectDictionary)
                     {
-                        parameter = $"{parameterName}:[{objectDictionary.ToString(":", ", ")}]";
+                        parameter = $"{parameterName}:[{objectDictionary.ToString(":", ", ", cacheKeyMethodParameter.CacheKeyAttribute?.PropertyNames)}]";
                     }
                     else
                     {
-                        // Is there a specific cache key with target properties?
-                        var cacheKeyAttribute = specificCacheKey?.ParameterInfo.GetCustomAttribute<CacheKeyAttribute>(true);
-
                         // Complex type param values without override
-                        var complexParameters = parameterValue.ToString(":", ", ", cacheKeyAttribute?.PropertyNames);
+                        var complexParameters = extractedArgumentValue.ToString(":", ", ", cacheKeyMethodParameter.CacheKeyAttribute?.PropertyNames);
                         if (!string.IsNullOrWhiteSpace(complexParameters))
-                            parameter = $"{parameterName}:{{{complexParameters}}}"; 
+                            parameter = $"{parameterName}:{{{complexParameters}}}";
                     }
 
-                    if(!string.IsNullOrWhiteSpace(parameter))
+                    if (!string.IsNullOrWhiteSpace(parameter))
                         parameters.Add(parameter);
                 }
 
@@ -2748,27 +2723,6 @@ namespace Apizr
             _cachingMethodsSet.TryAdd(methodDetails, cacheAttribute);
 
             return cacheAttribute;
-        }
-
-        private static string GetParameterKeyValues(string parameterName, object parameterValue)
-        {
-            // Simple param value OR complex type with overriden ToString
-            var value = parameterValue.ToString();
-            if (!string.IsNullOrWhiteSpace(value) && value != parameterValue.GetType().ToString())
-                return value.Contains(":") && !value.Contains("[")
-                    ? $"{parameterName}:{{{value}}}"
-                    : $"{parameterName}:{value}";
-
-            // Dictionary param key values
-            if (parameterValue is IDictionary objectDictionary)
-                return $"{parameterName}:[{objectDictionary.ToString(":", ", ")}]";
-
-            // Complex type param values without override
-            var parameters = parameterValue.ToString(":", ", ");
-            if (!string.IsNullOrWhiteSpace(parameters))
-                return $"{parameterName}:{{{parameters}}}";
-
-            return null;
         }
 
         private static IDictionary<string, object> GetCacheEntries<TResult>(IApizrResponse<TResult> apizrResponse,
@@ -3274,7 +3228,7 @@ namespace Apizr
                             parameters.Add(key, value);
                     }
 
-                    yield return new ExtractedConstant {Value = $"[{parameters.ToString(":", ", ")}]"};
+                    yield return new ExtractedConstant {Value = parameters};
                 }
                 else
                     yield return new ExtractedConstant { };
@@ -3312,7 +3266,7 @@ namespace Apizr
                         }
                     }
 
-                    yield return new ExtractedConstant {Value = parameters.ToString(":", ", ")};
+                    yield return new ExtractedConstant {Value = parameters};
                 }
                 else
                     foreach (var constants in ExtractConstants(memberInitExpression.NewExpression))
@@ -3328,7 +3282,7 @@ namespace Apizr
                         parameters.Add(constructorParameters[i].Name, constantExpression.Value);
                 }
 
-                yield return new ExtractedConstant {Value = parameters.ToString(":", ", ")};
+                yield return new ExtractedConstant {Value = parameters};
             }
             else
                 throw new NotImplementedException();

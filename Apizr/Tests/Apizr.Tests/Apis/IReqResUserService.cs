@@ -94,6 +94,9 @@ namespace Apizr.Tests.Apis
         [Get("/users")]
         Task<ApiResult<User>> GetUsersAsync(bool isTest, IDictionary<string, object> userIds, ReadAllUsersParams parameters, [Priority] int priority, CancellationToken cancellationToken);
 
+        [Get("/users")]
+        Task<ApiResult<User>> GetUsersAsync([CacheKey(nameof(ReadAllUsersParams.Param1))] ReadAllUsersParams customParams, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+
         [Get("/users/{userId}")]
         Task<UserDetails> GetUserAsync(int userId, [Priority] int priority, CancellationToken cancellationToken);
 
@@ -101,13 +104,16 @@ namespace Apizr.Tests.Apis
         Task<UserDetails> GetUserAsync(int userId, IDictionary<string, object> parameters, [Priority] int priority, CancellationToken cancellationToken);
 
         [Get("/users/{userId}")]
-        Task<UserDetails> GetUserAsync([CacheKey] int userId, IDictionary<string, object> parameters, [CacheKey(nameof(ReadAllUsersParams.Param1))] ReadAllUsersParams customParams, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+        Task<UserDetails> GetUserAsync([CacheKey] int userId, IDictionary<string, object> parameters, [CacheKey(nameof(ReadAllUsersParams.Param1))] ReadAllUsersParams customParams, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode, CancellationToken cancellationToken);
+
+        [Get("/users/{userId}")]
+        Task<UserDetails> GetUserAsync(int userId, [Query] string someQuery, IDictionary<string, object> parameters, ReadAllUsersParams customParams, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode, CancellationToken cancellationToken);
 
         [Get("/users/{userId}")]
         Task<UserDetails> GetUserAsync(int userId);
 
         [Get("/users/{userId}")]
-        Task<UserDetails> GetUserAsync(int userId, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode);
+        Task<UserDetails> GetUserAsync(int userId, [Property(nameof(HttpStatusCode))] HttpStatusCode statusCode, CancellationToken cancellationToken);
 
         [Get("/users/{userId}")]
         Task<ApiResponse<UserDetails>> GetUserResponseAsync(int userId);

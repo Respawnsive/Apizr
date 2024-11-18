@@ -6,6 +6,7 @@
 - [New][Authentication] Now **`WithAuthenticationHandler` option provide many more overloads** to fit more use cases, like property mapping, local methods, service methods, custom handler, etc.
 - [New][Authentication] Now **`AuthenticationHandlerBase` does clone request Options** as well as former Properties
 - [New][Authentication] Now **`AuthenticationHandlerBase` performances and behavior have been improved** by caching compiled factories and adjusting authentication flow
+- [Improvement/Breaking][Authentication] Now **`AuthenticationHandlerBase` with no token available fails fast by returning an Unauthorized response** without actually sending the request
 - [Improvement/Breaking][Authentication] Now **`AuthenticationHandlerBase`'s GetToken & SetToken former methods upgraded to GetTokenAsync & SetTokenAsync** so we could wait for it
 - [Improvement/Breaking][Authentication] Now **`WithAuthenticationHandler` option's methods handle more parameters** like HttpRequestMessage & CancellationToken
 - [Improvement][CacheKey] Now **cache key generator extracts values from selected parameters only** to improve performances

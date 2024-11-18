@@ -65,7 +65,12 @@ namespace Apizr.Authenticating
                 refreshedToken = await RefreshTokenAsync(request, formerToken, cancellationToken).ConfigureAwait(false);
                 // If no token is provided, fail fast by returning an Unauthorized response without sending the request
                 if (string.IsNullOrEmpty(refreshedToken))
-                    return new HttpResponseMessage(HttpStatusCode.Unauthorized) { Content = new StringContent("Authorization token is missing.") };
+                    return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+                    {
+                        RequestMessage = request,
+                        ReasonPhrase = "Authorization token is missing.",
+                        Content = new StringContent("Authorization token is missing.")
+                    };
             }
 
             // Set the authentication header
@@ -84,6 +89,14 @@ namespace Apizr.Authenticating
                 // Refresh the token
                 logger?.Log(logLevels.Low(), $"{context.OperationKey}: Refreshing token...");
                 refreshedToken = await RefreshTokenAsync(request, formerToken, cancellationToken).ConfigureAwait(false);
+                // If no token is provided, fail fast by returning an Unauthorized response without sending the request
+                if (string.IsNullOrEmpty(refreshedToken))
+                    return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+                    {
+                        RequestMessage = request,
+                        ReasonPhrase = "Authorization token is missing.",
+                        Content = new StringContent("Authorization token is missing.")
+                    };
 
                 // Set the authentication header with refreshed token 
                 clonedRequest.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, refreshedToken);

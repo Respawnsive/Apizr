@@ -137,10 +137,10 @@ namespace Apizr.Configuring.Manager
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IDictionary<Type, Func<IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
         /// <inheritdoc />
-        public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set;  }
+        public Func<IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set;  }
 
         private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

@@ -13,7 +13,6 @@ using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
 using Apizr.Configuring.Shared.Context;
 using Apizr.Connecting;
-using Apizr.Extending.Authenticating;
 using Apizr.Extending.Configuring.Shared;
 using Apizr.Logging;
 using Apizr.Mapping;
@@ -237,9 +236,9 @@ namespace Apizr.Extending.Configuring.Common
                 throw new ArgumentException(
                     $"{authenticationHandlerType.Name} must define only one generic TWebApi argument");
 
-            if (!typeof(AuthenticationHandlerBase<>).IsAssignableFromGenericType(authenticationHandlerType))
+            if (!typeof(AuthenticationHandlerBase).IsAssignableFrom(authenticationHandlerType))
                 throw new ArgumentException(
-                    $"{authenticationHandlerType.Name} must inherit from AuthenticationHandlerBase<TWebApi>");
+                    $"{authenticationHandlerType.Name} must inherit from AuthenticationHandlerBase");
 
             return WithDelegatingHandler((serviceProvider, options) => (AuthenticationHandlerBase)serviceProvider.GetRequiredService(authenticationHandlerType.MakeGenericType(options.WebApiType)));
         }
@@ -247,24 +246,21 @@ namespace Apizr.Extending.Configuring.Common
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(
             Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory)
-            => WithDelegatingHandler((serviceProvider, options) =>
-                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
-                    options, getTokenFactory));
+            => WithDelegatingHandler((_, options) =>
+                new AuthenticationHandler(options, getTokenFactory));
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(
             Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory,
             Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory)
             => WithDelegatingHandler((serviceProvider, options) =>
-                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
-                    options, getTokenFactory, setTokenFactory));
+                new AuthenticationHandler(options, getTokenFactory, setTokenFactory));
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(
             Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory)
             => WithDelegatingHandler((serviceProvider, options) =>
-                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
-                    options, refreshTokenFactory));
+                new AuthenticationHandler(options, refreshTokenFactory));
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler(
@@ -272,8 +268,7 @@ namespace Apizr.Extending.Configuring.Common
             Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory,
             Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory)
             => WithDelegatingHandler((serviceProvider, options) =>
-                new AuthenticationHandler(serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
-                    options, getTokenFactory, setTokenFactory, refreshTokenFactory));
+                new AuthenticationHandler(options, getTokenFactory, setTokenFactory, refreshTokenFactory));
 
         /// <inheritdoc />
         public IApizrExtendedCommonOptionsBuilder WithAuthenticationHandler<TSettingsService>(
@@ -282,7 +277,6 @@ namespace Apizr.Extending.Configuring.Common
             {
                 var getTokenFactory = getTokenExpression.Compile();
                 return new AuthenticationHandler(
-                    serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
                     options,
                     (request, ct) => getTokenFactory.Invoke(serviceProvider.GetRequiredService<TSettingsService>(), request, ct));
             });
@@ -296,7 +290,6 @@ namespace Apizr.Extending.Configuring.Common
                 var getTokenFactory = getTokenExpression.Compile();
                 var setTokenFactory = setTokenExpression.Compile();
                 return new AuthenticationHandler(
-                    serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
                     options,
                     (request, ct) => getTokenFactory.Invoke(serviceProvider.GetRequiredService<TSettingsService>(), request, ct),
                     (request, token, ct) => setTokenFactory.Invoke(serviceProvider.GetRequiredService<TSettingsService>(), request, token, ct));
@@ -310,7 +303,6 @@ namespace Apizr.Extending.Configuring.Common
             {
                 var refreshTokenFactory = refreshTokenExpression.Compile();
                 return new AuthenticationHandler(
-                    serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
                     options,
                     (request, token, ct) => refreshTokenFactory.Invoke(serviceProvider.GetRequiredService<TTokenService>(), request, token, ct));
             });
@@ -327,7 +319,6 @@ namespace Apizr.Extending.Configuring.Common
                 var setTokenFactory = setTokenExpression.Compile();
                 var refreshTokenFactory = refreshTokenExpression.Compile();
                 return new AuthenticationHandler(
-                    serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
                     options,
                     (request, ct) => getTokenFactory.Invoke(serviceProvider.GetRequiredService<TSettingsService>(), request, ct),
                     (request, token, ct) => setTokenFactory.Invoke(serviceProvider.GetRequiredService<TSettingsService>(), request, token, ct),
@@ -346,7 +337,6 @@ namespace Apizr.Extending.Configuring.Common
                 var setTokenFactory = setTokenExpression.Compile();
                 var refreshTokenFactory = refreshTokenExpression.Compile();
                 return new AuthenticationHandler(
-                    serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
                     options,
                     (request, ct) => getTokenFactory.Invoke(serviceProvider.GetRequiredService<TAuthService>(), request, ct),
                     (request, token, ct) => setTokenFactory.Invoke(serviceProvider.GetRequiredService<TAuthService>(), request, token, ct),
@@ -361,7 +351,6 @@ namespace Apizr.Extending.Configuring.Common
                 var getTokenFactory = tokenPropertyExpression.Compile();
                 var setTokenAction = tokenPropertyExpression.ToCompiledSetter();
                 return new AuthenticationHandler(
-                    serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
                     options,
                     (_, _) => Task.FromResult(getTokenFactory.Invoke(serviceProvider.GetRequiredService<TSettingsService>())),
                     (_, token, _) =>
@@ -382,7 +371,6 @@ namespace Apizr.Extending.Configuring.Common
                 var setTokenAction = tokenPropertyExpression.ToCompiledSetter();
                 var refreshTokenFactory = refreshTokenExpression.Compile();
                 return new AuthenticationHandler(
-                    serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
                     options,
                     (_, _) => Task.FromResult(getTokenFactory.Invoke(serviceProvider.GetRequiredService<TSettingsService>())),
                     (_, token, _) =>
@@ -404,7 +392,6 @@ namespace Apizr.Extending.Configuring.Common
                 var setTokenAction = tokenPropertyExpression.ToCompiledSetter();
                 var refreshTokenFactory = refreshTokenExpression.Compile();
                 return new AuthenticationHandler(
-                    serviceProvider.GetRequiredService<ILogger<AuthenticationHandler>>(),
                     options,
                     (_, _) => Task.FromResult(getTokenFactory.Invoke(serviceProvider.GetRequiredService<TAuthService>())),
                     (_, token, _) =>

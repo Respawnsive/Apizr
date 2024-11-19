@@ -56,12 +56,12 @@ namespace Apizr.Configuring.Shared
         /// <summary>
         /// DelegatingHandler factories
         /// </summary>
-        IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        IDictionary<Type, Func<IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
         /// <summary>
         /// HttpMessageHandler factory
         /// </summary>
-        Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; }
+        Func<IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; }
 
         /// <summary>
         /// The operation timeout factory (overall request tries)

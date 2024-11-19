@@ -35,7 +35,7 @@ namespace Apizr.Configuring.Common
             MappingHandlerFactory = baseCommonOptions?.MappingHandlerFactory ?? (() => new VoidMappingHandler());
             DelegatingHandlersFactories =
                 baseCommonOptions?.DelegatingHandlersFactories?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) ??
-                new Dictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>();
+                new Dictionary<Type, Func<IApizrManagerOptionsBase, DelegatingHandler>>();
             HttpMessageHandlerFactory = baseCommonOptions?.HttpMessageHandlerFactory;
             OperationTimeoutFactory = baseCommonOptions?.OperationTimeoutFactory;
             RequestTimeoutFactory = baseCommonOptions?.RequestTimeoutFactory;
@@ -99,10 +99,10 @@ namespace Apizr.Configuring.Common
         public Func<IMappingHandler> MappingHandlerFactory { get; set; }
 
         /// <inheritdoc />
-        public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+        public IDictionary<Type, Func<IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
 
         /// <inheritdoc />
-        public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
+        public Func<IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
 
         private Func<TimeSpan> _operationTimeoutFactory;
         /// <inheritdoc />

@@ -275,7 +275,7 @@ namespace Apizr.Tests
                         builder.AddXUnit(_outputHelper)
                             .SetMinimumLevel(LogLevel.Trace)))
                     .WithLogging()
-                    .WithAuthenticationHandler((log, opt) => new AuthHandler<IHttpBinService>(log, opt, tokenService)));
+                    .WithAuthenticationHandler(opt => new AuthHandler(opt, tokenService)));
 
             var result = await httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
 

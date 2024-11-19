@@ -76,7 +76,7 @@ namespace Apizr.Configuring.Shared
         /// <param name="authenticationHandlerFactory">A <typeparamref name="TAuthenticationHandler"/> instance factory</param>
         /// <returns></returns>
         TApizrOptionsBuilder WithAuthenticationHandler<TAuthenticationHandler>(
-            Func<ILogger, IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
+            Func<IApizrManagerOptionsBase, TAuthenticationHandler> authenticationHandlerFactory)
             where TAuthenticationHandler : AuthenticationHandlerBase;
 
         /// <summary>
@@ -301,16 +301,7 @@ namespace Apizr.Configuring.Shared
         /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
         /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithDelegatingHandler<THandler>(Func<ILogger, THandler> delegatingHandlerFactory,
-            ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler;
-
-        /// <summary>
-        /// Add a custom delegating handler inheriting from <see cref="DelegatingHandler"/> (serial call)
-        /// </summary>
-        /// <param name="delegatingHandlerFactory">A delegating handler factory</param>
-        /// <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithDelegatingHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> delegatingHandlerFactory,
+        TApizrOptionsBuilder WithDelegatingHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> delegatingHandlerFactory,
             ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler;
 
         /// <summary>
@@ -318,14 +309,7 @@ namespace Apizr.Configuring.Shared
         /// </summary>
         /// <param name="httpMessageHandlerFactory">A http message handler factory</param>
         /// <returns></returns>
-        TApizrOptionsBuilder WithHttpMessageHandler<THandler>(Func<ILogger, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler;
-
-        /// <summary>
-        /// Add a custom http message handler inheriting from <see cref="HttpMessageHandler"/> (last call)
-        /// </summary>
-        /// <param name="httpMessageHandlerFactory">A http message handler factory</param>
-        /// <returns></returns>
-        TApizrOptionsBuilder WithHttpMessageHandler<THandler>(Func<ILogger, IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler;
+        TApizrOptionsBuilder WithHttpMessageHandler<THandler>(Func<IApizrManagerOptionsBase, THandler> httpMessageHandlerFactory) where THandler : HttpMessageHandler;
 
         /// <summary>
         /// Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)

@@ -16,17 +16,14 @@ namespace Apizr.Authenticating
     /// </summary>
     public abstract class AuthenticationHandlerBase : DelegatingHandler, IAuthenticationHandler
     {
-        protected readonly ILogger Logger;
         protected readonly IApizrManagerOptionsBase ApizrOptions;
 
         /// <summary>
         /// The authentication handler constructor
         /// </summary>
-        /// <param name="logger">The logger</param>
         /// <param name="apizrOptions">The Apizr options</param>
-        protected AuthenticationHandlerBase(ILogger logger, IApizrManagerOptionsBase apizrOptions)
+        protected AuthenticationHandlerBase(IApizrManagerOptionsBase apizrOptions)
         {
-            Logger = logger;
             ApizrOptions = apizrOptions;
         }
 
@@ -42,11 +39,12 @@ namespace Apizr.Authenticating
             string refreshedToken = null;
 
             // Get logging config
+            request.TryGetApizrRequestOptions(out var requestOptions);
             var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
-            if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
+            if (!context.TryGetLogger(out var logger, out var logLevels, out var _, out var _))
             {
-                logger = Logger;
-                logLevels = ApizrOptions.LogLevels;
+                logLevels = requestOptions?.LogLevels ?? ApizrOptions.LogLevels;
+                logger = ApizrOptions.Logger;
             }
 
             // Get the token from saved settings if available

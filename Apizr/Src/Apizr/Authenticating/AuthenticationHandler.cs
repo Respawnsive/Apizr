@@ -22,13 +22,11 @@ namespace Apizr.Authenticating
         /// <summary>
         /// The authentication handler constructor
         /// </summary>
-        /// <param name="logger">The logger</param>
         /// <param name="apizrOptions">The Apizr options</param>
         /// <param name="getTokenFactory">The get token factory</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public AuthenticationHandler(ILogger logger,
-            IApizrManagerOptionsBase apizrOptions,
-            Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory) : base(logger, apizrOptions)
+        public AuthenticationHandler(IApizrManagerOptionsBase apizrOptions,
+            Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory) : base(apizrOptions)
         {
             _getTokenFactory = getTokenFactory ?? throw new ArgumentNullException(nameof(getTokenFactory));
         }
@@ -36,15 +34,13 @@ namespace Apizr.Authenticating
         /// <summary>
         /// The authentication handler constructor
         /// </summary>
-        /// <param name="logger">The logger</param>
         /// <param name="apizrOptions">The Apizr options</param>
         /// <param name="getTokenFactory">The get token factory</param>
         /// <param name="setTokenFactory">The set token factory</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public AuthenticationHandler(ILogger logger,
-            IApizrManagerOptionsBase apizrOptions,
+        public AuthenticationHandler(IApizrManagerOptionsBase apizrOptions,
             Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory,
-            Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory) : base(logger, apizrOptions)
+            Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory) : base(apizrOptions)
         {
             _getTokenFactory = getTokenFactory ?? throw new ArgumentNullException(nameof(getTokenFactory));
             _setTokenFactory = setTokenFactory ?? throw new ArgumentNullException(nameof(setTokenFactory));
@@ -53,13 +49,11 @@ namespace Apizr.Authenticating
         /// <summary>
         /// The authentication handler constructor
         /// </summary>
-        /// <param name="logger">The logger</param>
         /// <param name="apizrOptions">The Apizr options</param>
         /// <param name="refreshTokenFactory">The refresh token factory</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public AuthenticationHandler(ILogger logger, 
-            IApizrManagerOptionsBase apizrOptions, 
-            Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory) : base(logger, apizrOptions)
+        public AuthenticationHandler(IApizrManagerOptionsBase apizrOptions, 
+            Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory) : base(apizrOptions)
         {
             _refreshTokenFactory = refreshTokenFactory ?? throw new ArgumentNullException(nameof(refreshTokenFactory));
         }
@@ -67,17 +61,15 @@ namespace Apizr.Authenticating
         /// <summary>
         /// The authentication handler constructor
         /// </summary>
-        /// <param name="logger">The logger</param>
         /// <param name="apizrOptions">The Apizr options</param>
         /// <param name="refreshTokenFactory">The refresh token factory</param>
         /// <param name="getTokenFactory">The get token factory</param>
         /// <param name="setTokenFactory">The set token factory</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public AuthenticationHandler(ILogger logger,
-            IApizrManagerOptionsBase apizrOptions,
+        public AuthenticationHandler(IApizrManagerOptionsBase apizrOptions,
             Func<HttpRequestMessage, CancellationToken, Task<string>> getTokenFactory,
             Func<HttpRequestMessage, string, CancellationToken, Task> setTokenFactory,
-            Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory) : base(logger, apizrOptions)
+            Func<HttpRequestMessage, string, CancellationToken, Task<string>> refreshTokenFactory) : base(apizrOptions)
         {
             _getTokenFactory = getTokenFactory ?? throw new ArgumentNullException(nameof(getTokenFactory));
             _setTokenFactory = setTokenFactory ?? throw new ArgumentNullException(nameof(setTokenFactory));

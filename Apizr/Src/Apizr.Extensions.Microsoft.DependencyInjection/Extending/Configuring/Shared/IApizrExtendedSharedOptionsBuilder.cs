@@ -8,7 +8,6 @@ using Apizr.Authenticating;
 using Apizr.Configuring;
 using Apizr.Configuring.Manager;
 using Apizr.Configuring.Shared;
-using Apizr.Extending.Authenticating;
 using Apizr.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -144,9 +143,9 @@ namespace Apizr.Extending.Configuring.Shared
             where TAuthenticationHandler : AuthenticationHandlerBase;
 
         /// <summary>
-        /// Provide your own <see cref="AuthenticationHandlerBase{TWebApi}"/> generic implementation
+        /// Provide your own <see cref="AuthenticationHandlerBase"/> generic implementation
         /// </summary>
-        /// <param name="authenticationHandlerType">Your own <see cref="AuthenticationHandlerBase{TWebApi}"/> generic implementation</param>
+        /// <param name="authenticationHandlerType">Your own <see cref="AuthenticationHandlerBase"/> generic implementation</param>
         /// <returns></returns>
         TApizrExtendedSharedOptionsBuilder WithAuthenticationHandler(Type authenticationHandlerType);
 

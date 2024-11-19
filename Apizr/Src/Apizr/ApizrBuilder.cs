@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Threading;
 using Apizr.Caching;
 using Apizr.Caching.Attributes;
 using Apizr.Cancelling.Attributes.Operation;
@@ -20,11 +19,8 @@ using Apizr.Logging;
 using Apizr.Logging.Attributes;
 using Apizr.Mapping;
 using Apizr.Requesting;
-using Apizr.Requesting.Attributes;
 using Apizr.Resiliencing;
 using Apizr.Resiliencing.Attributes;
-using Microsoft.Extensions.Logging;
-using Polly;
 using Polly.Registry;
 using Refit;
 
@@ -161,10 +157,10 @@ namespace Apizr
                 handlerBuilder.AddHandler(new ResilienceHttpMessageHandler(apizrOptions.ResiliencePipelineRegistryFactory.Invoke(), apizrOptions));
 
                 foreach (var httpMessageHandlersFactory in apizrOptions.DelegatingHandlersFactories.Values)
-                    handlerBuilder.AddHandler(httpMessageHandlersFactory.Invoke(apizrOptions.Logger, apizrOptions));
+                    handlerBuilder.AddHandler(httpMessageHandlersFactory.Invoke(apizrOptions));
 
                 if(apizrOptions.HttpMessageHandlerFactory != null)
-                    handlerBuilder.AddHandler(apizrOptions.HttpMessageHandlerFactory.Invoke(apizrOptions.Logger, apizrOptions));
+                    handlerBuilder.AddHandler(apizrOptions.HttpMessageHandlerFactory.Invoke(apizrOptions));
 
                 var innerHandler = handlerBuilder.Build();
                 var primaryHandler = apizrOptions.PrimaryHandlerFactory?.Invoke(innerHandler, apizrOptions.Logger, apizrOptions) ?? innerHandler;

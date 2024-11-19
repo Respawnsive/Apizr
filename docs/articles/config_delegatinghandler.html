@@ -117,11 +117,8 @@ options =&gt; options.WithDelegatingHandler((serviceProvider, options) =&gt; You
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithDelegatingHandler(YourDelegatingHandler)
 
-// OR factory configuration with the logger instance
-options =&gt; options.WithDelegatingHandler(logger =&gt; YourDelegatingHandler)
-
 // OR factory configuration with the logger and options instances
-options =&gt; options.WithDelegatingHandler((logger, options) =&gt; YourDelegatingHandler)
+options =&gt; options.WithDelegatingHandler(options =&gt; YourDelegatingHandler)
 </code></pre>
 </section>
 </div>

@@ -48,8 +48,14 @@ private Task OnSetTokenAsync(HttpRequestMessage request, string token, Cancellat
 
 private Task<string> OnRefreshTokenAsync(HttpRequestMessage request, string token, CancellationToken ct)
 {
-    // Refresh the unauthorized token by sending a refreshing request, 
-    // or processing a login flow that returns a fresh token.
+    if(!string.IsNullOrWhiteSpace(token))
+    {
+        // May refresh the unauthorized token by sending a refreshing request
+    }
+    else
+    {
+        // Could process a login flow that returns a fresh token
+    }
 }
 
 ```
@@ -108,9 +114,20 @@ options => options.WithAuthenticationHandler<IAuthService>(
     (authService, request, tk, ct) => authService.RefreshTokenAsync(request, tk, ct))
 ```
 
-- When you want to provide your own `AuthenticationHandlerBase<TWebApi>` open generic implementation:
+- When you want to provide your own `AuthenticationHandlerBase` open generic implementation:
 ```csharp
 // by open generic auto resolving (need to be registered in service collection)
+public class YourAuthenticationHandler<TWebApi> : AuthenticationHandlerBase
+{
+    private readonly IAnyOtherService _service;
+
+    public YourAuthenticationHandler(IApizrManagerOptions<TWebApi> options, IAnyOtherService service) : base(options)
+    {
+        _service = service;
+    }
+    ...
+}
+...
 options => options.WithAuthenticationHandler(typeof(YourAuthenticationHandler<>))
 ...
 service.AddTransient(typeof(YourAuthenticationHandler<>)))
@@ -225,11 +242,12 @@ protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage 
     string refreshedToken = null;
 
     // Get logging config
+    request.TryGetApizrRequestOptions(out var requestOptions);
     var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
-    if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
+    if (!context.TryGetLogger(out var logger, out var logLevels, out var _, out var _))
     {
-        logger = Logger;
-        logLevels = ApizrOptions.LogLevels;
+        logLevels = requestOptions?.LogLevels ?? ApizrOptions.LogLevels;
+        logger = ApizrOptions.Logger;
     }
 
     // Get the token from saved settings if available
@@ -248,7 +266,12 @@ protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage 
         refreshedToken = await RefreshTokenAsync(request, formerToken, cancellationToken).ConfigureAwait(false);
         // If no token is provided, fail fast by returning an Unauthorized response without sending the request
         if (string.IsNullOrEmpty(refreshedToken))
-            return new HttpResponseMessage(HttpStatusCode.Unauthorized) { Content = new StringContent("Authorization token is missing.") };
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                RequestMessage = request,
+                ReasonPhrase = "Authorization token is missing.",
+                Content = new StringContent("Authorization token is missing.")
+            };
     }
 
     // Set the authentication header
@@ -267,6 +290,14 @@ protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage 
         // Refresh the token
         logger?.Log(logLevels.Low(), $"{context.OperationKey}: Refreshing token...");
         refreshedToken = await RefreshTokenAsync(request, formerToken, cancellationToken).ConfigureAwait(false);
+        // If no token is provided, fail fast by returning an Unauthorized response without sending the request
+        if (string.IsNullOrEmpty(refreshedToken))
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                RequestMessage = request,
+                ReasonPhrase = "Authorization token is missing.",
+                Content = new StringContent("Authorization token is missing.")
+            };
 
         // Set the authentication header with refreshed token 
         clonedRequest.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, refreshedToken);

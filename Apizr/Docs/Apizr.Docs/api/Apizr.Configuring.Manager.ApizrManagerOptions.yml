@@ -93,13 +93,13 @@ items:
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ShouldRedactHeaderValue
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.ResiliencePipelineOptions
   - Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+  - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions.#ctor(Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Proper.IApizrProperOptions)
   commentId: M:Apizr.Configuring.Manager.ApizrManagerOptions.#ctor(Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Proper.IApizrProperOptions)
   id: '#ctor(Apizr.Configuring.Common.IApizrCommonOptions,Apizr.Configuring.Proper.IApizrProperOptions)'
@@ -658,11 +658,11 @@ items:
   summary: DelegatingHandler factories
   example: []
   syntax:
-    content: public IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
+    content: public IDictionary<Type, Func<IApizrManagerOptionsBase, DelegatingHandler>> DelegatingHandlersFactories { get; }
     parameters: []
     return:
-      type: System.Collections.Generic.IDictionary{System.Type,System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
-    content.vb: Public ReadOnly Property DelegatingHandlersFactories As IDictionary(Of Type, Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
+      type: System.Collections.Generic.IDictionary{System.Type,System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
+    content.vb: Public ReadOnly Property DelegatingHandlersFactories As IDictionary(Of Type, Func(Of IApizrManagerOptionsBase, DelegatingHandler))
   overload: Apizr.Configuring.Manager.ApizrManagerOptions.DelegatingHandlersFactories*
   implements:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
@@ -691,11 +691,11 @@ items:
   summary: HttpMessageHandler factory
   example: []
   syntax:
-    content: public Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
+    content: public Func<IApizrManagerOptionsBase, HttpMessageHandler> HttpMessageHandlerFactory { get; set; }
     parameters: []
     return:
-      type: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
-    content.vb: Public Property HttpMessageHandlerFactory As Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+      type: System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+    content.vb: Public Property HttpMessageHandlerFactory As Func(Of IApizrManagerOptionsBase, HttpMessageHandler)
   overload: Apizr.Configuring.Manager.ApizrManagerOptions.HttpMessageHandlerFactory*
   implements:
   - Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
@@ -1120,6 +1120,30 @@ references:
   name: CacheOptions
   nameWithType: ApizrGlobalSharedOptionsBase.CacheOptions
   fullName: Apizr.Configuring.Shared.ApizrGlobalSharedOptionsBase.CacheOptions
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -1186,6 +1210,51 @@ references:
     name: Equals
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
   - uid: System.Object
     name: Object
@@ -1268,75 +1337,6 @@ references:
     name: MemberwiseClone
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
-  - name: (
-  - name: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
-  name: ReferenceEquals(object, object)
-  nameWithType: object.ReferenceEquals(object, object)
-  fullName: object.ReferenceEquals(object, object)
-  nameWithType.vb: Object.ReferenceEquals(Object, Object)
-  fullName.vb: Object.ReferenceEquals(Object, Object)
-  name.vb: ReferenceEquals(Object, Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
-  - name: (
-  - uid: System.Object
-    name: object
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object
-  - name: ','
-  - name: " "
-  - uid: System.Object
-    name: object
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object
-  - name: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
-  - name: (
-  - uid: System.Object
-    name: Object
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object
-  - name: ','
-  - name: " "
-  - uid: System.Object
-    name: Object
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object
-  - name: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
-  name: ToString()
-  nameWithType: object.ToString()
-  fullName: object.ToString()
-  nameWithType.vb: Object.ToString()
-  fullName.vb: Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
-  - name: (
-  - name: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
   - name: )
 - uid: System
@@ -2269,17 +2269,17 @@ references:
   name: DelegatingHandlersFactories
   nameWithType: IApizrSharedRegistrationOptions.DelegatingHandlersFactories
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.DelegatingHandlersFactories
-- uid: System.Collections.Generic.IDictionary{System.Type,System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
-  commentId: T:System.Collections.Generic.IDictionary{System.Type,System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
+- uid: System.Collections.Generic.IDictionary{System.Type,System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
+  commentId: T:System.Collections.Generic.IDictionary{System.Type,System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.DelegatingHandler}}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IDictionary`2
   href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
-  name: IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>
-  nameWithType: IDictionary<Type, Func<ILogger, IApizrManagerOptionsBase, DelegatingHandler>>
-  fullName: System.Collections.Generic.IDictionary<System.Type, System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler>>
-  nameWithType.vb: IDictionary(Of Type, Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.Type, System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler))
-  name.vb: IDictionary(Of Type, Func(Of ILogger, IApizrManagerOptionsBase, DelegatingHandler))
+  name: IDictionary<Type, Func<IApizrManagerOptionsBase, DelegatingHandler>>
+  nameWithType: IDictionary<Type, Func<IApizrManagerOptionsBase, DelegatingHandler>>
+  fullName: System.Collections.Generic.IDictionary<System.Type, System.Func<Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler>>
+  nameWithType.vb: IDictionary(Of Type, Func(Of IApizrManagerOptionsBase, DelegatingHandler))
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Type, System.Func(Of Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.DelegatingHandler))
+  name.vb: IDictionary(Of Type, Func(Of IApizrManagerOptionsBase, DelegatingHandler))
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
@@ -2292,17 +2292,11 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.type
   - name: ','
   - name: " "
-  - uid: System.Func`3
+  - uid: System.Func`2
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-3
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-  - uid: Microsoft.Extensions.Logging.ILogger
-    name: ILogger
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
-  - name: ','
-  - name: " "
   - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     name: IApizrManagerOptionsBase
     href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
@@ -2328,18 +2322,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.type
   - name: ','
   - name: " "
-  - uid: System.Func`3
+  - uid: System.Func`2
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-3
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: (
   - name: Of
-  - name: " "
-  - uid: Microsoft.Extensions.Logging.ILogger
-    name: ILogger
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
-  - name: ','
   - name: " "
   - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     name: IApizrManagerOptionsBase
@@ -2436,29 +2424,23 @@ references:
   name: HttpMessageHandlerFactory
   nameWithType: IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
   fullName: Apizr.Configuring.Shared.IApizrSharedRegistrationOptions.HttpMessageHandlerFactory
-- uid: System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
-  commentId: T:System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+- uid: System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
+  commentId: T:System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Net.Http.HttpMessageHandler}
   parent: System
-  definition: System.Func`3
-  href: https://learn.microsoft.com/dotnet/api/system.func-3
-  name: Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
-  nameWithType: Func<ILogger, IApizrManagerOptionsBase, HttpMessageHandler>
-  fullName: System.Func<Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
-  nameWithType.vb: Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
-  fullName.vb: System.Func(Of Microsoft.Extensions.Logging.ILogger, Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
-  name.vb: Func(Of ILogger, IApizrManagerOptionsBase, HttpMessageHandler)
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<IApizrManagerOptionsBase, HttpMessageHandler>
+  nameWithType: Func<IApizrManagerOptionsBase, HttpMessageHandler>
+  fullName: System.Func<Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler>
+  nameWithType.vb: Func(Of IApizrManagerOptionsBase, HttpMessageHandler)
+  fullName.vb: System.Func(Of Apizr.Configuring.Manager.IApizrManagerOptionsBase, System.Net.Http.HttpMessageHandler)
+  name.vb: Func(Of IApizrManagerOptionsBase, HttpMessageHandler)
   spec.csharp:
-  - uid: System.Func`3
+  - uid: System.Func`2
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-3
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: <
-  - uid: Microsoft.Extensions.Logging.ILogger
-    name: ILogger
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
-  - name: ','
-  - name: " "
   - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     name: IApizrManagerOptionsBase
     href: Apizr.Configuring.Manager.IApizrManagerOptionsBase.html
@@ -2470,18 +2452,12 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
   - name: '>'
   spec.vb:
-  - uid: System.Func`3
+  - uid: System.Func`2
     name: Func
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.func-3
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
   - name: (
   - name: Of
-  - name: " "
-  - uid: Microsoft.Extensions.Logging.ILogger
-    name: ILogger
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger
-  - name: ','
   - name: " "
   - uid: Apizr.Configuring.Manager.IApizrManagerOptionsBase
     name: IApizrManagerOptionsBase
@@ -2492,6 +2468,40 @@ references:
     name: HttpMessageHandler
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler
+  - name: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
   - name: )
 - uid: Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory*
   commentId: Overload:Apizr.Configuring.Manager.ApizrManagerOptions.OperationTimeoutFactory

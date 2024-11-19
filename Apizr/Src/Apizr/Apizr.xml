@@ -240,39 +240,35 @@
             The authentication handler implementation refreshing token
             </summary>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             The authentication handler constructor
             </summary>
-            <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
             <param name="getTokenFactory">The get token factory</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task})">
             <summary>
             The authentication handler constructor
             </summary>
-            <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
             <param name="getTokenFactory">The get token factory</param>
             <param name="setTokenFactory">The set token factory</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             The authentication handler constructor
             </summary>
-            <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
             <param name="refreshTokenFactory">The refresh token factory</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
+        <member name="M:Apizr.Authenticating.AuthenticationHandler.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase,System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{System.Net.Http.HttpRequestMessage,System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
             <summary>
             The authentication handler constructor
             </summary>
-            <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
             <param name="refreshTokenFactory">The refresh token factory</param>
             <param name="getTokenFactory">The get token factory</param>
@@ -295,12 +291,14 @@
             The authentication handler base implementation
             </summary>
         </member>
-        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase)">
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.#ctor(Apizr.Configuring.Manager.IApizrManagerOptionsBase)">
             <summary>
             The authentication handler constructor
             </summary>
-            <param name="logger">The logger</param>
             <param name="apizrOptions">The Apizr options</param>
+        </member>
+        <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <inheritdoc/>
         </member>
         <member name="M:Apizr.Authenticating.AuthenticationHandlerBase.GetTokenAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -887,7 +885,7 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
@@ -953,19 +951,13 @@
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpMessageHandler``1(``0)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithHttpMessageHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Common.ApizrCommonOptionsBuilder.WithResiliencePipelineRegistry(Polly.Registry.ResiliencePipelineRegistry{System.String})">
@@ -1534,7 +1526,7 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
@@ -1600,19 +1592,13 @@
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpMessageHandler``1(``0)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithHttpMessageHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Manager.ApizrManagerOptionsBuilder.WithRefitSettings(Refit.RefitSettings)">
@@ -1951,7 +1937,7 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.ConfigureHttpClient(System.Action{System.Net.Http.HttpClient},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler(System.Func{System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.String}})">
@@ -2017,19 +2003,13 @@
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(``0,Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(``0)">
             <inheritdoc />
         </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <inheritdoc />
         </member>
         <member name="M:Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
@@ -3406,7 +3386,7 @@
             <param name="strategy">The duplicate strategy if there's another one already (default: Merge)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithAuthenticationHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <summary>
             Provide your own <see cref="T:Apizr.Authenticating.AuthenticationHandlerBase"/> implementation factory
             </summary>
@@ -3580,7 +3560,7 @@
             <param name="refreshTokenMethod">The method called to refresh the token</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
             <summary>
             Add a custom delegating handler inheriting from <see cref="T:System.Net.Http.DelegatingHandler"/> (serial call)
             </summary>
@@ -3588,22 +3568,7 @@
             <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
             <returns></returns>
         </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
-            <summary>
-            Add a custom delegating handler inheriting from <see cref="T:System.Net.Http.DelegatingHandler"/> (serial call)
-            </summary>
-            <param name="delegatingHandlerFactory">A delegating handler factory</param>
-            <param name="strategy">The duplicate strategy if there's any other already (default: Add)</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})">
-            <summary>
-            Add a custom http message handler inheriting from <see cref="T:System.Net.Http.HttpMessageHandler"/> (last call)
-            </summary>
-            <param name="httpMessageHandlerFactory">A http message handler factory</param>
-            <returns></returns>
-        </member>
-        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+        <member name="M:Apizr.Configuring.Shared.IApizrSharedRegistrationOptionsBuilder`2.WithHttpMessageHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
             <summary>
             Add a custom http message handler inheriting from <see cref="T:System.Net.Http.HttpMessageHandler"/> (last call)
             </summary>

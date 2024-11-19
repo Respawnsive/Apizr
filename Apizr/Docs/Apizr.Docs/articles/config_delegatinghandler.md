@@ -24,11 +24,8 @@ options => options.WithDelegatingHandler((serviceProvider, options) => YourDeleg
 // direct configuration
 options => options.WithDelegatingHandler(YourDelegatingHandler)
 
-// OR factory configuration with the logger instance
-options => options.WithDelegatingHandler(logger => YourDelegatingHandler)
-
 // OR factory configuration with the logger and options instances
-options => options.WithDelegatingHandler((logger, options) => YourDelegatingHandler)
+options => options.WithDelegatingHandler(options => YourDelegatingHandler)
 ```
 
 ***

@@ -141,10 +141,16 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
     <dt>Inherited Members</dt>
     <dd>
     <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
@@ -154,12 +160,6 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
   </dd></dl>
 
@@ -174,15 +174,6 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
   </div>
   <div>
       <a class="xref" href="Apizr.FileTransferOptionsBuilderExtensions.html#Apizr_FileTransferOptionsBuilderExtensions_WithProgress__1___0_System_Action_Apizr_Progressing_ApizrProgressEventArgs__">FileTransferOptionsBuilderExtensions.WithProgress&lt;TBuilder&gt;(TBuilder, Action&lt;ApizrProgressEventArgs&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_">FusilladeOptionsBuilderExtensions.WithPriority&lt;T&gt;(T)</a>
-  </div>
-  <div>
-      <a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_Fusillade_Priority_">FusilladeOptionsBuilderExtensions.WithPriority&lt;T&gt;(T, Priority)</a>
-  </div>
-  <div>
-      <a class="xref" href="Apizr.FusilladeOptionsBuilderExtensions.html#Apizr_FusilladeOptionsBuilderExtensions_WithPriority__1___0_System_Int32_">FusilladeOptionsBuilderExtensions.WithPriority&lt;T&gt;(T, int)</a>
   </div>
   <div>
       <a class="xref" href="Apizr.Logging.HttpMessagePartsExtensions.html#Apizr_Logging_HttpMessagePartsExtensions_IgnoreMessageParts__1___0_Apizr_Logging_HttpMessageParts_">HttpMessagePartsExtensions.IgnoreMessageParts&lt;T&gt;(T, HttpMessageParts)</a>
@@ -436,8 +427,8 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
 
   <a id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithAuthenticationHandler_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithAuthenticationHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
-  WithAuthenticationHandler&lt;TAuthenticationHandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, TAuthenticationHandler&gt;)
+  <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithAuthenticationHandler__1_System_Func_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithAuthenticationHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+  WithAuthenticationHandler&lt;TAuthenticationHandler&gt;(Func&lt;IApizrManagerOptionsBase, TAuthenticationHandler&gt;)
   <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L283"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -446,12 +437,12 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrProperOptionsBuilder WithAuthenticationHandler&lt;TAuthenticationHandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, TAuthenticationHandler&gt; authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrProperOptionsBuilder WithAuthenticationHandler&lt;TAuthenticationHandler&gt;(Func&lt;IApizrManagerOptionsBase, TAuthenticationHandler&gt; authenticationHandlerFactory) where TAuthenticationHandler : AuthenticationHandlerBase</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>authenticationHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, TAuthenticationHandler&gt;</dt>
+    <dt><code>authenticationHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, TAuthenticationHandler&gt;</dt>
     <dd><p>A <code class="typeparamref">TAuthenticationHandler</code> instance factory</p>
 </dd>
   </dl>
@@ -1542,7 +1533,7 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithCaching_Apizr_Caching_CacheMode_System_Nullable_System_TimeSpan__System_Boolean_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithCaching(Apizr.Caching.CacheMode,System.Nullable{System.TimeSpan},System.Boolean)">
   WithCaching(CacheMode, TimeSpan?, bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L1038"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L1029"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Cache data.</p>
@@ -1660,54 +1651,8 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
 
   <a id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithDelegatingHandler_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
-  WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L606"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Add a custom delegating handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a> (serial call)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrProperOptionsBuilder WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt; delegatingHandlerFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>delegatingHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</dt>
-    <dd><p>A delegating handler factory</p>
-</dd>
-    <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
-    <dd><p>The duplicate strategy if there's any other already (default: Add)</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptionsBuilder.html">IApizrProperOptionsBuilder</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>THandler</code></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithDelegatingHandler_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler*"></a>
-
-  <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithDelegatingHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
-  WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt;, ApizrDuplicateStrategy)
+  <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithDelegatingHandler__1_System_Func_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithDelegatingHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0},Apizr.Configuring.ApizrDuplicateStrategy)">
+  WithDelegatingHandler&lt;THandler&gt;(Func&lt;IApizrManagerOptionsBase, THandler&gt;, ApizrDuplicateStrategy)
   <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L600"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -1716,12 +1661,12 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrProperOptionsBuilder WithDelegatingHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt; delegatingHandlerFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrProperOptionsBuilder WithDelegatingHandler&lt;THandler&gt;(Func&lt;IApizrManagerOptionsBase, THandler&gt; delegatingHandlerFactory, ApizrDuplicateStrategy strategy = ApizrDuplicateStrategy.Add) where THandler : DelegatingHandler</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>delegatingHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, THandler&gt;</dt>
+    <dt><code>delegatingHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</dt>
     <dd><p>A delegating handler factory</p>
 </dd>
     <dt><code>strategy</code> <a class="xref" href="Apizr.Configuring.ApizrDuplicateStrategy.html">ApizrDuplicateStrategy</a></dt>
@@ -1800,7 +1745,7 @@ Class ApizrProperOptionsBuilder  <a class="header-action link-secondary" title="
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithExCatching_System_Action_Apizr_ApizrException__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching(System.Action{Apizr.ApizrException},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Action&lt;ApizrException&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L652"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L643"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1845,7 +1790,7 @@ public IApizrProperOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; on
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithExCatching_System_Func_Apizr_ApizrException_System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;ApizrException, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L661"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1889,7 +1834,7 @@ public IApizrProperOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; on
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithExCatching_System_Func_Apizr_ApizrException_System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching(System.Func{Apizr.ApizrException,System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching(Func&lt;ApizrException, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L687"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L678"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1933,7 +1878,7 @@ public IApizrProperOptionsBuilder WithExCatching(Action&lt;ApizrException&gt; on
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithExCatching__1_System_Action_Apizr_ApizrException___0___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(System.Action{Apizr.ApizrException{``0}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Action&lt;ApizrException&lt;TResult&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L660"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L651"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -1983,7 +1928,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Boolean__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Boolean},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, bool&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L678"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L669"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2032,7 +1977,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithExCatching__1_System_Func_Apizr_ApizrException___0__System_Threading_Tasks_Task_System_Boolean___System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(System.Func{Apizr.ApizrException{``0},System.Threading.Tasks.Task{System.Boolean}},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;TResult&gt;(Func&lt;ApizrException&lt;TResult&gt;, Task&lt;bool&gt;&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L701"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L692"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2081,7 +2026,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithExCatching__1_System_Func___0__System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(System.Func{``0},System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;THandler&gt;(Func&lt;THandler&gt;, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L709"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L700"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2130,7 +2075,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithExCatching__1___0_System_Boolean_Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithExCatching``1(``0,System.Boolean,Apizr.Configuring.ApizrDuplicateStrategy)">
   WithExCatching&lt;THandler&gt;(THandler, bool, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L693"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L684"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Catch potential exceptions</p>
@@ -2179,7 +2124,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHandlerParameter_System_String_System_Object_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHandlerParameter(System.String,System.Object)">
   WithHandlerParameter(string, object)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L745"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L736"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some parameters passed through all delegating handlers</p>
@@ -2220,7 +2165,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHeaders_System_Collections_Generic_IList_System_String__Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.Collections.Generic.IList{System.String},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders(IList&lt;string&gt;, ApizrDuplicateStrategy, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L776"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L767"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request</p>
@@ -2264,7 +2209,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHeaders_System_Func_System_Collections_Generic_IList_System_String___Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders(System.Func{System.Collections.Generic.IList{System.String}},Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders(Func&lt;IList&lt;string&gt;&gt;, ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L807"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L798"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request</p>
@@ -2311,7 +2256,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHeaders__1_System_Func___0__System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders``1(System.Func{``0},System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders&lt;TSettingsService&gt;(Func&lt;TSettingsService&gt;, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L847"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L838"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request loaded from service properties</p>
@@ -2367,7 +2312,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHeaders__1___0_System_Linq_Expressions_Expression_System_Func___0_System_String_____Apizr_Configuring_ApizrDuplicateStrategy_Apizr_Configuring_ApizrLifetimeScope_Apizr_Configuring_ApizrRegistrationMode_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHeaders``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.String}}[],Apizr.Configuring.ApizrDuplicateStrategy,Apizr.Configuring.ApizrLifetimeScope,Apizr.Configuring.ApizrRegistrationMode)">
   WithHeaders&lt;TSettingsService&gt;(TSettingsService, Expression&lt;Func&lt;TSettingsService, string&gt;&gt;[], ApizrDuplicateStrategy, ApizrLifetimeScope, ApizrRegistrationMode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L839"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L830"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add some headers to the request loaded from service properties</p>
@@ -2497,9 +2442,9 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <a id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHttpMessageHandler_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler*"></a>
 
-  <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
-  WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L641"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHttpMessageHandler__1_System_Func_Apizr_Configuring_Manager_IApizrManagerOptionsBase___0__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Apizr.Configuring.Manager.IApizrManagerOptionsBase,``0})">
+  WithHttpMessageHandler&lt;THandler&gt;(Func&lt;IApizrManagerOptionsBase, THandler&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L631"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2507,55 +2452,12 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrProperOptionsBuilder WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, IApizrManagerOptionsBase, THandler&gt; httpMessageHandlerFactory) where THandler : HttpMessageHandler</code></pre>
+    <pre><code class="lang-csharp hljs">public IApizrProperOptionsBuilder WithHttpMessageHandler&lt;THandler&gt;(Func&lt;IApizrManagerOptionsBase, THandler&gt; httpMessageHandlerFactory) where THandler : HttpMessageHandler</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>httpMessageHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, <a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</dt>
-    <dd><p>A http message handler factory</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Apizr.Configuring.Proper.IApizrProperOptionsBuilder.html">IApizrProperOptionsBuilder</a></dt>
-    <dd></dd>
-  </dl>
-
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>THandler</code></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <a id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHttpMessageHandler_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler*"></a>
-
-  <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHttpMessageHandler__1_System_Func_Microsoft_Extensions_Logging_ILogger___0__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(System.Func{Microsoft.Extensions.Logging.ILogger,``0})">
-  WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L637"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IApizrProperOptionsBuilder WithHttpMessageHandler&lt;THandler&gt;(Func&lt;ILogger, THandler&gt; httpMessageHandlerFactory) where THandler : HttpMessageHandler</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>httpMessageHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger">ILogger</a>, THandler&gt;</dt>
+    <dt><code>httpMessageHandlerFactory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Apizr.Configuring.Manager.IApizrManagerOptionsBase.html">IApizrManagerOptionsBase</a>, THandler&gt;</dt>
     <dd><p>A http message handler factory</p>
 </dd>
   </dl>
@@ -2585,7 +2487,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithHttpMessageHandler__1___0_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithHttpMessageHandler``1(``0)">
   WithHttpMessageHandler&lt;THandler&gt;(THandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L633"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L627"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Add a custom http message handler inheriting from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmessagehandler">HttpMessageHandler</a> (last call)</p>
@@ -2628,7 +2530,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithLoggedHeadersRedactionNames_System_Collections_Generic_IEnumerable_System_String__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLoggedHeadersRedactionNames(System.Collections.Generic.IEnumerable{System.String},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithLoggedHeadersRedactionNames(IEnumerable&lt;string&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L943"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L934"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the collection of HTTP headers names for which values should be redacted before logging.</p>
@@ -2669,7 +2571,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithLoggedHeadersRedactionRule_System_Func_System_String_System_Boolean__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLoggedHeadersRedactionRule(System.Func{System.String,System.Boolean},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithLoggedHeadersRedactionRule(Func&lt;string, bool&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L952"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L943"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func&lt;T, TResult&gt;</a> which determines whether to redact the HTTP header value before logging.</p>
@@ -2710,7 +2612,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithLogging_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel___" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[])">
   WithLogging(HttpTracerMode, HttpMessageParts, params LogLevel[])
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L753"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L744"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -2753,7 +2655,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithLogging_System_Func_Apizr_Logging_HttpTracerMode__System_Func_Apizr_Logging_HttpMessageParts__System_Func_Microsoft_Extensions_Logging_LogLevel____" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{Apizr.Logging.HttpTracerMode},System.Func{Apizr.Logging.HttpMessageParts},System.Func{Microsoft.Extensions.Logging.LogLevel[]})">
   WithLogging(Func&lt;HttpTracerMode&gt;, Func&lt;HttpMessageParts&gt;, Func&lt;LogLevel[]&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L758"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L749"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -2797,7 +2699,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithLogging_System_Func_System_ValueTuple_Apizr_Logging_HttpTracerMode_Apizr_Logging_HttpMessageParts_Microsoft_Extensions_Logging_LogLevel_____" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithLogging(System.Func{System.ValueTuple{Apizr.Logging.HttpTracerMode,Apizr.Logging.HttpMessageParts,Microsoft.Extensions.Logging.LogLevel[]}})">
   WithLogging(Func&lt;(HttpTracerMode, HttpMessageParts, LogLevel[])&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L769"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L760"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Define tracer mode, http traffic tracing verbosity and log levels (could be defined with LogAttribute)</p>
@@ -2835,7 +2737,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithOperationTimeout_System_Func_System_TimeSpan__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithOperationTimeout(System.Func{System.TimeSpan})">
   WithOperationTimeout(Func&lt;TimeSpan&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L895"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L886"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the operation (overall request tries)</p>
@@ -2873,7 +2775,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithOperationTimeout_System_TimeSpan_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithOperationTimeout(System.TimeSpan)">
   WithOperationTimeout(TimeSpan)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L891"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L882"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the operation (overall request tries)</p>
@@ -2911,7 +2813,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithRequestOptions_System_String_System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String,System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithRequestOptions(string, Action&lt;IApizrRequestOptionsBuilder&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L1047"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L1038"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Configure options for specific requests</p>
@@ -2955,7 +2857,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithRequestOptions_System_String___System_Action_Apizr_Configuring_Request_IApizrRequestOptionsBuilder__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestOptions(System.String[],System.Action{Apizr.Configuring.Request.IApizrRequestOptionsBuilder},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithRequestOptions(string[], Action&lt;IApizrRequestOptionsBuilder&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L1053"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L1044"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Configure options for specific requests</p>
@@ -2999,7 +2901,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithRequestTimeout_System_Func_System_TimeSpan__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestTimeout(System.Func{System.TimeSpan})">
   WithRequestTimeout(Func&lt;TimeSpan&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L907"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L898"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the request (each request try)</p>
@@ -3037,7 +2939,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithRequestTimeout_System_TimeSpan_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithRequestTimeout(System.TimeSpan)">
   WithRequestTimeout(TimeSpan)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L903"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L894"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set a timeout to the request (each request try)</p>
@@ -3075,7 +2977,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithResilienceContextOptions_System_Action_Apizr_Configuring_Shared_Context_IApizrResilienceContextOptionsBuilder__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithResilienceContextOptions(System.Action{Apizr.Configuring.Shared.Context.IApizrResilienceContextOptionsBuilder})">
   WithResilienceContextOptions(Action&lt;IApizrResilienceContextOptionsBuilder&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L927"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L918"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some options to the resilience context</p>
@@ -3113,7 +3015,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithResiliencePipelineKeys_System_String___System_Collections_Generic_IEnumerable_Apizr_Configuring_ApizrRequestMethod__Apizr_Configuring_ApizrDuplicateStrategy_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithResiliencePipelineKeys(System.String[],System.Collections.Generic.IEnumerable{Apizr.Configuring.ApizrRequestMethod},Apizr.Configuring.ApizrDuplicateStrategy)">
   WithResiliencePipelineKeys(string[], IEnumerable&lt;ApizrRequestMethod&gt;, ApizrDuplicateStrategy)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L984"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L975"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Apply some resilience strategies by getting pipelines from registry with key matching.</p>
@@ -3157,7 +3059,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0__System_Func___0__" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},System.Func{``0})">
   WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, Func&lt;TValue&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L919"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L910"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some resilience properties to the resilience context</p>
@@ -3203,7 +3105,7 @@ public IApizrProperOptionsBuilder WithExCatching&lt;TResult&gt;(Action&lt;ApizrE
 
   <h3 id="Apizr_Configuring_Proper_ApizrProperOptionsBuilder_WithResilienceProperty__1_Polly_ResiliencePropertyKey___0____0_" data-uid="Apizr.Configuring.Proper.ApizrProperOptionsBuilder.WithResilienceProperty``1(Polly.ResiliencePropertyKey{``0},``0)">
   WithResilienceProperty&lt;TValue&gt;(ResiliencePropertyKey&lt;TValue&gt;, TValue)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L915"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Respawnsive/Apizr/blob/dev/Apizr/Src/Apizr/Configuring/Proper/ApizrProperOptionsBuilder.cs/#L906"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Set some resilience properties to the resilience context</p>

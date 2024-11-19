@@ -27,6 +27,7 @@ namespace Apizr.Authenticating
             ApizrOptions = apizrOptions;
         }
 
+        /// <inheritdoc/>
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             // See if the request has an authorize header

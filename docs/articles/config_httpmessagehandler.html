@@ -117,11 +117,8 @@ options =&gt; options.WithHttpMessageHandler((serviceProvider, options) =&gt; Yo
 <pre><code class="lang-csharp">// direct configuration
 options =&gt; options.WithHttpMessageHandler(YourHttpMessageHandler)
 
-// OR factory configuration with the logger instance
-options =&gt; options.WithHttpMessageHandler(logger =&gt; YourHttpMessageHandler)
-
 // OR factory configuration with the logger and options instances
-options =&gt; options.WithHttpMessageHandler((logger, options) =&gt; YourHttpMessageHandler)
+options =&gt; options.WithHttpMessageHandler(options =&gt; YourHttpMessageHandler)
 </code></pre>
 </section>
 </div>

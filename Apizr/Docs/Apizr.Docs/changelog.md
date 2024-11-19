@@ -9,11 +9,13 @@
 - [Improvement/Breaking][Authentication] Now **`AuthenticationHandlerBase` with no token available fails fast by returning an Unauthorized response** without actually sending the request
 - [Improvement/Breaking][Authentication] Now **`AuthenticationHandlerBase`'s GetToken & SetToken former methods upgraded to GetTokenAsync & SetTokenAsync** so we could wait for it
 - [Improvement/Breaking][Authentication] Now **`WithAuthenticationHandler` option's methods handle more parameters** like HttpRequestMessage & CancellationToken
+- [Breaking][DelegatingHandler] Now **`WithDelegatingHandler`, `WithHttpMessageHandler` and `WithAuthenticationHandler` provide a Logger within IApizrManagerOptionsBase single parameter**
 - [Improvement][CacheKey] Now **cache key generator extracts values from selected parameters only** to improve performances
 - [Fix][CacheKey] Now **cache key generator handle parameters initialized right into the ExecuteAsync call** as expected
 - [Fix][CacheKey] Now **POST methods returning a result could finally be data cached and key discriminated** as expected
 - [Fix][Config] Now **configuration pipeline spreads options from common to request level** as expected
 - [Update][NuGet] Now **Refit package reference has been updated to latest v8**
+- [Targets][NuGet] Now **all Apizr packages are aligned with the same targeting frameworks as its referenced packages**
  
 ### Apizr.Extensions.Microsoft.DependencyInjection
 

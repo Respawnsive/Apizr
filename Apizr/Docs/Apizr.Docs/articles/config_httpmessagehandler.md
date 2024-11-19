@@ -24,11 +24,8 @@ options => options.WithHttpMessageHandler((serviceProvider, options) => YourHttp
 // direct configuration
 options => options.WithHttpMessageHandler(YourHttpMessageHandler)
 
-// OR factory configuration with the logger instance
-options => options.WithHttpMessageHandler(logger => YourHttpMessageHandler)
-
 // OR factory configuration with the logger and options instances
-options => options.WithHttpMessageHandler((logger, options) => YourHttpMessageHandler)
+options => options.WithHttpMessageHandler(options => YourHttpMessageHandler)
 ```
 
 ***

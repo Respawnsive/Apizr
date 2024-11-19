@@ -35,49 +35,49 @@ items:
   implements:
   - System.IDisposable
   inheritedMembers:
-  - System.Net.Http.HttpClient.CancelPendingRequests
-  - System.Net.Http.HttpClient.DeleteAsync(System.String)
-  - System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
-  - System.Net.Http.HttpClient.DeleteAsync(System.Uri)
-  - System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
-  - System.Net.Http.HttpClient.Dispose(System.Boolean)
-  - System.Net.Http.HttpClient.GetAsync(System.String)
-  - System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
-  - System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-  - System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
-  - System.Net.Http.HttpClient.GetAsync(System.Uri)
-  - System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
-  - System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-  - System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
+  - System.Net.Http.HttpClient.GetStringAsync(System.String)
+  - System.Net.Http.HttpClient.GetStringAsync(System.Uri)
   - System.Net.Http.HttpClient.GetByteArrayAsync(System.String)
   - System.Net.Http.HttpClient.GetByteArrayAsync(System.Uri)
   - System.Net.Http.HttpClient.GetStreamAsync(System.String)
   - System.Net.Http.HttpClient.GetStreamAsync(System.Uri)
-  - System.Net.Http.HttpClient.GetStringAsync(System.String)
-  - System.Net.Http.HttpClient.GetStringAsync(System.Uri)
+  - System.Net.Http.HttpClient.GetAsync(System.String)
+  - System.Net.Http.HttpClient.GetAsync(System.Uri)
+  - System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
+  - System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
+  - System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
+  - System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
+  - System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+  - System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
   - System.Net.Http.HttpClient.PostAsync(System.String,System.Net.Http.HttpContent)
-  - System.Net.Http.HttpClient.PostAsync(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   - System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
+  - System.Net.Http.HttpClient.PostAsync(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   - System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   - System.Net.Http.HttpClient.PutAsync(System.String,System.Net.Http.HttpContent)
-  - System.Net.Http.HttpClient.PutAsync(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   - System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
+  - System.Net.Http.HttpClient.PutAsync(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   - System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)
+  - System.Net.Http.HttpClient.DeleteAsync(System.String)
+  - System.Net.Http.HttpClient.DeleteAsync(System.Uri)
+  - System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
+  - System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
   - System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage)
   - System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)
   - System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-  - System.Net.Http.HttpClient.BaseAddress
+  - System.Net.Http.HttpClient.CancelPendingRequests
+  - System.Net.Http.HttpClient.Dispose(System.Boolean)
   - System.Net.Http.HttpClient.DefaultRequestHeaders
-  - System.Net.Http.HttpClient.MaxResponseContentBufferSize
+  - System.Net.Http.HttpClient.BaseAddress
   - System.Net.Http.HttpClient.Timeout
+  - System.Net.Http.HttpClient.MaxResponseContentBufferSize
   - System.Net.Http.HttpMessageInvoker.Dispose
+  - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
 - uid: Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler,System.Boolean,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   commentId: M:Apizr.ApizrHttpClient.#ctor(System.Net.Http.HttpMessageHandler,System.Boolean,Apizr.Configuring.Manager.IApizrManagerOptionsBase)
   id: '#ctor(System.Net.Http.HttpMessageHandler,System.Boolean,Apizr.Configuring.Manager.IApizrManagerOptionsBase)'
@@ -136,19 +136,33 @@ items:
   assemblies:
   - Apizr
   namespace: Apizr
+  summary: Send an HTTP request as an asynchronous operation.
   example: []
   syntax:
     content: public override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     parameters:
     - id: request
       type: System.Net.Http.HttpRequestMessage
+      description: The HTTP request message to send.
     - id: cancellationToken
       type: System.Threading.CancellationToken
+      description: The cancellation token to cancel operation.
     return:
       type: System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}
+      description: Returns <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref>.The task object representing the asynchronous operation.
     content.vb: Public Overrides Function SendAsync(request As HttpRequestMessage, cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
   overridden: System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   overload: Apizr.ApizrHttpClient.SendAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code class="paramref">request</code> was null.
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: The request message was already sent by the <xref href="System.Net.Http.HttpClient" data-throw-if-not-resolved="false"></xref> instance.
+  - type: System.Net.Http.HttpRequestException
+    commentId: T:System.Net.Http.HttpRequestException
+    description: The request failed due to an underlying issue such as network connectivity, DNS failure, server certificate validation or timeout.
 references:
 - uid: Apizr
   commentId: N:Apizr
@@ -191,44 +205,22 @@ references:
   name: IDisposable
   nameWithType: IDisposable
   fullName: System.IDisposable
-- uid: System.Net.Http.HttpClient.CancelPendingRequests
-  commentId: M:System.Net.Http.HttpClient.CancelPendingRequests
+- uid: System.Net.Http.HttpClient.GetStringAsync(System.String)
+  commentId: M:System.Net.Http.HttpClient.GetStringAsync(System.String)
   parent: System.Net.Http.HttpClient
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.cancelpendingrequests
-  name: CancelPendingRequests()
-  nameWithType: HttpClient.CancelPendingRequests()
-  fullName: System.Net.Http.HttpClient.CancelPendingRequests()
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-string)
+  name: GetStringAsync(string)
+  nameWithType: HttpClient.GetStringAsync(string)
+  fullName: System.Net.Http.HttpClient.GetStringAsync(string)
+  nameWithType.vb: HttpClient.GetStringAsync(String)
+  fullName.vb: System.Net.Http.HttpClient.GetStringAsync(String)
+  name.vb: GetStringAsync(String)
   spec.csharp:
-  - uid: System.Net.Http.HttpClient.CancelPendingRequests
-    name: CancelPendingRequests
+  - uid: System.Net.Http.HttpClient.GetStringAsync(System.String)
+    name: GetStringAsync
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.cancelpendingrequests
-  - name: (
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.CancelPendingRequests
-    name: CancelPendingRequests
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.cancelpendingrequests
-  - name: (
-  - name: )
-- uid: System.Net.Http.HttpClient.DeleteAsync(System.String)
-  commentId: M:System.Net.Http.HttpClient.DeleteAsync(System.String)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string)
-  name: DeleteAsync(string)
-  nameWithType: HttpClient.DeleteAsync(string)
-  fullName: System.Net.Http.HttpClient.DeleteAsync(string)
-  nameWithType.vb: HttpClient.DeleteAsync(String)
-  fullName.vb: System.Net.Http.HttpClient.DeleteAsync(String)
-  name.vb: DeleteAsync(String)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.DeleteAsync(System.String)
-    name: DeleteAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string)
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-string)
   - name: (
   - uid: System.String
     name: string
@@ -236,74 +228,29 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
   spec.vb:
-  - uid: System.Net.Http.HttpClient.DeleteAsync(System.String)
-    name: DeleteAsync
+  - uid: System.Net.Http.HttpClient.GetStringAsync(System.String)
+    name: GetStringAsync
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string)
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-string)
   - name: (
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-- uid: System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
-  commentId: M:System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
+- uid: System.Net.Http.HttpClient.GetStringAsync(System.Uri)
+  commentId: M:System.Net.Http.HttpClient.GetStringAsync(System.Uri)
   parent: System.Net.Http.HttpClient
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string-system-threading-cancellationtoken)
-  name: DeleteAsync(string, CancellationToken)
-  nameWithType: HttpClient.DeleteAsync(string, CancellationToken)
-  fullName: System.Net.Http.HttpClient.DeleteAsync(string, System.Threading.CancellationToken)
-  nameWithType.vb: HttpClient.DeleteAsync(String, CancellationToken)
-  fullName.vb: System.Net.Http.HttpClient.DeleteAsync(String, System.Threading.CancellationToken)
-  name.vb: DeleteAsync(String, CancellationToken)
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-uri)
+  name: GetStringAsync(Uri)
+  nameWithType: HttpClient.GetStringAsync(Uri)
+  fullName: System.Net.Http.HttpClient.GetStringAsync(System.Uri)
   spec.csharp:
-  - uid: System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
-    name: DeleteAsync
+  - uid: System.Net.Http.HttpClient.GetStringAsync(System.Uri)
+    name: GetStringAsync
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
-    name: DeleteAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-- uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri)
-  commentId: M:System.Net.Http.HttpClient.DeleteAsync(System.Uri)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri)
-  name: DeleteAsync(Uri)
-  nameWithType: HttpClient.DeleteAsync(Uri)
-  fullName: System.Net.Http.HttpClient.DeleteAsync(System.Uri)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri)
-    name: DeleteAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri)
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-uri)
   - name: (
   - uid: System.Uri
     name: Uri
@@ -311,438 +258,15 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: )
   spec.vb:
-  - uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri)
-    name: DeleteAsync
+  - uid: System.Net.Http.HttpClient.GetStringAsync(System.Uri)
+    name: GetStringAsync
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri)
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-uri)
   - name: (
   - uid: System.Uri
     name: Uri
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: )
-- uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
-  commentId: M:System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri-system-threading-cancellationtoken)
-  name: DeleteAsync(Uri, CancellationToken)
-  nameWithType: HttpClient.DeleteAsync(Uri, CancellationToken)
-  fullName: System.Net.Http.HttpClient.DeleteAsync(System.Uri, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
-    name: DeleteAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
-    name: DeleteAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-- uid: System.Net.Http.HttpClient.Dispose(System.Boolean)
-  commentId: M:System.Net.Http.HttpClient.Dispose(System.Boolean)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.dispose
-  name: Dispose(bool)
-  nameWithType: HttpClient.Dispose(bool)
-  fullName: System.Net.Http.HttpClient.Dispose(bool)
-  nameWithType.vb: HttpClient.Dispose(Boolean)
-  fullName.vb: System.Net.Http.HttpClient.Dispose(Boolean)
-  name.vb: Dispose(Boolean)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.Dispose(System.Boolean)
-    name: Dispose
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.dispose
-  - name: (
-  - uid: System.Boolean
-    name: bool
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.boolean
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.Dispose(System.Boolean)
-    name: Dispose
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.dispose
-  - name: (
-  - uid: System.Boolean
-    name: Boolean
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.boolean
-  - name: )
-- uid: System.Net.Http.HttpClient.GetAsync(System.String)
-  commentId: M:System.Net.Http.HttpClient.GetAsync(System.String)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string)
-  name: GetAsync(string)
-  nameWithType: HttpClient.GetAsync(string)
-  fullName: System.Net.Http.HttpClient.GetAsync(string)
-  nameWithType.vb: HttpClient.GetAsync(String)
-  fullName.vb: System.Net.Http.HttpClient.GetAsync(String)
-  name.vb: GetAsync(String)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.String)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string)
-  - name: (
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.String)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string)
-  - name: (
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: )
-- uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
-  commentId: M:System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption)
-  name: GetAsync(string, HttpCompletionOption)
-  nameWithType: HttpClient.GetAsync(string, HttpCompletionOption)
-  fullName: System.Net.Http.HttpClient.GetAsync(string, System.Net.Http.HttpCompletionOption)
-  nameWithType.vb: HttpClient.GetAsync(String, HttpCompletionOption)
-  fullName.vb: System.Net.Http.HttpClient.GetAsync(String, System.Net.Http.HttpCompletionOption)
-  name.vb: GetAsync(String, HttpCompletionOption)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption)
-  - name: (
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpCompletionOption
-    name: HttpCompletionOption
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption)
-  - name: (
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpCompletionOption
-    name: HttpCompletionOption
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
-  - name: )
-- uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-  commentId: M:System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
-  name: GetAsync(string, HttpCompletionOption, CancellationToken)
-  nameWithType: HttpClient.GetAsync(string, HttpCompletionOption, CancellationToken)
-  fullName: System.Net.Http.HttpClient.GetAsync(string, System.Net.Http.HttpCompletionOption, System.Threading.CancellationToken)
-  nameWithType.vb: HttpClient.GetAsync(String, HttpCompletionOption, CancellationToken)
-  fullName.vb: System.Net.Http.HttpClient.GetAsync(String, System.Net.Http.HttpCompletionOption, System.Threading.CancellationToken)
-  name.vb: GetAsync(String, HttpCompletionOption, CancellationToken)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpCompletionOption
-    name: HttpCompletionOption
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpCompletionOption
-    name: HttpCompletionOption
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-- uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
-  commentId: M:System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-threading-cancellationtoken)
-  name: GetAsync(string, CancellationToken)
-  nameWithType: HttpClient.GetAsync(string, CancellationToken)
-  fullName: System.Net.Http.HttpClient.GetAsync(string, System.Threading.CancellationToken)
-  nameWithType.vb: HttpClient.GetAsync(String, CancellationToken)
-  fullName.vb: System.Net.Http.HttpClient.GetAsync(String, System.Threading.CancellationToken)
-  name.vb: GetAsync(String, CancellationToken)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.String
-    name: string
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.String
-    name: String
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.string
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-- uid: System.Net.Http.HttpClient.GetAsync(System.Uri)
-  commentId: M:System.Net.Http.HttpClient.GetAsync(System.Uri)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri)
-  name: GetAsync(Uri)
-  nameWithType: HttpClient.GetAsync(Uri)
-  fullName: System.Net.Http.HttpClient.GetAsync(System.Uri)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: )
-- uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
-  commentId: M:System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption)
-  name: GetAsync(Uri, HttpCompletionOption)
-  nameWithType: HttpClient.GetAsync(Uri, HttpCompletionOption)
-  fullName: System.Net.Http.HttpClient.GetAsync(System.Uri, System.Net.Http.HttpCompletionOption)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpCompletionOption
-    name: HttpCompletionOption
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpCompletionOption
-    name: HttpCompletionOption
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
-  - name: )
-- uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-  commentId: M:System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
-  name: GetAsync(Uri, HttpCompletionOption, CancellationToken)
-  nameWithType: HttpClient.GetAsync(Uri, HttpCompletionOption, CancellationToken)
-  fullName: System.Net.Http.HttpClient.GetAsync(System.Uri, System.Net.Http.HttpCompletionOption, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpCompletionOption
-    name: HttpCompletionOption
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpCompletionOption
-    name: HttpCompletionOption
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-- uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
-  commentId: M:System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-threading-cancellationtoken)
-  name: GetAsync(Uri, CancellationToken)
-  nameWithType: HttpClient.GetAsync(Uri, CancellationToken)
-  fullName: System.Net.Http.HttpClient.GetAsync(System.Uri, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
-    name: GetAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-threading-cancellationtoken)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
 - uid: System.Net.Http.HttpClient.GetByteArrayAsync(System.String)
   commentId: M:System.Net.Http.HttpClient.GetByteArrayAsync(System.String)
@@ -870,22 +394,22 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: )
-- uid: System.Net.Http.HttpClient.GetStringAsync(System.String)
-  commentId: M:System.Net.Http.HttpClient.GetStringAsync(System.String)
+- uid: System.Net.Http.HttpClient.GetAsync(System.String)
+  commentId: M:System.Net.Http.HttpClient.GetAsync(System.String)
   parent: System.Net.Http.HttpClient
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-string)
-  name: GetStringAsync(string)
-  nameWithType: HttpClient.GetStringAsync(string)
-  fullName: System.Net.Http.HttpClient.GetStringAsync(string)
-  nameWithType.vb: HttpClient.GetStringAsync(String)
-  fullName.vb: System.Net.Http.HttpClient.GetStringAsync(String)
-  name.vb: GetStringAsync(String)
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string)
+  name: GetAsync(string)
+  nameWithType: HttpClient.GetAsync(string)
+  fullName: System.Net.Http.HttpClient.GetAsync(string)
+  nameWithType.vb: HttpClient.GetAsync(String)
+  fullName.vb: System.Net.Http.HttpClient.GetAsync(String)
+  name.vb: GetAsync(String)
   spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetStringAsync(System.String)
-    name: GetStringAsync
+  - uid: System.Net.Http.HttpClient.GetAsync(System.String)
+    name: GetAsync
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-string)
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string)
   - name: (
   - uid: System.String
     name: string
@@ -893,29 +417,29 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
   spec.vb:
-  - uid: System.Net.Http.HttpClient.GetStringAsync(System.String)
-    name: GetStringAsync
+  - uid: System.Net.Http.HttpClient.GetAsync(System.String)
+    name: GetAsync
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-string)
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string)
   - name: (
   - uid: System.String
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
-- uid: System.Net.Http.HttpClient.GetStringAsync(System.Uri)
-  commentId: M:System.Net.Http.HttpClient.GetStringAsync(System.Uri)
+- uid: System.Net.Http.HttpClient.GetAsync(System.Uri)
+  commentId: M:System.Net.Http.HttpClient.GetAsync(System.Uri)
   parent: System.Net.Http.HttpClient
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-uri)
-  name: GetStringAsync(Uri)
-  nameWithType: HttpClient.GetStringAsync(Uri)
-  fullName: System.Net.Http.HttpClient.GetStringAsync(System.Uri)
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri)
+  name: GetAsync(Uri)
+  nameWithType: HttpClient.GetAsync(Uri)
+  fullName: System.Net.Http.HttpClient.GetAsync(System.Uri)
   spec.csharp:
-  - uid: System.Net.Http.HttpClient.GetStringAsync(System.Uri)
-    name: GetStringAsync
+  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri)
+    name: GetAsync
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-uri)
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri)
   - name: (
   - uid: System.Uri
     name: Uri
@@ -923,15 +447,300 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: )
   spec.vb:
-  - uid: System.Net.Http.HttpClient.GetStringAsync(System.Uri)
-    name: GetStringAsync
+  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri)
+    name: GetAsync
     isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getstringasync#system-net-http-httpclient-getstringasync(system-uri)
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri)
   - name: (
   - uid: System.Uri
     name: Uri
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: )
+- uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
+  commentId: M:System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption)
+  name: GetAsync(string, HttpCompletionOption)
+  nameWithType: HttpClient.GetAsync(string, HttpCompletionOption)
+  fullName: System.Net.Http.HttpClient.GetAsync(string, System.Net.Http.HttpCompletionOption)
+  nameWithType.vb: HttpClient.GetAsync(String, HttpCompletionOption)
+  fullName.vb: System.Net.Http.HttpClient.GetAsync(String, System.Net.Http.HttpCompletionOption)
+  name.vb: GetAsync(String, HttpCompletionOption)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption)
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpCompletionOption
+    name: HttpCompletionOption
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption)
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpCompletionOption
+    name: HttpCompletionOption
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
+  - name: )
+- uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
+  commentId: M:System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption)
+  name: GetAsync(Uri, HttpCompletionOption)
+  nameWithType: HttpClient.GetAsync(Uri, HttpCompletionOption)
+  fullName: System.Net.Http.HttpClient.GetAsync(System.Uri, System.Net.Http.HttpCompletionOption)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpCompletionOption
+    name: HttpCompletionOption
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpCompletionOption
+    name: HttpCompletionOption
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
+  - name: )
+- uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-threading-cancellationtoken)
+  name: GetAsync(string, CancellationToken)
+  nameWithType: HttpClient.GetAsync(string, CancellationToken)
+  fullName: System.Net.Http.HttpClient.GetAsync(string, System.Threading.CancellationToken)
+  nameWithType.vb: HttpClient.GetAsync(String, CancellationToken)
+  fullName.vb: System.Net.Http.HttpClient.GetAsync(String, System.Threading.CancellationToken)
+  name.vb: GetAsync(String, CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Threading.CancellationToken)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-threading-cancellationtoken)
+  name: GetAsync(Uri, CancellationToken)
+  nameWithType: HttpClient.GetAsync(Uri, CancellationToken)
+  fullName: System.Net.Http.HttpClient.GetAsync(System.Uri, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Threading.CancellationToken)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
+  name: GetAsync(string, HttpCompletionOption, CancellationToken)
+  nameWithType: HttpClient.GetAsync(string, HttpCompletionOption, CancellationToken)
+  fullName: System.Net.Http.HttpClient.GetAsync(string, System.Net.Http.HttpCompletionOption, System.Threading.CancellationToken)
+  nameWithType.vb: HttpClient.GetAsync(String, HttpCompletionOption, CancellationToken)
+  fullName.vb: System.Net.Http.HttpClient.GetAsync(String, System.Net.Http.HttpCompletionOption, System.Threading.CancellationToken)
+  name.vb: GetAsync(String, HttpCompletionOption, CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpCompletionOption
+    name: HttpCompletionOption
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-string-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpCompletionOption
+    name: HttpCompletionOption
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
+  name: GetAsync(Uri, HttpCompletionOption, CancellationToken)
+  nameWithType: HttpClient.GetAsync(Uri, HttpCompletionOption, CancellationToken)
+  fullName: System.Net.Http.HttpClient.GetAsync(System.Uri, System.Net.Http.HttpCompletionOption, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpCompletionOption
+    name: HttpCompletionOption
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)
+    name: GetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.getasync#system-net-http-httpclient-getasync(system-uri-system-net-http-httpcompletionoption-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpCompletionOption
+    name: HttpCompletionOption
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcompletionoption
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
 - uid: System.Net.Http.HttpClient.PostAsync(System.String,System.Net.Http.HttpContent)
   commentId: M:System.Net.Http.HttpClient.PostAsync(System.String,System.Net.Http.HttpContent)
@@ -971,6 +780,48 @@ references:
     name: String
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpContent
+    name: HttpContent
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
+  - name: )
+- uid: System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
+  commentId: M:System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.postasync#system-net-http-httpclient-postasync(system-uri-system-net-http-httpcontent)
+  name: PostAsync(Uri, HttpContent)
+  nameWithType: HttpClient.PostAsync(Uri, HttpContent)
+  fullName: System.Net.Http.HttpClient.PostAsync(System.Uri, System.Net.Http.HttpContent)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
+    name: PostAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.postasync#system-net-http-httpclient-postasync(system-uri-system-net-http-httpcontent)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpContent
+    name: HttpContent
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
+    name: PostAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.postasync#system-net-http-httpclient-postasync(system-uri-system-net-http-httpcontent)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: ','
   - name: " "
   - uid: System.Net.Http.HttpContent
@@ -1034,48 +885,6 @@ references:
     name: CancellationToken
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
-  - name: )
-- uid: System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
-  commentId: M:System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.postasync#system-net-http-httpclient-postasync(system-uri-system-net-http-httpcontent)
-  name: PostAsync(Uri, HttpContent)
-  nameWithType: HttpClient.PostAsync(Uri, HttpContent)
-  fullName: System.Net.Http.HttpClient.PostAsync(System.Uri, System.Net.Http.HttpContent)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
-    name: PostAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.postasync#system-net-http-httpclient-postasync(system-uri-system-net-http-httpcontent)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpContent
-    name: HttpContent
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent)
-    name: PostAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.postasync#system-net-http-httpclient-postasync(system-uri-system-net-http-httpcontent)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpContent
-    name: HttpContent
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
   - name: )
 - uid: System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.HttpClient.PostAsync(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)
@@ -1176,6 +985,48 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
   - name: )
+- uid: System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
+  commentId: M:System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.putasync#system-net-http-httpclient-putasync(system-uri-system-net-http-httpcontent)
+  name: PutAsync(Uri, HttpContent)
+  nameWithType: HttpClient.PutAsync(Uri, HttpContent)
+  fullName: System.Net.Http.HttpClient.PutAsync(System.Uri, System.Net.Http.HttpContent)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
+    name: PutAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.putasync#system-net-http-httpclient-putasync(system-uri-system-net-http-httpcontent)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpContent
+    name: HttpContent
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
+    name: PutAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.putasync#system-net-http-httpclient-putasync(system-uri-system-net-http-httpcontent)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Net.Http.HttpContent
+    name: HttpContent
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
+  - name: )
 - uid: System.Net.Http.HttpClient.PutAsync(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.HttpClient.PutAsync(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   parent: System.Net.Http.HttpClient
@@ -1233,48 +1084,6 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-- uid: System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
-  commentId: M:System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
-  parent: System.Net.Http.HttpClient
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.putasync#system-net-http-httpclient-putasync(system-uri-system-net-http-httpcontent)
-  name: PutAsync(Uri, HttpContent)
-  nameWithType: HttpClient.PutAsync(Uri, HttpContent)
-  fullName: System.Net.Http.HttpClient.PutAsync(System.Uri, System.Net.Http.HttpContent)
-  spec.csharp:
-  - uid: System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
-    name: PutAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.putasync#system-net-http-httpclient-putasync(system-uri-system-net-http-httpcontent)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpContent
-    name: HttpContent
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
-  - name: )
-  spec.vb:
-  - uid: System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent)
-    name: PutAsync
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.putasync#system-net-http-httpclient-putasync(system-uri-system-net-http-httpcontent)
-  - name: (
-  - uid: System.Uri
-    name: Uri
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.uri
-  - name: ','
-  - name: " "
-  - uid: System.Net.Http.HttpContent
-    name: HttpContent
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
-  - name: )
 - uid: System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.HttpClient.PutAsync(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)
   parent: System.Net.Http.HttpClient
@@ -1322,6 +1131,156 @@ references:
     name: HttpContent
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.httpcontent
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.Net.Http.HttpClient.DeleteAsync(System.String)
+  commentId: M:System.Net.Http.HttpClient.DeleteAsync(System.String)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string)
+  name: DeleteAsync(string)
+  nameWithType: HttpClient.DeleteAsync(string)
+  fullName: System.Net.Http.HttpClient.DeleteAsync(string)
+  nameWithType.vb: HttpClient.DeleteAsync(String)
+  fullName.vb: System.Net.Http.HttpClient.DeleteAsync(String)
+  name.vb: DeleteAsync(String)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.DeleteAsync(System.String)
+    name: DeleteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string)
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.DeleteAsync(System.String)
+    name: DeleteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string)
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri)
+  commentId: M:System.Net.Http.HttpClient.DeleteAsync(System.Uri)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri)
+  name: DeleteAsync(Uri)
+  nameWithType: HttpClient.DeleteAsync(Uri)
+  fullName: System.Net.Http.HttpClient.DeleteAsync(System.Uri)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri)
+    name: DeleteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri)
+    name: DeleteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: )
+- uid: System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string-system-threading-cancellationtoken)
+  name: DeleteAsync(string, CancellationToken)
+  nameWithType: HttpClient.DeleteAsync(string, CancellationToken)
+  fullName: System.Net.Http.HttpClient.DeleteAsync(string, System.Threading.CancellationToken)
+  nameWithType.vb: HttpClient.DeleteAsync(String, CancellationToken)
+  fullName.vb: System.Net.Http.HttpClient.DeleteAsync(String, System.Threading.CancellationToken)
+  name.vb: DeleteAsync(String, CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
+    name: DeleteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.DeleteAsync(System.String,System.Threading.CancellationToken)
+    name: DeleteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-string-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+- uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
+  commentId: M:System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri-system-threading-cancellationtoken)
+  name: DeleteAsync(Uri, CancellationToken)
+  nameWithType: HttpClient.DeleteAsync(Uri, CancellationToken)
+  fullName: System.Net.Http.HttpClient.DeleteAsync(System.Uri, System.Threading.CancellationToken)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
+    name: DeleteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
+  - name: ','
+  - name: " "
+  - uid: System.Threading.CancellationToken
+    name: CancellationToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.DeleteAsync(System.Uri,System.Threading.CancellationToken)
+    name: DeleteAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.deleteasync#system-net-http-httpclient-deleteasync(system-uri-system-threading-cancellationtoken)
+  - name: (
+  - uid: System.Uri
+    name: Uri
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uri
   - name: ','
   - name: " "
   - uid: System.Threading.CancellationToken
@@ -1455,14 +1414,61 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
   - name: )
-- uid: System.Net.Http.HttpClient.BaseAddress
-  commentId: P:System.Net.Http.HttpClient.BaseAddress
+- uid: System.Net.Http.HttpClient.CancelPendingRequests
+  commentId: M:System.Net.Http.HttpClient.CancelPendingRequests
   parent: System.Net.Http.HttpClient
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.baseaddress
-  name: BaseAddress
-  nameWithType: HttpClient.BaseAddress
-  fullName: System.Net.Http.HttpClient.BaseAddress
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.cancelpendingrequests
+  name: CancelPendingRequests()
+  nameWithType: HttpClient.CancelPendingRequests()
+  fullName: System.Net.Http.HttpClient.CancelPendingRequests()
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.CancelPendingRequests
+    name: CancelPendingRequests
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.cancelpendingrequests
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.CancelPendingRequests
+    name: CancelPendingRequests
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.cancelpendingrequests
+  - name: (
+  - name: )
+- uid: System.Net.Http.HttpClient.Dispose(System.Boolean)
+  commentId: M:System.Net.Http.HttpClient.Dispose(System.Boolean)
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.dispose
+  name: Dispose(bool)
+  nameWithType: HttpClient.Dispose(bool)
+  fullName: System.Net.Http.HttpClient.Dispose(bool)
+  nameWithType.vb: HttpClient.Dispose(Boolean)
+  fullName.vb: System.Net.Http.HttpClient.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+  spec.csharp:
+  - uid: System.Net.Http.HttpClient.Dispose(System.Boolean)
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.dispose
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: System.Net.Http.HttpClient.Dispose(System.Boolean)
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.dispose
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
 - uid: System.Net.Http.HttpClient.DefaultRequestHeaders
   commentId: P:System.Net.Http.HttpClient.DefaultRequestHeaders
   parent: System.Net.Http.HttpClient
@@ -1471,14 +1477,14 @@ references:
   name: DefaultRequestHeaders
   nameWithType: HttpClient.DefaultRequestHeaders
   fullName: System.Net.Http.HttpClient.DefaultRequestHeaders
-- uid: System.Net.Http.HttpClient.MaxResponseContentBufferSize
-  commentId: P:System.Net.Http.HttpClient.MaxResponseContentBufferSize
+- uid: System.Net.Http.HttpClient.BaseAddress
+  commentId: P:System.Net.Http.HttpClient.BaseAddress
   parent: System.Net.Http.HttpClient
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.maxresponsecontentbuffersize
-  name: MaxResponseContentBufferSize
-  nameWithType: HttpClient.MaxResponseContentBufferSize
-  fullName: System.Net.Http.HttpClient.MaxResponseContentBufferSize
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.baseaddress
+  name: BaseAddress
+  nameWithType: HttpClient.BaseAddress
+  fullName: System.Net.Http.HttpClient.BaseAddress
 - uid: System.Net.Http.HttpClient.Timeout
   commentId: P:System.Net.Http.HttpClient.Timeout
   parent: System.Net.Http.HttpClient
@@ -1487,6 +1493,14 @@ references:
   name: Timeout
   nameWithType: HttpClient.Timeout
   fullName: System.Net.Http.HttpClient.Timeout
+- uid: System.Net.Http.HttpClient.MaxResponseContentBufferSize
+  commentId: P:System.Net.Http.HttpClient.MaxResponseContentBufferSize
+  parent: System.Net.Http.HttpClient
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient.maxresponsecontentbuffersize
+  name: MaxResponseContentBufferSize
+  nameWithType: HttpClient.MaxResponseContentBufferSize
+  fullName: System.Net.Http.HttpClient.MaxResponseContentBufferSize
 - uid: System.Net.Http.HttpMessageInvoker.Dispose
   commentId: M:System.Net.Http.HttpMessageInvoker.Dispose
   parent: System.Net.Http.HttpMessageInvoker
@@ -1507,6 +1521,30 @@ references:
     name: Dispose
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.net.http.httpmessageinvoker.dispose#system-net-http-httpmessageinvoker-dispose
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
   - name: )
 - uid: System.Object.Equals(System.Object)
@@ -1575,6 +1613,51 @@ references:
     name: Equals
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
   - name: (
   - uid: System.Object
     name: Object
@@ -1657,75 +1740,6 @@ references:
     name: MemberwiseClone
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
-  - name: (
-  - name: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
-  name: ReferenceEquals(object, object)
-  nameWithType: object.ReferenceEquals(object, object)
-  fullName: object.ReferenceEquals(object, object)
-  nameWithType.vb: Object.ReferenceEquals(Object, Object)
-  fullName.vb: Object.ReferenceEquals(Object, Object)
-  name.vb: ReferenceEquals(Object, Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
-  - name: (
-  - uid: System.Object
-    name: object
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object
-  - name: ','
-  - name: " "
-  - uid: System.Object
-    name: object
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object
-  - name: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
-  - name: (
-  - uid: System.Object
-    name: Object
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object
-  - name: ','
-  - name: " "
-  - uid: System.Object
-    name: Object
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object
-  - name: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
-  name: ToString()
-  nameWithType: object.ToString()
-  fullName: object.ToString()
-  nameWithType.vb: Object.ToString()
-  fullName.vb: Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
-  - name: (
-  - name: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
   - name: (
   - name: )
 - uid: System
@@ -1837,6 +1851,55 @@ references:
   - uid: Apizr.Configuring.Manager
     name: Manager
     href: Apizr.Configuring.Manager.html
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.invalidoperationexception
+  name: InvalidOperationException
+  nameWithType: InvalidOperationException
+  fullName: System.InvalidOperationException
+- uid: System.Net.Http.HttpRequestException
+  commentId: T:System.Net.Http.HttpRequestException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httprequestexception
+  name: HttpRequestException
+  nameWithType: HttpRequestException
+  fullName: System.Net.Http.HttpRequestException
 - uid: System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   parent: System.Net.Http.HttpClient
@@ -1963,34 +2026,6 @@ references:
     name: Threading
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.threading
-- uid: System.Threading.Tasks.Task`1
-  commentId: T:System.Threading.Tasks.Task`1
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
-  name: Task<TResult>
-  nameWithType: Task<TResult>
-  fullName: System.Threading.Tasks.Task<TResult>
-  nameWithType.vb: Task(Of TResult)
-  fullName.vb: System.Threading.Tasks.Task(Of TResult)
-  name.vb: Task(Of TResult)
-  spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
-  - name: <
-  - name: TResult
-  - name: '>'
-  spec.vb:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
-  - name: (
-  - name: Of
-  - name: " "
-  - name: TResult
-  - name: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: true

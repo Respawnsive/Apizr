@@ -125,8 +125,14 @@ private Task OnSetTokenAsync(HttpRequestMessage request, string token, Cancellat
 
 private Task&lt;string&gt; OnRefreshTokenAsync(HttpRequestMessage request, string token, CancellationToken ct)
 {
-    // Refresh the unauthorized token by sending a refreshing request, 
-    // or processing a login flow that returns a fresh token.
+    if(!string.IsNullOrWhiteSpace(token))
+    {
+        // May refresh the unauthorized token by sending a refreshing request
+    }
+    else
+    {
+        // Could process a login flow that returns a fresh token
+    }
 }
 
 </code></pre>
@@ -192,9 +198,20 @@ options =&gt; options.WithAuthenticationHandler&lt;IAuthService&gt;(
     (authService, request, tk, ct) =&gt; authService.RefreshTokenAsync(request, tk, ct))
 </code></pre>
 <ul>
-<li>When you want to provide your own <code>AuthenticationHandlerBase&lt;TWebApi&gt;</code> open generic implementation:</li>
+<li>When you want to provide your own <code>AuthenticationHandlerBase</code> open generic implementation:</li>
 </ul>
 <pre><code class="lang-csharp">// by open generic auto resolving (need to be registered in service collection)
+public class YourAuthenticationHandler&lt;TWebApi&gt; : AuthenticationHandlerBase
+{
+    private readonly IAnyOtherService _service;
+
+    public YourAuthenticationHandler(IApizrManagerOptions&lt;TWebApi&gt; options, IAnyOtherService service) : base(options)
+    {
+        _service = service;
+    }
+    ...
+}
+...
 options =&gt; options.WithAuthenticationHandler(typeof(YourAuthenticationHandler&lt;&gt;))
 ...
 service.AddTransient(typeof(YourAuthenticationHandler&lt;&gt;)))
@@ -305,11 +322,12 @@ Protected requests will be authenticated by Apizr thnaks to the get/set methods,
     string refreshedToken = null;
 
     // Get logging config
+    request.TryGetApizrRequestOptions(out var requestOptions);
     var context = request.GetOrBuildApizrResilienceContext(cancellationToken);
-    if (!context.TryGetLogger(out var logger, out var logLevels, out _, out _))
+    if (!context.TryGetLogger(out var logger, out var logLevels, out var _, out var _))
     {
-        logger = Logger;
-        logLevels = ApizrOptions.LogLevels;
+        logLevels = requestOptions?.LogLevels ?? ApizrOptions.LogLevels;
+        logger = ApizrOptions.Logger;
     }
 
     // Get the token from saved settings if available
@@ -328,7 +346,12 @@ Protected requests will be authenticated by Apizr thnaks to the get/set methods,
         refreshedToken = await RefreshTokenAsync(request, formerToken, cancellationToken).ConfigureAwait(false);
         // If no token is provided, fail fast by returning an Unauthorized response without sending the request
         if (string.IsNullOrEmpty(refreshedToken))
-            return new HttpResponseMessage(HttpStatusCode.Unauthorized) { Content = new StringContent(&quot;Authorization token is missing.&quot;) };
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                RequestMessage = request,
+                ReasonPhrase = &quot;Authorization token is missing.&quot;,
+                Content = new StringContent(&quot;Authorization token is missing.&quot;)
+            };
     }
 
     // Set the authentication header
@@ -347,6 +370,14 @@ Protected requests will be authenticated by Apizr thnaks to the get/set methods,
         // Refresh the token
         logger?.Log(logLevels.Low(), $&quot;{context.OperationKey}: Refreshing token...&quot;);
         refreshedToken = await RefreshTokenAsync(request, formerToken, cancellationToken).ConfigureAwait(false);
+        // If no token is provided, fail fast by returning an Unauthorized response without sending the request
+        if (string.IsNullOrEmpty(refreshedToken))
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                RequestMessage = request,
+                ReasonPhrase = &quot;Authorization token is missing.&quot;,
+                Content = new StringContent(&quot;Authorization token is missing.&quot;)
+            };
 
         // Set the authentication header with refreshed token 
         clonedRequest.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, refreshedToken);

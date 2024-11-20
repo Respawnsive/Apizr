@@ -17,6 +17,7 @@ namespace Apizr.Sample.MAUI.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IPageDialogService _dialogService;
+        private readonly ISecureStorage _secureStorage;
         private readonly IApizrManager<IReqResService> _reqResManager;
         private readonly IApizrManager<IHttpBinService> _httpBinManager;
         private readonly IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> _userCrudManager;
@@ -26,6 +27,7 @@ namespace Apizr.Sample.MAUI.ViewModels
 
         public MainPageViewModel(INavigationService navigationService, 
                 IPageDialogService dialogService, 
+                ISecureStorage secureStorage, 
                 IApizrExtendedRegistry apizrRegistry)
         //IApizrManager<IReqResService> reqResManager),
         //IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager,
@@ -36,6 +38,7 @@ namespace Apizr.Sample.MAUI.ViewModels
         {
             _navigationService = navigationService;
             _dialogService = dialogService;
+            _secureStorage = secureStorage;
             _reqResManager = apizrRegistry.GetManagerFor<IReqResService>(); //reqResManager;
             _userCrudManager = apizrRegistry.GetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(); //userCrudManager;
             _httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>(); //httpBinManager;
@@ -207,6 +210,10 @@ namespace Apizr.Sample.MAUI.ViewModels
             var succeed = false;
             try
             {
+                var confirm = await _dialogService.DisplayAlertAsync("Token", "Clear saved token?", "Yes", "No");
+                if(confirm)
+                    _secureStorage.Remove("AccessToken");
+
                 var response = await _httpBinManager.ExecuteAsync(api => api.AuthBearerAsync());
                 succeed = response.IsSuccessStatusCode;
                 result = response.IsSuccessStatusCode ? "Authentication succeed :)" : "Authentication failed :(";

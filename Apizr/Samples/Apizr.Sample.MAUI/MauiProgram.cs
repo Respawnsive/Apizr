@@ -130,7 +130,7 @@ namespace Apizr.Sample.MAUI
             services.AddApizr(
                 apizrRegistry => apizrRegistry
                     .AddManagerFor<IReqResService>()
-                    .AddManagerFor<IHttpBinService>(options => options.WithAuthenticationHandler((Func<HttpRequestMessage, CancellationToken, Task<string>>) OnRefreshToken))
+                    .AddManagerFor<IHttpBinService>()//options => options.WithAuthenticationHandler(typeof(AuthHandler<>)))
                     .AddCrudManagerFor([typeof(User)]),
 
                 config => config
@@ -140,9 +140,12 @@ namespace Apizr.Sample.MAUI
                     //.WithLogging()
                     //.WithConnectivityHandler<IConnectivity>(connectivity => connectivity.NetworkAccess == NetworkAccess.Internet)
                     .WithMediation()
-                    .WithOptionalMediation());
+                    .WithOptionalMediation()
+                    .WithAuthenticationHandler(typeof(AuthenticationHandler<>)));
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+            services.AddTransient(typeof(AuthenticationHandler<>));
 
             return builder.Build();
         }

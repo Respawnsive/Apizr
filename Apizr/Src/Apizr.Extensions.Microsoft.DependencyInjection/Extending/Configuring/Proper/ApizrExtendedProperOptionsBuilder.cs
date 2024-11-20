@@ -307,7 +307,7 @@ namespace Apizr.Extending.Configuring.Proper
                 throw new ArgumentException(
                     $"{authenticationHandlerType.Name} must define only one generic TWebApi argument");
 
-            if (!typeof(AuthenticationHandlerBase).IsAssignableFromGenericType(authenticationHandlerType))
+            if (!typeof(AuthenticationHandlerBase).IsAssignableFrom(authenticationHandlerType))
                 throw new ArgumentException(
                     $"{authenticationHandlerType.Name} must inherit from AuthenticationHandlerBase");
 

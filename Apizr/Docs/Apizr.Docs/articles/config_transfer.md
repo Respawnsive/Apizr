@@ -22,7 +22,7 @@ Please first install one of these integration packages, depending of your needs:
 
 ### Designing
 
-File Transfer package comes with some built-in apis son you don't have to create it yourself.
+File Transfer package comes with some built-in apis so you don't have to create it yourself.
 
 Here is what the provided apis look like then:
 

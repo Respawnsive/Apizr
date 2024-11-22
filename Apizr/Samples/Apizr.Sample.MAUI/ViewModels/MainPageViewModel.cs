@@ -4,11 +4,14 @@ using Apizr.Extending.Configuring.Registry;
 using Apizr.Optional.Cruding.Sending;
 using Apizr.Requesting;
 using Apizr.Sample.Models;
+using Apizr.Transferring.Managing;
 using Fusillade;
+using IntelliJ.Lang.Annotations;
 using MediatR;
 using MetroLog.Maui;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Refit;
 
 namespace Apizr.Sample.MAUI.ViewModels
 {
@@ -24,11 +27,15 @@ namespace Apizr.Sample.MAUI.ViewModels
         private readonly IApizrManager<ICrudApi<UserDetails, int, IEnumerable<UserDetails>, IDictionary<string, object>>> _userDetailsCrudManager;
         private readonly IMediator _mediator;
         private readonly IApizrCrudOptionalMediator<User, int, PagedResult<User>, IDictionary<string, object>> _userOptionalMediator;
+        private readonly IApizrUploadManager _uploadManager;
+        private readonly IFilePicker _filePicker;
 
         public MainPageViewModel(INavigationService navigationService, 
                 IPageDialogService dialogService, 
                 ISecureStorage secureStorage, 
-                IApizrExtendedRegistry apizrRegistry)
+                IApizrExtendedRegistry apizrRegistry, 
+                IApizrUploadManager uploadManager, 
+                IFilePicker filePicker)
         //IApizrManager<IReqResService> reqResManager),
         //IApizrManager<ICrudApi<User, int, PagedResult<User>, IDictionary<string, object>>> userCrudManager,
         //IApizrManager<IHttpBinService> httpBinManager,
@@ -39,6 +46,8 @@ namespace Apizr.Sample.MAUI.ViewModels
             _navigationService = navigationService;
             _dialogService = dialogService;
             _secureStorage = secureStorage;
+            _uploadManager = uploadManager;
+            _filePicker = filePicker;
             _reqResManager = apizrRegistry.GetManagerFor<IReqResService>(); //reqResManager;
             _userCrudManager = apizrRegistry.GetCrudManagerFor<User, int, PagedResult<User>, IDictionary<string, object>>(); //userCrudManager;
             _httpBinManager = apizrRegistry.GetManagerFor<IHttpBinService>(); //httpBinManager;
@@ -50,6 +59,7 @@ namespace Apizr.Sample.MAUI.ViewModels
             GetUsersCommand = ReactiveCommand.CreateFromTask(GetUsersAsync);
             GetUserDetailsCommand = ReactiveCommand.CreateFromTask<User>(GetUserDetailsAsync);
             AuthCommand = ReactiveCommand.CreateFromTask(AuthAsync);
+            UploadCommand = ReactiveCommand.CreateFromTask(UploadAsync);
             Users = new ObservableCollection<User>();
         }
 
@@ -66,6 +76,8 @@ namespace Apizr.Sample.MAUI.ViewModels
         public ICommand GetUserDetailsCommand { get; }
 
         public ICommand AuthCommand { get; }
+
+        public ICommand UploadCommand { get; }
 
         #endregion
 
@@ -225,6 +237,39 @@ namespace Apizr.Sample.MAUI.ViewModels
 
             if (!string.IsNullOrWhiteSpace(result))
                 await _dialogService.DisplayAlertAsync("Auth", result, "Ok");
+        }
+
+        private async Task UploadAsync()
+        {
+            string error = null;
+            var succeed = false;
+            try
+            {
+                var result = await _filePicker.PickAsync();
+                if (result != null)
+                {
+                    if (!result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) &&
+                        !result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                    {
+                        await _dialogService.DisplayAlertAsync("Format rejected!",
+                            $"Please select a jpg or png file only.", "OK");
+                        return;
+                    }
+
+                    await using var stream = await result.OpenReadAsync();
+                    var streamPart = new StreamPart(stream, result.FileName);
+                    var response = await _uploadManager.UploadAsync(streamPart);
+                    succeed = response.IsSuccessStatusCode;
+                    error = response.IsSuccessStatusCode ? "Upload succeed :)" : "Upload failed :(";
+                }
+            }
+            catch (ApizrException e)
+            {
+                error = e.InnerException is IOException ? "No network" : (e.Message ?? "Error");
+            }
+
+            if (!string.IsNullOrWhiteSpace(error))
+                await _dialogService.DisplayAlertAsync("Upload", error, "Ok");
         }
 
         #endregion

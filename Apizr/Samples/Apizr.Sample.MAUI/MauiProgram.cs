@@ -108,7 +108,8 @@ namespace Apizr.Sample.MAUI
             services.RegisterForNavigation<MainPage, MainPageViewModel>();
 
             // Plugins
-            services.AddSingleton(_ => SecureStorage.Default);
+            services.AddSingleton(_ => SecureStorage.Default)
+                .AddSingleton(_ => FilePicker.Default);
 
             // Polly
             services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
@@ -131,6 +132,11 @@ namespace Apizr.Sample.MAUI
                 apizrRegistry => apizrRegistry
                     .AddManagerFor<IReqResService>()
                     .AddManagerFor<IHttpBinService>()//options => options.WithAuthenticationHandler(typeof(AuthHandler<>)))
+                    .AddUploadManager(options => options
+                        //.WithBaseAddress("https://httpbin.org/post")
+                        .WithBaseAddress("https://rx6z0kd7-7015.uks1.devtunnels.ms/upload")
+                        .WithHeaders(["Authorization: Bearer"])
+                        .WithLogging())
                     .AddCrudManagerFor([typeof(User)]),
 
                 config => config

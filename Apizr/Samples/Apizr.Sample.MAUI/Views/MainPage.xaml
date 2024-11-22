@@ -10,9 +10,11 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding LogController.GoToLogsPageCommand}" Text="Logs" />
     </ContentPage.ToolbarItems>
-    <Grid RowDefinitions="*,Auto">
+    <Grid ColumnDefinitions="*,*" RowDefinitions="*,Auto">
         <RefreshView
             Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
             Command="{Binding GetUsersCommand}"
             IsRefreshing="{Binding IsRefreshing}"
             RefreshColor="Blue">
@@ -45,9 +47,18 @@
 
         <Button
             Grid.Row="1"
+            Grid.Column="0"
             Command="{Binding AuthCommand}"
             HorizontalOptions="FillAndExpand"
             Text="Auth"
+            VerticalOptions="End" />
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Command="{Binding UploadCommand}"
+            HorizontalOptions="FillAndExpand"
+            Text="Upload"
             VerticalOptions="End" />
     </Grid>
 </ContentPage>

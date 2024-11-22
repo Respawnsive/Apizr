@@ -51,7 +51,7 @@ namespace Apizr.Authenticating
             // Get the token from saved settings if available
             logger?.Log(logLevels.Low(), $"{context.OperationKey}: Authorization required with scheme {auth.Scheme}");
             var formerToken = await GetTokenAsync(request, cancellationToken).ConfigureAwait(false);
-            if (!string.IsNullOrWhiteSpace(formerToken))
+            if (!string.IsNullOrWhiteSpace(formerToken) && request.Content?.Headers.ContentType?.MediaType != "multipart/form-data")
             {
                 // We have one, then clone the request in case we need to re-issue it with a refreshed token
                 logger?.Log(logLevels.Low(), $"{context.OperationKey}: Saved token will be used");

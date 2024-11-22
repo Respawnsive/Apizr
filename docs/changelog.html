@@ -92,7 +92,8 @@
 <li>[New][Authentication] Now <strong><code>WithAuthenticationHandler</code> option provide many more overloads</strong> to fit more use cases, like property mapping, local methods, service methods, custom handler, etc.</li>
 <li>[New][Authentication] Now <strong><code>AuthenticationHandlerBase</code> does clone request Options</strong> as well as former Properties</li>
 <li>[New][Authentication] Now <strong><code>AuthenticationHandlerBase</code> performances and behavior have been improved</strong> by caching compiled factories and adjusting authentication flow</li>
-<li>[Improvement/Breaking][Authentication] Now <strong><code>AuthenticationHandlerBase</code> with no token available fails fast by returning an Unauthorized response</strong> without actually sending the request</li>
+<li>[Improvement][Authentication] Now <strong><code>AuthenticationHandlerBase</code> with no token available fails fast by returning an Unauthorized response</strong> without actually sending the request</li>
+<li>[Improvement/Fix][Authentication] Now <strong><code>AuthenticationHandlerBase</code> does not clone anymore request with multipart content</strong> to prevent from memory leaks and stream issues</li>
 <li>[Improvement/Breaking][Authentication] Now <strong><code>AuthenticationHandlerBase</code>'s GetToken &amp; SetToken former methods upgraded to GetTokenAsync &amp; SetTokenAsync</strong> so we could wait for it</li>
 <li>[Improvement/Breaking][Authentication] Now <strong><code>WithAuthenticationHandler</code> option's methods handle more parameters</strong> like HttpRequestMessage &amp; CancellationToken</li>
 <li>[Breaking][DelegatingHandler] Now <strong><code>WithDelegatingHandler</code>, <code>WithHttpMessageHandler</code> and <code>WithAuthenticationHandler</code> provide a Logger within IApizrManagerOptionsBase single parameter</strong></li>

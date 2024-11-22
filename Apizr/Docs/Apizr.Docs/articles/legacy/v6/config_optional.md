@@ -1,5 +1,10 @@
 ﻿## Configuring Optional.Async
 
+>[!WARNING]
+> **Deprecated**
+> 
+> Both Apizr.Integrations.Optional and Apizr.Integrations.FileTransfer.Optional packages have been deprecated as Optional.Async reference package is no longer maintained.
+
 Apizr offers an integration with [Optional.Async](https://github.com/dnikolovv/optional-async), following the [Optional pattern](https://github.com/nlkl/Optional), available only with the extended approach with MediatR integration activated.
 Optional.Async offers a strongly typed alternative to null values that lets you:
 - Avoid those pesky null-reference exceptions

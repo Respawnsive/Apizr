@@ -125,12 +125,6 @@
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer.MediatR/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.MediatR.svg" alt="NuGet"></a></td>
 <td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer.MediatR/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.MediatR.svg" alt="NuGet Pre Release"></a></td>
 </tr>
-<tr>
-<td>Apizr.Integrations.FileTransfer.Optional</td>
-<td>MS Extensions with MediatR &amp; Optional</td>
-<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer.Optional/"><img src="https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.Optional.svg" alt="NuGet"></a></td>
-<td><a href="https://www.nuget.org/packages/Apizr.Integrations.FileTransfer.Optional/"><img src="https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.Optional.svg" alt="NuGet Pre Release"></a></td>
-</tr>
 </tbody>
 </table>
 <h3 id="designing">Designing</h3>
@@ -309,9 +303,6 @@ Where you could register it as we used to do it with any other apis, FileTransfe
 <a href="#tabpanel_2_tabid-mediatr" role="tab" aria-controls="tabpanel_2_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_2_tabid-optional" role="tab" aria-controls="tabpanel_2_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
-</li>
-<li role="presentation">
 <a href="#tabpanel_2_tabid-static" role="tab" aria-controls="tabpanel_2_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
 </li>
 </ul>
@@ -348,24 +339,6 @@ services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
 </code></pre>
 <p>Then, get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code> to send some transfer requests.</p>
 </section>
-<section id="tabpanel_2_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
-
-<pre><code class="lang-csharp">// register the built-in transfer api
-services.AddApizrTransferManager(
-    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;)
-                .WithFileTransferOptionalMediation());
-
-// OR register the built-in transfer api with custom types
-services.AddApizrTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&gt;(
-    options =&gt; options.WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;)
-                .WithFileTransferOptionalMediation());
-
-// OR register a custom transfer api
-services.AddApizrTransferManagerFor&lt;ITransferSampleApi&gt;(
-    options =&gt; options.WithFileTransferOptionalMediation());
-</code></pre>
-<p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
-</section>
 <section id="tabpanel_2_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-csharp">// register the built-in transfer api
@@ -390,9 +363,6 @@ var transferManager = ApizrBuilder.Current.CreateTransferManagerFor&lt;ITransfer
 </li>
 <li role="presentation">
 <a href="#tabpanel_3_tabid-mediatr" role="tab" aria-controls="tabpanel_3_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_3_tabid-optional" role="tab" aria-controls="tabpanel_3_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
 <li role="presentation">
 <a href="#tabpanel_3_tabid-static" role="tab" aria-controls="tabpanel_3_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
@@ -438,22 +408,6 @@ var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&
 <p>Then, get an Apizr mediator instance by resolving/injecting <code>IApizrMediator</code> to send some transfer requests.</p>
 <p>For more info about MediatR intergration, see <a href="config_mediatr.html">Configuring MediatR</a>.</p>
 </section>
-<section id="tabpanel_3_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
-
-<pre><code class="lang-csharp">services.AddApizr(registry =&gt; registry
-        // Built-in api
-        .AddTransferManager(options =&gt; options
-            .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
-        // Built-in api with custom types
-        .AddTransferManagerWith&lt;MyDownloadParamType, MyUploadResultType&gt;(options =&gt; options
-            .WithBaseAddress(&quot;YOUR_API_BASE_ADDRESS_HERE&quot;))
-        // Custom api
-        .AddTransferManagerFor&lt;ITransferSampleApi&gt;(),
-    config =&gt; config.WithFileTransferOptionalMediation());
-</code></pre>
-<p>Then, get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code> to send some transfer requests returning optional results.</p>
-<p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
-</section>
 <section id="tabpanel_3_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-csharp">var apizrRegistry = ApizrBuilder.Current.CreateRegistry(registry =&gt; registry
@@ -486,9 +440,6 @@ var transferManager = apizrRegistry.GetTransferManagerFor&lt;ITransferSampleApi&
 </li>
 <li role="presentation">
 <a href="#tabpanel_4_tabid-mediatr" role="tab" aria-controls="tabpanel_4_tabid-mediatr" data-tab="tabid-mediatr" tabindex="-1">MediatR</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_4_tabid-optional" role="tab" aria-controls="tabpanel_4_tabid-optional" data-tab="tabid-optional" tabindex="-1">Optional</a>
 </li>
 <li role="presentation">
 <a href="#tabpanel_4_tabid-static" role="tab" aria-controls="tabpanel_4_tabid-static" data-tab="tabid-static" tabindex="-1">Static</a>
@@ -535,23 +486,6 @@ var transferResult = await apizrMediator.SendDownloadQuery&lt;ITransferSampleApi
     new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
 </code></pre>
 <p>For more info about MediatR intergration, see <a href="config_mediatr.html">Configuring MediatR</a>.</p>
-</section>
-<section id="tabpanel_4_tabid-optional" role="tabpanel" data-tab="tabid-optional" aria-hidden="true" hidden="hidden">
-
-<p>Once you get an Apizr optional mediator instance by resolving/injecting <code>IApizrOptionalMediator</code>, here is how to play with it:</p>
-<pre><code class="lang-csharp">// for the built-in transfer api
-var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery(
-    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-
-// OR for the built-in transfer api with custom param type
-var transferResult = await apizrMediator.SendDownloadWithOptionalQuery&lt;MyDownloadParamType&gt;(
-    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;), myDownloadParams);
-
-// OR for a custom transfer api
-var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery&lt;ITransferSampleApi&gt;(
-    new FileInfo(&quot;YOUR_FILE_FULL_NAME_HERE&quot;));
-</code></pre>
-<p>For more info about Optional.Async intergration, see <a href="config_optional.html">Configuring Optional.Async</a>.</p>
 </section>
 <section id="tabpanel_4_tabid-static" role="tabpanel" data-tab="tabid-static" aria-hidden="true" hidden="hidden">
 

@@ -71,11 +71,11 @@ TypeAdapterConfig<TSource, TDestination>
 
 >[!WARNING]
 >
->**Data Mapping with MediatR and/or Optional**
+>**Data Mapping with MediatR**
 >
->If you plan to use MediatR and/or Optional integrations, one more defining step has to be done.
+>If you plan to use MediatR integrations, one more defining step has to be done.
 
-Only for those of you planning to use data mapping with **MediatR** and/or **Optional**, Apizr provide a `MappedWith` attribute telling it to map api object with model object.
+Only for those of you planning to use data mapping with **MediatR**, Apizr provide a `MappedWith` attribute telling it to map api object with model object.
 You’ll find another `MappedCrudEntity` attribute dedicated to CRUD apis, coming with auto-registration capabilities, in case of access restricted to only local client model.
 We could get a model class mapped to an api one like:
 
@@ -205,4 +205,4 @@ Here we give a MinUser typed object to Apizr, which will be mapped to User type 
 Then Apizr will map the User typed result back to MinUser type just before returning it.
 
 There are much more overloads so you can map objects the way you need. 
-The same while using **MediatR** and/or **Optional**.
+The same while using **MediatR**.

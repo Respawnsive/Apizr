@@ -61,7 +61,6 @@ This is what the `.refitter` settings file may look like, depending on you confi
     "withCacheProvider": "InMemory", // Optional, default is None
     "withPriority": true, // Optional, default is false
     "withMediation": true, // Optional, default is false
-    "withOptionalMediation": true, // Optional, default is false
     "withMappingProvider": "AutoMapper", // Optional, default is None
     "withFileTransfer": true // Optional, default is false
   }
@@ -92,8 +91,8 @@ public static IServiceCollection ConfigurePetstoreApiApizrManager(
         .WithInMemoryCacheHandler()
         .WithAutoMapperMappingHandler()
         .WithPriority()
-        .WithOptionalMediation()
-        .WithFileTransferOptionalMediation();
+        .WithMediation()
+        .WithFileTransferMediation();
                  
     return services.AddApizrManagerFor<IPetstoreApi>(optionsBuilder);
 }
@@ -124,7 +123,6 @@ This comes in handy especially when generating multiple interfaces, by tag or en
     "withCacheProvider": "InMemory", // Optional, default is None
     "withPriority": true, // Optional, default is false
     "withMediation": true, // Optional, default is false
-    "withOptionalMediation": true, // Optional, default is false
     "withMappingProvider": "AutoMapper", // Optional, default is None
     "withFileTransfer": true // Optional, default is false
   }
@@ -155,8 +153,8 @@ public static IServiceCollection ConfigurePetstoreApizrManagers(
         .WithInMemoryCacheHandler()
         .WithAutoMapperMappingHandler()
         .WithPriority()
-        .WithOptionalMediation()
-        .WithFileTransferOptionalMediation();
+        .WithMediation()
+        .WithFileTransferMediation();
             
     return services.AddApizr(
         registry => registry
@@ -230,7 +228,6 @@ This comes in handy especially when generating multiple interfaces, by tag or en
     "withCacheProvider": "InMemory", // Optional, default is None
     "withPriority": true, // Optional, default is false
     "withMediation": true, // Optional, default is false
-    "withOptionalMediation": true, // Optional, default is false
     "withMappingProvider": "AutoMapper", // Optional, default is None
     "withFileTransfer": true // Optional, default is false
   }

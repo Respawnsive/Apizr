@@ -30,7 +30,6 @@ And more integration/extension independent optional features like:
 - Register it as an MS DI extension
 - Map model with DTO
 - Use Mediator pattern
-- Use Optional pattern
 - Manage file transfers
 
 The list is not exhaustive, there’s more, but what we wanted was playing with all of it with as less code as we could, not worrying about plumbing things and being sure everything is wired and handled by design or almost.
@@ -170,7 +169,6 @@ Apizr has a lot more to offer, just [read the doc](https://apizr.net/articles/in
 |-------|-----|-----|
 |Apizr.Integrations.Fusillade|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Fusillade.svg)](https://www.nuget.org/packages/Apizr.Integrations.Fusillade/)|
 |Apizr.Integrations.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.MediatR/)|
-|Apizr.Integrations.Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.Optional/)|
 
 ### Mapping
 
@@ -186,7 +184,6 @@ Apizr has a lot more to offer, just [read the doc](https://apizr.net/articles/in
 |Apizr.Integrations.FileTransfer|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
 |Apizr.Extensions.Microsoft.FileTransfer|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
 |Apizr.Integrations.FileTransfer.MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
-|Apizr.Integrations.FileTransfer.Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
 
 ### Generating
 
@@ -205,14 +202,12 @@ Install the NuGet reference package of your choice:
   - **Apizr.Integrations.MonkeyCache** package brings an ICacheHandler method mapping implementation for [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache)
   - **Apizr.Integrations.Fusillade** package enables request priority management using [Fusillade](https://github.com/reactiveui/Fusillade)
   - **Apizr.Integrations.MediatR** package enables request auto handling with mediation using [MediatR](https://github.com/jbogard/MediatR)
-  - **Apizr.Integrations.Optional** package enables Optional result from mediation requests (requires MediatR integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
   - **Apizr.Integrations.AutoMapper** package enables data mapping using [AutoMapper](https://github.com/AutoMapper/AutoMapper)
   - **Apizr.Integrations.Mapster** package enables data mapping using [Mapster](https://github.com/MapsterMapper/Mapster)
   - **Apizr.Integrations.FileTransfer** package enables file transfer management for static registration
   - **Apizr.Extensions.Microsoft.FileTransfer** package enables file transfer management for extended registration
-  - **Apizr.Integrations.FileTransfer.MediatR** package enables file transfer management for mediation requests (requires MediatR integration and could work with Optional integration) using [MediatR](https://github.com/jbogard/MediatR)
-  - **Apizr.Integrations.FileTransfer.Optional** package enables file transfer management for mediation requests with optional result (requires MediatR integration and could work with Optional integration) using [Optional.Async](https://github.com/dnikolovv/optional-async)
- 
+  - **Apizr.Integrations.FileTransfer.MediatR** package enables file transfer management for mediation requests (requires MediatR integration) using [MediatR](https://github.com/jbogard/MediatR)
+
 Choose which generating approach suites to your needs by installing either:
   - Refitter [.NET CLI Tool](https://refitter.github.io/articles/cli-tool.md) distributed via [nuget.org](http://www.nuget.org/packages/refitter) that outputs a single C# file on disk
   - Refiiter [C# Source Generator](https://refitter.github.io/articles/source-generator.md) via the [Refitter.SourceGenerator](http://www.nuget.org/packages/refitter.sourcegenerator) package that generates code on compile time based on a [.refitter](https://refitter.github.io/articles/refitter-file-format.md) within the project directory.

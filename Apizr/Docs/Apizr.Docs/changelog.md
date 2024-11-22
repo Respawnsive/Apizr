@@ -22,6 +22,14 @@
 
 - [New][Authentication] Now we can **register a custom open generic authentication handler inheriting from `AuthenticationHandlerBase<TWebApi>`** without needs of any instance factory.
 - [Update][NuGet] Now **Refit.HttpClientFactory package reference has been updated to latest v8**
+ 
+### Apizr.Integrations.Optional
+
+- [Deprecated] Apizr.Integrations.Optional package has been deprecated as Optional.Async reference package is no longer maintained.
+ 
+### Apizr.Integrations.FileTransfer.Optional
+
+- [Deprecated] Apizr.Integrations.FileTransfer.Optional package has been deprecated as Optional.Async reference package is no longer maintained.
 
 6.3.0
 ---

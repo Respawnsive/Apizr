@@ -18,7 +18,6 @@ Please first install one of these integration packages, depending of your needs:
 |Apizr.Integrations.FileTransfer|Static|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer/)|
 |Apizr.Extensions.Microsoft.FileTransfer|MS Extensions|[![NuGet](https://img.shields.io/nuget/v/Apizr.Extensions.Microsoft.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.FileTransfer/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Extensions.Microsoft.FileTransfer.svg)](https://www.nuget.org/packages/Apizr.Extensions.Microsoft.FileTransfer/)|
 |Apizr.Integrations.FileTransfer.MediatR|MS Extensions with MediatR|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer.MediatR/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.MediatR.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer.MediatR/)|
-|Apizr.Integrations.FileTransfer.Optional|MS Extensions with MediatR & Optional|[![NuGet](https://img.shields.io/nuget/v/Apizr.Integrations.FileTransfer.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer.Optional/)|[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Apizr.Integrations.FileTransfer.Optional.svg)](https://www.nuget.org/packages/Apizr.Integrations.FileTransfer.Optional/)|
 
 ### Designing
 
@@ -219,27 +218,6 @@ services.AddApizrTransferManagerFor<ITransferSampleApi>(
 
 Then, get an Apizr mediator instance by resolving/injecting `IApizrMediator` to send some transfer requests.
 
-
-#### [Optional](#tab/tabid-optional)
-
-```csharp
-// register the built-in transfer api
-services.AddApizrTransferManager(
-    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE")
-                .WithFileTransferOptionalMediation());
-
-// OR register the built-in transfer api with custom types
-services.AddApizrTransferManagerWith<MyDownloadParamType, MyUploadResultType>(
-    options => options.WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE")
-                .WithFileTransferOptionalMediation());
-
-// OR register a custom transfer api
-services.AddApizrTransferManagerFor<ITransferSampleApi>(
-    options => options.WithFileTransferOptionalMediation());
-```
-
-Then, get an Apizr optional mediator instance by resolving/injecting `IApizrOptionalMediator` to send some transfer requests returning optional results.
-
 #### [Static](#tab/tabid-static)
 
 ```csharp
@@ -307,25 +285,6 @@ services.AddApizr(registry => registry
 Then, get an Apizr mediator instance by resolving/injecting `IApizrMediator` to send some transfer requests.
 
 For more info about MediatR intergration, see [Configuring MediatR](config_mediatr.md).
-
-#### [Optional](#tab/tabid-optional)
-
-```csharp
-services.AddApizr(registry => registry
-        // Built-in api
-        .AddTransferManager(options => options
-            .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
-        // Built-in api with custom types
-        .AddTransferManagerWith<MyDownloadParamType, MyUploadResultType>(options => options
-            .WithBaseAddress("YOUR_API_BASE_ADDRESS_HERE"))
-        // Custom api
-        .AddTransferManagerFor<ITransferSampleApi>(),
-    config => config.WithFileTransferOptionalMediation());
-```
-
-Then, get an Apizr optional mediator instance by resolving/injecting `IApizrOptionalMediator` to send some transfer requests returning optional results.
-
-For more info about Optional.Async intergration, see [Configuring Optional.Async](config_optional.md).
 
 #### [Static](#tab/tabid-static)
 
@@ -406,25 +365,6 @@ var transferResult = await apizrMediator.SendDownloadQuery<ITransferSampleApi>(
 ```
 
 For more info about MediatR intergration, see [Configuring MediatR](config_mediatr.md).
-
-#### [Optional](#tab/tabid-optional)
-
-Once you get an Apizr optional mediator instance by resolving/injecting `IApizrOptionalMediator`, here is how to play with it:
-```csharp
-// for the built-in transfer api
-var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery(
-    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
-
-// OR for the built-in transfer api with custom param type
-var transferResult = await apizrMediator.SendDownloadWithOptionalQuery<MyDownloadParamType>(
-    new FileInfo("YOUR_FILE_FULL_NAME_HERE"), myDownloadParams);
-
-// OR for a custom transfer api
-var transferOptionalResult = await apizrOptionalMediator.SendDownloadOptionalQuery<ITransferSampleApi>(
-    new FileInfo("YOUR_FILE_FULL_NAME_HERE"));
-```
-
-For more info about Optional.Async intergration, see [Configuring Optional.Async](config_optional.md).
 
 #### [Static](#tab/tabid-static)
 

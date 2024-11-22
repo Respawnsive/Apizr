@@ -159,10 +159,10 @@ public static class StudentMapper {
 <h4 id="advanced">Advanced</h4>
 <div class="WARNING">
 <h5>Warning</h5>
-<p><strong>Data Mapping with MediatR and/or Optional</strong></p>
-<p>If you plan to use MediatR and/or Optional integrations, one more defining step has to be done.</p>
+<p><strong>Data Mapping with MediatR</strong></p>
+<p>If you plan to use MediatR integrations, one more defining step has to be done.</p>
 </div>
-<p>Only for those of you planning to use data mapping with <strong>MediatR</strong> and/or <strong>Optional</strong>, Apizr provide a <code>MappedWith</code> attribute telling it to map api object with model object.
+<p>Only for those of you planning to use data mapping with <strong>MediatR</strong>, Apizr provide a <code>MappedWith</code> attribute telling it to map api object with model object.
 You’ll find another <code>MappedCrudEntity</code> attribute dedicated to CRUD apis, coming with auto-registration capabilities, in case of access restricted to only local client model.
 We could get a model class mapped to an api one like:</p>
 <pre><code class="lang-csharp">[MappedWith(typeof(User))]
@@ -282,7 +282,7 @@ options =&gt; options.WithMappingHandler(() =&gt; new MapsterMappingHandler(new 
 <p>Here we give a MinUser typed object to Apizr, which will be mapped to User type just before sending it.
 Then Apizr will map the User typed result back to MinUser type just before returning it.</p>
 <p>There are much more overloads so you can map objects the way you need.
-The same while using <strong>MediatR</strong> and/or <strong>Optional</strong>.</p>
+The same while using <strong>MediatR</strong>.</p>
 
 </article>
 

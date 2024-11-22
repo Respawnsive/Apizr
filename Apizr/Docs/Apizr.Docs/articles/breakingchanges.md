@@ -112,7 +112,7 @@ Please find here some breaking changes while upgrading from previous versions
     ```
     ***
 
-- [MappedWith] Now we can **tell Apizr to map data while using MediatR/Optional thanks to the yet known `MappedWith` attribure** instead of the now removed `CrudEntity` or `MappedCrudEntity` useless ones
+- [MappedWith] Now we can **tell Apizr to map data while using MediatR thanks to the yet known `MappedWith` attribure** instead of the now removed `CrudEntity` or `MappedCrudEntity` useless ones
  
 >[!WARNING]
 > Former `CrudEntity` and `MappedCrudEntity` attributes have been dropped out to keep things simple and consistent.

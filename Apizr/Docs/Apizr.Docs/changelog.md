@@ -1,3 +1,11 @@
+6.4.1
+---
+
+### All
+
+- [Fix][Headers] Now **filtering out CRLF injection** from headers
+- [Update][Sample] Housekeeping sample projects
+
 6.4.0
 ---
 

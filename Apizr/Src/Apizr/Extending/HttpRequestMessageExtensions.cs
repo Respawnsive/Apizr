@@ -176,8 +176,9 @@ namespace Apizr.Extending
             if (value == null || removeOnly) 
                 return true;
 
-            // Remove redact stars (*) if any
-            var headerValue = value.StartsWith("*") && value.EndsWith("*") ? value.Trim('*') : value;
+            // Remove redact stars (*) if any & CRLF injection protection
+            key = EnsureSafe(key);
+            var headerValue = EnsureSafe(value.StartsWith("*") && value.EndsWith("*") ? value.Trim('*') : value);
 
             return headers.TryAddWithoutValidation(key, headerValue);
         }
@@ -202,9 +203,10 @@ namespace Apizr.Extending
             if (values == null || removeOnly)
                 return true;
 
-            // Remove redact stars (*) if any
+            // Remove redact stars (*) if any & CRLF injection protection
+            key = EnsureSafe(key);
             var headerValues = values.Select(headerValue =>
-                    headerValue.StartsWith("*") && headerValue.EndsWith("*") ? headerValue.Trim('*') : headerValue)
+                EnsureSafe(headerValue.StartsWith("*") && headerValue.EndsWith("*") ? headerValue.Trim('*') : headerValue))
                 .ToList();
 
             return headers.TryAddWithoutValidation(key, headerValues);
@@ -225,6 +227,14 @@ namespace Apizr.Extending
             }
 
             return !string.IsNullOrWhiteSpace(key);
+        }
+
+        internal static string EnsureSafe(string value)
+        {
+            // Remove CR and LF characters
+#pragma warning disable CA1307 // Specify StringComparison for clarity
+            return value.Replace("\r", string.Empty).Replace("\n", string.Empty);
+#pragma warning restore CA1307 // Specify StringComparison for clarity
         }
     }
 }

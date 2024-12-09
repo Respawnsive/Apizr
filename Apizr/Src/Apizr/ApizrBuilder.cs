@@ -372,6 +372,11 @@ namespace Apizr
             {
                 builder.ApizrOptions.BaseAddressFactory?.Invoke();
                 builder.ApizrOptions.BasePathFactory?.Invoke();
+
+                if(builder.ApizrOptions.BasePath?.Contains("\r") == true || 
+                    builder.ApizrOptions.BasePath?.Contains("\n") == true)
+                    throw new ArgumentException($"URL path {builder.ApizrOptions.BasePath} must not contain CR or LF characters");
+
                 if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseAddress, builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
                     builder.WithBaseAddress(baseUri);
             }
@@ -379,6 +384,11 @@ namespace Apizr
             {
                 builder.ApizrOptions.BaseUriFactory?.Invoke();
                 builder.ApizrOptions.BasePathFactory?.Invoke();
+
+                if (builder.ApizrOptions.BasePath?.Contains("\r") == true ||
+                    builder.ApizrOptions.BasePath?.Contains("\n") == true)
+                    throw new ArgumentException($"URL path {builder.ApizrOptions.BasePath} must not contain CR or LF characters");
+
                 if (Uri.TryCreate(UrlHelper.Combine(builder.ApizrOptions.BaseUri?.ToString(), builder.ApizrOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
                     builder.WithBaseAddress(baseUri);
             }

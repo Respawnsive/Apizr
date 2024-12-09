@@ -528,6 +528,11 @@ namespace Apizr
                 managerOptions.BaseUriFactory?.Invoke(serviceProvider);
                 managerOptions.BaseAddressFactory?.Invoke(serviceProvider);
                 managerOptions.BasePathFactory?.Invoke(serviceProvider);
+
+                if (managerOptions.BasePath?.Contains("\r") == true ||
+                    managerOptions.BasePath?.Contains("\n") == true)
+                    throw new ArgumentException($"URL path {managerOptions.BasePath} must not contain CR or LF characters");
+
                 var baseAddress = managerOptions.BaseUri?.ToString() ?? managerOptions.BaseAddress;
                 if (Uri.TryCreate(UrlHelper.Combine(baseAddress, managerOptions.BasePath), UriKind.RelativeOrAbsolute, out var baseUri))
                 {

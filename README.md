@@ -146,6 +146,8 @@ Apizr has a lot more to offer, just [read the doc](https://apizr.net/articles/in
 
 - Please read the [Change Log](https://apizr.net/changelog.md) to get a picture of what's in.
 - Please read the [Breaking changes](https://apizr.net/articles/breakingchanges.md) to get a picture of what's changed.
+- Please watch the Getting Started video:
+[![Getting Started](https://img.youtube.com/vi/9qXekjZepLA/0.jpg)](https://www.youtube.com/watch?v=9qXekjZepLA)
 
 ## Where
 

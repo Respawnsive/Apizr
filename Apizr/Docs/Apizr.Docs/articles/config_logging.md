@@ -1,4 +1,10 @@
-﻿## Configuring logging
+﻿## Watching
+
+Please find this dedicated tutorial video on YouTube about how to configure logging with Apizr:
+
+> [!Video https://www.youtube.com/embed/OSJcQEHyLhM]
+
+## Configuring logging
 
 You can adjust logging configuration with:
 - `httpTracerMode` (default: `Everything`) Http traffic tracing mode:

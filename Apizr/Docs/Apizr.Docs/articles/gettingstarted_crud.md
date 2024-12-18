@@ -1,6 +1,6 @@
 ﻿## Watching
 
-Please find this getting started video tutorial on YouTube about how to get started with Apizr:
+Please find this getting started tutorial video on YouTube about how to get started with Apizr:
 
 > [!Video https://www.youtube.com/embed/9qXekjZepLA]
 

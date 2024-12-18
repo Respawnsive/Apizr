@@ -1,4 +1,10 @@
-﻿## Configuring base address
+﻿## Watching
+
+Please find this dedicated tutorial video on YouTube about how to adjust basic options with Apizr:
+
+> [!Video https://www.youtube.com/embed/Kbk0f_aV84k]
+
+## Configuring base address
 
 You can configure base address and base path either by attribute decoration or by fluent configuration.
 Fluent configuration allows you to load options automatically from settings (see [Settings](config_settings.md)), or set options manually.

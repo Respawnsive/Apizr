@@ -32,7 +32,7 @@ And more integration/extension independent optional features like:
 - Use Mediator pattern
 - Manage file transfers
 
-The list is not exhaustive, there’s more, but what we wanted was playing with all of it with as less code as we could, not worrying about plumbing things and being sure everything is wired and handled by design or almost.
+The list is not exhaustive, thereâ€™s more, but what we wanted was playing with all of it with as less code as we could, not worrying about plumbing things and being sure everything is wired and handled by design or almost.
 
 Inspired by [Refit.Insane.PowerPack](https://github.com/thefex/Refit.Insane.PowerPack), we wanted to make it simple to use, mixing attribute decorations and fluent configuration.
 
@@ -147,6 +147,7 @@ Apizr has a lot more to offer, just [read the doc](https://apizr.net/articles/in
 - Please read the [Change Log](https://apizr.net/changelog.md) to get a picture of what's in.
 - Please read the [Breaking changes](https://apizr.net/articles/breakingchanges.md) to get a picture of what's changed.
 - Please watch the Getting Started video:
+
 [![Getting Started](https://img.youtube.com/vi/9qXekjZepLA/0.jpg)](https://www.youtube.com/watch?v=9qXekjZepLA)
 
 ## Where

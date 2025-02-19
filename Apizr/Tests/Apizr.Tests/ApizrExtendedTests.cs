@@ -1746,7 +1746,7 @@ namespace Apizr.Tests
             var result = await reqResMediator.SendFor(api => api.GetUsersAsync());
             result.Should().NotBeNull();
             result.Data.Should().NotBeNull();
-            result.Data.Count.Should().BeGreaterOrEqualTo(1);
+            result.Data.Count.Should().BeGreaterThanOrEqualTo(1);
 
             var response = await reqResMediator.SendFor(api => api.SafeGetUsersAsync());
             response.Should().NotBeNull();
@@ -1754,7 +1754,7 @@ namespace Apizr.Tests
             response.Exception.Should().BeNull();
             response.Result.Should().NotBeNull();
             response.Result.Data.Should().NotBeNull();
-            response.Result.Data.Count.Should().BeGreaterOrEqualTo(1);
+            response.Result.Data.Count.Should().BeGreaterThanOrEqualTo(1);
         }
 
         [Fact]
@@ -1820,7 +1820,7 @@ namespace Apizr.Tests
             var result = await reqResMediator.SendFor(api => api.GetUsersAsync());
             result.Should().NotBeNull();
             result.Data.Should().NotBeNull();
-            result.Data.Count.Should().BeGreaterOrEqualTo(1);
+            result.Data.Count.Should().BeGreaterThanOrEqualTo(1);
 
             var response = await reqResMediator.SendFor(api => api.SafeGetUsersAsync());
             response.Should().NotBeNull();
@@ -1828,7 +1828,7 @@ namespace Apizr.Tests
             response.Exception.Should().BeNull();
             response.Result.Should().NotBeNull();
             response.Result.Data.Should().NotBeNull();
-            response.Result.Data.Count.Should().BeGreaterOrEqualTo(1);
+            response.Result.Data.Count.Should().BeGreaterThanOrEqualTo(1);
         }
 
         [Fact]
@@ -2036,7 +2036,7 @@ namespace Apizr.Tests
                 {
                     userList.Should().NotBeNull();
                     userList.Data.Should().NotBeNull();
-                    userList.Data.Count.Should().BeGreaterOrEqualTo(1);
+                    userList.Data.Count.Should().BeGreaterThanOrEqualTo(1);
                 },
                 e =>
                 {
@@ -2118,7 +2118,7 @@ namespace Apizr.Tests
                 {
                     userList.Should().NotBeNull();
                     userList.Data.Should().NotBeNull();
-                    userList.Data.Count.Should().BeGreaterOrEqualTo(1);
+                    userList.Data.Count.Should().BeGreaterThanOrEqualTo(1);
                 },
                 e =>
                 {

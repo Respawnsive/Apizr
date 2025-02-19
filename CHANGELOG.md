@@ -1,3 +1,11 @@
+6.4.2
+---
+
+### All
+
+- [Fix][Authentication] **Redundant token refresh on multipart** requests fixed
+- [Update][NuGet] Now **all package references are up to date** with the latest versions
+
 6.4.1
 ---
 

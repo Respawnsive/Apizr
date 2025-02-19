@@ -270,7 +270,6 @@ namespace Apizr.Tests
         public async Task Calling_WithAuthenticationHandler_ProperOption_Should_Authenticate_Request()
         {
             string token = null;
-            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "token");
 
             using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
@@ -294,6 +293,9 @@ namespace Apizr.Tests
 
             result.IsSuccessStatusCode.Should().BeTrue();
             token.Should().Be("token");
+            return;
+
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "token");
         }
 
         [Fact]
@@ -303,24 +305,6 @@ namespace Apizr.Tests
             var setCounter = 0;
             var refreshCounter = 0;
             string token = null;
-            Task<string> OnGetToken(HttpRequestMessage request, CancellationToken ct)
-            {
-                getCounter++;
-                return Task.FromResult(token);
-            }
-
-            Task OnSetToken(HttpRequestMessage request, string tk, CancellationToken ct)
-            {
-                if (token != tk)
-                    setCounter++;
-                return Task.FromResult(token = tk);
-            }
-
-            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct)
-            {
-                refreshCounter++;
-                return Task.FromResult("token");
-            }
 
             using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
@@ -355,6 +339,26 @@ namespace Apizr.Tests
             getCounter.Should().Be(2);
             setCounter.Should().Be(1);
             refreshCounter.Should().Be(1);
+            return;
+
+            Task<string> OnGetToken(HttpRequestMessage request, CancellationToken ct)
+            {
+                getCounter++;
+                return Task.FromResult(token);
+            }
+
+            Task OnSetToken(HttpRequestMessage request, string tk, CancellationToken ct)
+            {
+                if (token != tk)
+                    setCounter++;
+                return Task.FromResult(token = tk);
+            }
+
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct)
+            {
+                refreshCounter++;
+                return Task.FromResult("token");
+            }
         }
 
         [Fact]
@@ -468,8 +472,6 @@ namespace Apizr.Tests
         {
             string token = null;
 
-            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "tokenA");
-
             using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging((_, builder) =>
                     builder.AddXUnit(_outputHelper)
@@ -492,6 +494,9 @@ namespace Apizr.Tests
 
             result.IsSuccessStatusCode.Should().BeTrue();
             token.Should().Be("tokenA");
+            return;
+
+            Task<string> OnRefreshToken(HttpRequestMessage request, string tk, CancellationToken ct) => Task.FromResult(token = "tokenA");
         }
 
         [Fact]
@@ -2561,6 +2566,78 @@ namespace Apizr.Tests
             var apizrCustomUploadManagerResult = await apizrCustomUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
             apizrCustomUploadManagerResult.Should().NotBeNull();
             apizrCustomUploadManagerResult.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task Uploading_File_Authenticated_Should_Succeed()
+        {
+            string savedToken = null;
+            var getCounter = 0;
+            var setCounter = 0;
+            var refreshCounter = 0;
+
+            using var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging((_, builder) =>
+                    builder.AddXUnit(_outputHelper)
+                        .SetMinimumLevel(LogLevel.Trace))
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddApizrUploadManager(options => options
+                        .WithBaseAddress("https://httpbin.org/post")
+                        .WithHeaders(["Authorization: Bearer"])
+                        .WithAuthenticationHandler(OnGetTokenAsync, OnSetTokenAsync, OnRefreshTokenAsync)
+                        .WithLogging());
+
+                    services.AddResiliencePipeline<string, HttpResponseMessage>("TransientHttpError",
+                        builder => builder.AddPipeline(_resiliencePipelineBuilder.Build()));
+                })
+                .Build();
+
+            var scope = host.Services.CreateScope();
+
+            // Get instances from the container
+            var apizrUploadManager = scope.ServiceProvider.GetService<IApizrUploadManager>(); // Built-in
+
+            apizrUploadManager.Should().NotBeNull(); // Built-in
+
+            // Upload
+            // Built-in
+            var apizrUploadManagerResult1 = await apizrUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
+            apizrUploadManagerResult1.Should().NotBeNull();
+            apizrUploadManagerResult1.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            getCounter.Should().Be(1);
+            setCounter.Should().Be(1);
+            refreshCounter.Should().Be(1);
+
+            var apizrUploadManagerResult2 = await apizrUploadManager.UploadAsync(FileHelper.GetTestFileStreamPart("small"));
+            apizrUploadManagerResult2.Should().NotBeNull();
+            apizrUploadManagerResult2.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            getCounter.Should().Be(2);
+            setCounter.Should().Be(1);
+            refreshCounter.Should().Be(1);
+
+            return;
+
+            Task<string> OnGetTokenAsync(HttpRequestMessage request, CancellationToken ct)
+            {
+                getCounter++;
+                return Task.FromResult(savedToken);
+            }
+
+            Task OnSetTokenAsync(HttpRequestMessage request, string token, CancellationToken ct)
+            {
+                setCounter++;
+                savedToken = token;
+                return Task.CompletedTask;
+            }
+
+            Task<string> OnRefreshTokenAsync(HttpRequestMessage request, string token, CancellationToken ct)
+            {
+                refreshCounter++;
+                return Task.FromResult("tokenValue");
+            }
         }
 
         [Fact]

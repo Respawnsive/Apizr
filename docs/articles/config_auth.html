@@ -337,7 +337,9 @@ Protected requests will be authenticated by Apizr thnaks to the get/set methods,
     {
         // We have one, then clone the request in case we need to re-issue it with a refreshed token
         logger?.Log(logLevels.Low(), $&quot;{context.OperationKey}: Saved token will be used&quot;);
-        clonedRequest = await CloneHttpRequestMessageAsync(request).ConfigureAwait(false);
+
+        if(request.Content?.Headers.ContentType?.MediaType != &quot;multipart/form-data&quot;)
+            clonedRequest = await CloneHttpRequestMessageAsync(request).ConfigureAwait(false);
     }
     else
     {
@@ -410,7 +412,7 @@ Protected requests will be authenticated by Apizr thnaks to the get/set methods,
 <li>We check if the request needs to be authenticated</li>
 <li>If so, we try to load a previously saved token
 <ul>
-<li>If there’s one, we clone the request in case we need to re-issue it with a refreshed token (as token could be rejected server side)</li>
+<li>If there’s one, we clone the request (non multipart) in case we need to re-issue it with a refreshed token (as token could be rejected server side)</li>
 <li>If there’s not, we ask for a refreshed one, depending on your <code>RefreshTokenAsync</code> implementation (at this stage, a login flow)</li>
 </ul>
 </li>

@@ -257,7 +257,9 @@ protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage 
     {
         // We have one, then clone the request in case we need to re-issue it with a refreshed token
         logger?.Log(logLevels.Low(), $"{context.OperationKey}: Saved token will be used");
-        clonedRequest = await CloneHttpRequestMessageAsync(request).ConfigureAwait(false);
+
+        if(request.Content?.Headers.ContentType?.MediaType != "multipart/form-data")
+            clonedRequest = await CloneHttpRequestMessageAsync(request).ConfigureAwait(false);
     }
     else
     {
@@ -330,7 +332,7 @@ The workflow:
 
 - We check if the request needs to be authenticated
 - If so, we try to load a previously saved token
-  - If there’s one, we clone the request in case we need to re-issue it with a refreshed token (as token could be rejected server side)
+  - If there’s one, we clone the request (non multipart) in case we need to re-issue it with a refreshed token (as token could be rejected server side)
   - If there’s not, we ask for a refreshed one, depending on your `RefreshTokenAsync` implementation (at this stage, a login flow)
 - We set the authentication header with the token
 - We finally send the request

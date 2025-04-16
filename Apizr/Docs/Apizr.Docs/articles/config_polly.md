@@ -1,4 +1,10 @@
-﻿## Configuring Polly
+﻿## Watching
+
+Please find this dedicated tutorial video on YouTube about how to configure logging with Apizr:
+
+> [!Video https://www.youtube.com/embed/x1L0J-GKKY0]
+
+## Configuring Polly
 
 If you are referencing the `Apizr.Extensions.Microsoft.DependencyInjection` package (extended registration), you may want to reference the `Microsoft.Extensions.Http.Resilience` optional package too, so that you can use all the Microsoft Resilience goodness.
 

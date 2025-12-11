@@ -120,7 +120,8 @@ namespace Apizr.Logging
                         await LogHttpErrorRequest(request, logger, logLevels, verbosity, shouldRedactHeaderValue).ConfigureAwait(false);
                     }
 
-                    if(verbosity.HasResponseFlags())
+                    if(verbosity.HasResponseFlags() && 
+                       (tracerMode == HttpTracerMode.Everything || !response.IsSuccessStatusCode))
                         await LogHttpResponse(response, stopwatch.Elapsed, logger, logLevels, verbosity, shouldRedactHeaderValue).ConfigureAwait(false);  
                 }
 

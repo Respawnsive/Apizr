@@ -4,6 +4,9 @@ Refit based web api client management, but resilient (retry, connectivity, cache
 
 [![Read - Documentation](https://img.shields.io/badge/read-documentation-blue?style=for-the-badge)](https://apizr.net "Go to project documentation") [![Watch - Tutorials](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/playlist?list=PLP7ES6CZYy_3zYjmOJzi3K_GZlViorgUO "Watch tutorial videos")
 
+>[!NOTE]
+> This open-source project is not affiliated with the company Apizr (iPaaS platform on https://apizr.fr)
+
 ## What
 
 The Apizr project was motivated by this [2015 famous blog post](https://github.com/RobGibbens/ResilientServices/blob/master/post/post.md) about resilient networking.
